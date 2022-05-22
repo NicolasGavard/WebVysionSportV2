@@ -40,8 +40,9 @@
             window.location.replace("loginInitPassword.php");
           }
         } else {
-          $('.alert-danger').show("slow").delay(5000).hide("slow");
-          $('.alert-danger p').html(data.errorData.defaultText);
+          errorData = "Erreur de connexion, nom d'utilisateur ou mot de passe invalide";
+          $('#sa-error-distrix').trigger('click');
+          $('#swal2-content').html('<ul class="list-group list-group-flush">'+errorData+'</ul>');
         }
       },
       error: function (e) {

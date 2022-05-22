@@ -42,10 +42,10 @@ class DistriXStyLogin
       $outputok          = false;
       $output            = array();
       $styServicesCaller = new DistriXStySvcCaller();
-      $styServicesCaller->addParameter("data", $data);                  print_r($data);
+      $styServicesCaller->addParameter("data", $data);                  //print_r($data);
       $styServicesCaller->setMethodName("Login");
       $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Login/DistriXStyLoginBusSvc.php");
-      list($outputok, $output, $errorData) = $styServicesCaller->call(); print_r($output);
+      list($outputok, $output, $errorData) = $styServicesCaller->call(); //print_r($output);
 
       if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
         $logInfoData = new DistriXLoggerInfoData();

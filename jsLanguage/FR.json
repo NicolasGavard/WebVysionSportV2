@@ -295,6 +295,7 @@
   "confirm_delete"  : "Confirmez la suppression pour ",
   "confirm_restore" : "Confirmez la restoration pour ",
 
+  "errorData_login_ko":         "Erreur de connexion, nom d'utilisateur ou mot de passe invalide !", 
   "errorData_ok":               "Traitement réussi !", 
   "errorData_ok_txt":           "Vos données ont été enregistrées avec succès.", 
   "errorData_ko":               "Erreur de traitement !", 
