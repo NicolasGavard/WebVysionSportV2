@@ -24,8 +24,9 @@ $scoresNova    = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($styScoreNovastor, $styScoreNovastorInd) = ScoreNovaStor::getList(true, $dbConnection);
-  foreach ($styScoreNovastor as $ScoreNova) {
+  $data = $dataSvc->getParameter("data");
+  list($scoreNovastor, $scoreNovastorInd) = ScoreNovaStor::getList($data->getStatus(), $dbConnection);
+  foreach ($scoreNovastor as $ScoreNova) {
     $infoScoreNova     = DistriXSvcUtil::setData($ScoreNova, "DistriXFoodScoreNovaData");
 
     $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $infoScoreNova->getLinkToPicture();

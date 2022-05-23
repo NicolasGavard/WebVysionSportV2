@@ -15,8 +15,13 @@ $listScoresEco  = array();
 $error          = array();
 $output         = array();
 $outputok       = false;
+
+$distriXFoodScoreEcoData = new DistriXFoodScoreEcoData();
+$distriXFoodScoreEcoData->setStatus($_POST['status']);
+
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListScoresEco");
+$servicesCaller->addParameter("data", $distriXFoodScoreEcoData);
 $servicesCaller->setServiceName("DistriXServices/Food/ScoreEco/DistriXFoodScoreEcoListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
