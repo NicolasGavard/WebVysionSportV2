@@ -190,6 +190,8 @@ function ViewEcoScore(id){
       $('.AddEcoScoreFormTimestamp').val(data.ViewEcoScore.timestamp);
       $('.AddEcoScoreFormStatut').val(data.ViewEcoScore.status);
       $('.showPicture').removeClass("d-none");
+      
+      $('.asColorPicker-trigger span').attr("style", 'background:'+data.ViewEcoScore.color);
     },
     error : function(data) {
       console.log(data);
