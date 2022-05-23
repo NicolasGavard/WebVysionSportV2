@@ -10,17 +10,18 @@ include(__DIR__ . "/../../DistriXSecurity/Data/DistriXStyRoleData.php");
 
 session_start();
 $resp                   = [];
+$isConnected            = false;
+$infoProfil             = new DistriXStyUserData();
 
 if (isset($_POST['login']) && isset($_POST['password'])) {
   $login                = DistriXStyAppInterface::loginPassword("WEBVYSION_SPORT", $_POST['login'], $_POST['password']);
   $isConnected          = DistriXStyAppInterface::isUserConnected();
-  $resp["isConnected"]  = $isConnected;
-  
-  $infoProfil           = [];
   if ($isConnected) {
     $infoProfil         = DistriXStyAppInterface::getUserInformation();
   }
-  $resp["infoProfil"]   = $infoProfil;
 }
+
+$resp["infoProfil"]   = $infoProfil;
+$resp["isConnected"]  = $isConnected;
 
 echo json_encode($resp);
