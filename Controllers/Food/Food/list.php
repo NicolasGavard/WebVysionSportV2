@@ -150,7 +150,7 @@ $resp["ListScoresNutri"]  = $listScoresNutri;
 $resp["ListWeightType"]   = $listWeightType;
 
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"]          = $error;
 }
 
 echo json_encode($resp);
