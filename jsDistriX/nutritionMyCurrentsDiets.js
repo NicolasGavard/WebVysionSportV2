@@ -237,9 +237,9 @@ function ListMyCurrentsDiets(status){
           '       <i class="dw dw-more"></i>'+
           '     </a>'+
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-          '       <a class="dropdown-item btnViewMyCurrentsDiets"                      data-toggle="modal" data-target="#modalAddMyCurrentsDiets"  onclick="ViewMyCurrentsDiets(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
-          '       <a class="dropdown-item btnDeleMyCurrentsDiets '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDelMyCurrentsDiets"  onclick="DelMyCurrentsDiets(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
-          '       <a class="dropdown-item btnRestMyCurrentsDiets '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRestMyCurrentsDiets" onclick="RestMyCurrentsDiets(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
+          '       <a class="dropdown-item btnViewMyCurrentsDiets"                      data-toggle="modal" data-target="#modalAddMyCurrentsDiets" onclick="ViewMyCurrentsDiets(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
+          '       <a class="dropdown-item btnDeleMyCurrentsDiets '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                onclick="DelMyCurrentsDiets(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
+          '       <a class="dropdown-item btnRestMyCurrentsDiets '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"                onclick="RestMyCurrentsDiets(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
           '     </div>'+
           '   </div>'+
           ' </td>'+
@@ -277,11 +277,11 @@ function ViewMyCurrentsDiets(id){
 }
 
 function DelMyCurrentsDiets(id, name){
-  $('.DelMyCurrentsDietsFormIdMyCurrentsDiets').val(id);
-  $('.DelMyCurrentsDietsTxt').html(confirm_delete+' <b>'+name+'</b> ?');
+  $('.DelFormId').val(id);
+  $('.DelTxt').html(confirm_delete+' <b>'+name+'</b> ?');
 }
 
 function RestMyCurrentsDiets(id, name){
-  $('.RestMyCurrentsDietsFormIdMyCurrentsDiets').val(id);
-  $('.RestMyCurrentsDietsTxt').html(confirm_restore+' <b>'+name+'</b> ?');
+  $('.RestFormId').val(id);
+  $('.RestTxt').html(confirm_restore+' <b>'+name+'</b> ?');
 }

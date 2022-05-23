@@ -14,7 +14,7 @@
 					<div class="clearfix">
             <div class="row">
               <div class="col-md-4 col-sm-12">
-                <h4 class="text-blue h4 page_nutrition_my_diet_title"></h4>
+                <h4 class="text-blue h4 page_nutrition_my_recipe_title"></h4>
               </div>
               <div class="col-md-4 col-sm-12" style="padding-bottom:10px;">
                 <select class="custom-select2 form-control InfoMyCurrentsDietsFormListStudents" name="state" style="width: 100%; height: 38px;">
@@ -34,12 +34,12 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr>
-                  <th width="15%"><span class="page_nutrition_my_diet_name"></span></th>
-                  <th width="20%"><span class="page_nutrition_my_diet_assigned_for"></span></th>
-                  <th width="10%"><span class="page_nutrition_my_diet_duration"></span></th>
-                  <th width="10%"><span class="page_nutrition_my_diet_date_begin"></span></th>
-                  <th width="20%"><span class="page_nutrition_my_diet_tags"></span></th>
-                  <th width="25%"><span class="page_nutrition_my_diet_advancement"></span></th>
+                  <th width="15%"><span class="page_nutrition_my_recipe_name"></span></th>
+                  <th width="20%"><span class="page_nutrition_my_recipe_assigned_for"></span></th>
+                  <th width="10%"><span class="page_nutrition_my_recipe_duration"></span></th>
+                  <th width="10%"><span class="page_nutrition_my_recipe_date_begin"></span></th>
+                  <th width="20%"><span class="page_nutrition_my_recipe_tags"></span></th>
+                  <th width="25%"><span class="page_nutrition_my_recipe_advancement"></span></th>
                   <th width="10%" class="datatable-nosort"><span class="page_nutrition_my_Diet_action"></span></th>
 								</tr>
 							</thead>
@@ -58,7 +58,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500 page_nutrition_my_diet_add_title"> </h4>
+              <h4 class="padding-top-30 mb-30 weight-500 page_nutrition_my_recipe_add_title"> </h4>
               <form class="FormAddMyCurrentsDiets" action="#" id="FormAddMyCurrentsDiets">
                 <input class="form-control AddMyCurrentsDietsFormId"        type="hidden" name="id"         value="0">
                 <input class="form-control AddMyCurrentsDietsFormTimestamp" type="hidden" name="timestamp"  value="0">
@@ -66,14 +66,14 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
-                      <label class="page_nutrition_my_diet_assigned_for"></label>
+                      <label class="page_nutrition_my_recipe_assigned_for"></label>
                       <select class="selectpicker form-control InfoMyCurrentsDietsFormListStudents" data-size="5" data-style="btn-outline-info" multiple data-actions-box="true" data-selected-text-format="count" name="assignedUsers">
                       </select>
                     </div>
                   </div>
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
-                      <label class="page_nutrition_my_diet_duration"></label>
+                      <label class="page_nutrition_my_recipe_duration"></label>
                       <select class="custom-select2 form-control InfoMyCurrentsDietsFormDuration" name="duration" style="width: 100%; height: 38px;">
                         <option value="0">Choix</option>
                         <option value="1">1 jours</option>
@@ -91,14 +91,14 @@
                   </div>
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
-                      <label class="page_nutrition_my_diet_date_begin"></label>
-                      <input class="form-control date-picker page_nutrition_my_diet_add_date_begin" placeholder="Sélectionnez une date" type="text" name="date_start">
+                      <label class="page_nutrition_my_recipe_date_begin"></label>
+                      <input class="form-control date-picker page_nutrition_my_recipe_add_date_begin" placeholder="Sélectionnez une date" type="text" name="date_start">
                     </div>
                   </div>
                   <div class="col-md-12 col-sm-12">
                     <div class="form-group">
-                      <label class="page_nutrition_my_diet_tags"></label>
-                      <input type="text" class="page_nutrition_my_diet_add_tag" value="" data-role="tagsinput" placeholder="Ajouter un tag" name="tags">
+                      <label class="page_nutrition_my_recipe_tags"></label>
+                      <input type="text" class="page_nutrition_my_recipe_add_tag" value="" data-role="tagsinput" placeholder="Ajouter un tag" name="tags">
                     </div>
                   </div>
                 </form>

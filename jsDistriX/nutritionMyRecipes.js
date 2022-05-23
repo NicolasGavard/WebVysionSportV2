@@ -1,21 +1,21 @@
-$(".page_nutrition_my_diet_title").text(language.page_nutrition_my_diet_title);
-$(".page_nutrition_my_diet_name").text(language.page_nutrition_my_diet_name);
-$(".page_nutrition_my_diet_assigned_for").text(language.page_nutrition_my_diet_assigned_for);
-$(".page_nutrition_my_diet_list_assigned_for_one").text(language.page_nutrition_my_diet_list_assigned_for_one);
-$(".page_nutrition_my_diet_list_assigned_for_plur").text(language.page_nutrition_my_diet_list_assigned_for_plur);
-$(".page_nutrition_my_diet_duration").text(language.page_nutrition_my_diet_duration);
-$(".page_nutrition_my_diet_date_begin").text(language.page_nutrition_my_diet_date_begin);
-$(".page_nutrition_my_diet_date_end").text(language.page_nutrition_my_diet_date_end);
-$(".page_nutrition_my_diet_tags").text(language.page_nutrition_my_diet_tags);
-$(".page_nutrition_my_diet_status").text(language.page_nutrition_my_diet_status);
-$(".page_nutrition_my_diet_action").text(language.page_nutrition_my_diet_action);
-$(".page_nutrition_my_diet_add_title").text(language.page_nutrition_my_diet_add_title);
-$(".page_nutrition_my_diet_update_title").text(language.page_nutrition_my_diet_update_title);
-$(".page_nutrition_my_diet_delete_title").text(language.page_nutrition_my_diet_delete_title);
-$(".page_nutrition_my_diet_restore_title").text(language.page_nutrition_my_diet_restore_title);
+$(".page_nutrition_my_recipe_title").text(language.page_nutrition_my_recipe_title);
+$(".page_nutrition_my_recipe_name").text(language.page_nutrition_my_recipe_name);
+$(".page_nutrition_my_recipe_assigned_for").text(language.page_nutrition_my_recipe_assigned_for);
+$(".page_nutrition_my_recipe_list_assigned_for_one").text(language.page_nutrition_my_recipe_list_assigned_for_one);
+$(".page_nutrition_my_recipe_list_assigned_for_plur").text(language.page_nutrition_my_recipe_list_assigned_for_plur);
+$(".page_nutrition_my_recipe_duration").text(language.page_nutrition_my_recipe_duration);
+$(".page_nutrition_my_recipe_date_begin").text(language.page_nutrition_my_recipe_date_begin);
+$(".page_nutrition_my_recipe_date_end").text(language.page_nutrition_my_recipe_date_end);
+$(".page_nutrition_my_recipe_tags").text(language.page_nutrition_my_recipe_tags);
+$(".page_nutrition_my_recipe_status").text(language.page_nutrition_my_recipe_status);
+$(".page_nutrition_my_recipe_action").text(language.page_nutrition_my_recipe_action);
+$(".page_nutrition_my_recipe_add_title").text(language.page_nutrition_my_recipe_add_title);
+$(".page_nutrition_my_recipe_update_title").text(language.page_nutrition_my_recipe_update_title);
+$(".page_nutrition_my_recipe_delete_title").text(language.page_nutrition_my_recipe_delete_title);
+$(".page_nutrition_my_recipe_restore_title").text(language.page_nutrition_my_recipe_restore_title);
 
-$(".page_nutrition_my_diet_add_date_begin").attr("placeholder", language.page_nutrition_my_diet_add_date_begin);
-$(".page_nutrition_my_diet_add_tag").attr("placeholder", language.page_nutrition_my_diet_add_tag);
+$(".page_nutrition_my_recipe_add_date_begin").attr("placeholder", language.page_nutrition_my_recipe_add_date_begin);
+$(".page_nutrition_my_recipe_add_tag").attr("placeholder", language.page_nutrition_my_recipe_add_tag);
 
 $(".page_all_close").text(language.page_all_close);
 $(".page_all_add").text(language.page_all_add);
@@ -72,7 +72,7 @@ $(".btn-success").on('click', function() {
 });
 
 $(".AddNewMyCurrentsDiets").on('click', function() {
-  $(".page_nutrition_my_diet_add_title").html(language.page_nutrition_my_diet_add_title);
+  $(".page_nutrition_my_recipe_add_title").html(language.page_nutrition_my_recipe_add_title);
   $('.AddMyCurrentsDietsFormId').val(0);
   $('.AddMyCurrentsDietsFormTimestamp').val(0);
   $('.AddMyCurrentsDietsFormStatut').val(0);
@@ -82,7 +82,7 @@ $(".btnAddMyCurrentsDiets").on('click', function() {
   var errorData     = "";
   var assignedUsers = $('.InfoMyCurrentsDietsFormListStudents').val();
   var duration      = $('.InfoMyCurrentsDietsFormDuration').val();
-  var date_start    = $('.page_nutrition_my_diet_add_date_begin').val();
+  var date_start    = $('.page_nutrition_my_recipe_add_date_begin').val();
   
   assignedUsers = 1;
   if (assignedUsers != 0 || duration != 0 || date_start != ""){
@@ -180,9 +180,9 @@ function ListMyCurrentsDiets(status){
         
         var spanListUserAssigned = '';
         if (nbStudent < 2) {
-          spanListUserAssigned = '<span class="page_nutrition_my_diet_list_assigned_for_one"> Elève</span>';
+          spanListUserAssigned = '<span class="page_nutrition_my_recipe_list_assigned_for_one"> Elève</span>';
         } else {
-          spanListUserAssigned = '<span class="page_nutrition_my_diet_list_assigned_for_plur"> Elèves</span>';
+          spanListUserAssigned = '<span class="page_nutrition_my_recipe_list_assigned_for_plur"> Elèves</span>';
         }
 
         if (val.advancement >= 0 && val.advancement <= 25) {
@@ -260,12 +260,12 @@ function ViewMyCurrentsDiets(id){
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      $(".page_nutrition_my_diet_add_title").html(language.page_nutrition_my_diet_update_title);
+      $(".page_nutrition_my_recipe_add_title").html(language.page_nutrition_my_recipe_update_title);
       
       $('.AddMyCurrentsDietsFormIdMyCurrentsDiets').val(id);
       $('.AddMyCurrentsDietsFormCode').val(data.ViewMyCurrentsDiets.code);
       $('.AddMyCurrentsDietsFormName').val(data.ViewMyCurrentsDiets.name);
-      $(".avatar-my_diet").attr("src", data.ViewMyCurrentsDiets.linkToPicture);
+      $(".avatar-my_recipe").attr("src", data.ViewMyCurrentsDiets.linkToPicture);
       $('.AddMyCurrentsDietsFormTimestamp').val(data.ViewMyCurrentsDiets.timestamp);
       $('.AddMyCurrentsDietsFormStatut').val(data.ViewMyCurrentsDiets.status);
       $('.showPicture').removeClass("d-none");

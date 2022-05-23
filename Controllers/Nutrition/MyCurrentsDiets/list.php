@@ -20,9 +20,6 @@ $error              = array();
 $output             = array();
 $outputok           = false;
 
-$_POST['idUser'] = 1;
-$_POST['status'] = 0;
-
 $distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
 $distriXNutritionCurrentDietData->setIdUser($_POST['idUser']);
 $distriXNutritionCurrentDietData->setStatus($_POST['status']);
