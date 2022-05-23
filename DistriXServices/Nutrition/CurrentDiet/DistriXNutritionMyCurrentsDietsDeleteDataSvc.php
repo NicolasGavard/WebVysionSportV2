@@ -30,8 +30,8 @@ if ($dataSvc->getMethodName() == "DelCurrentDiet") {
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
       $infoCurrentDiet     = $dataSvc->getParameter("data");
-      $styCurrentDietstor  = DietStor::read($infoCurrentDiet->getId(), $dbConnection);
-      $insere              = DietStor::remove($styCurrentDietstor, $dbConnection);
+      $styCurrentDietStor  = DietStor::read($infoCurrentDiet->getId(), $dbConnection);
+      $insere              = DietStor::remove($styCurrentDietStor, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();

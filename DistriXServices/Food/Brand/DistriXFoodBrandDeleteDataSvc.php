@@ -30,8 +30,8 @@ if ($dataSvc->getMethodName() == "DelBrand") {
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
       $infoBrand    = $dataSvc->getParameter("data");
-      $scoreEcostor = BrandStor::read($infoBrand->getId(), $dbConnection);
-      $insere       = BrandStor::remove($scoreEcostor, $dbConnection);
+      $scoreEcoStor = BrandStor::read($infoBrand->getId(), $dbConnection);
+      $insere       = BrandStor::remove($scoreEcoStor, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();

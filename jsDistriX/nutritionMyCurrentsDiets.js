@@ -117,12 +117,12 @@ $(".btnAddMyCurrentsDiets").on('click', function() {
   }
 });
 
-$("#btnDelMyCurrentsDiets").on('click', function() {
+$("#btnDel").on('click', function() {
   $.ajax({
     url : 'Controllers/Nutrition/MyCurrentsDiets/delete.php',
     type : 'POST',
     dataType : 'JSON',
-    data: $('#FormDelMyCurrentsDiets').serialize(),
+    data: $('#FormDel').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
@@ -137,12 +137,12 @@ $("#btnDelMyCurrentsDiets").on('click', function() {
   });
 });
 
-$("#btnRestMyCurrentsDiets").on('click', function() {
+$("#btnRest").on('click', function() {
   $.ajax({
     url : 'Controllers/Nutrition/MyCurrentsDiets/restore.php',
     type : 'POST',
     dataType : 'JSON',
-    data: $('#FormRestMyCurrentsDiets').serialize(),
+    data: $('#FormRest').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
@@ -239,7 +239,7 @@ function ListMyCurrentsDiets(status){
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
           '       <a class="dropdown-item btnViewMyCurrentsDiets"                      data-toggle="modal" data-target="#modalAddMyCurrentsDiets" onclick="ViewMyCurrentsDiets(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
           '       <a class="dropdown-item btnDeleMyCurrentsDiets '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                onclick="DelMyCurrentsDiets(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
-          '       <a class="dropdown-item btnRestMyCurrentsDiets '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"                onclick="RestMyCurrentsDiets(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
+          '       <a class="dropdown-item btnRestMyCurrentsDiets '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"               onclick="RestMyCurrentsDiets(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
           '     </div>'+
           '   </div>'+
           ' </td>'+
