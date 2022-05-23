@@ -28,6 +28,8 @@
 	<!-- bootstrap-tagsinput css -->
 	<link rel="stylesheet" type="text/css" href="src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
 	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+	<!-- bootstrap-colorPicker css -->
+	<link rel="stylesheet" type="text/css" href="src/plugins/jquery-asColorPicker/dist/css/asColorPicker.css">
 
 </head>
 <body>

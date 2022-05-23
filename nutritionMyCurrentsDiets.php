@@ -46,6 +46,10 @@
 							<tbody id="listMyCurrentsDietsTbody">
 							</tbody>
 						</table>
+            
+            <div id="listMyCurrentsDietsModal">
+
+					  </div>
 					</div>
 				</div>
 			</div>

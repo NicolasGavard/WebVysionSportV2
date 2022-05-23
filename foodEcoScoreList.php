@@ -1,178 +1,102 @@
 <?php
-  session_start();
-  include('header.php');
-  include('headerMenu.php');
+	session_start();
+	include('_header.php');
+	include('_headerMenuTop.php');
+	include('_headerMenuLeft.php');
 ?>
+	<div class="mobile-menu-overlay"></div>
 
-<div class="main-panel">        
-  <div class="content-wrapper" style="background:#69a7c5; padding: 1.5rem 1.5rem 1.5rem 1.5rem;">
-    <div class="row">
-      <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title page_food_eco_score_title" style='text-transform: none;'></h4>
-            
-            <div class="row">
-              <div class="col-md-9">
-              </div>
-              <div class="col-md-3" style="text-align:right">
-                <button type="button" class="btn btn-primary btn-icon-text AddNewEcoScore" data-bs-toggle="modal" data-bs-target="#modalAddEcoScore" style="margin-top: 28px;">
-                  <i class="menu-icon mdi mdi-plus"></i>
-                  <span class="page_food_eco_score_add_title"></span>
-                </button>
-              </div>
-            </div>
-
-            <div class="table-responsive">          
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width=5%><span class="page_food_eco_score_picture"></span></th>
-                    <th width=10%><span class="page_food_eco_score_code"></span></th>
-                    <th width=10%><span class="page_food_eco_score_color"></span></th>
-                    <th width=60%><span class="page_food_eco_score_name"></span></th>
-                    <th width=05%><span class="page_food_eco_score_status"></span></th>
-                    <th width=10%><span class="page_food_eco_score_action"></span></th>
-                  </tr>
-                </thead>
-                <tbody id="listEcoScoresTbody">
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modalAddEcoScore" tabindex="-1" aria-labelledby="modalAddEcoScoreLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title btnSave page_food_eco_score_add_title" id="modalAddEcoScoreLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormAddEcoScore">
-            <input type="hidden" name="id"        class="AddEcoScoreFormIdEcoScore" value="0">
-            <input type="hidden" name="statut"    class="AddEcoScoreFormStatut"     value="0">
-            <input type="hidden" name="timestamp" class="AddEcoScoreFormTimestamp"  value="0">
-            
-            <div class="form-group">
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<!-- Simple Datatable start -->
+				
+        <div class="pd-20 card-box mb-30">
+					<div class="clearfix">
+						<div class="pull-left">
+							<h4 class="text-blue h4 page_food_eco_score_title"></h4>
+						</div>
+        
+            <div class="pull-right">
+              <button type="button" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> Actifs</button>
+              <button type="button" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> Inactifs</button>
+              <button type="button" class="btn btn-primary AddNewEcoScore" data-toggle="modal" data-target="#modalAddEcoScore"><i class="fa fa-plus"></i> Ajouter</button>
+        		</div>
+					</div>
+          
+          <div class="pb-20"></div>
+          <div class="pb-20">
+						<table class="data-table table stripe hover nowrap">
+							<thead>
+								<tr>                 
+                  <th width=20% class="table-plus datatable-nosort"><span class="page_food_eco_score_picture"></span></th>
+                  <th width=10% class="table-plus datatable-nosort"><span class="page_food_eco_score_color"></span></th>
+                  <th width=60% class="table-plus datatable-nosort"><span class="page_food_eco_score_name"></span></th>
+                  <th width=10% class="table-plus datatable-nosort"><span class="page_food_eco_score_action"></span></th>
+								</tr>
+							</thead>
+							<tbody id="listEcoScoresTbody">            
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+      
+      <div class="modal fade" id="modalAddEcoScore" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center font-18">
+              <h4 class="padding-top-30 mb-30 weight-500 page_food_eco_score_add_title"> </h4>
               <div class="row">
-                <div class="col-md-4">
-                  <label for="InputEcoScoreCode" class="page_food_eco_score_code"></label>
-                  <input type="text" class="form-control AddEcoScoreFormCode" id="InputEcoScoreCode" placeholder="Code" name="code" value="">
+                <div class="col-md-12 col-sm-12 d-none showPicture">
+                  <div class="profile-photo" style="height:70px;">
+                    <img src="" alt="" class="avatar-photo avatar-eco_score" style="border-radius:10%">
+                  </div>
                 </div>
-                <div class="col-md-4">
-                  <label for="InputEcoScoreName" class="page_food_eco_score_name"></label>
-                  <input type="text" class="form-control AddEcoScoreFormName" id="InputEcoScoreName" placeholder="Nom" name="description" value="">
-                </div>
-                <div class="col-md-4">
-                  <label for="InputEcoScoreColor" class="page_food_eco_score_color"></label>
-                  <input type="text" class="form-control input-lg pick-a-color AddEcoScoreFormColor" id="InputEcoScoreColor" placeholder="Color" name="color" value="#B3B3B3"/>
-                </div>
-              </div>
-            </div>
 
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="EcoScoreEpic">
-                    <p>
-                      <input type="file" class="EcoScoreEpicImage" accept="image/*" name="picture" id="picture"  onchange="loadFile(event); encodeImgtoBase64(this);" style="display: none;">
-                      <input type="hidden" name="linkToPicture"       id="linkToPicture"      class="InfoProfilFormLinkToPicture"   value="">
-                      <input type="hidden" name="linkToPictureBase64" id="linkToPictureBase64">
-                    </p>
-                    <p>
-                      <label for="file" style="cursor: pointer;">
-                      <img class="EcoScoreEpicImage InfoEcoScorePicture" src="" style='max-width:100px; max-height:100px' alt="" id="base64Img"/>
-                      <div class="EcoScoreEpicContent" onclick='$("#picture").click();'>
-                        <span class="EcoScoreEpicIcon"><i class="menu-icon mdi mdi-camera"></i></span>
-                        <span class="EcoScoreEpic_Text page_all_change_picture"></span>
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label class="page_food_eco_score_name"></label>
+                    <input class="form-control AddEcoScoreFormName" type="text" name="name">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="InputEcoScoreColor" class="page_food_eco_score_color"></label>
+                    <input type="text" class="colorpicker form-control AddEcoScoreFormColor" id="InputEcoScoreColor" placeholder="Color" name="color" value="" />
+                  </div>
+                </div>
+                
+                <div class="col-md-12 col-sm-12">
+                  <div class="pd-20 card-box mb-30">
+                    <form class="dropzone FormAddEcoScore" action="#" id="FormAddEcoScore" style="max-height: 200px;">
+                      <input class="form-control AddEcoScoreFormIdEcoScore"    type="hidden" name="id"         value="0">
+                      <input class="form-control AddEcoScoreFormTimestamp"     type="hidden" name="timestamp"  value="0">
+                      <input class="form-control AddEcoScoreFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddEcoScoreFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
+                      <div class="fallback" style="margin: 1em 0;">
+                        <input type="file" name="file" class="AddEcoScoreFormPicture" />
                       </div>
-                    </label>
-                    </p>
+                    </form>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
-          
-          <!-- Success Alert -->
-          <div class="alert alert-success alert-dismissible fade show" style='display:none;'>
-            <strong class='errorData_ok'></strong>
-            <br/>
-            <p class='errorData_ok_txt'></p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          </div>
-
-          <!-- Error Alert -->
-          <div class="form-group">
-            <div class="alert alert-danger alert-dismissible fade show" style='display:none;'>
-              <strong class='errorData_ko'></strong>
-              <br/>
-              <p></p>
-              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              
+              <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                <div class="col-6">
+                  <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                  <span class="page_all_close"></span>
+                </div>
+                <div class="col-6">
+                  <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn btnAddEcoScore" data-dismiss="modal" id="btnAddEcoScore"><i class="fa fa-check"></i></button>
+                  <span class="page_all_add"></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-primary page_all_add btnSave" id="btnAddEcoScore"></button>
-        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="modal fade" id="modalDelEcoScore" tabindex="-1" aria-labelledby="modalDelEcoScoreLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title page_food_eco_score_delete_title" id="modalDelEcoScoreLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormDelEcoScore">
-            <input type="hidden" name="id" class="DelEcoScoreFormIdEcoScore" value="0">
-          </form>
-          <p class="DelEcoScoreTxt"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-danger page_all_delete" id="btnDelEcoScore"></button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="modal fade" id="modalRestEcoScore" tabindex="-1" aria-labelledby="modalRestEcoScoreLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title page_food_eco_score_restore_title" id="modalRestEcoScoreLabel" class="page_food_eco_score_restore_title"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormRestEcoScore">
-            <input type="hidden" name="id" class="RestEcoScoreFormIdEcoScore" value="0">
-          </form>
-          <p class="RestEcoScoreTxt"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-info page_all_restore" id="btnRestEcoScore"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    var loadFile = function(event) {
-      var image = document.getElementById('base64Img');
-      image.src = URL.createObjectURL(event.target.files[0]);
-    };
-  </script>
 <?php
-  include('headerFooter.php');
+	include('_headerFooter.php');
 ?>

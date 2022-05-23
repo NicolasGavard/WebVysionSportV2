@@ -110,6 +110,11 @@
       <script src="src/plugins/datatables/js/vfs_fonts.js"></script>
       <!-- Datatable Setting js -->
       <script src="vendors/scripts/datatable-setting.js"></script></body>
+      <!-- Datatable Colorpicker js -->
+      <script src="src/plugins/jquery-asColor/dist/jquery-asColor.js"></script>
+      <script src="src/plugins/jquery-asGradient/dist/jquery-asGradient.js"></script>
+      <script src="src/plugins/jquery-asColorPicker/jquery-asColorPicker.js"></script>
+      <script src="vendors/scripts/colorpicker.js"></script>
     <?php } ?>
 
     <!-- js DistriX -->

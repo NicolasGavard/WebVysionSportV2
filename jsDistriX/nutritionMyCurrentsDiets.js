@@ -1,6 +1,8 @@
 $(".page_nutrition_my_diet_title").text(language.page_nutrition_my_diet_title);
 $(".page_nutrition_my_diet_name").text(language.page_nutrition_my_diet_name);
 $(".page_nutrition_my_diet_assigned_for").text(language.page_nutrition_my_diet_assigned_for);
+$(".page_nutrition_my_diet_list_assigned_for_one").text(language.page_nutrition_my_diet_list_assigned_for_one);
+$(".page_nutrition_my_diet_list_assigned_for_plur").text(language.page_nutrition_my_diet_list_assigned_for_plur);
 $(".page_nutrition_my_diet_duration").text(language.page_nutrition_my_diet_duration);
 $(".page_nutrition_my_diet_date_begin").text(language.page_nutrition_my_diet_date_begin);
 $(".page_nutrition_my_diet_date_end").text(language.page_nutrition_my_diet_date_end);
@@ -21,11 +23,6 @@ $(".page_all_view").text(language.page_all_view);
 $(".page_all_delete").text(language.page_all_delete);
 $(".page_all_restore").text(language.page_all_restore);
 $(".page_all_change_picture").text(language.page_all_change_picture);
-
-// $(".errorData_ok").text(language.errorData_ok);
-// $(".errorData_ok_txt").text(language.errorData_ok_txt);
-// $(".errorData_ko").text(language.errorData_ko);
-// $(".errorData_ko_txt").text(language.errorData_ko_txt);
 
 var errorData_txt_assignedUsers = language.errorData_txt_assignedUsers;
 var errorData_txt_duration      = language.errorData_txt_duration;    
@@ -172,13 +169,21 @@ function ListMyCurrentsDiets(status){
       $.map(data.ListMyCurrentsDiets, function(val, key) {
         var assignedUsersList = '';
         var progressColor = 'primary';
-        var progressWidth = 0;
         if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
         if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
+        var nbStudent = 0;
         $.map(val.assignedUsers, function(valUsers, keyUsers) {
           assignedUsersList = assignedUsersList + valUsers.firstNameUser+' '+valUsers.nameUser+'<br>';
+          nbStudent++;
         });
+        
+        var spanListUserAssigned = '';
+        if (nbStudent < 2) {
+          spanListUserAssigned = '<span class="page_nutrition_my_diet_list_assigned_for_one"> Elève</span>';
+        } else {
+          spanListUserAssigned = '<span class="page_nutrition_my_diet_list_assigned_for_plur"> Elèves</span>';
+        }
 
         if (val.advancement >= 0 && val.advancement <= 25) {
           progressColor = "danger";
@@ -190,12 +195,42 @@ function ListMyCurrentsDiets(status){
           progressColor = "success";
         }
 
+        $('#listMyCurrentsDietsModal').append(
+          '<div class="modal fade bs-example-modal-lg" id="modalViewUserListDiet_'+val.id+'" tabindex="-1" role="dialog" aria-hidden="true">'+
+          ' <div class="modal-dialog modal-lg modal-dialog-centered" role="document">'+
+          '  <div class="modal-content">'+
+          '    <div class="modal-body text-center font-18">'+
+          '      <h4 class="padding-top-30 mb-30 weight-500">'+nbStudent+' '+spanListUserAssigned+'</h4>'+
+          '    </div>'+
+          '    <div class="row">'+
+          '      <div class="col-md-12 col-sm-12" style="text-align:center">'+
+          '       '+assignedUsersList+
+          '      </div>'+
+          '    </div>'+
+          '    <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">'+
+          '      <div class="col-6">'+
+          '        <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>'+
+          '        <span class="page_all_close"></span>'+
+          '      </div>'+
+          '      <div class="col-6">'+
+          '        <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn btnAddMyCurrentsDiets" data-dismiss="modal" id="btnAddMyCurrentsDiets"><i class="fa fa-check"></i></button>'+
+          '        <span class="page_all_add"></span>'+
+          '      </div>'+
+          '    </div>'+
+          '  </div>'+
+          '</div>'
+        );
+
         $('#listMyCurrentsDietsTbody').append(
-          
           '<tr>'+
           ' <td>'+val.name+'</td>'+
-          // ' <td>'+assignedUsersList+'</td>'+
-          ' <td><button type="button" style="margin-right: 0px;" class="btn btn-primary AddViewUserListDiet_'+val.id+'" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> Ajouter</button></td>'+
+          ' <td>'+
+          '  <button type="button" style="margin-right: 0px;" class="btn btn-info AddViewUserListDiet_'+val.id+'" data-toggle="modal" data-target="#modalViewUserListDiet_'+val.id+'">'+
+          '    <span class="micon dw dw-user-1"></span> '+
+          '    '+nbStudent+' '+
+          '    '+spanListUserAssigned+' '+
+          '  </button>'+
+          ' </td>'+
           ' <td>'+val.duration+' jours</td>'+
           ' <td>'+ConvertIntToDateFr(val.dateStart)+'</td>'+
           ' <td>'+val.tags+'</td>'+
@@ -212,27 +247,8 @@ function ListMyCurrentsDiets(status){
           '     </div>'+
           '   </div>'+
           ' </td>'+
-          '</tr>'+
-
-          '<div class="modal fade bs-example-modal-lg" id="AddViewUserListDiet_'+val.id+'" tabindex="-1" role="dialog" aria-hidden="true">'+
-          ' <div class="modal-dialog modal-lg modal-dialog-centered" role="document">'+
-          '  <div class="modal-content">'+
-          '    <div class="modal-body text-center font-18">'+
-          '      <h4 class="padding-top-30 mb-30 weight-500 page_nutrition_my_diet_add_title"> </h4>'+
-          '    </div>'+
-          '    <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">'+
-          '      <div class="col-6">'+
-          '        <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>'+
-          '        <span class="page_all_close"></span>'+
-          '      </div>'+
-          '      <div class="col-6">'+
-          '        <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn btnAddMyCurrentsDiets" data-dismiss="modal" id="btnAddMyCurrentsDiets"><i class="fa fa-check"></i></button>'+
-          '        <span class="page_all_add"></span>'+
-          '      </div>'+
-          '    </div>'+
-          '  </div>'+
-          '</div>'
-          )
+          '</tr>'
+          );
       });
     },
     error : function(data) {
