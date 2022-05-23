@@ -1,6 +1,7 @@
 $(".page_food_eco_score_title").text(language.page_food_eco_score_title);
 $(".page_food_eco_score_picture").text(language.page_food_eco_score_picture);
 $(".page_food_eco_score_code").text(language.page_food_eco_score_code);
+$(".page_food_eco_score_color").text(language.page_food_eco_score_color);
 $(".page_food_eco_score_name").text(language.page_food_eco_score_name);
 $(".page_food_eco_score_status").text(language.page_food_eco_score_status);
 $(".page_food_eco_score_action").text(language.page_food_eco_score_action);

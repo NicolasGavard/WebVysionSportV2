@@ -54,12 +54,14 @@
                   </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-6 col-sm-6">
                   <div class="form-group">
                     <label class="page_food_eco_score_name"></label>
                     <input class="form-control AddEcoScoreFormName" type="text" name="name">
                   </div>
+                </div>
 
+                <div class="col-md-6 col-sm-6">
                   <div class="form-group">
                     <label for="InputEcoScoreColor" class="page_food_eco_score_color"></label>
                     <input type="text" class="colorpicker form-control AddEcoScoreFormColor" id="InputEcoScoreColor" placeholder="Color" name="color" value="" />

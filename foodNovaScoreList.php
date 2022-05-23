@@ -54,12 +54,14 @@
                   </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-6 col-sm-6">
                   <div class="form-group">
                     <label class="page_food_nova_score_name"></label>
                     <input class="form-control AddNovaScoreFormName" type="text" name="name">
                   </div>
-
+                </div>
+                
+                <div class="col-md-6 col-sm-6">
                   <div class="form-group">
                     <label for="InputNovaScoreColor" class="page_food_nova_score_color"></label>
                     <input type="text" class="colorpicker form-control AddNovaScoreFormColor" id="InputNovaScoreColor" placeholder="Color" name="color" value="" />

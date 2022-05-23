@@ -1,6 +1,7 @@
 $(".page_food_nova_score_title").text(language.page_food_nova_score_title);
 $(".page_food_nova_score_picture").text(language.page_food_nova_score_picture);
 $(".page_food_nova_score_code").text(language.page_food_nova_score_code);
+$(".page_food_nova_score_color").text(language.page_food_nova_score_color);
 $(".page_food_nova_score_name").text(language.page_food_nova_score_name);
 $(".page_food_nova_score_status").text(language.page_food_nova_score_status);
 $(".page_food_nova_score_action").text(language.page_food_nova_score_action);
@@ -142,7 +143,7 @@ function ListNovaScore(status){
     dataType : 'JSON',
     data: {'status': status},
     success : function(data) {
-      $.map(data.ListScoresEco, function(val, key) {
+      $.map(data.ListScoresNova, function(val, key) {
         if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
         if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
