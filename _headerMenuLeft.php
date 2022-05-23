@@ -51,10 +51,10 @@
         <?php if ($hasNutrition) { ?>
           <?php
             $dataOption = '';
-            $navActiveMenunutritionMyCurrentsDiets = $navActiveMenuNutritionMyTemplatesDiets = $navActiveMenuNutritionMyRecipe = $navActiveMenuNutritionMyAliment = "";
+            $navActiveMenunutritionMyCurrentsDiets = $navActiveMenuNutritionMyTemplatesDiets = $navActiveMenuNutritionMyRecipes = $navActiveMenuNutritionMyAliment = "";
             if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDiets')   !== false) { $dataOption="on"; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDiets')  !== false) { $dataOption="on"; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipe')          !== false) { $dataOption="on"; $navActiveMenuNutritionMyRecipe        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipes')         !== false) { $dataOption="on"; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'NutritionMyAliment')         !== false) { $dataOption="on"; $navActiveMenuNutritionMyAliment       = 'class="active"'; }
           ?>
           
@@ -65,8 +65,8 @@
             <ul class="submenu">
               <?php if ($hasNutrition_MyDiet)           { ?><li <?php echo $navActiveMenunutritionMyCurrentsDiets ?>><a class="nav-link language_menu_nutrition_myDiet" href="nutritionMyCurrentsDiets.php"></a></li><?php } ?>
               <?php if ($hasNutrition_MyTemplatesDiets) { ?><li <?php echo $navActiveMenuNutritionMyTemplatesDiets ?>><a class="nav-link language_menu_nutrition_myTempletDiet" href="nutritionMyTemplatesDiets.php"></a></li><?php } ?>
-              <?php if ($hasNutrition_LIST)             { ?><li <?php echo $navActiveMenuNutritionMyRecipe ?>><a class="nav-link language_menu_menu_nutrition_myRecipe" href="nutritionMyRecipe.php"></a></li><?php } ?>
-              <?php if ($hasNutrition_Recipe)           { ?><li <?php echo $navActiveMenuNutritionMyAliment ?>><a class="nav-link language_menu_nutrition_myAliment" href="nutritionMyAliment.php"></a></li><?php } ?>
+              <?php if ($hasNutrition_LIST)             { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link language_menu_menu_nutrition_myRecipe" href="nutritionMyRecipes.php"></a></li><?php } ?>
+              <?php //if ($hasNutrition_Recipe)           { ?><!-- <li <?php //echo $navActiveMenuNutritionMyAliment ?>><a class="nav-link language_menu_nutrition_myAliment" href="nutritionMyAliment.php"></a></li>--><?php //} ?>
             </ul>
           </li>
         <?php } ?>

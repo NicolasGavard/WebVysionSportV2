@@ -125,7 +125,7 @@
       // Nutrition
       if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDiets')   !== false) { ?><script src="jsDistrix/nutritionMyCurrentsDiets.js"></script><?php }
       if (stripos($_SERVER['PHP_SELF'], 'nutritionMyTemplatesDiets')  !== false) { ?><script src="jsDistrix/nutritionMyTemplatesDiets.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'nutritionMyRecipe')          !== false) { ?><script src="jsDistrix/nutritionMyRecipes.js"></script><?php }
+      if (stripos($_SERVER['PHP_SELF'], 'nutritionMyRecipes')         !== false) { ?><script src="jsDistrix/nutritionMyRecipes.js"></script><?php }
       if (stripos($_SERVER['PHP_SELF'], 'nutritionMyAliment')         !== false) { ?><script src="jsDistrix/nutritionMyAliments.js"></script><?php }
 
       // Admin User
