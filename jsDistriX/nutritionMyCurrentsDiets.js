@@ -22,10 +22,10 @@ $(".page_all_delete").text(language.page_all_delete);
 $(".page_all_restore").text(language.page_all_restore);
 $(".page_all_change_picture").text(language.page_all_change_picture);
 
-$(".errorData_ok").text(language.errorData_ok);
-$(".errorData_ok_txt").text(language.errorData_ok_txt);
-$(".errorData_ko").text(language.errorData_ko);
-$(".errorData_ko_txt").text(language.errorData_ko_txt);
+// $(".errorData_ok").text(language.errorData_ok);
+// $(".errorData_ok_txt").text(language.errorData_ok_txt);
+// $(".errorData_ko").text(language.errorData_ko);
+// $(".errorData_ko_txt").text(language.errorData_ko_txt);
 
 var errorData_txt_assignedUsers = language.errorData_txt_assignedUsers;
 var errorData_txt_duration      = language.errorData_txt_duration;    
@@ -191,9 +191,11 @@ function ListMyCurrentsDiets(status){
         }
 
         $('#listMyCurrentsDietsTbody').append(
+          
           '<tr>'+
           ' <td>'+val.name+'</td>'+
-          ' <td>'+assignedUsersList+'</td>'+
+          // ' <td>'+assignedUsersList+'</td>'+
+          ' <td><button type="button" style="margin-right: 0px;" class="btn btn-primary AddViewUserListDiet_'+val.id+'" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> Ajouter</button></td>'+
           ' <td>'+val.duration+' jours</td>'+
           ' <td>'+ConvertIntToDateFr(val.dateStart)+'</td>'+
           ' <td>'+val.tags+'</td>'+
@@ -210,7 +212,27 @@ function ListMyCurrentsDiets(status){
           '     </div>'+
           '   </div>'+
           ' </td>'+
-          '</tr>')
+          '</tr>'+
+
+          '<div class="modal fade bs-example-modal-lg" id="AddViewUserListDiet_'+val.id+'" tabindex="-1" role="dialog" aria-hidden="true">'+
+          ' <div class="modal-dialog modal-lg modal-dialog-centered" role="document">'+
+          '  <div class="modal-content">'+
+          '    <div class="modal-body text-center font-18">'+
+          '      <h4 class="padding-top-30 mb-30 weight-500 page_nutrition_my_diet_add_title"> </h4>'+
+          '    </div>'+
+          '    <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">'+
+          '      <div class="col-6">'+
+          '        <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>'+
+          '        <span class="page_all_close"></span>'+
+          '      </div>'+
+          '      <div class="col-6">'+
+          '        <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn btnAddMyCurrentsDiets" data-dismiss="modal" id="btnAddMyCurrentsDiets"><i class="fa fa-check"></i></button>'+
+          '        <span class="page_all_add"></span>'+
+          '      </div>'+
+          '    </div>'+
+          '  </div>'+
+          '</div>'
+          )
       });
     },
     error : function(data) {
