@@ -16,7 +16,7 @@ include(__DIR__ . "/Storage/DietStor.php");
 // STOR Data
 include(__DIR__ . "/Data/DietStorData.php");
 // DISTRIX DATA
-include(__DIR__ . "/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/Data/DistriXNutritionCurrentDietData.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 

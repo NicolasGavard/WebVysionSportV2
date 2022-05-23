@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodBrandData.php");
+include(__DIR__ . "/../../Data/DistriXNutritionCurrentDietData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -16,32 +16,34 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
-$label  = new DistriXFoodBrandData();
-if ($_POST['id'] > 0) {
-  $label->setId($_POST['id']);
-}
-
-$servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("RestoreBrand");
-$servicesCaller->addParameter("data", $label);
-$servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandRestoreDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
-
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXBrandRestoreeteDataSvc");
-  $logInfoData->setLogFunction("RestoreBrand");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
-
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
+if (isset($_POST)) {
+  $label  = new DistriXNutritionCurrentDietData();
+  if (isset($_POST['id']) && $_POST['id'] > 0) {
+    $label->setId($_POST['id']);
   }
-} else {
-  $error = $errorData;
+  
+  $servicesCaller = new DistriXServicesCaller();
+  $servicesCaller->setMethodName("RestoreCurrentDiet");
+  $servicesCaller->addParameter("data", $label);
+  $servicesCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsRestoreDataSvc.php");
+  list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+  
+  if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_CurrentDiet")) {
+    $logInfoData = new DistriXLoggerInfoData();
+    $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+    $logInfoData->setLogApplication("DistriXCurrentDietRestoreDataSvc");
+    $logInfoData->setLogFunction("RestoreCurrentDiet");
+    $logInfoData->setLogData(print_r($output, true));
+    DistriXLogger::log($logInfoData);
+  }
+  
+  if ($outputok && !empty($output) > 0) {
+    if (isset($output["ConfirmSave"])) {
+      $confirmSave = $output["ConfirmSave"];
+    }
+  } else {
+    $error = $errorData;
+  }
 }
 
 $resp["confirmSave"]  = $confirmSave;

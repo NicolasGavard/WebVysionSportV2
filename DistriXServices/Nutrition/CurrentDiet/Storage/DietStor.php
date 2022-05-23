@@ -22,7 +22,7 @@ class DietStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(DietStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function getList(DietStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DietStorData();
@@ -74,7 +74,7 @@ class DietStor {
   }
   // End of IdUserIdDietTemplateDateStart
 
-  public static function findByIdDietTemplate(DietStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdDietTemplate(DietStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -83,14 +83,10 @@ class DietStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE iddiettemplate = :index0";
-      if (!$all) {
-        $request .= " AND statut = :statut";
-      }
+      $request .= " AND statut = :statut";
       $params = [];
       $params["index0"] = $dataIn->getIdDietTemplate();
-      if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
-      }
+      $params["statut"] = $status;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
@@ -104,7 +100,7 @@ class DietStor {
   }
   // End of IdDietTemplate
 
-  public static function findByIdUser(DietStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUser(DietStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -113,14 +109,10 @@ class DietStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE iduser = :index0";
-      if (!$all) {
-        $request .= " AND statut = :statut";
-      }
+      $request .= " AND statut = :statut";
       $params = [];
       $params["index0"] = $dataIn->getIdUser();
-      if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
-      }
+      $params["statut"] = $status;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
