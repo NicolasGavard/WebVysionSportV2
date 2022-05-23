@@ -1,0 +1,15 @@
+Serveur : 
+-	Protocole : SFTP 
+-	Hôte : access909501745.webspace-data.io
+-	Utilisateurs : u108247511-nicoG
+-	Mot de passe : NicoGavard2022$$
+-	Version de PHP : 8.0
+-	Espace : 100 GB 
+
+Base de données : 
+-	Hôte : db5007421837.hosting-data.io
+-	Utilisateur : dbu1336700
+-	Port : 3306 
+-	Mot de passe : uribdpreprodfitness2022$$
+-	Type et version : MariaDB 10.5
+-	Espace : 2 GB
