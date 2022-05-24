@@ -13,23 +13,25 @@ include(__DIR__ . "/../../../DistriXSvc/Data/DistriXSvcErrorData.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
+include(__DIR__ . "/Storage/DietStudentStor.php");
 include(__DIR__ . "/Storage/DietTemplateStor.php");
 // STOR Data
+include(__DIR__ . "/Data/DietStudentStorData.php");
 include(__DIR__ . "/Data/DietTemplateStorData.php");
 // DISTRIX DATA STY
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
 // DISTRIX DATA
-include(__DIR__ . "/Data/DistriXNutritionTemplatetDietData.php");
+include(__DIR__ . "/Data/DistriXNutritionTemplateDietData.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 
-$dbConnection = null;
-$errorData    = null;
+$dbConnection     = null;
+$errorData        = null;
 $myTemplatesDiets = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  $data         = $dataSvc->getParameter("data");
+  $data                 = $dataSvc->getParameter("data");
   $dietTemplateStorData = DistriXSvcUtil::setData($data, "DietTemplateStorData");
 
   $showOld = false;
@@ -38,12 +40,8 @@ if (is_null($dbConnection->getError())) {
   list($dietTemplateStor, $dietTemplateStorInd) = DietTemplateStor::findByIdUser($dietTemplateStorData, $showOld, $dbConnection);
   foreach ($dietTemplateStor as $diet) {
     $currentDietAssignedUsers         = [];
-    $distriXNutritionTemplateDietData = DistriXSvcUtil::setData($diet, "DistriXNutritionTemplatetDietData");
-    $dietTemplateStorData             = DietTemplateStor::read($diet->getIdDietTemplate(), $dbConnection);
-    $distriXNutritionTemplateDietData->setName($dietTemplateStorData->getName());
-    $distriXNutritionTemplateDietData->setDuration($dietTemplateStorData->getDuration());
-    $distriXNutritionTemplateDietData->setTags($dietTemplateStorData->getTags());
-    
+    $distriXNutritionTemplateDietData = DistriXSvcUtil::setData($diet, "DistriXNutritionTemplateDietData");
+        
     $dietStudentStorData = new DietStudentStorData();
     $dietStudentStorData->setIdDiet($diet->getId());
     list($dietStudentStor, $dietStudentStorInd) = DietStudentStor::findByIdDiet($dietStudentStorData, false, $dbConnection);

@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../../Data/DistriXNutritionTemplatetDietData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -15,35 +15,35 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-$label  = new DistriXNutritionCurrentDietData();
+$label  = new DistriXNutritionTemplatetDietData();
 if ($_POST['id'] > 0) {
   $label->setId($_POST['id']);
 }
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewMyCurrentDiet");
+$servicesCaller->setMethodName("ViewMyTemplatetDiet");
 $servicesCaller->addParameter("data", $label);
-$servicesCaller->setServiceName("DistriXServices/Food/MyCurrentDiet/DistriXFoodMyCurrentDietViewDataSvc.php");
+$servicesCaller->setServiceName("DistriXServices/Food/MyTemplatetDiet/DistriXFoodMyTemplatetDietViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_MyCurrentDiet")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_MyTemplatetDiet")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXMyCurrentDietViewDataSvc");
-  $logInfoData->setLogFunction("ViewMyCurrentDiet");
+  $logInfoData->setLogApplication("DistriXMyTemplatetDietViewDataSvc");
+  $logInfoData->setLogFunction("ViewMyTemplatetDiet");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
 if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewMyCurrentDiet"])) {
-    $label = $output["ViewMyCurrentDiet"];
+  if (isset($output["ViewMyTemplatetDiet"])) {
+    $label = $output["ViewMyTemplatetDiet"];
   }
 } else {
   $error = $errorData;
 }
 
-$resp["ViewMyCurrentDiet"]  = $label;
+$resp["ViewMyTemplatetDiet"]  = $label;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }

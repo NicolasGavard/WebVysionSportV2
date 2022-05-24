@@ -14,7 +14,10 @@ $(".language_menu_menu_nutrition_myRecipe").text(language.menu_nutrition_myRecip
 $(".language_menu_nutrition_myIngredient").text(language.menu_nutrition_myIngredient);
 
 $(".language_menu_bilan").text(language.menu_bilan);
-$(".language_menu_eleve").text(language.menu_eleve);
+
+$(".language_menu_student").text(language.menu_student);
+$(".menu_student_list_coatch").text(language.menu_student_list_coatch);
+
 $(".language_menu_ressource").text(language.menu_ressource);
 $(".language_menu_formule").text(language.menu_formule);
 $(".language_menu_parametre").text(language.menu_parametre);

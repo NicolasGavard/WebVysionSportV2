@@ -22,11 +22,11 @@
   "menu_bilan_3":     "Bilan", 
   "menu_bilan_4":     "Bilan", 
   
-  "menu_eleve":       "Elèves", 
-  "menu_eleve_1":     "Elèves", 
-  "menu_eleve_2":     "Elèves", 
-  "menu_eleve_3":     "Elèves", 
-  "menu_eleve_4":     "Elèves", 
+  "menu_student":             "Elèves", 
+  "menu_student_list_coatch": "Liste des coatch", 
+  "menu_student_2":           "Elèves 2", 
+  "menu_student_3":           "Elèves 3", 
+  "menu_student_4":           "Elèves 4", 
 
   "menu_ressource":   "Ressources", 
   "menu_ressource_1": "Ressources", 
