@@ -1,6 +1,7 @@
 $(".page_food_label_title").text(language.page_food_label_title);
 $(".page_food_label_picture").text(language.page_food_label_picture);
 $(".page_food_label_code").text(language.page_food_label_code);
+$(".page_food_label_color").text(language.page_food_label_color);
 $(".page_food_label_name").text(language.page_food_label_name);
 $(".page_food_label_status").text(language.page_food_label_status);
 $(".page_food_label_action").text(language.page_food_label_action);
@@ -21,68 +22,69 @@ $(".errorData_ok_txt").text(language.errorData_ok_txt);
 $(".errorData_ko").text(language.errorData_ko);
 $(".errorData_ko_txt").text(language.errorData_ko_txt);
 
-var confirm_delete  = language.confirm_delete;
-var confirm_restore = language.confirm_restore;
+var errorData_txt_code  = language.errorData_txt_code;
+var errorData_txt_name  = language.errorData_txt_name;
+var confirm_delete      = language.confirm_delete;
+var confirm_restore     = language.confirm_restore;
+var page_all_add        = language.page_all_add;
+var page_all_update     = language.page_all_update;
+var page_all_delete     = language.page_all_delete;
+var page_all_restore    = language.page_all_restore;
 
-$.ajax({
-  url : 'Controllers/Food/Label/list.php',
-  type : 'POST',
-  dataType : 'JSON',
-  success : function(data) {
-    $.map(data.ListLabels, function(val, key) {
-      if(val.status == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if(val.status == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
-      
-      $('#listLabelsTbody').append(
-        '<tr>'+
-        ' <td><img src="'+val.linkToPicture+'"/></td>'+
-        ' <td>'+val.code+'</td>'+
-        ' <td>'+val.name+'</td>'+
-        ' <td><div class="progress" style="width:15px; height:15px;"><div class="progress-bar bg-'+progressBarColor+'" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></td>'+
-        ' <td>'+
-        '   <button type="button" title="Voir"      class="btn btn-primary    btn-rounded btn-icon btnViewLabel"                       data-toggle="tooltip" data-placement="top" data-bs-toggle="modal" data-bs-target="#modalAddLabel"      onclick="ViewLabel(\''+val.id+'\');"><i class="ti-eye"></i></button>'+
-        '   <button type="button" title="Supprimer" class="btn btn-danger     btn-rounded btn-icon btnDeleLabel '+actionBtnDelete+'"   data-toggle="tooltip" data-placement="top" data-bs-toggle="modal" data-bs-target="#modalDelLabel"      onclick="DelLabel(\''+val.id+'\', \''+val.code+' '+val.name+'\');"><i class="ti-trash"></i></button>'+
-        '   <button type="button" title="Restorer " class="btn btn-info       btn-rounded btn-icon btnRestLabel '+actionBtnRestore+'"  data-toggle="tooltip" data-placement="top" data-bs-toggle="modal" data-bs-target="#modalRestLabel"     onclick="RestLabel(\''+val.id+'\', \''+val.code+' '+val.name+'\');"><i class="ti-share-alt"></i></button>'+
-        ' </td>'+
-        '</tr>')
-    });
-  },
-  error : function(data) {
-    console.log(data);
-  }
-}); 
+ListLabel(0);
 
-$(".AddNewLabel").on('click', function() {
-  $(".btnSave").html(language.page_food_label_add_title);
+$(".btn-warning").on('click', function() {
+  $(".btn-success").removeClass("disabled");
+  $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
+  
+  $(".btn-warning").addClass("disabled");
+  $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
+  ListLabel(1);
 });
 
-$("#btnAddLabel").on('click', function() {
-  var errorData   = "";
-  var code        = $('#InputLabelCode').val();
-  var name        = $('#InputLabelName').val();
+$(".btn-success").on('click', function() {
+  $(".btn-success").addClass("disabled");
+  $(".dw-success").removeClass("dw-ban").addClass("dw-checked");
   
-  if (code != "" || name != ""){
+  $(".btn-warning").removeClass("disabled");
+  $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
+  ListLabel(0);
+});
+
+$(".AddNewLabel").on('click', function() {
+  $(".page_food_label_add_title").html(language.page_food_label_add_title);
+      
+  $('.AddLabelFormIdLabel').val(0);
+  $('.AddLabelFormCode').val('');
+  $('.AddLabelFormName').val('');
+  $(".avatar-label").attr("src", '');
+  $('.AddLabelFormTimestamp').val(0);
+  $('.AddLabelFormStatut').val(0);
+});
+
+$(".btnAddLabel").on('click', function() {
+  var name = $('.AddLabelFormName').val();
+  if (name != ""){
+    var data = $('#FormAddLabel').serializeArray(); // convert form to array
+    data.push({name: "name", value: name});
+    
     $.ajax({
       url : 'Controllers/Food/Label/save.php',
       type : 'POST',
       dataType : 'JSON',
-      data: $('#FormAddLabel').serialize(),
+      data: $.param(data),
       success : function(data) {
-        $(".alert-success").show("slow").delay(1500).hide("slow");
-        setTimeout(function() {window.location.href = "./foodLabelList.php";}, 2000);
+        $('#sa-success-distrix').trigger('click');
+        setTimeout(function() {window.location.href = "./foodLabelList.php";}, 500);
       },
       error : function(data) {
-        errorData += ' - '+errorData_ko+'<br/>'
-        $('.alert-danger').show("slow").delay(5000).hide("slow");
-        $('.alert-danger p').html(errorData);
+        $('#sa-error-distrix').trigger('click');
       }
     });
   } else {
-    if (code == ""){
-      errorData += ' - '+errorData_txt_code+'<br/>'
-    } 
     if (name == ''){
-      errorData += ' - '+errorData_txt_name+'<br/>'
+      $('.AddLabelFormName').addClass("form-control-danger");
+      $('#danger-name').html(errorData_txt_code);
     }
   } 
 
@@ -92,39 +94,86 @@ $("#btnAddLabel").on('click', function() {
   }
 });
 
-$("#btnDelLabel").on('click', function() {
+$("#btnDel").on('click', function() {
   $.ajax({
     url : 'Controllers/Food/Label/delete.php',
     type : 'POST',
     dataType : 'JSON',
-    data: $('#FormDelLabel').serialize(),
+    data: $('#FormDel').serialize(),
     success : function(data) {
-      setTimeout(function() {window.location.href = "./foodLabelList.php";}, 200);
+      if (data.confirmSave) {
+        $('#sa-success-distrix').trigger('click');
+        setTimeout(function() {window.location.href = "./foodLabelList.php";}, 500);
+      } else {
+        $('#sa-error-distrix').trigger('click');
+      }
     },
     error : function(data) {
-      errorData += ' - '+errorData_ko+'<br/>'
-      $('.alert-danger').show("slow").delay(5000).hide("slow");
-      $('.alert-danger p').html(errorData);
+      $('#sa-error-distrix').trigger('click');
     }
   });
 });
 
-$("#btnRestLabel").on('click', function() {
+$("#btnRest").on('click', function() {
   $.ajax({
     url : 'Controllers/Food/Label/restore.php',
     type : 'POST',
     dataType : 'JSON',
-    data: $('#FormRestLabel').serialize(),
+    data: $('#FormRest').serialize(),
     success : function(data) {
-      setTimeout(function() {window.location.href = "./foodLabelList.php";}, 200);
+      if (data.confirmSave) {
+        $('#sa-success-distrix').trigger('click');
+        setTimeout(function() {window.location.href = "./foodLabelList.php";}, 500);
+      } else {
+        $('#sa-error-distrix').trigger('click');
+      }
     },
     error : function(data) {
-      errorData += ' - '+errorData_ko+'<br/>'
-      $('.alert-danger').show("slow").delay(5000).hide("slow");
-      $('.alert-danger p').html(errorData);
+      $('#sa-error-distrix').trigger('click');
     }
   });
 });
+
+function ListLabel(status){
+  $('#listLabelsTbody').empty();
+
+  $.ajax({
+    url : 'Controllers/Food/Label/list.php',
+    type : 'POST',
+    dataType : 'JSON',
+    data: {'status': status},
+    success : function(data) {
+      $.map(data.ListScoresNutri, function(val, key) {
+        if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        
+        $('#listLabelsTbody').append(
+          '<tr>'+
+          ' <td><img style="max-height:60px; max-width:60px;" src="'+val.linkToPicture+'"/></td>'+
+          ' <td>'+
+          '   <div class="progress" style="height:35px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'+
+          ' </td>'+    
+          ' <td>'+val.name+'</td>'+
+          ' <td>'+
+          '   <div class="dropdown">'+
+          '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+          '       <i class="dw dw-more"></i>'+
+          '     </a>'+
+          '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+          '       <a class="dropdown-item btnViewLabel"                      data-toggle="modal" data-target="#modalAddLabel" onclick="ViewLabel(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
+          '       <a class="dropdown-item btnDeleLabel '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelLabel(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
+          '       <a class="dropdown-item btnRestLabel '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestLabel(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
+          '     </div>'+
+          '   </div>'+
+          ' </td>'+
+          '</tr>')
+      });
+    },
+    error : function(data) {
+      console.log(data);
+    }
+  }); 
+}
 
 function ViewLabel(id){
   $.ajax({
@@ -133,14 +182,15 @@ function ViewLabel(id){
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      $(".btnSave").html(language.page_food_label_update_title);
+      $(".page_food_label_add_title").html(language.page_food_label_update_title);
       
       $('.AddLabelFormIdLabel').val(id);
-      $('.AddLabelFormCode').val(data.ViewLabel.code);
-      $('.AddLabelFormName').val(data.ViewLabel.name);
-      $(".InfoLabelPicture").attr("src", data.ViewLabel.linkToPicture);
+      $(".avatar-label").attr("src", data.ViewLabel.linkToPicture);
       $('.AddLabelFormTimestamp').val(data.ViewLabel.timestamp);
       $('.AddLabelFormStatut').val(data.ViewLabel.status);
+      $('.showPicture').removeClass("d-none");
+      
+      $('.asColorPicker-trigger span').attr("style", 'background:'+data.ViewLabel.color);
     },
     error : function(data) {
       console.log(data);
@@ -149,11 +199,11 @@ function ViewLabel(id){
 }
 
 function DelLabel(id, name){
-  $('.DelLabelFormIdLabel').val(id);
-  $('.DelLabelTxt').html(confirm_delete+' <b>'+name+'</b>');
+  $('.DelFormId').val(id);
+  $('.DelTxt').html(confirm_delete+' <b>'+name+'</b> ?');
 }
 
 function RestLabel(id, name){
-  $('.RestLabelFormIdLabel').val(id);
-  $('.RestLabelTxt').html(confirm_restore+' <b>'+name+'</b>');
+  $('.RestFormId').val(id);
+  $('.RestTxt').html(confirm_restore+' <b>'+name+'</b> ?');
 }

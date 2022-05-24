@@ -149,9 +149,9 @@ function ListNovaScore(status){
         
         $('#listNovaScoresTbody').append(
           '<tr>'+
-          ' <td><img style="max-width:40%;" src="'+val.linkToPicture+'"/></td>'+
+          ' <td><img style="max-height:60px; max-width:60px;" src="'+val.linkToPicture+'"/></td>'+
           ' <td>'+
-          '   <div class="progress" style="height:40px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'+
+          '   <div class="progress" style="height:35px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'+
           ' </td>'+    
           ' <td>'+val.number+'</td>'+
           ' <td>'+
@@ -161,8 +161,8 @@ function ListNovaScore(status){
           '     </a>'+
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
           '       <a class="dropdown-item btnViewNovaScore"                      data-toggle="modal" data-target="#modalAddNovaScore" onclick="ViewNovaScore(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
-          '       <a class="dropdown-item btnDeleNovaScore '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelNovaScore(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
-          '       <a class="dropdown-item btnRestNovaScore '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestNovaScore(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
+          '       <a class="dropdown-item btnDeleNovaScore '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelNovaScore(\''+val.id+'\', \''+val.number+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
+          '       <a class="dropdown-item btnRestNovaScore '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestNovaScore(\''+val.id+'\', \''+val.number+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
           '     </div>'+
           '   </div>'+
           ' </td>'+
@@ -200,12 +200,12 @@ function ViewNovaScore(id){
   });
 }
 
-function DelNovaScore(id, name){
+function DelNovaScore(id, number){
   $('.DelFormId').val(id);
-  $('.DelTxt').html(confirm_delete+' <b>'+name+'</b> ?');
+  $('.DelTxt').html(confirm_delete+' <b>'+number+'</b> ?');
 }
 
-function RestNovaScore(id, name){
+function RestNovaScore(id, number){
   $('.RestFormId').val(id);
-  $('.RestTxt').html(confirm_restore+' <b>'+name+'</b> ?');
+  $('.RestTxt').html(confirm_restore+' <b>'+number+'</b> ?');
 }

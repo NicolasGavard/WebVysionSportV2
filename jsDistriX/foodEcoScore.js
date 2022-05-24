@@ -149,7 +149,7 @@ function ListEcoScore(status){
         
         $('#listEcoScoresTbody').append(
           '<tr>'+
-          ' <td><img style="max-width:40%;" src="'+val.linkToPicture+'"/></td>'+
+          ' <td><img style="max-height:60px; max-width:60px;" src="'+val.linkToPicture+'"/></td>'+
           ' <td>'+
           '   <div class="progress" style="height:40px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'+
           ' </td>'+    
@@ -200,12 +200,12 @@ function ViewEcoScore(id){
   });
 }
 
-function DelEcoScore(id, name){
+function DelEcoScore(id, letter){
   $('.DelFormId').val(id);
-  $('.DelTxt').html(confirm_delete+' <b>'+name+'</b> ?');
+  $('.DelTxt').html(confirm_delete+' <b>'+letter+'</b> ?');
 }
 
-function RestEcoScore(id, name){
+function RestEcoScore(id, letter){
   $('.RestFormId').val(id);
-  $('.RestTxt').html(confirm_restore+' <b>'+name+'</b> ?');
+  $('.RestTxt').html(confirm_restore+' <b>'+letter+'</b> ?');
 }
