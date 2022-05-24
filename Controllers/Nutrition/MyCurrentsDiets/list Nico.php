@@ -25,35 +25,15 @@ $outputok           = false;
 $_POST['idUser'] = 1;
 $_POST['status'] = 0;
 
-// Current
 $distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
 $distriXNutritionCurrentDietData->setIdUser($_POST['idUser']);
 $distriXNutritionCurrentDietData->setStatus($_POST['status']);
 
-$currentCaller = new DistriXServicesCaller();
-$currentCaller->setMethodName("ListMyCurrentsDiets");
-$currentCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
-$currentCaller->addParameter("data", $distriXNutritionCurrentDietData);
-
-// Template
-$distriXNutritionTemplateDietData = new DistriXNutritionTemplateDietData();
-$distriXNutritionTemplateDietData->setIdUser($_POST['idUser']);
-$distriXNutritionTemplateDietData->setStatus(0);
-
-$templateCaller = new DistriXServicesCaller();
-$templateCaller->setMethodName("ListMyTemplatesDiets");
-$templateCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
-$templateCaller->addParameter("data", $distriXNutritionTemplateDietData);
-
-// Add Caller to multi caller
-$svc = new DistriXSvc();
-$svc->addToCall("Current", $currentCaller);
-$svc->addToCall("Template", $templateCaller);
-
-$callsOk = $svc->call();
-
-
-list($outputok, $output, $errorData) = $svc->getResult("Current"); //var_dump($output);
+$servicesCaller = new DistriXServicesCaller();
+$servicesCaller->setMethodName("ListMyCurrentsDiets");
+$servicesCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
+$servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 if ($outputok && !empty($output) > 0) {
   if (isset($output["ListMyCurrentsDiets"])) {
     $listMyCurrentDiets = $output["ListMyCurrentsDiets"];
@@ -62,8 +42,15 @@ if ($outputok && !empty($output) > 0) {
   $error = $errorData;
 }
 
+$distriXNutritionTemplateDietData = new DistriXNutritionTemplateDietData();
+$distriXNutritionTemplateDietData->setIdUser($_POST['idUser']);
+$distriXNutritionTemplateDietData->setStatus(0);
 
-list($outputok, $output, $errorData) = $svc->getResult("Template"); //var_dump($output);
+$servicesCaller = new DistriXServicesCaller();
+$servicesCaller->setMethodName("ListMyTemplatesDiets");
+$servicesCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
+$servicesCaller->addParameter("data", $distriXNutritionTemplateDietData);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 if ($outputok && !empty($output) > 0) {
   if (isset($output["ListMyTemplatesDiets"])) {
     $listMyTemplateDiets = $output["ListMyTemplatesDiets"];
