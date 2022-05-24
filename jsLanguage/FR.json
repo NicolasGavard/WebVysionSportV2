@@ -22,11 +22,11 @@
   "menu_bilan_3":     "Bilan", 
   "menu_bilan_4":     "Bilan", 
   
-  "menu_eleve":       "Elèves", 
-  "menu_eleve_1":     "Elèves", 
-  "menu_eleve_2":     "Elèves", 
-  "menu_eleve_3":     "Elèves", 
-  "menu_eleve_4":     "Elèves", 
+  "menu_student":             "Elèves", 
+  "menu_student_list_coatch": "Liste des coatch", 
+  "menu_student_2":           "Elèves 2", 
+  "menu_student_3":           "Elèves 3", 
+  "menu_student_4":           "Elèves 4", 
 
   "menu_ressource":   "Ressources", 
   "menu_ressource_1": "Ressources", 
@@ -123,6 +123,7 @@
   
   "page_nutrition_my_diet_title":                 "Mes diètes en cours", 
   "page_nutrition_my_diet_name":                  "Nom diète", 
+  "page_nutrition_my_diet_template":              "modèle de diète", 
   "page_nutrition_my_diet_assigned_for":          "Prénom Nom", 
   "page_nutrition_my_diet_list_assigned_for_one": "Elève", 
   "page_nutrition_my_diet_list_assigned_for_plur":"Elèves", 
@@ -133,6 +134,7 @@
   "page_nutrition_my_diet_tags":                  "Tags", 
   "page_nutrition_my_diet_add_tag":               "Ajouter un tag", 
   "page_nutrition_my_diet_advancement":           "Avancement", 
+  "page_nutrition_my_diet_filtered_title":        "Rechercher une diète", 
   "page_nutrition_my_diet_add_title":             "Ajouter une diète", 
   "page_nutrition_my_diet_update_title":          "Modifier la diète", 
   "page_nutrition_my_diet_delete_title":          "Supprimer la diète", 

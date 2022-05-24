@@ -89,15 +89,24 @@
         <?php } ?>
 
         <?php
-          $hasBilan = true;
+          $hasStudent = true;
         ?>
-        <?php if ($hasBilan) { ?>
+        <?php if ($hasStudent) { ?>
           <li class="dropdown">
             <a href="javascript:;" class="dropdown-toggle">
-              <span class="micon dw dw-user-2"></span><span class="mtext language_menu_eleve"> </span>&nbsp;<img src="vendors/images/coming-soon.png" alt="" width="25">
+              <span class="micon dw dw-user-2"></span><span class="mtext language_menu_student"> </span>&nbsp;<img src="vendors/images/coming-soon.png" alt="" width="25">
             </a>
             <ul class="submenu">
-              <li><a href="#">1</a></li>
+              <?php
+                $hasSTUDENT_LIST_COATCH = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'STUDENT', 'LIST_COATCH');
+                $hasSTUDENT_LIST_COATCH = true;  
+
+                $dataOption = '';
+                $navActiveMenuStudentListCoatch = "";
+                if (stripos($_SERVER['PHP_SELF'], 'studentListCoatch')        !== false) { $dataOption="on"; $navActiveMenuStudentListCoatch = 'class="active"'; }
+              ?> 
+              <?php if ($hasSTUDENT_LIST_COATCH) { ?><li <?php echo $navActiveMenuStudentListCoatch ?>><a class="menu_student_list_coatch" href="studentListCoatch.php"></a></li><?php } ?>
+            
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>

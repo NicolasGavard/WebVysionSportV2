@@ -1,6 +1,7 @@
 $(".page_nutrition_my_diet_title").text(language.page_nutrition_my_diet_title);
 $(".page_nutrition_my_diet_name").text(language.page_nutrition_my_diet_name);
 $(".page_nutrition_my_diet_assigned_for").text(language.page_nutrition_my_diet_assigned_for);
+$(".page_nutrition_my_diet_template").text(language.page_nutrition_my_diet_template);
 $(".page_nutrition_my_diet_list_assigned_for_one").text(language.page_nutrition_my_diet_list_assigned_for_one);
 $(".page_nutrition_my_diet_list_assigned_for_plur").text(language.page_nutrition_my_diet_list_assigned_for_plur);
 $(".page_nutrition_my_diet_duration").text(language.page_nutrition_my_diet_duration);
@@ -9,6 +10,7 @@ $(".page_nutrition_my_diet_date_end").text(language.page_nutrition_my_diet_date_
 $(".page_nutrition_my_diet_tags").text(language.page_nutrition_my_diet_tags);
 $(".page_nutrition_my_diet_status").text(language.page_nutrition_my_diet_status);
 $(".page_nutrition_my_diet_action").text(language.page_nutrition_my_diet_action);
+$(".page_nutrition_my_diet_filtered_title").text(language.page_nutrition_my_diet_filtered_title);
 $(".page_nutrition_my_diet_add_title").text(language.page_nutrition_my_diet_add_title);
 $(".page_nutrition_my_diet_update_title").text(language.page_nutrition_my_diet_update_title);
 $(".page_nutrition_my_diet_delete_title").text(language.page_nutrition_my_diet_delete_title);
@@ -159,6 +161,7 @@ $("#btnRest").on('click', function() {
 
 function ListMyCurrentsDiets(status){
   $('#listMyCurrentsDietsTbody').empty();
+  $('.InfoMyCurrentsDietsFormListMyTemplates').empty();
 
   $.ajax({
     url : 'Controllers/Nutrition/MyCurrentsDiets/list.php',
@@ -166,6 +169,11 @@ function ListMyCurrentsDiets(status){
     dataType : 'JSON',
     data: {'status': status, 'idUser': localStorage.getItem("idUser")},
     success : function(data) {
+      
+      $.map(data.ListMyTemplatesDiets, function(val, key) {
+        $('.InfoMyCurrentsDietsFormListMyTemplates').append('<option value="'+val.id+'">'+val.name+'</option>');
+      });
+      
       $.map(data.ListMyCurrentsDiets, function(val, key) {
         var assignedUsersList = '';
         var progressColor = 'primary';
