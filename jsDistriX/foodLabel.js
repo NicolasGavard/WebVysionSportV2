@@ -143,16 +143,13 @@ function ListLabel(status){
     dataType : 'JSON',
     data: {'status': status},
     success : function(data) {
-      $.map(data.ListScoresNutri, function(val, key) {
+      $.map(data.ListLabels, function(val, key) {
         if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
         if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listLabelsTbody').append(
           '<tr>'+
-          ' <td><img style="max-height:60px; max-width:60px;" src="'+val.linkToPicture+'"/></td>'+
-          ' <td>'+
-          '   <div class="progress" style="height:35px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'+
-          ' </td>'+    
+          ' <td><img style="max-height:50px; max-width:50px;" src="'+val.linkToPicture+'"/></td>'+
           ' <td>'+val.name+'</td>'+
           ' <td>'+
           '   <div class="dropdown">'+

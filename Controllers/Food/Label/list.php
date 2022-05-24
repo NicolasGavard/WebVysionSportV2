@@ -10,14 +10,19 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp           = array();
+$resp        = array();
 $listLabels  = array();
-$error          = array();
-$output         = array();
-$outputok       = false;
+$error       = array();
+$output      = array();
+$outputok    = false;
+
+$distriXFoodlabelData = new DistriXFoodlabelData();
+$distriXFoodlabelData->setStatus($_POST['status']);
+
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListLabels");
 $servicesCaller->setServiceName("DistriXServices/Food/Label/DistriXFoodLabelListDataSvc.php");
+$servicesCaller->addParameter("data", $distriXFoodlabelData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Label")) {

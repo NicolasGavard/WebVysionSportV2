@@ -53,17 +53,10 @@
                   </div>
                 </div>
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-12 col-sm-12">
                   <div class="form-group">
                     <label class="page_food_label_name"></label>
                     <input class="form-control AddLabelFormName" type="text" name="name">
-                  </div>
-                </div>
-                
-                <div class="col-md-6 col-sm-6">
-                  <div class="form-group">
-                    <label for="InputLabelColor" class="page_food_label_color"></label>
-                    <input type="text" class="colorpicker form-control AddLabelFormColor" id="InputLabelColor" placeholder="Color" name="color" value="" />
                   </div>
                 </div>
                 
