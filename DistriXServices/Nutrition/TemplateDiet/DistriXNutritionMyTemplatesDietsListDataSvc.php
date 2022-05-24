@@ -19,47 +19,35 @@ include(__DIR__ . "/Data/DietTemplateStorData.php");
 // DISTRIX DATA STY
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
 // DISTRIX DATA
-include(__DIR__ . "/Data/DistriXNutritionTemplateDietData.php");
+include(__DIR__ . "/Data/DistriXNutritionTemplatetDietData.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 
-$dbConnection     = null;
-$errorData        = null;
+$dbConnection = null;
+$errorData    = null;
 $myTemplatesDiets = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   $data         = $dataSvc->getParameter("data");
-  $dietStorData = DistriXSvcUtil::setData($data, "DietStorData");
+  $dietTemplateStorData = DistriXSvcUtil::setData($data, "DietTemplateStorData");
 
   $showOld = false;
-  if ($dietStorData->getStatus()) $showOld = true;
+  if ($dietTemplateStorData->getStatus()) $showOld = true;
 
-  list($dietStor, $dietStorInd) = DietStor::findByIdUser($dietStorData, $showOld, $dbConnection);
-  foreach ($dietStor as $diet) {
+  list($dietTemplateStor, $dietTemplateStorInd) = DietTemplateStor::findByIdUser($dietTemplateStorData, $showOld, $dbConnection);
+  foreach ($dietTemplateStor as $diet) {
     $currentDietAssignedUsers         = [];
-    $distriXNutritionTemplateDietData = DistriXSvcUtil::setData($diet, "DistriXNutritionTemplateDietData");
+    $distriXNutritionTemplateDietData = DistriXSvcUtil::setData($diet, "DistriXNutritionTemplatetDietData");
     $dietTemplateStorData             = DietTemplateStor::read($diet->getIdDietTemplate(), $dbConnection);
     $distriXNutritionTemplateDietData->setName($dietTemplateStorData->getName());
     $distriXNutritionTemplateDietData->setDuration($dietTemplateStorData->getDuration());
     $distriXNutritionTemplateDietData->setTags($dietTemplateStorData->getTags());
     
-    // Prendre date de la diet
-    $date_start       = DistriXSvcUtil::getjmaDate($diet->getDateStart());
-    $date_start       = $date_start[0].'-'.$date_start[1].'-'.$date_start[2];
-    $date_rest        = new DateTime('now'); 
-    // Ajouter le nombre de jour de la diet
-    $duration         = $dietTemplateStorData->getDuration();
-    // Trouver la date de fin
-    $date_end         =  date('Y-m-d', strtotime($date_start. ' + '.$duration.' days'));
-    $date_fin         = new DateTime($date_end);
-    // Nombre de jours restant
-    $interval         = $date_rest->diff($date_fin);
-    $nbDaysInterval   = $interval->format('%d');
-    // Faire pourcentage
-    $advancement_rest = round(($nbDaysInterval / $duration) * 100, 2);
-    $advancement_done = 100 - round($advancement_rest,2);
-    $distriXNutritionTemplateDietData->setAdvancement(round($advancement_done));
+    $dietStudentStorData = new DietStudentStorData();
+    $dietStudentStorData->setIdDiet($diet->getId());
+    list($dietStudentStor, $dietStudentStorInd) = DietStudentStor::findByIdDiet($dietStudentStorData, false, $dbConnection);
+    $distriXNutritionTemplateDietData->setNbStudentAssigned($dietStudentStorInd);
     $myTemplatesDiets[]  = $distriXNutritionTemplateDietData;
   }
 } else {

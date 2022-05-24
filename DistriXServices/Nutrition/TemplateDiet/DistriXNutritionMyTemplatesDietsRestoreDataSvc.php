@@ -30,9 +30,9 @@ if ($dataSvc->getMethodName() == "RestoreTemplateDiet") {
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoTemplateDiet            = $dataSvc->getParameter("data");
-      $styTemplateDietTemplateStor = DietTemplateStor::read($infoTemplateDiet->getId(), $dbConnection);
-      $insere                     = DietTemplateStor::restore($styTemplateDietTemplateStor, $dbConnection);
+      $infoTemplateDiet             = $dataSvc->getParameter("data");
+      $styTemplateDietTemplateStor  = DietTemplateStor::read($infoTemplateDiet->getId(), $dbConnection);
+      $insere                       = DietTemplateStor::restore($styTemplateDietTemplateStor, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();

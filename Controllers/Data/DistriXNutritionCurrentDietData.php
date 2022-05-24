@@ -6,7 +6,7 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     protected $idUser;
     protected $nameUser;
     protected $firstNameUser;
-    protected $idDietTemplace;
+    protected $idDietTemplate;
     protected $name;
     protected $duration;
     protected $tags;
@@ -22,7 +22,7 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
       $this->idUser         = 0;
       $this->nameUser       = "";
       $this->firstNameUser  = "";
-      $this->idDietTemplace = 0;
+      $this->idDietTemplate = 0;
       $this->name           = "";
       $this->duration       = 0;
       $this->tags           = "";
@@ -37,7 +37,7 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     public function getIdUser() { return $this->idUser; }
     public function getNameUser() { return $this->nameUser; }
     public function getFirstNameUser() { return $this->firstNameUser; }
-    public function getIdDietTemplace() { return $this->idDietTemplace; }
+    public function getIdDietTemplate() { return $this->idDietTemplate; }
     public function getName() { return $this->name; }
     public function getDuration() { return $this->duration; }
     public function getTags() { return $this->tags; }
@@ -52,7 +52,7 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     public function setIdUser($idUser) { $this->idUser = $idUser; }
     public function setNameUser($nameUser) { $this->nameUser = $nameUser; }
     public function setFirstNameUser($firstNameUser) { $this->firstNameUser = $firstNameUser; }
-    public function setIdDietTemplace($idDietTemplace) { $this->idDietTemplace = $idDietTemplace; }
+    public function setIdDietTemplate($idDietTemplate) { $this->idDietTemplate = $idDietTemplate; }
     public function setName($name) { $this->name = $name; }
     public function setDuration($duration) { $this->duration = $duration; }
     public function setTags($tags) { $this->tags = $tags; }
