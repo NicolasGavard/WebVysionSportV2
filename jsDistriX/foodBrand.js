@@ -148,7 +148,6 @@ $("#btnRest").on('click', function() {
 });
 
 function ListBrand(status){
-  $('#listBrandsTbody').empty();
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
     if(val.status == status){
@@ -174,6 +173,7 @@ function ListBrand(status){
       datatable.row.add($(line)).draw();
     }
   });
+  datatable.clear();
 }
 
 function ViewBrand(id){
