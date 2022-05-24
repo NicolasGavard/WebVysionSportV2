@@ -26,7 +26,7 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table class="data-table table stripe hover nowrap">
+						<table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>                 
                   <th width="20%" class="table-plus datatable-nosort"><span class="page_food_brand_picture"></span></th>

@@ -30,7 +30,19 @@ var page_all_update     = language.page_all_update;
 var page_all_delete     = language.page_all_delete;
 var page_all_restore    = language.page_all_restore;
 
-ListBrand(0);
+datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
+$.ajax({
+  url : 'Controllers/Food/Brand/list.php',
+  type : 'POST',
+  dataType : 'JSON',
+  success : function(data) {
+    localStorage.setItem("dataTable", JSON.stringify(data.ListBrands));
+    $('.btn-success').trigger('click');
+  },
+  error : function(data) {
+    console.log(data);
+  }
+});
 
 $(".btn-warning").on('click', function() {
   $(".btn-success").removeClass("disabled");
@@ -38,6 +50,7 @@ $(".btn-warning").on('click', function() {
   
   $(".btn-warning").addClass("disabled");
   $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
+
   ListBrand(1);
 });
 
@@ -47,6 +60,7 @@ $(".btn-success").on('click', function() {
   
   $(".btn-warning").removeClass("disabled");
   $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
+
   ListBrand(0);
 });
 
@@ -135,40 +149,31 @@ $("#btnRest").on('click', function() {
 
 function ListBrand(status){
   $('#listBrandsTbody').empty();
-
-  $.ajax({
-    url : 'Controllers/Food/Brand/list.php',
-    type : 'POST',
-    dataType : 'JSON',
-    data: {'status': status},
-    success : function(data) {
-      $.map(data.ListBrands, function(val, key) {
-        if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
-        
-        $('#listBrandsTbody').append(
-          '<tr>'+
-          ' <td><img style="max-width:20%;" src="'+val.linkToPicture+'"/></td>'+
-          ' <td>'+val.name+'</td>'+
-          ' <td>'+
-          '   <div class="dropdown">'+
-          '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
-          '       <i class="dw dw-more"></i>'+
-          '     </a>'+
-          '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddBrand"   onclick="ViewBrand(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
-          '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelBrand(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
-          '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestBrand(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
-          '     </div>'+
-          '   </div>'+
-          ' </td>'+
-          '</tr>')
-      });
-    },
-    error : function(data) {
-      console.log(data);
+  var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
+  $.map(dataTableData, function(val, key) {
+    if(val.status == status){
+      if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+      
+      const line =  '<tr>'+
+                    ' <td><img style="max-width:20%;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td>'+val.name+'</td>'+
+                    ' <td>'+
+                    '   <div class="dropdown">'+
+                    '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+                    '       <i class="dw dw-more"></i>'+
+                    '     </a>'+
+                    '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddBrand"   onclick="ViewBrand(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelBrand(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestBrand(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
+                    '     </div>'+
+                    '   </div>'+
+                    ' </td>'+
+                    '</tr>';
+      datatable.row.add($(line)).draw();
     }
-  }); 
+  });
 }
 
 function ViewBrand(id){

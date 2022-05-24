@@ -16,13 +16,13 @@ $error          = array();
 $output         = array();
 $outputok       = false;
 
-$distriXFoodBrandData = new DistriXFoodBrandData();
-$distriXFoodBrandData->setStatus($_POST['status']);
+// $distriXFoodBrandData = new DistriXFoodBrandData();
+// $distriXFoodBrandData->setStatus($_POST['status']);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListBrands");
 $servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandListDataSvc.php");
-$servicesCaller->addParameter("data", $distriXFoodBrandData);
+// $servicesCaller->addParameter("data", $distriXFoodBrandData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {

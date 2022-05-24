@@ -23,8 +23,7 @@ $labels       = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  $data = $dataSvc->getParameter("data");
-  list($labelStor, $labelStorInd) = BrandStor::getList($data->getStatus(), $dbConnection);
+  list($labelStor, $labelStorInd) = BrandStor::getList(true, $dbConnection);
   foreach ($labelStor as $Brand) {
     $infoBrand    = DistriXSvcUtil::setData($Brand, "DistriXFoodBrandData");
     $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_FOOD . '/' . $infoBrand->getLinkToPicture();

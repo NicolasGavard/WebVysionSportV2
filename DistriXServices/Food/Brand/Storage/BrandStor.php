@@ -22,7 +22,7 @@ class BrandStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(int $status, DistriXPDOConnection $inDbConnection)
+  public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new BrandStorData();
@@ -31,11 +31,13 @@ class BrandStor {
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE statut = :statut";
+      if (!$all) {
+        $request .= " WHERE statut = :statut";
+      }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $status]);
+      $stmt->execute(['statut'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
