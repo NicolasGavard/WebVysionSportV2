@@ -346,6 +346,11 @@
     };
   </script>
 
-<?php
-  include('headerFooter.php');
-?>
+
+      <?php
+        include('_headerFooter.php');
+      ?>
+      
+      <script src="jsDistrix/foodFood.js"></script>
+  </body>
+</html>

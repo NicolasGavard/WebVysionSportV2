@@ -98,7 +98,10 @@
         </div>
       </div>
 
-
-<?php
-	include('_headerFooter.php');
-?>
+      <?php
+        include('_headerFooter.php');
+      ?>
+      
+      <script src="jsDistrix/foodNovaScore.js"></script>
+  </body>
+</html>

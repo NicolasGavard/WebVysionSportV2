@@ -140,6 +140,10 @@
         </div>
       </div> 
 
-<?php
-	include('_headerFooter.php');
-?>
+      <?php
+        include('_headerFooter.php');
+      ?>
+      
+      <script src="jsDistrix/nutritionMyCurrentsDiets.js"></script>
+  </body>
+</html>

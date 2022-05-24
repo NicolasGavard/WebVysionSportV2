@@ -261,6 +261,10 @@
 				</div>
 			</div>
 
-<?php
-	include('_headerFooter.php');
-?>
+			<?php
+        include('_headerFooter.php');
+      ?>
+      
+      <script src="jsDistrix/adminApplications.js"></script>
+  </body>
+</html>

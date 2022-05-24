@@ -121,67 +121,33 @@
     <script src="jsDistriX/main.js"></script>
     <script src="jsDistrix/profil.js"></script>
 
-    <?php
-      // Nutrition
-      if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDiets')   !== false) { ?><script src="jsDistrix/nutritionMyCurrentsDiets.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'nutritionMyTemplatesDiets')  !== false) { ?><script src="jsDistrix/nutritionMyTemplatesDiets.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'nutritionMyRecipes')         !== false) { ?><script src="jsDistrix/nutritionMyRecipes.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'nutritionMyAliment')         !== false) { ?><script src="jsDistrix/nutritionMyAliments.js"></script><?php }
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        var image = document.getElementById('image');
+        var cropBoxData;
+        var canvasData;
+        var cropper;
 
-      // Admin User
-      if (stripos($_SERVER['PHP_SELF'], 'adminUserList')          !== false) { ?><script src="jsDistrix/adminUsers.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'adminEnterpriseList')    !== false) { ?><script src="jsDistrix/adminEnterprises.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'adminUserTypeList')      !== false) { ?><script src="jsDistrix/adminUserTypes.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'adminRoleList')          !== false) { ?><script src="jsDistrix/adminRoles.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'adminRightList')         !== false) { ?><script src="jsDistrix/adminRights.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'adminApplication')       !== false) { ?><script src="jsDistrix/adminApplications.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'adminModule')            !== false) { ?><script src="jsDistrix/adminModules.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'adminFunctionality')     !== false) { ?><script src="jsDistrix/adminFunctionalities.js"></script><?php }
-      
-      // Food
-      if (stripos($_SERVER['PHP_SELF'], 'foodFoodList')       !== false) { ?><script src="jsDistrix/foodFood.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'foodBrandList')      !== false) { ?><script src="jsDistrix/foodBrand.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'foodEcoScoreList')   !== false) { ?><script src="jsDistrix/foodEcoScore.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'foodNovaScoreList')  !== false) { ?><script src="jsDistrix/foodNovaScore.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'foodNutriScoreList') !== false) { ?><script src="jsDistrix/foodNutriScore.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'foodLabelList')      !== false) { ?><script src="jsDistrix/foodLabel.js"></script><?php }
-      
-      // Codes tables
-      if (stripos($_SERVER['PHP_SELF'], 'codeTableWeightTypeList')  !== false) { ?><script src="jsDistrix/codeTableWeightType.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'codeTableFoodCategoryList')!== false) { ?><script src="jsDistrix/codeTableFoodCategory.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'codeTableNutritionalList') !== false) { ?><script src="jsDistrix/codeTableNutritional.js"></script><?php }
-      if (stripos($_SERVER['PHP_SELF'], 'codeTableLanguageList')    !== false) { ?><script src="jsDistrix/codeTableLanguages.js"></script><?php }
-    ?>
-
-  <script>
-		window.addEventListener('DOMContentLoaded', function () {
-			var image = document.getElementById('image');
-			var cropBoxData;
-			var canvasData;
-			var cropper;
-
-			$('#modal').on('shown.bs.modal', function () {
-				cropper = new Cropper(image, {
-					autoCropArea: 0.5,
-					dragMode: 'move',
-					aspectRatio: 3 / 3,
-					restore: false,
-					guides: false,
-					center: false,
-					highlight: false,
-					cropBoxMovable: false,
-					cropBoxResizable: false,
-					toggleDragModeOnDblclick: false,
-					ready: function () {
-						cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
-					}
-				});
-			}).on('hidden.bs.modal', function () {
-				cropBoxData = cropper.getCropBoxData();
-				canvasData = cropper.getCanvasData();
-				cropper.destroy();
-			});
-		});
-	</script>
-  </body>
-</html>
+        $('#modal').on('shown.bs.modal', function () {
+          cropper = new Cropper(image, {
+            autoCropArea: 0.5,
+            dragMode: 'move',
+            aspectRatio: 3 / 3,
+            restore: false,
+            guides: false,
+            center: false,
+            highlight: false,
+            cropBoxMovable: false,
+            cropBoxResizable: false,
+            toggleDragModeOnDblclick: false,
+            ready: function () {
+              cropper.setCropBoxData(cropBoxData).setCanvasData(canvasData);
+            }
+          });
+        }).on('hidden.bs.modal', function () {
+          cropBoxData = cropper.getCropBoxData();
+          canvasData = cropper.getCanvasData();
+          cropper.destroy();
+        });
+      });
+    </script>
