@@ -24,7 +24,8 @@ DROP TABLE IF EXISTS `brand`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `brand` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  -- `code` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
   `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `linktopicture` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `size` int unsigned NOT NULL,
@@ -470,7 +471,8 @@ DROP TABLE IF EXISTS `nutritional`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nutritional` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  -- `code` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
   `statut` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
@@ -757,7 +759,8 @@ CREATE TABLE `sociallink` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `color` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `colorbg` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `iconfa` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  -- `iconfa` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `iconfa` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
   `linksocial` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `linktopicture` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `size` int unsigned NOT NULL,
@@ -1360,7 +1363,8 @@ DROP TABLE IF EXISTS `subscriptionpackage`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `subscriptionpackage` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  -- `code` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
   `price` float unsigned NOT NULL,
   `statut` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
