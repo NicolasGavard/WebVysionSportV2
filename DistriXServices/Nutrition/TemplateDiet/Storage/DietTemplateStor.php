@@ -22,7 +22,7 @@ class DietTemplateStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
+  public static function getList(int $status, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DietTemplateStorData();
@@ -31,13 +31,11 @@ class DietTemplateStor {
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      if (!$all) {
-        $request .= " WHERE statut = :statut";
-      }
+      $request .= " WHERE statut = :statut";
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['statut'=> $status]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -74,7 +72,7 @@ class DietTemplateStor {
   }
   // End of iduserNameDuration
 
-  public static function findByIdUser(DietTemplateStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUser(DietTemplateStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -83,14 +81,10 @@ class DietTemplateStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE iduser = :index0";
-      if (!$all) {
-        $request .= " AND statut = :statut";
-      }
+      $request .= " AND statut = :statut";
       $params = [];
       $params["index0"] = $dataIn->getIdUser();
-      if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
-      }
+      $params["statut"] = $status;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {

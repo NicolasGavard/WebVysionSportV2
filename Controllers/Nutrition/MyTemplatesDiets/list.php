@@ -19,7 +19,6 @@ $error              = array();
 $output             = array();
 $outputok           = false;
 
-
 $distriXNutritionTemplateDietData = new DistriXNutritionTemplateDietData();
 $distriXNutritionTemplateDietData->setIdUser($_POST['idUser']);
 $distriXNutritionTemplateDietData->setStatus($_POST['status']);

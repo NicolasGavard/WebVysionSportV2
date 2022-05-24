@@ -16,11 +16,9 @@
               <div class="col-md-4 col-sm-12">
                 <h4 class="text-blue h4 page_nutrition_my_template_diet_title"></h4>
               </div>
-              <div class="col-md-4 col-sm-12" style="padding-bottom:10px;">
-                <select class="custom-select2 form-control InfoMyTemplatesDietsFormListStudents" name="state" style="width: 100%; height: 38px;">
-                  <option value="0">Choix</option>
-                </select>
-              </div>
+
+              <div class="col-md-4 col-sm-12" style="padding-bottom:10px;"></div>
+              
               <div class="col-md-4 col-sm-12">
                 <button type="button" style="margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> Actifs</buttons>
                 <button type="button" style="margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> Inactifs</button>
@@ -34,12 +32,10 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr>
-                  <th width="15%"><span class="page_nutrition_my_template_diet_name"></span></th>
+                  <th width="30%" class="table-plus"><span class="page_nutrition_my_template_diet_name"></span></th>
                   <th width="20%"><span class="page_nutrition_my_template_diet_assigned_for"></span></th>
                   <th width="10%"><span class="page_nutrition_my_template_diet_duration"></span></th>
-                  <th width="10%"><span class="page_nutrition_my_template_diet_date_begin"></span></th>
-                  <th width="20%"><span class="page_nutrition_my_template_diet_tags"></span></th>
-                  <th width="25%"><span class="page_nutrition_my_template_diet_advancement"></span></th>
+                  <th width="30%"><span class="page_nutrition_my_template_diet_tags"></span></th>
                   <th width="10%" class="datatable-nosort"><span class="page_nutrition_my_Diet_action"></span></th>
 								</tr>
 							</thead>

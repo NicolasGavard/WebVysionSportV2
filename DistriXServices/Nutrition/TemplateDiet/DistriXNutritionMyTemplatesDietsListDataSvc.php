@@ -34,10 +34,7 @@ if (is_null($dbConnection->getError())) {
   $data                 = $dataSvc->getParameter("data");
   $dietTemplateStorData = DistriXSvcUtil::setData($data, "DietTemplateStorData");
 
-  $showOld = false;
-  if ($dietTemplateStorData->getStatus()) $showOld = true;
-
-  list($dietTemplateStor, $dietTemplateStorInd) = DietTemplateStor::findByIdUser($dietTemplateStorData, $showOld, $dbConnection);
+  list($dietTemplateStor, $dietTemplateStorInd) = DietTemplateStor::findByIdUser($dietTemplateStorData, $dietTemplateStorData->getStatus(), $dbConnection);
   foreach ($dietTemplateStor as $diet) {
     $currentDietAssignedUsers         = [];
     $distriXNutritionTemplateDietData = DistriXSvcUtil::setData($diet, "DistriXNutritionTemplateDietData");
