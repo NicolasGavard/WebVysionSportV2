@@ -57,18 +57,24 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500 page_nutrition_my_diet_add_title"> </h4>
-              <form class="FormAddMyCurrentsDiets" action="#" id="FormAddMyCurrentsDiets">
-                <div class="row">
-                  <div class="col-md-4 col-sm-12">
-                    <div class="form-group">
-                      <label class="page_nutrition_my_diet_assigned_for"></label>
-                      <select class="custom-select2 form-control InfoMyCurrentsDietsFormListStudents" name="state" style="width: 100%; height: 38px;">
-                        <option value="0">Choix</option>
-                      </select>
-                    </div>
+              <h4 class="padding-top-30 mb-30 weight-500 page_nutrition_my_diet_filtered_title"> </h4>
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label class="page_nutrition_my_diet_template"></label>
+                    <select class="custom-select2 form-control InfoMyCurrentsDietsFormListMyTemplates" name="idDietTemplate" style="width: 100%; height: 38px;">  
+                      <option value="0">Choix</option>
+                    </select>
                   </div>
-                </form>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label class="page_nutrition_my_diet_assigned_for"></label>
+                    <select class="custom-select2 form-control InfoMyCurrentsDietsFormListStudents" name="state" style="width: 100%; height: 38px;">
+                      <option value="0">Choix</option>
+                    </select>
+                  </div>
+                </div>
               </div>
               
               <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
@@ -98,6 +104,13 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
+                      <label class="page_nutrition_my_diet_template"></label>
+                      <select class="custom-select2 form-control InfoMyCurrentsDietsFormListMyTemplates" name="idDietTemplate" style="width: 100%; height: 38px;">  
+                    </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
                       <label class="page_nutrition_my_diet_assigned_for"></label>
                       <select class="selectpicker form-control InfoMyCurrentsDietsFormListStudents" data-size="5" data-style="btn-outline-info" multiple data-actions-box="true" data-selected-text-format="count" name="assignedUsers">
                       </select>
@@ -105,32 +118,8 @@
                   </div>
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
-                      <label class="page_nutrition_my_diet_duration"></label>
-                      <select class="custom-select2 form-control InfoMyCurrentsDietsFormDuration" name="duration" style="width: 100%; height: 38px;">
-                        <option value="0">Choix</option>
-                        <option value="1">1 jours</option>
-                        <option value="2">2 jours</option>
-                        <option value="3">3 jours</option>
-                        <option value="4">4 jours</option>
-                        <option value="5">5 jours</option>
-                        <option value="6">6 jours</option>
-                        <option value="7">7 jours</option>
-                        <option value="14">2 semaines</option>
-                        <option value="21">3 semaines</option>
-                        <option value="28">4 semaines</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-12">
-                    <div class="form-group">
                       <label class="page_nutrition_my_diet_date_begin"></label>
                       <input class="form-control date-picker page_nutrition_my_diet_add_date_begin" placeholder="Sélectionnez une date" type="text" name="date_start">
-                    </div>
-                  </div>
-                  <div class="col-md-12 col-sm-12">
-                    <div class="form-group">
-                      <label class="page_nutrition_my_diet_tags"></label>
-                      <input type="text" class="page_nutrition_my_diet_add_tag" value="" data-role="tagsinput" placeholder="Ajouter un tag" name="tags">
                     </div>
                   </div>
                 </form>
