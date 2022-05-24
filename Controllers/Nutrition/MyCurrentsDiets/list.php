@@ -22,38 +22,35 @@ $error              = array();
 $output             = array();
 $outputok           = false;
 
-$_POST['idUser'] = 1;
-$_POST['status'] = 0;
-
-// Current
+// Current Diet
 $distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
 $distriXNutritionCurrentDietData->setIdUser($_POST['idUser']);
 $distriXNutritionCurrentDietData->setStatus($_POST['status']);
 
-$currentCaller = new DistriXServicesCaller();
-$currentCaller->setMethodName("ListMyCurrentsDiets");
-$currentCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
-$currentCaller->addParameter("data", $distriXNutritionCurrentDietData);
+$currentDietCaller = new DistriXServicesCaller();
+$currentDietCaller->setMethodName("ListMyCurrentsDiets");
+$currentDietCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
+$currentDietCaller->addParameter("data", $distriXNutritionCurrentDietData);
 
-// Template
+// Template Diet
 $distriXNutritionTemplateDietData = new DistriXNutritionTemplateDietData();
 $distriXNutritionTemplateDietData->setIdUser($_POST['idUser']);
 $distriXNutritionTemplateDietData->setStatus(0);
 
-$templateCaller = new DistriXServicesCaller();
-$templateCaller->setMethodName("ListMyTemplatesDiets");
-$templateCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
-$templateCaller->addParameter("data", $distriXNutritionTemplateDietData);
+$templateDietCaller = new DistriXServicesCaller();
+$templateDietCaller->setMethodName("ListMyTemplatesDiets");
+$templateDietCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
+$templateDietCaller->addParameter("data", $distriXNutritionTemplateDietData);
 
 // Add Caller to multi caller
 $svc = new DistriXSvc();
-$svc->addToCall("Current", $currentCaller);
-$svc->addToCall("Template", $templateCaller);
+$svc->addToCall("CurrentDiet", $currentDietCaller);
+$svc->addToCall("TemplateDiet", $templateDietCaller);
 
 $callsOk = $svc->call();
 
-
-list($outputok, $output, $errorData) = $svc->getResult("Current"); //var_dump($output);
+// Current Diet
+list($outputok, $output, $errorData) = $svc->getResult("CurrentDiet"); //var_dump($output);
 if ($outputok && !empty($output) > 0) {
   if (isset($output["ListMyCurrentsDiets"])) {
     $listMyCurrentDiets = $output["ListMyCurrentsDiets"];
@@ -62,8 +59,8 @@ if ($outputok && !empty($output) > 0) {
   $error = $errorData;
 }
 
-
-list($outputok, $output, $errorData) = $svc->getResult("Template"); //var_dump($output);
+// Template Diet
+list($outputok, $output, $errorData) = $svc->getResult("TemplateDiet"); //var_dump($output);
 if ($outputok && !empty($output) > 0) {
   if (isset($output["ListMyTemplatesDiets"])) {
     $listMyTemplateDiets = $output["ListMyTemplatesDiets"];
