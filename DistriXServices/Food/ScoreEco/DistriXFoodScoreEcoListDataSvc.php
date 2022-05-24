@@ -24,7 +24,8 @@ $scoresEco    = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($styScoreEcostor, $styScoreEcostorInd) = ScoreEcoStor::getList(true, $dbConnection);
+  $data = $dataSvc->getParameter("data");
+  list($styScoreEcostor, $styScoreEcostorInd) = ScoreEcoStor::getList($data->getStatus(), $dbConnection);
   foreach ($styScoreEcostor as $ScoreEco) {
     $infoScoreEco     = DistriXSvcUtil::setData($ScoreEco, "DistriXFoodScoreEcoData");
 

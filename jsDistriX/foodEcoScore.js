@@ -1,6 +1,7 @@
 $(".page_food_eco_score_title").text(language.page_food_eco_score_title);
 $(".page_food_eco_score_picture").text(language.page_food_eco_score_picture);
 $(".page_food_eco_score_code").text(language.page_food_eco_score_code);
+$(".page_food_eco_score_color").text(language.page_food_eco_score_color);
 $(".page_food_eco_score_name").text(language.page_food_eco_score_name);
 $(".page_food_eco_score_status").text(language.page_food_eco_score_status);
 $(".page_food_eco_score_action").text(language.page_food_eco_score_action);
@@ -160,8 +161,8 @@ function ListEcoScore(status){
           '     </a>'+
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
           '       <a class="dropdown-item btnViewEcoScore"                      data-toggle="modal" data-target="#modalAddEcoScore" onclick="ViewEcoScore(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
-          '       <a class="dropdown-item btnDeleEcoScore '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelEcoScore(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
-          '       <a class="dropdown-item btnRestEcoScore '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestEcoScore(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
+          '       <a class="dropdown-item btnDeleEcoScore '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelEcoScore(\''+val.id+'\', \''+val.letter+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
+          '       <a class="dropdown-item btnRestEcoScore '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestEcoScore(\''+val.id+'\', \''+val.letter+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
           '     </div>'+
           '   </div>'+
           ' </td>'+
