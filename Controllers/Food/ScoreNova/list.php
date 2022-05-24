@@ -15,8 +15,13 @@ $listScoresNova  = array();
 $error          = array();
 $output         = array();
 $outputok       = false;
+
+$distriXFoodScoreNovaData = new DistriXFoodScoreNovaData();
+$distriXFoodScoreNovaData->setStatus($_POST['status']);
+
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListScoresNova");
+$servicesCaller->addParameter("data", $distriXFoodScoreNovaData);
 $servicesCaller->setServiceName("DistriXServices/Food/ScoreNova/DistriXFoodScoreNovaListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 

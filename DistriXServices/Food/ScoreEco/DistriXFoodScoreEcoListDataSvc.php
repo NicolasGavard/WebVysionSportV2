@@ -25,8 +25,8 @@ $scoresEco    = [];
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   $data = $dataSvc->getParameter("data");
-  list($styScoreEcostor, $styScoreEcostorInd) = ScoreEcoStor::getList($data->getStatus(), $dbConnection);
-  foreach ($styScoreEcostor as $ScoreEco) {
+  list($scoreEcoStor, $scoreEcoStorInd) = ScoreEcoStor::getList($data->getStatus(), $dbConnection);
+  foreach ($scoreEcoStor as $ScoreEco) {
     $infoScoreEco     = DistriXSvcUtil::setData($ScoreEco, "DistriXFoodScoreEcoData");
 
     $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $infoScoreEco->getLinkToPicture();

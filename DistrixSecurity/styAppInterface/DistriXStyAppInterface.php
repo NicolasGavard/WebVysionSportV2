@@ -47,7 +47,7 @@ class DistriXStyAppInterface
       $outputok          = false;
       $output            = array();
       $styServicesCaller = new DistriXStySvcCaller();
-      $styServicesCaller->addParameter("data", $data);
+      $styServicesCaller->addParameter("data", $data);                        //print_r($data);
       $styServicesCaller->setMethodName("Login");
       $styServicesCaller->setServiceName("DistriXSecurity/styServices/Login/DistriXStyLoginBusSvc.php");
       list($outputok, $output, $errorData) = $styServicesCaller->call();      //print_r($output);
