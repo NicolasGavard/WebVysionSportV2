@@ -16,15 +16,14 @@
               <div class="col-md-4 col-sm-12">
                 <h4 class="text-blue h4 page_nutrition_my_diet_title"></h4>
               </div>
-              <div class="col-md-4 col-sm-12" style="padding-bottom:10px;">
-                <select class="custom-select2 form-control InfoMyCurrentsDietsFormListStudents" name="state" style="width: 100%; height: 38px;">
-                  <option value="0">Choix</option>
-                </select>
-              </div>
-              <div class="col-md-4 col-sm-12">
-                <button type="button" style="margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> Actifs</buttons>
-                <button type="button" style="margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> Inactifs</button>
-                <button type="button" style="margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> Ajouter</button>
+              
+              <div class="col-md-2"></div>
+              
+              <div class="col-xs-12 col-md-6 col-sm-12">
+                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-info AddSearchMyCurrentsDiets" data-toggle="modal" data-target="#modalSearchMyCurrentsDiets"><i class="icon-copy dw-info dw dw-search"></i> Filtres</buttons>
+                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> Actifs</buttons>
+                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> Inactifs</button>
+                <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> Ajouter</button>
               </div>
             </div>
           </div>
@@ -34,7 +33,7 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr>
-                  <th width="15%"><span class="page_nutrition_my_diet_name"></span></th>
+                  <th width="15%" class="table-plus"><span class="page_nutrition_my_diet_name"></span></th>
                   <th width="20%"><span class="page_nutrition_my_diet_assigned_for"></span></th>
                   <th width="10%"><span class="page_nutrition_my_diet_duration"></span></th>
                   <th width="10%"><span class="page_nutrition_my_diet_date_begin"></span></th>
@@ -54,6 +53,39 @@
 				</div>
 			</div>
       
+      <div class="modal fade bs-example-modal-lg" id="modalSearchMyCurrentsDiets" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center font-18">
+              <h4 class="padding-top-30 mb-30 weight-500 page_nutrition_my_diet_add_title"> </h4>
+              <form class="FormAddMyCurrentsDiets" action="#" id="FormAddMyCurrentsDiets">
+                <div class="row">
+                  <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
+                      <label class="page_nutrition_my_diet_assigned_for"></label>
+                      <select class="custom-select2 form-control InfoMyCurrentsDietsFormListStudents" name="state" style="width: 100%; height: 38px;">
+                        <option value="0">Choix</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              
+              <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                <div class="col-6">
+                  <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                  <span class="page_all_close"></span>
+                </div>
+                <div class="col-6">
+                  <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn btnAddMyCurrentsDiets" data-dismiss="modal" id="btnAddMyCurrentsDiets"><i class="fa fa-check"></i></button>
+                  <span class="page_all_add"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+
       <div class="modal fade bs-example-modal-lg" id="modalAddMyCurrentsDiets" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">

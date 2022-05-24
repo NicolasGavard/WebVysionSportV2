@@ -6,6 +6,7 @@ include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php"
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
 include(__DIR__ . "/../../Data/DistriXNutritionCurrentDietData.php");
 include(__DIR__ . "/../../Data/DistriXNutritionCurrentDietUsersData.php");
+include(__DIR__ . "/../../Data/DistriXNutritionTemplateDietData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -16,9 +17,13 @@ include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
 $resp               = array();
 $listMyCurrentDiets = array();
+$listMyTemplateDiets= array();
 $error              = array();
 $output             = array();
 $outputok           = false;
+
+$_POST['idUser'] = 1;
+$_POST['status'] = 0;
 
 $distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
 $distriXNutritionCurrentDietData->setIdUser($_POST['idUser']);
@@ -37,7 +42,24 @@ if ($outputok && !empty($output) > 0) {
   $error = $errorData;
 }
 
-$resp["ListMyCurrentsDiets"] = $listMyCurrentDiets;
+$distriXNutritionTemplateDietData = new DistriXNutritionTemplateDietData();
+$distriXNutritionTemplateDietData->setStatus(0);
+
+$servicesCaller = new DistriXServicesCaller();
+$servicesCaller->setMethodName("ListMyTemplatesDiets");
+$servicesCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
+$servicesCaller->addParameter("data", $distriXNutritionTemplateDietData);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+if ($outputok && !empty($output) > 0) {
+  if (isset($output["ListMyTemplatesDiets"])) {
+    $listMyTemplateDiets = $output["ListMyTemplatesDiets"];
+  }
+} else {
+  $error = $errorData;
+}
+
+$resp["ListMyCurrentsDiets"]  = $listMyCurrentDiets;
+$resp["ListMyTemplatesDiets"] = $listMyTemplateDiets;
 if(!empty($error)){
   $resp["Error"]        = $error;
 }

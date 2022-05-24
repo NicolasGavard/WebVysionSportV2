@@ -30,8 +30,8 @@
 							<thead>
 								<tr>                 
                   <th width=20% class="table-plus datatable-nosort"><span class="page_food_label_picture"></span></th>
-                  <th width=70% class="table-plus datatable-nosort"><span class="page_food_label_name"></span></th>
-                  <th width=10% class="table-plus datatable-nosort"><span class="page_food_label_action"></span></th>
+                  <th width=70% class="datatable-nosort"><span class="page_food_label_name"></span></th>
+                  <th width=10% class="datatable-nosort"><span class="page_food_label_action"></span></th>
 								</tr>
 							</thead>
 							<tbody id="listLabelsTbody">            

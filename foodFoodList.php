@@ -80,7 +80,7 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th width=10%><span class="page_food_food_name"></span></th>
+                    <th width=10% class="table-plus"><span class="page_food_food_name"></span></th>
                     <th width=10%><span class="page_food_food_brand"></span></th>
                     <th width=10%><span class="page_food_food_score_nutri"></span></th>
                     <th width=10%><span class="page_food_food_score_nova"></span></th>

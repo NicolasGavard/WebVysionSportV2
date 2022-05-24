@@ -1,18 +1,14 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXNutritionCurrentDietData", false)) {
-  class DistriXNutritionCurrentDietData extends DistriXSvcAppData
+if (!class_exists("DistriXNutritionTemplateDietData", false)) {
+  class DistriXNutritionTemplateDietData extends DistriXSvcAppData
   {
     protected $id;
     protected $idUser;
     protected $nameUser;
     protected $firstNameUser;
-    protected $idDietTemplace;
     protected $name;
     protected $duration;
     protected $tags;
-    protected $dateStart;
-    protected $assignedUsers;
-    protected $advancement;
     protected $status;
     protected $timestamp;
 
@@ -22,13 +18,9 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
       $this->idUser         = 0;
       $this->nameUser       = "";
       $this->firstNameUser  = "";
-      $this->idDietTemplace = 0;
       $this->name           = "";
       $this->duration       = 0;
       $this->tags           = "";
-      $this->dateStart      = "";
-      $this->assignedUsers  = [];
-      $this->advancement    = 0;
       $this->status         = 0;
       $this->timestamp      = 0;
     }
@@ -37,13 +29,9 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     public function getIdUser() { return $this->idUser; }
     public function getNameUser() { return $this->nameUser; }
     public function getFirstNameUser() { return $this->firstNameUser; }
-    public function getIdDietTemplace() { return $this->idDietTemplace; }
     public function getName() { return $this->name; }
     public function getDuration() { return $this->duration; }
     public function getTags() { return $this->tags; }
-    public function getDateStart() { return $this->dateStart; }
-    public function getAssignedUsers() { return $this->assignedUsers; }
-    public function getAdvancement() { return $this->advancement; }
     public function getStatus() { return $this->status; }
     public function getTimestamp() { return $this->timestamp; }
 
@@ -52,13 +40,9 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     public function setIdUser($idUser) { $this->idUser = $idUser; }
     public function setNameUser($nameUser) { $this->nameUser = $nameUser; }
     public function setFirstNameUser($firstNameUser) { $this->firstNameUser = $firstNameUser; }
-    public function setIdDietTemplace($idDietTemplace) { $this->idDietTemplace = $idDietTemplace; }
     public function setName($name) { $this->name = $name; }
     public function setDuration($duration) { $this->duration = $duration; }
     public function setTags($tags) { $this->tags = $tags; }
-    public function setDateStart($dateStart) { $this->dateStart = $dateStart; }
-    public function setAssignedUsers($assignedUsers) { $this->assignedUsers = $assignedUsers; }
-    public function setAdvancement($advancement) { $this->advancement = $advancement; }
     public function setStatus($status) { $this->status = $status; }
     public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   }

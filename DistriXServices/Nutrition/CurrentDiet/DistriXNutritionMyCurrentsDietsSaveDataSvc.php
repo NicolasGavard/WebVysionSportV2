@@ -2,83 +2,86 @@
 // DISTRIX Init
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
-// STY Const
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/../../Data/DistriXStyApplicationData.php");
-// Database Data
-include(__DIR__ . "/Data/StyApplicationStorData.php");
+include(__DIR__ . "/../../../GlobalData/CurrentDietErrorData.php");
 // Trace Data
 include(__DIR__ . "/../../../DistriXTrace/data/DistriXTraceData.php");
 // Error Data
 include(__DIR__ . "/../../../DistriXSvc/Data/DistriXSvcErrorData.php");
+// STY APP
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
-include(__DIR__ . "/Storage/StyApplicationStor.php");
+include(__DIR__ . "/Storage/DietStor.php");
+// STOR Data
+include(__DIR__ . "/Data/DietStorData.php");
+// DISTRIX DATA STY
+include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
+// DISTRIX DATA
+include(__DIR__ . "/Data/DistriXNutritionCurrentDietData.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 
-// SaveApplication
-if ($dataSvc->getMethodName() == "SaveApplication") {
+// SaveCurrentDiet
+if ($dataSvc->getMethodName() == "SaveCurrentDiet") {
   $dbConnection = null;
   $errorData    = null;
   $insere       = false;
-  $infoApplication     = new DistriXStyApplicationData();
+  $infoCurrentDiet     = new DistriXNutritionCurrentDietData();
 
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoApplication     = $dataSvc->getParameter("data");
-      $applicationStorData = DistriXSvcUtil::setData($infoApplication, "StyApplicationStorData");
-      $canSaveApplication  = true;
-      if ($infoApplication->getId() == 0) {
+      $infoCurrentDiet  = $dataSvc->getParameter("data");
+      $dietStorData     = DistriXSvcUtil::setData($infoCurrentDiet, "CurrentDietStorData");
+      $canSaveCurrentDiet  = true;
+      if ($infoCurrentDiet->getId() == 0) {
         // Verify Code Exist
-        list($styApplicationStor, $styApplicationStorInd) = StyApplicationStor::findByIndCode($applicationStorData, true, $dbConnection);
-        if ($styApplicationStorInd > 0) {
-          $canSaveApplication          = false;
+        list($styCurrentDietStor, $styCurrentDietStorInd) = DietStor::findByIdUserIdDietTemplateDateStart($dietStorData, true, $dbConnection);
+        if ($styCurrentDietStorInd > 0) {
+          $canSaveCurrentDiet          = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
-          $distriXSvcErrorData->setDefaultText("The Code " . $infoApplication->getCode() . " is already in use");
+          $distriXSvcErrorData->setDefaultText("The Code " . $infoCurrentDiet->getCode() . " is already in use");
           $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
           $errorData = $distriXSvcErrorData;
         }
       }
 
-      if ($canSaveApplication) {
-        $applicationStorData = new StyApplicationStorData();
-        $applicationStorData->setId($infoApplication->getId());
-        $applicationStorData->setCode($infoApplication->getCode());
-        $applicationStorData->setDescription($infoApplication->getDescription());
-        $applicationStorData->setStatus($infoApplication->getStatus());
-        $applicationStorData->setTimestamp($infoApplication->getTimestamp());
-        list($insere, $idStyApplication) = StyApplicationStor::save($applicationStorData, $dbConnection);
+      if ($canSaveCurrentDiet) {
+        $dietStorData = new DietStorData();
+        $dietStorData->setId($infoCurrentDiet->getId());
+        $dietStorData->setCode($infoCurrentDiet->getCode());
+        $dietStorData->setDescription($infoCurrentDiet->getDescription());
+        $dietStorData->setStatus($infoCurrentDiet->getStatus());
+        $dietStorData->setTimestamp($infoCurrentDiet->getTimestamp());
+        list($insere, $idCurrentDiet) = DietStor::save($dietStorData, $dbConnection);
 
         if ($insere) {
           $dbConnection->commit();
         } else {
           $dbConnection->rollBack();
-          if ($infoApplication->getId() > 0) {
-            $errorData = ApplicationErrorData::warningUpdateData(1, 1);
+          if ($infoCurrentDiet->getId() > 0) {
+            $errorData = CurrentDietErrorData::warningUpdateData(1, 1);
           } else {
-            $errorData = ApplicationErrorData::warningInsertData(1, 1);
+            $errorData = CurrentDietErrorData::warningInsertData(1, 1);
           }
         }
       }
     } else {
-      $errorData = ApplicationErrorData::noBeginTransaction(1, 1);
+      $errorData = CurrentDietErrorData::noBeginTransaction(1, 1);
     }
   } else {
-    $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
+    $errorData = CurrentDietErrorData::noDatabaseConnection(1, 32);
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "Login", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setCurrentDietModuleFunctionalityCodeAndFilename("DistrixSty", "Login", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 
-  $dataSvc->addToResponse("ConfirmSaveApplication", $insere);
+  $dataSvc->addToResponse("ConfirmSaveCurrentDiet", $insere);
 }
 
 // Return response

@@ -30,9 +30,9 @@
 							<thead>
 								<tr>                 
                   <th width=20% class="table-plus datatable-nosort"><span class="page_food_nova_score_picture"></span></th>
-                  <th width=10% class="table-plus datatable-nosort"><span class="page_food_nova_score_color"></span></th>
-                  <th width=60% class="table-plus datatable-nosort"><span class="page_food_nova_score_name"></span></th>
-                  <th width=10% class="table-plus datatable-nosort"><span class="page_food_nova_score_action"></span></th>
+                  <th width=10% class="datatable-nosort"><span class="page_food_nova_score_color"></span></th>
+                  <th width=60% class="datatable-nosort"><span class="page_food_nova_score_name"></span></th>
+                  <th width=10% class="datatable-nosort"><span class="page_food_nova_score_action"></span></th>
 								</tr>
 							</thead>
 							<tbody id="listNovaScoresTbody">            

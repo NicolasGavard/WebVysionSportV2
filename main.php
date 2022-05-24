@@ -4,6 +4,8 @@
 	include('_headerLoader.php');
 	include('_headerMenuTop.php');
 	include('_headerMenuLeft.php');
+	
+	include('i18/FR/home.php');
 ?>
 
 	<div class="mobile-menu-overlay"></div>
