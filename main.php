@@ -1,11 +1,11 @@
 <?php
 	session_start();
+	include('i18/FR/headerMenuLeft.php');
+
 	include('_header.php');
 	include('_headerLoader.php');
 	include('_headerMenuTop.php');
 	include('_headerMenuLeft.php');
-	
-	include('i18/FR/home.php');
 ?>
 
 	<div class="mobile-menu-overlay"></div>
