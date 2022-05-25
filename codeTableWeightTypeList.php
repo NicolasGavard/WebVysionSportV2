@@ -116,23 +116,6 @@
             </div>
           </form>
           
-          <!-- Success Alert -->
-          <div class="alert alert-success alert-dismissible fade show" style='display:none;'>
-            <strong class='errorData_ok'></strong>
-            <br/>
-            <p class='errorData_ok_txt'></p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          </div>
-
-          <!-- Error Alert -->
-          <div class="form-group">
-            <div class="alert alert-danger alert-dismissible fade show" style='display:none;'>
-              <strong class='errorData_ko'></strong>
-              <br/>
-              <p></p>
-              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
@@ -142,50 +125,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modalDelWeightType" tabindex="-1" aria-labelledby="modalDelWeightTypeLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title page_codeTables_weight_type_delete_title" id="modalDelWeightTypeLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormDelWeightType">
-            <input type="hidden" name="id" class="DelWeightTypeFormIdWeightType" value="0">
-          </form>
-          <p class="DelWeightTypeTxt"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-danger page_all_delete" id="btnDelWeightType"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modalRestWeightType" tabindex="-1" aria-labelledby="modalRestWeightTypeLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title page_codeTables_weight_type_restore_title" id="modalRestWeightTypeLabel" class="page_codeTables_weight_type_restore_title"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormRestWeightType">
-            <input type="hidden" name="id" class="RestWeightTypeFormIdWeightType" value="0">
-          </form>
-          <p class="RestWeightTypeTxt"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-info page_all_restore" id="btnRestWeightType"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-      <?php
+        <?php
         include('_headerFooter.php');
       ?>
       

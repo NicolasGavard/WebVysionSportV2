@@ -1,6 +1,10 @@
 <?php
 	session_start();
+  $international  = 'foodNovaScoreList';
+  $i18cdlangue    = 'FR';
+  // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('i18/FR/header.php');
+  include("i18/_i18.php");
   
   include('_header.php');
 	include('_headerMenuTop.php');
@@ -16,13 +20,13 @@
         <div class="pd-20 card-box mb-30">
 					<div class="clearfix">
 						<div class="pull-left">
-							<h4 class="text-blue h4 page_food_nova_score_title"></h4>
+							<h4 class="text-blue h4"><?php echo $page_title; ?></h4>
 						</div>
         
             <div class="pull-right">
-              <button type="button" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> Actifs</button>
-              <button type="button" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> Inactifs</button>
-              <button type="button" class="btn btn-primary AddNewNovaScore" data-toggle="modal" data-target="#modalAddNovaScore"><i class="fa fa-plus"></i> Ajouter</button>
+              <button type="button" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> <?php echo $page_all_active; ?></button>
+              <button type="button" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> <?php echo $page_all_inactive; ?></button>
+              <button type="button" class="btn btn-primary AddNewNovaScore" data-toggle="modal" data-target="#modalAddNovaScore"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
         		</div>
 					</div>
           
@@ -31,10 +35,10 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr>                 
-                  <th width=20% class="table-plus datatable-nosort"><span class="page_food_nova_score_picture"></span></th>
-                  <th width=10% class="datatable-nosort"><span class="page_food_nova_score_color"></span></th>
-                  <th width=60% class="datatable-nosort"><span class="page_food_nova_score_name"></span></th>
-                  <th width=10% class="datatable-nosort"><span class="page_food_nova_score_action"></span></th>
+                  <th width=20% class="table-plus datatable-nosort"><span><?php echo $page_picture; ?></span></th>
+                  <th width=10% class="datatable-nosort"><span><?php echo $page_color; ?></span></th>
+                  <th width=60% class="datatable-nosort"><span><?php echo $page_name; ?></span></th>
+                  <th width=10% class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
 							<tbody id="listNovaScoresTbody">            
@@ -48,25 +52,26 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500 page_food_nova_score_add_title"> </h4>
+            <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
+            <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
                 <div class="col-md-12 col-sm-12 d-none showPicture">
                   <div class="profile-photo" style="height:70px;">
-                    <img src="" alt="" class="avatar-photo avatar-nova_score" style="border-radius:10%">
+                    <img src="" alt="" class="avatar-photo avatar-Nova_score" style="border-radius:10%">
                   </div>
                 </div>
 
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
-                    <label class="page_food_nova_score_name"></label>
-                    <input class="form-control AddNovaScoreFormName" type="text" name="name">
+                    <label for="InputNovaScoreName"><?php echo $page_name; ?></label>
+                    <input class="form-control AddNovaScoreFormName" id="InputNovaScoreName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
                   </div>
                 </div>
-                
+
                 <div class="col-md-6 col-sm-6">
                   <div class="form-group">
-                    <label for="InputNovaScoreColor" class="page_food_nova_score_color"></label>
-                    <input type="text" class="colorpicker form-control AddNovaScoreFormColor" id="InputNovaScoreColor" placeholder="Color" name="color" value="" />
+                    <label for="InputNovaScorNovalor"><?php echo $page_color; ?></label>
+                    <input type="text" class="colorpicker form-control AddNovaScoreFormColor" id="InputNovaScorNovalor" placeholder="<?php echo $page_color; ?>" name="color" value="" />
                   </div>
                 </div>
                 
@@ -86,13 +91,9 @@
               </div>
               
               <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
-                <div class="col-6">
-                  <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                  <span class="page_all_close"></span>
-                </div>
-                <div class="col-6">
-                  <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn btnAddNovaScore" data-dismiss="modal" id="btnAddNovaScore"><i class="fa fa-check"></i></button>
-                  <span class="page_all_add"></span>
+                <div class="col-12">
+                  <button type="button" class="btn btn-sNovandary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
+                  <button type="button" class="btn btn-primary btnAddNovaScore" data-dismiss="modal" id="btnAddNovaScore"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_add; ?></button>
                 </div>
               </div>
             </div>

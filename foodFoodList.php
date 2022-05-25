@@ -1,14 +1,14 @@
 <?php
   session_start();
+  $international  = 'foodFoodList';
+  $i18cdlangue    = 'FR';
+  // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+	include('i18/FR/header.php');
+  include("i18/_i18.php");
+
   include('header.php');
   include('headerMenu.php');
 ?>
-
-<style>
-  .zeroPadding {
-    padding: 0 !important;
-  }
-</style>
 
 <div class="main-panel">        
   <div class="content-wrapper" style="background:#69a7c5; padding: 1.5rem 1.5rem 1.5rem 1.5rem;">

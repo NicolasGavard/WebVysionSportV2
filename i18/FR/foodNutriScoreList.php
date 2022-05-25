@@ -9,6 +9,6 @@
   $page_delete_title    = "Supprimer le nutri score";
   $page_restore_title   = "Restaurer le nutri score";
 
-  $errorData_txt_name  = "Le code de le nutri score est manquant !!";
-  $errorData_txt_name  = "Le nom de le nutri score est manquant !!";
-  $errorData_txt_name  = "La couleur de le nutri score est manquant !!";
+  $errorData_txt_name  = "Le code du nutri score est manquant !!";
+  $errorData_txt_name  = "Le nom du nutri score est manquant !!";
+  $errorData_txt_name  = "La couleur du nutri score est manquantz !!";

@@ -35,6 +35,9 @@ $(".btn-success").on('click', function() {
 });
 
 $(".AddNewBrand").on('click', function() {
+  $(".add_title").removeClass("d-none");
+  $(".update_title").addClass("d-none");
+
   $('.AddBrandFormIdBrand').val(0);
   $('.AddBrandFormCode').val('');
   $('.AddBrandFormName').val('');
@@ -68,14 +71,14 @@ $(".btnAddBrand").on('click', function() {
   } else {
     if (name == ''){
       $('.AddBrandFormName').addClass("form-control-danger");
-      $('#danger-name').removeClass("d-none");
+      $('.danger-name').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddBrandFormName").removeClass("form-control-danger");
+        $('.danger-name').addClass("d-none");
+      }, 3000 );
     }
   } 
-
-  if (errorData !== ''){
-    $('.alert-danger').show("slow").delay(5000).hide("slow");
-    $('.alert-danger p').html(errorData);
-  }
 });
 
 $("#btnDel").on('click', function() {
@@ -153,9 +156,8 @@ function ViewBrand(id){
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      // $(".page_food_brand_add_title").html(language.page_food_brand_update_title);
-      
-      $(".page_food_brand_add_title").removeClass("d-none");
+      $(".add_title").addClass("d-none");
+      $(".update_title").removeClass("d-none");
 
       $('.AddBrandFormIdBrand').val(id);
       $('.AddBrandFormCode').val(data.ViewBrand.code);

@@ -1,36 +1,3 @@
-// $(".page_food_eco_score_title").text(language.page_food_eco_score_title);
-// $(".page_food_eco_score_picture").text(language.page_food_eco_score_picture);
-// $(".page_food_eco_score_code").text(language.page_food_eco_score_code);
-// $(".page_food_eco_score_color").text(language.page_food_eco_score_color);
-// $(".page_food_eco_score_name").text(language.page_food_eco_score_name);
-// $(".page_food_eco_score_status").text(language.page_food_eco_score_status);
-// $(".page_food_eco_score_action").text(language.page_food_eco_score_action);
-// $(".page_food_eco_score_add_title").text(language.page_food_eco_score_add_title);
-// $(".page_food_eco_score_update_title").text(language.page_food_eco_score_update_title);
-// $(".page_food_eco_score_delete_title").text(language.page_food_eco_score_delete_title);
-// $(".page_food_eco_score_restore_title").text(language.page_food_eco_score_restore_title);
-
-// $(".page_all_close").text(language.page_all_close);
-// $(".page_all_add").text(language.page_all_add);
-// $(".page_all_view").text(language.page_all_view);
-// $(".page_all_delete").text(language.page_all_delete);
-// $(".page_all_restore").text(language.page_all_restore);
-// $(".page_all_change_picture").text(language.page_all_change_picture);
-
-// $(".errorData_ok").text(language.errorData_ok);
-// $(".errorData_ok_txt").text(language.errorData_ok_txt);
-// $(".errorData_ko").text(language.errorData_ko);
-// $(".errorData_ko_txt").text(language.errorData_ko_txt);
-
-// var errorData_txt_code  = language.errorData_txt_code;
-// var errorData_txt_name  = language.errorData_txt_name;
-// var confirm_delete      = language.confirm_delete;
-// var confirm_restore     = language.confirm_restore;
-// var page_all_add        = language.page_all_add;
-// var page_all_update     = language.page_all_update;
-// var page_all_delete     = language.page_all_delete;
-// var page_all_restore    = language.page_all_restore;
-
 ListEcoScore(0);
 
 $(".btn-warning").on('click', function() {

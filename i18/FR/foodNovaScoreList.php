@@ -9,6 +9,6 @@
   $page_delete_title    = "Supprimer le nova score";
   $page_restore_title   = "Restaurer le nova score";
 
-  $errorData_txt_name  = "Le code de le nova score est manquant !!";
-  $errorData_txt_name  = "Le nom de le nova score est manquant !!";
-  $errorData_txt_name  = "La couleur de le nova score est manquant !!";
+  $errorData_txt_name  = "Le code du nova score est manquant !!";
+  $errorData_txt_name  = "Le nom du nova score est manquant !!";
+  $errorData_txt_name  = "La couleur du nova score est manquante !!";

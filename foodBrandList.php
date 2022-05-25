@@ -1,9 +1,13 @@
 <?php
 	session_start();
-	include('i18/FR/header.php');
-	include('i18/FR/foodBrandList.php');
 
-	include('_header.php');
+  $international  = 'foodBrandList';
+  $i18cdlangue    = 'FR';
+  // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+	include('i18/FR/header.php');
+  include("i18/_i18.php");
+
+  include('_header.php');
 	include('_headerMenuTop.php');
 	include('_headerMenuLeft.php');
 ?>
@@ -46,8 +50,8 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500 d-none"><?php echo $page_add_title; ?></h4>
-              <h4 class="padding-top-30 mb-30 weight-500 d-none"><?php echo $page_update_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
                 <div class="col-md-12 col-sm-12 d-none showPicture">
                   <div class="profile-photo">
