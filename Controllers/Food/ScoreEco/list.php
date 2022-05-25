@@ -16,17 +16,10 @@ $error          = [];
 $output         = [];
 $outputok       = false;
 
-// $distriXFoodScoreEcoData = new DistriXFoodScoreEcoData();
-// $distriXFoodScoreEcoData->setStatus($_POST['status'] ?? 0);
-
-list($distriXFoodScoreEcoData, $errorJson) = DistriXFoodScoreEcoData::getJsonData($_POST);
-
-
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListScoresEco");
-$servicesCaller->addParameter("data", $distriXFoodScoreEcoData);
 $servicesCaller->setServiceName("DistriXServices/Food/ScoreEco/DistriXFoodScoreEcoListDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_ScoreEco")) {
   $logInfoData = new DistriXLoggerInfoData();
@@ -38,13 +31,13 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 }
 
 if ($outputok && isset($output["ListScoresEco"]) && is_array($output["ListScoresEco"])) {
-  list($listScoresEco, $jsonError) = DistriXFoodScoreEcoData::getJsonArray($output["ListScoresEco"]);
-  // $resp["ListScoresEco"] = $$output["ListScoresEco"]; // A tester !
+  // list($listScoresEco, $jsonError) = DistriXFoodScoreEcoData::getJsonArray($output["ListScoresEco"]);
+  $resp["ListScoresEco"] = $output["ListScoresEco"]; // A tester !
 
 } else {
   $error = $errorData;
 }
-$resp["ListScoresEco"] = $listScoresEco;
+// $resp["ListScoresEco"] = $listScoresEco;
 if(!empty($error)){
   $resp["Error"] = $error;
 }

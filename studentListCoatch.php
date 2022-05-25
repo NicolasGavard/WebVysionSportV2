@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	include('i18/FR/header.php');
+	
 	include('_header.php');
 	include('_headerMenuTop.php');
 	include('_headerMenuLeft.php');

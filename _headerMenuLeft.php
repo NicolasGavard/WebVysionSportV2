@@ -43,21 +43,19 @@
         <?php } ?>
 
         <?php
-          $hasNutrition                 = true;
-          $hasNutrition_MyDiet          = true;
-          $hasNutrition_MyTemplatesDiets = true;
-          $hasNutrition_LIST            = true;
-          $hasNutrition_Recipe          = true;
+          $hasNutrition                   = true;
+          $hasNutrition_MyDiet            = true;
+          $hasNutrition_MyTemplatesDiets  = true;
+          $hasNutrition_Recipe            = true;
         ?>
         
         <?php if ($hasNutrition) { ?>
           <?php
             $dataOption = '';
-            $navActiveMenunutritionMyCurrentsDiets = $navActiveMenuNutritionMyTemplatesDiets = $navActiveMenuNutritionMyRecipes = $navActiveMenuNutritionMyAliment = "";
+            $navActiveMenunutritionMyCurrentsDiets = $navActiveMenuNutritionMyTemplatesDiets = $navActiveMenuNutritionMyRecipes = "";
             if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDiets')   !== false) { $dataOption="on"; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDiets')  !== false) { $dataOption="on"; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipes')         !== false) { $dataOption="on"; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyAliment')         !== false) { $dataOption="on"; $navActiveMenuNutritionMyAliment       = 'class="active"'; }
           ?>
           
           <li class="dropdown">
@@ -69,8 +67,7 @@
             <ul class="submenu">
               <?php if ($hasNutrition_MyDiet)           { ?><li <?php echo $navActiveMenunutritionMyCurrentsDiets ?>><a class="nav-link" href="nutritionMyCurrentsDiets.php"><?php echo $menu_nutrition_myDiet; ?></a></li><?php } ?>
               <?php if ($hasNutrition_MyTemplatesDiets) { ?><li <?php echo $navActiveMenuNutritionMyTemplatesDiets ?>><a class="nav-link" href="nutritionMyTemplatesDiets.php"><?php echo $menu_nutrition_myTempletDiet; ?></a></li><?php } ?>
-              <?php if ($hasNutrition_LIST)             { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link" href="nutritionMyRecipes.php"><?php echo $menu_nutrition_myRecipe; ?></a></li><?php } ?>
-              <?php //if ($hasNutrition_Recipe)           { ?><!-- <li <?php //echo $navActiveMenuNutritionMyAliment ?>><a class="nav-link language_menu_nutrition_myAliment" href="nutritionMyAliment.php"></a></li>--><?php //} ?>
+              <?php if ($hasNutrition_Recipe)           { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link" href="nutritionMyRecipes.php"><?php echo $menu_nutrition_myRecipe; ?></a></li><?php } ?>
             </ul>
           </li>
         <?php } ?>
@@ -257,6 +254,31 @@
               $hasAdministration            = true;
               $hasCodeTable                 = true;
           }
+
+          $hasRight_ADMIN_ENTERPRISE          = true;
+          $hasRight_ADMIN_USER                = true;
+          $hasRight_ADMIN_USER_TYPE           = true;
+          $hasRight_SECURITY_APPLICATION      = true;
+          $hasRight_SECURITY_MODULE           = true;
+          $hasRight_SECURITY_FUNCTIONALITY    = true;
+          $hasRight_SECURITY_ROLE             = true;
+          $hasRight_SECURITY_RIGHT            = true;
+          $hasRight_FOOD_FOOD                 = true;
+          $hasRight_FOOD_BRAND                = true;
+          $hasRight_FOOD_ECO_SCORE            = true;
+          $hasRight_FOOD_NOVA_SCORE           = true;
+          $hasRight_FOOD_NUTRI_SCORE          = true;
+          $hasRight_FOOD_LABEL                = true;
+          $hasRight_CODE_TABLE_WEIGHT_TYPE    = true;
+          $hasRight_CODE_TABLE_FOOD_CATEGORY  = true;
+          $hasRight_CODE_TABLE_NUTRITIONAL    = true;
+          $hasRight_CODE_TABLE_LANGUES        = true;
+          
+          $hasAdministration                  = true;
+          $hasAdminUser                       = true;
+          $hasSecurity                        = true;
+          $hasFood                            = true;
+          $hasCodeTable                       = true;
         ?>
         
         <?php if ($hasAdministration) { ?>

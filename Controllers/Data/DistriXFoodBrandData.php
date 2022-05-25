@@ -23,24 +23,24 @@ if (!class_exists("DistriXFoodBrandData", false)) {
       $this->timestamp      = 0;
     }
     // Gets
-    public function getId() { return $this->id; }
-    public function getCode() { return $this->code; }
-    public function getName() { return $this->name; }
-    public function getLinkToPicture() { return $this->linkToPicture; }
-    public function getSize() { return $this->size; }
-    public function getType() { return $this->type; }
-    public function getStatus() { return $this->status; }
-    public function getTimestamp() { return $this->timestamp; }
+    public function getId():int { return $this->id; }
+    public function getCode():string { return $this->code; }
+    public function getName():string { return $this->name; }
+    public function getLinkToPicture():string { return $this->linkToPicture; }
+    public function getSize():int { return $this->size; }
+    public function getType():string { return $this->type; }
+    public function getStatus():int { return $this->status; }
+    public function getTimestamp():int { return $this->timestamp; }
 
     // Sets
-    public function setId($id) { $this->id = $id; }
-    public function setCode($code) { $this->code = $code; }
-    public function setName($name) { $this->name = $name; }
-    public function setLinkToPicture($linkToPicture) { $this->linkToPicture = $linkToPicture; }
-    public function setSize($size) { $this->size = $size; }
-    public function setType($type) { $this->type = $type; }
-    public function setStatus($status) { $this->status = $status; }
-    public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+    public function setId(int $id) { $this->id = $id; }
+    public function setCode(string $code) { $this->code = $code; }
+    public function setName(string $name) { $this->name = $name; }
+    public function setLinkToPicture(string $linkToPicture) { $this->linkToPicture = $linkToPicture; }
+    public function setSize(int $size) { $this->size = $size; }
+    public function setType(string $type) { $this->type = $type; }
+    public function setStatus(int $status) { $this->status = $status; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }

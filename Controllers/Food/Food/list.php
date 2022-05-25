@@ -61,6 +61,8 @@ $distriXFoodFoodData->setIdScoreNutri($_POST['idScoreNutri']);
 $distriXFoodFoodData->setIdScoreNova($_POST['idScoreNova']);
 $distriXFoodFoodData->setIdScoreEco($_POST['idScoreEco']);
 
+// list($distriXFoodScoreEcoData, $errorJson) = DistriXFoodScoreEcoData::getJsonData($_POST);
+
 $servicesCaller->setServiceName("DistriXServices/Food/Food/DistriXFoodListDataSvc.php");
 $servicesCaller->setMethodName("ListFoods");
 $servicesCaller->addParameter("dataLanguage", $distriXGeneralIdData);
