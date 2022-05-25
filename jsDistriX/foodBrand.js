@@ -1,35 +1,3 @@
-$(".page_food_brand_title").text(language.page_food_brand_title);
-$(".page_food_brand_picture").text(language.page_food_brand_picture);
-$(".page_food_brand_code").text(language.page_food_brand_code);
-$(".page_food_brand_name").text(language.page_food_brand_name);
-$(".page_food_brand_status").text(language.page_food_brand_status);
-$(".page_food_brand_action").text(language.page_food_brand_action);
-$(".page_food_brand_add_title").text(language.page_food_brand_add_title);
-$(".page_food_brand_update_title").text(language.page_food_brand_update_title);
-$(".page_food_brand_delete_title").text(language.page_food_brand_delete_title);
-$(".page_food_brand_restore_title").text(language.page_food_brand_restore_title);
-
-$(".page_all_close").text(language.page_all_close);
-$(".page_all_add").text(language.page_all_add);
-$(".page_all_view").text(language.page_all_view);
-$(".page_all_delete").text(language.page_all_delete);
-$(".page_all_restore").text(language.page_all_restore);
-$(".page_all_change_picture").text(language.page_all_change_picture);
-
-$(".errorData_ok").text(language.errorData_ok);
-$(".errorData_ok_txt").text(language.errorData_ok_txt);
-$(".errorData_ko").text(language.errorData_ko);
-$(".errorData_ko_txt").text(language.errorData_ko_txt);
-
-var errorData_txt_code  = language.errorData_txt_code;
-var errorData_txt_name  = language.errorData_txt_name;
-var confirm_delete      = language.confirm_delete;
-var confirm_restore     = language.confirm_restore;
-var page_all_add        = language.page_all_add;
-var page_all_update     = language.page_all_update;
-var page_all_delete     = language.page_all_delete;
-var page_all_restore    = language.page_all_restore;
-
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : 'Controllers/Food/Brand/list.php',
@@ -67,8 +35,6 @@ $(".btn-success").on('click', function() {
 });
 
 $(".AddNewBrand").on('click', function() {
-  $(".page_food_brand_add_title").html(language.page_food_brand_add_title);
-      
   $('.AddBrandFormIdBrand').val(0);
   $('.AddBrandFormCode').val('');
   $('.AddBrandFormName').val('');
@@ -78,6 +44,8 @@ $(".AddNewBrand").on('click', function() {
 });
 
 $(".btnAddBrand").on('click', function() {
+  $(".page_food_brand_update_title").removeClass("d-none");
+  
   var name = $('.AddBrandFormName').val();
   if (name != ""){
     var data = $('#FormAddBrand').serializeArray(); // convert form to array
@@ -101,7 +69,6 @@ $(".btnAddBrand").on('click', function() {
     if (name == ''){
       $('.AddBrandFormName').addClass("form-control-danger");
       $('#danger-name').removeClass("d-none");
-      
     }
   } 
 
@@ -186,8 +153,10 @@ function ViewBrand(id){
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      $(".page_food_brand_add_title").html(language.page_food_brand_update_title);
+      // $(".page_food_brand_add_title").html(language.page_food_brand_update_title);
       
+      $(".page_food_brand_add_title").removeClass("d-none");
+
       $('.AddBrandFormIdBrand').val(id);
       $('.AddBrandFormCode').val(data.ViewBrand.code);
       $('.AddBrandFormName').val(data.ViewBrand.name);

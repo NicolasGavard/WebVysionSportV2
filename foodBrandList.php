@@ -46,7 +46,8 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_add_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 d-none"><?php echo $page_add_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
                 <div class="col-md-12 col-sm-12 d-none showPicture">
                   <div class="profile-photo">
