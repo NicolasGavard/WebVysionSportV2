@@ -26,14 +26,12 @@ if (is_null($dbConnection->getError())) {
   $data = $dataSvc->getParameter("data");
   list($labelStor, $labelStorInd) = LabelStor::getList($data->getStatus(), $dbConnection);
   foreach ($labelStor as $Label) {
-    $infoLabel    = DistriXSvcUtil::setData($Label, "DistriXFoodLabelData");
-    $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $infoLabel->getLinkToPicture();
+    $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $Label->getLinkToPicture();
     $pictures_headers = get_headers($urlPicture);
-    if ($infoLabel->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $infoLabel->getLinkToPicture() == '') {
+    if ($Label->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $Label->getLinkToPicture() == '') {
       $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/default.png';
     }
-    $infoLabel->setLinkToPicture($urlPicture);
-    $labels[]     = $infoLabel;
+    $Label->setLinkToPicture($urlPicture);
   }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
@@ -42,7 +40,7 @@ if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListLabels", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListLabels", $labels);
+$dataSvc->addToResponse("ListLabels", $labelStor);
 
 // Return response
 $dataSvc->endOfService();

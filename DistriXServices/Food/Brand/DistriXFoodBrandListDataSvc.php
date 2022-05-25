@@ -37,6 +37,9 @@ if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListBrands", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
+
+print_r($brandStor);
+
 $dataSvc->addToResponse("ListBrands", $brandStor);
 
 // Return response

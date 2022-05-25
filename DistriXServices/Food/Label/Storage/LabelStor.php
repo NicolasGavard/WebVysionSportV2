@@ -22,7 +22,7 @@ class LabelStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(int $status, DistriXPDOConnection $inDbConnection)
+  public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new LabelStorData();
@@ -31,11 +31,13 @@ class LabelStor {
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE statut = :statut";
+      if (!$all) {
+        $request .= " WHERE statut = :statut";
+      }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $status]);
+      $stmt->execute(['statut'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -47,7 +49,7 @@ class LabelStor {
   }
   // End of getList
 
-  public static function findByCode(LabelStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
+  public static function findByCode(LabelStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -56,10 +58,14 @@ class LabelStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE code = :index0";
-      $request .= " AND statut = :statut";
+      if (!$all) {
+        $request .= " WHERE statut = :statut";
+      }
       $params = [];
       $params["index0"] = $dataIn->getCode();
-      $params["statut"] = $status;
+      if (!$all) {
+        $params["statut"] = $dataIn->getStatus();
+      }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
