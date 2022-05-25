@@ -1,178 +1,103 @@
 <?php
-  session_start();
-  include('header.php');
-  include('headerMenu.php');
+	session_start();
+
+  $international  = 'codeTableLanguageList';
+  $i18cdlangue    = 'FR';
+  // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+	include('i18/FR/header.php');
+  include("i18/_i18.php");
+
+  include('_header.php');
+	include('_headerMenuTop.php');
+	include('_headerMenuLeft.php');
 ?>
+	<div class="mobile-menu-overlay"></div>
 
-<div class="main-panel">        
-  <div class="content-wrapper" style="background:#69a7c5; padding: 1.5rem 1.5rem 1.5rem 1.5rem;">
-    <div class="row">
-      <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title page_codeTables_language_title" style='text-transform: none;'></h4>
-            
-            <div class="row">
-              <div class="col-md-9">
-              </div>
-              <div class="col-md-3" style="text-align:right">
-                <button type="button" class="btn btn-primary btn-icon-text AddNewLanguage" data-bs-toggle="modal" data-bs-target="#modalAddLanguage" style="margin-top: 28px;">
-                  <i class="menu-icon mdi mdi-plus"></i>
-                  <span class="page_codeTables_language_add_title"></span>
-                </button>
-              </div>
-            </div>
-
-            <div class="table-responsive">          
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width=5%><span class="page_codeTables_language_picture"></span></th>
-                    <th width=10%><span class="page_codeTables_language_code"></span></th>
-                    <th width=70%><span class="page_codeTables_language_name"></span></th>
-                    <th width=05%><span class="page_codeTables_language_status"></span></th>
-                    <th width=10%><span class="page_codeTables_language_action"></span></th>
-                  </tr>
-                </thead>
-                <tbody id="listLanguagesTbody">
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modalAddLanguage" tabindex="-1" aria-labelledby="modalAddLanguageLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title btnSave page_codeTables_language_add_title" id="modalAddLanguageLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormAddLanguage">
-            <input type="hidden" name="id"        class="AddLanguageFormIdLanguage" value="0">
-            <input type="hidden" name="statut"    class="AddLanguageFormStatut"     value="0">
-            <input type="hidden" name="timestamp" class="AddLanguageFormTimestamp"  value="0">
-            
-            <div class="form-group">
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="pd-20 card-box mb-30">
+					<div class="clearfix">
+						<div class="pull-left">
+							<h4 class="text-blue h4"><?php echo $page_title; ?></h4>
+						</div>
+        
+            <div class="pull-right">
+              <button type="button" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i>&nbsp;<?php echo $page_all_active; ?></button>
+              <button type="button" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i>&nbsp;<?php echo $page_all_inactive; ?></button>
+              <button type="button" class="btn btn-primary AddNewLanguage" data-toggle="modal" data-target="#modalAddLanguage"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
+        		</div>
+					</div>
+          
+          <div class="pb-20"></div>
+          <div class="pb-20">
+						<table class="table stripe hover nowrap" id="datatable">
+							<thead>
+								<tr>                 
+                <th width="20%" class="table-plus datatable-nosort"><span><?php echo $page_picture; ?></span></th>
+                  <th width="70%"><span><?php echo $page_name; ?></span></th>
+                  <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
+								</tr>
+							</thead>
+							<tbody id="listLanguagesTbody">            
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+      
+      <div class="modal fade" id="modalAddLanguage" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center font-18">
+              <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
-                <div class="col-md-6">
-                  <label for="InputLanguageCode" class="page_codeTables_language_code"></label>
-                  <input type="text" class="form-control AddLanguageFormCode" id="InputLanguageCode" placeholder="Code" name="code" value="">
+                <div class="col-md-12 col-sm-12 d-none showPicture">
+                  <div class="profile-photo">
+                    <img src="" alt="" class="avatar-photo avatar-Language">
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <label for="InputLanguageName" class="page_codeTables_language_name"></label>
-                  <input type="text" class="form-control AddLanguageFormName" id="InputLanguageName" placeholder="Nom" name="description" value="">
-                </div>
-              </div>
-            </div>
 
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="LanguageEpic">
-                    <p>
-                      <input type="file" class="LanguageEpicImage" accept="image/*" name="picture" id="picture"  onchange="loadFile(event); encodeImgtoBase64(this);" style="display: none;">
-                      <input type="hidden" name="linkToPicture"       id="linkToPicture"      class="InfoProfilFormLinkToPicture"   value="">
-                      <input type="hidden" name="linkToPictureBase64" id="linkToPictureBase64">
-                    </p>
-                    <p>
-                      <label for="file" style="cursor: pointer;">
-                      <img class="LanguageEpicImage InfoLanguagePicture" src="" width="150" height="100" alt="" id="base64Img"/>
-                      <div class="LanguageEpicContent" onclick='$("#picture").click();'>
-                        <span class="LanguageEpicIcon"><i class="menu-icon mdi mdi-camera"></i></span>
-                        <span class="LanguageEpic_Text page_all_change_picture"></span>
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_name; ?></label>
+                    <input class="form-control AddLanguageFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
+                    <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-12 col-sm-12">
+                  <div class="pd-20 card-box mb-30">
+                    <form class="dropzone FormAddLanguage" action="#" id="FormAddLanguage" style="max-height: 200px;">
+                      <input class="form-control AddLanguageFormIdLanguage"    type="hidden" name="id"         value="0">
+                      <input class="form-control AddLanguageFormTimestamp"     type="hidden" name="timestamp"  value="0">
+                      <input class="form-control AddLanguageFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddLanguageFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
+                      <div class="fallback" style="margin: 1em 0;">
+                        <input type="file" name="file" class="AddLanguageFormPicture" />
                       </div>
-                    </label>
-                    </p>
+                    </form>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
-          
-          <!-- Success Alert -->
-          <div class="alert alert-success alert-dismissible fade show" style='display:none;'>
-            <strong class='errorData_ok'></strong>
-            <br/>
-            <p class='errorData_ok_txt'></p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          </div>
-
-          <!-- Error Alert -->
-          <div class="form-group">
-            <div class="alert alert-danger alert-dismissible fade show" style='display:none;'>
-              <strong class='errorData_ko'></strong>
-              <br/>
-              <p></p>
-              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              
+              <div class="padding-bottom-30 row" style="margin: 0 auto;">
+                <div class="col-12">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
+                  <button type="button" class="btn btn-primary btnAddLanguage" id="btnAddLanguage"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_add; ?></button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-primary page_all_add btnSave" id="btnAddLanguage"></button>
-        </div>
       </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modalDelLanguage" tabindex="-1" aria-labelledby="modalDelLanguageLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title page_codeTables_language_delete_title" id="modalDelLanguageLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormDelLanguage">
-            <input type="hidden" name="id" class="DelLanguageFormIdLanguage" value="0">
-          </form>
-          <p class="DelLanguageTxt"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-danger page_all_delete" id="btnDelLanguage"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modalRestLanguage" tabindex="-1" aria-labelledby="modalRestLanguageLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title page_codeTables_language_restore_title" id="modalRestLanguageLabel" class="page_codeTables_language_restore_title"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormRestLanguage">
-            <input type="hidden" name="id" class="RestLanguageFormIdLanguage" value="0">
-          </form>
-          <p class="RestLanguageTxt"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-info page_all_restore" id="btnRestLanguage"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    var loadFile = function(event) {
-      var image = document.getElementById('base64Img');
-      image.src = URL.createObjectURL(event.target.files[0]);
-    };
-  </script>
 
       <?php
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/codeTableLanguages.js"></script>
+      <script src="jsDistrix/foodLanguage.js"></script>
   </body>
 </html>
+

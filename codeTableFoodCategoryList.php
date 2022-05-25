@@ -1,154 +1,102 @@
 <?php
-  session_start();
-  include('header.php');
-  include('headerMenu.php');
+	session_start();
+
+  $international  = 'codeTableFoodCategoryList';
+  $i18cdlangue    = 'FR';
+  // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+	include('i18/FR/header.php');
+  include("i18/_i18.php");
+
+  include('_header.php');
+	include('_headerMenuTop.php');
+	include('_headerMenuLeft.php');
 ?>
+	<div class="mobile-menu-overlay"></div>
 
-<div class="main-panel">        
-  <div class="content-wrapper" style="background:#69a7c5; padding: 1.5rem 1.5rem 1.5rem 1.5rem;">
-    <div class="row">
-      <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title page_codeTables_food_category_title" style='text-transform: none;'></h4>
-            
-            <div class="row">
-              <div class="col-md-8">
-              </div>
-              <div class="col-md-4" style="text-align:right">
-                <button type="button" class="btn btn-primary btn-icon-text AddNewFoodCategory" data-bs-toggle="modal" data-bs-target="#modalAddFoodCategory" style="margin-top: 28px;">
-                  <i class="menu-icon mdi mdi-plus"></i>
-                  <span class="page_codeTables_food_category_add_title"></span>
-                </button>
-              </div>
-            </div>
-
-            <div class="table-responsive">          
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th width=10%><span class="page_codeTables_food_category_code"></span></th>
-                    <th width=75%><span class="page_codeTables_food_category_name"></span></th>
-                    <th width=05%><span class="page_codeTables_food_category_status"></span></th>
-                    <th width=10%><span class="page_codeTables_food_category_action"></span></th>
-                  </tr>
-                </thead>
-                <tbody id="listFoodCategorysTbody">
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modalAddFoodCategory" tabindex="-1" aria-labelledby="modalAddFoodCategoryLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title btnSave page_codeTables_food_category_add_title" id="modalAddFoodCategoryLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormAddFoodCategory">
-            <input type="hidden" name="id"          class="AddFoodCategoryFormIdFoodCategoryName" value="0">
-            <input type="hidden" name="idCategory"  class="AddFoodCategoryFormIdFoodCategory"     value="0">
-            <input type="hidden" name="statut"      class="AddFoodCategoryFormStatut"             value="0">
-            <input type="hidden" name="timestamp"   class="AddFoodCategoryFormTimestamp"          value="0">
-            
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-6">
-                  <label for="InputFoodCategoryCode" class="page_codeTables_food_category_code"></label>
-                  <input type="text" class="form-control AddFoodCategoryFormCode" id="InputFoodCategoryCode" placeholder="Code" name="code" value="">
-                </div>
-                <div class="col-md-6">
-                  <label for="InputFoodCategoryLanguage" class="page_codeTables_food_category_language"></label>
-                  <select class="form-control AddFoodCategoryFormLanguage" id="InputFoodCategoryLanguage" name="idLanguage">
-                  </select>
-                </div>
-                <div class="col-md-12">
-                  <label for="InputFoodCategoryName" class="page_codeTables_food_category_name"></label>
-                  <input type="text" class="form-control AddFoodCategoryFormName" id="InputFoodCategoryName" placeholder="Nom" name="name" value="">
-                </div>
-              </div>
-            </div>
-          </form>
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="pd-20 card-box mb-30">
+					<div class="clearfix">
+						<div class="pull-left">
+							<h4 class="text-blue h4"><?php echo $page_title; ?></h4>
+						</div>
+        
+            <div class="pull-right">
+              <button type="button" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i>&nbsp;<?php echo $page_all_active; ?></button>
+              <button type="button" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i>&nbsp;<?php echo $page_all_inactive; ?></button>
+              <button type="button" class="btn btn-primary AddNewFoodCategory" data-toggle="modal" data-target="#modalAddFoodCategory"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
+        		</div>
+					</div>
           
-          <!-- Success Alert -->
-          <div class="alert alert-success alert-dismissible fade show" style='display:none;'>
-            <strong class='errorData_ok'></strong>
-            <br/>
-            <p class='errorData_ok_txt'></p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          </div>
+          <div class="pb-20"></div>
+          <div class="pb-20">
+						<table class="table stripe hover nowrap" id="datatable">
+							<thead>
+								<tr>                 
+                  <th width="90%"><span><?php echo $page_name; ?></span></th>
+                  <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
+								</tr>
+							</thead>
+							<tbody id="listFoodCategorysTbody">            
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+      
+      <div class="modal fade" id="modalAddFoodCategory" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center font-18">
+              <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
+              <div class="row">
+                <div class="col-md-12 col-sm-12 d-none showPicture">
+                  <div class="profile-photo">
+                    <img src="" alt="" class="avatar-photo avatar-FoodCategory">
+                  </div>
+                </div>
 
-          <!-- Error Alert -->
-          <div class="form-group">
-            <div class="alert alert-danger alert-dismissible fade show" style='display:none;'>
-              <strong class='errorData_ko'></strong>
-              <br/>
-              <p></p>
-              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_name; ?></label>
+                    <input class="form-control AddFoodCategoryFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
+                    <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-12 col-sm-12">
+                  <div class="pd-20 card-box mb-30">
+                    <form class="dropzone FormAddFoodCategory" action="#" id="FormAddFoodCategory" style="max-height: 200px;">
+                      <input class="form-control AddFoodCategoryFormIdFoodCategory"       type="hidden" name="id"         value="0">
+                      <input class="form-control AddFoodCategoryFormTimestamp"     type="hidden" name="timestamp"  value="0">
+                      <input class="form-control AddFoodCategoryFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddFoodCategoryFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
+                      <div class="fallback" style="margin: 1em 0;">
+                        <input type="file" name="file" class="AddFoodCategoryFormPicture" />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="padding-bottom-30 row" style="margin: 0 auto;">
+                <div class="col-12">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
+                  <button type="button" class="btn btn-primary btnAddFoodCategory" id="btnAddFoodCategory"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_add; ?></button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-primary page_all_add btnSave" id="btnAddFoodCategory"></button>
-        </div>
       </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modalDelFoodCategory" tabindex="-1" aria-labelledby="modalDelFoodCategoryLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title page_codeTables_food_category_delete_title" id="modalDelFoodCategoryLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormDelFoodCategory">
-            <input type="hidden" name="id" class="DelFoodCategoryFormIdFoodCategory" value="0">
-          </form>
-          <p class="DelFoodCategoryTxt"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-danger page_all_delete" id="btnDelFoodCategory"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modalRestFoodCategory" tabindex="-1" aria-labelledby="modalRestFoodCategoryLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title page_codeTables_food_category_restore_title" id="modalRestFoodCategoryLabel" class="page_codeTables_food_category_restore_title"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="padding: 15px 15px;">
-          <form class="forms-sample" id="FormRestFoodCategory">
-            <input type="hidden" name="id" class="RestFoodCategoryFormIdFoodCategory" value="0">
-          </form>
-          <p class="RestFoodCategoryTxt"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary page_all_close" data-bs-dismiss="modal"></button>
-          <button type="button" class="btn btn-info page_all_restore" id="btnRestFoodCategory"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
       <?php
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/codeTableFoodCategory.js"></script>
+      <script src="jsDistrix/foodFoodCategory.js"></script>
   </body>
 </html>
+

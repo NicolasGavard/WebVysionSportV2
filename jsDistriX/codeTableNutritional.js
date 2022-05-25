@@ -1,30 +1,3 @@
-$(".page_codeTables_nutritional_title").text(language.page_codeTables_nutritional_title);
-$(".page_codeTables_nutritional_code").text(language.page_codeTables_nutritional_code);
-$(".page_codeTables_nutritional_name").text(language.page_codeTables_nutritional_name);
-$(".page_codeTables_nutritional_abbreviation").text(language.page_codeTables_nutritional_abbreviation);
-$(".page_codeTables_nutritional_language").text(language.page_codeTables_nutritional_language);
-$(".page_codeTables_nutritional_description").text(language.page_codeTables_nutritional_description);
-$(".page_codeTables_nutritional_type").text(language.page_codeTables_nutritional_type);
-$(".page_codeTables_nutritional_status").text(language.page_codeTables_nutritional_status);
-$(".page_codeTables_nutritional_action").text(language.page_codeTables_nutritional_action);
-$(".page_codeTables_nutritional_add_title").text(language.page_codeTables_nutritional_add_title);
-$(".page_codeTables_nutritional_update_title").text(language.page_codeTables_nutritional_update_title);
-$(".page_codeTables_nutritional_delete_title").text(language.page_codeTables_nutritional_delete_title);
-$(".page_codeTables_nutritional_restore_title").text(language.page_codeTables_nutritional_restore_title);
-$(".page_codeTables_nutritional_solid_title").text(language.page_codeTables_nutritional_solid_title);
-$(".page_codeTables_nutritional_liquid_title").text(language.page_codeTables_nutritional_liquid_title);
-$(".page_codeTables_nutritional_other_title").text(language.page_codeTables_nutritional_other_title);
-
-$(".AddNutritionalFormCode").attr("placeholder", language.page_codeTables_nutritional_code);
-$(".AddNutritionalFormName").attr("placeholder", language.page_codeTables_nutritional_name);
-$(".AddNutritionalFormDescription").attr("placeholder", language.page_codeTables_nutritional_description);
-$(".AddNutritionalFormAbbreviation").attr("placeholder", language.page_codeTables_nutritional_abbreviation);
-
-$(".page_all_close").text(language.page_all_close);
-$(".page_all_add").text(language.page_all_add);
-$(".page_all_view").text(language.page_all_view);
-$(".page_all_delete").text(language.page_all_delete);
-$(".page_all_restore").text(language.page_all_restore);
 
 $.ajax({
   url : 'Controllers/CodeTables/Nutritional/list.php',

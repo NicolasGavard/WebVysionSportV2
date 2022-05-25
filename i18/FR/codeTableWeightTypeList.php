@@ -12,6 +12,7 @@
   $page_update_title  = "Modifier l'unité de mesures";
   $page_delete_title  = "Supprimer l'unité de mesures";
   $page_restore_title = "Restaurer l'unité de mesures";
+  
   $page_solid_title   = "Solide";
   $page_liquid_title  = "Liquide";
   $page_other_title   = "Autre";

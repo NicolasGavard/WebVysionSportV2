@@ -1,30 +1,3 @@
-$(".page_codeTables_weight_type_title").text(language.page_codeTables_weight_type_title);
-$(".page_codeTables_weight_type_code").text(language.page_codeTables_weight_type_code);
-$(".page_codeTables_weight_type_name").text(language.page_codeTables_weight_type_name);
-$(".page_codeTables_weight_type_abbreviation").text(language.page_codeTables_weight_type_abbreviation);
-$(".page_codeTables_weight_type_language").text(language.page_codeTables_weight_type_language);
-$(".page_codeTables_weight_type_description").text(language.page_codeTables_weight_type_description);
-$(".page_codeTables_weight_type_type").text(language.page_codeTables_weight_type_type);
-$(".page_codeTables_weight_type_status").text(language.page_codeTables_weight_type_status);
-$(".page_codeTables_weight_type_action").text(language.page_codeTables_weight_type_action);
-$(".page_codeTables_weight_type_add_title").text(language.page_codeTables_weight_type_add_title);
-$(".page_codeTables_weight_type_update_title").text(language.page_codeTables_weight_type_update_title);
-$(".page_codeTables_weight_type_delete_title").text(language.page_codeTables_weight_type_delete_title);
-$(".page_codeTables_weight_type_restore_title").text(language.page_codeTables_weight_type_restore_title);
-$(".page_codeTables_weight_type_solid_title").text(language.page_codeTables_weight_type_solid_title);
-$(".page_codeTables_weight_type_liquid_title").text(language.page_codeTables_weight_type_liquid_title);
-$(".page_codeTables_weight_type_other_title").text(language.page_codeTables_weight_type_other_title);
-
-$(".AddWeightTypeFormCode").attr("placeholder", language.page_codeTables_weight_type_code);
-$(".AddWeightTypeFormName").attr("placeholder", language.page_codeTables_weight_type_name);
-$(".AddWeightTypeFormDescription").attr("placeholder", language.page_codeTables_weight_type_description);
-$(".AddWeightTypeFormAbbreviation").attr("placeholder", language.page_codeTables_weight_type_abbreviation);
-
-$(".page_all_close").text(language.page_all_close);
-$(".page_all_add").text(language.page_all_add);
-$(".page_all_view").text(language.page_all_view);
-$(".page_all_delete").text(language.page_all_delete);
-$(".page_all_restore").text(language.page_all_restore);
 
 $.ajax({
   url : 'Controllers/CodeTables/WeightType/list.php',
