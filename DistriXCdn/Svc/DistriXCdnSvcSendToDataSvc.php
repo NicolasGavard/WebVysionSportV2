@@ -18,9 +18,8 @@ $errors     = [];
 
 $parameters = $dataSvc->getRawParameters(); // As we do not know the parameter name which is the image name. Yvan 08-Mar-22
 if (is_array($parameters) && !empty($parameters)) {
-  $image = unserialize($parameters[array_key_first($parameters)]); // Works from PHP 7.3.0
+  list($image, $jsonError) = DistriXCdnData::getJsonData($parameters[array_key_first($parameters)]); // Works from PHP 7.3.0
 }
-$url = $cdnSvcCall->getServerCall() . '://' . $cdnSvcCall->getServerAddress() . '/' . $cdnSvcCall->getServerDirectory();
 if ($image != null) {
   if (strlen($image->getImageGroup()) > 0 && strlen($image->getImageFamily()) > 0) {
     $groupLocation = DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES;
@@ -28,8 +27,6 @@ if ($image != null) {
       $groupLocation = DISTRIX_CDN_URL_UP_TO_FOLDER_MOVIES;
     }
     $filename  = __DIR__ . "/" . $groupLocation . $image->getImageFamily() . '/' . $image->getImageName();
-    // $imgBase64 = 'data:' . $image->getImageType() . ';base64,' . $image->getImage();
-    // if (file_put_contents($filename, base64_decode($imgBase64)) === FALSE) {
     if (file_put_contents($filename, base64_decode($image->getImage())) === FALSE) {
       $errorData = new DistriXSvcErrorData();
       $errorData->setCode(DISTRIX_CDN_BAD_FILENAME_CODE);

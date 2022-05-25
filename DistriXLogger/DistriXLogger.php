@@ -2,10 +2,14 @@
 if (!class_exists('DistriXLogger', false)) {
   class DistriXLogger
   {
-    const LOG_MESSAGE = "LOG_MESSAGE";
-    const LOG_INFO    = "LOG_INFO";
-    const LOG_ERROR   = "LOG_ERROR";
-    const LOG_WARNING = "LOG_WARNING";
+    const LOG_EMERGENCY = 'LOG_EMERGENCY';
+    const LOG_CRITICAL  = 'LOG_CRITICAL';
+    const LOG_ERROR     = "LOG_ERROR";
+    const LOG_ALERT     = 'LOG_ALERT';
+    const LOG_WARNING   = "LOG_WARNING";
+    const LOG_NOTICE    = 'LOG_NOTICE';
+    const LOG_INFO      = "LOG_INFO";
+    const LOG_DEBUG     = 'LOG_DEBUG';
 
     static $typeData = null;
 
@@ -16,12 +20,16 @@ if (!class_exists('DistriXLogger', false)) {
 
       if (file_exists($loggerSettings)) {
         include($loggerSettings);
-        if (isset($DistriXLoggerSettings["running"]) && isset($DistriXLoggerSettings["running"][$element])) {
-          $loggerRunning = $DistriXLoggerSettings["running"][$element];
+        if (isset($DistriXLoggerSettings["running"]) && strlen($element) == 0) {
+          $loggerRunning = $DistriXLoggerSettings["running"];
+        } else {
+          if (isset($DistriXLoggerSettings["running"][$element])) {
+            $loggerRunning = $DistriXLoggerSettings["running"][$element];
+          }
+        }
+        if ($loggerRunning) {
           $typeData = new DistriXLoggerTypeData($DistriXLoggerSettings);
           self::$typeData = $typeData;
-        } else {
-          // Error
         }
       } else {
         // Error
@@ -43,10 +51,14 @@ if (!class_exists('DistriXLogger', false)) {
         }
         $logFilename .= self::$typeData->getLogExtension();
 
-        $setForLogging = ($loggerInfoData->getLogType() == self::LOG_MESSAGE && self::$typeData->getLogMessage());
-        $setForLogging = $setForLogging || ($loggerInfoData->getLogType() == self::LOG_INFO && self::$typeData->getLogInfo());
+        $setForLogging = ($loggerInfoData->getLogType() == self::LOG_EMERGENCY && self::$typeData->getLogEmergency());
+        $setForLogging = $setForLogging || ($loggerInfoData->getLogType() == self::LOG_CRITICAL && self::$typeData->getLogCritical());
         $setForLogging = $setForLogging || ($loggerInfoData->getLogType() == self::LOG_ERROR && self::$typeData->getLogError());
+        $setForLogging = $setForLogging || ($loggerInfoData->getLogType() == self::LOG_ALERT && self::$typeData->getLogAlert());
         $setForLogging = $setForLogging || ($loggerInfoData->getLogType() == self::LOG_WARNING && self::$typeData->getLogWarning());
+        $setForLogging = $setForLogging || ($loggerInfoData->getLogType() == self::LOG_NOTICE && self::$typeData->getLogNotice());
+        $setForLogging = $setForLogging || ($loggerInfoData->getLogType() == self::LOG_INFO && self::$typeData->getLogInfo());
+        $setForLogging = $setForLogging || ($loggerInfoData->getLogType() == self::LOG_DEBUG && self::$typeData->getLogDebug());
 
         if ($setForLogging) {
           $fHandler = null;
@@ -57,6 +69,7 @@ if (!class_exists('DistriXLogger', false)) {
           }
           if ($fHandler !== FALSE) {
             $logData = $loggerInfoData->getLogData();
+            $context = $loggerInfoData->getLogContext();
             if (is_array($logData)) {
               foreach ($logData as $dataToLog) {
                 if (!is_null($logFormatStrings) && $logFormatStrings !== FALSE) {
@@ -64,15 +77,29 @@ if (!class_exists('DistriXLogger', false)) {
                   foreach ($logFormatStrings as $logFormatString) {
                     $logFormatStringTrimmed = trim($logFormatString, " [ ]");
                     $method = "getLog$logFormatStringTrimmed";
-                    if ($logFormatStringTrimmed != "Parameters" && $logFormatStringTrimmed != "Message") {
+                    if ($logFormatStringTrimmed != "Message") {
                       $messageToLog .= "[$logFormatStringTrimmed-" . $loggerInfoData->$method() . "]";
                     } else {
-                      if ($logFormatStringTrimmed == "Parameters") {
-                        $messageToLog .= "[$logFormatStringTrimmed-" . json_encode($loggerInfoData->$method()) . "]";
+                      if (!empty($context)) {
+                        $posOpen = strpos($logData, "{");
+                        while ($posOpen !== FALSE) {
+                          $posClose = strpos($logData, "}", $posOpen);
+                          if ($posClose !== FALSE) {
+                            $contextName = substr($logData, $posOpen + 1, $posClose - ($posOpen + 1));
+                            foreach ($context as $contextValue) {
+                              if ($contextValue == $contextName) {
+                                $newLogData  = substr($logData, 0, $posOpen);
+                                $newLogData .= $contextValue;
+                                $newLogData .= substr($logData, ($posClose + 1));
+                                $logData = $newLogData;
+                              }
+                            }
+                          } else {
+                            break; // No } found. So nothing to replace. Team 28-Mar-22
+                          }
+                        }
                       }
-                      if ($logFormatStringTrimmed == "Message") {
-                        $messageToLog .= " " . $logData;
-                      }
+                      $messageToLog .= " " . $logData;
                     }
                   }
                   fwrite($fHandler, $messageToLog . "\r\n");
@@ -86,15 +113,29 @@ if (!class_exists('DistriXLogger', false)) {
                 foreach ($logFormatStrings as $logFormatString) {
                   $logFormatStringTrimmed = trim($logFormatString, " [ ]");
                   $method = "getLog$logFormatStringTrimmed";
-                  if ($logFormatStringTrimmed != "Parameters" && $logFormatStringTrimmed != "Message") {
+                  if ($logFormatStringTrimmed != "Message") {
                     $messageToLog .= "[$logFormatStringTrimmed-" . $loggerInfoData->$method() . "]";
                   } else {
-                    if ($logFormatStringTrimmed == "Parameters") {
-                      $messageToLog .= "[$logFormatStringTrimmed-" . json_encode($loggerInfoData->$method()) . "]";
+                    if (!empty($context)) {
+                      $posOpen = strpos($logData, "{");
+                      while ($posOpen !== FALSE) {
+                        $posClose = strpos($logData, "}", $posOpen);
+                        if ($posClose !== FALSE) {
+                          $contextName = substr($logData, $posOpen + 1, $posClose - ($posOpen + 1));
+                          foreach ($context as $contextValue) {
+                            if ($contextValue == $contextName) {
+                              $newLogData  = substr($logData, 0, $posOpen);
+                              $newLogData .= $contextValue;
+                              $newLogData .= substr($logData, ($posClose + 1));
+                              $logData = $newLogData;
+                            }
+                          }
+                        } else {
+                          break; // No } found. So nothing to replace. Team 28-Mar-22
+                        }
+                      }
                     }
-                    if ($logFormatStringTrimmed == "Message") {
-                      $messageToLog .= " " . $logData;
-                    }
+                    $messageToLog .= " " . $logData;
                   }
                 }
                 fwrite($fHandler, $messageToLog . "\r\n");

@@ -9,18 +9,18 @@ if (!class_exists('DistriXLoggerInfoData', false)) {
     protected $logApplication;
     protected $logFunction;
     protected $logData;
-    protected $logParameters;
+    protected $logContext;
 
     public function __construct()
     {
-      $this->logType        = DistriXLogger::LOG_MESSAGE;
+      $this->logType        = DistriXLogger::LOG_INFO;
       $this->logDate        = DistriXSvcUtil::getCurrentNumDate();
       $this->logTime        = DistriXSvcUtil::getCurrentNumTime();
       $this->logIpAddress   = "";
       $this->logApplication = "";
       $this->logFunction    = "";
       $this->logData        = "";
-      $this->logParameters  = [];
+      $this->logContext     = [];
     }
     // Gets
     public function getLogType(): string
@@ -51,9 +51,9 @@ if (!class_exists('DistriXLoggerInfoData', false)) {
     {
       return $this->logData;
     }
-    public function getLogParameters(): array
+    public function getLogContext(): array
     {
-      return $this->logParameters;
+      return $this->logContext;
     }
     // Sets
     public function setLogtype(string $logType)
@@ -84,9 +84,9 @@ if (!class_exists('DistriXLoggerInfoData', false)) {
     {
       $this->logData = $logData;
     }
-    public function setLogParameters(array $logParameters)
+    public function setLogContext(array $logContext)
     {
-      $this->logParameters = $logParameters;
+      $this->logContext = $logContext;
     }
   }
   // End of Class

@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
 include(__DIR__ . "/../../Data/DistriXFoodScoreEcoData.php");
@@ -10,14 +10,17 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp           = array();
-$listScoresEco  = array();
-$error          = array();
-$output         = array();
+$resp           = [];
+$listScoresEco  = [];
+$error          = [];
+$output         = [];
 $outputok       = false;
 
-$distriXFoodScoreEcoData = new DistriXFoodScoreEcoData();
-$distriXFoodScoreEcoData->setStatus($_POST['status']);
+// $distriXFoodScoreEcoData = new DistriXFoodScoreEcoData();
+// $distriXFoodScoreEcoData->setStatus($_POST['status'] ?? 0);
+
+list($distriXFoodScoreEcoData, $errorJson) = DistriXFoodScoreEcoData::getJsonData($_POST);
+
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListScoresEco");
@@ -34,17 +37,15 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ListScoresEco"])) {
-    $listScoresEco = $output["ListScoresEco"];
-  }
+if ($outputok && isset($output["ListScoresEco"]) && is_array($output["ListScoresEco"])) {
+  list($listScoresEco, $jsonError) = DistriXFoodScoreEcoData::getJsonArray($output["ListScoresEco"]);
+  // $resp["ListScoresEco"] = $$output["ListScoresEco"]; // A tester !
+
 } else {
   $error = $errorData;
 }
-
-$resp["ListScoresEco"]  = $listScoresEco;
+$resp["ListScoresEco"] = $listScoresEco;
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"] = $error;
 }
-
 echo json_encode($resp);

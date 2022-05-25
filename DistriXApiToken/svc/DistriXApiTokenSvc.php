@@ -17,7 +17,6 @@ include(__DIR__ . "/Storage/ApiTokenApplicationStor.php");
 include(__DIR__ . "/Storage/ApiTokenClientStor.php");
 include(__DIR__ . "/Storage/ApiTokenTokenStor.php");
 
-
 // ------------------------------------
 // -----------L O G G E R ---------------
 
@@ -37,6 +36,7 @@ include("../DistriXTrace/DistriXTrace.php");
 include("../DistriXTrace/Data/DistriXTraceData.php");
 const APPLICATION_NAME = "APITOKEN";
 const DB_SCHEMA_NAME   = "APITOKEN";
+include(__DIR__ . "/../Layers/DistriXApiTokenTraceSvcCaller.php");
 
 // ------------------------------------
 // ------------------------------------
@@ -52,7 +52,7 @@ if ("generate" == $dataSvc->getMethodName()) {
   $insere       = false;
   $error        = false;
 
-  $tokenData = $dataSvc->getParameter(DISTRIX_APITOKEN_GENERATION_DATA_NAME);
+  $tokenData = $dataSvc->getParameter(DISTRIX_APITOKEN_GENERATION_DATA_NAME, "DistriXApiTokenData");
 
   $dbConnection = new DistriXPDOConnection($databasefile, "");
   if (is_null($dbConnection->getError())) {
@@ -64,8 +64,9 @@ if ("generate" == $dataSvc->getMethodName()) {
 
     // $trace = new DistriXTrace($idUser, APPLICATION_NAME, DB_SCHEMA_NAME);
     $trace = new DistriXTrace(0, APPLICATION_NAME, DB_SCHEMA_NAME);
-    $trace->setManualTrace(true);
-    $trace->setCommitBefore(false);
+    $trace->setManualTrace(false);
+    // $trace->setCommitBefore(false);
+    $trace->setDistriXCaller(new DistriXApiTokenTraceSvcCaller());
     $dbConnection->setTrace($trace);
 
     // ------------------------------------
@@ -146,7 +147,8 @@ if ("verify" == $dataSvc->getMethodName()) {
   $insere       = false;
   $error        = false;
 
-  $tokenData = $dataSvc->getParameter(DISTRIX_APITOKEN_VERIFY_DATA);
+  $tokenData = $dataSvc->getParameter(DISTRIX_APITOKEN_VERIFY_DATA, "DistriXApiTokenData");
+
   $dbConnection = new DistriXPDOConnection($databasefile, "");
   if (is_null($dbConnection->getError())) {
     // print_r($tokenData);

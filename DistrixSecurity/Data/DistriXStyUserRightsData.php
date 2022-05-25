@@ -2,73 +2,53 @@
 if (!class_exists("DistriXStyUserRightsData", false)) {
   class DistriXStyUserRightsData extends DistriXSvcAppData
   {
-    protected $id;
-    protected $idStyUser;
-    protected $idStyRole;
-    protected $codeRole;
-    protected $nameRole;
-    protected $styApplications;
-    
+    protected $applicationCode;
+    protected $moduleCode;
+    protected $functionalityCode;
+    protected $sumOfRights;
+
     public function __construct()
     {
-      $this->id               = 0;
-      $this->idStyUser        = 0;
-      $this->idStyRole        = 0;
-      $this->codeRole         = "";
-      $this->nameRole         = "";
-      $this->styApplications  = array();
+      $this->applicationCode = "";
+      $this->moduleCode = "";
+      $this->functionalityCode = "";
+      $this->sumOfRights = 0;
     }
     // Gets
-    public function getId()
+    public function getApplicationCode()
     {
-      return $this->id;
+      return $this->applicationCode;
     }
-    public function getIdStyUser()
+    public function getModuleCode()
     {
-      return $this->idStyUser;
+      return $this->moduleCode;
     }
-    public function getIdStyRole()
+    public function getFunctionalityCode()
     {
-      return $this->idStyRole;
+      return $this->functionalityCode;
     }
-    public function getCodeStyRole()
+    public function getSumOfRights()
     {
-      return $this->codeRole;
+      return $this->sumOfRights;
     }
-    public function getNameRole()
-    {
-      return $this->nameRole;
-    }
-    public function getStyApplications()
-    {
-      return $this->styApplications;
-    }
-    
+
     // Sets
-    public function setId($id)
+    public function setApplicationCode($applicationCode)
     {
-      $this->id = $id;
+      $this->applicationCode = $applicationCode;
     }
-    public function setIdStyUser($idStyUser)
+    public function setModuleCode($moduleCode)
     {
-      $this->idStyUser = $idStyUser;
+      $this->moduleCode = $moduleCode;
     }
-    public function setIdStyRole($idStyRole)
+    public function setFunctionalityCode($functionalityCode)
     {
-      $this->idStyRole = $idStyRole;
+      $this->functionalityCode = $functionalityCode;
     }
-    public function setCodeRole($codeRole)
+    public function setSumOfRights($sumOfRights)
     {
-      $this->codeRole = $codeRole;
+      $this->sumOfRights = $sumOfRights;
     }
-    public function setNameRole($nameRole)
-    {
-      $this->nameRole = $nameRole;
-    }
-    public function setStyApplications($styApplications)
-    {
-      $this->styApplications = $styApplications;
-    }   
   }
   // End of class
 }

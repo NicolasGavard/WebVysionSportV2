@@ -1,14 +1,14 @@
-<?php
-include(__DIR__ . "/../../DistriXInit/DistriXSvcControllerInit.php");
+<?php session_start();
+include(__DIR__ . "/../../DistriXSvc/Config/DistriXFolderPath.php");
+include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-include(__DIR__ . "/../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
+include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
-include(__DIR__ . "/../../DistriXSecurity/Data/DistriXStyInfoSessionData.php");
-include(__DIR__ . "/../../DistriXSecurity/Data/DistriXStyUserData.php");
-include(__DIR__ . "/../../DistriXSecurity/Data/DistriXStyRoleData.php");
+include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/Data/DistriXStyInfoSessionData.php");
+include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/Data/DistriXStyUserData.php");
+include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/Data/DistriXStyRoleData.php");
 
-session_start();
 $resp                   = [];
 $isConnected            = false;
 $infoProfil             = new DistriXStyUserData();

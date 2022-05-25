@@ -11,33 +11,44 @@ if (!class_exists('DistriXTrace', false)) {
     private $manualTrace;
     private $commitBefore;
     private $traceFile;
+    private $distriXMultiCall;
+    private $distriXCaller;
 
     public function __construct(int $idUser, string $applicationName, string $dbSchemaName)
     {
-      $this->traces          = [];
-      $this->idUser          = $idUser;
-      $this->applicationName = $applicationName;
-      $this->dbSchemaName    = $dbSchemaName;
-      $this->manualTrace     = false;
-      $this->commitBefore    = true;
-      $this->traceFile       = "";
+      $this->traces           = [];
+      $this->idUser           = $idUser;
+      $this->applicationName  = $applicationName;
+      $this->dbSchemaName     = $dbSchemaName;
+      $this->manualTrace      = false;
+      $this->commitBefore     = true;
+      $this->traceFile        = "";
+      $this->distriXMultiCall = null;
+      $this->distriXCaller    = null;
     }
     /* End __construct */
 
     public function commitTrace(DistriXPDOConnection $dbConnection): bool
     {
-      $insere      = false;
-      $fileHandle  = null;
-      $traceInFile = false;
+      $insere             = false;
+      $fileHandle         = null;
+      $traceInFile        = false;
+      $traceSentToService = false;
 
       $traceInFile = (strlen($this->getTraceFile()) > 0);
       if ($traceInFile) {
         $fileHandle = fopen($this->getTraceFile(), "a");
       }
+      if (!is_null($this->getDistriXCaller())) {
+        $traceSentToService = true;
+        if (is_null($this->getDistriXMultiCall())) {
+          $this->setDistriXMultiCall(new DistriXSvc());
+        }
+      }
       foreach ($this->traces as $trace) {
         $dataTracking = new DistriXTraceStorData();
         $dataTracking->setIdUser($trace->getIdUser());
-        $dataTracking->setDataBaseschema($trace->getSchema());
+        $dataTracking->setDataBaseSchema($trace->getSchema());
         $dataTracking->setOperationTable($trace->getOperationTable());
         $dataTracking->setOperationId($trace->getOperationId());
         $dataTracking->setOperationCode($trace->getOperationCode());
@@ -45,18 +56,18 @@ if (!class_exists('DistriXTrace', false)) {
         $dataTracking->setOperationTime($trace->getOperationTime());
         $dataTracking->setOperationData($trace->getOperationData());
         $tableName = "trace_" . strtolower($this->getApplicationName());
-        if (!$traceInFile) {
+        if (!$traceInFile && !$traceSentToService) {
           list($insere, $id) = DistriXTraceStor::create($tableName, $dataTracking, $dbConnection);
           if (!$insere) {
             break;
           }
         } else {
-          if (!is_null($fileHandle) && $fileHandle !== FALSE) {
+          if ($traceInFile && !is_null($fileHandle) && $fileHandle !== FALSE) {
             $request  = "INSERT INTO $tableName(";
             $request .= "iduser,databaseschema,operationtable,operationid,operationcode,operationdate,operationtime,operationdata)";
             $request .= " VALUES(";
             $request .= $dataTracking->getIdUser() . ",";
-            $request .= $dataTracking->getDataBaseschema() . ",";
+            $request .= $dataTracking->getDataBaseSchema() . ",";
             $request .= $dataTracking->getOperationTable() . ",";
             $request .= $dataTracking->getOperationId() . ",";
             $request .= $dataTracking->getOperationCode() . ",";
@@ -64,11 +75,21 @@ if (!class_exists('DistriXTrace', false)) {
             $request .= $dataTracking->getOperationTime() . ",";
             $request .= $dataTracking->getOperationData() . ")";
             fwrite($fileHandle, $request);
+          } else {
+            if ($traceSentToService) {
+              $caller = $this->getDistriXCaller();
+              $caller->addParameter("Trace", $trace);
+              $paramName = $trace->getSchema() . $trace->getOperationTable() . $trace->getOperationId();
+              $this->getDistriXMultiCall()->addToCall($paramName, $caller);
+            }
           }
         }
       }
       if (!is_null($fileHandle) && $fileHandle !== FALSE) {
         $insere = fclose($fileHandle);
+      }
+      if ($traceSentToService) {
+        $insere = $this->getDistriXMultiCall()->call();
       }
       return $insere;
     }
@@ -104,6 +125,26 @@ if (!class_exists('DistriXTrace', false)) {
     {
       return $this->traceFile;
     }
+    public function getDistriXMultiCall(): ?object
+    {
+      return $this->distriXMultiCall;
+    }
+    public function getDistriXCaller(): ?object
+    {
+      return $this->distriXCaller;
+    }
+    public function getResults(string $name): array
+    {
+      $outputok   = false;
+      $output     = null;
+      $errorData  = null;
+
+      if (!is_null($this->distriXMultiCall)) {
+        list($outputok, $output, $errorData) = $this->distriXMultiCall->getResult($name);
+      }
+      return array($outputok, $output, $errorData);
+    }
+
     // Sets
     public function setIdUser(int $idUser)
     {
@@ -128,6 +169,14 @@ if (!class_exists('DistriXTrace', false)) {
     public function setTraceFile(string $traceFile)
     {
       $this->traceFile = $traceFile;
+    }
+    public function setDistriXMultiCall(object $distriXMultiCall)
+    {
+      $this->distriXMultiCall = $distriXMultiCall;
+    }
+    public function setDistriXCaller(object $distriXCaller)
+    {
+      $this->distriXCaller = $distriXCaller;
     }
   }
   // End of Class

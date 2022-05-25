@@ -1,7 +1,4 @@
 <?php // Needed to encode in UTF8 ààéàé //
-
-use DistriXSvc as GlobalDistriXSvc;
-
 if (!class_exists("DistriXSvc", false)) {
   class DistriXSvc
   {
@@ -78,6 +75,7 @@ if (!class_exists("DistriXSvc", false)) {
               curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
               if ($caller->getServerTimeoutSeconds() > 0) {
                 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $caller->getServerTimeoutSeconds());
+                curl_setopt($ch, CURLOPT_TIMEOUT, $caller->getServerTimeoutSeconds());
               }
 
               //SSL
@@ -92,18 +90,14 @@ if (!class_exists("DistriXSvc", false)) {
               $curlfields_string = "";
               $curlfields_string .= DISTRIX_SVC_RESPONSE_SERVICE_NAME_PARAMETER . "=" . urlencode(DISTRIX_SVC_SERVICE_LEVEL . $caller->getServiceName()) . "&";
               $curlfields_string .= DISTRIX_SVC_RESPONSE_METHOD_NAME_PARAMETER . "=" . urlencode($caller->getMethodName()) . "&";
-              $curlfields_string .= DISTRIX_SVC_RESPONSE_APITOKEN_PARAMETER . "=" . urlencode(serialize($caller->getApiToken())) . "&";
+              $curlfields_string .= DISTRIX_SVC_RESPONSE_APITOKEN_PARAMETER . "=" . urlencode(json_encode($caller->getApiToken())) . "&";
               $curlfields_string .= DISTRIX_SVC_RESPONSE_SECRET_KEY_PARAMETER . "=" . urlencode($caller->getSecretKey()) . "&";
-              $layerData = $caller->getLayerData();
-              if (!is_string($layerData)) {
-                $layerData = serialize($layerData);
-              }
-              $curlfields_string .= DISTRIX_SVC_RESPONSE_LAYER_DATA_PARAMETER . "=" . urlencode($layerData) . "&";
+              $curlfields_string .= DISTRIX_SVC_RESPONSE_LAYER_DATA_PARAMETER . "=" . urlencode(json_encode($caller->getLayerData())) . "&";
               $curlfields_string .= DISTRIX_SVC_RESPONSE_DEBUG_MODE_PARAMETER . "=" . urlencode($caller->getDebugMode()) . "&";
               if (!empty($caller->getParameters())) {
                 foreach ($caller->getParameters() as $key => $value) {
                   if (!is_string($value)) {
-                    $value = serialize($value);
+                    $value = json_encode($value);
                   }
                   $curlfields_string .= $key . "=" . urlencode($value) . "&";
                 }
@@ -233,24 +227,8 @@ if (!class_exists("DistriXSvc", false)) {
               }
               $output = substr($output, $indO);
 
-              $oldOutput     = $output;
-              $unserOutput   = @unserialize($output);
-              if (is_array($unserOutput)) {
-                if (isset($unserOutput[DISTRIX_SVC_RESPONSE_ERROR])) {
-                  $result->setErrorData($unserOutput[DISTRIX_SVC_RESPONSE_ERROR]);
-                  unset($unserOutput[DISTRIX_SVC_RESPONSE_ERROR]);
-                  $result->setOutputOk(false);
-                }
-                $result->setContent($unserOutput);
-              } else {
-                $output = $oldOutput;
-              }
-
               if (is_string($output)) {
-                $unserOutput = @json_decode($output, true);
-                if (!is_array($unserOutput)) {
-                  $unserOutput = @unserialize($output);
-                }
+                $unserOutput = json_decode($output, true);
                 if (is_array($unserOutput)) {
                   if (isset($unserOutput[DISTRIX_SVC_RESPONSE_ERROR])) {
                     $result->setErrorData($unserOutput[DISTRIX_SVC_RESPONSE_ERROR]);

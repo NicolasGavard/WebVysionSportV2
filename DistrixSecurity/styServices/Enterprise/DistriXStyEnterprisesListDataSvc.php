@@ -2,55 +2,93 @@
 // DISTRIX Init
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
-// STY Const
-include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
+include(__DIR__ . "/../../Const/DistriXStyKeys.php");
 // STY Data
+include(__DIR__ . "/../../Data/DistriXStyInfoSessionData.php");
 include(__DIR__ . "/../../Data/DistriXStyEnterpriseData.php");
+include(__DIR__ . "/../../Data/DistriXStyEnterprisePosData.php");
+include(__DIR__ . "/../../Data/DistriXStyUserEnterpriseData.php");
 // Database Data
-include(__DIR__ . "/Data/StyEnterpriseStorData.php");
+include(__DIR__ . "/Data/EnterpriseStorData.php");
+include(__DIR__ . "/Data/EnterprisePosStorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
-include(__DIR__ . "/Storage/StyEnterpriseStor.php");
-// Cdn Location
-include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
-include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
+include(__DIR__ . "/Storage/EnterpriseStor.php");
+include(__DIR__ . "/Storage/EnterprisePosStor.php");
+
 
 $databasefile    = __DIR__ . "/../Db/Infodb.php";
+$dbConnection    = null;
+$errorData       = null;
+$enterprises     = [];
+$enterprisesData = [];
+$enterprisesPos  = [];
+$userEnterprises = [];
 
-// ListEnterprises
-if ($dataSvc->getMethodName() == "ListEnterprises") {
-  $dbConnection    = null;
-  $errorData       = null;
-  $enterprisesList = [];
-  
-  $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
-  if (is_null($dbConnection->getError())) {
-    list($enterprisesStorData, $enterprisesStorDataInd) = StyEnterpriseStor::getList(true, $dbConnection);
-    foreach ($enterprisesStorData as $enterprise) {
-      $data = DistriXSvcUtil::setData($enterprise, "DistriXStyEnterpriseData");
-      
-      $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_ENTERPRISE . '/' . trim($data->getLogoImageHtmlName());
-      $pictures_headers = get_headers($urlPicture);
-      if (trim($data->getLogoImageHtmlName()) == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found') {
-        $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_ENTERPRISE . '/enterpriseDefault.png';
+$dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
+if ($dbConnection != null) {
+  $_infosSession = $dataSvc->getParameter("infoSession");
+  if ($_infosSession != null) {
+    list($enterprisesStorData, $enterprisesStorDataInd) = EnterpriseStor::getParentList(false, $dbConnection);
+    // Get Root enterprise
+    foreach ($enterprisesStorData as $enterpriseStorData) {
+      if ($enterpriseStorData->getId() == $_infosSession->getIdEnterprise()) {
+        list($enterprisesPosStorData, $enterprisesPosStorDataInd) = EnterprisePosStor::getList(true, $dbConnection);
+        foreach ($enterprisesPosStorData as $enterprisePosStorData) {
+          if ($enterprisePosStorData->getIdEnterprise() == $enterpriseStorData->getId()) {
+            $data = new DistriXStyEnterprisePosData();
+            $data->setIdPos($enterprisePosStorData->getIdPos());
+            $enterprisesPos[] = $data;
+          }
+        }
+        $data = DistriXSvcUtil::setData($enterpriseStorData, "DistriXStyEnterpriseData");
+        $enterprisesData[] = $data;
+
+        $data = new DistriXStyUserEnterpriseData();
+        $data->setId($enterpriseStorData->getId());
+        $data->setName($enterpriseStorData->getName());
+        $data->setCity($enterpriseStorData->getCity());
+        $data->setIdEnterprise($enterpriseStorData->getIdEnterpriseParent());
+        $userEnterprises[] = $data;
       }
-      $data->setLogoImageHtmlName($urlPicture);
-
-      $enterprisesList[] = $data;
     }
-  } else {
-    $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
-  }
-  if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "Login", $dataSvc->getMethodName(), basename(__FILE__));
-    $dataSvc->addErrorToResponse($errorData);
-  }
+    foreach ($enterprisesStorData as $enterpriseStorData) {
+      $found = false;
+      foreach ($userEnterprises as $userEnterprise) {
+        $found = ($userEnterprise->getId() == $enterpriseStorData->getIdEnterpriseParent());
+        if ($found) {
+          list($enterprisesPosStorData, $enterprisesPosStorDataInd) = EnterprisePosStor::getList(true, $dbConnection);
+          foreach ($enterprisesPosStorData as $enterprisePosStorData) {
+            if ($enterprisePosStorData->getIdEnterprise() == $enterpriseStorData->getId()) {
+              $data = new DistriXStyEnterprisePosData();
+              $data->setIdPos($enterprisePosStorData->getIdPos());
+              $enterprisesPos[] = $data;
+            }
+          }
+          $data = DistriXSvcUtil::setData($enterpriseStorData, "DistriXStyEnterpriseData");
+          $enterprisesData[] = $data;
 
-
-  $dataSvc->addToResponse("ListEnterprises", $enterprisesList);
+          $data = new DistriXStyUserEnterpriseData();
+          $data->setId($enterpriseStorData->getId());
+          $data->setName($enterpriseStorData->getName());
+          $data->setCity($enterpriseStorData->getCity());
+          $data->setIdEnterprise($enterpriseStorData->getIdEnterpriseParent());
+          $userEnterprises[] = $data;
+          break;
+        }
+      }
+    }
+  }
+} else {
+  $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
+if ($errorData != null) {
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "Login", $dataSvc->getMethodName(), basename(__FILE__));
+  $dataSvc->addToResponse("ApplicationError", $errorData);
+}
+$dataSvc->addToResponse("StyUserEnterprises", $userEnterprises);
+$dataSvc->addToResponse("StyEnterprises", $enterprisesData);
+$dataSvc->addToResponse("StyEnterprisePos", $enterprisesPos);
 
 // Return response
 $dataSvc->endOfService();

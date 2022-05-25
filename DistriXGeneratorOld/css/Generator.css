@@ -1,0 +1,23 @@
+body {
+  background-color: rgb(242,243,247)!important;
+}
+.dbLabel {
+ padding-right: 0px;
+ margin-top: 5px;
+}
+.genGlyph {
+ font-size: 17px;
+ border: 1px solid lightgray;
+}
+.genArea {
+ padding: 9px;
+ cursor: pointer;
+ background-color: lightgray;
+}
+.genArea:hover {
+ border: 2px solid gray;
+}
+.genAreaCurrent {
+ cursor: default;
+ border: 2px solid gray;
+}

@@ -21,7 +21,7 @@ if (!class_exists('DistriXCdnSvcCaller', false)) {
 		const CLIENT_CALL_PROD    = "https";
 
 		/* Client Servers Directories Values */
-		const CLIENT_DIR_DEV     = "WebVysionSportV2";
+		const CLIENT_DIR_DEV     = "DISTRIX_CDN/DistriX";
 		const CLIENT_DIR_INT     = "CdnServices";
 		const CLIENT_DIR_VER     = "CdnServices";
 		const CLIENT_DIR_VAL     = "CdnServices";
@@ -31,7 +31,7 @@ if (!class_exists('DistriXCdnSvcCaller', false)) {
 		const CLIENT_SRV_DEV_TIMEOUT              = "localhost";
 		const CLIENT_CALL_DEV_TIMEOUT             = "http";
 		const CLIENT_CALL_DEV_TIMEOUT_NB_SECONDS  = 5;
-		const CLIENT_DIR_DEV_TIMEOUT              = "WebVysionSportV2";
+		const CLIENT_DIR_DEV_TIMEOUT              = "DISTRIX_CDN/DistriX";
 
 		const CLIENT_SRV_INT_TIMEOUT              = "";
 		const CLIENT_CALL_INT_TIMEOUT             = "https";

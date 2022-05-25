@@ -15,12 +15,12 @@ CREATE TABLE `styuser` (
   `mobile` varchar(20) NOT NULL,
   `initpass` tinyint unsigned,
   `idlanguage` int unsigned,
-  `idstyenterprise` int unsigned NOT NULL,
+  `identerprise` int unsigned NOT NULL,
   `statut` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `indlogin` (`login`),
-  KEY `indenterpise` (`idstyenterprise`)
+  KEY `indenterpise` (`identerprise`)
 ) ENGINE=InnoDB COMMENT='Security Users' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
 INSERT INTO styuser VALUES

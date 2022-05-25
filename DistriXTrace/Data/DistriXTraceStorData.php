@@ -33,7 +33,7 @@ if (!class_exists("DistriXTraceStorData", false)) {
     {
       return $this->iduser;
     }
-    public function getDataBaseschema()
+    public function getDataBaseSchema()
     {
       return $this->databaseschema;
     }
@@ -70,9 +70,9 @@ if (!class_exists("DistriXTraceStorData", false)) {
     {
       $this->iduser = $idUser;
     }
-    public function setDataBaseschema($dataBaseschema)
+    public function setDataBaseSchema($dataBaseSchema)
     {
-      $this->databaseschema = $dataBaseschema;
+      $this->databaseSchema = $dataBaseSchema;
     }
     public function setOperationTable($operationTable)
     {

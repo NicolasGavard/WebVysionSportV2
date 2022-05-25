@@ -12,7 +12,7 @@ if (!class_exists("DistriXStyEnterpriseData", false)) {
     protected $street;
     protected $zipCode;
     protected $city;
-    protected $linkToPicture;
+    protected $logoImage;
     protected $logoImageHtmlName;
     protected $logoImageName;
     protected $logoSize;
@@ -27,9 +27,18 @@ if (!class_exists("DistriXStyEnterpriseData", false)) {
     protected $mailUserManager;
     protected $phoneUserManager;
     protected $mobileUserManager;
-    protected $idStyEnterpriseParent;
+    protected $idEnterpriseParent;
     protected $statut;
-    protected $timestamp;
+    protected $Enterprise;
+    protected $idUserCreate;
+    protected $dateCreate;
+    protected $timeCreate;
+    protected $idUserModif;
+    protected $dateLastModif;
+    protected $timeLastModif;
+    protected $idUserDelete;
+    protected $dateDelete;
+    protected $timeDelete;
 
     public function __construct()
     {
@@ -43,7 +52,7 @@ if (!class_exists("DistriXStyEnterpriseData", false)) {
       $this->street = "";
       $this->zipCode = "";
       $this->city = "";
-      $this->linkToPicture  = "";
+      $this->logoImage = "";
       $this->logoImageHtmlName = "";
       $this->logoImageName = "";
       $this->logoSize = 0;
@@ -58,9 +67,18 @@ if (!class_exists("DistriXStyEnterpriseData", false)) {
       $this->mailUserManager = "";
       $this->phoneUserManager = "";
       $this->mobileUserManager = "";
-      $this->idStyEnterpriseParent = 0;
+      $this->idEnterpriseParent = 0;
       $this->statut = 0;
-      $this->timestamp = 0;
+      $this->Enterprise = 0;
+      $this->idUserCreate = 0;
+      $this->dateCreate = 0;
+      $this->timeCreate = 0;
+      $this->idUserModif = 0;
+      $this->dateLastModif = 0;
+      $this->timeLastModif = 0;
+      $this->idUserDelete = 0;
+      $this->dateDelete = 0;
+      $this->timeDelete = 0;
     }
     // Gets
     public function getId()
@@ -103,9 +121,9 @@ if (!class_exists("DistriXStyEnterpriseData", false)) {
     {
       return $this->city;
     }
-    public function getLinkToPicture()
+    public function getLogoImage()
     {
-      return $this->linkToPicture;
+      return $this->logoImage;
     }
     public function getLogoImageHtmlName()
     {
@@ -163,17 +181,49 @@ if (!class_exists("DistriXStyEnterpriseData", false)) {
     {
       return $this->mobileUserManager;
     }
-    public function getIdStyEnterpriseParent()
+    public function getIdEnterpriseParent()
     {
-      return $this->idStyEnterpriseParent;
+      return $this->idEnterpriseParent;
     }
     public function getStatut()
     {
       return $this->statut;
     }
-    public function getTimestamp()
+    public function getIdUserCreate()
     {
-      return $this->timestamp;
+      return $this->idUserCreate;
+    }
+    public function getDateCreate()
+    {
+      return $this->dateCreate;
+    }
+    public function getTimeCreate()
+    {
+      return $this->timeCreate;
+    }
+    public function getIdUserModif()
+    {
+      return $this->idUserModif;
+    }
+    public function getDateLastModif()
+    {
+      return $this->dateLastModif;
+    }
+    public function getTimeLastModif()
+    {
+      return $this->timeLastModif;
+    }
+    public function getIdUserDelete()
+    {
+      return $this->idUserDelete;
+    }
+    public function getDateDelete()
+    {
+      return $this->dateDelete;
+    }
+    public function getTimeDelete()
+    {
+      return $this->timeDelete;
     }
 
     // Sets
@@ -217,9 +267,9 @@ if (!class_exists("DistriXStyEnterpriseData", false)) {
     {
       $this->city = $city;
     }
-    public function setLinkToPicture($linkToPicture)
+    public function setLogoImage($logoImage)
     {
-      $this->linkToPicture = $linkToPicture;
+      $this->logoImage = $logoImage;
     }
     public function setLogoImageHtmlName($logoImageHtmlName)
     {
@@ -277,17 +327,49 @@ if (!class_exists("DistriXStyEnterpriseData", false)) {
     {
       $this->mobileUserManager = $mobileUserManager;
     }
-    public function setIdStyEnterpriseParent($idStyEnterpriseParent)
+    public function setIdEnterpriseParent($idEnterpriseParent)
     {
-      $this->idStyEnterpriseParent = $idStyEnterpriseParent;
+      $this->idEnterpriseParent = $idEnterpriseParent;
     }
     public function setStatut($statut)
     {
       $this->statut = $statut;
     }
-    public function setTimestamp($timestamp)
+    public function setIdUserCreate($idUserCreate)
     {
-      $this->timestamp = $timestamp;
+      $this->idUserCreate = $idUserCreate;
+    }
+    public function setDateCreate($dateCreate)
+    {
+      $this->dateCreate = $dateCreate;
+    }
+    public function setTimeCreate($timeCreate)
+    {
+      $this->timeCreate = $timeCreate;
+    }
+    public function setIdUserModif($idUserModif)
+    {
+      $this->idUserModif = $idUserModif;
+    }
+    public function setDateLastModif($dateLastModif)
+    {
+      $this->dateLastModif = $dateLastModif;
+    }
+    public function setTimeLastModif($timeLastModif)
+    {
+      $this->timeLastModif = $timeLastModif;
+    }
+    public function setIdUserDelete($idUserDelete)
+    {
+      $this->idUserDelete = $idUserDelete;
+    }
+    public function setDateDelete($dateDelete)
+    {
+      $this->dateDelete = $dateDelete;
+    }
+    public function setTimeDelete($timeDelete)
+    {
+      $this->timeDelete = $timeDelete;
     }
   }
   // End of class

@@ -1,4 +1,7 @@
-<?php
+<?php session_start();
+include(__DIR__ . "/../../DistriXSvc/Config/DistriXFolderPath.php");
+
+
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
@@ -17,15 +20,15 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp           = array();
-$listFoodCategory = array();
-$error          = array();
-$output         = array();
-$outputok       = false;
+$resp             = [];
+$listFoodCategory = [];
+$error            = [];
+$output           = [];
+$outputok         = false;
 
-$listLanguages        = DistriXStyLanguage::listLanguages();
+$listLanguages    = DistriXStyLanguage::listLanguages();
 
-session_start();
+
 $infoProfil           = DistriXStyAppInterface::getUserInformation();
 $distriXGeneralIdData = new DistriXGeneralIdData();
 $distriXGeneralIdData->setId($infoProfil->getIdLanguage());
@@ -44,19 +47,16 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
-
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ListFoodCategory"])) {
-    $listFoodCategory = $output["ListFoodCategory"];
-  }
+if ($outputok && isset($busOutput["ListFoodCategory"]) && is_array($busOutput["ListFoodCategory"])) {
+  list($resp["ListFoodCategory"], $jsonError) = DistriXCodeTableFoodCategoryData::getJsonArray($busOutput["ListFoodCategory"]);
 } else {
   $error = $errorData;
 }
 
-$resp["ListFoodCategory"]  = $listFoodCategory;
+$resp["ListFoodCategory"] = $listFoodCategory;
 $resp["ListLanguages"]    = $listLanguages;
-if(!empty($error)){
-  $resp["Error"]          = $error;
+if (!empty($error)) {
+  $resp["Error"] = $error;
 }
 
 echo json_encode($resp);

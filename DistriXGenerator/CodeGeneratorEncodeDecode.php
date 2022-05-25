@@ -19,8 +19,8 @@ $encode = true;
 $data = "";
 $resp = [];
 
-if (@$_POST["encodingKey"]) {
-  // $keyAes = $_POST["encodingKey"];
+if (@$_POST["key"]) {
+  $keyAes = $_POST["key"];
 }
 if (@$_POST["decode"]) {
   $encode = false;

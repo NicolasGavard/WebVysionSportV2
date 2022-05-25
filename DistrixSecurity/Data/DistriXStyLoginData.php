@@ -3,27 +3,21 @@ if (!class_exists("DistriXStyLoginData", false)) {
   class DistriXStyLoginData extends DistriXSvcAppData
   {
     protected $application;
-    protected $idUser;
     protected $login;
     protected $password;
     protected $authType;
 
     public function __construct()
     {
-      $this->application  = "";
-      $this->idUser       = 0;
-      $this->login        = "";
-      $this->password     = "";
-      $this->authType     = "";
+      $this->application = "";
+      $this->login = "";
+      $this->password = "";
+      $this->authType = "";
     }
     // Gets
     public function getApplication()
     {
       return $this->application;
-    }
-    public function getIdUser()
-    {
-      return $this->idUser;
     }
     public function getLogin()
     {
@@ -42,10 +36,6 @@ if (!class_exists("DistriXStyLoginData", false)) {
     public function setApplication($application)
     {
       $this->application = $application;
-    }
-    public function setIdUser($idUser)
-    {
-      $this->idUser = $idUser;
     }
     public function setLogin($login)
     {

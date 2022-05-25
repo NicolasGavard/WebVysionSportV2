@@ -21,7 +21,8 @@ if (!class_exists("DistriXApiToken", false)) {
       // echo " ApiToken Svc Error -" . print_r($errorData, true) . "<br><br>";
       if ($outputok) {
         if (isset($busOutput[DISTRIX_APITOKEN_GENERATION_DATA_NAME])) {
-          $generatedTokenData = $busOutput[DISTRIX_APITOKEN_GENERATION_DATA_NAME];
+          list($generatedTokenData, $errorData) = DistriXApiTokenData::getJsonData($busOutput[DISTRIX_APITOKEN_GENERATION_DATA_NAME]);
+
           $tokenData->setToken($generatedTokenData->getToken());
           $tokenData->setValid($generatedTokenData->getValid());
           $tokenData->setTokenDate($generatedTokenData->getTokenDate());

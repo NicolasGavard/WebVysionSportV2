@@ -22,7 +22,6 @@ if (!defined('DISTRIX_UNAVAILABLE_SERVER')) {
 }
 // By default
 // $PHP_D_UNAVAILABLE_SERVER[] = "";
-// $DISTRIX_UNAVAILABLE_SERVER[] = "";
-// $DISTRIX_UNAVAILABLE_SERVER[] = "127.0.0.1";
+$DISTRIX_UNAVAILABLE_SERVER[] = "127.0.0.1";
 // echo "<br/>PHP_D_UNAVAILABLE_SERVER in init: " . print_r($PHP_D_UNAVAILABLE_SERVER)."<br/>";
 // $PHP_D_UNAVAILABLE_SERVER[] = "www.unavailableserver.com";

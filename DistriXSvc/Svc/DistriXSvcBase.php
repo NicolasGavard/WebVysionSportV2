@@ -25,8 +25,8 @@ if (!class_exists('DistriXSvcBase', false)) {
       $this->apiToken       = null;
       $this->secretKey      = "";
       $this->layerData      = new DistriXSvcLayerData();
-      $this->response       = array();
-      $this->parameters     = array();
+      $this->response       = [];
+      $this->parameters     = [];
       $this->svcDebugMode   = DISTRIX_SVC_NO_LAYER_NOT_IN_DEBUG_MODE;
       $this->svcDebugBuffer = "";
       $this->jsonCall       = false;
@@ -92,14 +92,7 @@ if (!class_exists('DistriXSvcBase', false)) {
       $formattedResponse = "";
 
       if ($this->isAuthorized) {
-        $formattedResponse = $this->response;
-        if (is_array($this->response)) {
-          if (!$this->getJsonCall()) {
-            $formattedResponse = serialize($this->response);
-          } else {
-            $formattedResponse = json_encode($this->response);
-          }
-        }
+        $formattedResponse = json_encode($this->response);
       }
       return $formattedResponse;
     }
@@ -108,28 +101,18 @@ if (!class_exists('DistriXSvcBase', false)) {
     {
       $added = false;
 
-      if ($this->isAuthorized) {
-        if (
-          $key != DISTRIX_SVC_RESPONSE_SERVICE_NAME_PARAMETER
-          && $key != DISTRIX_SVC_RESPONSE_METHOD_NAME_PARAMETER
-          && $key != DISTRIX_SVC_RESPONSE_LAYER_DATA_PARAMETER
-          && $key != DISTRIX_SVC_RESPONSE_DEBUG_MODE_PARAMETER
-          && $key != DISTRIX_SVC_RESPONSE_DEBUG_INFO_PARAMETER
-          && $key != DISTRIX_SVC_RESPONSE_ERROR
-          && $key != DISTRIX_SVC_RESPONSE_SECURITY_DATA_PARAMETER
-        ) {
-          if (is_string($this->response)) { // serialized ?
-            $this->response = $this->getResponseInArray();
-            $this->response[$key] = $data;
-            $this->response = $this->getFormattedResponse();
-            $added = true;
-          } else {
-            if (is_array($this->response)) { // Already unserialized
-              $this->response[$key] = $data;
-              $added = true;
-            }
-          }
-        }
+      if (
+        $this->isAuthorized
+        && $key != DISTRIX_SVC_RESPONSE_SERVICE_NAME_PARAMETER
+        && $key != DISTRIX_SVC_RESPONSE_METHOD_NAME_PARAMETER
+        && $key != DISTRIX_SVC_RESPONSE_LAYER_DATA_PARAMETER
+        && $key != DISTRIX_SVC_RESPONSE_DEBUG_MODE_PARAMETER
+        && $key != DISTRIX_SVC_RESPONSE_DEBUG_INFO_PARAMETER
+        && $key != DISTRIX_SVC_RESPONSE_ERROR
+        && $key != DISTRIX_SVC_RESPONSE_SECURITY_DATA_PARAMETER
+      ) {
+        $this->response[$key] = $data;
+        $added = true;
       }
       return $added;
     }
@@ -138,37 +121,10 @@ if (!class_exists('DistriXSvcBase', false)) {
       $added = false;
 
       if ($this->isAuthorized) {
-        if (is_string($this->response)) { // serialized ?
-          $this->response = $this->getResponseInArray();
-          $this->response[DISTRIX_SVC_RESPONSE_ERROR] = $data;
-          $this->response = $this->getFormattedResponse();
-          $added = true;
-        } else {
-          if (is_array($this->response)) { // Already unserialized
-            $this->response[DISTRIX_SVC_RESPONSE_ERROR] = $data;
-            $added = true;
-          }
-        }
+        $this->response[DISTRIX_SVC_RESPONSE_ERROR] = $data;
+        $added = true;
       }
       return $added;
-    }
-    public function getOutputInArray($output)
-    {
-      $respArray = array();
-
-      if ($this->isAuthorized && is_string($output)) {
-        $respArray = unserialize($output);
-      }
-      return $respArray;
-    }
-
-    public function getResponseInArray()
-    {
-      $respArray = array();
-      if ($this->isAuthorized && is_string($this->response)) {
-        $respArray = unserialize($this->response);
-      }
-      return $respArray;
     }
 
     public function getRawParameters()
@@ -241,23 +197,30 @@ if (!class_exists('DistriXSvcBase', false)) {
     public function getParameter($key, $appDataClass = null)
     {
       $value = null;
-      if ($this->isAuthorized) {
-        if (isset($this->parameters[$key])) {
+      if (
+        $this->isAuthorized
+        && isset($this->parameters[$key])
+      ) {
+        if ($appDataClass != null) {
+          list($value, $jsonError) = $appDataClass::getJsonData($this->parameters[$key]);
+        } else {
           if (is_string($this->parameters[$key])) {
-            if ($appDataClass == null) {
-              if (!$this->getJsonCall()) {
-                $this->parameters[$key] = unserialize($this->parameters[$key]);
-              }
-              $value = $this->parameters[$key];
-            } else {
-              $jsonString = json_decode($this->parameters[$key], false);
-              $value = new $appDataClass();
-              $value->setData($jsonString);
-            }
+            $value = json_decode($this->parameters[$key], true);
           } else {
             $value = $this->parameters[$key];
           }
         }
+      }
+      return $value;
+    }
+    public function getRawParameter($key)
+    {
+      $value = null;
+      if (
+        $this->isAuthorized
+        && isset($this->parameters[$key])
+      ) {
+        $value = $this->parameters[$key];
       }
       return $value;
     }
@@ -266,7 +229,7 @@ if (!class_exists('DistriXSvcBase', false)) {
     {
       if ($this->isAuthorized) {
         if (is_string($this->layerData)) {
-          $this->layerData = unserialize($this->layerData);
+          list($this->layerData, $jsonError) = DistriXSvcLayerData::getJsonData($this->layerData);
         }
         return $this->layerData;
       }
@@ -312,17 +275,19 @@ if (!class_exists('DistriXSvcBase', false)) {
             }
             if ($key == DISTRIX_SVC_RESPONSE_APITOKEN_PARAMETER) {
               $tokenData = new DistriXApiTokenData();
-              $tokenData = unserialize($value);
+              $data = json_decode($value);
+              if (!is_null($data)) {
+                list($tokenData, $jsonError) = $tokenData::getJsonData($data);
+              }
               $this->setApiToken($tokenData);
             }
             if ($key == DISTRIX_SVC_RESPONSE_LAYER_DATA_PARAMETER) {
-              if (!$this->getJsonCall()) {
-                $this->setLayerData($value);
-              } else {
-                $newLayerData = new DistriXSvcLayerData();
-                $newLayerData->setData($value);
-                $this->setLayerData($newLayerData);
+              $newLayerData = new DistriXSvcLayerData();
+              $data = json_decode($value);
+              if (!is_null($data)) {
+                list($newLayerData, $jsonError) = $newLayerData::getJsonData($data);
               }
+              $this->setLayerData($newLayerData);
             }
             if ($key == DISTRIX_SVC_RESPONSE_DEBUG_MODE_PARAMETER) {
               $this->setDebugMode($value);

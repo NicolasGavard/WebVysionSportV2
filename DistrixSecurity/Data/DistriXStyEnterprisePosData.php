@@ -3,7 +3,7 @@ if (!class_exists("DistriXStyEnterprisePosData", false)) {
   class DistriXStyEnterprisePosData extends DistriXSvcAppData
   {
     protected $id;
-    protected $idStyEnterprise;
+    protected $idEnterprise;
     protected $idPos;
     protected $status;
     protected $timestamp;
@@ -11,7 +11,7 @@ if (!class_exists("DistriXStyEnterprisePosData", false)) {
     public function __construct()
     {
       $this->id = 0;
-      $this->idStyEnterprise = 0;
+      $this->idEnterprise = 0;
       $this->idPos = 0;
       $this->status = 0;
       $this->timestamp = 0;
@@ -21,9 +21,9 @@ if (!class_exists("DistriXStyEnterprisePosData", false)) {
     {
       return $this->id;
     }
-    public function getIdStyEnterprise()
+    public function getIdEnterprise()
     {
-      return $this->idStyEnterprise;
+      return $this->idEnterprise;
     }
     public function getIdPos()
     {
@@ -43,9 +43,9 @@ if (!class_exists("DistriXStyEnterprisePosData", false)) {
     {
       $this->id = $id;
     }
-    public function setIdStyEnterprise($idStyEnterprise)
+    public function setIdEnterprise($idEnterprise)
     {
-      $this->idStyEnterprise = $idStyEnterprise;
+      $this->idEnterprise = $idEnterprise;
     }
     public function setIdPos($idPos)
     {

@@ -22,14 +22,28 @@ if (!class_exists('DistriXPDOConnection', false)) {
           $user = DistriXCrypto::decode($user, $encryptionKey);
           $passBD = DistriXCrypto::decode($passBD, $encryptionKey);
         }
-        $dsn = "mysql:dbname=$bdd;host=$host;charset=utf8";
-        try {
-          parent::__construct($dsn, $user, $passBD);
-        } catch (PDOException $e) {
+        if (
+          strlen($bdd) > 0 && strlen($host) > 0 &&
+          strlen($user) > 0 && strlen($passBD) > 0
+        ) {
+          $dsn = "mysql:dbname=$bdd;host=$host;charset=utf8";
+          try {
+            parent::__construct($dsn, $user, $passBD);
+          } catch (PDOException $e) {
+            $error = new DistriXSvcErrorData();
+            $error->setTypeSystem();
+            $error->setSeverityCritical();
+            $error->setCode($e->getCode() . " - Connection failed. file : " . $connectionFile);
+            $error->setTextToAllText($e->getMessage());
+            $error->setParameters($e->getTrace());
+            $error->setFileName($e->getFile() . ", line " . $e->getLine());
+            $this->errorData = $error;
+          }
+        } else {
           $error = new DistriXSvcErrorData();
           $error->setTypeSystem();
           $error->setSeverityCritical();
-          $error->setCode($e->getCode() . " - Connection failed. file : " . $connectionFile.$bdd);
+          $error->setCode($e->getCode() . " - Connection failed. file : " . $connectionFile);
           $error->setTextToAllText($e->getMessage());
           $error->setParameters($e->getTrace());
           $error->setFileName($e->getFile() . ", line " . $e->getLine());
@@ -87,13 +101,13 @@ if (!class_exists('DistriXPDOConnection', false)) {
     }
     /* End function getError */
 
-    public function getTrace()
+    public function getTrace(): ?DistriXTrace
     {
       return $this->distriXTrace;
     }
     /* End function getTrace */
 
-    public function setTrace($distriXTrace)
+    public function setTrace(DistriXTrace $distriXTrace)
     {
       $this->distriXTrace = $distriXTrace;
     }

@@ -1,6 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
 if (!class_exists("DistriXSvcAppData", false)) {
-  class DistriXSvcAppData implements Serializable, JsonSerializable
+  class DistriXSvcAppData implements JsonSerializable
   {
     // Set Data
     public function setData($dataObject, $mappingArray = null)
@@ -34,21 +34,18 @@ if (!class_exists("DistriXSvcAppData", false)) {
     }
 
     // Serialization
-    public function serialize()
+    public function __serialize(): array
     {
-      return serialize(get_object_vars($this));
+      return get_object_vars($this);
     }
-
-    public function unserialize($data)
+    public function __unserialize(array $data): void
     {
-      $unSer = unserialize($data);
-      foreach ($unSer as $key => $value) {
+      foreach ($data as $key => $value) {
         if (property_exists($this, $key)) {
           $this->$key = $value;
         }
       }
     }
-
     public static function jsonSerializeArray($array)
     {
       $resp = [];
@@ -58,7 +55,7 @@ if (!class_exists("DistriXSvcAppData", false)) {
       return $resp;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
       $data = get_object_vars($this);
       foreach ($data as $key => $value) {
@@ -135,7 +132,7 @@ if (!class_exists("DistriXSvcAppData", false)) {
       $items = [];
       foreach ($json as $item) {
         list($data, $errorData) = self::getJsonData($item);
-        if ($errorData->getCode() != "") {
+        if ($errorData->getCode() == "") {
           $items[] = $data;
         }
       }

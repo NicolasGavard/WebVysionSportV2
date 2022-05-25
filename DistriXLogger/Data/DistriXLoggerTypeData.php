@@ -6,10 +6,14 @@ if (!class_exists('DistriXLoggerTypeData', false)) {
     protected $logExtension;
     protected $logDaily;
     protected $logAppend;
+    protected $logEmergency;
+    protected $logCritical;
     protected $logError;
-    protected $logInfo;
-    protected $logMessage;
+    protected $logAlert;
     protected $logWarning;
+    protected $logNotice;
+    protected $logInfo;
+    protected $logDebug;
     protected $logFormat;
 
     public function __construct($DistriXLoggerSettings)
@@ -18,10 +22,14 @@ if (!class_exists('DistriXLoggerTypeData', false)) {
       $this->logExtension = "";
       $this->logDaily     = true;
       $this->logAppend    = true;
+      $this->logEmergency = true;
+      $this->logCritical  = true;
       $this->logError     = true;
-      $this->logInfo      = true;
-      $this->logMessage   = true;
+      $this->logAlert     = true;
       $this->logWarning   = true;
+      $this->logNotice    = true;
+      $this->logInfo      = true;
+      $this->logDebug     = true;
       $this->logFormat    = "[Date] [Time] [Type] [IpAddress] [Parameters] [Application] [Function] [Message]";
 
       if (isset($DistriXLoggerSettings["logFilename"])) {
@@ -36,17 +44,29 @@ if (!class_exists('DistriXLoggerTypeData', false)) {
       if (isset($DistriXLoggerSettings["logAppend"])) {
         $this->setLogAppend($DistriXLoggerSettings["logAppend"]);
       }
-      if (isset($DistriXLoggerSettings["logMessage"])) {
-        $this->setLogMessage($DistriXLoggerSettings["logMessage"]);
+      if (isset($DistriXLoggerSettings["logEmergency"])) {
+        $this->setLogEmergency($DistriXLoggerSettings["logEmergency"]);
       }
-      if (isset($DistriXLoggerSettings["logInfo"])) {
-        $this->setLogInfo($DistriXLoggerSettings["logInfo"]);
+      if (isset($DistriXLoggerSettings["logCritical"])) {
+        $this->setLogCritical($DistriXLoggerSettings["logCritical"]);
       }
       if (isset($DistriXLoggerSettings["logError"])) {
         $this->setLogError($DistriXLoggerSettings["logError"]);
       }
+      if (isset($DistriXLoggerSettings["logAlert"])) {
+        $this->setLogAlert($DistriXLoggerSettings["logAlert"]);
+      }
       if (isset($DistriXLoggerSettings["logWarning"])) {
         $this->setLogWarning($DistriXLoggerSettings["logWarning"]);
+      }
+      if (isset($DistriXLoggerSettings["logNotice"])) {
+        $this->setLogNotice($DistriXLoggerSettings["logNotice"]);
+      }
+      if (isset($DistriXLoggerSettings["logInfo"])) {
+        $this->setLogInfo($DistriXLoggerSettings["logInfo"]);
+      }
+      if (isset($DistriXLoggerSettings["logDebug"])) {
+        $this->setLogDebug($DistriXLoggerSettings["logDebug"]);
       }
       if (isset($DistriXLoggerSettings["logFormat"])) {
         $this->setLogFormat($DistriXLoggerSettings["logFormat"]);
@@ -69,21 +89,37 @@ if (!class_exists('DistriXLoggerTypeData', false)) {
     {
       return $this->logAppend;
     }
+    public function getLogEmergency(): bool
+    {
+      return $this->logEmergency;
+    }
+    public function getLogCritical(): bool
+    {
+      return $this->logCritical;
+    }
     public function getLogError(): bool
     {
       return $this->logError;
+    }
+    public function getLogAlert(): bool
+    {
+      return $this->logAlert;
+    }
+    public function getLogWarning(): bool
+    {
+      return $this->logWarning;
+    }
+    public function getLogNotice(): bool
+    {
+      return $this->logNotice;
     }
     public function getLogInfo(): bool
     {
       return $this->logInfo;
     }
-    public function getLogMessage(): bool
+    public function getLogDebug(): bool
     {
-      return $this->logMessage;
-    }
-    public function getLogWarning(): bool
-    {
-      return $this->logWarning;
+      return $this->logDebug;
     }
     public function getLogFormat(): string
     {
@@ -106,21 +142,37 @@ if (!class_exists('DistriXLoggerTypeData', false)) {
     {
       $this->logAppend = $logAppend;
     }
+    public function setLogEmergency(bool $logEmergency)
+    {
+      $this->logEmergency = $logEmergency;
+    }
+    public function setLogCritical(bool $logCritical)
+    {
+      $this->logCritical = $logCritical;
+    }
     public function setLogError(bool $logError)
     {
       $this->logError = $logError;
+    }
+    public function setLogAlert(bool $logAlert)
+    {
+      $this->logAlert = $logAlert;
+    }
+    public function setLogWarning(bool $logWarning)
+    {
+      $this->logWarning = $logWarning;
+    }
+    public function setLogNotice(bool $logNotice)
+    {
+      $this->logNotice = $logNotice;
     }
     public function setLogInfo(bool $logInfo)
     {
       $this->logInfo = $logInfo;
     }
-    public function setLogMessage(bool $logMessage)
+    public function setLogDebug(bool $logDebug)
     {
-      $this->logMessage = $logMessage;
-    }
-    public function setLogWarning(bool $logWarning)
-    {
-      $this->logWarning = $logWarning;
+      $this->logDebug = $logDebug;
     }
     public function setLogFormat(string $logFormat)
     {

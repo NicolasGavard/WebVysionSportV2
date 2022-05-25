@@ -4,19 +4,15 @@ if (!class_exists("DistriXStyApplicationData", false)) {
   {
     protected $id;
     protected $code;
-    protected $description;
-    protected $styModules;
-    protected $status;
-    protected $timestamp;
+    protected $name;
+    protected $statut;
 
     public function __construct()
     {
-      $this->id           = 0;
-      $this->code         = "";
-      $this->description  = "";
-      $this->styModules   = array();
-      $this->status       = 0;
-      $this->timestamp    = 0;
+      $this->id     = 0;
+      $this->code   = "";
+      $this->name   = "";
+      $this->statut = 0;
     }
     // Gets
     public function getId()
@@ -27,21 +23,13 @@ if (!class_exists("DistriXStyApplicationData", false)) {
     {
       return $this->code;
     }
-    public function getDescription()
+    public function getName()
     {
-      return $this->description;
+      return $this->name;
     }
-    public function getStyModules()
+    public function getStatut()
     {
-      return $this->styModules;
-    }
-    public function getStatus()
-    {
-      return $this->status;
-    }
-    public function getTimestamp()
-    {
-      return $this->timestamp;
+      return $this->statut;
     }
 
     // Sets
@@ -53,21 +41,13 @@ if (!class_exists("DistriXStyApplicationData", false)) {
     {
       $this->code = $code;
     }
-    public function setDescription($description)
+    public function setName($name)
     {
-      $this->description = $description;
+      $this->name = $name;
     }
-    public function setStyModules($styModules)
+    public function setStatut($statut)
     {
-      $this->styModules = $styModules;
-    }
-    public function setStatus($status)
-    {
-      $this->status = $status;
-    }
-    public function setTimestamp($timestamp)
-    {
-      $this->timestamp = $timestamp;
+      $this->statut = $statut;
     }
   }
   // End of class

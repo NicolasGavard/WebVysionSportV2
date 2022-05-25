@@ -73,9 +73,14 @@ if (!class_exists('DistriXCdn', false)) {
       }
       return array($outputok, $output, $errorData);
     }
-    public function setDistriXMultiCall(object $distriXMultiCall)
+    public function setDistriXMultiCall(object $distriXMultiCall): bool
     {
-      $this->distriXMultiCall = $distriXMultiCall;
+      $distriXMultiCallSet = false;
+      if (!is_null($distriXMultiCall) && is_a($distriXMultiCall, 'DistriXSvc')) {
+        $this->distriXMultiCall = $distriXMultiCall;
+        $distriXMultiCallSet = true;
+      }
+      return $distriXMultiCallSet;
     }
   }
   // End of Class

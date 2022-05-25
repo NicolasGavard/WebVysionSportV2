@@ -12,7 +12,7 @@ class StyUserStor
   //=============================================================================
   //=============================================================================
   const TABLE_NAME = "styuser";
-  const SELECT = 'SELECT id,idstyusertype,login,firstname,name,linktopicture,size,type,pass,email,emailbackup,phone,mobile,initpass,idlanguage,idstyenterprise,statut,timestamp';
+  const SELECT = 'SELECT id,idstyusertype,login,firstname,name,linktopicture,size,type,pass,email,emailbackup,phone,mobile,initpass,idlanguage,identerprise,statut,timestamp';
   const FROM = ' FROM styuser';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -127,12 +127,12 @@ class StyUserStor
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE idstyenterprise = :index0";
+      $request .= " WHERE identerprise = :index0";
       if (!$all) {
         $request .= " AND statut = :statut";
       }
       $params = [];
-      $params["index0"] = $dataIn->getIdStyEnterprise();
+      $params["index0"] = $dataIn->getIdEnterprise();
       if (!$all) {
         $params["statut"] = $dataIn->getStatus();
       }
@@ -207,7 +207,7 @@ class StyUserStor
       $request .= "mobile= :mobile,";
       $request .= "initpass= :initpass,";
       $request .= "idlanguage= :idlanguage,";
-      $request .= "idstyenterprise= :idstyenterprise,";
+      $request .= "identerprise= :identerprise,";
       $request .= "statut= :statut,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
@@ -228,7 +228,7 @@ class StyUserStor
       $params["mobile"] = $data->getMobile();
       $params["initpass"] = $data->getInitPass();
       $params["idlanguage"] = $data->getIdLanguage();
-      $params["idstyenterprise"] = $data->getIdStyEnterprise();
+      $params["identerprise"] = $data->getIdEnterprise();
       $params["statut"] = $data->getStatus();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
@@ -339,7 +339,7 @@ class StyUserStor
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO styuser(";
-      $request .= "idstyusertype,login,firstname,name,linktopicture,size,type,pass,email,emailbackup,phone,mobile,initpass,idlanguage,idstyenterprise,statut,timestamp)";
+      $request .= "idstyusertype,login,firstname,name,linktopicture,size,type,pass,email,emailbackup,phone,mobile,initpass,idlanguage,identerprise,statut,timestamp)";
       $request .= " VALUES(";
       $request .= ":idstyusertype,";
       $request .= ":login,";
@@ -355,7 +355,7 @@ class StyUserStor
       $request .= ":mobile,";
       $request .= ":initpass,";
       $request .= ":idlanguage,";
-      $request .= ":idstyenterprise,";
+      $request .= ":identerprise,";
       $request .= ":statut,";
       $request .= ":timestamp)";
       $params = [];
@@ -373,7 +373,7 @@ class StyUserStor
       $params["mobile"] = $data->getMobile();
       $params["initpass"] = $data->getInitPass();
       $params["idlanguage"] = $data->getIdLanguage();
-      $params["idstyenterprise"] = $data->getIdStyEnterprise();
+      $params["identerprise"] = $data->getIdEnterprise();
       $params["statut"] = $data->getStatus();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
