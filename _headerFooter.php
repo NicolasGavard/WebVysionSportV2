@@ -1,13 +1,8 @@
-        <!-- 
-          <div class="footer-wrap pd-20 mb-20 card-box">
-            WebVysionSport - Par <a href="https://www.webvysion.fr" target="_blank">WebVysion</a>
-          </div>
-         -->
-
          <div class="modal fade" id="modalDel" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-body text-center font-18">
+                <h4 class="padding-top-30 mb-30 weight-500"><?php echo $confirm_delete; ?></h4>
                 <h4 class="padding-top-30 mb-30 weight-500 DelTxt"> </h4>
                 <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
                   <form class="forms-sample" id="FormDel">
@@ -31,6 +26,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-body text-center font-18">
+                <h4 class="padding-top-30 mb-30 weight-500"><?php echo $confirm_restore; ?></h4>
                 <h4 class="padding-top-30 mb-30 weight-500 RestTxt"> </h4>
                 <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
                   <form class="forms-sample" id="FormRest">
@@ -52,18 +48,18 @@
 
         <div class="col-lg-4 col-md-6 col-sm-12 mb-30 d-none">
           <div class="pd-20 card-box text-center height-100-p">
-            <h5 class="pt-20 h5 mb-30 errorData_ok_txt"></h5>
+            <h5 class="pt-20 h5 mb-30"><?php echo $errorData_ok_txt; ?></h5>
             <div class="max-width-200 mx-auto">
-              <button type="button" class="btn mb-20 btn-primary btn-block" id="sa-success-distrix">Click me</button>
+              <button type="button" class="btn mb-20 btn-primary btn-block" id="sa-success-distrix">Open</button>
             </div>
           </div>
         </div>
 
         <div class="col-lg-4 col-md-6 col-sm-12 mb-30 d-none">
           <div class="pd-20 card-box text-center height-100-p">
-            <h5 class="pt-20 h5 mb-30 errorData_ko"></h5>
+            <h5 class="pt-20 h5 mb-30"><?php echo $errorData_ko; ?></h5>
             <div class="max-width-200 mx-auto">
-              <button type="button" class="btn mb-20 btn-primary btn-block" id="sa-error-distrix">Click me</button>
+              <button type="button" class="btn mb-20 btn-primary btn-block" id="sa-error-distrix">Open</button>
             </div>
           </div>
         </div>

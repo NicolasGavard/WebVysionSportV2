@@ -2,8 +2,6 @@
   include(__DIR__ . "/DistriXInit/DistriXSvcControllerInit.php");
   include(__DIR__ . "/DistrixSecurity/styAppInterface/DistriXStyAppInterface.php");
   include(__DIR__ . "/DistrixSecurity/Const/DistriXStyRightConst.php");
-  //i18
-  include('i18/FR/headerMenuLeft.php');
 ?>
 
 <div class="left-side-bar">

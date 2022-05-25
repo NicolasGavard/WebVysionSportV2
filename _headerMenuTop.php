@@ -84,10 +84,11 @@
           <span class="user-name InfoProfilFullName"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-          <a class="dropdown-item" href="profil.php"><i class="dw dw-user1"></i> <span class="language_profil_my_profil">Mon profil</span></a>
-          <a class="dropdown-item" href="message.html"><i class="dw dw-settings2"></i> <span class="language_profil_messages">Messages</span></a>
-          <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> <span class="language_profil_faq">Aide</span></a>
-          <a class="dropdown-item btnLogout" id="btnLogout"><i class="dw dw-logout"></i> <span class="language_profil_logout">Log Out</span></a>
+          <a class="dropdown-item" href="profil.php"><i class="dw dw-user1"></i> <span><?php echo $menu_profil_myProfil; ?></span></a>
+          <a class="dropdown-item" href="message.html"><i class="dw dw-message"></i> <span><?php echo $menu_profil_messages; ?></span></a>
+          <a class="dropdown-item" href="activities.php"><i class="dw dw-notification"></i> <span><?php echo $menu_profil_activities; ?></span></a>
+          <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> <span><?php echo $menu_profil_faq; ?></span></a>
+          <a class="dropdown-item btnLogout" id="btnLogout"><i class="dw dw-logout"></i> <span><?php echo $menu_profil_logout; ?></span></a>
         </div>
       </div>
     </div>

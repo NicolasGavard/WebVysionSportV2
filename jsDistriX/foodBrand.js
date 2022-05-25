@@ -96,10 +96,12 @@ $(".btnAddBrand").on('click', function() {
         $('#sa-error-distrix').trigger('click');
       }
     });
+    $(".btnAddBrand").attr("data-dismiss", "modal");
   } else {
     if (name == ''){
       $('.AddBrandFormName').addClass("form-control-danger");
-      $('#danger-name').html(errorData_txt_code);
+      $('#danger-name').removeClass("d-none");
+      
     }
   } 
 
@@ -202,10 +204,10 @@ function ViewBrand(id){
 
 function DelBrand(id, name){
   $('.DelFormId').val(id);
-  $('.DelTxt').html(confirm_delete+' <b>'+name+'</b> ?');
+  $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
 function RestBrand(id, name){
   $('.RestFormId').val(id);
-  $('.RestTxt').html(confirm_restore+' <b>'+name+'</b> ?');
+  $('.RestTxt').html(' <b>'+name+'</b> ?');
 }
