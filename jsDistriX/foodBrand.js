@@ -51,6 +51,7 @@ $(".btn-warning").on('click', function() {
   $(".btn-warning").addClass("disabled");
   $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
+  datatable.clear();
   ListBrand(1);
 });
 
@@ -61,6 +62,7 @@ $(".btn-success").on('click', function() {
   $(".btn-warning").removeClass("disabled");
   $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
+  datatable.clear();
   ListBrand(0);
 });
 
@@ -173,7 +175,6 @@ function ListBrand(status){
       datatable.row.add($(line)).draw();
     }
   });
-  datatable.clear();
 }
 
 function ViewBrand(id){

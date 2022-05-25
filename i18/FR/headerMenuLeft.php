@@ -17,17 +17,17 @@
   $menu_nutrition_myRecipe      = "Mes recettes";
   $menu_nutrition_myIngredient  = "Aliments";
   
-  $menu_bilan   =   "Bilan";
+  $menu_bilan   = "Bilan";
   $menu_bilan_1 = "Bilan";
   $menu_bilan_2 = "Bilan";
   $menu_bilan_3 = "Bilan";
   $menu_bilan_4 = "Bilan";
   
-  $menu_eleve   =   "Elèves";
-  $menu_eleve_1 = "Elèves";
-  $menu_eleve_2 = "Elèves";
-  $menu_eleve_3 = "Elèves";
-  $menu_eleve_4 = "Elèves";
+  $menu_student             = "Elèves";
+  $menu_student_list_coatch = "Liste des coatchs";
+  $menu_student_2 = "Elèves";
+  $menu_student_3 = "Elèves";
+  $menu_student_4 = "Elèves";
 
   $menu_ressource   = "Ressources";
   $menu_ressource_1 = "Ressources";
