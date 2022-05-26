@@ -90,10 +90,10 @@
                 </div>
               </div>
               
-              <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+              <div class="padding-bottom-30 row" style="margin: 0 auto;">
                 <div class="col-12">
                   <button type="button" class="btn btn-sNovandary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
-                  <button type="button" class="btn btn-primary btnAddNovaScore" data-dismiss="modal" id="btnAddNovaScore"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_add; ?></button>
+                  <button type="button" class="btn btn-primary btnAddNovaScore" data-dismiss="modal" id="btnAddNovaScore"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
                 </div>
               </div>
             </div>
