@@ -39,7 +39,7 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 
 if ($outputok && isset($output["ListScoresEco"]) && is_array($output["ListScoresEco"])) {
   list($listScoresEco, $jsonError) = DistriXFoodScoreEcoData::getJsonArray($output["ListScoresEco"]);
-  // $resp["ListScoresEco"] = $$output["ListScoresEco"]; // A tester !
+  // $resp["ListScoresEco"] = $output["ListScoresEco"]; // A tester !
 
 } else {
   $error = $errorData;

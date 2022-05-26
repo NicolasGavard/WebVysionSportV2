@@ -35,7 +35,7 @@ if (!class_exists('CodeGeneratorData', false)) {
         }
         $f = fopen($filename, "w");
         fputs($f, '<?php // Needed to encode in UTF8 ààéàé //' . "\r\n");
-        fputs($f, 'class ' . $dataObjectName . ' extends DistriXSvcData {' . "\r\n");
+        fputs($f, 'class ' . $dataObjectName . ' {' . "\r\n");
 
         if ($hasStatusField) {
           fputs($f, '  const ' . $tableNameUpper . '_STATUS_AVAILABLE     = 0;' . "\r\n");
@@ -43,7 +43,7 @@ if (!class_exists('CodeGeneratorData', false)) {
           fputs($f, "\r\n");
         }
         for ($i = 0; $i < $fieldind; $i++) {
-          fputs($f, '  protected $' . $field[$i]["nom"] . ';' . "\r\n");
+          fputs($f, '  private $' . $field[$i]["nom"] . ';' . "\r\n");
         }
         fputs($f, "\r\n");
         fputs($f, '  public function __construct() {' . "\r\n");
@@ -75,38 +75,7 @@ if (!class_exists('CodeGeneratorData', false)) {
 
         fputs($f, '// Gets' . "\r\n");
         for ($i = 0; $i < $fieldind; $i++) {
-          if ($i != $uniqueKey) {
-            if (
-              stripos($field[$i]["type"], "int") !== false ||
-              stripos($field[$i]["type"], "tinyint") !== false
-            ) {
-              fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '():int { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
-            }
-            if (
-              stripos($field[$i]["type"], "decimal") !== false ||
-              stripos($field[$i]["type"], "bigint") !== false
-            ) {
-              fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '():float { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
-            }
-            if (
-              stripos($field[$i]["type"], "varchar") !== false ||
-              stripos($field[$i]["type"], "char") !== false
-            ) {
-              fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '():string { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
-            }
-            if (
-              stripos($field[$i]["type"], "int") === false &&
-              stripos($field[$i]["type"], "tinyint") === false &&
-              stripos($field[$i]["type"], "decimal") === false &&
-              stripos($field[$i]["type"], "bigint") === false &&
-              stripos($field[$i]["type"], "varchar") === false &&
-              stripos($field[$i]["type"], "char") === false
-            ) {
-              fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '() { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
-            }
-          } else {
-            fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '():int { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
-          }
+          fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '() { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
         }
         if ($hasStatusField) {
           fputs($f, '  public function isAvailable() { return ($this->statut == self::' . $tableNameUpper . '_STATUS_AVAILABLE); }' . "\r\n");
@@ -116,43 +85,8 @@ if (!class_exists('CodeGeneratorData', false)) {
 
         fputs($f, '// Sets' . "\r\n");
         for ($i = 0; $i < $fieldind; $i++) {
-          if ($i != $uniqueKey) {
-            if (
-              stripos($field[$i]["type"], "int") !== false ||
-              stripos($field[$i]["type"], "tinyint") !== false
-            ) {
-              fputs($f, '  public function set' . ucfirst($field[$i]["up"]) . '(int $' . $field[$i]["up"] . ')');
-              fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
-            }
-            if (
-              stripos($field[$i]["type"], "decimal") !== false ||
-              stripos($field[$i]["type"], "bigint") !== false
-            ) {
-              fputs($f, '  public function set' . ucfirst($field[$i]["up"]) . '(float $' . $field[$i]["up"] . ')');
-              fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
-            }
-            if (
-              stripos($field[$i]["type"], "varchar") !== false ||
-              stripos($field[$i]["type"], "char") !== false
-            ) {
-              fputs($f, '  public function set' . ucfirst($field[$i]["up"]) . '(string $' . $field[$i]["up"] . ')');
-              fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
-            }
-            if (
-              stripos($field[$i]["type"], "int") === false &&
-              stripos($field[$i]["type"], "tinyint") === false &&
-              stripos($field[$i]["type"], "decimal") === false &&
-              stripos($field[$i]["type"], "bigint") === false &&
-              stripos($field[$i]["type"], "varchar") === false &&
-              stripos($field[$i]["type"], "char") === false
-            ) {
-              fputs($f, '  public function set' . ucfirst($field[$i]["up"]) . '($' . $field[$i]["up"] . ')');
-              fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
-            }
-          } else {
-            fputs($f, '  public function set' . ucfirst($field[$i]["up"]) . '(int $' . $field[$i]["up"] . ')');
-            fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
-          }
+          fputs($f, '  public function set' . ucfirst($field[$i]["up"]) . '($' . $field[$i]["up"] . ')');
+          fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
         }
         if ($hasStatusField) {
           fputs($f, '  public function setAvailable() { $this->statut = self::' . $tableNameUpper . '_STATUS_AVAILABLE; }' . "\r\n");
