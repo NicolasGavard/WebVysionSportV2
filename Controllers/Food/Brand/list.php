@@ -33,8 +33,9 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 // print_r($output["ListBrands"]);
 
 if ($outputok && isset($output["ListBrands"]) && is_array($output["ListBrands"])) {
-  // list($listBrands, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ListBrands"]);
-  $resp["ListBrands"] = $output["ListBrands"]; // A tester !
+  list($listBrands, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ListBrands"]);
+  $resp["ListBrands"] = $listBrands;
+  // $resp["ListBrands"] = $output["ListBrands"]; // A tester !
 } else {
   $resp["ListBrands"] = [];
   $error              = $errorData;
