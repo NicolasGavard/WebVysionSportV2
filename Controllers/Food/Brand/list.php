@@ -19,7 +19,7 @@ $outputok       = false;
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListBrands");
 $servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandListDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {
   $logInfoData = new DistriXLoggerInfoData();
@@ -30,7 +30,7 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-print_r($output["ListBrands"]);
+// print_r($output["ListBrands"]);
 
 if ($outputok && isset($output["ListBrands"]) && is_array($output["ListBrands"])) {
   // list($listBrands, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ListBrands"]);

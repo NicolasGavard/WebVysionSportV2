@@ -35,9 +35,13 @@ class BrandStor {
         $request .= " WHERE statut = :statut";
       }
       $request .= " ORDER BY id";
-
+      
       $stmt = $inDbConnection->prepare($request);
+      if (!$all) {
       $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      }
+      else
+      $stmt->execute();
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }

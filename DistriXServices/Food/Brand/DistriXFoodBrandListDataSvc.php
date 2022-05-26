@@ -38,7 +38,7 @@ if ($errorData != null) {
   $dataSvc->addErrorToResponse($errorData);
 }
 
-print_r($brandStor);
+// print_r($brandStor);
 
 $dataSvc->addToResponse("ListBrands", $brandStor);
 

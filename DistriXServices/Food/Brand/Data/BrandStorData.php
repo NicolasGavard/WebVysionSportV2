@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class BrandStorData {
+class BrandStorData extends DistriXSvcAppData {
   const BRAND_STATUS_AVAILABLE     = 0;
   const BRAND_STATUS_NOT_AVAILABLE = 1;
 
