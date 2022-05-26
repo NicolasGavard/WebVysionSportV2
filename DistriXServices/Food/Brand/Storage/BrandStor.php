@@ -16,7 +16,7 @@ class BrandStor {
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
   const SHOW_CREATE_REQUEST = FALSE;
-  const SHOW_UPDATE_REQUEST = TRUE;
+  const SHOW_UPDATE_REQUEST = FALSE;
   const SHOW_DELETE_REQUEST = FALSE;
   const DEBUG_ERROR = "</p><br/>DB Error: ";
   const BREAK = "<br/>";

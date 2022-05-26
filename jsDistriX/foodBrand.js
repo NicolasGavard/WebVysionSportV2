@@ -73,7 +73,7 @@ $(".btnAddBrand").on('click', function() {
       data: $.param(data),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 500);
+        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
@@ -102,7 +102,7 @@ $("#btnDel").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 500);
+        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -122,7 +122,7 @@ $("#btnRest").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 500);
+        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
