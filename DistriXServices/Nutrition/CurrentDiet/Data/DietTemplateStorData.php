@@ -26,7 +26,7 @@ class DietTemplateStorData {
   public function getName() { return $this->name; }
   public function getDuration() { return $this->duration; }
   public function getTags() { return $this->tags; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::DIETTEMPLATE_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::DIETTEMPLATE_STATUS_AVAILABLE; }
@@ -37,7 +37,7 @@ class DietTemplateStorData {
   public function setName($name) { $this->name = $name; }
   public function setDuration($duration) { $this->duration = $duration; }
   public function setTags($tags) { $this->tags = $tags; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::DIETTEMPLATE_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::DIETTEMPLATE_STATUS_NOT_AVAILABLE; }

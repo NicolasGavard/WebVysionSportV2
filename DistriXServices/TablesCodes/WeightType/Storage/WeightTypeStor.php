@@ -64,7 +64,7 @@ class WeightTypeStor {
       $params = [];
       $params["index0"] = $dataIn->getCode();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -137,7 +137,7 @@ class WeightTypeStor {
       $params["issolid"] = $data->getIsSolid();
       $params["isliquid"] = $data->getIsLiquid();
       $params["isother"] = $data->getIsOther();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -259,7 +259,7 @@ class WeightTypeStor {
       $params["issolid"] = $data->getIsSolid();
       $params["isliquid"] = $data->getIsLiquid();
       $params["isother"] = $data->getIsOther();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

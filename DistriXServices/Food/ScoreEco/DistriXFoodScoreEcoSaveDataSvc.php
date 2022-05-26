@@ -55,7 +55,7 @@ if ($dataSvc->getMethodName() == "SaveScoreEco") {
         $scoreEcoStorData->setLetter($infoScoreEco->getLetter());
         $scoreEcoStorData->setColor($infoScoreEco->getColor());
         $scoreEcoStorData->setDescription($infoScoreEco->getDescription());
-        $scoreEcoStorData->setStatus($infoScoreEco->getStatus());
+        $scoreEcoStorData->setStatut($infoScoreEco->getStatut());
         $scoreEcoStorData->setTimestamp($infoScoreEco->getTimestamp());
         
         if ($infoScoreEco->getLinkToPicture() != "") {

@@ -32,7 +32,7 @@ if (is_null($dbConnection->getError())) {
   $distriXCodeTableNutritionalNameData->setIdLanguage($nutritionalNameStor->getIdLanguage());
   $distriXCodeTableNutritionalNameData->setCode($nutritionalStor->getCode());
   $distriXCodeTableNutritionalNameData->setName($nutritionalNameStor->getName());
-  $distriXCodeTableNutritionalNameData->setStatus($nutritionalNameStor->getStatus());
+  $distriXCodeTableNutritionalNameData->setStatut($nutritionalNameStor->getStatut());
   $distriXCodeTableNutritionalNameData->setTimestamp($nutritionalNameStor->getTimestamp());
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);

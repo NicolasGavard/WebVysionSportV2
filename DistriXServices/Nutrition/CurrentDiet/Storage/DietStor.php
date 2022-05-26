@@ -22,7 +22,7 @@ class DietStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(DietStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
+  public static function getList(DietStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DietStorData();
@@ -37,7 +37,7 @@ class DietStor {
       $request .= " ORDER BY iduser";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $status]);
+      $stmt->execute(['statut'=> $statut]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -74,7 +74,7 @@ class DietStor {
   }
   // End of IdUserIdDietTemplateDateStart
 
-  public static function findByIdDietTemplate(DietStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
+  public static function findByIdDietTemplate(DietStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -86,7 +86,7 @@ class DietStor {
       $request .= " AND statut = :statut";
       $params = [];
       $params["index0"] = $dataIn->getIdDietTemplate();
-      $params["statut"] = $status;
+      $params["statut"] = $statut;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
@@ -100,7 +100,7 @@ class DietStor {
   }
   // End of IdDietTemplate
 
-  public static function findByIdUser(DietStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUser(DietStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -112,7 +112,7 @@ class DietStor {
       $request .= " AND statut = :statut";
       $params = [];
       $params["index0"] = $dataIn->getIdUser();
-      $params["statut"] = $status;
+      $params["statut"] = $statut;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
@@ -182,7 +182,7 @@ class DietStor {
       $params["iduser"] = $data->getIdUser();
       $params["iddiettemplate"] = $data->getIdDietTemplate();
       $params["datestart"] = $data->getDateStart();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -302,7 +302,7 @@ class DietStor {
       $params["iduser"] = $data->getIdUser();
       $params["iddiettemplate"] = $data->getIdDietTemplate();
       $params["datestart"] = $data->getDateStart();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

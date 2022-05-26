@@ -22,7 +22,7 @@ class DietTemplateStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(int $status, DistriXPDOConnection $inDbConnection)
+  public static function getList(int $statut, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DietTemplateStorData();
@@ -35,7 +35,7 @@ class DietTemplateStor {
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $status]);
+      $stmt->execute(['statut'=> $statut]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -72,7 +72,7 @@ class DietTemplateStor {
   }
   // End of iduserNameDuration
 
-  public static function findByIdUser(DietTemplateStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUser(DietTemplateStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -84,7 +84,7 @@ class DietTemplateStor {
       $request .= " AND statut = :statut";
       $params = [];
       $params["index0"] = $dataIn->getIdUser();
-      $params["statut"] = $status;
+      $params["statut"] = $statut;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
@@ -156,7 +156,7 @@ class DietTemplateStor {
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -278,7 +278,7 @@ class DietTemplateStor {
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

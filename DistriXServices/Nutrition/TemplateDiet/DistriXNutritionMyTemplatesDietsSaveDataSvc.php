@@ -51,7 +51,7 @@ if ($dataSvc->getMethodName() == "SaveApplication") {
         $applicationStorData->setId($infoApplication->getId());
         $applicationStorData->setCode($infoApplication->getCode());
         $applicationStorData->setDescription($infoApplication->getDescription());
-        $applicationStorData->setStatus($infoApplication->getStatus());
+        $applicationStorData->setStatut($infoApplication->getStatut());
         $applicationStorData->setTimestamp($infoApplication->getTimestamp());
         list($insere, $idStyApplication) = StyApplicationStor::save($applicationStorData, $dbConnection);
 

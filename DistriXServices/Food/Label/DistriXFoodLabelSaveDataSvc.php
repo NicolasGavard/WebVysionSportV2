@@ -53,7 +53,7 @@ if ($dataSvc->getMethodName() == "SaveLabel") {
         $LabelStorData->setId($infoLabel->getId());
         $LabelStorData->setCode($infoLabel->getCode());
         $LabelStorData->setName($infoLabel->getName());
-        $LabelStorData->setStatus($infoLabel->getStatus());
+        $LabelStorData->setStatut($infoLabel->getStatut());
         $LabelStorData->setTimestamp($infoLabel->getTimestamp());
         
         if ($infoLabel->getLinkToPicture() != "" && $infoLabel->getLinkToPicture() != $LabelStorData->getLinkToPicture()) {

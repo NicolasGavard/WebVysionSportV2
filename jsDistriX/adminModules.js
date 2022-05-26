@@ -70,8 +70,8 @@ function showData(idStyApplication){
       });
       
       $.map(data.ListModules, function(val, key) {
-        if (val.status == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if (val.status == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if (val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if (val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listModulesTbody').append(
           '<tr>'+
@@ -140,7 +140,7 @@ function ViewModule(id){
       $('.AddModuleFormId').val(id);
       $('.AddModuleFormCode').val(data.ViewModule.code);
       $('.AddModuleFormDescription').val(data.ViewModule.description);
-      $('.AddModuleFormStatus').val(data.ViewModule.status);
+      $('.AddModuleFormStatut').val(data.ViewModule.statut);
       $('.AddModuleFormTimestamp').val(data.ViewModule.timestamp);
     },
     error : function(data) {

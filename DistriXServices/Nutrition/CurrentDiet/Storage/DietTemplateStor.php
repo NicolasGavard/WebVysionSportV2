@@ -89,7 +89,7 @@ class DietTemplateStor {
       $params = [];
       $params["index0"] = $dataIn->getIdUser();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -162,7 +162,7 @@ class DietTemplateStor {
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -284,7 +284,7 @@ class DietTemplateStor {
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

@@ -26,7 +26,7 @@ class CoachUserStorData {
   public function getStyIdUser() { return $this->styIdUser; }
   public function getDateStart() { return $this->datestart; }
   public function getDateEnd() { return $this->dateend; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::COACHUSER_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::COACHUSER_STATUS_AVAILABLE; }
@@ -37,7 +37,7 @@ class CoachUserStorData {
   public function setStyIdUser($styIdUser) { $this->styIdUser = $styIdUser; }
   public function setDateStart($dateStart) { $this->datestart = $dateStart; }
   public function setDateEnd($dateEnd) { $this->dateend = $dateEnd; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::COACHUSER_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::COACHUSER_STATUS_NOT_AVAILABLE; }

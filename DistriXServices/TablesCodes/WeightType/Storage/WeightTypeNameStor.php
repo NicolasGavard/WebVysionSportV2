@@ -64,7 +64,7 @@ class WeightTypeNameStor {
       $params = [];
       $params["index0"] = $dataIn->getIdWeightType();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -94,7 +94,7 @@ class WeightTypeNameStor {
       $params = [];
       $params["index0"] = $dataIn->getIdLanguage();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -196,7 +196,7 @@ class WeightTypeNameStor {
       $params["name"] = $data->getName();
       $params["description"] = $data->getDescription();
       $params["abbreviation"] = $data->getAbbreviation();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -320,7 +320,7 @@ class WeightTypeNameStor {
       $params["name"] = $data->getName();
       $params["description"] = $data->getDescription();
       $params["abbreviation"] = $data->getAbbreviation();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

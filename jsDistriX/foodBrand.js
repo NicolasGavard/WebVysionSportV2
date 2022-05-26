@@ -121,12 +121,12 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListBrand(status){
+function ListBrand(statut){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
-    if(val.status == status){
-      if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+    if(val.statut == statut){
+      if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
                     ' <td><img style="max-width:20%;" src="'+val.linkToPicture+'"/></td>'+
@@ -164,7 +164,7 @@ function ViewBrand(id){
       $('.AddBrandFormName').val(data.ViewBrand.name);
       $(".avatar-brand").attr("src", data.ViewBrand.linkToPicture);
       $('.AddBrandFormTimestamp').val(data.ViewBrand.timestamp);
-      $('.AddBrandFormStatut').val(data.ViewBrand.status);
+      $('.AddBrandFormStatut').val(data.ViewBrand.statut);
       $('.showPicture').removeClass("d-none");
     },
     error : function(data) {

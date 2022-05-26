@@ -22,7 +22,7 @@ class ScoreNovaStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(int $status, DistriXPDOConnection $inDbConnection)
+  public static function getList(int $statut, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new ScoreNovaStorData();
@@ -35,7 +35,7 @@ class ScoreNovaStor {
       $request .= " ORDER BY number";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $status]);
+      $stmt->execute(['statut'=> $statut]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -47,7 +47,7 @@ class ScoreNovaStor {
   }
   // End of getList
 
-  public static function findByNumber(ScoreNovaStorData $dataIn, int $status, DistriXPDOConnection $inDbConnection)
+  public static function findByNumber(ScoreNovaStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -59,7 +59,7 @@ class ScoreNovaStor {
       $request .= " AND statut = :statut";
       $params = [];
       $params["index0"] = $dataIn->getNumber();
-      $params["statut"] = $status;
+      $params["statut"] = $statut;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
@@ -135,7 +135,7 @@ class ScoreNovaStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -261,7 +261,7 @@ class ScoreNovaStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

@@ -20,7 +20,7 @@ class DietStudentStorData {
   public function getId() { return $this->id; }
   public function getIdDiet() { return $this->iddiet; }
   public function getIdUser() { return $this->iduser; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::DIETSTUDENT_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::DIETSTUDENT_STATUS_AVAILABLE; }
@@ -29,7 +29,7 @@ class DietStudentStorData {
   public function setId($id) { $this->id = $id; }
   public function setIdDiet($idDiet) { $this->iddiet = $idDiet; }
   public function setIdUser($idUser) { $this->iduser = $idUser; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::DIETSTUDENT_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::DIETSTUDENT_STATUS_NOT_AVAILABLE; }

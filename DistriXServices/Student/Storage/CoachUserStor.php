@@ -61,7 +61,7 @@ class CoachUserStor {
       $request .= " AND styIdUser = :index1";
       $request .= " AND statut = :index2";
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['index0'=>  $dataIn->getStyIdUserCoach(), 'index1'=>  $dataIn->getStyIdUser(), 'index2'=>  $dataIn->getStatus()]);
+      $stmt->execute(['index0'=>  $dataIn->getStyIdUserCoach(), 'index1'=>  $dataIn->getStyIdUser(), 'index2'=>  $dataIn->getStatut()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -89,7 +89,7 @@ class CoachUserStor {
       $params = [];
       $params["index0"] = $dataIn->getStyIdUserCoach();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -119,7 +119,7 @@ class CoachUserStor {
       $params = [];
       $params["index0"] = $dataIn->getStyIdUser();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -192,7 +192,7 @@ class CoachUserStor {
       $params["styIdUser"] = $data->getStyIdUser();
       $params["datestart"] = $data->getDateStart();
       $params["dateend"] = $data->getDateEnd();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -314,7 +314,7 @@ class CoachUserStor {
       $params["styIdUser"] = $data->getStyIdUser();
       $params["datestart"] = $data->getDateStart();
       $params["dateend"] = $data->getDateEnd();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

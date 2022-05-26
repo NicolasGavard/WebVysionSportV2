@@ -23,7 +23,7 @@ class FoodNameStorData {
   public function getIdFood() { return $this->idfood; }
   public function getIdLanguage() { return $this->idlanguage; }
   public function getName() { return $this->name; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::FOODNAME_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::FOODNAME_STATUS_AVAILABLE; }
@@ -33,7 +33,7 @@ class FoodNameStorData {
   public function setIdFood($idFood) { $this->idfood = $idFood; }
   public function setIdLanguage($idLanguage) { $this->idlanguage = $idLanguage; }
   public function setName($name) { $this->name = $name; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::FOODNAME_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::FOODNAME_STATUS_NOT_AVAILABLE; }

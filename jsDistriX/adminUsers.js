@@ -140,8 +140,8 @@ function showData(idStyEnterprise){
       });
       
       $.map(data.ListUsers, function(val, key) {
-        if(val.status == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.status == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if(val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listUsersTbody').append(
           '<tr>'+

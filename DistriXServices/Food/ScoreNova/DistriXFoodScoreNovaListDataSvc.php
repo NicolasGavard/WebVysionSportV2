@@ -25,7 +25,7 @@ $scoresNova    = [];
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   $data = $dataSvc->getParameter("data");
-  list($scoreNovastor, $scoreNovastorInd) = ScoreNovaStor::getList($data->getStatus(), $dbConnection);
+  list($scoreNovastor, $scoreNovastorInd) = ScoreNovaStor::getList($data->getStatut(), $dbConnection);
   foreach ($scoreNovastor as $ScoreNova) {
     $infoScoreNova     = DistriXSvcUtil::setData($ScoreNova, "DistriXFoodScoreNovaData");
 

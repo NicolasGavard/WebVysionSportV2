@@ -5,8 +5,8 @@ $.ajax({
   dataType : 'JSON',
   success : function(data) {
     $.map(data.ListLanguages, function(val, key) {
-      if(val.status == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if(val.status == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+      if(val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if(val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       $('#listLanguagesTbody').append(
         '<tr>'+
@@ -115,7 +115,7 @@ function ViewLanguage(id){
       $('.AddLanguageFormName').val(data.ViewLanguage.description);
       $(".InfoLanguagePicture").attr("src", data.ViewLanguage.linkToPicture);
       $('.AddLanguageFormTimestamp').val(data.ViewLanguage.timestamp);
-      $('.AddLanguageFormStatut').val(data.ViewLanguage.status);
+      $('.AddLanguageFormStatut').val(data.ViewLanguage.statut);
     },
     error : function(data) {
       console.log(data);

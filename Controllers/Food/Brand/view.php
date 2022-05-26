@@ -33,7 +33,7 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 }
 
 if ($outputok && isset($output["ViewBrand"])) {
-  list($distriXFoodBandData, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ViewBrand"]);
+  $distriXFoodBandData = $output["ViewBrand"];
 } else {
   $error = $errorData;
 }

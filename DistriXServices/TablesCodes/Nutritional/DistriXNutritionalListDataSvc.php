@@ -40,7 +40,7 @@ if (is_null($dbConnection->getError())) {
     $distriXCodeTableNutritionalNameData->setIdLanguage($weightTypeNameStor->getIdLanguage());
     $distriXCodeTableNutritionalNameData->setCode($Nutritional->getCode());
     $distriXCodeTableNutritionalNameData->setName($weightTypeNameStor->getName());
-    $distriXCodeTableNutritionalNameData->setStatus($Nutritional->getStatus());
+    $distriXCodeTableNutritionalNameData->setStatut($Nutritional->getStatut());
     $distriXCodeTableNutritionalNameData->setTimestamp($Nutritional->getTimestamp());
     $weightType[]  = $distriXCodeTableNutritionalNameData;
   }

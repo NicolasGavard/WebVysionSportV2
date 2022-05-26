@@ -64,7 +64,7 @@ class CategoryStor {
       $params = [];
       $params["index0"] = $dataIn->getCode();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -131,7 +131,7 @@ class CategoryStor {
       $params = [];
       $params["id"] = $data->getId();
       $params["code"] = $data->getCode();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -247,7 +247,7 @@ class CategoryStor {
       $request .= ":timestamp)";
       $params = [];
       $params["code"] = $data->getCode();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

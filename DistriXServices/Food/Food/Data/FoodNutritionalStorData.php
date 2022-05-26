@@ -32,7 +32,7 @@ class FoodNutritionalStorData {
   public function getIdWeightType() { return $this->idweighttype; }
   public function getIdWeightTypeBase() { return $this->idweighttypebase; }
   public function getWeightTypeBase() { return $this->weighttypebase; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::FOODNUTRITIONAL_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::FOODNUTRITIONAL_STATUS_AVAILABLE; }
@@ -45,7 +45,7 @@ class FoodNutritionalStorData {
   public function setIdWeightType($idWeightType) { $this->idweighttype = $idWeightType; }
   public function setIdWeightTypeBase($idWeightTypeBase) { $this->idweighttypebase = $idWeightTypeBase; }
   public function setWeightTypeBase($weightTypeBase) { $this->weighttypebase = $weightTypeBase; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::FOODNUTRITIONAL_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::FOODNUTRITIONAL_STATUS_NOT_AVAILABLE; }

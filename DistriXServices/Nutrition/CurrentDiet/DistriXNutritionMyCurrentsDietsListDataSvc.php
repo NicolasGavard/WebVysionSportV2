@@ -37,7 +37,7 @@ if (is_null($dbConnection->getError())) {
   $data         = $dataSvc->getParameter("data");
   $dietStorData = DistriXSvcUtil::setData($data, "DietStorData");
 
-  list($dietStor, $dietStorInd) = DietStor::findByIdUser($dietStorData, $dietStorData->getStatus(), $dbConnection);
+  list($dietStor, $dietStorInd) = DietStor::findByIdUser($dietStorData, $dietStorData->getStatut(), $dbConnection);
   foreach ($dietStor as $diet) {
     $currentDietAssignedUsers         = [];
     $distriXNutritionCurrentDietData  = DistriXSvcUtil::setData($diet, "DistriXNutritionCurrentDietData");
