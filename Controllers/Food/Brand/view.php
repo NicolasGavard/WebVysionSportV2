@@ -15,14 +15,11 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-$label  = new DistriXFoodBrandData();
-if ($_POST['id'] > 0) {
-  $label->setId($_POST['id']);
-}
+list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewBrand");
-$servicesCaller->addParameter("data", $label);
+$servicesCaller->addParameter("data", $distriXFoodBandData);
 $servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
@@ -35,15 +32,13 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewBrand"])) {
-    $label = $output["ViewBrand"];
-  }
+if ($outputok && isset($output["ViewBrand"])) {
+  list($distriXFoodBandData, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ViewBrand"]);
 } else {
   $error = $errorData;
 }
 
-$resp["ViewBrand"]  = $label;
+$resp["ViewBrand"]  = $distriXFoodBandData;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }

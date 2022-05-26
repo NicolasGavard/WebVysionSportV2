@@ -5,11 +5,11 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Database Data
-include(__DIR__ . "/Data/BrandStorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/BrandStor.php");
+// Database Data
+include(__DIR__ . "/Data/BrandStorData.php");
 // Cdn Location
 include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
 include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");

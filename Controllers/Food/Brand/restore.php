@@ -10,20 +10,17 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp         = array();
+$resp         = [];
 $confirmSave  = false;
-$error        = array();
-$output       = array();
+$error        = [];
+$output       = [];
 $outputok     = false;
 
-$label  = new DistriXFoodBrandData();
-if ($_POST['id'] > 0) {
-  $label->setId($_POST['id']);
-}
+list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("RestoreBrand");
-$servicesCaller->addParameter("data", $label);
+$servicesCaller->addParameter("data", $distriXFoodBandData);
 $servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
@@ -36,10 +33,8 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
-  }
+if ($outputok && isset($output["ConfirmSave"]) && is_array($output["ConfirmSave"])) {
+  list($confirmSave, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ConfirmSave"]);
 } else {
   $error = $errorData;
 }

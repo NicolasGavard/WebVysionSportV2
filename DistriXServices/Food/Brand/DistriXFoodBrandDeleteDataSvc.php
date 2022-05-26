@@ -5,33 +5,28 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/Data/DistriXFoodBrandData.php");
-// Database Data
-include(__DIR__ . "/Data/BrandStorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/BrandStor.php");
+// Database Data
+include(__DIR__ . "/Data/BrandStorData.php");
 // Trace Data
 include(__DIR__ . "/../../../DistriXTrace/data/DistriXTraceData.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
-$dbConnection = null;
-$errorData    = null;
 
 // DelBrand
 if ($dataSvc->getMethodName() == "DelBrand") {
   $dbConnection = null;
   $errorData    = null;
   $insere       = false;
-  $infoBrand    = new DistriXFoodBrandData();
-
+  
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoBrand    = $dataSvc->getParameter("data");
-      $scoreEcoStor = BrandStor::read($infoBrand->getId(), $dbConnection);
-      $insere       = BrandStor::remove($scoreEcoStor, $dbConnection);
+      list($data, $jsonError) = BrandStorData::getJsonData($dataSvc->getParameter("data"));
+      $brandStor              = BrandStor::read($data->getId(), $dbConnection);
+      $insere                 = BrandStor::remove($brandStor, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();
