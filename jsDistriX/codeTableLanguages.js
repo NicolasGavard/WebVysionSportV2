@@ -1,28 +1,3 @@
-$(".page_codeTables_language_title").text(language.page_codeTables_language_title);
-$(".page_codeTables_language_picture").text(language.page_codeTables_language_picture);
-$(".page_codeTables_language_code").text(language.page_codeTables_language_code);
-$(".page_codeTables_language_name").text(language.page_codeTables_language_name);
-$(".page_codeTables_language_status").text(language.page_codeTables_language_status);
-$(".page_codeTables_language_action").text(language.page_codeTables_language_action);
-$(".page_codeTables_language_add_title").text(language.page_codeTables_language_add_title);
-$(".page_codeTables_language_update_title").text(language.page_codeTables_language_update_title);
-$(".page_codeTables_language_delete_title").text(language.page_codeTables_language_delete_title);
-$(".page_codeTables_language_restore_title").text(language.page_codeTables_language_restore_title);
-
-$(".page_all_close").text(language.page_all_close);
-$(".page_all_add").text(language.page_all_add);
-$(".page_all_view").text(language.page_all_view);
-$(".page_all_delete").text(language.page_all_delete);
-$(".page_all_restore").text(language.page_all_restore);
-$(".page_all_change_picture").text(language.page_all_change_picture);
-
-$(".errorData_ok").text(language.errorData_ok);
-$(".errorData_ok_txt").text(language.errorData_ok_txt);
-$(".errorData_ko").text(language.errorData_ko);
-$(".errorData_ko_txt").text(language.errorData_ko_txt);
-
-var confirm_delete  = language.confirm_delete;
-var confirm_restore = language.confirm_restore;
 
 $.ajax({
   url : 'Controllers/Security/Language/list.php',

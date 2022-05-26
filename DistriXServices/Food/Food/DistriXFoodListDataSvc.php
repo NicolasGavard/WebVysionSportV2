@@ -70,6 +70,8 @@ if (is_null($dbConnection->getError())) {
   $dataFood     = $dataSvc->getParameter("dataFood");
   $foodStorData = DistriXSvcUtil::setData($dataFood, "FoodStorData");
 
+// list($data, $jsonError) = ScoreEcoStorData::getJsonData($dataSvc->getParameter("data"));
+
   list($foodStor, $foodStorInd) = FoodStor::findByDatas($foodStorData, false, $dbConnection);
   foreach ($foodStor as $food) {
     $foodCategories   = [];

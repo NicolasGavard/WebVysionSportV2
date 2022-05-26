@@ -1,30 +1,4 @@
-$(".page_codeTables_food_category_title").text(language.page_codeTables_food_category_title);
-$(".page_codeTables_food_category_code").text(language.page_codeTables_food_category_code);
-$(".page_codeTables_food_category_name").text(language.page_codeTables_food_category_name);
-$(".page_codeTables_food_category_abbreviation").text(language.page_codeTables_food_category_abbreviation);
-$(".page_codeTables_food_category_language").text(language.page_codeTables_food_category_language);
-$(".page_codeTables_food_category_description").text(language.page_codeTables_food_category_description);
-$(".page_codeTables_food_category_type").text(language.page_codeTables_food_category_type);
-$(".page_codeTables_food_category_status").text(language.page_codeTables_food_category_status);
-$(".page_codeTables_food_category_action").text(language.page_codeTables_food_category_action);
-$(".page_codeTables_food_category_add_title").text(language.page_codeTables_food_category_add_title);
-$(".page_codeTables_food_category_update_title").text(language.page_codeTables_food_category_update_title);
-$(".page_codeTables_food_category_delete_title").text(language.page_codeTables_food_category_delete_title);
-$(".page_codeTables_food_category_restore_title").text(language.page_codeTables_food_category_restore_title);
-$(".page_codeTables_food_category_solid_title").text(language.page_codeTables_food_category_solid_title);
-$(".page_codeTables_food_category_liquid_title").text(language.page_codeTables_food_category_liquid_title);
-$(".page_codeTables_food_category_other_title").text(language.page_codeTables_food_category_other_title);
 
-$(".AddFoodCategoryFormCode").attr("placeholder", language.page_codeTables_food_category_code);
-$(".AddFoodCategoryFormName").attr("placeholder", language.page_codeTables_food_category_name);
-$(".AddFoodCategoryFormDescription").attr("placeholder", language.page_codeTables_food_category_description);
-$(".AddFoodCategoryFormAbbreviation").attr("placeholder", language.page_codeTables_food_category_abbreviation);
-
-$(".page_all_close").text(language.page_all_close);
-$(".page_all_add").text(language.page_all_add);
-$(".page_all_view").text(language.page_all_view);
-$(".page_all_delete").text(language.page_all_delete);
-$(".page_all_restore").text(language.page_all_restore);
 
 $.ajax({
   url : 'Controllers/CodeTables/FoodCategory/list.php',

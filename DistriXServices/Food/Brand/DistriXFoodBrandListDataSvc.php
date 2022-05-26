@@ -5,8 +5,6 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/Data/DistriXFoodBrandData.php");
 // Database Data
 include(__DIR__ . "/Data/BrandStorData.php");
 // Storage
@@ -23,16 +21,14 @@ $labels       = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($labelStor, $labelStorInd) = BrandStor::getList(true, $dbConnection);
-  foreach ($labelStor as $Brand) {
-    $infoBrand    = DistriXSvcUtil::setData($Brand, "DistriXFoodBrandData");
-    $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_FOOD . '/' . $infoBrand->getLinkToPicture();
+  list($brandStor, $brandStorInd) = BrandStor::getList(true, $dbConnection);
+  foreach ($brandStor as $brand) {
+    $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_FOOD . '/' . $brand->getLinkToPicture();
     $pictures_headers = get_headers($urlPicture);
-    if ($infoBrand->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $infoBrand->getLinkToPicture() == '') {
+    if ($brand->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $brand->getLinkToPicture() == '') {
       $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_FOOD . '/default.png';
     }
-    $infoBrand->setLinkToPicture($urlPicture);
-    $labels[]     = $infoBrand;
+    $brand->setLinkToPicture($urlPicture);
   }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
@@ -41,7 +37,10 @@ if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListBrands", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListBrands", $labels);
+
+print_r($brandStor);
+
+$dataSvc->addToResponse("ListBrands", $brandStor);
 
 // Return response
 $dataSvc->endOfService();

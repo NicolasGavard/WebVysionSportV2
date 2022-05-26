@@ -5,8 +5,6 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// // STOR DATA
-// include(__DIR__ . "/Data/DistriXFoodScoreEcoData.php");
 // Database Data
 include(__DIR__ . "/Data/ScoreEcoStorData.php");
 // Storage
@@ -25,10 +23,7 @@ $scoresEco    = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-
-  list($data, $jsonError) = ScoreEcoStorData::getJsonData($dataSvc->getParameter("data"));
-
-  list($scoreEcoStor, $scoreEcoStorInd) = ScoreEcoStor::getList($data->getStatus(), $dbConnection);
+  list($scoreEcoStor, $scoreEcoStorInd) = ScoreEcoStor::getList(true, $dbConnection);
   foreach ($scoreEcoStor as $scoreEco) {
     $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $scoreEco->getLinkToPicture();
     $pictures_headers = get_headers($urlPicture);

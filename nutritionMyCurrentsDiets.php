@@ -1,6 +1,12 @@
 <?php
 	session_start();
-	include('_header.php');
+	$international  = 'nutritionMyCurrentsDiets';
+  $i18cdlangue    = 'FR';
+  // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+	include('i18/FR/header.php');
+  include("i18/_i18.php");
+  
+  include('_header.php');
 	include('_headerMenuTop.php');
 	include('_headerMenuLeft.php');
 ?>
@@ -14,16 +20,16 @@
 					<div class="clearfix">
             <div class="row">
               <div class="col-md-4 col-sm-12">
-                <h4 class="text-blue h4 page_nutrition_my_diet_title"></h4>
+                <h4 class="text-blue h4"><?php echo $page_title; ?></h4>
               </div>
               
               <div class="col-md-2"></div>
               
               <div class="col-xs-12 col-md-6 col-sm-12">
-                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-info AddSearchMyCurrentsDiets" data-toggle="modal" data-target="#modalSearchMyCurrentsDiets"><i class="icon-copy dw-info dw dw-search"></i> Filtres</buttons>
-                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> Actifs</buttons>
-                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> Inactifs</button>
-                <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> Ajouter</button>
+                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-info AddSearchMyCurrentsDiets" data-toggle="modal" data-target="#modalSearchMyCurrentsDiets"><i class="icon-copy dw-info dw dw-search"></i> <?php echo $page_all_filter; ?></buttons>
+                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> <?php echo $page_all_active; ?></buttons>
+                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> <?php echo $page_all_inactive; ?></button>
+                <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
               </div>
             </div>
           </div>
@@ -33,13 +39,13 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr>
-                  <th width="15%" class="table-plus"><span class="page_nutrition_my_diet_name"></span></th>
-                  <th width="20%"><span class="page_nutrition_my_diet_assigned_for"></span></th>
-                  <th width="10%"><span class="page_nutrition_my_diet_duration"></span></th>
-                  <th width="10%"><span class="page_nutrition_my_diet_date_begin"></span></th>
-                  <th width="20%"><span class="page_nutrition_my_diet_tags"></span></th>
-                  <th width="25%"><span class="page_nutrition_my_diet_advancement"></span></th>
-                  <th width="10%" class="datatable-nosort"><span class="page_nutrition_my_Diet_action"></span></th>
+                  <th width="15%" class="table-plus"><span><?php echo $page_name; ?></span></th>
+                  <th width="20%"><span><?php echo $page_assigned_for; ?></span></th>
+                  <th width="10%"><span><?php echo $page_date_duration; ?></span></th>
+                  <th width="10%"><span><?php echo $page_date_begin; ?></span></th>
+                  <th width="20%"><span><?php echo $page_date_tags; ?></span></th>
+                  <th width="25%"><span><?php echo $page_advancement; ?></span></th>
+                  <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
 							<tbody id="listMyCurrentsDietsTbody">
@@ -57,34 +63,30 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500 page_nutrition_my_diet_filtered_title"> </h4>
+              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_filter_title; ?></h4>
               <div class="row">
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
-                    <label class="page_nutrition_my_diet_template"></label>
+                    <label><?php echo $page_name; ?></label>
                     <select class="custom-select2 form-control InfoMyCurrentsDietsFormListMyTemplates" name="idDietTemplate" style="width: 100%; height: 38px;">  
-                      <option value="0">Choix</option>
+                      <option value="0"><?php echo $page_all_choice; ?></option>
                     </select>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
-                    <label class="page_nutrition_my_diet_assigned_for"></label>
+                    <label><?php echo $page_list_assigned_for_one; ?></label>
                     <select class="custom-select2 form-control InfoMyCurrentsDietsFormListStudents" name="state" style="width: 100%; height: 38px;">
-                      <option value="0">Choix</option>
+                      <option value="0"><?php echo $page_all_choice; ?></option>
                     </select>
                   </div>
                 </div>
               </div>
               
-              <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
-                <div class="col-6">
-                  <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                  <span class="page_all_close"></span>
-                </div>
-                <div class="col-6">
-                  <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn btnAddMyCurrentsDiets" data-dismiss="modal" id="btnAddMyCurrentsDiets"><i class="fa fa-check"></i></button>
-                  <span class="page_all_add"></span>
+              <div class="padding-bottom-30 row" style="margin: 0 auto;">
+                <div class="col-12">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
+                  <button type="button" class="btn btn-primary btnAddMyCurrentsDiets" id="btnAddMyCurrentsDiets"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
                 </div>
               </div>
             </div>

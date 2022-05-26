@@ -87,7 +87,10 @@
 
   $page_all_active              = "Actifs";
   $page_all_inactive            = "Inactifs";
+  $page_all_filter              = "Filtres";
+  $page_all_choice              = "Choix";
   $page_all_close               = "Fermer";
+  $page_all_confirm             = "Valider";
   $page_all_add                 = "Ajouter";
   $page_all_update              = "Modifier";
   $page_all_initPass            = "Initialiser le mot de passe";

@@ -16,13 +16,9 @@ $error          = array();
 $output         = array();
 $outputok       = false;
 
-// $distriXFoodBrandData = new DistriXFoodBrandData();
-// $distriXFoodBrandData->setStatus($_POST['status']);
-
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListBrands");
 $servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandListDataSvc.php");
-// $servicesCaller->addParameter("data", $distriXFoodBrandData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {
@@ -34,17 +30,14 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ListBrands"])) {
-    $listBrands = $output["ListBrands"];
-  }
+print_r($output["ListBrands"]);
+
+if ($outputok && isset($output["ListBrands"]) && is_array($output["ListBrands"])) {
+  // list($listBrands, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ListBrands"]);
+  $resp["ListBrands"] = $output["ListBrands"]; // A tester !
 } else {
-  $error = $errorData;
+  $resp["ListBrands"] = [];
+  $error              = $errorData;
+  $resp["Error"]      = $error;
 }
-
-$resp["ListBrands"]  = $listBrands;
-if(!empty($error)){
-  $resp["Error"]        = $error;
-}
-
 echo json_encode($resp);
