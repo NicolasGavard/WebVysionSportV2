@@ -24,18 +24,14 @@ if ($dataSvc->getMethodName() == "RestoreBrand") {
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
       list($data, $jsonError) = BrandStorData::getJsonData($dataSvc->getParameter("data"));
-      $brandStor              = BrandStor::read($data->getId(), $dbConnection);
-      $insere                 = BrandStor::restore($brandStor, $dbConnection);
+      $brandStorData          = BrandStor::read($data->getId(), $dbConnection);
+      $insere                 = BrandStor::restore($brandStorData, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();
       } else {
         $dbConnection->rollBack();
-        if ($infoBrand->getId() > 0) {
-          $errorData = ApplicationErrorData::warningUpdateData(1, 1);
-        } else {
-          $errorData = ApplicationErrorData::warningInsertData(1, 1);
-        }
+        $errorData = ApplicationErrorData::warningUpdateData(1, 1);
       }
     } else {
       $errorData = ApplicationErrorData::noBeginTransaction(1, 1);

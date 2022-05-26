@@ -28,14 +28,15 @@ if (isset($_POST)) {
   if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {
     $logInfoData = new DistriXLoggerInfoData();
     $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-    $logInfoData->setLogApplication("DistriXBrandDeleteDataSvc");
+    $logInfoData->setLogApplication("DistriXFoodBrandDeleteDataSvc");
     $logInfoData->setLogFunction("DelBrand");
     $logInfoData->setLogData(print_r($output, true));
     DistriXLogger::log($logInfoData);
   }
   
-  if ($outputok && isset($output["ConfirmSave"]) && is_array($output["ConfirmSave"])) {
-    list($confirmSave, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ConfirmSave"]);
+  if ($outputok && isset($output["ConfirmSave"])) {
+    // list($confirmSave, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ConfirmSave"]);
+    $confirmSave = $output["ConfirmSave"];
   } else {
     $error = $errorData;
   }
