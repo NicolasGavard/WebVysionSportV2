@@ -3,18 +3,18 @@
             <div class="modal-content">
               <div class="modal-body text-center font-18">
                 <h4 class="padding-top-30 mb-30 weight-500"><?php echo $confirm_delete; ?></h4>
-                <h4 class="padding-top-30 mb-30 weight-500 DelTxt"> </h4>
-                <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                <h4 class="mb-20 weight-500 DelTxt"> </h4>
+                <div class="padding-bottom-20 row" style="max-width: 170px; margin: 0 auto;">
                   <form class="forms-sample" id="FormDel">
                     <input type="hidden" name="id" class="DelFormId" value="0">
                   </form>
+                </div>
+                <div class="padding-top-10 row" style="margin: 0 auto;">
                   <div class="col-6">
-                    <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                    <span class="page_all_no"></span>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i><span>&nbsp;<?php echo $page_all_close; ?></button>
                   </div>
                   <div class="col-6">
-                    <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn" data-dismiss="modal" id="btnDel"><i class="fa fa-check"></i></button>
-                    <span class="page_all_yes"></span>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnDel"><i class="fa fa-check"></i><span>&nbsp;<?php echo $page_all_confirm; ?></button>
                   </div>
                 </div>
               </div>
@@ -27,18 +27,18 @@
             <div class="modal-content">
               <div class="modal-body text-center font-18">
                 <h4 class="padding-top-30 mb-30 weight-500"><?php echo $confirm_restore; ?></h4>
-                <h4 class="padding-top-30 mb-30 weight-500 RestTxt"> </h4>
-                <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                <h4 class="mb-20 weight-500 RestTxt"> </h4>
+                <div class="padding-bottom-20 row" style="max-width: 170px; margin: 0 auto;">
                   <form class="forms-sample" id="FormRest">
                     <input type="hidden" name="id" class="RestFormId" value="0">
                   </form>
+                </div>
+                <div class="padding-top-10 row" style="margin: 0 auto;">
                   <div class="col-6">
-                    <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                    <span class="page_all_no"></span>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i><span>&nbsp;<?php echo $page_all_close; ?></button>
                   </div>
                   <div class="col-6">
-                    <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn" data-dismiss="modal" id="btnRest"><i class="fa fa-check"></i></button>
-                    <span class="page_all_yes"></span>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnRest"><i class="fa fa-check"></i><span>&nbsp;<?php echo $page_all_confirm; ?></button>
                   </div>
                 </div>
               </div>

@@ -10,10 +10,10 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp           = array();
-$listBrands     = array();
-$error          = array();
-$output         = array();
+$resp           = [];
+$listBrands     = [];
+$error          = [];
+$output         = [];
 $outputok       = false;
 
 $servicesCaller = new DistriXServicesCaller();
@@ -32,10 +32,11 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 
 if ($outputok && isset($output["ListBrands"]) && is_array($output["ListBrands"])) {
   list($listBrands, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ListBrands"]);
-  $resp["ListBrands"] = $listBrands;
 } else {
-  $resp["ListBrands"] = [];
   $error              = $errorData;
   $resp["Error"]      = $error;
 }
+
+$resp["ListBrands"]   = $listBrands;
+
 echo json_encode($resp);
