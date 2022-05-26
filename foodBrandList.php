@@ -85,7 +85,7 @@
               <div class="padding-bottom-30 row" style="margin: 0 auto;">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
-                  <button type="button" class="btn btn-primary btnAddBrand" id="btnAddBrand"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_add; ?></button>
+                  <button type="button" class="btn btn-primary btnAddBrand" id="btnAddBrand"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
                 </div>
               </div>
             </div>
