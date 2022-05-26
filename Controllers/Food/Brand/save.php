@@ -17,7 +17,6 @@ $output       = array();
 $outputok     = false;
 
 list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
-if($_POST['base64Img'] != '') { $distriXFoodBandData->setLinkToPicture($_POST['base64Img']);}
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveBrand");
