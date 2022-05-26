@@ -19,17 +19,13 @@ $errorData    = null;
 
 // RestoreBrand
 if ($dataSvc->getMethodName() == "RestoreBrand") {
-  $dbConnection = null;
-  $errorData    = null;
   $insere       = false;
-  $infoBrand     = new DistriXFoodBrandData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoBrand    = $dataSvc->getParameter("data");
-      $scoreEcostor = BrandStor::read($infoBrand->getId(), $dbConnection);
-      $insere       = BrandStor::restore($scoreEcostor, $dbConnection);
+      list($data, $jsonError) = BrandStorData::getJsonData($dataSvc->getParameter("data"));
+      $brandStor              = BrandStor::read($data->getId(), $dbConnection);
+      $insere                 = BrandStor::restore($brandStor, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();

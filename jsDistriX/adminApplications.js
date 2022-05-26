@@ -108,7 +108,6 @@ function ViewApplication(id){
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      $('.btnSave').html('Update application');
       $('.AddApplicationFormId').val(id);
       $('.AddApplicationFormCode').val(data.ViewApplication.code);
       $('.AddApplicationFormDescription').val(data.ViewApplication.description);

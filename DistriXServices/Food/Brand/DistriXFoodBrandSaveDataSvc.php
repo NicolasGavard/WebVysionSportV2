@@ -19,49 +19,46 @@ include(__DIR__ . "/../../../DistriXCdn/DistriXCdn.php");
 include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
+$dbConnection = null;
+$errorData    = null;
 
 // SaveBrand
 if ($dataSvc->getMethodName() == "SaveBrand") {
-  $dbConnection = null;
-  $errorData    = null;
   $insere       = false;
-  $infoBrand     = new DistriXFoodBrandData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoBrand     = $dataSvc->getParameter("data");
-      $BrandStorData = DistriXSvcUtil::setData($infoBrand, "BrandStorData");
+      list($data, $jsonError) = BrandStorData::getJsonData($dataSvc->getParameter("data"));
       $canSaveBrand  = true;
-      if ($infoBrand->getId() == 0) {
+      if ($data->getId() == 0) {
         // Verify Code Exist
-        list($styBrandStor, $styBrandStorInd) = BrandStor::findByCode($BrandStorData, true, $dbConnection);
-        if ($styBrandStorInd > 0) {
+        list($brandStor, $brandStorInd) = BrandStor::findByCode($data, true, $dbConnection);
+        if ($brandStorInd > 0) {
           $canSaveBrand          = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
-          $distriXSvcErrorData->setDefaultText("The Code " . $infoBrand->getCode() . " is already in use");
+          $distriXSvcErrorData->setDefaultText("The Code " . $data->getCode() . " is already in use");
           $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
           $errorData = $distriXSvcErrorData;
         }
       }
 
       if ($canSaveBrand) {
-        $BrandStorData = new BrandStorData();
-        $BrandStorData->setId($infoBrand->getId());
-        $BrandStorData->setCode(trim(DistriXSvcUtil::remove_accents($infoBrand->getName())));
-        $BrandStorData->setName($infoBrand->getName());
-        $BrandStorData->setStatut($infoBrand->getStatut());
-        $BrandStorData->setTimestamp($infoBrand->getTimestamp());
+        $brandStorData = BrandStor::read($data->getId(), $dbConnection);
+        $brandStorData->setId($data->getId());
+        $brandStorData->setCode(strtoupper(trim(DistriXSvcUtil::remove_accents($data->getName()))));
+        $brandStorData->setName($data->getName());
+        $brandStorData->setStatut($data->getStatut());
+        $brandStorData->setTimestamp($data->getTimestamp());
         
-        if ($infoBrand->getLinkToPicture() != "" && $infoBrand->getLinkToPicture() != $BrandStorData->getLinkToPicture()) {
-          $image          = file_get_contents($infoBrand->getLinkToPicture());
+        if ($data->getLinkToPicture() != "" && $data->getLinkToPicture() != $brandStorData->getLinkToPicture()) {
+          $image          = file_get_contents($data->getLinkToPicture());
           $imageInfo      = getimagesizefromstring($image);
           $imageExtension = str_replace("image/", "", $imageInfo['mime']);
 
           if ($imageExtension == "jpg" || $imageExtension == "png" || $imageExtension == "jpeg" || $imageExtension == "gif") {
             $imageName    = DistriXSvcUtil::generateRandomText(50);
-            $imageFile    = substr($infoBrand->getLinkToPicture(), strpos($infoBrand->getLinkToPicture(), ",") + 1);
+            $imageFile    = substr($data->getLinkToPicture(), strpos($data->getLinkToPicture(), ",") + 1);
 
             $cdn          = new DistriXCdn();
             $data         = new DistriXCdnData();
@@ -74,9 +71,9 @@ if ($dataSvc->getMethodName() == "SaveBrand") {
             $confirmSavePicture = $cdn->sendToCdn();
 
             if ($confirmSavePicture) {
-              $BrandStorData->setLinkToPicture($imageName);
-              $BrandStorData->setSize($imageInfo['bits']);
-              $BrandStorData->setType($imageInfo['mime']);
+              $brandStorData->setLinkToPicture($imageName);
+              $brandStorData->setSize($imageInfo['bits']);
+              $brandStorData->setType($imageInfo['mime']);
             } else {
               $distriXSvcErrorData = new DistriXSvcErrorData();
               $distriXSvcErrorData->setCode("400");
@@ -90,17 +87,17 @@ if ($dataSvc->getMethodName() == "SaveBrand") {
             $distriXSvcErrorData->setText("BAD_IMAGE_EXTENSION");
           }
         } else {
-          $BrandStorData->setLinkToPicture($BrandStorData->getLinkToPicture());
-          $BrandStorData->setSize($BrandStorData->getSize());
-          $BrandStorData->setType($BrandStorData->getType());
+          $brandStorData->setLinkToPicture($brandStorData->getLinkToPicture());
+          $brandStorData->setSize($brandStorData->getSize());
+          $brandStorData->setType($brandStorData->getType());
         }
-        list($insere, $idBrand) = BrandStor::save($BrandStorData, $dbConnection);
+        list($insere, $idBrand) = BrandStor::save($brandStorData, $dbConnection);
 
         if ($insere) {
           $dbConnection->commit();
         } else {
           $dbConnection->rollBack();
-          if ($infoBrand->getId() > 0) {
+          if ($data->getId() > 0) {
             $errorData = ApplicationErrorData::warningUpdateData(1, 1);
           } else {
             $errorData = ApplicationErrorData::warningInsertData(1, 1);

@@ -23,8 +23,8 @@
 						</div>
         
             <div class="pull-right">
-              <button type="button" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i>&nbsp;<?php echo $page_all_active; ?></button>
-              <button type="button" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i>&nbsp;<?php echo $page_all_inactive; ?></button>
+              <button type="button" class="btn btn-success disabled"><i class="icon-copy dw dw-checked"></i>&nbsp;<?php echo $page_all_active; ?></button>
+              <button type="button" class="btn btn-warning"><i class="icon-copy dw dw-ban"></i>&nbsp;<?php echo $page_all_inactive; ?></button>
               <button type="button" class="btn btn-primary AddNewBrand" data-toggle="modal" data-target="#modalAddBrand"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
         		</div>
 					</div>
@@ -53,12 +53,6 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
-                <div class="col-md-12 col-sm-12 d-none showPicture">
-                  <div class="profile-photo">
-                    <img src="" alt="" class="avatar-photo avatar-brand">
-                  </div>
-                </div>
-
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
@@ -67,7 +61,7 @@
                   </div>
                 </div>
                 
-                <div class="col-md-12 col-sm-12">
+                <div class="dropzoneNoImage col-md-12 col-sm-12 d-none">
                   <div class="pd-20 card-box mb-30">
                     <form class="dropzone FormAddBrand" action="#" id="FormAddBrand" style="max-height: 200px;">
                       <input class="form-control AddBrandFormIdBrand"       type="hidden" name="id"         value="0">
@@ -78,10 +72,18 @@
                         <input type="file" name="file" class="AddBrandFormPicture" />
                       </div>
                     </form>
+                    <button type="button" class="btn btn-info btnChangeImageCancel"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_cancel; ?></button>
                   </div>
                 </div>
               </div>
               
+              <div class="dropzoneImage padding-bottom-30 col-md-12 col-sm-12 d-none">
+                <div class="profile-photo">
+                  <img src="" alt="" style="max-width:120px; max-height:150px;" class="avatar-photo avatar-brand">
+                </div>
+                <button type="button" class="btn btn-info btnChangeImage"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_change_picture; ?></button>
+              </div>
+
               <div class="padding-bottom-30 row" style="margin: 0 auto;">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>

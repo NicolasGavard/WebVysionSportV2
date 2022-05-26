@@ -1,3 +1,5 @@
+// Dropzone.autoDiscover = false;
+
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : 'Controllers/Food/Brand/list.php',
@@ -10,6 +12,16 @@ $.ajax({
   error : function(data) {
     console.log(data);
   }
+});
+
+$(".btnChangeImage").on('click', function() {
+  $(".dropzoneImage").addClass("d-none");
+  $(".dropzoneNoImage").removeClass("d-none");
+});
+
+$(".btnChangeImageCancel").on('click', function() {
+  $(".dropzoneImage").removeClass("d-none");
+  $(".dropzoneNoImage").addClass("d-none");
 });
 
 $(".btn-warning").on('click', function() {
@@ -158,14 +170,16 @@ function ViewBrand(id){
     success : function(data) {
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
+    
+      $(".dropzoneImage").removeClass("d-none");
+      $(".dropzoneNoImage").addClass("d-none");
 
       $('.AddBrandFormIdBrand').val(id);
       $('.AddBrandFormCode').val(data.ViewBrand.code);
       $('.AddBrandFormName').val(data.ViewBrand.name);
-      $(".avatar-brand").attr("src", data.ViewBrand.linkToPicture);
+      $(".avatar-brand").attr("src", data.ViewBrand.linktopicture);
       $('.AddBrandFormTimestamp').val(data.ViewBrand.timestamp);
       $('.AddBrandFormStatut').val(data.ViewBrand.statut);
-      $('.showPicture').removeClass("d-none");
     },
     error : function(data) {
       console.log(data);
