@@ -17,7 +17,7 @@ include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 $dbConnection = null;
 $errorData    = null;
-$labels       = [];
+$brandStor    = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
