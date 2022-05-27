@@ -86,15 +86,7 @@ if (!class_exists('CodeGeneratorData', false)) {
               stripos($field[$i]["type"], "int") !== false ||
               stripos($field[$i]["type"], "tinyint") !== false
             ) {
-              if (! $hasStatusFieldTer) {
-                fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '():int { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
-              } else {
-                if (strtoupper($field[$i]["up"]) != strtoupper($statusFieldTer)) {
-                  fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '():int { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
-                } else {
-                  fputs($f, '  public function getElemState():int { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
-                }
-              }
+              fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '():int { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
             }
             if (
               stripos($field[$i]["type"], "decimal") !== false ||
@@ -139,18 +131,8 @@ if (!class_exists('CodeGeneratorData', false)) {
               stripos($field[$i]["type"], "int") !== false ||
               stripos($field[$i]["type"], "tinyint") !== false
             ) {
-              if (! $hasStatusFieldTer) {
-                fputs($f, '  public function set' . ucfirst($field[$i]["up"]) . '(int $' . $field[$i]["up"] . ')');
-                fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
-              } else {
-                if (strtoupper($field[$i]["up"]) != strtoupper($statusFieldTer)) {
-                  fputs($f, '  public function set' . ucfirst($field[$i]["up"]) . '(int $' . $field[$i]["up"] . ')');
-                  fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
-                } else {
-                  fputs($f, '  public function setElemState(int $elemState)');
-                  fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $elemState; }' . "\r\n");
-                }
-              }
+              fputs($f, '  public function set' . ucfirst($field[$i]["up"]) . '(int $' . $field[$i]["up"] . ')');
+              fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
             }
             if (
               stripos($field[$i]["type"], "decimal") !== false ||

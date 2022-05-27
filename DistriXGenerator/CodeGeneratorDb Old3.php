@@ -4,7 +4,14 @@ if (!class_exists('CodeGeneratorDb', false)) {
   {
 /* TO BE DONE
 
+public static function getListFromList(bool $all, string $className, DistriXPDOConnection $inDbConnection) {
+    if ($className == "" ) {
+    $className="StyUserStorData";
+    }
+  }
 */
+
+
 
     const COMMENT_SEPARATOR = '//=============================================================================';
 
@@ -28,8 +35,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
       $errorT = $errorR = "";
       $statusField = "status";
       $statusFieldBis = "statut";
-      $statusFieldTer = "elemstate";
-      $hasStatusField = $hasStatusFieldTer = $hasTimestampField = false;
+      $hasStatusField = $hasTimestampField = false;
 
       if (
         strlen($tableName) > 0 &&
@@ -52,10 +58,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
             $field[$i]["up"] = $statusField;
             break;
           }
-          if (strtoupper($field[$i]["nom"]) == strtoupper($statusFieldTer)) {
-            $hasStatusFieldTer = true;
-            break;
-          }        }
+        }
         $firstLine  = '<?php // Needed to encode in UTF8 ààéàé //' . "\r\n";
         $secondLine = 'class ' . $storName . ' {' . "\r\n";
         $firstLineToSearch  = self::COMMENT_SEPARATOR . "\r\n";
@@ -113,7 +116,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
 
         // Get List
         fputs($f, '  public static function getList(');
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, 'bool $all, ');
         }
         if ($generateFor == "P") {
@@ -122,7 +125,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
         fputs($f, '$inDbConnection)' . "\r\n");
         fputs($f, '  {' . "\r\n");
         fputs($f, '    $request = "";' . "\r\n");
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, '    $data = new ' . $dbDataObjectName . '();' . "\r\n");
         }
         fputs($f, '    $list = [];' . "\r\n");
@@ -130,20 +133,16 @@ if (!class_exists('CodeGeneratorDb', false)) {
         fputs($f, '    if ($inDbConnection != null) {' . "\r\n");
         fputs($f, '      $request  = self::SELECT;' . "\r\n");
         fputs($f, '      $request .= self::FROM;' . "\r\n");
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, '      if (!$all) {' . "\r\n");
-          if ($hasStatusField) {
-            fputs($f, '        $request .= " WHERE statut = :statut";' . "\r\n");
-          } else {
-            fputs($f, '        $request .= " WHERE elemstate = :statut";' . "\r\n");
-          }
+          fputs($f, '        $request .= " WHERE statut = :statut";' . "\r\n");
           fputs($f, '      }' . "\r\n");
         }
         fputs($f, '      $request .= " ORDER BY ' . $field[$listSortedBy]["nom"] . '";' . "\r\n");
         fputs($f, "\r\n");
 
         fputs($f, '      $stmt = $inDbConnection->prepare($request);' . "\r\n");
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, '      if (!$all) {' . "\r\n");
           fputs($f, '        $stmt->execute([' . "'statut'" . '=> $data->getAvailableValue()]);' . "\r\n");
           fputs($f, '      } else {' . "\r\n");
@@ -167,7 +166,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
         // Get List From List
         fputs($f, '  public static function getListFromList(');
         fputs($f, 'array $inList, ');
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, 'bool $all, ');
         }
         fputs($f, 'string $className, ');
@@ -177,7 +176,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
         fputs($f, '$inDbConnection)' . "\r\n");
         fputs($f, '  {' . "\r\n");
         fputs($f, '    $request = "";' . "\r\n");
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, '    $data = new ' . $dbDataObjectName . '();' . "\r\n");
         }
         fputs($f, '    $list = [];' . "\r\n");
@@ -189,20 +188,16 @@ if (!class_exists('CodeGeneratorDb', false)) {
         fputs($f, '      $request  = self::SELECT;' . "\r\n");
         fputs($f, '      $request .= self::FROM;' . "\r\n");
         fputs($f, '      $request .= " WHERE id IN('."'".'" . implode("'."','".'", array_map(function($data) { return $data->getId(); }, '.'$inList'.")).".'"'."')".'";' . "\r\n");
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, '      if (!$all) {' . "\r\n");
-          if ($hasStatusField) {
-            fputs($f, '        $request .= " AND statut = :statut";' . "\r\n");
-          } else {
-            fputs($f, '        $request .= " AND elemstate = :statut";' . "\r\n");
-          }
+          fputs($f, '        $request .= " AND statut = :statut";' . "\r\n");
           fputs($f, '      }' . "\r\n");
         }
         fputs($f, '      $request .= " ORDER BY ' . $field[$listSortedBy]["nom"] . '";' . "\r\n");
         fputs($f, "\r\n");
 
         fputs($f, '      $stmt = $inDbConnection->prepare($request);' . "\r\n");
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, '      if (!$all) {' . "\r\n");
           fputs($f, '        $stmt->execute([' . "'statut'" . '=> $data->getAvailableValue()]);' . "\r\n");
           fputs($f, '      } else {' . "\r\n");
@@ -281,7 +276,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
           fputs($f, "\r\n");
           fputs($f, '  public static function findBy');
           fputs($f, $indexGenerate["name"] . '(' . $dbDataObjectName . ' $dataIn, ');
-          if ($hasStatusField || $hasStatusFieldTer) {
+          if ($hasStatusField) {
             fputs($f, 'bool $all, ');
           }
           if ($generateFor == "P") {
@@ -304,13 +299,9 @@ if (!class_exists('CodeGeneratorDb', false)) {
               fputs($f, $indexes[$indexGenerate["number"]]["field" . $indI] . ' = :index' . $indI . '";' . "\r\n");
             }
           }
-          if ($hasStatusField || $hasStatusFieldTer) {
+          if ($hasStatusField) {
             fputs($f, '      if (!$all) {' . "\r\n");
-            if ($hasStatusField) {
-              fputs($f, '        $request .= " AND statut = :statut";' . "\r\n");
-            } else {
-              fputs($f, '        $request .= " AND elemstate = :statut";' . "\r\n");
-            }
+            fputs($f, '        $request .= " AND statut = :statut";' . "\r\n");
             fputs($f, '      }' . "\r\n");
           }
           fputs($f, '      $params = [];' . "\r\n");
@@ -323,9 +314,9 @@ if (!class_exists('CodeGeneratorDb', false)) {
               }
             }
           }
-          if ($hasStatusField || $hasStatusFieldTer) {
+          if ($hasStatusField) {
             fputs($f, '      if (!$all) {' . "\r\n");
-            fputs($f, '        $params["statut"] = $dataIn->getAvailableValue();' . "\r\n");
+            fputs($f, '        $params["statut"] = $dataIn->getStatus();' . "\r\n");
             fputs($f, '      }' . "\r\n");
           }
           fputs($f, '      $stmt = $inDbConnection->prepare($request);' . "\r\n");
@@ -430,11 +421,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
           if ($hasTimestampField && $field[$i]["nom"] == $field[$timestamp]["nom"]) {
             fputs($f, '      $params["' . $field[$i]["nom"] . '"] = $data->get' . ucfirst($field[$i]["up"]) . '() + 1;' . "\r\n");
           } else {
-            if (strtoupper($field[$i]["nom"]) != strtoupper($statusFieldTer)) {
-              fputs($f, '      $params["' . $field[$i]["nom"] . '"] = $data->get' . ucfirst($field[$i]["up"]) . '();' . "\r\n");
-            } else {
-              fputs($f, '      $params["' . $field[$i]["nom"] . '"] = $data->getElemState();' . "\r\n");
-            }
+            fputs($f, '      $params["' . $field[$i]["nom"] . '"] = $data->get' . ucfirst($field[$i]["up"]) . '();' . "\r\n");
           }
         }
         if ($hasTimestampField) {
@@ -506,7 +493,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
         fputs($f, '  // End of save' . "\r\n");
 
         // remove
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, "\r\n");
           fputs($f, '  public static function remove(' . $dbDataObjectName . ' $data, ');
           if ($generateFor == "P") {
@@ -529,7 +516,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
           fputs($f, '  // End of remove' . "\r\n");
         }
         // restore
-        if ($hasStatusField || $hasStatusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, "\r\n");
           fputs($f, '  public static function restore(' . $dbDataObjectName . ' $data, ');
           if ($generateFor == "P") {
@@ -639,11 +626,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
         $alreadyOneField = false;
         for ($i = 0; $i < $fieldind; $i++) {
           if ($i != $uniqueKey) {
-            if (strtoupper($field[$i]["nom"]) != strtoupper($statusFieldTer)) {
-              fputs($f, '      $params["' . $field[$i]["nom"] . '"] = $data->get' . ucfirst($field[$i]["up"]) . '();' . "\r\n");
-            } else {
-              fputs($f, '      $params["' . $field[$i]["nom"] . '"] = $data->getElemState();' . "\r\n");
-            }
+            fputs($f, '      $params["' . $field[$i]["nom"] . '"] = $data->get' . ucfirst($field[$i]["up"]) . '();' . "\r\n");
           }
         }
         fputs($f, '      $stmt = $inDbConnection->prepare($request);' . "\r\n");
