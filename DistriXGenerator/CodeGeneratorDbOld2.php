@@ -4,13 +4,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
   {
 /* TO BE DONE
 
-public static function getListFromList(bool $all, string $className, DistriXPDOConnection $inDbConnection) {
-    if ($className == "" ) {
-    $className="StyUserStorData";
-    }
-  }
 */
-
 
 
     const COMMENT_SEPARATOR = '//=============================================================================';
@@ -161,61 +155,6 @@ public static function getListFromList(bool $all, string $className, DistriXPDOC
         fputs($f, '    return array($list, count($list));' . "\r\n");
         fputs($f, '  }' . "\r\n");
         fputs($f, '  // End of getList' . "\r\n");
-        fputs($f, "\r\n");
-
-        // Get List From List
-        fputs($f, '  public static function getListFromList(');
-        fputs($f, 'array $inList, ');
-        if ($hasStatusField) {
-          fputs($f, 'bool $all, ');
-        }
-        fputs($f, 'string $className, ');
-        if ($generateFor == "P") {
-          fputs($f, 'DistriXPDOConnection ');
-        }
-        fputs($f, '$inDbConnection)' . "\r\n");
-        fputs($f, '  {' . "\r\n");
-        fputs($f, '    $request = "";' . "\r\n");
-        if ($hasStatusField) {
-          fputs($f, '    $data = new ' . $dbDataObjectName . '();' . "\r\n");
-        }
-        fputs($f, '    $list = [];' . "\r\n");
-        fputs($f, "\r\n");
-        fputs($f, '    if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {' . "\r\n");
-        fputs($f, '      if ($className == "" || is_null($className)) {' . "\r\n");
-        fputs($f, '        $className = "'.$dbDataObjectName.'";' . "\r\n");
-        fputs($f, '      }' . "\r\n");
-        fputs($f, '      $request  = self::SELECT;' . "\r\n");
-        fputs($f, '      $request .= self::FROM;' . "\r\n");
-        fputs($f, '      $request .= " WHERE id IN('."'".'" . implode("'."','".'", array_map(function($data) { return $data->getId(); }, '.'$inList'.")).".'"'."')".'";' . "\r\n");
-        if ($hasStatusField) {
-          fputs($f, '      if (!$all) {' . "\r\n");
-          fputs($f, '        $request .= " AND statut = :statut";' . "\r\n");
-          fputs($f, '      }' . "\r\n");
-        }
-        fputs($f, '      $request .= " ORDER BY ' . $field[$listSortedBy]["nom"] . '";' . "\r\n");
-        fputs($f, "\r\n");
-
-        fputs($f, '      $stmt = $inDbConnection->prepare($request);' . "\r\n");
-        if ($hasStatusField) {
-          fputs($f, '      if (!$all) {' . "\r\n");
-          fputs($f, '        $stmt->execute([' . "'statut'" . '=> $data->getAvailableValue()]);' . "\r\n");
-          fputs($f, '      } else {' . "\r\n");
-          fputs($f, '        $stmt->execute();' . "\r\n");
-          fputs($f, '      }' . "\r\n");
-        } else {
-          fputs($f, '      $stmt->execute();' . "\r\n");
-        }
-        fputs($f, '      if (self::SHOW_READ_REQUEST) {' . "\r\n");
-        fputs($f, '        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;' . "\r\n");
-        fputs($f, '      }' . "\r\n");
-        fputs($f, '      if ($stmt->rowCount() > 0) {' . "\r\n");
-        fputs($f, '        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $className);' . "\r\n");
-        fputs($f, '      }' . "\r\n");
-        fputs($f, '    }' . "\r\n");
-        fputs($f, '    return array($list, count($list));' . "\r\n");
-        fputs($f, '  }' . "\r\n");
-        fputs($f, '  // End of getListFromList' . "\r\n");
 
         // Find methods based on unique indexes
         foreach ($uniqueToGenerate as $uniqueGenerate) {
