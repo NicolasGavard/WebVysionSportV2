@@ -31,32 +31,32 @@ if (!class_exists("DistriXCodeTableWeightTypeNameData", false)) {
       $this->timestamp    = 0;
     }
     // Gets
-    public function getId() { return $this->id; }
-    public function getIdWeightType() { return $this->idWeightType; }
-    public function getIdLanguage() { return $this->idLanguage; }
-    public function getCode() { return $this->code; }
-    public function getName() { return $this->name; }
-    public function getDescription() { return $this->description; }
-    public function getAbbreviation() { return $this->abbreviation; }
-    public function getIsSolid() { return $this->isSolid; }
-    public function getIsLiquid() { return $this->isLiquid; }
-    public function getIsOther() { return $this->isOther; }
-    public function getStatut() { return $this->statut; }
-    public function getTimestamp() { return $this->timestamp; }
+    public function getId():int { return $this->id; }
+    public function getIdWeightType():int { return $this->idWeightType; }
+    public function getIdLanguage():int { return $this->idLanguage; }
+    public function getCode():string { return $this->code; }
+    public function getName():string { return $this->name; }
+    public function getDescription():string { return $this->description; }
+    public function getAbbreviation():string { return $this->abbreviation; }
+    public function getIsSolid():int { return $this->isSolid; }
+    public function getIsLiquid():int { return $this->isLiquid; }
+    public function getIsOther():int { return $this->isOther; }
+    public function getStatut():int { return $this->statut; }
+    public function getTimestamp():int { return $this->timestamp; }
 
     // Sets
-    public function setId($id) { $this->id = $id; }
-    public function setIdWeightType($idWeightType) { $this->idWeightType = $idWeightType; }
-    public function setIdLanguage($idLanguage) { $this->idLanguage = $idLanguage; }
-    public function setCode($code) { $this->code = $code; }
-    public function setName($name) { $this->name = $name; }
-    public function setDescription($description) { $this->description = $description; }
-    public function setAbbreviation($abbreviation) { $this->abbreviation = $abbreviation; }
-    public function setIsSolid($isSolid) { $this->isSolid = $isSolid; }
-    public function setIsLiquid($isLiquid) { $this->isLiquid = $isLiquid; }
-    public function setIsOther($isOther) { $this->isOther = $isOther; }
-    public function setStatut($statut) { $this->statut = $statut; }
-    public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+    public function setId(int $id) { $this->id = $id; }
+    public function setIdWeightType(int $idWeightType) { $this->idWeightType = $idWeightType; }
+    public function setIdLanguage(int $idLanguage) { $this->idLanguage = $idLanguage; }
+    public function setCode(string $code) { $this->code = $code; }
+    public function setName(string $name) { $this->name = $name; }
+    public function setDescription(string $description) { $this->description = $description; }
+    public function setAbbreviation(string $abbreviation) { $this->abbreviation = $abbreviation; }
+    public function setIsSolid(int $isSolid) { $this->isSolid = $isSolid; }
+    public function setIsLiquid(int $isLiquid) { $this->isLiquid = $isLiquid; }
+    public function setIsOther(int $isOther) { $this->isOther = $isOther; }
+    public function setStatut(int $statut) { $this->statut = $statut; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }

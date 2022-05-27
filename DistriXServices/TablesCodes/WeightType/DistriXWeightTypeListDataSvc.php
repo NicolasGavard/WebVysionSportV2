@@ -5,11 +5,8 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/../../../GlobalData/DistriXGeneralIdData.php");
-include(__DIR__ . "/Data/DistriXCodeTableWeightTypeData.php");
-include(__DIR__ . "/Data/DistriXCodeTableWeightTypeNameData.php");
 // Database Data
+include(__DIR__ . "/../../../DistrixSecurity/Data/WeightTypeNameStorData.php");
 include(__DIR__ . "/Data/WeightTypeNameStorData.php");
 include(__DIR__ . "/Data/WeightTypeStorData.php");
 // Storage
@@ -25,6 +22,9 @@ $weightType    = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
+  
+  list($dataLanguage, $jsonError) = BrandStorData::getJsonData($dataSvc->getParameter("data"));
+  
   $dataLanguage = $dataSvc->getParameter("dataLanguage");
   
   list($weightTypeStor, $weightTypeStorInd) = WeightTypeStor::getList(true, $dbConnection);

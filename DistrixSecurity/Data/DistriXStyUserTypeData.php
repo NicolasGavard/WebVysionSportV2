@@ -1,18 +1,18 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXStyEnterprisePosData", false)) {
-  class DistriXStyEnterprisePosData extends DistriXSvcAppData
+if (!class_exists("DistriXStyUserTypeData", false)) {
+  class DistriXStyUserTypeData extends DistriXSvcAppData
   {
     protected $id;
-    protected $idStyEnterprise;
-    protected $idPos;
+    protected $code;
+    protected $name;
     protected $status;
     protected $timestamp;
 
     public function __construct()
     {
       $this->id = 0;
-      $this->idStyEnterprise = 0;
-      $this->idPos = 0;
+      $this->code = "";
+      $this->name = "";
       $this->status = 0;
       $this->timestamp = 0;
     }
@@ -21,13 +21,13 @@ if (!class_exists("DistriXStyEnterprisePosData", false)) {
     {
       return $this->id;
     }
-    public function getIdStyEnterprise()
+    public function getCode()
     {
-      return $this->idStyEnterprise;
+      return $this->code;
     }
-    public function getIdPos()
+    public function getName()
     {
-      return $this->idPos;
+      return $this->name;
     }
     public function getStatus()
     {
@@ -43,13 +43,13 @@ if (!class_exists("DistriXStyEnterprisePosData", false)) {
     {
       $this->id = $id;
     }
-    public function setIdStyEnterprise($idStyEnterprise)
+    public function setCode($code)
     {
-      $this->idStyEnterprise = $idStyEnterprise;
+      $this->code = $code;
     }
-    public function setIdPos($idPos)
+    public function setName($name)
     {
-      $this->idPos = $idPos;
+      $this->name = $name;
     }
     public function setStatus($status)
     {

@@ -5,25 +5,25 @@ if (! class_exists("DistriXStyUserEnterpriseData", false)) {
     protected $id;
     protected $name;
     protected $city;
-    protected $idEnterprise;
+    protected $idStyEnterprise;
 
     public function __construct() {
       $this->id           = 0;
       $this->name         = "";
       $this->city         = "";
-      $this->idEnterprise = 0;
+      $this->idStyEnterprise = 0;
     }
 // Gets
     public function getId() { return $this->id; }
     public function getName() { return $this->name; }
     public function getCity() { return $this->city; }
-    public function getIdEnterprise() { return $this->idEnterprise; }
+    public function getIdStyEnterprise() { return $this->idStyEnterprise; }
 
 // Sets
     public function setId($id) { $this->id = $id; }
     public function setName($name) { $this->name = $name; }
     public function setCity($city) { $this->city = $city; }
-    public function setIdEnterprise($idEnterprise) { $this->idEnterprise = $idEnterprise; }
+    public function setIdStyEnterprise($idStyEnterprise) { $this->idStyEnterprise = $idStyEnterprise; }
   }
   // End of class
 }

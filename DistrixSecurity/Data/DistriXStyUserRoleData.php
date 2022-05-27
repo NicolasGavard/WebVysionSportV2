@@ -1,22 +1,22 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXStyUserRightsData", false)) {
-  class DistriXStyUserRightsData extends DistriXSvcAppData
+if (!class_exists("DistriXStyUserRoleData", false)) {
+  class DistriXStyUserRoleData extends DistriXSvcAppData
   {
     protected $id;
     protected $idStyUser;
     protected $idStyRole;
     protected $codeRole;
     protected $nameRole;
-    protected $styApplications;
-    
+    protected $timestamp;
+
     public function __construct()
     {
-      $this->id               = 0;
-      $this->idStyUser        = 0;
-      $this->idStyRole        = 0;
-      $this->codeRole         = "";
-      $this->nameRole         = "";
-      $this->styApplications  = array();
+      $this->id         = 0;
+      $this->idStyUser  = 0;
+      $this->idStyRole  = 0;
+      $this->code       = "";
+      $this->name       = "";
+      $this->timestamp  = 0;
     }
     // Gets
     public function getId()
@@ -31,7 +31,7 @@ if (!class_exists("DistriXStyUserRightsData", false)) {
     {
       return $this->idStyRole;
     }
-    public function getCodeStyRole()
+    public function getCodeRole()
     {
       return $this->codeRole;
     }
@@ -39,11 +39,11 @@ if (!class_exists("DistriXStyUserRightsData", false)) {
     {
       return $this->nameRole;
     }
-    public function getStyApplications()
+    public function getTimestamp()
     {
-      return $this->styApplications;
+      return $this->timestamp;
     }
-    
+
     // Sets
     public function setId($id)
     {
@@ -65,10 +65,10 @@ if (!class_exists("DistriXStyUserRightsData", false)) {
     {
       $this->nameRole = $nameRole;
     }
-    public function setStyApplications($styApplications)
+    public function setTimestamp($timestamp)
     {
-      $this->styApplications = $styApplications;
-    }   
+      $this->timestamp = $timestamp;
+    }
   }
   // End of class
 }

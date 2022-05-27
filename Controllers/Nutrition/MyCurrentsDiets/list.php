@@ -23,20 +23,17 @@ $output             = array();
 $outputok           = false;
 
 // Current Diet
-$distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
-$distriXNutritionCurrentDietData->setIdUser($_POST['idUser']);
-$distriXNutritionCurrentDietData->setStatus($_POST['status']);
+list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
+// Template Diet
+list($distriXNutritionTemplateDietData, $errorJson) = DistriXNutritionTemplateDietData::getJsonData($_POST);
 
+// Current Diet
 $currentDietCaller = new DistriXServicesCaller();
 $currentDietCaller->setMethodName("ListMyCurrentsDiets");
 $currentDietCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
 $currentDietCaller->addParameter("data", $distriXNutritionCurrentDietData);
 
 // Template Diet
-$distriXNutritionTemplateDietData = new DistriXNutritionTemplateDietData();
-$distriXNutritionTemplateDietData->setIdUser($_POST['idUser']);
-$distriXNutritionTemplateDietData->setStatus(0);
-
 $templateDietCaller = new DistriXServicesCaller();
 $templateDietCaller->setMethodName("ListMyTemplatesDiets");
 $templateDietCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");

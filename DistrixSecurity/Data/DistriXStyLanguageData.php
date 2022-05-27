@@ -1,22 +1,26 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXStyApplicationData", false)) {
-  class DistriXStyApplicationData extends DistriXSvcAppData
+if (!class_exists("DistriXStyLanguageData", false)) {
+  class DistriXStyLanguageData extends DistriXSvcAppData
   {
     protected $id;
     protected $code;
     protected $description;
-    protected $styModules;
+    protected $linkToPicture;
+    protected $size;
+    protected $type;
     protected $status;
     protected $timestamp;
 
     public function __construct()
     {
-      $this->id           = 0;
-      $this->code         = "";
-      $this->description  = "";
-      $this->styModules   = array();
-      $this->status       = 0;
-      $this->timestamp    = 0;
+      $this->id             = 0;
+      $this->code           = "";
+      $this->description    = "";
+      $this->linkToPicture  = "";
+      $this->size           = 0;
+      $this->type           = "";
+      $this->status         = 0;
+      $this->timestamp      = 0;
     }
     // Gets
     public function getId()
@@ -31,9 +35,17 @@ if (!class_exists("DistriXStyApplicationData", false)) {
     {
       return $this->description;
     }
-    public function getStyModules()
+    public function getLinkToPicture()
     {
-      return $this->styModules;
+      return $this->linkToPicture;
+    }
+    public function getSize()
+    {
+      return $this->size;
+    }
+    public function getType()
+    {
+      return $this->type;
     }
     public function getStatus()
     {
@@ -57,9 +69,17 @@ if (!class_exists("DistriXStyApplicationData", false)) {
     {
       $this->description = $description;
     }
-    public function setStyModules($styModules)
+    public function setLinkToPicture($linkToPicture)
     {
-      $this->styModules = $styModules;
+      $this->linkToPicture = $linkToPicture;
+    }
+    public function setSize($size)
+    {
+      $this->size = $size;
+    }
+    public function setType($type)
+    {
+      $this->type = $type;
     }
     public function setStatus($status)
     {

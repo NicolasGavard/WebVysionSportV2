@@ -1,9 +1,8 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXStyUserRightsData", false)) {
-  class DistriXStyUserRightsData extends DistriXSvcAppData
+if (!class_exists("DistriXStyRoleRightsData", false)) {
+  class DistriXStyRoleRightsData extends DistriXSvcAppData
   {
     protected $id;
-    protected $idStyUser;
     protected $idStyRole;
     protected $codeRole;
     protected $nameRole;
@@ -11,21 +10,16 @@ if (!class_exists("DistriXStyUserRightsData", false)) {
     
     public function __construct()
     {
-      $this->id               = 0;
-      $this->idStyUser        = 0;
-      $this->idStyRole        = 0;
-      $this->codeRole         = "";
-      $this->nameRole         = "";
-      $this->styApplications  = array();
+      $this->id                 = 0;
+      $this->idStyRole          = 0;
+      $this->codeRole           = "";
+      $this->nameRole           = "";
+      $this->styApplications    = array();
     }
     // Gets
     public function getId()
     {
       return $this->id;
-    }
-    public function getIdStyUser()
-    {
-      return $this->idStyUser;
     }
     public function getIdStyRole()
     {
@@ -48,10 +42,6 @@ if (!class_exists("DistriXStyUserRightsData", false)) {
     public function setId($id)
     {
       $this->id = $id;
-    }
-    public function setIdStyUser($idStyUser)
-    {
-      $this->idStyUser = $idStyUser;
     }
     public function setIdStyRole($idStyRole)
     {
