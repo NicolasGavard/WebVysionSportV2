@@ -8,9 +8,7 @@ if (!class_exists('CodeGeneratorData', false)) {
       $errorT = $errorR = "";
       $statusField = "status";
       $statusFieldBis = "statut";
-      $statusFieldTer = "elemstate";
       $hasStatusField = false;
-      $hasStatusFieldTer = false;
 
       if (
         strlen($tableName) > 0 &&
@@ -34,16 +32,12 @@ if (!class_exists('CodeGeneratorData', false)) {
             $field[$i]["up"] = $statusField;
             break;
           }
-          if (strtoupper($field[$i]["up"]) == strtoupper($statusFieldTer)) {
-            $hasStatusFieldTer = true;
-            break;
-          }
         }
         $f = fopen($filename, "w");
         fputs($f, '<?php // Needed to encode in UTF8 ààéàé //' . "\r\n");
         fputs($f, 'class ' . $dataObjectName . ' extends DistriXSvcAppData {' . "\r\n");
 
-        if ($hasStatusField || $statusFieldTer) {
+        if ($hasStatusField) {
           fputs($f, '  const ' . $tableNameUpper . '_STATUS_AVAILABLE     = 0;' . "\r\n");
           fputs($f, '  const ' . $tableNameUpper . '_STATUS_NOT_AVAILABLE = 1;' . "\r\n");
           fputs($f, "\r\n");
@@ -114,12 +108,8 @@ if (!class_exists('CodeGeneratorData', false)) {
             fputs($f, '  public function get' . ucfirst($field[$i]["up"]) . '():int { return $this->' . $field[$i]["nom"] . '; }' . "\r\n");
           }
         }
-        if ($hasStatusField || $hasStatusFieldTer) {
-          if ($hasStatusField) {
-            fputs($f, '  public function isAvailable():bool { return ($this->statut == self::' . $tableNameUpper . '_STATUS_AVAILABLE); }' . "\r\n");
-          } else {
-            fputs($f, '  public function isAvailable():bool { return ($this->elemstate == self::' . $tableNameUpper . '_STATUS_AVAILABLE); }' . "\r\n");
-          }
+        if ($hasStatusField) {
+          fputs($f, '  public function isAvailable():bool { return ($this->statut == self::' . $tableNameUpper . '_STATUS_AVAILABLE); }' . "\r\n");
           fputs($f, '  public function getAvailableValue():int { return self::' . $tableNameUpper . '_STATUS_AVAILABLE; }' . "\r\n");
           fputs($f, '  public function getUnavailableValue():int { return self::' . $tableNameUpper . '_STATUS_NOT_AVAILABLE; }' . "\r\n");
         }
@@ -164,14 +154,9 @@ if (!class_exists('CodeGeneratorData', false)) {
             fputs($f, ' { $this->' . $field[$i]["nom"] . ' = $' . $field[$i]["up"] . '; }' . "\r\n");
           }
         }
-        if ($hasStatusField || $hasStatusFieldTer) {
-          if ($hasStatusField) {
-            fputs($f, '  public function setAvailable() { $this->statut = self::' . $tableNameUpper . '_STATUS_AVAILABLE; }' . "\r\n");
-            fputs($f, '  public function setUnavailable() { $this->statut = self::' . $tableNameUpper . '_STATUS_NOT_AVAILABLE; }' . "\r\n");
-          } else {
-            fputs($f, '  public function setAvailable() { $this->elemstate = self::' . $tableNameUpper . '_STATUS_AVAILABLE; }' . "\r\n");
-            fputs($f, '  public function setUnavailable() { $this->elemstate = self::' . $tableNameUpper . '_STATUS_NOT_AVAILABLE; }' . "\r\n");
-          }
+        if ($hasStatusField) {
+          fputs($f, '  public function setAvailable() { $this->statut = self::' . $tableNameUpper . '_STATUS_AVAILABLE; }' . "\r\n");
+          fputs($f, '  public function setUnavailable() { $this->statut = self::' . $tableNameUpper . '_STATUS_NOT_AVAILABLE; }' . "\r\n");
         }
         fputs($f, '}' . "\r\n");
         fclose($f);
