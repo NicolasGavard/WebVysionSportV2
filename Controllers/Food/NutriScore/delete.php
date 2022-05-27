@@ -17,11 +17,11 @@ $output       = [];
 $outputok     = false;
 
 if (isset($_POST)) {
-  list($distriXFoodBandData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
+  list($distriXFoodNutriScoreData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
   
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setMethodName("DelNutriScore");
-  $servicesCaller->addParameter("data", $distriXFoodBandData);
+  $servicesCaller->addParameter("data", $distriXFoodNutriScoreData);
   $servicesCaller->setServiceName("DistriXServices/Food/NutriScore/DistriXFoodNutriScoreDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   

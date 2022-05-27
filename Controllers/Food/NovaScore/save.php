@@ -16,11 +16,11 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
-list($distriXFoodBandData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
+list($distriXFoodNovaScoreData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveNovaScore");
-$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->addParameter("data", $distriXFoodNovaScoreData);
 $servicesCaller->setServiceName("DistriXServices/Food/NovaScore/DistriXFoodNovaScoreSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 

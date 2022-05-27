@@ -15,11 +15,11 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-list($distriXFoodBandData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
+list($distriXFoodEcoScoreData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewEcoScore");
-$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->addParameter("data", $distriXFoodEcoScoreData);
 $servicesCaller->setServiceName("DistriXServices/Food/EcoScore/DistriXFoodEcoScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
@@ -33,12 +33,12 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 }
 
 if ($outputok && isset($output["ViewEcoScore"])) {
-  $distriXFoodBandData = $output["ViewEcoScore"];
+  $distriXFoodEcoScoreData = $output["ViewEcoScore"];
 } else {
   $error = $errorData;
 }
 
-$resp["ViewEcoScore"]  = $distriXFoodBandData;
+$resp["ViewEcoScore"]  = $distriXFoodEcoScoreData;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }

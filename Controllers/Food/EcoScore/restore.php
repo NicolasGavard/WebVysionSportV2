@@ -16,11 +16,11 @@ $error        = [];
 $output       = [];
 $outputok     = false;
 
-list($distriXFoodBandData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
+list($distriXFoodEcoScoreData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("RestoreEcoScore");
-$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->addParameter("data", $distriXFoodEcoScoreData);
 $servicesCaller->setServiceName("DistriXServices/Food/EcoScore/DistriXFoodEcoScoreRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 

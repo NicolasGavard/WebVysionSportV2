@@ -15,11 +15,11 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-list($distriXFoodBandData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
+list($distriXFoodNutriScoreData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewNutriScore");
-$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->addParameter("data", $distriXFoodNutriScoreData);
 $servicesCaller->setServiceName("DistriXServices/Food/NutriScore/DistriXFoodNutriScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
@@ -33,12 +33,12 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 }
 
 if ($outputok && isset($output["ViewNutriScore"])) {
-  $distriXFoodBandData = $output["ViewNutriScore"];
+  $distriXFoodNutriScoreData = $output["ViewNutriScore"];
 } else {
   $error = $errorData;
 }
 
-$resp["ViewNutriScore"]  = $distriXFoodBandData;
+$resp["ViewNutriScore"]  = $distriXFoodNutriScoreData;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }
