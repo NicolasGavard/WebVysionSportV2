@@ -16,11 +16,11 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
-list($distriXFoodBandData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
+list($distriXFoodNutriScoreData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveNutriScore");
-$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->addParameter("data", $distriXFoodNutriScoreData);
 $servicesCaller->setServiceName("DistriXServices/Food/NutriScore/DistriXFoodNutriScoreSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 

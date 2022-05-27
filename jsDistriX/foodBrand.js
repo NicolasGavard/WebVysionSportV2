@@ -1,5 +1,3 @@
-// Dropzone.autoDiscover = false;
-
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : 'Controllers/Food/Brand/list.php',

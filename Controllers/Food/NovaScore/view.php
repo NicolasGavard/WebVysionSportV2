@@ -15,11 +15,11 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-list($distriXFoodBandData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
+list($distriXFoodNovaScoreData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewNovaScore");
-$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->addParameter("data", $distriXFoodNovaScoreData);
 $servicesCaller->setServiceName("DistriXServices/Food/NovaScore/DistriXFoodNovaScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
@@ -33,12 +33,12 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 }
 
 if ($outputok && isset($output["ViewNovaScore"])) {
-  $distriXFoodBandData = $output["ViewNovaScore"];
+  $distriXFoodNovaScoreData = $output["ViewNovaScore"];
 } else {
   $error = $errorData;
 }
 
-$resp["ViewNovaScore"]  = $distriXFoodBandData;
+$resp["ViewNovaScore"]  = $distriXFoodNovaScoreData;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }
