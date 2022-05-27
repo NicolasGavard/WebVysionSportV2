@@ -5,8 +5,6 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/Data/DistriXFoodScoreEcoData.php");
 // Database Data
 include(__DIR__ . "/Data/ScoreEcoStorData.php");
 // Storage
@@ -21,27 +19,19 @@ $errorData    = null;
 
 // RestoreEcoScore
 if ($dataSvc->getMethodName() == "RestoreEcoScore") {
-  $dbConnection = null;
-  $errorData    = null;
   $insere       = false;
-  $infoScoreEco     = new DistriXFoodScoreEcoData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoScoreEco = $dataSvc->getParameter("data");
-      $scoreEcostor = ScoreEcoStor::read($infoScoreEco->getId(), $dbConnection);
+      list($data, $jsonError) = ScoreEcoStorData::getJsonData($dataSvc->getParameter("data"));
+      $scoreEcostor = ScoreEcoStor::read($data->getId(), $dbConnection);
       $insere       = ScoreEcoStor::restore($scoreEcostor, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();
       } else {
         $dbConnection->rollBack();
-        if ($infoScoreEco->getId() > 0) {
-          $errorData = ApplicationErrorData::warningUpdateData(1, 1);
-        } else {
-          $errorData = ApplicationErrorData::warningInsertData(1, 1);
-        }
+        $errorData = ApplicationErrorData::warningUpdateData(1, 1);
       }
     } else {
       $errorData = ApplicationErrorData::noBeginTransaction(1, 1);

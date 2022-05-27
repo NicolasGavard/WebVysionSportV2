@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodScoreNovaData.php");
+include(__DIR__ . "/../../Data/DistriXFoodNovaScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -15,37 +15,32 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-$scoreNova  = new DistriXFoodScoreNovaData();
-if ($_POST['id'] > 0) {
-  $scoreNova->setId($_POST['id']);
-}
+list($distriXFoodBandData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewScoresNova");
-$servicesCaller->addParameter("data", $scoreNova);
-$servicesCaller->setServiceName("DistriXServices/Food/ScoreNova/DistriXFoodScoreNovaViewDataSvc.php");
+$servicesCaller->setMethodName("ViewNovaScore");
+$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->setServiceName("DistriXServices/Food/NovaScore/DistriXFoodNovaScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_ScoreNova")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NovaScore")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXScoreNovaViewDataSvc");
-  $logInfoData->setLogFunction("ViewScoresNova");
+  $logInfoData->setLogApplication("DistriXNovaScoreViewDataSvc");
+  $logInfoData->setLogFunction("ViewNovaScore");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewScoreNova"])) {
-    $scoreNova = $output["ViewScoreNova"];
-  }
+if ($outputok && isset($output["ViewNovaScore"])) {
+  $distriXFoodBandData = $output["ViewNovaScore"];
 } else {
   $error = $errorData;
 }
 
-$resp["ViewNovaScore"]  = $scoreNova;
+$resp["ViewNovaScore"]  = $distriXFoodBandData;
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"]    = $error;
 }
 
 echo json_encode($resp);

@@ -141,7 +141,7 @@ function ListEcoScore(statut){
       if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td><img style="max-width:20%;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
                     ' <td>'+val.letter+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
@@ -176,7 +176,7 @@ function ViewEcoScore(id){
 
       $('.AddEcoScoreFormIdEcoScore').val(id);
       $('.AddEcoScoreFormCode').val(data.ViewEcoScore.code);
-      $('.AddEcoScoreFormName').val(data.ViewEcoScore.name);
+      $('.AddEcoScoreFormName').val(data.ViewEcoScore.letter);
       $(".avatar-EcoScore").attr("src", data.ViewEcoScore.linktopicture);
       $('.AddEcoScoreFormTimestamp').val(data.ViewEcoScore.timestamp);
       $('.AddEcoScoreFormStatut').val(data.ViewEcoScore.statut);

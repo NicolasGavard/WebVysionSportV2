@@ -35,7 +35,6 @@ if (isset($_POST)) {
   }
   
   if ($outputok && isset($output["ConfirmSave"])) {
-    // list($confirmSave, $jsonError) = DistriXFoodEcoScoreData::getJsonArray($output["ConfirmSave"]);
     $confirmSave = $output["ConfirmSave"];
   } else {
     $error = $errorData;

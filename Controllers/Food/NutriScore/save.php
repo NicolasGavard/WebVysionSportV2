@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodScoreNutriData.php");
+include(__DIR__ . "/../../Data/DistriXFoodNutriScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -16,35 +16,25 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
-$distriXCodeTableScoreNutriData = new DistriXFoodScoreNutriData();
-$distriXCodeTableScoreNutriData->setId($_POST['id']);
-$distriXCodeTableScoreNutriData->setLetter($_POST['code']);
-$distriXCodeTableScoreNutriData->setColor($_POST['color']);
-$distriXCodeTableScoreNutriData->setDescription($_POST['description']);
-$distriXCodeTableScoreNutriData->setLinkToPicture('');
-if($_POST['linkToPictureBase64'] != '') { $distriXCodeTableScoreNutriData->setLinkToPicture($_POST['linkToPictureBase64']);}
-$distriXCodeTableScoreNutriData->setTimestamp($_POST['timestamp']);
-$distriXCodeTableScoreNutriData->setStatus($_POST['statut']);
+list($distriXFoodBandData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("SaveScoreNutri");
-$servicesCaller->addParameter("data", $distriXCodeTableScoreNutriData);
-$servicesCaller->setServiceName("DistriXServices/Food/ScoreNutri/DistriXFoodScoreNutriSaveDataSvc.php");
+$servicesCaller->setMethodName("SaveNutriScore");
+$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->setServiceName("DistriXServices/Food/NutriScore/DistriXFoodNutriScoreSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_ScoreNutri")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NutriScore")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXScoreNutriSaveDataSvc");
-  $logInfoData->setLogFunction("SaveScoreNutri");
+  $logInfoData->setLogApplication("DistriXNutriScoreSaveDataSvc");
+  $logInfoData->setLogFunction("SaveNutriScore");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
-  }
+if ($outputok && isset($output["ConfirmSave"])) {
+  list($confirmSave, $jsonError) = DistriXFoodNutriScoreData::getJsonArray($output["ConfirmSave"]);
 } else {
   $error = $errorData;
 }

@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodScoreNovaData.php");
+include(__DIR__ . "/../../Data/DistriXFoodNovaScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -10,41 +10,33 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp           = array();
-$listScoresNova  = array();
-$error          = array();
-$output         = array();
+$resp           = [];
+$listNovaScores     = [];
+$error          = [];
+$output         = [];
 $outputok       = false;
 
-$distriXFoodScoreNovaData = new DistriXFoodScoreNovaData();
-$distriXFoodScoreNovaData->setStatus($_POST['status']);
-
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ListScoresNova");
-$servicesCaller->addParameter("data", $distriXFoodScoreNovaData);
-$servicesCaller->setServiceName("DistriXServices/Food/ScoreNova/DistriXFoodScoreNovaListDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+$servicesCaller->setMethodName("ListNovaScores");
+$servicesCaller->setServiceName("DistriXServices/Food/NovaScore/DistriXFoodNovaScoreListDataSvc.php");
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_ScoreNova")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NovaScore")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXScoreNovaListDataSvc");
-  $logInfoData->setLogFunction("ListScoresNova");
+  $logInfoData->setLogApplication("DistriXNovaScoreListDataSvc");
+  $logInfoData->setLogFunction("ListNovaScores");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ListScoresNova"])) {
-    $listScoresNova = $output["ListScoresNova"];
-  }
+if ($outputok && isset($output["ListNovaScores"]) && is_array($output["ListNovaScores"])) {
+  list($listNovaScores, $jsonError) = DistriXFoodNovaScoreData::getJsonArray($output["ListNovaScores"]);
 } else {
-  $error = $errorData;
+  $error              = $errorData;
+  $resp["Error"]      = $error;
 }
 
-$resp["ListScoresNova"]  = $listScoresNova;
-if(!empty($error)){
-  $resp["Error"]        = $error;
-}
+$resp["ListNovaScores"]   = $listNovaScores;
 
 echo json_encode($resp);

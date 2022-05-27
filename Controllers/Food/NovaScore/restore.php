@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodScoreNovaData.php");
+include(__DIR__ . "/../../Data/DistriXFoodNovaScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -10,36 +10,31 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp         = array();
+$resp         = [];
 $confirmSave  = false;
-$error        = array();
-$output       = array();
+$error        = [];
+$output       = [];
 $outputok     = false;
 
-$scoreNova  = new DistriXFoodScoreNovaData();
-if ($_POST['id'] > 0) {
-  $scoreNova->setId($_POST['id']);
-}
+list($distriXFoodBandData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("RestoreScoreNova");
-$servicesCaller->addParameter("data", $scoreNova);
-$servicesCaller->setServiceName("DistriXServices/Food/ScoreNova/DistriXFoodScoreNovaRestoreDataSvc.php");
+$servicesCaller->setMethodName("RestoreNovaScore");
+$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->setServiceName("DistriXServices/Food/NovaScore/DistriXFoodNovaScoreRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_ScoreNova")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NovaScore")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXScoreNovaRestoreeteDataSvc");
-  $logInfoData->setLogFunction("RestoreScoreNova");
+  $logInfoData->setLogApplication("DistriXFoodNovaScoreRestoreDataSvc");
+  $logInfoData->setLogFunction("RestoreNovaScore");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
+if ($outputok && isset($output["ConfirmSave"])) {
     $confirmSave = $output["ConfirmSave"];
-  }
 } else {
   $error = $errorData;
 }

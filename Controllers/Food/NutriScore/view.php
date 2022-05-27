@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodScoreNutriData.php");
+include(__DIR__ . "/../../Data/DistriXFoodNutriScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -15,37 +15,32 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-$scoreNutri  = new DistriXFoodScoreNutriData();
-if ($_POST['id'] > 0) {
-  $scoreNutri->setId($_POST['id']);
-}
+list($distriXFoodBandData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewScoresNutri");
-$servicesCaller->addParameter("data", $scoreNutri);
-$servicesCaller->setServiceName("DistriXServices/Food/ScoreNutri/DistriXFoodScoreNutriViewDataSvc.php");
+$servicesCaller->setMethodName("ViewNutriScore");
+$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->setServiceName("DistriXServices/Food/NutriScore/DistriXFoodNutriScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_ScoreNutri")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NutriScore")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXScoreNutriViewDataSvc");
-  $logInfoData->setLogFunction("ViewScoresNutri");
+  $logInfoData->setLogApplication("DistriXNutriScoreViewDataSvc");
+  $logInfoData->setLogFunction("ViewNutriScore");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewScoreNutri"])) {
-    $scoreNutri = $output["ViewScoreNutri"];
-  }
+if ($outputok && isset($output["ViewNutriScore"])) {
+  $distriXFoodBandData = $output["ViewNutriScore"];
 } else {
   $error = $errorData;
 }
 
-$resp["ViewNutriScore"]  = $scoreNutri;
+$resp["ViewNutriScore"]  = $distriXFoodBandData;
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"]    = $error;
 }
 
 echo json_encode($resp);
