@@ -1,164 +1,191 @@
+var weightTypeType_solid  = $('.weightTypeType_solid').val();
+var weightTypeType_liquid = $('.weightTypeType_liquid').val();
+var weightTypeType_other  = $('.weightTypeType_other').val();
 
+datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : 'Controllers/CodeTables/WeightType/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
-    var idLanguage = 1;
-    $.map(data.ListWeightType, function(val, key) {
-      idLanguage = val.idLanguage;
-      
-      if (val.elemState == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if (val.elemState == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
-      
-      var weightTypeType  = '<i class="menu-icon mdi mdi-weight"></i> '+language.page_codeTables_weight_type_solid_title;
-      if (val.isSolid == 1)  {weightTypeType  = '<i class="menu-icon mdi mdi-weight"></i> '+language.page_codeTables_weight_type_solid_title;}
-      if (val.isLiquid == 1) {weightTypeType  = '<i class="menu-icon mdi mdi-water"></i> '+language.page_codeTables_weight_type_liquid_title;}
-      if (val.isOther == 1)  {weightTypeType  = '<i class="menu-icon mdi mdi-food-fork-drink"></i> '+language.page_codeTables_weight_type_other_title;}
-
-      $('#listWeightTypesTbody').append(
-        '<tr>'+
-        ' <td>'+val.code+'</td>'+
-        ' <td>'+val.abbreviation+'</td>'+
-        ' <td>'+weightTypeType+'</td>'+
-        ' <td>'+val.name+'</td>'+
-        ' <td><div class="progress" style="width:15px; height:15px;"><div class="progress-bar bg-'+progressBarColor+'" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></td>'+
-        ' <td>'+
-        '   <button type="button" title="Voir"      class="btn btn-primary    btn-rounded btn-icon btnViewWeightType"                       data-toggle="tooltip" data-placement="top" data-bs-toggle="modal" data-bs-target="#modalAddWeightType"      onclick="ViewWeightType(\''+val.id+'\', \''+val.idWeightType+'\', \''+val.idLanguage+'\');"><i class="ti-eye"></i></button>'+
-        '   <button type="button" title="Supprimer" class="btn btn-danger     btn-rounded btn-icon btnDeleWeightType '+actionBtnDelete+'"   data-toggle="tooltip" data-placement="top" data-bs-toggle="modal" data-bs-target="#modalDelWeightType"      onclick="DelWeightType(\''+val.id+'\', \''+val.name+'\');"><i class="ti-trash"></i></button>'+
-        '   <button type="button" title="Restorer " class="btn btn-info       btn-rounded btn-icon btnRestWeightType '+actionBtnRestore+'"  data-toggle="tooltip" data-placement="top" data-bs-toggle="modal" data-bs-target="#modalRestWeightType"     onclick="RestWeightType(\''+val.id+'\', \''+val.name+'\');"><i class="ti-share-alt"></i></button>'+
-        ' </td>'+
-        '</tr>')
-    });
-
-    $('.AddWeightTypeFormLanguage').append("");
-    $.map(data.ListLanguages, function(val, key) {
-      var  activeSelected = false;
-      if (val.id == idLanguage) {
-        activeSelected = true;
-      }
-      
-      $('.AddWeightTypeFormLanguage').append($('<option>', {
-        value: val.id,
-        text: val.code+' - '+val.description,
-        selected: activeSelected
-      }));
-    });
+    localStorage.setItem("dataTable", JSON.stringify(data.ListWeightTypes));
+    $('.btn-success').trigger('click');
   },
   error : function(data) {
     console.log(data);
   }
-}); 
-
-$(".AddNewWeightType").on('click', function() {
-  $(".btnSave").html(language.page_codeTables_weight_type_add_title);
 });
 
-$("#btnAddWeightType").on('click', function() {
-  var errorData     = "";
-  var code          = $('#InputWeightTypeCode').val();
-  var description   = $('#InputWeightTypeName').val();
-  var abbreviation  = $('#InputWeightTypeAbbreviation').val();
-  if (code != "" || description != "" || abbreviation != ""){
+$(".btnChangeImage").on('click', function() {
+  $(".dropzoneImage").addClass("d-none");
+  $(".dropzoneNoImage").removeClass("d-none");
+});
+
+$(".btnChangeImageCancel").on('click', function() {
+  $(".dropzoneImage").removeClass("d-none");
+  $(".dropzoneNoImage").addClass("d-none");
+});
+
+$(".btn-warning").on('click', function() {
+  $(".btn-success").removeClass("disabled");
+  $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
+  
+  $(".btn-warning").addClass("disabled");
+  $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
+
+  datatable.clear();
+  ListWeightType(1);
+});
+
+$(".btn-success").on('click', function() {
+  $(".btn-success").addClass("disabled");
+  $(".dw-success").removeClass("dw-ban").addClass("dw-checked");
+  
+  $(".btn-warning").removeClass("disabled");
+  $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
+
+  datatable.clear();
+  ListWeightType(0);
+});
+
+$(".AddNewWeightType").on('click', function() {
+  $(".add_title").removeClass("d-none");
+  $(".update_title").addClass("d-none");
+
+  $('.AddWeightTypeFormIdWeightType').val(0);
+  $('.AddWeightTypeFormCode').val('');
+  $('.AddWeightTypeFormName').val('');
+  $(".avatar-brand").attr("src", '');
+  $('.AddWeightTypeFormTimestamp').val(0);
+  $('.AddWeightTypeFormStatut').val(0);
+});
+
+$(".btnAddWeightType").on('click', function() {
+  $(".page_food_brand_update_title").removeClass("d-none");
+  
+  var name = $('.AddWeightTypeFormName').val();
+  if (name != ""){
+    var data = $('#FormAddWeightType').serializeArray(); // convert form to array
+    data.push({name: "name", value: name});
+    
     $.ajax({
       url : 'Controllers/CodeTables/WeightType/save.php',
       type : 'POST',
       dataType : 'JSON',
-      data: $('#FormAddWeightType').serialize(),
+      data: $.param(data),
       success : function(data) {
-        if (data.confirmSave){
-          $(".alert-success").show("slow").delay(1500).hide("slow");
-          setTimeout(function() {window.location.href = "./codeTableWeightTypeList.php";}, 2000);
-        } else {
-          errorData += ' - '+errorData_ko+'<br/>'
-          $('.alert-danger').show("slow").delay(5000).hide("slow");
-          $('.alert-danger p').html(errorData);
-        }
+        $('#sa-success-distrix').trigger('click');
+        setTimeout(function() {window.location.href = "./foodWeightTypeList.php";}, 800);
       },
       error : function(data) {
-        errorData += ' - '+errorData_ko+'<br/>'
-        $('.alert-danger').show("slow").delay(5000).hide("slow");
-        $('.alert-danger p').html(errorData);
+        $('#sa-error-distrix').trigger('click');
       }
     });
+    $(".btnAddWeightType").attr("data-dismiss", "modal");
   } else {
-    if (code == ""){
-      errorData += ' - '+errorData_txt_code+'<br/>'
-    } 
-    if (description == ''){
-      errorData += ' - '+errorData_txt_description+'<br/>'
-    }
-    if (abbreviation == ''){
-      errorData += ' - '+errorData_txt_abbreviation+'<br/>'
+    if (name == ''){
+      $('.AddWeightTypeFormName').addClass("form-control-danger");
+      $('.danger-name').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddWeightTypeFormName").removeClass("form-control-danger");
+        $('.danger-name').addClass("d-none");
+      }, 3000 );
     }
   } 
-  if (errorData !== ''){
-    $('.alert-danger').show("slow").delay(5000).hide("slow");
-    $('.alert-danger p').html(errorData);
-  }
 });
 
-$("#btnDelWeightType").on('click', function() {
+$("#btnDel").on('click', function() {
   $.ajax({
     url : 'Controllers/CodeTables/WeightType/delete.php',
     type : 'POST',
     dataType : 'JSON',
-    data: $('#FormDelWeightType').serialize(),
+    data: $('#FormDel').serialize(),
     success : function(data) {
-      setTimeout(function() {window.location.href = "./codeTableWeightTypeList.php";}, 200);
+      if (data.confirmSave) {
+        $('#sa-success-distrix').trigger('click');
+        setTimeout(function() {window.location.href = "./foodWeightTypeList.php";}, 800);
+      } else {
+        $('#sa-error-distrix').trigger('click');
+      }
     },
     error : function(data) {
-      errorData += ' - '+errorData_ko+'<br/>'
-      $('.alert-danger').show("slow").delay(5000).hide("slow");
-      $('.alert-danger p').html(errorData);
+      $('#sa-error-distrix').trigger('click');
     }
   });
 });
 
-$("#btnRestWeightType").on('click', function() {
+$("#btnRest").on('click', function() {
   $.ajax({
     url : 'Controllers/CodeTables/WeightType/restore.php',
     type : 'POST',
     dataType : 'JSON',
-    data: $('#FormRestWeightType').serialize(),
+    data: $('#FormRest').serialize(),
     success : function(data) {
-      setTimeout(function() {window.location.href = "./codeTableWeightTypeList.php";}, 200);
+      if (data.confirmSave) {
+        $('#sa-success-distrix').trigger('click');
+        setTimeout(function() {window.location.href = "./foodWeightTypeList.php";}, 800);
+      } else {
+        $('#sa-error-distrix').trigger('click');
+      }
     },
     error : function(data) {
-      errorData += ' - '+errorData_ko+'<br/>'
-      $('.alert-danger').show("slow").delay(5000).hide("slow");
-      $('.alert-danger p').html(errorData);
+      $('#sa-error-distrix').trigger('click');
     }
   });
 });
 
-function ViewWeightType(id, idWeightType,idLanguage){
-  $('.AddWeightTypeFormLanguage').append('');
-  
+function ListWeightType(elemState){
+  var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
+  $.map(dataTableData, function(val, key) {
+    if(val.elemState == elemState){
+      if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+      
+      var weightTypeType  = '';
+      if (val.isSolid == 1)  {weightTypeType  = weightTypeType_solid;}
+      if (val.isLiquid == 1) {weightTypeType  = weightTypeType_liquid;}
+      if (val.isOther == 1)  {weightTypeType  = weightTypeType_other;}
+
+      const line =  '<tr>'+
+                    ' <td>'+val.abbreviation+'</td>'+
+                    ' <td>'+val.name+'</td>'+
+                    ' <td>'+weightTypeType+'</td>'+
+                    ' <td>'+
+                    '   <div class="dropdown">'+
+                    '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+                    '       <i class="dw dw-more"></i>'+
+                    '     </a>'+
+                    '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddWeightType" onclick="ViewWeightType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"           onclick="DelWeightType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"          onclick="RestWeightType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '     </div>'+
+                    '   </div>'+
+                    ' </td>'+
+                    '</tr>';
+      datatable.row.add($(line)).draw();
+    }
+  });
+}
+
+function ViewWeightType(id){
   $.ajax({
     url : 'Controllers/CodeTables/WeightType/view.php',
     type : 'POST',
     dataType : 'JSON',
-    data: {'id': id, 'idWeightType': idWeightType},
+    data: {'id': id},
     success : function(data) {
-      $(".btnSave").html(language.page_codeTables_weight_type_update_title);
-      
+      $(".add_title").addClass("d-none");
+      $(".update_title").removeClass("d-none");
+    
+      $(".dropzoneImage").removeClass("d-none");
+      $(".dropzoneNoImage").addClass("d-none");
+
       $('.AddWeightTypeFormIdWeightType').val(id);
-      $('.AddWeightTypeFormIdWeightTypeName').val(idWeightType);
-      
       $('.AddWeightTypeFormCode').val(data.ViewWeightType.code);
       $('.AddWeightTypeFormName').val(data.ViewWeightType.name);
-      $('.AddWeightTypeFormDescription').val(data.ViewWeightType.description);
-      $('.AddWeightTypeFormAbbreviation').val(data.ViewWeightType.abbreviation);
-      
-      $('.AddWeightTypeFormIsSolid').prop('checked', false);
-      $('.AddWeightTypeFormIsLiquid').prop('checked', false);
-      $('.AddWeightTypeFormIsOther').prop('checked', false);
-
-      if (data.ViewWeightType.isSolid == 1) {$('.AddWeightTypeFormIsSolid').prop('checked', true);}
-      if (data.ViewWeightType.isLiquid == 1){$('.AddWeightTypeFormIsLiquid').prop('checked', true);}
-      if (data.ViewWeightType.isOther == 1) {$('.AddWeightTypeFormIsOther').prop('checked', true);}
-
+      $(".avatar-brand").attr("src", data.ViewWeightType.linktopicture);
       $('.AddWeightTypeFormTimestamp').val(data.ViewWeightType.timestamp);
       $('.AddWeightTypeFormStatut').val(data.ViewWeightType.elemState);
     },
@@ -169,11 +196,11 @@ function ViewWeightType(id, idWeightType,idLanguage){
 }
 
 function DelWeightType(id, name){
-  $('.DelWeightTypeFormIdWeightType').val(id);
-  $('.DelWeightTypeTxt').html(confirm_delete+' <b>'+name+'</b>');
+  $('.DelFormId').val(id);
+  $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
 function RestWeightType(id, name){
-  $('.RestWeightTypeFormIdWeightType').val(id);
-  $('.RestWeightTypeTxt').html(confirm_restore+' <b>'+name+'</b>');
+  $('.RestFormId').val(id);
+  $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

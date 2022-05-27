@@ -11,7 +11,7 @@ class WeightTypeStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "weighttype";
-  const SELECT = 'SELECT id,code,name,issolid,isliquid,isother,elemstate,timestamp';
+  const SELECT = 'SELECT id,code,name,abbreviation,issolid,isliquid,isother,elemstate,timestamp';
   const FROM = ' FROM weighttype';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -157,6 +157,7 @@ class WeightTypeStor {
       $request  = "UPDATE weighttype SET ";
       $request .= "code= :code,";
       $request .= "name= :name,";
+      $request .= "abbreviation= :abbreviation,";
       $request .= "issolid= :issolid,";
       $request .= "isliquid= :isliquid,";
       $request .= "isother= :isother,";
@@ -168,9 +169,10 @@ class WeightTypeStor {
       $params["id"] = $data->getId();
       $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
-      $params["issolid"] = $data->getIsSolid();
-      $params["isliquid"] = $data->getIsLiquid();
-      $params["isother"] = $data->getIsOther();
+      $params["abbreviation"] = $data->getAbbreviation();
+      $params["issolid"] = $data->getIssolid();
+      $params["isliquid"] = $data->getIsliquid();
+      $params["isother"] = $data->getIsother();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
@@ -280,10 +282,11 @@ class WeightTypeStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO weighttype(";
-      $request .= "code,name,issolid,isliquid,isother,elemstate,timestamp)";
+      $request .= "code,name,abbreviation,issolid,isliquid,isother,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";
       $request .= ":name,";
+      $request .= ":abbreviation,";
       $request .= ":issolid,";
       $request .= ":isliquid,";
       $request .= ":isother,";
@@ -292,9 +295,10 @@ class WeightTypeStor {
       $params = [];
       $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
-      $params["issolid"] = $data->getIsSolid();
-      $params["isliquid"] = $data->getIsLiquid();
-      $params["isother"] = $data->getIsOther();
+      $params["abbreviation"] = $data->getAbbreviation();
+      $params["issolid"] = $data->getIssolid();
+      $params["isliquid"] = $data->getIsliquid();
+      $params["isother"] = $data->getIsother();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);

@@ -22,15 +22,16 @@ $weightType    = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($dataLanguage, $jsonError) = LanguageStorData::getJsonData($dataSvc->getParameter("data"));
-
+  list($dataLanguage, $jsonError)           = LanguageStorData::getJsonData($dataSvc->getParameter("data"));
   list($weightTypeStor, $weightTypeStorInd) = WeightTypeStor::getList(true, $dbConnection);
   foreach ($weightTypeStor as $WeightType) {
     $weightTypeNameStorData = new WeightTypeNameStorData();
     $weightTypeNameStorData->setIdWeightType($WeightType->getId());
     $weightTypeNameStorData->setIdLanguage($dataLanguage->getId());
-    $weightTypeNameStor = WeightTypeNameStor::findByWeightTypeIdLanguage($weightTypeNameStorData, $dbConnection);
-    $WeightType->setName($weightTypeNameStor->getName());
+    $weightTypeNameStor = WeightTypeNameStor::findByIdWeightTypeIdLanguage($weightTypeNameStorData, $dbConnection);
+    if ($weightTypeNameStor->getId() > 0) {
+      $WeightType->setName($weightTypeNameStor->getName());
+    }
   }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);

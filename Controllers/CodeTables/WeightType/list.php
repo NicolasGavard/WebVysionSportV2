@@ -17,8 +17,8 @@ include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
 session_start();
 $resp           = array();
-$listLanguage   = array();
-$listWeightType = array();
+$listLanguages   = array();
+$listWeightTypes = array();
 $error          = array();
 $output         = array();
 $outputok       = false;
@@ -43,21 +43,21 @@ $svc->addToCall("WeightType", $weightTypeCaller);
 $callsOk = $svc->call();
 
 list($outputok, $output, $errorData) = $svc->getResult("Language"); //var_dump($output);
-if ($outputok && isset($output["ListLanguage"]) && is_array($output["ListLanguage"])) {
-  list($listLanguage, $jsonError) = DistriXCodeTableLanguageData::getJsonArray($output["ListLanguage"]);
+if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLanguages"])) {
+  list($listLanguages, $jsonError) = DistriXCodeTableLanguageData::getJsonArray($output["ListLanguages"]);
 } else {
   $error = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("WeightType"); var_dump($output);
+list($outputok, $output, $errorData) = $svc->getResult("WeightType"); //var_dump($output);
 if ($outputok && isset($output["ListWeightType"]) && is_array($output["ListWeightType"])) {
-  list($listWeightType, $jsonError) = DistriXCodeTableWeightTypeData::getJsonArray($output["ListWeightType"]);
+  list($listWeightTypes, $jsonError) = DistriXCodeTableWeightTypeData::getJsonArray($output["ListWeightType"]);
 } else {
   $error = $errorData;
 }
 
-$resp["ListWeightType"]   = $listWeightType;
-$resp["ListLanguages"]    = $listLanguage;
+$resp["ListWeightTypes"]  = $listWeightTypes;
+$resp["ListLanguages"]    = $listLanguages;
 if(!empty($error)){
   $resp["Error"]          = $error;
 }
