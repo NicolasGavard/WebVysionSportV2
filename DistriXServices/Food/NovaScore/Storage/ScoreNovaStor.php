@@ -22,7 +22,7 @@ class ScoreNovaStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(int $statut, DistriXPDOConnection $inDbConnection)
+  public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new ScoreNovaStorData();
@@ -31,11 +31,17 @@ class ScoreNovaStor {
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE statut = :statut";
+      if (!$all) {
+        $request .= " WHERE statut = :statut";
+      }
       $request .= " ORDER BY number";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $statut]);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -47,7 +53,7 @@ class ScoreNovaStor {
   }
   // End of getList
 
-  public static function findByNumber(ScoreNovaStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
+  public static function findByNumber(ScoreNovaStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -56,10 +62,14 @@ class ScoreNovaStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE number = :index0";
-      $request .= " AND statut = :statut";
+      if (!$all) {
+        $request .= " AND statut = :index1";
+      }
       $params = [];
       $params["index0"] = $dataIn->getNumber();
-      $params["statut"] = $statut;
+      if (!$all) {
+        $params['index1'] = $dataIn->getAvailableValue();
+      }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {

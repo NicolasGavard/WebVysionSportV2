@@ -23,8 +23,8 @@ $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 $dbConnection = null;
 $errorData    = null;
 
-// SaveScoreEco
-if ($dataSvc->getMethodName() == "SaveScoreEco") {
+// SaveEcoScore
+if ($dataSvc->getMethodName() == "SaveEcoScore") {
   $dbConnection = null;
   $errorData    = null;
   $insere       = false;
@@ -40,7 +40,7 @@ if ($dataSvc->getMethodName() == "SaveScoreEco") {
         // Verify Code Exist
         list($scoresEcoStor, $scoresEcoStorInd) = ScoreEcoStor::findByLetter($scoreEcoData, true, $dbConnection);
         if ($scoresEcoStorInd > 0) {
-          $canSaveScoreEco          = false;
+          $canSaveScoreEco     = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
           $distriXSvcErrorData->setDefaultText("The Code " . $infoScoreEco->getCode() . " is already in use");
@@ -123,7 +123,7 @@ if ($dataSvc->getMethodName() == "SaveScoreEco") {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "Login", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "SaveEcoScore", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 

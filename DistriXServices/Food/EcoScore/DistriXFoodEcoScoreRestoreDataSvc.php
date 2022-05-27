@@ -19,8 +19,8 @@ $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 $dbConnection = null;
 $errorData    = null;
 
-// DelScoreEco
-if ($dataSvc->getMethodName() == "DelScoreEco") {
+// RestoreEcoScore
+if ($dataSvc->getMethodName() == "RestoreEcoScore") {
   $dbConnection = null;
   $errorData    = null;
   $insere       = false;
@@ -31,7 +31,7 @@ if ($dataSvc->getMethodName() == "DelScoreEco") {
     if ($dbConnection->beginTransaction()) {
       $infoScoreEco = $dataSvc->getParameter("data");
       $scoreEcostor = ScoreEcoStor::read($infoScoreEco->getId(), $dbConnection);
-      $insere       = ScoreEcoStor::remove($scoreEcostor, $dbConnection);
+      $insere       = ScoreEcoStor::restore($scoreEcostor, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();
@@ -51,7 +51,7 @@ if ($dataSvc->getMethodName() == "DelScoreEco") {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "DelScoreEco", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "RestoreEcoScore", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 
