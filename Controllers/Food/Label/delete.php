@@ -10,38 +10,35 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp         = array();
+$resp         = [];
 $confirmSave  = false;
-$error        = array();
-$output       = array();
+$error        = [];
+$output       = [];
 $outputok     = false;
 
-$label  = new DistriXFoodLabelData();
-if ($_POST['id'] > 0) {
-  $label->setId($_POST['id']);
-}
-
-$servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("DelLabel");
-$servicesCaller->addParameter("data", $label);
-$servicesCaller->setServiceName("DistriXServices/Food/Label/DistriXFoodLabelDeleteDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
-
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Label")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXLabelDeleteDataSvc");
-  $logInfoData->setLogFunction("DelLabel");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
-
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
+if (isset($_POST)) {
+  list($distriXFoodBandData, $errorJson) = DistriXFoodLabelData::getJsonData($_POST);
+  
+  $servicesCaller = new DistriXServicesCaller();
+  $servicesCaller->setMethodName("DelLabel");
+  $servicesCaller->addParameter("data", $distriXFoodBandData);
+  $servicesCaller->setServiceName("DistriXServices/Food/Label/DistriXFoodLabelDeleteDataSvc.php");
+  list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+  
+  if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Label")) {
+    $logInfoData = new DistriXLoggerInfoData();
+    $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+    $logInfoData->setLogApplication("DistriXFoodLabelDeleteDataSvc");
+    $logInfoData->setLogFunction("DelLabel");
+    $logInfoData->setLogData(print_r($output, true));
+    DistriXLogger::log($logInfoData);
   }
-} else {
-  $error = $errorData;
+  
+  if ($outputok && isset($output["ConfirmSave"])) {
+    $confirmSave = $output["ConfirmSave"];
+  } else {
+    $error = $errorData;
+  }
 }
 
 $resp["confirmSave"]  = $confirmSave;

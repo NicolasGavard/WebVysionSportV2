@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class LabelStorData {
+class LabelStorData extends DistriXSvcAppData {
   const LABEL_STATUS_AVAILABLE     = 0;
   const LABEL_STATUS_NOT_AVAILABLE = 1;
 

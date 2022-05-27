@@ -1,5 +1,3 @@
-// Dropzone.autoDiscover = false;
-
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : 'Controllers/Food/NutriScore/list.php',
@@ -53,6 +51,7 @@ $(".AddNewNutriScore").on('click', function() {
   $('.AddNutriScoreFormIdNutriScore').val(0);
   $('.AddNutriScoreFormCode').val('');
   $('.AddNutriScoreFormName').val('');
+  $('.AddNutriScoreFormColor').val('');
   $(".avatar-NutriScore").attr("src", '');
   $('.AddNutriScoreFormTimestamp').val(0);
   $('.AddNutriScoreFormStatut').val(0);
@@ -61,8 +60,9 @@ $(".AddNewNutriScore").on('click', function() {
 $(".btnAddNutriScore").on('click', function() {
   $(".page_food_NutriScore_update_title").removeClass("d-none");
   
-  var name = $('.AddNutriScoreFormName').val();
-  if (name != ""){
+  var name  = $('.AddNutriScoreFormName').val();
+  var color = $('.AddNutriScoreFormColor').val();
+  if (name != "" || color != ""){
     var data = $('#FormAddNutriScore').serializeArray(); // convert form to array
     data.push({name: "name", value: name});
     
@@ -88,6 +88,15 @@ $(".btnAddNutriScore").on('click', function() {
       setTimeout( () => { 
         $(".AddNutriScoreFormName").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (color == ''){
+      $('.AddNutriScoreFormColor').addClass("form-control-danger");
+      $('.danger-color').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddNutriScoreFormColor").removeClass("form-control-danger");
+        $('.danger-color').addClass("d-none");
       }, 3000 );
     }
   } 
@@ -142,6 +151,7 @@ function ListNutriScore(statut){
       
       const line =  '<tr>'+
                     ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td><div class="progress" style="height:40px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></td>'+ 
                     ' <td>'+val.letter+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
@@ -177,6 +187,9 @@ function ViewNutriScore(id){
       $('.AddNutriScoreFormIdNutriScore').val(id);
       $('.AddNutriScoreFormCode').val(data.ViewNutriScore.code);
       $('.AddNutriScoreFormName').val(data.ViewNutriScore.letter);
+      $('.AddNutriScoreFormColor').val(data.ViewNutriScore.color);
+      $('.asColorPicker-trigger span').attr('style',  'background-color:'+data.ViewNutriScore.color);
+
       $(".avatar-NutriScore").attr("src", data.ViewNutriScore.linktopicture);
       $('.AddNutriScoreFormTimestamp').val(data.ViewNutriScore.timestamp);
       $('.AddNutriScoreFormStatut').val(data.ViewNutriScore.statut);

@@ -10,20 +10,16 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp        = array();
-$listLabels  = array();
-$error       = array();
-$output      = array();
-$outputok    = false;
-
-$distriXFoodlabelData = new DistriXFoodlabelData();
-$distriXFoodlabelData->setStatus($_POST['status']);
+$resp           = [];
+$listLabels     = [];
+$error          = [];
+$output         = [];
+$outputok       = false;
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListLabels");
 $servicesCaller->setServiceName("DistriXServices/Food/Label/DistriXFoodLabelListDataSvc.php");
-$servicesCaller->addParameter("data", $distriXFoodlabelData);
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Label")) {
   $logInfoData = new DistriXLoggerInfoData();
@@ -34,17 +30,13 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ListLabels"])) {
-    $listLabels = $output["ListLabels"];
-  }
+if ($outputok && isset($output["ListLabels"]) && is_array($output["ListLabels"])) {
+  list($listLabels, $jsonError) = DistriXFoodLabelData::getJsonArray($output["ListLabels"]);
 } else {
-  $error = $errorData;
+  $error              = $errorData;
+  $resp["Error"]      = $error;
 }
 
-$resp["ListLabels"]  = $listLabels;
-if(!empty($error)){
-  $resp["Error"]        = $error;
-}
+$resp["ListLabels"]   = $listLabels;
 
 echo json_encode($resp);
