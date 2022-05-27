@@ -35,7 +35,8 @@
 							<thead>
 								<tr>                 
                   <th width="20%" class="table-plus datatable-nosort"><span><?php echo $page_picture; ?></span></th>
-                  <th width="70%"><span><?php echo $page_name; ?></span></th>
+                  <th width="10%"><span><?php echo $page_color; ?></span></th>
+                  <th width="60%"><span><?php echo $page_name; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
@@ -53,11 +54,18 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
                     <input class="form-control AddNovaScoreFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_color; ?></label>
+                    <input class="colorpicker form-control AddNovaScoreFormColor" type="text" name="color" placeholder="<?php echo $page_color; ?>">
+                    <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_color; ?> </div>
                   </div>
                 </div>
                 

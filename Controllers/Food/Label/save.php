@@ -16,18 +16,11 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
-$distriXCodeTableLabelData = new DistriXFoodLabelData();
-$distriXCodeTableLabelData->setId($_POST['id']);
-$distriXCodeTableLabelData->setCode($_POST['code']);
-$distriXCodeTableLabelData->setName($_POST['name']);
-$distriXCodeTableLabelData->setLinkToPicture('');
-if($_POST['linkToPictureBase64'] != '') { $distriXCodeTableLabelData->setLinkToPicture($_POST['linkToPictureBase64']);}
-$distriXCodeTableLabelData->setTimestamp($_POST['timestamp']);
-$distriXCodeTableLabelData->setStatus($_POST['statut']);
+list($distriXFoodBandData, $errorJson) = DistriXFoodLabelData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveLabel");
-$servicesCaller->addParameter("data", $distriXCodeTableLabelData);
+$servicesCaller->addParameter("data", $distriXFoodBandData);
 $servicesCaller->setServiceName("DistriXServices/Food/Label/DistriXFoodLabelSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
@@ -40,10 +33,8 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
-  }
+if ($outputok && isset($output["ConfirmSave"])) {
+  list($confirmSave, $jsonError) = DistriXFoodLabelData::getJsonArray($output["ConfirmSave"]);
 } else {
   $error = $errorData;
 }

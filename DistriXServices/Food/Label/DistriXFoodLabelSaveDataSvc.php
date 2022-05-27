@@ -5,8 +5,6 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Database Data
-include(__DIR__ . "/Data/LabelStorData.php");
 // Trace Data
 include(__DIR__ . "/../../../DistriXTrace/data/DistriXTraceData.php");
 // Error Data
@@ -14,61 +12,58 @@ include(__DIR__ . "/../../../DistriXSvc/Data/DistriXSvcErrorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/LabelStor.php");
-// Stor Data
-include(__DIR__ . "/Data/DistriXFoodLabelData.php");
+// Database Data
+include(__DIR__ . "/Data/LabelStorData.php");
 // Distrix CDN
 include(__DIR__ . "/../../../DistriXCdn/DistriXCdn.php");
 include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
+$dbConnection = null;
+$errorData    = null;
 
 // SaveLabel
 if ($dataSvc->getMethodName() == "SaveLabel") {
-  $dbConnection = null;
-  $errorData    = null;
   $insere       = false;
-  $infoLabel     = new DistriXFoodLabelData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoLabel     = $dataSvc->getParameter("data");
-      $LabelStorData = DistriXSvcUtil::setData($infoLabel, "LabelStorData");
+      list($data, $jsonError) = LabelStorData::getJsonData($dataSvc->getParameter("data"));
       $canSaveLabel  = true;
-      if ($infoLabel->getId() == 0) {
+      if ($data->getId() == 0) {
         // Verify Code Exist
-        list($styLabelStor, $styLabelStorInd) = LabelStor::findByCode($LabelStorData, true, $dbConnection);
-        if ($styLabelStorInd > 0) {
+        list($labelStor, $labelStorInd) = LabelStor::findByCode($data, true, $dbConnection);
+        if ($labelStorInd > 0) {
           $canSaveLabel          = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
-          $distriXSvcErrorData->setDefaultText("The Code " . $infoLabel->getCode() . " is already in use");
+          $distriXSvcErrorData->setDefaultText("The Code " . $data->getCode() . " is already in use");
           $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
           $errorData = $distriXSvcErrorData;
         }
       }
 
       if ($canSaveLabel) {
-        $LabelStorData = new LabelStorData();
-        $LabelStorData->setId($infoLabel->getId());
-        $LabelStorData->setCode($infoLabel->getCode());
-        $LabelStorData->setName($infoLabel->getName());
-        $LabelStorData->setStatut($infoLabel->getStatut());
-        $LabelStorData->setTimestamp($infoLabel->getTimestamp());
+        $labelStorData = LabelStor::read($data->getId(), $dbConnection);
+        $labelStorData->setId($data->getId());
+        $labelStorData->setCode(strtoupper(trim(DistriXSvcUtil::remove_accents($data->getName()))));
+        $labelStorData->setName($data->getName());
+        $labelStorData->setStatut($data->getStatut());
+        $labelStorData->setTimestamp($data->getTimestamp());
         
-        if ($infoLabel->getLinkToPicture() != "" && $infoLabel->getLinkToPicture() != $LabelStorData->getLinkToPicture()) {
-          $image          = file_get_contents($infoLabel->getLinkToPicture());
+        if ($data->getLinkToPicture() != "" && $data->getLinkToPicture() != $labelStorData->getLinkToPicture()) {
+          $image          = file_get_contents($data->getLinkToPicture());
           $imageInfo      = getimagesizefromstring($image);
           $imageExtension = str_replace("image/", "", $imageInfo['mime']);
 
           if ($imageExtension == "jpg" || $imageExtension == "png" || $imageExtension == "jpeg" || $imageExtension == "gif") {
             $imageName    = DistriXSvcUtil::generateRandomText(50);
-            $imageFile    = substr($infoLabel->getLinkToPicture(), strpos($infoLabel->getLinkToPicture(), ",") + 1);
+            $imageFile    = substr($data->getLinkToPicture(), strpos($data->getLinkToPicture(), ",") + 1);
 
             $cdn          = new DistriXCdn();
             $data         = new DistriXCdnData();
             $data->setImageGroup(DISTRIX_CDN_GROUP_IMAGES);
-            $data->setImageFamily(DISTRIX_CDN_FOLDER_CODE_TABLES);
+            $data->setImageFamily(DISTRIX_CDN_FOLDER_FOOD);
             $data->setImageName($imageName);
             $data->setImageType($imageInfo['mime']);
             $data->setImage($imageFile);
@@ -76,9 +71,9 @@ if ($dataSvc->getMethodName() == "SaveLabel") {
             $confirmSavePicture = $cdn->sendToCdn();
 
             if ($confirmSavePicture) {
-              $LabelStorData->setLinkToPicture($imageName);
-              $LabelStorData->setSize($imageInfo['bits']);
-              $LabelStorData->setType($imageInfo['mime']);
+              $labelStorData->setLinkToPicture($imageName);
+              $labelStorData->setSize($imageInfo['bits']);
+              $labelStorData->setType($imageInfo['mime']);
             } else {
               $distriXSvcErrorData = new DistriXSvcErrorData();
               $distriXSvcErrorData->setCode("400");
@@ -92,17 +87,17 @@ if ($dataSvc->getMethodName() == "SaveLabel") {
             $distriXSvcErrorData->setText("BAD_IMAGE_EXTENSION");
           }
         } else {
-          $LabelStorData->setLinkToPicture($LabelStorData->getLinkToPicture());
-          $LabelStorData->setSize($LabelStorData->getSize());
-          $LabelStorData->setType($LabelStorData->getType());
+          $labelStorData->setLinkToPicture($labelStorData->getLinkToPicture());
+          $labelStorData->setSize($labelStorData->getSize());
+          $labelStorData->setType($labelStorData->getType());
         }
-        list($insere, $idLabel) = LabelStor::save($LabelStorData, $dbConnection);
+        list($insere, $idLabel) = LabelStor::save($labelStorData, $dbConnection);
 
         if ($insere) {
           $dbConnection->commit();
         } else {
           $dbConnection->rollBack();
-          if ($infoLabel->getId() > 0) {
+          if ($data->getId() > 0) {
             $errorData = ApplicationErrorData::warningUpdateData(1, 1);
           } else {
             $errorData = ApplicationErrorData::warningInsertData(1, 1);
@@ -117,11 +112,11 @@ if ($dataSvc->getMethodName() == "SaveLabel") {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "Login", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "SaveLabel", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 
-  $dataSvc->addToResponse("ConfirmSaveLabel", $insere);
+  $dataSvc->addToResponse("ConfirmSave", $insere);
 }
 
 // Return response

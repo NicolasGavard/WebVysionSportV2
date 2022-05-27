@@ -16,24 +16,25 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 // DistriX LOGGER
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+
+session_start();
 $resp           = array();
+$listLanguages  = array();
 $listWeightType = array();
 $error          = array();
 $output         = array();
 $outputok       = false;
 
-$listLanguages        = DistriXStyLanguage::listLanguages();
-
-session_start();
-$infoProfil           = DistriXStyAppInterface::getUserInformation();
-$distriXGeneralIdData = new DistriXGeneralIdData();
-$distriXGeneralIdData->setId($infoProfil->getIdLanguage());
+// $listLanguages        = DistriXStyLanguage::listLanguages();
+$infoProfil[0]['idLanguage'] = 1;
+$_POST['id'] = $infoProfil[0]['idLanguage']; // NG 27-05-22 - until a solution is found
+list($distriXStyLanguageData, $errorJson) = DistriXStyLanguageData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListWeightType");
-$servicesCaller->addParameter("dataLanguage", $distriXGeneralIdData);
+$servicesCaller->addParameter("data", $distriXStyLanguageData);
 $servicesCaller->setServiceName("DistriXServices/TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_WeightType")) {
   $logInfoData = new DistriXLoggerInfoData();
@@ -44,10 +45,8 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ListWeightType"])) {
-    $listWeightType = $output["ListWeightType"];
-  }
+if ($outputok && isset($output["ListWeightType"]) && is_array($output["ListWeightType"])) {
+  list($listWeightType, $jsonError) = DistriXCodeTableWeightTypeNameData::getJsonArray($output["ListWeightType"]);
 } else {
   $error = $errorData;
 }

@@ -1,5 +1,3 @@
-// Dropzone.autoDiscover = false;
-
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : 'Controllers/Food/NovaScore/list.php',
@@ -53,6 +51,7 @@ $(".AddNewNovaScore").on('click', function() {
   $('.AddNovaScoreFormIdNovaScore').val(0);
   $('.AddNovaScoreFormCode').val('');
   $('.AddNovaScoreFormName').val('');
+  $('.AddNovaScoreFormColor').val('');
   $(".avatar-NovaScore").attr("src", '');
   $('.AddNovaScoreFormTimestamp').val(0);
   $('.AddNovaScoreFormStatut').val(0);
@@ -61,8 +60,9 @@ $(".AddNewNovaScore").on('click', function() {
 $(".btnAddNovaScore").on('click', function() {
   $(".page_food_NovaScore_update_title").removeClass("d-none");
   
-  var name = $('.AddNovaScoreFormName').val();
-  if (name != ""){
+  var name  = $('.AddNovaScoreFormName').val();
+  var color = $('.AddNovaScoreFormColor').val();
+  if (name != "" || color != ""){
     var data = $('#FormAddNovaScore').serializeArray(); // convert form to array
     data.push({name: "name", value: name});
     
@@ -88,6 +88,15 @@ $(".btnAddNovaScore").on('click', function() {
       setTimeout( () => { 
         $(".AddNovaScoreFormName").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (color == ''){
+      $('.AddNovaScoreFormColor').addClass("form-control-danger");
+      $('.danger-color').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddNovaScoreFormColor").removeClass("form-control-danger");
+        $('.danger-color').addClass("d-none");
       }, 3000 );
     }
   } 
@@ -141,7 +150,8 @@ function ListNovaScore(statut){
       if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td><img style="max-height:80px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td><div class="progress" style="height:40px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></td>'+ 
                     ' <td>'+val.number+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
@@ -177,6 +187,9 @@ function ViewNovaScore(id){
       $('.AddNovaScoreFormIdNovaScore').val(id);
       $('.AddNovaScoreFormCode').val(data.ViewNovaScore.code);
       $('.AddNovaScoreFormName').val(data.ViewNovaScore.number);
+      $('.AddNovaScoreFormColor').val(data.ViewNovaScore.color);
+      $('.asColorPicker-trigger span').attr('style',  'background-color:'+data.ViewNovaScore.color);
+
       $(".avatar-NovaScore").attr("src", data.ViewNovaScore.linktopicture);
       $('.AddNovaScoreFormTimestamp').val(data.ViewNovaScore.timestamp);
       $('.AddNovaScoreFormStatut').val(data.ViewNovaScore.statut);

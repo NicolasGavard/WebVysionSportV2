@@ -5,13 +5,11 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/Data/DistriXFoodLabelData.php");
-// Database Data
-include(__DIR__ . "/Data/LabelStorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/LabelStor.php");
+// Database Data
+include(__DIR__ . "/Data/LabelStorData.php");
 // Trace Data
 include(__DIR__ . "/../../../DistriXTrace/data/DistriXTraceData.php");
 
@@ -21,27 +19,19 @@ $errorData    = null;
 
 // RestoreLabel
 if ($dataSvc->getMethodName() == "RestoreLabel") {
-  $dbConnection = null;
-  $errorData    = null;
   $insere       = false;
-  $infoLabel     = new DistriXFoodLabelData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoLabel    = $dataSvc->getParameter("data");
-      $scoreEcostor = LabelStor::read($infoLabel->getId(), $dbConnection);
-      $insere       = LabelStor::restore($scoreEcostor, $dbConnection);
+      list($data, $jsonError) = LabelStorData::getJsonData($dataSvc->getParameter("data"));
+      $labelStorData          = LabelStor::read($data->getId(), $dbConnection);
+      $insere                 = LabelStor::restore($labelStorData, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();
       } else {
         $dbConnection->rollBack();
-        if ($infoLabel->getId() > 0) {
-          $errorData = ApplicationErrorData::warningUpdateData(1, 1);
-        } else {
-          $errorData = ApplicationErrorData::warningInsertData(1, 1);
-        }
+        $errorData = ApplicationErrorData::warningUpdateData(1, 1);
       }
     } else {
       $errorData = ApplicationErrorData::noBeginTransaction(1, 1);

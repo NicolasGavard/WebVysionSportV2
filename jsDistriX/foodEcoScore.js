@@ -51,6 +51,7 @@ $(".AddNewEcoScore").on('click', function() {
   $('.AddEcoScoreFormIdEcoScore').val(0);
   $('.AddEcoScoreFormCode').val('');
   $('.AddEcoScoreFormName').val('');
+  $('.AddEcoScoreFormColor').val('');
   $(".avatar-EcoScore").attr("src", '');
   $('.AddEcoScoreFormTimestamp').val(0);
   $('.AddEcoScoreFormStatut').val(0);
@@ -59,8 +60,9 @@ $(".AddNewEcoScore").on('click', function() {
 $(".btnAddEcoScore").on('click', function() {
   $(".page_food_EcoScore_update_title").removeClass("d-none");
   
-  var name = $('.AddEcoScoreFormName').val();
-  if (name != ""){
+  var name  = $('.AddEcoScoreFormName').val();
+  var color = $('.AddEcoScoreFormColor').val();
+  if (name != "" || color != ""){
     var data = $('#FormAddEcoScore').serializeArray(); // convert form to array
     data.push({name: "name", value: name});
     
@@ -86,6 +88,15 @@ $(".btnAddEcoScore").on('click', function() {
       setTimeout( () => { 
         $(".AddEcoScoreFormName").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (color == ''){
+      $('.AddEcoScoreFormColor').addClass("form-control-danger");
+      $('.danger-color').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddEcoScoreFormColor").removeClass("form-control-danger");
+        $('.danger-color').addClass("d-none");
       }, 3000 );
     }
   } 
@@ -140,6 +151,7 @@ function ListEcoScore(statut){
       
       const line =  '<tr>'+
                     ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td><div class="progress" style="height:40px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></td>'+ 
                     ' <td>'+val.letter+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
@@ -175,6 +187,9 @@ function ViewEcoScore(id){
       $('.AddEcoScoreFormIdEcoScore').val(id);
       $('.AddEcoScoreFormCode').val(data.ViewEcoScore.code);
       $('.AddEcoScoreFormName').val(data.ViewEcoScore.letter);
+      $('.AddEcoScoreFormColor').val(data.ViewEcoScore.color);
+      $('.asColorPicker-trigger span').attr('style',  'background-color:'+data.ViewEcoScore.color);
+
       $(".avatar-EcoScore").attr("src", data.ViewEcoScore.linktopicture);
       $('.AddEcoScoreFormTimestamp').val(data.ViewEcoScore.timestamp);
       $('.AddEcoScoreFormStatut').val(data.ViewEcoScore.statut);

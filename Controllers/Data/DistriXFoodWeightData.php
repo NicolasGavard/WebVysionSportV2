@@ -27,28 +27,28 @@ if (!class_exists("DistriXFoodWeightData", false)) {
       $this->timestamp      = 0;
     }
     // Gets
-    public function getId() { return $this->id; }
-    public function getIdFood() { return $this->idFood; }
-    public function getIdWeightType() { return $this->idWeightType; }
-    public function getNameWeightType() { return $this->nameWeightType; }
-    public function getWeight() { return $this->weight; }
-    public function getLinkToPicture() { return $this->linkToPicture; }
-    public function getSize() { return $this->size; }
-    public function getType() { return $this->type; }
-    public function getStatut() { return $this->statut; }
-    public function getTimestamp() { return $this->timestamp; }
+    public function getId():int { return $this->id; }
+    public function getIdFood():int { return $this->idFood; }
+    public function getIdWeightType():int { return $this->idWeightType; }
+    public function getNameWeightType():string { return $this->nameWeightType; }
+    public function getWeight():float { return $this->weight; }
+    public function getLinkToPicture():string { return $this->linkToPicture; }
+    public function getSize():int { return $this->size; }
+    public function getType():string { return $this->type; }
+    public function getStatut():int { return $this->statut; }
+    public function getTimestamp():int { return $this->timestamp; }
 
     // Sets
-    public function setId($id) { $this->id = $id; }
-    public function setIdFood($idFood) { $this->idFood = $idFood; }
-    public function setIdWeightType($idWeightType) { $this->idWeightType = $idWeightType; }
-    public function setNameWeightType($nameWeightType) { $this->nameWeightType = $nameWeightType; }
-    public function setWeight($weight) { $this->weight = $weight; }
-    public function setLinkToPicture($linkToPicture) { $this->linkToPicture = $linkToPicture; }
-    public function setSize($size) { $this->size = $size; }
-    public function setType($type) { $this->type = $type; }
-    public function setStatut($statut) { $this->statut = $statut; }
-    public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+    public function setId(int $id) { $this->id = $id; }
+    public function setIdFood(int $idFood) { $this->idFood = $idFood; }
+    public function setIdWeightType(int $idWeightType) { $this->idWeightType = $idWeightType; }
+    public function setNameWeightType(string $nameWeightType) { $this->nameWeightType = $nameWeightType; }
+    public function setWeight(float $weight) { $this->weight = $weight; }
+    public function setLinkToPicture(string $linkToPicture) { $this->linkToPicture = $linkToPicture; }
+    public function setSize(int $size) { $this->size = $size; }
+    public function setType(string $type) { $this->type = $type; }
+    public function setStatut(int $statut) { $this->statut = $statut; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }

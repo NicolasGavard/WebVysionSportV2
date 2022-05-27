@@ -21,22 +21,22 @@ if (!class_exists("DistriXCodeTableWeightTypeData", false)) {
       $this->timestamp  = 0;
     }
     // Gets
-    public function getId() { return $this->id; }
-    public function getCode() { return $this->code; }
-    public function getIsLiquid() { return $this->isLiquid; }
-    public function getIsSolid() { return $this->isSolid; }
-    public function getIsOther() { return $this->isOther; }
-    public function getStatut() { return $this->statut; }
-    public function getTimestamp() { return $this->timestamp; }
+    public function getId():int { return $this->id; }
+    public function getCode():string { return $this->code; }
+    public function getIsLiquid():int { return $this->isLiquid; }
+    public function getIsSolid():int { return $this->isSolid; }
+    public function getIsOther():int { return $this->isOther; }
+    public function getStatut():int { return $this->statut; }
+    public function getTimestamp():int { return $this->timestamp; }
 
     // Sets
-    public function setId($id) { $this->id = $id; }
-    public function setCode($code) { $this->code = $code; }
-    public function setIsLiquid($isLiquid) { $this->isLiquid = $isLiquid; }
-    public function setIsSolid($isSolid) { $this->isSolid = $isSolid; }
-    public function setIsOther($isOther) { $this->isOther = $isOther; }
-    public function setStatut($statut) { $this->statut = $statut; }
-    public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+    public function setId(int $id) { $this->id = $id; }
+    public function setCode(string $code) { $this->code = $code; }
+    public function setIsLiquid(int $isLiquid) { $this->isLiquid = $isLiquid; }
+    public function setIsSolid(int $isSolid) { $this->isSolid = $isSolid; }
+    public function setIsOther(int $isOther) { $this->isOther = $isOther; }
+    public function setStatut(int $statut) { $this->statut = $statut; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }
