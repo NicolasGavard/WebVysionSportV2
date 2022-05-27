@@ -4,12 +4,12 @@ include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 include(__DIR__ . "/../../Data/DistriXGeneralIdData.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyLanguage.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
 include(__DIR__ . "/../../Data/DistriXFoodFoodData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableFoodCategoryData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableFoodCategoryNameData.php");
+include(__DIR__ . "/../../Data/DistriXCodeTableLanguageData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableNutritionalData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableNutritionalNameData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableWeightTypeData.php");
@@ -35,7 +35,7 @@ include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 session_start();
 $resp             = array();
 $listFoods        = array();
-$listWeightType   = array();
+$listWeightTypes  = array();
 $listBrands       = array();
 $listLabels       = array();
 $listEcoScores    = array();
@@ -50,17 +50,17 @@ $servicesCaller   = new DistriXServicesCaller();
 list($distriXFoodFoodData, $errorJson)    = DistriXFoodFoodData::getJsonData($_POST);
 $infoProfil[0]['idLanguage'] = 1;
 $_POST['id'] = $infoProfil[0]['idLanguage']; // NG 27-05-22 - until a solution is found
-list($distriXStyLanguageData, $errorJson) = DistriXStyLanguageData::getJsonData($_POST);
+list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
 
 $foodCaller = new DistriXServicesCaller();
 $foodCaller->setServiceName("DistriXServices/Food/Food/DistriXFoodListDataSvc.php");
 $foodCaller->setMethodName("ListFoods");
-$foodCaller->addParameter("dataLanguage", $distriXStyLanguageData);
+$foodCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 $foodCaller->addParameter("dataFood", $distriXFoodFoodData);
 
 $weightTypeCaller = new DistriXServicesCaller();
-$weightTypeCaller->setMethodName("ListWeightType");
-$weightTypeCaller->addParameter("dataLanguage", $distriXStyLanguageData);
+$weightTypeCaller->setMethodName("ListWeightTypes");
+$weightTypeCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 $weightTypeCaller->setServiceName("DistriXServices/TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
 
 $foodBrandCaller = new DistriXServicesCaller();
@@ -104,11 +104,12 @@ if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) 
 }
 
 list($outputok, $output, $errorData) = $svc->getResult("WeightType"); //var_dump($output);
-if ($outputok && isset($output["ListWeightType"]) && is_array($output["ListWeightType"])) {
-  list($listWeightType, $jsonError) = DistriXFoodWeightData::getJsonArray($output["ListWeightType"]);
+if ($outputok && isset($output["ListWeightTypes"]) && is_array($output["ListWeightTypes"])) {
+  list($listWeightTypes, $jsonError) = DistriXCodeTableWeightTypeData::getJsonArray($output["ListWeightTypes"]);
 } else {
   $error = $errorData;
 }
+
 
 list($outputok, $output, $errorData) = $svc->getResult("FoodBrand"); //var_dump($output);
 if ($outputok && isset($output["ListBrands"]) && is_array($output["ListBrands"])) {
@@ -155,7 +156,7 @@ $resp["ListLabels"]       = $listLabels;
 $resp["ListEcoScores"]    = $listEcoScores;
 $resp["ListNovaScores"]   = $listNovaScores;
 $resp["ListNutriScores"]  = $listNutriScores;
-$resp["ListWeightType"]   = $listWeightType;
+$resp["ListWeightTypes"]  = $listWeightTypes;
 
 if(!empty($error)){
   $resp["Error"]          = $error;

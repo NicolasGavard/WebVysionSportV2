@@ -16,12 +16,12 @@ include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
 session_start();
-$resp           = array();
-$listLanguages   = array();
-$listWeightTypes = array();
-$error          = array();
-$output         = array();
-$outputok       = false;
+$resp             = array();
+$listLanguages    = array();
+$listWeightTypes  = array();
+$error            = array();
+$output           = array();
+$outputok         = false;
 
 $infoProfil[0]['idLanguage'] = 1;
 $_POST['id'] = $infoProfil[0]['idLanguage']; // NG 27-05-22 - until a solution is found
@@ -32,8 +32,8 @@ $languageCaller->setMethodName("ListLanguages");
 $languageCaller->setServiceName("DistriXServices/TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
 $weightTypeCaller = new DistriXServicesCaller();
-$weightTypeCaller->setMethodName("ListWeightType");
-$weightTypeCaller->addParameter("data", $distriXCodeTableLanguageData);
+$weightTypeCaller->setMethodName("ListWeightTypes");
+$weightTypeCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 $weightTypeCaller->setServiceName("DistriXServices/TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
 
 $svc = new DistriXSvc();
@@ -50,8 +50,8 @@ if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLangua
 }
 
 list($outputok, $output, $errorData) = $svc->getResult("WeightType"); //var_dump($output);
-if ($outputok && isset($output["ListWeightType"]) && is_array($output["ListWeightType"])) {
-  list($listWeightTypes, $jsonError) = DistriXCodeTableWeightTypeData::getJsonArray($output["ListWeightType"]);
+if ($outputok && isset($output["ListWeightTypes"]) && is_array($output["ListWeightTypes"])) {
+  list($listWeightTypes, $jsonError) = DistriXCodeTableWeightTypeData::getJsonArray($output["ListWeightTypes"]);
 } else {
   $error = $errorData;
 }
