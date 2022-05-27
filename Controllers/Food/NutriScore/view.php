@@ -21,7 +21,7 @@ $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewNutriScore");
 $servicesCaller->addParameter("data", $distriXFoodNutriScoreData);
 $servicesCaller->setServiceName("DistriXServices/Food/NutriScore/DistriXFoodNutriScoreViewDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NutriScore")) {
   $logInfoData = new DistriXLoggerInfoData();
