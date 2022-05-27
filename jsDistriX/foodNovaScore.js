@@ -101,18 +101,18 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListNovaScore(status){
+function ListNovaScore(statut){
   $('#listNovaScoresTbody').empty();
 
   $.ajax({
     url : 'Controllers/Food/ScoreNova/list.php',
     type : 'POST',
     dataType : 'JSON',
-    data: {'status': status},
+    data: {'statut': statut},
     success : function(data) {
       $.map(data.ListScoresNova, function(val, key) {
-        if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listNovaScoresTbody').append(
           '<tr>'+
@@ -156,7 +156,7 @@ function ViewNovaScore(id){
       $('.AddNovaScoreFormColor').val(data.ViewNovaScore.color);
       $(".avatar-nova_score").attr("src", data.ViewNovaScore.linkToPicture);
       $('.AddNovaScoreFormTimestamp').val(data.ViewNovaScore.timestamp);
-      $('.AddNovaScoreFormStatut').val(data.ViewNovaScore.status);
+      $('.AddNovaScoreFormStatut').val(data.ViewNovaScore.statut);
       $('.showPicture').removeClass("d-none");
       
       $('.asColorPicker-trigger span').attr("style", 'background:'+data.ViewNovaScore.color);

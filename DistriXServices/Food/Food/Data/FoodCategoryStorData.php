@@ -20,7 +20,7 @@ class FoodCategoryStorData {
   public function getId() { return $this->id; }
   public function getIdFood() { return $this->idfood; }
   public function getIdCategory() { return $this->idcategory; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::FOODCATEGORY_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::FOODCATEGORY_STATUS_AVAILABLE; }
@@ -29,7 +29,7 @@ class FoodCategoryStorData {
   public function setId($id) { $this->id = $id; }
   public function setIdFood($idFood) { $this->idfood = $idFood; }
   public function setIdCategory($idCategory) { $this->idcategory = $idCategory; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::FOODCATEGORY_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::FOODCATEGORY_STATUS_NOT_AVAILABLE; }

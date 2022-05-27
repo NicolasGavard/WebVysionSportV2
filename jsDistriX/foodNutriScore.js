@@ -101,18 +101,18 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListNutriScore(status){
+function ListNutriScore(statut){
   $('#listNutriScoresTbody').empty();
 
   $.ajax({
     url : 'Controllers/Food/ScoreNutri/list.php',
     type : 'POST',
     dataType : 'JSON',
-    data: {'status': status},
+    data: {'statut': statut},
     success : function(data) {
       $.map(data.ListScoresNutri, function(val, key) {
-        if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listNutriScoresTbody').append(
           '<tr>'+
@@ -156,7 +156,7 @@ function ViewNutriScore(id){
       $('.AddNutriScoreFormColor').val(data.ViewNutriScore.color);
       $(".avatar-nutri_score").attr("src", data.ViewNutriScore.linkToPicture);
       $('.AddNutriScoreFormTimestamp').val(data.ViewNutriScore.timestamp);
-      $('.AddNutriScoreFormStatut').val(data.ViewNutriScore.status);
+      $('.AddNutriScoreFormStatut').val(data.ViewNutriScore.statut);
       $('.showPicture').removeClass("d-none");
       
       $('.asColorPicker-trigger span').attr("style", 'background:'+data.ViewNutriScore.color);

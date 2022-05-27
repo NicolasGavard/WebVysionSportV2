@@ -24,7 +24,7 @@ $labels       = [];
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   $data = $dataSvc->getParameter("data");
-  list($labelStor, $labelStorInd) = LabelStor::getList($data->getStatus(), $dbConnection);
+  list($labelStor, $labelStorInd) = LabelStor::getList($data->getStatut(), $dbConnection);
   foreach ($labelStor as $Label) {
     $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $Label->getLinkToPicture();
     $pictures_headers = get_headers($urlPicture);

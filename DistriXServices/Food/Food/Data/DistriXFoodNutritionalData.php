@@ -12,7 +12,7 @@ if (!class_exists("DistriXFoodNutritionalData", false)) {
     protected $idWeightTypeBase;
     protected $nameWeightTypeBase;
     protected $weightTypeBase;
-    protected $status;
+    protected $statut;
     protected $timestamp;
 
     public function __construct()
@@ -27,7 +27,7 @@ if (!class_exists("DistriXFoodNutritionalData", false)) {
       $this->idweighttypebase     = 0;
       $this->nameweighttypebase  = "";
       $this->weighttypebase       = 0;
-      $this->status               = 0;
+      $this->statut               = 0;
       $this->timestamp            = 0;
     }
     // Gets
@@ -41,7 +41,7 @@ if (!class_exists("DistriXFoodNutritionalData", false)) {
     public function getIdWeightTypeBase() { return $this->idWeightTypeBase; }
     public function getNameWeightTypeBase() { return $this->nameWeightTypeBase; }
     public function getWeightTypeBase() { return $this->weightTypeBase; }
-    public function getStatus() { return $this->status; }
+    public function getStatut() { return $this->statut; }
     public function getTimestamp() { return $this->timestamp; }
 
     // Sets
@@ -55,7 +55,7 @@ if (!class_exists("DistriXFoodNutritionalData", false)) {
     public function setIdWeightTypeBase($idWeightTypeBase) { $this->idWeightTypeBase = $idWeightTypeBase; }
     public function setNameWeightTypeBase($nameWeightTypeBase) { $this->nameWeightTypeBase = $nameWeightTypeBase; }
     public function setWeightTypeBase($weightTypeBase) { $this->weightTypeBase = $weightTypeBase; }
-    public function setStatus($status) { $this->status = $status; }
+    public function setStatut($statut) { $this->statut = $statut; }
     public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class

@@ -17,7 +17,7 @@ class CategoryStorData {
 // Gets
   public function getId() { return $this->id; }
   public function getCode() { return $this->code; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::CATEGORY_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::CATEGORY_STATUS_AVAILABLE; }
@@ -25,7 +25,7 @@ class CategoryStorData {
 // Sets
   public function setId($id) { $this->id = $id; }
   public function setCode($code) { $this->code = $code; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::CATEGORY_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::CATEGORY_STATUS_NOT_AVAILABLE; }

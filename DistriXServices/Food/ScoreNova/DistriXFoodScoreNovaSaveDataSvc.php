@@ -55,7 +55,7 @@ if ($dataSvc->getMethodName() == "SaveScoreNova") {
         $scoreNovaStorData->setNumber($infoScoreNova->getNumber());
         $scoreNovaStorData->setColor($infoScoreNova->getColor());
         $scoreNovaStorData->setDescription($infoScoreNova->getDescription());
-        $scoreNovaStorData->setStatus($infoScoreNova->getStatus());
+        $scoreNovaStorData->setStatut($infoScoreNova->getStatut());
         $scoreNovaStorData->setTimestamp($infoScoreNova->getTimestamp());
         
         if ($infoScoreNova->getLinkToPicture() != "") {

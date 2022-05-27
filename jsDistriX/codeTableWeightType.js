@@ -8,8 +8,8 @@ $.ajax({
     $.map(data.ListWeightType, function(val, key) {
       idLanguage = val.idLanguage;
       
-      if (val.status == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if (val.status == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+      if (val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if (val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       var weightTypeType  = '<i class="menu-icon mdi mdi-weight"></i> '+language.page_codeTables_weight_type_solid_title;
       if (val.isSolid == 1)  {weightTypeType  = '<i class="menu-icon mdi mdi-weight"></i> '+language.page_codeTables_weight_type_solid_title;}
@@ -160,7 +160,7 @@ function ViewWeightType(id, idWeightType,idLanguage){
       if (data.ViewWeightType.isOther == 1) {$('.AddWeightTypeFormIsOther').prop('checked', true);}
 
       $('.AddWeightTypeFormTimestamp').val(data.ViewWeightType.timestamp);
-      $('.AddWeightTypeFormStatut').val(data.ViewWeightType.status);
+      $('.AddWeightTypeFormStatut').val(data.ViewWeightType.statut);
     },
     error : function(data) {
       console.log(data);

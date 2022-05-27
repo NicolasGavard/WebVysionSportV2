@@ -11,7 +11,7 @@ $(".page_food_food_score_nutri").text(language.page_food_food_score_nutri);
 $(".page_food_food_score_nova").text(language.page_food_food_score_nova);
 $(".page_food_food_score_eco").text(language.page_food_food_score_eco);
 $(".page_food_food_picture").text(language.page_food_food_picture);
-$(".page_food_food_status").text(language.page_food_food_status);
+$(".page_food_food_statut").text(language.page_food_food_statut);
 $(".page_food_food_action").text(language.page_food_food_action);
 $(".page_food_food_add_title").text(language.page_food_food_add_title);
 $(".page_food_food_update_title").text(language.page_food_food_update_title);
@@ -274,8 +274,8 @@ function showListFood(idBrand, idLabel, idScoreNutri, idScoreNova, idScoreEco){
       });
       
       $.map(data.ListFoods, function(val, key) {
-        if(val.status == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.status == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if(val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         var weights = '';
         $.map(val.foodWeights, function(valWeights, key) {
@@ -374,7 +374,7 @@ function ViewFood(id){
       $('.AddFoodFormColor').val(data.ViewFood.color);
       $(".InfoFoodPicture").attr("src", data.ViewFood.linkToPicture);
       $('.AddFoodFormTimestamp').val(data.ViewFood.timestamp);
-      $('.AddFoodFormStatut').val(data.ViewFood.status);
+      $('.AddFoodFormStatut').val(data.ViewFood.statut);
     },
     error : function(data) {
       console.log(data);

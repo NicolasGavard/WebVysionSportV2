@@ -10,16 +10,16 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp           = array();
-$listBrands     = array();
-$error          = array();
-$output         = array();
+$resp           = [];
+$listBrands     = [];
+$error          = [];
+$output         = [];
 $outputok       = false;
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListBrands");
 $servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandListDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {
   $logInfoData = new DistriXLoggerInfoData();
@@ -30,15 +30,13 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-// print_r($output["ListBrands"]);
-
 if ($outputok && isset($output["ListBrands"]) && is_array($output["ListBrands"])) {
   list($listBrands, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ListBrands"]);
-  $resp["ListBrands"] = $listBrands;
-  // $resp["ListBrands"] = $output["ListBrands"]; // A tester !
 } else {
-  $resp["ListBrands"] = [];
   $error              = $errorData;
   $resp["Error"]      = $error;
 }
+
+$resp["ListBrands"]   = $listBrands;
+
 echo json_encode($resp);

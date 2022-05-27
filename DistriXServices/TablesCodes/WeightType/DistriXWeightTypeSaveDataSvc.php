@@ -52,7 +52,7 @@ if ($dataSvc->getMethodName() == "SaveWeightType") {
         $weightTypeStorData = new WeightTypeStorData();
         $weightTypeStorData->setId($infoWeightType->getId());
         $weightTypeStorData->setCode($infoWeightType->getCode());
-        $weightTypeStorData->setStatus($infoWeightType->getStatus());
+        $weightTypeStorData->setStatut($infoWeightType->getStatut());
         $weightTypeStorData->setTimestamp($infoWeightType->getTimestamp());
         list($insere, $idWeightType) = WeightTypeStor::save($weightTypeStorData, $dbConnection);
         
@@ -64,7 +64,7 @@ if ($dataSvc->getMethodName() == "SaveWeightType") {
           $weightTypeNameStorData->setName($infoWeightType->getName());
           $weightTypeNameStorData->setDescription($infoWeightType->getDescription());
           $weightTypeNameStorData->setAbbreviation($infoWeightType->getAbbreviation());
-          $weightTypeNameStorData->setStatus($infoWeightType->getStatus());
+          $weightTypeNameStorData->setStatut($infoWeightType->getStatut());
           $weightTypeNameStorData->setTimestamp($infoWeightType->getTimestamp());
           list($insere, $idWeightTypeName) = WeightTypeNameStor::save($weightTypeNameStorData, $dbConnection);
         }

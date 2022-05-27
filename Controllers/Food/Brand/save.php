@@ -16,17 +16,11 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
-$distriXCodeTableBrandData = new DistriXFoodBrandData();
-$distriXCodeTableBrandData->setId($_POST['id']);
-$distriXCodeTableBrandData->setName($_POST['name']);
-$distriXCodeTableBrandData->setLinkToPicture('');
-if($_POST['base64Img'] != '') { $distriXCodeTableBrandData->setLinkToPicture($_POST['base64Img']);}
-$distriXCodeTableBrandData->setTimestamp($_POST['timestamp']);
-$distriXCodeTableBrandData->setStatus($_POST['statut']);
+list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveBrand");
-$servicesCaller->addParameter("data", $distriXCodeTableBrandData);
+$servicesCaller->addParameter("data", $distriXFoodBandData);
 $servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
@@ -39,10 +33,8 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
-  }
+if ($outputok && isset($output["ConfirmSave"])) {
+  list($confirmSave, $jsonError) = DistriXFoodBrandData::getJsonArray($output["ConfirmSave"]);
 } else {
   $error = $errorData;
 }

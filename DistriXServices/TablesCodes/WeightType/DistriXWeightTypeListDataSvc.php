@@ -45,7 +45,7 @@ if (is_null($dbConnection->getError())) {
     $distriXCodeTableWeightTypeNameData->setIsSolid($WeightType->getIsSolid());
     $distriXCodeTableWeightTypeNameData->setIsLiquid($WeightType->getIsLiquid());
     $distriXCodeTableWeightTypeNameData->setIsOther($WeightType->getIsOther());
-    $distriXCodeTableWeightTypeNameData->setStatus($WeightType->getStatus());
+    $distriXCodeTableWeightTypeNameData->setStatut($WeightType->getStatut());
     $distriXCodeTableWeightTypeNameData->setTimestamp($WeightType->getTimestamp());
     $weightType[] = $distriXCodeTableWeightTypeNameData;
   }

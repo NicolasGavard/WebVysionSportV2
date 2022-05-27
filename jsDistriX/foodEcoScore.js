@@ -101,19 +101,19 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListEcoScore(status){
+function ListEcoScore(statut){
   $('#listEcoScoresTbody').empty();
 
   $.ajax({
     url : 'Controllers/Food/ScoreEco/list.php',
     type : 'POST',
     dataType : 'JSON',
-    data: {'status': status},
+    data: {'statut': statut},
     success : function(data) {
       console.log(data.ListScoresEco);
       $.map(data.ListScoresEco, function(val, key) {
-        if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listEcoScoresTbody').append(
           '<tr>'+
@@ -157,7 +157,7 @@ function ViewEcoScore(id){
       $('.AddEcoScoreFormColor').val(data.ViewEcoScore.color);
       $(".avatar-eco_score").attr("src", data.ViewEcoScore.linkToPicture);
       $('.AddEcoScoreFormTimestamp').val(data.ViewEcoScore.timestamp);
-      $('.AddEcoScoreFormStatut').val(data.ViewEcoScore.status);
+      $('.AddEcoScoreFormStatut').val(data.ViewEcoScore.statut);
       $('.showPicture').removeClass("d-none");
       
       $('.asColorPicker-trigger span').attr("style", 'background:'+data.ViewEcoScore.color);

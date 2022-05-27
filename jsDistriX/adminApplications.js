@@ -6,8 +6,8 @@ $(document).ready(function() {
     success : function(data) {    
       if (data.errorData.text == "") {
         $.map(data.ListApplications, function(val, key) {
-          if (val.status == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-          if (val.status == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+          if (val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+          if (val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
           
           $('#listApplicationsTbody').append(
             '<tr>'+
@@ -108,11 +108,10 @@ function ViewApplication(id){
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      $('.btnSave').html('Update application');
       $('.AddApplicationFormId').val(id);
       $('.AddApplicationFormCode').val(data.ViewApplication.code);
       $('.AddApplicationFormDescription').val(data.ViewApplication.description);
-      $('.AddApplicationFormStatus').val(data.ViewApplication.status);
+      $('.AddApplicationFormStatut').val(data.ViewApplication.statut);
       $('.AddApplicationFormTimestamp').val(data.ViewApplication.timestamp);
     },
     error : function(data) {

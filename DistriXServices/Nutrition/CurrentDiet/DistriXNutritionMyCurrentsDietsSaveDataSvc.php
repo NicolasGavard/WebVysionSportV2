@@ -54,7 +54,7 @@ if ($dataSvc->getMethodName() == "SaveCurrentDiet") {
         $dietStorData->setId($infoCurrentDiet->getId());
         $dietStorData->setCode($infoCurrentDiet->getCode());
         $dietStorData->setDescription($infoCurrentDiet->getDescription());
-        $dietStorData->setStatus($infoCurrentDiet->getStatus());
+        $dietStorData->setStatut($infoCurrentDiet->getStatut());
         $dietStorData->setTimestamp($infoCurrentDiet->getTimestamp());
         list($insere, $idCurrentDiet) = DietStor::save($dietStorData, $dbConnection);
 

@@ -52,7 +52,7 @@ if ($dataSvc->getMethodName() == "SaveFoodCategory") {
         $nutritionalStorData = new CategoryStorData();
         $nutritionalStorData->setId($infoFoodCategory->getId());
         $nutritionalStorData->setCode($infoFoodCategory->getCode());
-        $nutritionalStorData->setStatus($infoFoodCategory->getStatus());
+        $nutritionalStorData->setStatut($infoFoodCategory->getStatut());
         $nutritionalStorData->setTimestamp($infoFoodCategory->getTimestamp());
         list($insere, $idFoodCategory) = CategoryStor::save($nutritionalStorData, $dbConnection);
         
@@ -62,7 +62,7 @@ if ($dataSvc->getMethodName() == "SaveFoodCategory") {
           $nutritionalNameStorData->setIdCategory($infoFoodCategory->getIdCategory());
           $nutritionalNameStorData->setIdLanguage($infoFoodCategory->getIdLanguage());
           $nutritionalNameStorData->setName($infoFoodCategory->getName());
-          $nutritionalNameStorData->setStatus($infoFoodCategory->getStatus());
+          $nutritionalNameStorData->setStatut($infoFoodCategory->getStatut());
           $nutritionalNameStorData->setTimestamp($infoFoodCategory->getTimestamp());
           list($insere, $idFoodCategoryName) = CategoryNameStor::save($nutritionalNameStorData, $dbConnection);
         }

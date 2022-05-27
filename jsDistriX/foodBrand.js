@@ -1,3 +1,5 @@
+// Dropzone.autoDiscover = false;
+
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : 'Controllers/Food/Brand/list.php',
@@ -10,6 +12,16 @@ $.ajax({
   error : function(data) {
     console.log(data);
   }
+});
+
+$(".btnChangeImage").on('click', function() {
+  $(".dropzoneImage").addClass("d-none");
+  $(".dropzoneNoImage").removeClass("d-none");
+});
+
+$(".btnChangeImageCancel").on('click', function() {
+  $(".dropzoneImage").removeClass("d-none");
+  $(".dropzoneNoImage").addClass("d-none");
 });
 
 $(".btn-warning").on('click', function() {
@@ -61,7 +73,7 @@ $(".btnAddBrand").on('click', function() {
       data: $.param(data),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 500);
+        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
@@ -90,7 +102,7 @@ $("#btnDel").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 500);
+        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -110,7 +122,7 @@ $("#btnRest").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 500);
+        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -121,12 +133,12 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListBrand(status){
+function ListBrand(statut){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
-    if(val.status == status){
-      if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+    if(val.statut == statut){
+      if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
                     ' <td><img style="max-width:20%;" src="'+val.linkToPicture+'"/></td>'+
@@ -137,9 +149,9 @@ function ListBrand(status){
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddBrand"   onclick="ViewBrand(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelBrand(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestBrand(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddBrand"   onclick="ViewBrand(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelBrand(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestBrand(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -158,14 +170,16 @@ function ViewBrand(id){
     success : function(data) {
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
+    
+      $(".dropzoneImage").removeClass("d-none");
+      $(".dropzoneNoImage").addClass("d-none");
 
       $('.AddBrandFormIdBrand').val(id);
       $('.AddBrandFormCode').val(data.ViewBrand.code);
       $('.AddBrandFormName').val(data.ViewBrand.name);
-      $(".avatar-brand").attr("src", data.ViewBrand.linkToPicture);
+      $(".avatar-brand").attr("src", data.ViewBrand.linktopicture);
       $('.AddBrandFormTimestamp').val(data.ViewBrand.timestamp);
-      $('.AddBrandFormStatut').val(data.ViewBrand.status);
-      $('.showPicture').removeClass("d-none");
+      $('.AddBrandFormStatut').val(data.ViewBrand.statut);
     },
     error : function(data) {
       console.log(data);

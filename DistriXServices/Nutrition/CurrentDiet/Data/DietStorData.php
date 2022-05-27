@@ -23,7 +23,7 @@ class DietStorData {
   public function getIdUser() { return $this->iduser; }
   public function getIdDietTemplate() { return $this->iddiettemplate; }
   public function getDateStart() { return $this->datestart; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::DIET_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::DIET_STATUS_AVAILABLE; }
@@ -33,7 +33,7 @@ class DietStorData {
   public function setIdUser($idUser) { $this->iduser = $idUser; }
   public function setIdDietTemplate($idDietTemplate) { $this->iddiettemplate = $idDietTemplate; }
   public function setDateStart($dateStart) { $this->datestart = $dateStart; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::DIET_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::DIET_STATUS_NOT_AVAILABLE; }

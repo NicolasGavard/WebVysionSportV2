@@ -8,7 +8,7 @@ if (!class_exists("DistriXFoodBrandData", false)) {
     protected $linkToPicture;
     protected $size;
     protected $type;
-    protected $status;
+    protected $statut;
     protected $timestamp;
 
     public function __construct()
@@ -19,7 +19,7 @@ if (!class_exists("DistriXFoodBrandData", false)) {
       $this->linkToPicture  = "";
       $this->size           = 0;
       $this->type           = "";
-      $this->status         = 0;
+      $this->statut         = 0;
       $this->timestamp      = 0;
     }
     // Gets
@@ -29,7 +29,7 @@ if (!class_exists("DistriXFoodBrandData", false)) {
     public function getLinkToPicture():string { return $this->linkToPicture; }
     public function getSize():int { return $this->size; }
     public function getType():string { return $this->type; }
-    public function getStatus():int { return $this->status; }
+    public function getStatut():int { return $this->statut; }
     public function getTimestamp():int { return $this->timestamp; }
 
     // Sets
@@ -39,7 +39,7 @@ if (!class_exists("DistriXFoodBrandData", false)) {
     public function setLinkToPicture(string $linkToPicture) { $this->linkToPicture = $linkToPicture; }
     public function setSize(int $size) { $this->size = $size; }
     public function setType(string $type) { $this->type = $type; }
-    public function setStatus(int $status) { $this->status = $status; }
+    public function setStatut(int $statut) { $this->statut = $statut; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class

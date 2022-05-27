@@ -88,7 +88,7 @@ class FoodNameStor {
       $params = [];
       $params["index0"] = $dataIn->getIdFood();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -118,7 +118,7 @@ class FoodNameStor {
       $params = [];
       $params["index0"] = $dataIn->getIdLanguage();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -189,7 +189,7 @@ class FoodNameStor {
       $params["idfood"] = $data->getIdFood();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["name"] = $data->getName();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -309,7 +309,7 @@ class FoodNameStor {
       $params["idfood"] = $data->getIdFood();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["name"] = $data->getName();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

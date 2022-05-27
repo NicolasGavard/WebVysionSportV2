@@ -88,7 +88,7 @@ class DietStudentStor {
       $params = [];
       $params["index0"] = $dataIn->getIdDiet();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -118,7 +118,7 @@ class DietStudentStor {
       $params = [];
       $params["index0"] = $dataIn->getIdUser();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -187,7 +187,7 @@ class DietStudentStor {
       $params["id"] = $data->getId();
       $params["iddiet"] = $data->getIdDiet();
       $params["iduser"] = $data->getIdUser();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -305,7 +305,7 @@ class DietStudentStor {
       $params = [];
       $params["iddiet"] = $data->getIdDiet();
       $params["iduser"] = $data->getIdUser();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

@@ -11,7 +11,7 @@ if (!class_exists("DistriXStudentCoatchUserData", false)) {
     protected $firstNameUser;
     protected $dateStart;
     protected $dateEnd;
-    protected $status;
+    protected $statut;
     protected $timestamp;
 
     public function __construct()
@@ -25,7 +25,7 @@ if (!class_exists("DistriXStudentCoatchUserData", false)) {
       $this->firstNameUser      = "";
       $this->dateStart          = 0;
       $this->dateEnd            = 0;
-      $this->status             = 0;
+      $this->statut             = 0;
       $this->timestamp          = 0;
     }
     // Gets
@@ -38,7 +38,7 @@ if (!class_exists("DistriXStudentCoatchUserData", false)) {
     public function getFirstNameUser() { return $this->firstNameUser; }
     public function getDateStart() { return $this->dateStart; }
     public function getDateEnd() { return $this->dateEnd; }
-    public function getStatus() { return $this->status; }
+    public function getStatut() { return $this->statut; }
     public function getTimestamp() { return $this->timestamp; }
 
     // Sets
@@ -51,7 +51,7 @@ if (!class_exists("DistriXStudentCoatchUserData", false)) {
     public function setFirstNameUser($firstNameUser) { $this->firstNameUser = $firstNameUser; }
     public function setDateStart($dateStart) { $this->dateStart = $dateStart; }
     public function setDateEnd($dateEnd) { $this->dateEnd = $dateEnd; }
-    public function setStatus($status) { $this->status = $status; }
+    public function setStatut($statut) { $this->statut = $statut; }
     public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class

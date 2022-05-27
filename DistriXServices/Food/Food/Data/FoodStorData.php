@@ -35,7 +35,7 @@ class FoodStorData {
   public function getCode() { return $this->code; }
   public function getName() { return $this->name; }
   public function getDescription() { return $this->description; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::FOOD_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::FOOD_STATUS_AVAILABLE; }
@@ -49,7 +49,7 @@ class FoodStorData {
   public function setCode($code) { $this->code = $code; }
   public function setName($name) { $this->name = $name; }
   public function setDescription($description) { $this->description = $description; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::FOOD_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::FOOD_STATUS_NOT_AVAILABLE; }

@@ -173,7 +173,7 @@ if (is_null($dbConnection->getError())) {
       $distriXCodeTableFoodCategoryNameData->setIdCategory($foodCategory->getIdCategory());
       $distriXCodeTableFoodCategoryNameData->setIdLanguage($categoryNameStor->getIdLanguage());
       $distriXCodeTableFoodCategoryNameData->setName($categoryNameStor->getName());
-      $distriXCodeTableFoodCategoryNameData->setStatus($foodCategory->getStatus());
+      $distriXCodeTableFoodCategoryNameData->setStatut($foodCategory->getStatut());
       $distriXCodeTableFoodCategoryNameData->setTimestamp($foodCategory->getTimestamp());
       $foodCategories[] = $distriXCodeTableFoodCategoryNameData;
     }
@@ -229,7 +229,7 @@ if (is_null($dbConnection->getError())) {
         }
       }
 
-      $distriXFoodNutritionalData->setStatus($foodNutritional->getStatus());
+      $distriXFoodNutritionalData->setStatut($foodNutritional->getStatut());
       $distriXFoodNutritionalData->setTimestamp($foodNutritional->getTimestamp());
       $foodNutritionals[]         = $distriXFoodNutritionalData;
     }
@@ -262,13 +262,13 @@ if (is_null($dbConnection->getError())) {
       $distriXFoodWeightData->setLinkToPicture($urlPicture);
       $distriXFoodWeightData->setSize($foodWeight->getSize());
       $distriXFoodWeightData->setType($foodWeight->getType());
-      $distriXFoodWeightData->setStatus($foodWeight->getStatus());
+      $distriXFoodWeightData->setStatut($foodWeight->getStatut());
       $distriXFoodWeightData->setTimestamp($foodWeight->getTimestamp());
       $foodWeights[]         = $distriXFoodWeightData;
     }
     $distriXFoodFoodData->setFoodWeights($foodWeights);
 
-    $distriXFoodFoodData->setStatus($food->getStatus());
+    $distriXFoodFoodData->setStatut($food->getStatut());
     $distriXFoodFoodData->setTimestamp($food->getTimestamp());
     $foods[]  = $distriXFoodFoodData;
   }

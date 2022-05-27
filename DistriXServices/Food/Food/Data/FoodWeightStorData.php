@@ -32,7 +32,7 @@ class FoodWeightStorData {
   public function getLinkToPicture() { return $this->linktopicture; }
   public function getSize() { return $this->size; }
   public function getType() { return $this->type; }
-  public function getStatus() { return $this->statut; }
+  public function getStatut() { return $this->statut; }
   public function getTimestamp() { return $this->timestamp; }
   public function isAvailable() { return ($this->statut == self::FOODWEIGHT_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::FOODWEIGHT_STATUS_AVAILABLE; }
@@ -45,7 +45,7 @@ class FoodWeightStorData {
   public function setLinkToPicture($linkToPicture) { $this->linktopicture = $linkToPicture; }
   public function setSize($size) { $this->size = $size; }
   public function setType($type) { $this->type = $type; }
-  public function setStatus($status) { $this->statut = $status; }
+  public function setStatut($statut) { $this->statut = $statut; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->statut = self::FOODWEIGHT_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->statut = self::FOODWEIGHT_STATUS_NOT_AVAILABLE; }

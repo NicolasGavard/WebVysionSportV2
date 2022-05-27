@@ -103,8 +103,8 @@ function showData(idStyApplication, idStyModule){
       }
       
       $.map(data.ListFunctionalities, function(val, key) {
-        if (val.status == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if (val.status == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if (val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if (val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listFunctionalitiesTbody').append(
           '<tr>'+
@@ -174,7 +174,7 @@ function ViewFunctionality(id){
       $('.AddFunctionalityFormId').val(id);
       $('.AddFunctionalityFormCode').val(data.ViewFunctionality.code);
       $('.AddFunctionalityFormDescription').val(data.ViewFunctionality.description);
-      $('.AddFunctionalityFormStatus').val(data.ViewFunctionality.status);
+      $('.AddFunctionalityFormStatut').val(data.ViewFunctionality.statut);
       $('.AddFunctionalityFormTimestamp').val(data.ViewFunctionality.timestamp);
     },
     error : function(data) {

@@ -101,18 +101,18 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListLabel(status){
+function ListLabel(statut){
   $('#listLabelsTbody').empty();
 
   $.ajax({
     url : 'Controllers/Food/Label/list.php',
     type : 'POST',
     dataType : 'JSON',
-    data: {'status': status},
+    data: {'statut': statut},
     success : function(data) {
       $.map(data.ListLabels, function(val, key) {
-        if(val.status == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.status == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listLabelsTbody').append(
           '<tr>'+
@@ -151,7 +151,7 @@ function ViewLabel(id){
       $('.AddLabelFormIdLabel').val(id);
       $(".avatar-label").attr("src", data.ViewLabel.linkToPicture);
       $('.AddLabelFormTimestamp').val(data.ViewLabel.timestamp);
-      $('.AddLabelFormStatut').val(data.ViewLabel.status);
+      $('.AddLabelFormStatut').val(data.ViewLabel.statut);
       $('.showPicture').removeClass("d-none");
       
       $('.asColorPicker-trigger span').attr("style", 'background:'+data.ViewLabel.color);
