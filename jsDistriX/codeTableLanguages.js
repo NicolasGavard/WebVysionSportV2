@@ -1,121 +1,184 @@
-
+datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : 'Controllers/Security/Language/list.php',
+  url : 'Controllers/CodeTables/Language/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
-    $.map(data.ListLanguages, function(val, key) {
-      if(val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if(val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
-      
-      $('#listLanguagesTbody').append(
-        '<tr>'+
-        ' <td><img src="'+val.linkToPicture+'"/></td>'+
-        ' <td>'+val.code+'</td>'+
-        ' <td>'+val.description+'</td>'+
-        ' <td><div class="progress" style="width:15px; height:15px;"><div class="progress-bar bg-'+progressBarColor+'" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></td>'+
-        ' <td>'+
-        '   <button type="button" title="Voir"      class="btn btn-primary    btn-rounded btn-icon btnViewLanguage"                       data-toggle="tooltip" data-placement="top" data-bs-toggle="modal" data-bs-target="#modalAddLanguage"      onclick="ViewLanguage(\''+val.id+'\');"><i class="ti-eye"></i></button>'+
-        '   <button type="button" title="Supprimer" class="btn btn-danger     btn-rounded btn-icon btnDeleLanguage '+actionBtnDelete+'"   data-toggle="tooltip" data-placement="top" data-bs-toggle="modal" data-bs-target="#modalDelLanguage"      onclick="DelLanguage(\''+val.id+'\', \''+val.code+' '+val.description+'\');"><i class="ti-trash"></i></button>'+
-        '   <button type="button" title="Restorer " class="btn btn-info       btn-rounded btn-icon btnRestLanguage '+actionBtnRestore+'"  data-toggle="tooltip" data-placement="top" data-bs-toggle="modal" data-bs-target="#modalRestLanguage"     onclick="RestLanguage(\''+val.id+'\', \''+val.code+' '+val.description+'\');"><i class="ti-share-alt"></i></button>'+
-        ' </td>'+
-        '</tr>')
-    });
+    localStorage.setItem("dataTable", JSON.stringify(data.ListLanguages));
+    $('.btn-success').trigger('click');
   },
   error : function(data) {
     console.log(data);
   }
-}); 
+});
+
+$(".btnChangeImage").on('click', function() {
+  $(".dropzoneImage").addClass("d-none");
+  $(".dropzoneNoImage").removeClass("d-none");
+});
+
+$(".btnChangeImageCancel").on('click', function() {
+  $(".dropzoneImage").removeClass("d-none");
+  $(".dropzoneNoImage").addClass("d-none");
+});
+
+$(".btn-warning").on('click', function() {
+  $(".btn-success").removeClass("disabled");
+  $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
+  
+  $(".btn-warning").addClass("disabled");
+  $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
+
+  datatable.clear();
+  ListLanguage(1);
+});
+
+$(".btn-success").on('click', function() {
+  $(".btn-success").addClass("disabled");
+  $(".dw-success").removeClass("dw-ban").addClass("dw-checked");
+  
+  $(".btn-warning").removeClass("disabled");
+  $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
+
+  datatable.clear();
+  ListLanguage(0);
+});
 
 $(".AddNewLanguage").on('click', function() {
-  $(".btnSave").html(language.page_codeTables_language_add_title);
+  $(".add_title").removeClass("d-none");
+  $(".update_title").addClass("d-none");
+
+  $('.AddLanguageFormIdLanguage').val(0);
+  $('.AddLanguageFormCode').val('');
+  $('.AddLanguageFormName').val('');
+  $(".avatar-brand").attr("src", '');
+  $('.AddLanguageFormTimestamp').val(0);
+  $('.AddLanguageFormStatut').val(0);
 });
 
-$("#btnAddLanguage").on('click', function() {
-  var errorData   = "";
-  var code        = $('#InputLanguageCode').val();
-  var description = $('#InputLanguageName').val();
+$(".btnAddLanguage").on('click', function() {
+  $(".page_food_brand_update_title").removeClass("d-none");
   
-  if (code != "" || description != ""){
+  var name = $('.AddLanguageFormName').val();
+  if (name != ""){
+    var data = $('#FormAddLanguage').serializeArray(); // convert form to array
+    data.push({name: "name", value: name});
+    
     $.ajax({
-      url : 'Controllers/Security/Language/save.php',
+      url : 'Controllers/CodeTables/Language/save.php',
       type : 'POST',
       dataType : 'JSON',
-      data: $('#FormAddLanguage').serialize(),
+      data: $.param(data),
       success : function(data) {
-        $(".alert-success").show("slow").delay(1500).hide("slow");
-        setTimeout(function() {window.location.href = "./codeTableLanguageList.php";}, 2000);
+        $('#sa-success-distrix').trigger('click');
+        setTimeout(function() {window.location.href = "./foodLanguageList.php";}, 800);
       },
       error : function(data) {
-        errorData += ' - '+errorData_ko+'<br/>'
-        $('.alert-danger').show("slow").delay(5000).hide("slow");
-        $('.alert-danger p').html(errorData);
+        $('#sa-error-distrix').trigger('click');
       }
     });
+    $(".btnAddLanguage").attr("data-dismiss", "modal");
   } else {
-    if (code == ""){
-      errorData += ' - '+errorData_txt_code+'<br/>'
-    } 
-    if (description == ''){
-      errorData += ' - '+errorData_txt_description+'<br/>'
+    if (name == ''){
+      $('.AddLanguageFormName').addClass("form-control-danger");
+      $('.danger-name').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddLanguageFormName").removeClass("form-control-danger");
+        $('.danger-name').addClass("d-none");
+      }, 3000 );
     }
   } 
-
-  if (errorData !== ''){
-    $('.alert-danger').show("slow").delay(5000).hide("slow");
-    $('.alert-danger p').html(errorData);
-  }
 });
 
-$("#btnDelLanguage").on('click', function() {
+$("#btnDel").on('click', function() {
   $.ajax({
-    url : 'Controllers/Security/Language/delete.php',
+    url : 'Controllers/CodeTables/Language/delete.php',
     type : 'POST',
     dataType : 'JSON',
-    data: $('#FormDelLanguage').serialize(),
+    data: $('#FormDel').serialize(),
     success : function(data) {
-      setTimeout(function() {window.location.href = "./codeTableLanguageList.php";}, 200);
+      if (data.confirmSave) {
+        $('#sa-success-distrix').trigger('click');
+        setTimeout(function() {window.location.href = "./foodLanguageList.php";}, 800);
+      } else {
+        $('#sa-error-distrix').trigger('click');
+      }
     },
     error : function(data) {
-      errorData += ' - '+errorData_ko+'<br/>'
-      $('.alert-danger').show("slow").delay(5000).hide("slow");
-      $('.alert-danger p').html(errorData);
+      $('#sa-error-distrix').trigger('click');
     }
   });
 });
 
-$("#btnRestLanguage").on('click', function() {
+$("#btnRest").on('click', function() {
   $.ajax({
-    url : 'Controllers/Security/Language/restore.php',
+    url : 'Controllers/CodeTables/Language/restore.php',
     type : 'POST',
     dataType : 'JSON',
-    data: $('#FormRestLanguage').serialize(),
+    data: $('#FormRest').serialize(),
     success : function(data) {
-      setTimeout(function() {window.location.href = "./codeTableLanguageList.php";}, 200);
+      if (data.confirmSave) {
+        $('#sa-success-distrix').trigger('click');
+        setTimeout(function() {window.location.href = "./foodLanguageList.php";}, 800);
+      } else {
+        $('#sa-error-distrix').trigger('click');
+      }
     },
     error : function(data) {
-      errorData += ' - '+errorData_ko+'<br/>'
-      $('.alert-danger').show("slow").delay(5000).hide("slow");
-      $('.alert-danger p').html(errorData);
+      $('#sa-error-distrix').trigger('click');
     }
   });
 });
+
+function ListLanguage(elemState){
+  var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
+  $.map(dataTableData, function(val, key) {
+    if(val.elemState == elemState){
+      if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+      
+      const line =  '<tr>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td>'+val.codeShort+'</td>'+
+                    ' <td>'+val.name+'</td>'+
+                    ' <td>'+
+                    '   <div class="dropdown">'+
+                    '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+                    '       <i class="dw dw-more"></i>'+
+                    '     </a>'+
+                    '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddLanguage"   onclick="ViewLanguage(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelLanguage(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestLanguage(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '     </div>'+
+                    '   </div>'+
+                    ' </td>'+
+                    '</tr>';
+      datatable.row.add($(line)).draw();
+    }
+  });
+}
 
 function ViewLanguage(id){
   $.ajax({
-    url : 'Controllers/Security/Language/view.php',
+    url : 'Controllers/CodeTables/Language/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      $(".btnSave").html(language.page_codeTables_language_update_title);
-      
+      $(".add_title").addClass("d-none");
+      $(".update_title").removeClass("d-none");
+    
+      $(".dropzoneImage").removeClass("d-none");
+      $(".dropzoneNoImage").addClass("d-none");
+
       $('.AddLanguageFormIdLanguage').val(id);
-      $('.AddLanguageFormCode').val(data.ViewLanguage.code);
-      $('.AddLanguageFormName').val(data.ViewLanguage.description);
-      $(".InfoLanguagePicture").attr("src", data.ViewLanguage.linkToPicture);
+      $('.AddLanguageFormCode').val(data.ViewLanguage.codeshort);
+      $('.AddLanguageFormName').val(data.ViewLanguage.name);
+      $(".avatar-brand").attr("src", data.ViewLanguage.linktopicture);
       $('.AddLanguageFormTimestamp').val(data.ViewLanguage.timestamp);
-      $('.AddLanguageFormStatut').val(data.ViewLanguage.statut);
+      $('.AddLanguageFormStatut').val(data.ViewLanguage.elemState);
     },
     error : function(data) {
       console.log(data);
@@ -124,11 +187,11 @@ function ViewLanguage(id){
 }
 
 function DelLanguage(id, name){
-  $('.DelLanguageFormIdLanguage').val(id);
-  $('.DelLanguageTxt').html(confirm_delete+' <b>'+name+'</b>');
+  $('.DelFormId').val(id);
+  $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
 function RestLanguage(id, name){
-  $('.RestLanguageFormIdLanguage').val(id);
-  $('.RestLanguageTxt').html(confirm_restore+' <b>'+name+'</b>');
+  $('.RestFormId').val(id);
+  $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

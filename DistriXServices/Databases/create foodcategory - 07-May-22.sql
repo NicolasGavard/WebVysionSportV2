@@ -3,7 +3,7 @@ CREATE TABLE `foodcategory` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `idfood` int unsigned NOT NULL,
   `idcategory` int unsigned NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indfood` (`idfood`),
@@ -11,7 +11,7 @@ CREATE TABLE `foodcategory` (
   UNIQUE KEY `indfoodcategoryunique` (`idfood`,`idcategory`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Food Category' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO foodcategory(id,idfood,idcategory,statut,timestamp) VALUES 
+INSERT INTO foodcategory(id,idfood,idcategory,elemstate,timestamp) VALUES 
 (1,1,1,0,0),
 (2,1,2,0,0),
 (3,1,3,0,0),

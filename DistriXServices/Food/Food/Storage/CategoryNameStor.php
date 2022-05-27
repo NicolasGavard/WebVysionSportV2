@@ -11,7 +11,7 @@ class CategoryNameStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "categoryname";
-  const SELECT = 'SELECT id,idcategory,idlanguage,name,statut,timestamp';
+  const SELECT = 'SELECT id,idcategory,idlanguage,name,elemstate,timestamp';
   const FROM = ' FROM categoryname';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class CategoryNameStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY idcategory";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -59,12 +59,12 @@ class CategoryNameStor {
       $request .= self::FROM;
       $request .= " WHERE idcategory = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdCategory();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -89,12 +89,12 @@ class CategoryNameStor {
       $request .= self::FROM;
       $request .= " WHERE idlanguage = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdLanguage();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -183,7 +183,7 @@ class CategoryNameStor {
       $request .= "idcategory= :idcategory,";
       $request .= "idlanguage= :idlanguage,";
       $request .= "name= :name,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -192,7 +192,7 @@ class CategoryNameStor {
       $params["idcategory"] = $data->getIdCategory();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["name"] = $data->getName();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -301,18 +301,18 @@ class CategoryNameStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO categoryname(";
-      $request .= "idcategory,idlanguage,name,statut,timestamp)";
+      $request .= "idcategory,idlanguage,name,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":idcategory,";
       $request .= ":idlanguage,";
       $request .= ":name,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["idcategory"] = $data->getIdCategory();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["name"] = $data->getName();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

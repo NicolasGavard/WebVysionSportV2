@@ -11,7 +11,7 @@ class DietStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "diet";
-  const SELECT = 'SELECT id,iduser,iddiettemplate,datestart,statut,timestamp';
+  const SELECT = 'SELECT id,iduser,iddiettemplate,datestart,elemstate,timestamp';
   const FROM = ' FROM diet';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -22,7 +22,7 @@ class DietStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(DietStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
+  public static function getList(DietStorData $dataIn, int $elemstate, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DietStorData();
@@ -32,12 +32,12 @@ class DietStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE id > 0";
-      $request .= " AND statut = :statut";
-      $request .= " AND statut = :statut";
+      $request .= " AND elemstate = :elemstate";
+      $request .= " AND elemstate = :elemstate";
       $request .= " ORDER BY iduser";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $statut]);
+      $stmt->execute(['elemstate'=> $elemstate]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -74,7 +74,7 @@ class DietStor {
   }
   // End of IdUserIdDietTemplateDateStart
 
-  public static function findByIdDietTemplate(DietStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
+  public static function findByIdDietTemplate(DietStorData $dataIn, int $elemstate, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -83,10 +83,10 @@ class DietStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE iddiettemplate = :index0";
-      $request .= " AND statut = :statut";
+      $request .= " AND elemstate = :elemstate";
       $params = [];
       $params["index0"] = $dataIn->getIdDietTemplate();
-      $params["statut"] = $statut;
+      $params["elemstate"] = $elemstate;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
@@ -100,7 +100,7 @@ class DietStor {
   }
   // End of IdDietTemplate
 
-  public static function findByIdUser(DietStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUser(DietStorData $dataIn, int $elemstate, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -109,10 +109,10 @@ class DietStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE iduser = :index0";
-      $request .= " AND statut = :statut";
+      $request .= " AND elemstate = :elemstate";
       $params = [];
       $params["index0"] = $dataIn->getIdUser();
-      $params["statut"] = $statut;
+      $params["elemstate"] = $elemstate;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
@@ -173,7 +173,7 @@ class DietStor {
       $request .= "iduser= :iduser,";
       $request .= "iddiettemplate= :iddiettemplate,";
       $request .= "datestart= :datestart,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -182,7 +182,7 @@ class DietStor {
       $params["iduser"] = $data->getIdUser();
       $params["iddiettemplate"] = $data->getIdDietTemplate();
       $params["datestart"] = $data->getDateStart();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -291,18 +291,18 @@ class DietStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO diet(";
-      $request .= "iduser,iddiettemplate,datestart,statut,timestamp)";
+      $request .= "iduser,iddiettemplate,datestart,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":iduser,";
       $request .= ":iddiettemplate,";
       $request .= ":datestart,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["iduser"] = $data->getIdUser();
       $params["iddiettemplate"] = $data->getIdDietTemplate();
       $params["datestart"] = $data->getDateStart();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

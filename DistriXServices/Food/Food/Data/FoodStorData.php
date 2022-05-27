@@ -11,7 +11,7 @@ class FoodStorData {
   private $code;
   private $name;
   private $description;
-  private $statut;
+  private $elemstate;
   private $timestamp;
 
   public function __construct() {
@@ -23,7 +23,7 @@ class FoodStorData {
       $this->code = "";
       $this->name = "";
       $this->description = "";
-      $this->statut = 0;
+      $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
@@ -35,9 +35,9 @@ class FoodStorData {
   public function getCode() { return $this->code; }
   public function getName() { return $this->name; }
   public function getDescription() { return $this->description; }
-  public function getStatut() { return $this->statut; }
+  public function getElemState() { return $this->elemstate; }
   public function getTimestamp() { return $this->timestamp; }
-  public function isAvailable() { return ($this->statut == self::FOOD_STATUS_AVAILABLE); }
+  public function isAvailable() { return ($this->elemstate == self::FOOD_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::FOOD_STATUS_AVAILABLE; }
   public function getUnavailableValue() { return self::FOOD_STATUS_NOT_AVAILABLE; }
 // Sets
@@ -49,8 +49,8 @@ class FoodStorData {
   public function setCode($code) { $this->code = $code; }
   public function setName($name) { $this->name = $name; }
   public function setDescription($description) { $this->description = $description; }
-  public function setStatut($statut) { $this->statut = $statut; }
+  public function setElemState($elemstate) { $this->elemstate = $elemstate; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->statut = self::FOOD_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->statut = self::FOOD_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::FOOD_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::FOOD_STATUS_NOT_AVAILABLE; }
 }

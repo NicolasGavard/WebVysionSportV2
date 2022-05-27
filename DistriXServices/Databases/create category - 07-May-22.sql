@@ -2,14 +2,13 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(100) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `indcode` (`code`),
   UNIQUE KEY `indcodeunique` (`code`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Category' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO category(id,code,statut,timestamp) VALUES 
+INSERT INTO category(id,code,elemstate,timestamp) VALUES 
 (1,'WATERS',0,0),
 (2,'SOURCE WATERS',0,0),
 (3,'MINERAL WATERS',0,0),

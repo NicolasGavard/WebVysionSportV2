@@ -7,7 +7,7 @@ if (!class_exists("DistriXCodeTableFoodCategoryNameData", false)) {
     protected $idLanguage;
     protected $code;
     protected $name;
-    protected $statut;
+    protected $elemState;
     protected $timestamp;
 
     public function __construct()
@@ -17,7 +17,7 @@ if (!class_exists("DistriXCodeTableFoodCategoryNameData", false)) {
       $this->idLanguage   = 0;
       $this->code         = "";
       $this->name         = "";
-      $this->statut       = 0;
+      $this->elemState    = 0;
       $this->timestamp    = 0;
     }
     // Gets
@@ -26,7 +26,7 @@ if (!class_exists("DistriXCodeTableFoodCategoryNameData", false)) {
     public function getIdLanguage() { return $this->idLanguage; }
     public function getCode() { return $this->code; }
     public function getName() { return $this->name; }
-    public function getStatut() { return $this->statut; }
+    public function getElemState() { return $this->elemState; }
     public function getTimestamp() { return $this->timestamp; }
 
     // Sets
@@ -35,7 +35,7 @@ if (!class_exists("DistriXCodeTableFoodCategoryNameData", false)) {
     public function setIdLanguage($idLanguage) { $this->idLanguage = $idLanguage; }
     public function setCode($code) { $this->code = $code; }
     public function setName($name) { $this->name = $name; }
-    public function setStatut($statut) { $this->statut = $statut; }
+    public function setElemState($elemState) { $this->elemState = $elemState; }
     public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class

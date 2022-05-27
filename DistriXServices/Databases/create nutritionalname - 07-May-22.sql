@@ -3,8 +3,8 @@ CREATE TABLE `nutritionalname` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `idnutritional` int unsigned NOT NULL,
   `idlanguage` int unsigned NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indnutritional` (`idnutritional`),
@@ -12,7 +12,7 @@ CREATE TABLE `nutritionalname` (
   UNIQUE KEY `indnutritionalunique` (`idnutritional`,`idlanguage`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Nutritional Names' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO nutritionalname(id,idnutritional,idlanguage,name,statut,timestamp) VALUES 
+INSERT INTO nutritionalname(id,idnutritional,idlanguage,name,elemstate,timestamp) VALUES 
 (1,1,1,'Énergie',0,0),
 (2,2,1,'Matières grasses',0,0),
 (3,3,1,'Glucides',0,0),

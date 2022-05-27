@@ -21,11 +21,11 @@ $errorData    = null;
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   list($data, $jsonError) = LanguageStorData::getJsonData($dataSvc->getParameter("data"));
-  $languageStorData = LanguageStor::read($data->getId(), $dbConnection);
-  $urlPicture       = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_FOOD . '/' . $languageStorData->getLinkToPicture();
-  $pictures_headers = get_headers($urlPicture);
+  $languageStorData       = LanguageStor::read($data->getId(), $dbConnection);
+  $urlPicture             = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $languageStorData->getLinkToPicture();
+  $pictures_headers       = get_headers($urlPicture);
   if ($languageStorData->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $languageStorData->getLinkToPicture() == '') {
-    $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_FOOD . '/default.png';
+    $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/default.png';
   }
   $languageStorData->setLinkToPicture($urlPicture);
 } else {

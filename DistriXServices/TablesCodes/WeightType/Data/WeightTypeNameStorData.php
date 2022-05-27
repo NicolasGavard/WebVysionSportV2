@@ -10,7 +10,7 @@ class WeightTypeNameStorData extends DistriXSvcAppData {
   protected $name;
   protected $description;
   protected $abbreviation;
-  protected $statut;
+  protected $elemstate;
   protected $timestamp;
 
   public function __construct() {
@@ -20,7 +20,7 @@ class WeightTypeNameStorData extends DistriXSvcAppData {
       $this->name = "";
       $this->description = "";
       $this->abbreviation = "";
-      $this->statut = 0;
+      $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
@@ -30,9 +30,9 @@ class WeightTypeNameStorData extends DistriXSvcAppData {
   public function getName():string { return $this->name; }
   public function getDescription():string { return $this->description; }
   public function getAbbreviation():string { return $this->abbreviation; }
-  public function getStatut():int { return $this->statut; }
+  public function getElemState():int { return $this->elemstate; }
   public function getTimestamp():int { return $this->timestamp; }
-  public function isAvailable():int { return ($this->statut == self::WEIGHTTYPENAME_STATUS_AVAILABLE); }
+  public function isAvailable():int { return ($this->elemstate == self::WEIGHTTYPENAME_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::WEIGHTTYPENAME_STATUS_AVAILABLE; }
   public function getUnavailableValue() { return self::WEIGHTTYPENAME_STATUS_NOT_AVAILABLE; }
 // Sets
@@ -42,8 +42,8 @@ class WeightTypeNameStorData extends DistriXSvcAppData {
   public function setName(string $name) { $this->name = $name; }
   public function setDescription(string $description) { $this->description = $description; }
   public function setAbbreviation(string $abbreviation) { $this->abbreviation = $abbreviation; }
-  public function setStatut(int $statut) { $this->statut = $statut; }
+  public function setElemState(int $elemstate) { $this->elemstate = $elemstate; }
   public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->statut = self::WEIGHTTYPENAME_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->statut = self::WEIGHTTYPENAME_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::WEIGHTTYPENAME_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::WEIGHTTYPENAME_STATUS_NOT_AVAILABLE; }
 }

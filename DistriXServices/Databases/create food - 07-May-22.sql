@@ -7,8 +7,8 @@ CREATE TABLE `food` (
   `idscoreeco` int unsigned NOT NULL,
   `code` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `description` varchar(150) NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indbrand` (`idbrand`),
@@ -19,7 +19,7 @@ CREATE TABLE `food` (
   UNIQUE KEY `indfoodunique` (`idbrand`, `code`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Food' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO food(id,idbrand,idscorenutri,idscorenova,idscoreeco,code,name,description,statut,timestamp) VALUES 
+INSERT INTO food(id,idbrand,idscorenutri,idscorenova,idscoreeco,code,name,description,elemstate,timestamp) VALUES 
 (1,1,2,2,2,'SPRING_WATER','Spring water','Spring water',0,0),
 (2,2,5,5,6,'PRINCE CHOCOLATE','Prince Chocolate','Prince Chocolate',0,0);
 

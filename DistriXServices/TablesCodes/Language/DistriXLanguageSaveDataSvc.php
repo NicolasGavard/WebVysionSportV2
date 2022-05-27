@@ -48,7 +48,7 @@ if ($dataSvc->getMethodName() == "SaveLanguage") {
         $languageStorData->setId($data->getId());
         $languageStorData->setCode(strtoupper(trim(DistriXSvcUtil::remove_accents($data->getName()))));
         $languageStorData->setName($data->getName());
-        $languageStorData->setStatut($data->getStatut());
+        $languageStorData->setElemState($data->getElemState());
         $languageStorData->setTimestamp($data->getTimestamp());
         
         if ($data->getLinkToPicture() != "" && $data->getLinkToPicture() != $languageStorData->getLinkToPicture()) {

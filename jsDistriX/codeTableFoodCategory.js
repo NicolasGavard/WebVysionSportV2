@@ -8,8 +8,8 @@ $.ajax({
     var idLanguage = 1;
     $.map(data.ListFoodCategory, function(val, key) {
       idLanguage = val.idLanguage;
-      if (val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if (val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+      if (val.elemState == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if (val.elemState == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       $('#listFoodCategorysTbody').append(
         '<tr>'+
@@ -153,7 +153,7 @@ function ViewFoodCategory(id, idCategory,idLanguage){
       if (data.ViewFoodCategory.isOther == 1) {$('.AddFoodCategoryFormIsOther').prop('checked', true);}
 
       $('.AddFoodCategoryFormTimestamp').val(data.ViewFoodCategory.timestamp);
-      $('.AddFoodCategoryFormStatut').val(data.ViewFoodCategory.statut);
+      $('.AddFoodCategoryFormStatut').val(data.ViewFoodCategory.elemState);
 
       $.map(data.ListLanguages, function(val, key) {
         var  activeSelected = false;

@@ -11,7 +11,7 @@ class StyApplicationStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "styApplication";
-  const SELECT = 'SELECT id,code,description,statut,timestamp';
+  const SELECT = 'SELECT id,code,description,elemstate,timestamp';
   const FROM = ' FROM styApplication';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class StyApplicationStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY code";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -59,12 +59,12 @@ class StyApplicationStor {
       $request .= self::FROM;
       $request .= " WHERE code = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getCode();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -125,7 +125,7 @@ class StyApplicationStor {
       $request  = "UPDATE styApplication SET ";
       $request .= "code= :code,";
       $request .= "description= :description,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -133,7 +133,7 @@ class StyApplicationStor {
       $params["id"] = $data->getId();
       $params["code"] = $data->getCode();
       $params["description"] = $data->getDescription();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -242,16 +242,16 @@ class StyApplicationStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO styApplication(";
-      $request .= "code,description,statut,timestamp)";
+      $request .= "code,description,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";
       $request .= ":description,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["code"] = $data->getCode();
       $params["description"] = $data->getDescription();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

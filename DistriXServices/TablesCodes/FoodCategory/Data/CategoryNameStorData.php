@@ -7,7 +7,7 @@ class CategoryNameStorData {
   private $idcategory;
   private $idlanguage;
   private $name;
-  private $statut;
+  private $elemstate;
   private $timestamp;
 
   public function __construct() {
@@ -15,7 +15,7 @@ class CategoryNameStorData {
       $this->idcategory = 0;
       $this->idlanguage = 0;
       $this->name = "";
-      $this->statut = 0;
+      $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
@@ -23,9 +23,9 @@ class CategoryNameStorData {
   public function getIdCategory() { return $this->idcategory; }
   public function getIdLanguage() { return $this->idlanguage; }
   public function getName() { return $this->name; }
-  public function getStatut() { return $this->statut; }
+  public function getElemState() { return $this->elemstate; }
   public function getTimestamp() { return $this->timestamp; }
-  public function isAvailable() { return ($this->statut == self::CATEGORYNAME_STATUS_AVAILABLE); }
+  public function isAvailable() { return ($this->elemstate == self::CATEGORYNAME_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::CATEGORYNAME_STATUS_AVAILABLE; }
   public function getUnavailableValue() { return self::CATEGORYNAME_STATUS_NOT_AVAILABLE; }
 // Sets
@@ -33,8 +33,8 @@ class CategoryNameStorData {
   public function setIdCategory($idCategory) { $this->idcategory = $idCategory; }
   public function setIdLanguage($idLanguage) { $this->idlanguage = $idLanguage; }
   public function setName($name) { $this->name = $name; }
-  public function setStatut($statut) { $this->statut = $statut; }
+  public function setElemState($elemstate) { $this->elemstate = $elemstate; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->statut = self::CATEGORYNAME_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->statut = self::CATEGORYNAME_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::CATEGORYNAME_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::CATEGORYNAME_STATUS_NOT_AVAILABLE; }
 }

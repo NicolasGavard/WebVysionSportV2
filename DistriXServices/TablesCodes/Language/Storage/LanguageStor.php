@@ -11,7 +11,7 @@ class LanguageStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "language";
-  const SELECT = 'SELECT id,code,description,linktopicture,size,type,statut,timestamp';
+  const SELECT = 'SELECT id,codeshort,code,name,linktopicture,size,type,elemstate,timestamp';
   const FROM = ' FROM language';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,13 +32,13 @@ class LanguageStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
-        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+        $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       } else {
         $stmt->execute();
       }
@@ -67,13 +67,13 @@ class LanguageStor {
       $request .= self::FROM;
       $request .= " WHERE id IN('" . implode("','", array_map(function($data) { return $data->getId(); }, $inList))."')";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
-        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+        $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       } else {
         $stmt->execute();
       }
@@ -98,12 +98,12 @@ class LanguageStor {
       $request .= self::FROM;
       $request .= " WHERE code = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getCode();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getStatus();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -162,23 +162,25 @@ class LanguageStor {
 
     if ($inDbConnection != null) {
       $request  = "UPDATE language SET ";
+      $request .= "codeshort= :codeshort,";
       $request .= "code= :code,";
-      $request .= "description= :description,";
+      $request .= "name= :name,";
       $request .= "linktopicture= :linktopicture,";
       $request .= "size= :size,";
       $request .= "type= :type,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
       $params = [];
       $params["id"] = $data->getId();
+      $params["codeshort"] = $data->getCodeShort();
       $params["code"] = $data->getCode();
-      $params["description"] = $data->getDescription();
+      $params["name"] = $data->getName();
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getStatus();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -287,22 +289,24 @@ class LanguageStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO language(";
-      $request .= "code,description,linktopicture,size,type,statut,timestamp)";
+      $request .= "codeshort,code,name,linktopicture,size,type,elemstate,timestamp)";
       $request .= " VALUES(";
+      $request .= ":codeshort,";
       $request .= ":code,";
-      $request .= ":description,";
+      $request .= ":name,";
       $request .= ":linktopicture,";
       $request .= ":size,";
       $request .= ":type,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
+      $params["codeshort"] = $data->getCodeShort();
       $params["code"] = $data->getCode();
-      $params["description"] = $data->getDescription();
+      $params["name"] = $data->getName();
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getStatus();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

@@ -3,13 +3,13 @@ CREATE TABLE `ingredient` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `idingredientpackagingbrand` int unsigned NOT NULL,
   `code` varchar(40) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `linktopicture` varchar(255) NOT NULL,
+  `description` varchar(150) NOT NULL,
+  `linktopicture` varchar(150) NOT NULL,
   `size` int unsigned NOT NULL,
   `weight` int unsigned NOT NULL,
   `weighttype` int unsigned NOT NULL,
   `nutriscoreletter` varchar(2) NOT NULL,
-  `nutriscorepicture` varchar(255) NOT NULL,
+  `nutriscorepicture` varchar(150) NOT NULL,
 
   `fats` float(3.2) NOT NULL,
   `saturatedfattyacids` float(3.2) NOT NULL,
@@ -18,8 +18,8 @@ CREATE TABLE `ingredient` (
   `weightnutritionalbenchmarks` int unsigned NOT NULL,
   `weighttype` int unsigned NOT NULL,
   
-  `type` varchar(255) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `type` varchar(150) NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indingredientpackagingbrand` (`idingredientpackagingbrand`),
@@ -28,7 +28,7 @@ CREATE TABLE `ingredient` (
   UNIQUE KEY `indingredientcodeunique` (`idingredientpackagingbrand`,`code`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Ingredients' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO ingredient(id,idingredienttype,code,description,linktopicture,size,type,statut,timestamp) VALUES
+INSERT INTO ingredient(id,idingredienttype,code,description,linktopicture,size,type,elemstate,timestamp) VALUES
 (1,1,'CHOUX_ROUGE','Chou rouge','',0,'',0,0),
 (2,1,'CHOUX_BRUXELLES','Choux de Bruxelles','',0,'',0,0),
 (3,1,'CHOUX_KALE','Chou Kale','',0,'',0,0),

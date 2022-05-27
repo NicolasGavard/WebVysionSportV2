@@ -11,7 +11,7 @@ class FoodNutritionalStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "foodnutritional";
-  const SELECT = 'SELECT id,idfood,idnutritional,nutritional,idweighttype,idweighttypebase,weighttypebase,statut,timestamp';
+  const SELECT = 'SELECT id,idfood,idnutritional,nutritional,idweighttype,idweighttypebase,weighttypebase,elemstate,timestamp';
   const FROM = ' FROM foodnutritional';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class FoodNutritionalStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY idfood";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -85,12 +85,12 @@ class FoodNutritionalStor {
       $request .= self::FROM;
       $request .= " WHERE idfood = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdFood();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -115,12 +115,12 @@ class FoodNutritionalStor {
       $request .= self::FROM;
       $request .= " WHERE idnutritional = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdNutritional();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -185,7 +185,7 @@ class FoodNutritionalStor {
       $request .= "idweighttype= :idweighttype,";
       $request .= "idweighttypebase= :idweighttypebase,";
       $request .= "weighttypebase= :weighttypebase,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -197,7 +197,7 @@ class FoodNutritionalStor {
       $params["idweighttype"] = $data->getIdWeightType();
       $params["idweighttypebase"] = $data->getIdWeightTypeBase();
       $params["weighttypebase"] = $data->getWeightTypeBase();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -306,7 +306,7 @@ class FoodNutritionalStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO foodnutritional(";
-      $request .= "idfood,idnutritional,nutritional,idweighttype,idweighttypebase,weighttypebase,statut,timestamp)";
+      $request .= "idfood,idnutritional,nutritional,idweighttype,idweighttypebase,weighttypebase,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":idfood,";
       $request .= ":idnutritional,";
@@ -314,7 +314,7 @@ class FoodNutritionalStor {
       $request .= ":idweighttype,";
       $request .= ":idweighttypebase,";
       $request .= ":weighttypebase,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["idfood"] = $data->getIdFood();
@@ -323,7 +323,7 @@ class FoodNutritionalStor {
       $params["idweighttype"] = $data->getIdWeightType();
       $params["idweighttypebase"] = $data->getIdWeightTypeBase();
       $params["weighttypebase"] = $data->getWeightTypeBase();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

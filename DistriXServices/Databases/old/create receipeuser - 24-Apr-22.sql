@@ -3,7 +3,7 @@ CREATE TABLE `recipeuser` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `idrecipe` int unsigned NOT NULL,
   `idstyuser` int unsigned NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indrecipe` (`idrecipe`),

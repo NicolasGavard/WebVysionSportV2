@@ -4,9 +4,9 @@ CREATE TABLE `weighttypename` (
   `idweighttype` int unsigned NOT NULL,
   `idlanguage` int unsigned NOT NULL,
   `name` varchar(100) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` varchar(150) NOT NULL,
   `abbreviation` varchar(20) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indweighttype` (`idweighttype`),
@@ -14,7 +14,7 @@ CREATE TABLE `weighttypename` (
   UNIQUE KEY `indweighttypenameunique` (`idweighttype`,`idlanguage`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Weight Type Name' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO weighttypename(id,idweighttype,idlanguage,name,description,abbreviation,statut,timestamp) VALUES 
+INSERT INTO weighttypename(id,idweighttype,idlanguage,name,description,abbreviation,elemstate,timestamp) VALUES 
 (1,1,1,'Kilogramme','Kilogramme','kg',0,0),
 (2,2,1,'Gramme','Gramme','g',0,0),
 (3,3,1,'Miligramme','Miligramme','mg',0,0),

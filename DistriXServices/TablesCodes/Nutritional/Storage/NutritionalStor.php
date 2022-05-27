@@ -11,7 +11,7 @@ class NutritionalStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "nutritional";
-  const SELECT = 'SELECT id,code,statut,timestamp';
+  const SELECT = 'SELECT id,code,elemstate,timestamp';
   const FROM = ' FROM nutritional';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class NutritionalStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -59,12 +59,12 @@ class NutritionalStor {
       $request .= self::FROM;
       $request .= " WHERE code = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getCode();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -124,14 +124,14 @@ class NutritionalStor {
     if ($inDbConnection != null) {
       $request  = "UPDATE nutritional SET ";
       $request .= "code= :code,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
       $params = [];
       $params["id"] = $data->getId();
       $params["code"] = $data->getCode();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -240,14 +240,14 @@ class NutritionalStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO nutritional(";
-      $request .= "code,statut,timestamp)";
+      $request .= "code,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["code"] = $data->getCode();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

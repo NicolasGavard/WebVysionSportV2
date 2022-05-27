@@ -19,7 +19,7 @@ if (!class_exists("DistriXFoodFoodData", false)) {
     protected $foodLabels;
     protected $foodNutritionals;
     protected $foodWeights;
-    protected $statut;
+    protected $elemstate;
     protected $timestamp;
 
     public function __construct()
@@ -41,7 +41,7 @@ if (!class_exists("DistriXFoodFoodData", false)) {
       $this->foodLabels       = [];
       $this->foodNutritionals = [];
       $this->foodWeights      = [];
-      $this->statut           = 0;
+      $this->elemstate           = 0;
       $this->timestamp        = 0;
 
     }
@@ -63,7 +63,7 @@ if (!class_exists("DistriXFoodFoodData", false)) {
     public function getFoodLabels() { return $this->foodLabels; }
     public function getFoodNutritionals() { return $this->foodNutritionals; }
     public function getFoodWeights() { return $this->foodWeights; }
-    public function getStatut() { return $this->statut; }
+    public function getElemState() { return $this->elemstate; }
     public function getTimestamp() { return $this->timestamp; }
 
     // Sets
@@ -84,7 +84,7 @@ if (!class_exists("DistriXFoodFoodData", false)) {
     public function setFoodLabels($foodLabels) { $this->foodLabels = $foodLabels; }
     public function setFoodNutritionals($foodNutritionals) { $this->foodNutritionals = $foodNutritionals; }
     public function setFoodWeights($foodWeights) { $this->foodWeights = $foodWeights; }
-    public function setStatut($statut) { $this->statut = $statut; }
+    public function setElemState($elemstate) { $this->elemstate = $elemstate; }
     public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class

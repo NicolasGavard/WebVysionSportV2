@@ -1,15 +1,14 @@
 DROP TABLE IF EXISTS `nutritional`;
 CREATE TABLE `nutritional` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(200) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `code` varchar(150) NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `indcode` (`code`),
   UNIQUE KEY `indcodeunique` (`code`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Nutritional' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO nutritional(id,code,statut,timestamp) VALUES 
+INSERT INTO nutritional(id,code,elemstate,timestamp) VALUES 
 (1,'ENERGIE',0,0),
 (2,'MATIERES_GRASSES',0,0),
 (3,'GLUCIDES',0,0),

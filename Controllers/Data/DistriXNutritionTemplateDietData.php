@@ -10,7 +10,7 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
     protected $duration;
     protected $tags;
     protected $nbStudentAssigned;
-    protected $statut;
+    protected $elemState;
     protected $timestamp;
 
     public function __construct()
@@ -22,7 +22,7 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
       $this->name           = "";
       $this->duration       = 0;
       $this->tags           = "";
-      $this->statut         = 0;
+      $this->elemState      = 0;
       $this->timestamp      = 0;
     }
     // Gets
@@ -34,7 +34,7 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
     public function getDuration() { return $this->duration; }
     public function getTags() { return $this->tags; }
     public function getNbStudentAssigned() { return $this->nbStudentAssigned; }
-    public function getStatut() { return $this->statut; }
+    public function getElemState() { return $this->elemState; }
     public function getTimestamp() { return $this->timestamp; }
 
     // Sets
@@ -46,7 +46,7 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
     public function setDuration($duration) { $this->duration = $duration; }
     public function setTags($tags) { $this->tags = $tags; }
     public function setNbStudentAssigned($nbStudentAssigned) { $this->nbStudentAssigned = $nbStudentAssigned; }
-    public function setStatut($statut) { $this->statut = $statut; }
+    public function setElemState($elemState) { $this->elemState = $elemState; }
     public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class

@@ -9,7 +9,7 @@ if (!class_exists("DistriXFoodScoreNutriData", false)) {
     protected $linkToPicture;
     protected $size;
     protected $type;
-    protected $statut;
+    protected $elemstate;
     protected $timestamp;
 
     public function __construct()
@@ -21,7 +21,7 @@ if (!class_exists("DistriXFoodScoreNutriData", false)) {
       $this->linkToPicture  = "";
       $this->size           = 0;
       $this->type           = "";
-      $this->statut         = 0;
+      $this->elemstate         = 0;
       $this->timestamp      = 0;
     }
     // Gets
@@ -32,7 +32,7 @@ if (!class_exists("DistriXFoodScoreNutriData", false)) {
     public function getLinkToPicture() { return $this->linkToPicture; }
     public function getSize() { return $this->size; }
     public function getType() { return $this->type; }
-    public function getStatut() { return $this->statut; }
+    public function getElemState() { return $this->elemstate; }
     public function getTimestamp() { return $this->timestamp; }
 
     // Sets
@@ -43,7 +43,7 @@ if (!class_exists("DistriXFoodScoreNutriData", false)) {
     public function setLinkToPicture($linkToPicture) { $this->linkToPicture = $linkToPicture; }
     public function setSize($size) { $this->size = $size; }
     public function setType($type) { $this->type = $type; }
-    public function setStatut($statut) { $this->statut = $statut; }
+    public function setElemState($elemstate) { $this->elemstate = $elemstate; }
     public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class

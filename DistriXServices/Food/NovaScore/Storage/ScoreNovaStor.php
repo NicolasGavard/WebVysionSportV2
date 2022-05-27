@@ -11,7 +11,7 @@ class ScoreNovaStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "scorenova";
-  const SELECT = 'SELECT id,number,color,description,linktopicture,size,type,statut,timestamp';
+  const SELECT = 'SELECT id,number,color,description,linktopicture,size,type,elemstate,timestamp';
   const FROM = ' FROM scorenova';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,13 +32,13 @@ class ScoreNovaStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY number";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
-        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+        $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       } else {
         $stmt->execute();
       }
@@ -63,7 +63,7 @@ class ScoreNovaStor {
       $request .= self::FROM;
       $request .= " WHERE number = :index0";
       if (!$all) {
-        $request .= " AND statut = :index1";
+        $request .= " AND elemstate = :index1";
       }
       $params = [];
       $params["index0"] = $dataIn->getNumber();
@@ -133,7 +133,7 @@ class ScoreNovaStor {
       $request .= "linktopicture= :linktopicture,";
       $request .= "size= :size,";
       $request .= "type= :type,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -145,7 +145,7 @@ class ScoreNovaStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -254,7 +254,7 @@ class ScoreNovaStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO scorenova(";
-      $request .= "number,color,description,linktopicture,size,type,statut,timestamp)";
+      $request .= "number,color,description,linktopicture,size,type,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":number,";
       $request .= ":color,";
@@ -262,7 +262,7 @@ class ScoreNovaStor {
       $request .= ":linktopicture,";
       $request .= ":size,";
       $request .= ":type,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["number"] = $data->getNumber();
@@ -271,7 +271,7 @@ class ScoreNovaStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

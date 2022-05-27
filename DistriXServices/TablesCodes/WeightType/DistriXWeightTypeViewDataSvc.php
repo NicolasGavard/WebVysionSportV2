@@ -37,7 +37,7 @@ if (is_null($dbConnection->getError())) {
   $distriXCodeTableWeightTypeNameData->setIsSolid($weightTypeStor->getIsSolid());
   $distriXCodeTableWeightTypeNameData->setIsLiquid($weightTypeStor->getIsLiquid());
   $distriXCodeTableWeightTypeNameData->setIsOther($weightTypeStor->getIsOther());
-  $distriXCodeTableWeightTypeNameData->setStatut($weightTypeNameStor->getStatut());
+  $distriXCodeTableWeightTypeNameData->setElemState($weightTypeNameStor->getElemState());
   $distriXCodeTableWeightTypeNameData->setTimestamp($weightTypeNameStor->getTimestamp());
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);

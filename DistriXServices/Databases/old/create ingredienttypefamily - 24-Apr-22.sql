@@ -3,15 +3,15 @@ CREATE TABLE `ingredienttypefamily` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(40) NOT NULL,
   `color` varchar(40) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `description` varchar(150) NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indcode` (`code`),
   UNIQUE KEY `indcodeunique` (`code`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Ingredients Types Family' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO ingredienttypefamily(id,code,color,description,statut,timestamp) VALUES
+INSERT INTO ingredienttypefamily(id,code,color,description,elemstate,timestamp) VALUES
 (1,'LEGUMES', '00561B','Légumes',0,0),
 (2,'LEGUMES_FRUITS', 'F35D8B','Légumes fruits',0,0),
 (3,'FRUITS', 'EA6652','Fruits',0,0),

@@ -6,8 +6,8 @@ $(document).ready(function() {
     success : function(data) {    
       if (data.errorData.text == "") {
         $.map(data.ListApplications, function(val, key) {
-          if (val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-          if (val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+          if (val.elemState == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+          if (val.elemState == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
           
           $('#listApplicationsTbody').append(
             '<tr>'+
@@ -111,7 +111,7 @@ function ViewApplication(id){
       $('.AddApplicationFormId').val(id);
       $('.AddApplicationFormCode').val(data.ViewApplication.code);
       $('.AddApplicationFormDescription').val(data.ViewApplication.description);
-      $('.AddApplicationFormStatut').val(data.ViewApplication.statut);
+      $('.AddApplicationFormStatut').val(data.ViewApplication.elemState);
       $('.AddApplicationFormTimestamp').val(data.ViewApplication.timestamp);
     },
     error : function(data) {

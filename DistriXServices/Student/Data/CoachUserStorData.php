@@ -8,7 +8,7 @@ class CoachUserStorData {
   private $styIdUser;
   private $datestart;
   private $dateend;
-  private $statut;
+  private $elemstate;
   private $timestamp;
 
   public function __construct() {
@@ -17,7 +17,7 @@ class CoachUserStorData {
       $this->styIdUser = 0;
       $this->datestart = 0;
       $this->dateend = 0;
-      $this->statut = 0;
+      $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
@@ -26,9 +26,9 @@ class CoachUserStorData {
   public function getStyIdUser() { return $this->styIdUser; }
   public function getDateStart() { return $this->datestart; }
   public function getDateEnd() { return $this->dateend; }
-  public function getStatut() { return $this->statut; }
+  public function getElemState() { return $this->elemstate; }
   public function getTimestamp() { return $this->timestamp; }
-  public function isAvailable() { return ($this->statut == self::COACHUSER_STATUS_AVAILABLE); }
+  public function isAvailable() { return ($this->elemstate == self::COACHUSER_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::COACHUSER_STATUS_AVAILABLE; }
   public function getUnavailableValue() { return self::COACHUSER_STATUS_NOT_AVAILABLE; }
 // Sets
@@ -37,8 +37,8 @@ class CoachUserStorData {
   public function setStyIdUser($styIdUser) { $this->styIdUser = $styIdUser; }
   public function setDateStart($dateStart) { $this->datestart = $dateStart; }
   public function setDateEnd($dateEnd) { $this->dateend = $dateEnd; }
-  public function setStatut($statut) { $this->statut = $statut; }
+  public function setElemState($elemstate) { $this->elemstate = $elemstate; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->statut = self::COACHUSER_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->statut = self::COACHUSER_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::COACHUSER_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::COACHUSER_STATUS_NOT_AVAILABLE; }
 }

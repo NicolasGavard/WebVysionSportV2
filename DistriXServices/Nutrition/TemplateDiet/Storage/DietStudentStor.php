@@ -11,7 +11,7 @@ class DietStudentStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "dietStudent";
-  const SELECT = 'SELECT id,iddiet,iduser,statut,timestamp';
+  const SELECT = 'SELECT id,iddiet,iduser,elemstate,timestamp';
   const FROM = ' FROM dietStudent';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class DietStudentStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY iddiet";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -83,12 +83,12 @@ class DietStudentStor {
       $request .= self::FROM;
       $request .= " WHERE iddiet = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdDiet();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -113,12 +113,12 @@ class DietStudentStor {
       $request .= self::FROM;
       $request .= " WHERE iduser = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdUser();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -179,7 +179,7 @@ class DietStudentStor {
       $request  = "UPDATE dietStudent SET ";
       $request .= "iddiet= :iddiet,";
       $request .= "iduser= :iduser,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -187,7 +187,7 @@ class DietStudentStor {
       $params["id"] = $data->getId();
       $params["iddiet"] = $data->getIdDiet();
       $params["iduser"] = $data->getIdUser();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -296,16 +296,16 @@ class DietStudentStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO dietStudent(";
-      $request .= "iddiet,iduser,statut,timestamp)";
+      $request .= "iddiet,iduser,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":iddiet,";
       $request .= ":iduser,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["iddiet"] = $data->getIdDiet();
       $params["iduser"] = $data->getIdUser();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

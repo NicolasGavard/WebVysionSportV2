@@ -11,7 +11,7 @@ class ScoreNutriStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "scorenutri";
-  const SELECT = 'SELECT id,letter,color,description,linktopicture,size,type,statut,timestamp';
+  const SELECT = 'SELECT id,letter,color,description,linktopicture,size,type,elemstate,timestamp';
   const FROM = ' FROM scorenutri';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,13 +32,13 @@ class ScoreNutriStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY letter";
       
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
-        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+        $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       } else {
         $stmt->execute();
       }
@@ -63,12 +63,12 @@ class ScoreNutriStor {
       $request .= self::FROM;
       $request .= " WHERE letter = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getLetter();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -133,7 +133,7 @@ class ScoreNutriStor {
       $request .= "linktopicture= :linktopicture,";
       $request .= "size= :size,";
       $request .= "type= :type,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -145,7 +145,7 @@ class ScoreNutriStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -254,7 +254,7 @@ class ScoreNutriStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO scorenutri(";
-      $request .= "letter,color,description,linktopicture,size,type,statut,timestamp)";
+      $request .= "letter,color,description,linktopicture,size,type,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":letter,";
       $request .= ":color,";
@@ -262,7 +262,7 @@ class ScoreNutriStor {
       $request .= ":linktopicture,";
       $request .= ":size,";
       $request .= ":type,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["letter"] = $data->getLetter();
@@ -271,7 +271,7 @@ class ScoreNutriStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
