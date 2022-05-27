@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodScoreEcoData.php");
+include(__DIR__ . "/../../Data/DistriXFoodEcoScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -15,37 +15,32 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-$scoreEco  = new DistriXFoodScoreEcoData();
-if ($_POST['id'] > 0) {
-  $scoreEco->setId($_POST['id']);
-}
+list($distriXFoodBandData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewScoresEco");
-$servicesCaller->addParameter("data", $scoreEco);
-$servicesCaller->setServiceName("DistriXServices/Food/ScoreEco/DistriXFoodScoreEcoViewDataSvc.php");
+$servicesCaller->setMethodName("ViewEcoScore");
+$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->setServiceName("DistriXServices/Food/EcoScore/DistriXFoodEcoScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_ScoreEco")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_EcoScore")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXScoreEcoViewDataSvc");
-  $logInfoData->setLogFunction("ViewScoresEco");
+  $logInfoData->setLogApplication("DistriXEcoScoreViewDataSvc");
+  $logInfoData->setLogFunction("ViewEcoScore");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewScoreEco"])) {
-    $scoreEco = $output["ViewScoreEco"];
-  }
+if ($outputok && isset($output["ViewEcoScore"])) {
+  $distriXFoodBandData = $output["ViewEcoScore"];
 } else {
   $error = $errorData;
 }
 
-$resp["ViewEcoScore"]  = $scoreEco;
+$resp["ViewEcoScore"]  = $distriXFoodBandData;
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"]    = $error;
 }
 
 echo json_encode($resp);

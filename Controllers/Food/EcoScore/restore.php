@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodScoreEcoData.php");
+include(__DIR__ . "/../../Data/DistriXFoodEcoScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -10,36 +10,32 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp         = array();
+$resp         = [];
 $confirmSave  = false;
-$error        = array();
-$output       = array();
+$error        = [];
+$output       = [];
 $outputok     = false;
 
-$scoreEco  = new DistriXFoodScoreEcoData();
-if ($_POST['id'] > 0) {
-  $scoreEco->setId($_POST['id']);
-}
+list($distriXFoodBandData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("RestoreScoreEco");
-$servicesCaller->addParameter("data", $scoreEco);
-$servicesCaller->setServiceName("DistriXServices/Food/ScoreEco/DistriXFoodScoreEcoRestoreDataSvc.php");
+$servicesCaller->setMethodName("RestoreEcoScore");
+$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->setServiceName("DistriXServices/Food/EcoScore/DistriXFoodEcoScoreRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_ScoreEco")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_EcoScore")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXScoreEcoRestoreeteDataSvc");
-  $logInfoData->setLogFunction("RestoreScoreEco");
+  $logInfoData->setLogApplication("DistriXFoodEcoScoreRestoreDataSvc");
+  $logInfoData->setLogFunction("RestoreEcoScore");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
+if ($outputok && isset($output["ConfirmSave"])) {
+    // list($confirmSave, $jsonError) = DistriXFoodEcoScoreData::getJsonArray($output["ConfirmSave"]);
     $confirmSave = $output["ConfirmSave"];
-  }
 } else {
   $error = $errorData;
 }

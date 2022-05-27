@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodScoreEcoData.php");
+include(__DIR__ . "/../../Data/DistriXFoodEcoScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -16,35 +16,25 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
-$distriXCodeTableScoreEcoData = new DistriXFoodScoreEcoData();
-$distriXCodeTableScoreEcoData->setId($_POST['id']);
-$distriXCodeTableScoreEcoData->setLetter($_POST['code']);
-$distriXCodeTableScoreEcoData->setColor($_POST['color']);
-$distriXCodeTableScoreEcoData->setDescription($_POST['description']);
-$distriXCodeTableScoreEcoData->setLinkToPicture('');
-if($_POST['linkToPictureBase64'] != '') { $distriXCodeTableScoreEcoData->setLinkToPicture($_POST['linkToPictureBase64']);}
-$distriXCodeTableScoreEcoData->setTimestamp($_POST['timestamp']);
-$distriXCodeTableScoreEcoData->setStatus($_POST['statut']);
+list($distriXFoodBandData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("SaveScoreEco");
-$servicesCaller->addParameter("data", $distriXCodeTableScoreEcoData);
-$servicesCaller->setServiceName("DistriXServices/Food/ScoreEco/DistriXFoodScoreEcoSaveDataSvc.php");
+$servicesCaller->setMethodName("SaveEcoScore");
+$servicesCaller->addParameter("data", $distriXFoodBandData);
+$servicesCaller->setServiceName("DistriXServices/Food/EcoScore/DistriXFoodEcoScoreSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_ScoreEco")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_EcoScore")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXScoreEcoSaveDataSvc");
-  $logInfoData->setLogFunction("SaveScoreEco");
+  $logInfoData->setLogApplication("DistriXEcoScoreSaveDataSvc");
+  $logInfoData->setLogFunction("SaveEcoScore");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
-  }
+if ($outputok && isset($output["ConfirmSave"])) {
+  list($confirmSave, $jsonError) = DistriXFoodEcoScoreData::getJsonArray($output["ConfirmSave"]);
 } else {
   $error = $errorData;
 }

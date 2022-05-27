@@ -1,6 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXFoodScoreEcoData", false)) {
-  class DistriXFoodScoreEcoData extends DistriXSvcAppData
+if (!class_exists("DistriXFoodEcoScoreData", false)) {
+  class DistriXFoodEcoScoreData extends DistriXSvcAppData
   {
     protected $id;
     protected $letter;
