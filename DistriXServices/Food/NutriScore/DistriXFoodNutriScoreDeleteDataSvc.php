@@ -5,8 +5,6 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/Data/DistriXFoodScoreNutriData.php");
 // Database Data
 include(__DIR__ . "/Data/ScoreNutriStorData.php");
 // Storage
@@ -19,29 +17,21 @@ $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 $dbConnection = null;
 $errorData    = null;
 
-// DelScoreNutri
-if ($dataSvc->getMethodName() == "DelScoreNutri") {
-  $dbConnection = null;
-  $errorData    = null;
+// DelNutriScore
+if ($dataSvc->getMethodName() == "DelNutriScore") {
   $insere       = false;
-  $infoScoreNutri     = new DistriXFoodScoreNutriData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoScoreNutri = $dataSvc->getParameter("data");
-      $scoreNutristor = ScoreNutriStor::read($infoScoreNutri->getId(), $dbConnection);
-      $insere       = ScoreNutriStor::remove($scoreNutristor, $dbConnection);
+      list($data, $jsonError) = ScoreNutriStorData::getJsonData($dataSvc->getParameter("data"));
+      $scoreNutristor           = ScoreNutriStor::read($data->getId(), $dbConnection);
+      $insere                 = ScoreNutriStor::remove($scoreNutristor, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();
       } else {
         $dbConnection->rollBack();
-        if ($infoScoreNutri->getId() > 0) {
-          $errorData = ApplicationErrorData::warningUpdateData(1, 1);
-        } else {
-          $errorData = ApplicationErrorData::warningInsertData(1, 1);
-        }
+        $errorData = ApplicationErrorData::warningUpdateData(1, 1);
       }
     } else {
       $errorData = ApplicationErrorData::noBeginTransaction(1, 1);
@@ -51,7 +41,7 @@ if ($dataSvc->getMethodName() == "DelScoreNutri") {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "DelScoreNutri", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "DelNutriScore", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 

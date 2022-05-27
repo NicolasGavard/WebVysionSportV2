@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class ScoreNutriStorData {
+class ScoreNutriStorData extends DistriXSvcAppData {
   const SCORENUTRI_STATUS_AVAILABLE     = 0;
   const SCORENUTRI_STATUS_NOT_AVAILABLE = 1;
 

@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class ScoreNovaStorData {
+class ScoreNovaStorData extends DistriXSvcAppData {
   const SCORENOVA_STATUS_AVAILABLE     = 0;
   const SCORENOVA_STATUS_NOT_AVAILABLE = 1;
 

@@ -23,8 +23,8 @@ $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 $dbConnection = null;
 $errorData    = null;
 
-// SaveScoreNova
-if ($dataSvc->getMethodName() == "SaveScoreNova") {
+// SaveNovaScore
+if ($dataSvc->getMethodName() == "SaveNovaScore") {
   $dbConnection = null;
   $errorData    = null;
   $insere       = false;
@@ -38,9 +38,9 @@ if ($dataSvc->getMethodName() == "SaveScoreNova") {
       $canSaveScoreNova  = true;
       if ($infoScoreNova->getId() == 0) {
         // Verify Code Exist
-        list($scoresNovaStor, $scoresNovaStorInd) = ScoreNovaStor::findByNumber($scoreNovaData, true, $dbConnection);
+        list($scoresNovaStor, $scoresNovaStorInd) = ScoreNovaStor::findByLetter($scoreNovaData, true, $dbConnection);
         if ($scoresNovaStorInd > 0) {
-          $canSaveScoreNova          = false;
+          $canSaveScoreNova     = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
           $distriXSvcErrorData->setDefaultText("The Code " . $infoScoreNova->getCode() . " is already in use");
@@ -52,7 +52,7 @@ if ($dataSvc->getMethodName() == "SaveScoreNova") {
       if ($canSaveScoreNova) {
         $scoreNovaStorData = new ScoreNovaStorData();
         $scoreNovaStorData->setId($infoScoreNova->getId());
-        $scoreNovaStorData->setNumber($infoScoreNova->getNumber());
+        $scoreNovaStorData->setLetter($infoScoreNova->getLetter());
         $scoreNovaStorData->setColor($infoScoreNova->getColor());
         $scoreNovaStorData->setDescription($infoScoreNova->getDescription());
         $scoreNovaStorData->setStatut($infoScoreNova->getStatut());
@@ -123,7 +123,7 @@ if ($dataSvc->getMethodName() == "SaveScoreNova") {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "Login", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "SaveNovaScore", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 

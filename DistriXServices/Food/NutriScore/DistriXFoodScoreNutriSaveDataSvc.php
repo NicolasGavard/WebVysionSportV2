@@ -23,8 +23,8 @@ $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 $dbConnection = null;
 $errorData    = null;
 
-// SaveScoreNutri
-if ($dataSvc->getMethodName() == "SaveScoreNutri") {
+// SaveNutriScore
+if ($dataSvc->getMethodName() == "SaveNutriScore") {
   $dbConnection = null;
   $errorData    = null;
   $insere       = false;
@@ -40,7 +40,7 @@ if ($dataSvc->getMethodName() == "SaveScoreNutri") {
         // Verify Code Exist
         list($scoresNutriStor, $scoresNutriStorInd) = ScoreNutriStor::findByLetter($scoreNutriData, true, $dbConnection);
         if ($scoresNutriStorInd > 0) {
-          $canSaveScoreNutri          = false;
+          $canSaveScoreNutri     = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
           $distriXSvcErrorData->setDefaultText("The Code " . $infoScoreNutri->getCode() . " is already in use");
@@ -123,7 +123,7 @@ if ($dataSvc->getMethodName() == "SaveScoreNutri") {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "Login", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "SaveNutriScore", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 

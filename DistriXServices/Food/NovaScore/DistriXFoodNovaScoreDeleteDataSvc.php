@@ -5,8 +5,6 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/Data/DistriXFoodScoreNovaData.php");
 // Database Data
 include(__DIR__ . "/Data/ScoreNovaStorData.php");
 // Storage
@@ -19,29 +17,21 @@ $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 $dbConnection = null;
 $errorData    = null;
 
-// DelScoreNova
-if ($dataSvc->getMethodName() == "DelScoreNova") {
-  $dbConnection = null;
-  $errorData    = null;
+// DelNovaScore
+if ($dataSvc->getMethodName() == "DelNovaScore") {
   $insere       = false;
-  $infoScoreNova     = new DistriXFoodScoreNovaData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoScoreNova = $dataSvc->getParameter("data");
-      $scoreNovastor = ScoreNovaStor::read($infoScoreNova->getId(), $dbConnection);
-      $insere       = ScoreNovaStor::remove($scoreNovastor, $dbConnection);
+      list($data, $jsonError) = ScoreNovaStorData::getJsonData($dataSvc->getParameter("data"));
+      $scoreNovastor           = ScoreNovaStor::read($data->getId(), $dbConnection);
+      $insere                 = ScoreNovaStor::remove($scoreNovastor, $dbConnection);
       
       if ($insere) {
         $dbConnection->commit();
       } else {
         $dbConnection->rollBack();
-        if ($infoScoreNova->getId() > 0) {
-          $errorData = ApplicationErrorData::warningUpdateData(1, 1);
-        } else {
-          $errorData = ApplicationErrorData::warningInsertData(1, 1);
-        }
+        $errorData = ApplicationErrorData::warningUpdateData(1, 1);
       }
     } else {
       $errorData = ApplicationErrorData::noBeginTransaction(1, 1);
@@ -51,7 +41,7 @@ if ($dataSvc->getMethodName() == "DelScoreNova") {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "DelScoreNova", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "DelNovaScore", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 

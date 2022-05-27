@@ -5,8 +5,6 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/Data/DistriXFoodScoreNovaData.php");
 // Database Data
 include(__DIR__ . "/Data/ScoreNovaStorData.php");
 // Storage
@@ -16,6 +14,7 @@ include(__DIR__ . "/Storage/ScoreNovaStor.php");
 include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
 include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
 
+
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 
 $dbConnection = null;
@@ -24,27 +23,23 @@ $scoresNova    = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  $data = $dataSvc->getParameter("data");
-  list($scoreNovastor, $scoreNovastorInd) = ScoreNovaStor::getList($data->getStatut(), $dbConnection);
-  foreach ($scoreNovastor as $ScoreNova) {
-    $infoScoreNova     = DistriXSvcUtil::setData($ScoreNova, "DistriXFoodScoreNovaData");
-
-    $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $infoScoreNova->getLinkToPicture();
+  list($scoreNovaStor, $scoreNovaStorInd) = ScoreNovaStor::getList(true, $dbConnection);
+  foreach ($scoreNovaStor as $scoreNova) {
+    $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $scoreNova->getLinkToPicture();
     $pictures_headers = get_headers($urlPicture);
-    if ($infoScoreNova->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $infoScoreNova->getLinkToPicture() == '') {
+    if ($scoreNova->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $scoreNova->getLinkToPicture() == '') {
       $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/default.png';
     }
-    $infoScoreNova->setLinkToPicture($urlPicture);
-    $scoresNova[]  = $infoScoreNova;
+    $scoreNova->setLinkToPicture($urlPicture);
   }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
 if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListScoresNova", $dataSvc->getMethodName(), basename(__FILE__));
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListNovaScores", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListScoresNova", $scoresNova);
+$dataSvc->addToResponse("ListNovaScores", $scoreNovaStor);
 
 // Return response
 $dataSvc->endOfService();
