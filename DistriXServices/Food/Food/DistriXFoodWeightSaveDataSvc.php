@@ -40,7 +40,7 @@ if ($dataSvc->getMethodName() == "SaveFoodWeight") {
         $foodWeightStorData = FoodWeightStor::findByIdFoodIdWeightTypeWeight($foodWeightStorData, $dbConnection);
         if ($foodWeightStorData->getId() > 0) {
           $canSaveFoodWeight          = false;
-          if ($foodWeightStorData->getStatut() == 0){
+          if ($foodWeightStorData->getElemState() == 0){
             $distriXSvcErrorData = new DistriXSvcErrorData();
             $distriXSvcErrorData->setCode("400");
             $distriXSvcErrorData->setDefaultText("The Weight " . $infoFoodWeight->getWeight() . " is already in use");
@@ -61,7 +61,7 @@ if ($dataSvc->getMethodName() == "SaveFoodWeight") {
         $foodWeightStorData->setIdFood($infoFoodWeight->getIdFood());
         $foodWeightStorData->setIdWeightType($infoFoodWeight->getIdWeightType());
         $foodWeightStorData->setWeight($infoFoodWeight->getWeight());
-        $foodWeightStorData->setStatut($infoFoodWeight->getStatut());
+        $foodWeightStorData->setElemState($infoFoodWeight->getElemState());
         $foodWeightStorData->setTimestamp($infoFoodWeight->getTimestamp());
         
         if ($infoFoodWeight->getLinkToPicture() != "" && $infoFoodWeight->getLinkToPicture() != $foodWeightStorData->getLinkToPicture()) {

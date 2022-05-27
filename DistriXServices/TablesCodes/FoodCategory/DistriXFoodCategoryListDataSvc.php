@@ -40,7 +40,7 @@ if (is_null($dbConnection->getError())) {
     $distriXCodeTableFoodCategoryNameData->setIdLanguage($categoryNameStor->getIdLanguage());
     $distriXCodeTableFoodCategoryNameData->setCode($FoodCategory->getCode());
     $distriXCodeTableFoodCategoryNameData->setName($categoryNameStor->getName());
-    $distriXCodeTableFoodCategoryNameData->setStatut($FoodCategory->getStatut());
+    $distriXCodeTableFoodCategoryNameData->setElemState($FoodCategory->getElemState());
     $distriXCodeTableFoodCategoryNameData->setTimestamp($FoodCategory->getTimestamp());
     $category[]  = $distriXCodeTableFoodCategoryNameData;
   }

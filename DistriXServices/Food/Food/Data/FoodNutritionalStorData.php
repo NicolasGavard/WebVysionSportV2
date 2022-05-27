@@ -10,7 +10,7 @@ class FoodNutritionalStorData {
   private $idweighttype;
   private $idweighttypebase;
   private $weighttypebase;
-  private $statut;
+  private $elemstate;
   private $timestamp;
 
   public function __construct() {
@@ -21,7 +21,7 @@ class FoodNutritionalStorData {
       $this->idweighttype = 0;
       $this->idweighttypebase = 0;
       $this->weighttypebase = 0;
-      $this->statut = 0;
+      $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
@@ -32,9 +32,9 @@ class FoodNutritionalStorData {
   public function getIdWeightType() { return $this->idweighttype; }
   public function getIdWeightTypeBase() { return $this->idweighttypebase; }
   public function getWeightTypeBase() { return $this->weighttypebase; }
-  public function getStatut() { return $this->statut; }
+  public function getElemState() { return $this->elemstate; }
   public function getTimestamp() { return $this->timestamp; }
-  public function isAvailable() { return ($this->statut == self::FOODNUTRITIONAL_STATUS_AVAILABLE); }
+  public function isAvailable() { return ($this->elemstate == self::FOODNUTRITIONAL_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::FOODNUTRITIONAL_STATUS_AVAILABLE; }
   public function getUnavailableValue() { return self::FOODNUTRITIONAL_STATUS_NOT_AVAILABLE; }
 // Sets
@@ -45,8 +45,8 @@ class FoodNutritionalStorData {
   public function setIdWeightType($idWeightType) { $this->idweighttype = $idWeightType; }
   public function setIdWeightTypeBase($idWeightTypeBase) { $this->idweighttypebase = $idWeightTypeBase; }
   public function setWeightTypeBase($weightTypeBase) { $this->weighttypebase = $weightTypeBase; }
-  public function setStatut($statut) { $this->statut = $statut; }
+  public function setElemState($elemstate) { $this->elemstate = $elemstate; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->statut = self::FOODNUTRITIONAL_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->statut = self::FOODNUTRITIONAL_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::FOODNUTRITIONAL_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::FOODNUTRITIONAL_STATUS_NOT_AVAILABLE; }
 }

@@ -48,7 +48,7 @@ if ($dataSvc->getMethodName() == "SaveBrand") {
         $brandStorData->setId($data->getId());
         $brandStorData->setCode(strtoupper(trim(DistriXSvcUtil::remove_accents($data->getName()))));
         $brandStorData->setName($data->getName());
-        $brandStorData->setStatut($data->getStatut());
+        $brandStorData->setElemState($data->getElemState());
         $brandStorData->setTimestamp($data->getTimestamp());
         
         if ($data->getLinkToPicture() != "" && $data->getLinkToPicture() != $brandStorData->getLinkToPicture()) {

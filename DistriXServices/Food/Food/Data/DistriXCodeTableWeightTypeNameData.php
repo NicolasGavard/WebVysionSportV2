@@ -12,7 +12,7 @@ if (!class_exists("DistriXCodeTableWeightTypeNameData", false)) {
     protected $isSolid;
     protected $isLiquid;
     protected $isOther;
-    protected $statut;
+    protected $elemstate;
     protected $timestamp;
 
     public function __construct()
@@ -27,7 +27,7 @@ if (!class_exists("DistriXCodeTableWeightTypeNameData", false)) {
       $this->isSolid      = 0;
       $this->isLiquid     = 0;
       $this->isOther      = 0;
-      $this->statut       = 0;
+      $this->elemstate       = 0;
       $this->timestamp    = 0;
     }
     // Gets
@@ -41,7 +41,7 @@ if (!class_exists("DistriXCodeTableWeightTypeNameData", false)) {
     public function getIsSolid() { return $this->isSolid; }
     public function getIsLiquid() { return $this->isLiquid; }
     public function getIsOther() { return $this->isOther; }
-    public function getStatut() { return $this->statut; }
+    public function getElemState() { return $this->elemstate; }
     public function getTimestamp() { return $this->timestamp; }
 
     // Sets
@@ -55,7 +55,7 @@ if (!class_exists("DistriXCodeTableWeightTypeNameData", false)) {
     public function setIsSolid($isSolid) { $this->isSolid = $isSolid; }
     public function setIsLiquid($isLiquid) { $this->isLiquid = $isLiquid; }
     public function setIsOther($isOther) { $this->isOther = $isOther; }
-    public function setStatut($statut) { $this->statut = $statut; }
+    public function setElemState($elemstate) { $this->elemstate = $elemstate; }
     public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class

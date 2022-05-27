@@ -45,7 +45,7 @@ if (is_null($dbConnection->getError())) {
 
     $distriXStudentCoatchUserData->setDateStart($coachUser->getDateStart());
     $distriXStudentCoatchUserData->setDateEnd($coachUser->getDateEnd());
-    $distriXStudentCoatchUserData->setStatut($coachUser->getStatut());
+    $distriXStudentCoatchUserData->setElemState($coachUser->getElemState());
     $distriXStudentCoatchUserData->setTimestamp($coachUser->getTimestamp());
     $listMyStudents[] = $distriXStudentCoatchUserData;
   }

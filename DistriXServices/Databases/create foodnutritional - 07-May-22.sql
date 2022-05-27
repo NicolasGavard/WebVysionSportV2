@@ -7,7 +7,7 @@ CREATE TABLE `foodnutritional` (
   `idweighttype` int unsigned NOT NULL,
   `idweighttypebase` int unsigned NOT NULL,
   `weighttypebase` int unsigned NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indfood` (`idfood`),
@@ -15,7 +15,7 @@ CREATE TABLE `foodnutritional` (
   UNIQUE KEY `indfoodnutritionalunique` (`idfood`,`idnutritional`,`nutritional`,`idweighttypebase`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Food Nutritional' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO foodnutritional(id,idfood,idnutritional,nutritional,idweighttype,weighttypebase,idweighttypebase,statut,timestamp) VALUES 
+INSERT INTO foodnutritional(id,idfood,idnutritional,nutritional,idweighttype,weighttypebase,idweighttypebase,elemstate,timestamp) VALUES 
 (1,1,6,0.021,2,100,7,0,0),
 (2,1,8,100,4,100,7,0,0),
 (3,1,9,2.6,3,100,7,0,0),

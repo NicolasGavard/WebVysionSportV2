@@ -55,7 +55,7 @@ if ($dataSvc->getMethodName() == "SaveNutriScore") {
         $scoreNutriStorData->setLetter($infoScoreNutri->getLetter());
         $scoreNutriStorData->setColor($infoScoreNutri->getColor());
         $scoreNutriStorData->setDescription($infoScoreNutri->getDescription());
-        $scoreNutriStorData->setStatut($infoScoreNutri->getStatut());
+        $scoreNutriStorData->setElemState($infoScoreNutri->getElemState());
         $scoreNutriStorData->setTimestamp($infoScoreNutri->getTimestamp());
         
         if ($infoScoreNutri->getLinkToPicture() != "") {

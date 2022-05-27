@@ -5,14 +5,13 @@ CREATE TABLE `weighttype` (
   `issolid` tinyint unsigned NOT NULL,
   `isliquid` tinyint unsigned NOT NULL,
   `isother` tinyint unsigned NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `indcode` (`code`),
   UNIQUE KEY `indcodeunique` (`code`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Weight Type' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO weighttype(id,code,issolid,isliquid,isother,statut,timestamp) VALUES 
+INSERT INTO weighttype(id,code,issolid,isliquid,isother,elemstate,timestamp) VALUES 
 (1,'KG',1,0,0,0,0),
 (2,'G',1,0,0,0,0),
 (3,'MG',1,0,0,0,0),

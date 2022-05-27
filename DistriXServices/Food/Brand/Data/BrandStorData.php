@@ -9,7 +9,7 @@ class BrandStorData extends DistriXSvcAppData {
   protected $linktopicture;
   protected $size;
   protected $type;
-  protected $statut;
+  protected $elemstate;
   protected $timestamp;
 
   public function __construct() {
@@ -19,7 +19,7 @@ class BrandStorData extends DistriXSvcAppData {
       $this->linktopicture = "";
       $this->size = 0;
       $this->type = "";
-      $this->statut = 0;
+      $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
@@ -29,9 +29,9 @@ class BrandStorData extends DistriXSvcAppData {
   public function getLinkToPicture():string { return $this->linktopicture; }
   public function getSize():int { return $this->size; }
   public function getType():string { return $this->type; }
-  public function getStatut():int { return $this->statut; }
+  public function getElemState():int { return $this->elemstate; }
   public function getTimestamp():int { return $this->timestamp; }
-  public function isAvailable():bool { return ($this->statut == self::BRAND_STATUS_AVAILABLE); }
+  public function isAvailable():bool { return ($this->elemstate == self::BRAND_STATUS_AVAILABLE); }
   public function getAvailableValue():int { return self::BRAND_STATUS_AVAILABLE; }
   public function getUnavailableValue():int { return self::BRAND_STATUS_NOT_AVAILABLE; }
 // Sets
@@ -41,8 +41,8 @@ class BrandStorData extends DistriXSvcAppData {
   public function setLinkToPicture(string $linkToPicture) { $this->linktopicture = $linkToPicture; }
   public function setSize(int $size) { $this->size = $size; }
   public function setType(string $type) { $this->type = $type; }
-  public function setStatut(int $statut) { $this->statut = $statut; }
+  public function setElemState(int $elemstate) { $this->elemstate = $elemstate; }
   public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->statut = self::BRAND_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->statut = self::BRAND_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::BRAND_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::BRAND_STATUS_NOT_AVAILABLE; }
 }

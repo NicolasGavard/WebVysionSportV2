@@ -18,7 +18,7 @@ $outputok       = false;
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListLanguages");
-$servicesCaller->setServiceName("DistriXServices/CodeTable/Language/DistriXCodeTableLanguageListDataSvc.php");
+$servicesCaller->setServiceName("DistriXServices/TablesCodes/Language/DistriXLanguageListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Language")) {

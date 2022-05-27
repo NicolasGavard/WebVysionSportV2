@@ -11,7 +11,7 @@ class FoodNameStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "foodname";
-  const SELECT = 'SELECT id,idfood,idlanguage,name,statut,timestamp';
+  const SELECT = 'SELECT id,idfood,idlanguage,name,elemstate,timestamp';
   const FROM = ' FROM foodname';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class FoodNameStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY idfood";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -83,12 +83,12 @@ class FoodNameStor {
       $request .= self::FROM;
       $request .= " WHERE idfood = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdFood();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -113,12 +113,12 @@ class FoodNameStor {
       $request .= self::FROM;
       $request .= " WHERE idlanguage = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdLanguage();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -180,7 +180,7 @@ class FoodNameStor {
       $request .= "idfood= :idfood,";
       $request .= "idlanguage= :idlanguage,";
       $request .= "name= :name,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -189,7 +189,7 @@ class FoodNameStor {
       $params["idfood"] = $data->getIdFood();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["name"] = $data->getName();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -298,18 +298,18 @@ class FoodNameStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO foodname(";
-      $request .= "idfood,idlanguage,name,statut,timestamp)";
+      $request .= "idfood,idlanguage,name,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":idfood,";
       $request .= ":idlanguage,";
       $request .= ":name,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["idfood"] = $data->getIdFood();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["name"] = $data->getName();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

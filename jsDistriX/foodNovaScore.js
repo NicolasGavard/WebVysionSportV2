@@ -142,12 +142,12 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListNovaScore(statut){
+function ListNovaScore(elemState){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
-    if(val.statut == statut){
-      if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+    if(val.elemState == elemState){
+      if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
                     ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
@@ -192,7 +192,7 @@ function ViewNovaScore(id){
 
       $(".avatar-NovaScore").attr("src", data.ViewNovaScore.linktopicture);
       $('.AddNovaScoreFormTimestamp').val(data.ViewNovaScore.timestamp);
-      $('.AddNovaScoreFormStatut').val(data.ViewNovaScore.statut);
+      $('.AddNovaScoreFormStatut').val(data.ViewNovaScore.elemState);
     },
     error : function(data) {
       console.log(data);

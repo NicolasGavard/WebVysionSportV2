@@ -34,6 +34,7 @@
 							<thead>
 								<tr>                 
                 <th width="20%" class="table-plus datatable-nosort"><span><?php echo $page_picture; ?></span></th>
+                  <th width="10%"><span><?php echo $page_code; ?></span></th>
                   <th width="70%"><span><?php echo $page_name; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
@@ -58,7 +59,15 @@
                   </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_code; ?></label>
+                    <input class="form-control AddLanguageFormCode" type="text" code="code" placeholder="<?php echo $page_code; ?>">
+                    <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
                     <input class="form-control AddLanguageFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
@@ -96,7 +105,7 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/foodLanguage.js"></script>
+      <script src="jsDistrix/codeTableLanguages.js"></script>
   </body>
 </html>
 

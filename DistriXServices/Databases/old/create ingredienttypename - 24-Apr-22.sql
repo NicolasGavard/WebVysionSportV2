@@ -4,7 +4,7 @@ CREATE TABLE `ingredienttypename` (
   `idingredienttype` int unsigned NOT NULL,
   `idlanguage` int unsigned NOT NULL,
   `name` varchar(100) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indingredienttype` (`idingredienttype`),
@@ -13,7 +13,7 @@ CREATE TABLE `ingredienttypename` (
   UNIQUE KEY `indingredienttypelanguageunique` (`idingredienttype`,`idlanguage`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Ingredients Types Names' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO ingredienttypename(id,idingredienttype,idlanguage,name,statut,timestamp) VALUES
+INSERT INTO ingredienttypename(id,idingredienttype,idlanguage,name,elemstate,timestamp) VALUES
 (1,1,1,'Choux',0,0),
 (2,2,1,'Légumes feuilles',0,0),
 (3,3,1,'Champignons',0,0),

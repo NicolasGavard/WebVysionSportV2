@@ -13,7 +13,7 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     protected $dateStart;
     protected $assignedUsers;
     protected $advancement;
-    protected $statut;
+    protected $elemstate;
     protected $timestamp;
 
     public function __construct()
@@ -29,7 +29,7 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
       $this->dateStart      = "";
       $this->assignedUsers  = [];
       $this->advancement    = 0;
-      $this->statut         = 0;
+      $this->elemstate         = 0;
       $this->timestamp      = 0;
     }
     // Gets
@@ -44,7 +44,7 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     public function getDateStart() { return $this->dateStart; }
     public function getAssignedUsers() { return $this->assignedUsers; }
     public function getAdvancement() { return $this->advancement; }
-    public function getStatut() { return $this->statut; }
+    public function getElemState() { return $this->elemstate; }
     public function getTimestamp() { return $this->timestamp; }
 
     // Sets
@@ -59,7 +59,7 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     public function setDateStart($dateStart) { $this->dateStart = $dateStart; }
     public function setAssignedUsers($assignedUsers) { $this->assignedUsers = $assignedUsers; }
     public function setAdvancement($advancement) { $this->advancement = $advancement; }
-    public function setStatut($statut) { $this->statut = $statut; }
+    public function setElemState($elemstate) { $this->elemstate = $elemstate; }
     public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class

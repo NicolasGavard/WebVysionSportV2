@@ -4,7 +4,7 @@ CREATE TABLE `recipename` (
   `idrecipe` int unsigned NOT NULL,
   `idlanguage` int unsigned NOT NULL,
   `name` varchar(100) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indrecipe` (`idrecipe`),

@@ -48,7 +48,7 @@ if ($dataSvc->getMethodName() == "SaveLabel") {
         $labelStorData->setId($data->getId());
         $labelStorData->setCode(strtoupper(trim(DistriXSvcUtil::remove_accents($data->getName()))));
         $labelStorData->setName($data->getName());
-        $labelStorData->setStatut($data->getStatut());
+        $labelStorData->setElemState($data->getElemState());
         $labelStorData->setTimestamp($data->getTimestamp());
         
         if ($data->getLinkToPicture() != "" && $data->getLinkToPicture() != $labelStorData->getLinkToPicture()) {

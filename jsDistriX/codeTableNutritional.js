@@ -7,8 +7,8 @@ $.ajax({
     var idLanguage = 1;
     $.map(data.ListNutritional, function(val, key) {
       idLanguage = val.idLanguage;
-      if (val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-      if (val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+      if (val.elemState == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if (val.elemState == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       $('#listNutritionalsTbody').append(
         '<tr>'+
@@ -152,7 +152,7 @@ function ViewNutritional(id, idNutritional,idLanguage){
       if (data.ViewNutritional.isOther == 1) {$('.AddNutritionalFormIsOther').prop('checked', true);}
 
       $('.AddNutritionalFormTimestamp').val(data.ViewNutritional.timestamp);
-      $('.AddNutritionalFormStatut').val(data.ViewNutritional.statut);
+      $('.AddNutritionalFormStatut').val(data.ViewNutritional.elemState);
 
       $.map(data.ListLanguages, function(val, key) {
         var  activeSelected = false;

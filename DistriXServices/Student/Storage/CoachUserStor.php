@@ -11,7 +11,7 @@ class CoachUserStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "coachuser";
-  const SELECT = 'SELECT id,styIdUserCoach,styIdUser,datestart,dateend,statut,timestamp';
+  const SELECT = 'SELECT id,styIdUserCoach,styIdUser,datestart,dateend,elemstate,timestamp';
   const FROM = ' FROM coachuser';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class CoachUserStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY styIdUserCoach";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -49,7 +49,7 @@ class CoachUserStor {
   }
   // End of getList
 
-  public static function findByStyIdUserCoachStyIdUserStatut(CoachUserStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByStyIdUserCoachStyIdUserElemState(CoachUserStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new CoachUserStorData();
@@ -59,9 +59,9 @@ class CoachUserStor {
       $request .= self::FROM;
       $request .= " WHERE styIdUserCoach = :index0";
       $request .= " AND styIdUser = :index1";
-      $request .= " AND statut = :index2";
+      $request .= " AND elemstate = :index2";
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['index0'=>  $dataIn->getStyIdUserCoach(), 'index1'=>  $dataIn->getStyIdUser(), 'index2'=>  $dataIn->getStatut()]);
+      $stmt->execute(['index0'=>  $dataIn->getStyIdUserCoach(), 'index1'=>  $dataIn->getStyIdUser(), 'index2'=>  $dataIn->getElemState()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -72,7 +72,7 @@ class CoachUserStor {
     }
     return $data;
   }
-  // End of IndStyIdUserCoachStyIdUserStatut
+  // End of IndStyIdUserCoachStyIdUserElemState
 
   public static function findByStyIdUserCoach(CoachUserStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
@@ -84,12 +84,12 @@ class CoachUserStor {
       $request .= self::FROM;
       $request .= " WHERE styIdUserCoach = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getStyIdUserCoach();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -114,12 +114,12 @@ class CoachUserStor {
       $request .= self::FROM;
       $request .= " WHERE styIdUser = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getStyIdUser();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -182,7 +182,7 @@ class CoachUserStor {
       $request .= "styIdUser= :styIdUser,";
       $request .= "datestart= :datestart,";
       $request .= "dateend= :dateend,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -192,7 +192,7 @@ class CoachUserStor {
       $params["styIdUser"] = $data->getStyIdUser();
       $params["datestart"] = $data->getDateStart();
       $params["dateend"] = $data->getDateEnd();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -301,20 +301,20 @@ class CoachUserStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO coachuser(";
-      $request .= "styIdUserCoach,styIdUser,datestart,dateend,statut,timestamp)";
+      $request .= "styIdUserCoach,styIdUser,datestart,dateend,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":styIdUserCoach,";
       $request .= ":styIdUser,";
       $request .= ":datestart,";
       $request .= ":dateend,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["styIdUserCoach"] = $data->getStyIdUserCoach();
       $params["styIdUser"] = $data->getStyIdUser();
       $params["datestart"] = $data->getDateStart();
       $params["dateend"] = $data->getDateEnd();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

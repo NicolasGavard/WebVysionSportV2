@@ -8,7 +8,7 @@ class DietTemplateStorData {
   private $name;
   private $duration;
   private $tags;
-  private $statut;
+  private $elemstate;
   private $timestamp;
 
   public function __construct() {
@@ -17,7 +17,7 @@ class DietTemplateStorData {
       $this->name = "";
       $this->duration = 0;
       $this->tags = "";
-      $this->statut = 0;
+      $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
@@ -26,9 +26,9 @@ class DietTemplateStorData {
   public function getName() { return $this->name; }
   public function getDuration() { return $this->duration; }
   public function getTags() { return $this->tags; }
-  public function getStatut() { return $this->statut; }
+  public function getElemState() { return $this->elemstate; }
   public function getTimestamp() { return $this->timestamp; }
-  public function isAvailable() { return ($this->statut == self::DIETTEMPLATE_STATUS_AVAILABLE); }
+  public function isAvailable() { return ($this->elemstate == self::DIETTEMPLATE_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::DIETTEMPLATE_STATUS_AVAILABLE; }
   public function getUnavailableValue() { return self::DIETTEMPLATE_STATUS_NOT_AVAILABLE; }
 // Sets
@@ -37,8 +37,8 @@ class DietTemplateStorData {
   public function setName($name) { $this->name = $name; }
   public function setDuration($duration) { $this->duration = $duration; }
   public function setTags($tags) { $this->tags = $tags; }
-  public function setStatut($statut) { $this->statut = $statut; }
+  public function setElemState($elemstate) { $this->elemstate = $elemstate; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->statut = self::DIETTEMPLATE_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->statut = self::DIETTEMPLATE_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::DIETTEMPLATE_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::DIETTEMPLATE_STATUS_NOT_AVAILABLE; }
 }

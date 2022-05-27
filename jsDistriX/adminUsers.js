@@ -140,8 +140,8 @@ function showData(idStyEnterprise){
       });
       
       $.map(data.ListUsers, function(val, key) {
-        if(val.statut == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.statut == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if(val.elemState == 1) {progressBarColor = 'danger';   actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.elemState == 0) {progressBarColor = 'success';  actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listUsersTbody').append(
           '<tr>'+
@@ -241,7 +241,7 @@ function ViewUser(id){
       $('.AddProfilFormInitPass').val(data.ViewUser.initPass);
       $('.AddProfilFormIdLanguage').val(data.ViewUser.idLanguage);
       $("#listUsersAddAccountIdStyEnterprise").val(data.ViewUser.idStyEnterprise);
-      $('.AddProfilFormStatut').val(data.ViewUser.statut);
+      $('.AddProfilFormStatut').val(data.ViewUser.elemState);
     },
     error : function(data) {
       console.log(data);

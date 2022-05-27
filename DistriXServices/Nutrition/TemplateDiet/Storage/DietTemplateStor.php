@@ -11,7 +11,7 @@ class DietTemplateStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "diettemplate";
-  const SELECT = 'SELECT id,iduser,name,duration,tags,statut,timestamp';
+  const SELECT = 'SELECT id,iduser,name,duration,tags,elemstate,timestamp';
   const FROM = ' FROM diettemplate';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -22,7 +22,7 @@ class DietTemplateStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(int $statut, DistriXPDOConnection $inDbConnection)
+  public static function getList(int $elemstate, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DietTemplateStorData();
@@ -31,11 +31,11 @@ class DietTemplateStor {
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE statut = :statut";
+      $request .= " WHERE elemstate = :elemstate";
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $statut]);
+      $stmt->execute(['elemstate'=> $elemstate]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -72,7 +72,7 @@ class DietTemplateStor {
   }
   // End of iduserNameDuration
 
-  public static function findByIdUser(DietTemplateStorData $dataIn, int $statut, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUser(DietTemplateStorData $dataIn, int $elemstate, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -81,10 +81,10 @@ class DietTemplateStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE iduser = :index0";
-      $request .= " AND statut = :statut";
+      $request .= " AND elemstate = :elemstate";
       $params = [];
       $params["index0"] = $dataIn->getIdUser();
-      $params["statut"] = $statut;
+      $params["elemstate"] = $elemstate;
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
@@ -146,7 +146,7 @@ class DietTemplateStor {
       $request .= "name= :name,";
       $request .= "duration= :duration,";
       $request .= "tags= :tags,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -156,7 +156,7 @@ class DietTemplateStor {
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -265,20 +265,20 @@ class DietTemplateStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO diettemplate(";
-      $request .= "iduser,name,duration,tags,statut,timestamp)";
+      $request .= "iduser,name,duration,tags,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":iduser,";
       $request .= ":name,";
       $request .= ":duration,";
       $request .= ":tags,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["iduser"] = $data->getIdUser();
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

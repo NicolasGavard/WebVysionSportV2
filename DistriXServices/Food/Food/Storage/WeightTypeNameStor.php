@@ -11,7 +11,7 @@ class WeightTypeNameStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "weighttypename";
-  const SELECT = 'SELECT id,idweighttype,idlanguage,name,description,abbreviation,statut,timestamp';
+  const SELECT = 'SELECT id,idweighttype,idlanguage,name,description,abbreviation,elemstate,timestamp';
   const FROM = ' FROM weighttypename';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class WeightTypeNameStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -59,12 +59,12 @@ class WeightTypeNameStor {
       $request .= self::FROM;
       $request .= " WHERE idweighttype = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdWeightType();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -89,12 +89,12 @@ class WeightTypeNameStor {
       $request .= self::FROM;
       $request .= " WHERE idlanguage = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdLanguage();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -185,7 +185,7 @@ class WeightTypeNameStor {
       $request .= "name= :name,";
       $request .= "description= :description,";
       $request .= "abbreviation= :abbreviation,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -196,7 +196,7 @@ class WeightTypeNameStor {
       $params["name"] = $data->getName();
       $params["description"] = $data->getDescription();
       $params["abbreviation"] = $data->getAbbreviation();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -305,14 +305,14 @@ class WeightTypeNameStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO weighttypename(";
-      $request .= "idweighttype,idlanguage,name,description,abbreviation,statut,timestamp)";
+      $request .= "idweighttype,idlanguage,name,description,abbreviation,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":idweighttype,";
       $request .= ":idlanguage,";
       $request .= ":name,";
       $request .= ":description,";
       $request .= ":abbreviation,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["idweighttype"] = $data->getIdWeightType();
@@ -320,7 +320,7 @@ class WeightTypeNameStor {
       $params["name"] = $data->getName();
       $params["description"] = $data->getDescription();
       $params["abbreviation"] = $data->getAbbreviation();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

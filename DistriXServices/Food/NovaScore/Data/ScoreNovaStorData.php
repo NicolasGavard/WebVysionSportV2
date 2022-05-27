@@ -10,7 +10,7 @@ class ScoreNovaStorData extends DistriXSvcAppData {
   protected $linktopicture;
   protected $size;
   protected $type;
-  protected $statut;
+  protected $elemstate;
   protected $timestamp;
 
   public function __construct() {
@@ -21,7 +21,7 @@ class ScoreNovaStorData extends DistriXSvcAppData {
       $this->linktopicture = "";
       $this->size = 0;
       $this->type = "";
-      $this->statut = 0;
+      $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
@@ -32,9 +32,9 @@ class ScoreNovaStorData extends DistriXSvcAppData {
   public function getLinkToPicture() { return $this->linktopicture; }
   public function getSize() { return $this->size; }
   public function getType() { return $this->type; }
-  public function getStatut() { return $this->statut; }
+  public function getElemState() { return $this->elemstate; }
   public function getTimestamp() { return $this->timestamp; }
-  public function isAvailable() { return ($this->statut == self::SCORENOVA_STATUS_AVAILABLE); }
+  public function isAvailable() { return ($this->elemstate == self::SCORENOVA_STATUS_AVAILABLE); }
   public function getAvailableValue() { return self::SCORENOVA_STATUS_AVAILABLE; }
   public function getUnavailableValue() { return self::SCORENOVA_STATUS_NOT_AVAILABLE; }
 // Sets
@@ -45,8 +45,8 @@ class ScoreNovaStorData extends DistriXSvcAppData {
   public function setLinkToPicture($linkToPicture) { $this->linktopicture = $linkToPicture; }
   public function setSize($size) { $this->size = $size; }
   public function setType($type) { $this->type = $type; }
-  public function setStatut($statut) { $this->statut = $statut; }
+  public function setElemState($elemstate) { $this->elemstate = $elemstate; }
   public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->statut = self::SCORENOVA_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->statut = self::SCORENOVA_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::SCORENOVA_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::SCORENOVA_STATUS_NOT_AVAILABLE; }
 }

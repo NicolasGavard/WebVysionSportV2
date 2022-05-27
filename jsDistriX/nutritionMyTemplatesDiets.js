@@ -105,20 +105,20 @@ $("#btnRestMyTemplatesDiets").on('click', function() {
   });
 });
 
-function ListMyTemplatesDiets(statut){
+function ListMyTemplatesDiets(elemState){
   $('#listMyTemplatesDietsTbody').empty();
 
   $.ajax({
     url : 'Controllers/Nutrition/MyTemplatesDiets/list.php',
     type : 'POST',
     dataType : 'JSON',
-    data: {'statut': statut, 'idUser': localStorage.getItem("idUser")},
+    data: {'elemState': elemState, 'idUser': localStorage.getItem("idUser")},
     success : function(data) {
       $.map(data.ListMyTemplatesDiets, function(val, key) {
         var assignedUsersList = '';
         var progressColor = 'primary';
-        if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         $('#listMyTemplatesDietsTbody').append(
           '<tr>'+
@@ -162,7 +162,7 @@ function ViewMyTemplatesDiets(id){
       $('.AddMyTemplatesDietsFormName').val(data.ViewMyTemplatesDiets.name);
       $(".avatar-my_template_diet").attr("src", data.ViewMyTemplatesDiets.linkToPicture);
       $('.AddMyTemplatesDietsFormTimestamp').val(data.ViewMyTemplatesDiets.timestamp);
-      $('.AddMyTemplatesDietsFormStatut').val(data.ViewMyTemplatesDiets.statut);
+      $('.AddMyTemplatesDietsFormStatut').val(data.ViewMyTemplatesDiets.elemState);
       $('.showPicture').removeClass("d-none");
     },
     error : function(data) {

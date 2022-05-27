@@ -11,7 +11,7 @@ class LabelStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "label";
-  const SELECT = 'SELECT id,code,name,linktopicture,size,type,statut,timestamp';
+  const SELECT = 'SELECT id,code,name,linktopicture,size,type,elemstate,timestamp';
   const FROM = ' FROM label';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class LabelStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -59,12 +59,12 @@ class LabelStor {
       $request .= self::FROM;
       $request .= " WHERE code = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getCode();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -128,7 +128,7 @@ class LabelStor {
       $request .= "linktopicture= :linktopicture,";
       $request .= "size= :size,";
       $request .= "type= :type,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -139,7 +139,7 @@ class LabelStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -248,14 +248,14 @@ class LabelStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO label(";
-      $request .= "code,name,linktopicture,size,type,statut,timestamp)";
+      $request .= "code,name,linktopicture,size,type,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";
       $request .= ":name,";
       $request .= ":linktopicture,";
       $request .= ":size,";
       $request .= ":type,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["code"] = $data->getCode();
@@ -263,7 +263,7 @@ class LabelStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

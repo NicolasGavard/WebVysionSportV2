@@ -52,7 +52,7 @@ if ($dataSvc->getMethodName() == "SaveNutritional") {
         $nutritionalStorData = new NutritionalStorData();
         $nutritionalStorData->setId($infoNutritional->getId());
         $nutritionalStorData->setCode($infoNutritional->getCode());
-        $nutritionalStorData->setStatut($infoNutritional->getStatut());
+        $nutritionalStorData->setElemState($infoNutritional->getElemState());
         $nutritionalStorData->setTimestamp($infoNutritional->getTimestamp());
         list($insere, $idNutritional) = NutritionalStor::save($nutritionalStorData, $dbConnection);
         
@@ -62,7 +62,7 @@ if ($dataSvc->getMethodName() == "SaveNutritional") {
           $nutritionalNameStorData->setIdNutritional($infoNutritional->getIdNutritional());
           $nutritionalNameStorData->setIdLanguage($infoNutritional->getIdLanguage());
           $nutritionalNameStorData->setName($infoNutritional->getName());
-          $nutritionalNameStorData->setStatut($infoNutritional->getStatut());
+          $nutritionalNameStorData->setElemState($infoNutritional->getElemState());
           $nutritionalNameStorData->setTimestamp($infoNutritional->getTimestamp());
           list($insere, $idNutritionalName) = NutritionalNameStor::save($nutritionalNameStorData, $dbConnection);
         }

@@ -1,6 +1,7 @@
 <?php
   $page_title          = "Liste des langues";
   $page_picture        = "Image";
+  $page_code           = "Code";
   $page_name           = "Langue";
   $page_action         = "Actions";
   $page_add_title      = "Ajouter une langue";

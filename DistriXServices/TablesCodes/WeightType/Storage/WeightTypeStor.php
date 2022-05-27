@@ -11,7 +11,7 @@ class WeightTypeStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "weighttype";
-  const SELECT = 'SELECT id,code,issolid,isliquid,isother,statut,timestamp';
+  const SELECT = 'SELECT id,code,issolid,isliquid,isother,elemstate,timestamp';
   const FROM = ' FROM weighttype';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,12 @@ class WeightTypeStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -59,12 +59,12 @@ class WeightTypeStor {
       $request .= self::FROM;
       $request .= " WHERE code = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :elemstate";
       }
       $params = [];
       $params["index0"] = $dataIn->getCode();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatut();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -127,7 +127,7 @@ class WeightTypeStor {
       $request .= "issolid= :issolid,";
       $request .= "isliquid= :isliquid,";
       $request .= "isother= :isother,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
@@ -137,7 +137,7 @@ class WeightTypeStor {
       $params["issolid"] = $data->getIsSolid();
       $params["isliquid"] = $data->getIsLiquid();
       $params["isother"] = $data->getIsOther();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -246,20 +246,20 @@ class WeightTypeStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO weighttype(";
-      $request .= "code,issolid,isliquid,isother,statut,timestamp)";
+      $request .= "code,issolid,isliquid,isother,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";
       $request .= ":issolid,";
       $request .= ":isliquid,";
       $request .= ":isother,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["code"] = $data->getCode();
       $params["issolid"] = $data->getIsSolid();
       $params["isliquid"] = $data->getIsLiquid();
       $params["isother"] = $data->getIsOther();
-      $params["statut"] = $data->getStatut();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

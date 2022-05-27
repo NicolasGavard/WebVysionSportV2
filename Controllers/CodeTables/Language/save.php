@@ -21,7 +21,7 @@ list($distriXCodeTableBandData, $errorJson) = DistriXCodeTableLanguageData::getJ
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveLanguage");
 $servicesCaller->addParameter("data", $distriXCodeTableBandData);
-$servicesCaller->setServiceName("DistriXServices/CodeTable/Language/DistriXCodeTableLanguageSaveDataSvc.php");
+$servicesCaller->setServiceName("DistriXServices/TablesCodes/Language/DistriXLanguageSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Language")) {

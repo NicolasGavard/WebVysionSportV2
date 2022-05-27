@@ -120,20 +120,20 @@ $("#btnRestMyCurrentsDiets").on('click', function() {
   });
 });
 
-function ListMyCurrentsDiets(statut){
+function ListMyCurrentsDiets(elemState){
   $('#listMyCurrentsDietsTbody').empty();
 
   $.ajax({
     url : 'Controllers/Nutrition/MyCurrentsDiets/list.php',
     type : 'POST',
     dataType : 'JSON',
-    data: {'statut': statut, 'idUser': localStorage.getItem("idUser")},
+    data: {'elemState': elemState, 'idUser': localStorage.getItem("idUser")},
     success : function(data) {
       $.map(data.ListMyCurrentsDiets, function(val, key) {
         var assignedUsersList = '';
         var progressColor = 'primary';
-        if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+        if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+        if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         var nbStudent = 0;
         $.map(val.assignedUsers, function(valUsers, keyUsers) {
@@ -230,7 +230,7 @@ function ViewMyCurrentsDiets(id){
       $('.AddMyCurrentsDietsFormName').val(data.ViewMyCurrentsDiets.name);
       $(".avatar-my_recipe").attr("src", data.ViewMyCurrentsDiets.linkToPicture);
       $('.AddMyCurrentsDietsFormTimestamp').val(data.ViewMyCurrentsDiets.timestamp);
-      $('.AddMyCurrentsDietsFormStatut').val(data.ViewMyCurrentsDiets.statut);
+      $('.AddMyCurrentsDietsFormStatut').val(data.ViewMyCurrentsDiets.elemState);
       $('.showPicture').removeClass("d-none");
     },
     error : function(data) {

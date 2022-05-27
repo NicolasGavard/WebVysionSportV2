@@ -3,8 +3,8 @@ CREATE TABLE `categoryname` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `idcategory` int unsigned NOT NULL,
   `idlanguage` int unsigned NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `statut` tinyint unsigned NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `elemstate` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indcategory` (`idcategory`),
@@ -13,7 +13,7 @@ CREATE TABLE `categoryname` (
   UNIQUE KEY `indcategoryunique` (`idcategory`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Category Name' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO categoryname(id,idcategory,idlanguage,name,statut,timestamp) VALUES 
+INSERT INTO categoryname(id,idcategory,idlanguage,name,elemstate,timestamp) VALUES 
 (1,1,1,'Eaux',0,0),
 (2,2,1,'Eaux de sources',0,0),
 (3,3,1,'Eaux minérales',0,0),
