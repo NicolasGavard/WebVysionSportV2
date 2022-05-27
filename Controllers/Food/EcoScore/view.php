@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodBrandData.php");
+include(__DIR__ . "/../../Data/DistriXFoodEcoScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -10,38 +10,37 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp         = [];
-$confirmSave  = false;
-$error        = [];
-$output       = [];
-$outputok     = false;
+$resp              = array();
+$error             = array();
+$output            = array();
+$outputok          = false;
 
-list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
+list($distriXFoodBandData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("RestoreBrand");
+$servicesCaller->setMethodName("ViewEcoScore");
 $servicesCaller->addParameter("data", $distriXFoodBandData);
-$servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandRestoreDataSvc.php");
+$servicesCaller->setServiceName("DistriXServices/Food/EcoScore/DistriXFoodEcoScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {
+if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_EcoScore")) {
   $logInfoData = new DistriXLoggerInfoData();
   $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXFoodBrandRestoreDataSvc");
-  $logInfoData->setLogFunction("RestoreBrand");
+  $logInfoData->setLogApplication("DistriXEcoScoreViewDataSvc");
+  $logInfoData->setLogFunction("ViewEcoScore");
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
+if ($outputok && isset($output["ViewEcoScore"])) {
+  $distriXFoodBandData = $output["ViewEcoScore"];
 } else {
   $error = $errorData;
 }
 
-$resp["confirmSave"]  = $confirmSave;
+$resp["ViewEcoScore"]  = $distriXFoodBandData;
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"]    = $error;
 }
 
 echo json_encode($resp);

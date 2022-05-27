@@ -5,65 +5,72 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Trace Data
-include(__DIR__ . "/../../../DistriXTrace/data/DistriXTraceData.php");
-// Error Data
-include(__DIR__ . "/../../../DistriXSvc/Data/DistriXSvcErrorData.php");
+// STOR DATA
+include(__DIR__ . "/Data/DistriXFoodScoreEcoData.php");
+// Database Data
+include(__DIR__ . "/Data/ScoreEcoStorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
-include(__DIR__ . "/Storage/BrandStor.php");
-// Database Data
-include(__DIR__ . "/Data/BrandStorData.php");
-// Distrix CDN
+include(__DIR__ . "/Storage/ScoreEcoStor.php");
+// Trace Data
+include(__DIR__ . "/../../../DistriXTrace/data/DistriXTraceData.php");
+// Cdn Location
 include(__DIR__ . "/../../../DistriXCdn/DistriXCdn.php");
-include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
+include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
+include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 $dbConnection = null;
 $errorData    = null;
 
-// SaveBrand
-if ($dataSvc->getMethodName() == "SaveBrand") {
+// SaveEcoScore
+if ($dataSvc->getMethodName() == "SaveEcoScore") {
+  $dbConnection = null;
+  $errorData    = null;
   $insere       = false;
+  $infoScoreEco = new DistriXFoodScoreEcoData();
+
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      list($data, $jsonError) = BrandStorData::getJsonData($dataSvc->getParameter("data"));
-      $canSaveBrand  = true;
-      if ($data->getId() == 0) {
+      $infoScoreEco     = $dataSvc->getParameter("data");
+      $scoreEcoData     = DistriXSvcUtil::setData($infoScoreEco, "ScoreEcoStorData");
+      $canSaveScoreEco  = true;
+      if ($infoScoreEco->getId() == 0) {
         // Verify Code Exist
-        list($brandStor, $brandStorInd) = BrandStor::findByCode($data, true, $dbConnection);
-        if ($brandStorInd > 0) {
-          $canSaveBrand          = false;
+        list($scoresEcoStor, $scoresEcoStorInd) = ScoreEcoStor::findByLetter($scoreEcoData, true, $dbConnection);
+        if ($scoresEcoStorInd > 0) {
+          $canSaveScoreEco     = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
-          $distriXSvcErrorData->setDefaultText("The Code " . $data->getCode() . " is already in use");
+          $distriXSvcErrorData->setDefaultText("The Code " . $infoScoreEco->getCode() . " is already in use");
           $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
           $errorData = $distriXSvcErrorData;
         }
       }
 
-      if ($canSaveBrand) {
-        $brandStorData = BrandStor::read($data->getId(), $dbConnection);
-        $brandStorData->setId($data->getId());
-        $brandStorData->setCode(strtoupper(trim(DistriXSvcUtil::remove_accents($data->getName()))));
-        $brandStorData->setName($data->getName());
-        $brandStorData->setStatut($data->getStatut());
-        $brandStorData->setTimestamp($data->getTimestamp());
+      if ($canSaveScoreEco) {
+        $scoreEcoStorData = new ScoreEcoStorData();
+        $scoreEcoStorData->setId($infoScoreEco->getId());
+        $scoreEcoStorData->setLetter($infoScoreEco->getLetter());
+        $scoreEcoStorData->setColor($infoScoreEco->getColor());
+        $scoreEcoStorData->setDescription($infoScoreEco->getDescription());
+        $scoreEcoStorData->setStatut($infoScoreEco->getStatut());
+        $scoreEcoStorData->setTimestamp($infoScoreEco->getTimestamp());
         
-        if ($data->getLinkToPicture() != "" && $data->getLinkToPicture() != $brandStorData->getLinkToPicture()) {
-          $image          = file_get_contents($data->getLinkToPicture());
+        if ($infoScoreEco->getLinkToPicture() != "") {
+          $image          = file_get_contents($infoScoreEco->getLinkToPicture());
           $imageInfo      = getimagesizefromstring($image);
           $imageExtension = str_replace("image/", "", $imageInfo['mime']);
 
           if ($imageExtension == "jpg" || $imageExtension == "png" || $imageExtension == "jpeg" || $imageExtension == "gif") {
             $imageName    = DistriXSvcUtil::generateRandomText(50);
-            $imageFile    = substr($data->getLinkToPicture(), strpos($data->getLinkToPicture(), ",") + 1);
+            $imageFile    = substr($infoScoreEco->getLinkToPicture(), strpos($infoScoreEco->getLinkToPicture(), ",") + 1);
 
             $cdn          = new DistriXCdn();
             $data         = new DistriXCdnData();
             $data->setImageGroup(DISTRIX_CDN_GROUP_IMAGES);
-            $data->setImageFamily(DISTRIX_CDN_FOLDER_FOOD);
+            $data->setImageFamily(DISTRIX_CDN_FOLDER_CODE_TABLES);
             $data->setImageName($imageName);
             $data->setImageType($imageInfo['mime']);
             $data->setImage($imageFile);
@@ -71,9 +78,9 @@ if ($dataSvc->getMethodName() == "SaveBrand") {
             $confirmSavePicture = $cdn->sendToCdn();
 
             if ($confirmSavePicture) {
-              $brandStorData->setLinkToPicture($imageName);
-              $brandStorData->setSize($imageInfo['bits']);
-              $brandStorData->setType($imageInfo['mime']);
+              $scoreEcoStorData->setLinkToPicture($imageName);
+              $scoreEcoStorData->setSize($imageInfo['bits']);
+              $scoreEcoStorData->setType($imageInfo['mime']);
             } else {
               $distriXSvcErrorData = new DistriXSvcErrorData();
               $distriXSvcErrorData->setCode("400");
@@ -87,17 +94,21 @@ if ($dataSvc->getMethodName() == "SaveBrand") {
             $distriXSvcErrorData->setText("BAD_IMAGE_EXTENSION");
           }
         } else {
-          $brandStorData->setLinkToPicture($brandStorData->getLinkToPicture());
-          $brandStorData->setSize($brandStorData->getSize());
-          $brandStorData->setType($brandStorData->getType());
+          if($infoScoreEco->getId() > 0){
+            $scoreEcoStor = ScoreEcoStor::read($infoScoreEco->getId(), $dbConnection);
+            $scoreEcoData = DistriXSvcUtil::setData($scoreEcoStor, "DistriXFoodScoreEcoData");
+            $scoreEcoStorData->setLinkToPicture($scoreEcoData->getLinkToPicture());
+            $scoreEcoStorData->setSize($scoreEcoData->getSize());
+            $scoreEcoStorData->setType($scoreEcoData->getType());
+          }
         }
-        list($insere, $idBrand) = BrandStor::save($brandStorData, $dbConnection);
+        list($insere, $idStyScoresEco) = ScoreEcoStor::save($scoreEcoStorData, $dbConnection);
 
         if ($insere) {
           $dbConnection->commit();
         } else {
           $dbConnection->rollBack();
-          if ($data->getId() > 0) {
+          if ($infoScoreEco->getId() > 0) {
             $errorData = ApplicationErrorData::warningUpdateData(1, 1);
           } else {
             $errorData = ApplicationErrorData::warningInsertData(1, 1);
@@ -112,7 +123,7 @@ if ($dataSvc->getMethodName() == "SaveBrand") {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "SaveBrand", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "SaveEcoScore", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 

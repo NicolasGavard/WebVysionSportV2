@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodBrandData.php");
+include(__DIR__ . "/../../Data/DistriXFoodNutriScoreData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -17,19 +17,19 @@ $output       = [];
 $outputok     = false;
 
 if (isset($_POST)) {
-  list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
+  list($distriXFoodBandData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
   
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->setMethodName("DelBrand");
+  $servicesCaller->setMethodName("DelNutriScore");
   $servicesCaller->addParameter("data", $distriXFoodBandData);
-  $servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandDeleteDataSvc.php");
+  $servicesCaller->setServiceName("DistriXServices/Food/NutriScore/DistriXFoodNutriScoreDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
-  if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {
+  if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NutriScore")) {
     $logInfoData = new DistriXLoggerInfoData();
     $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-    $logInfoData->setLogApplication("DistriXFoodBrandDeleteDataSvc");
-    $logInfoData->setLogFunction("DelBrand");
+    $logInfoData->setLogApplication("DistriXFoodNutriScoreDeleteDataSvc");
+    $logInfoData->setLogFunction("DelNutriScore");
     $logInfoData->setLogData(print_r($output, true));
     DistriXLogger::log($logInfoData);
   }
