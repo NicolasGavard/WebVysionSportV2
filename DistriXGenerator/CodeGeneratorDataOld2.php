@@ -35,7 +35,7 @@ if (!class_exists('CodeGeneratorData', false)) {
         }
         $f = fopen($filename, "w");
         fputs($f, '<?php // Needed to encode in UTF8 ààéàé //' . "\r\n");
-        fputs($f, 'class ' . $dataObjectName . ' extends DistriXSvcAppData {' . "\r\n");
+        fputs($f, 'class ' . $dataObjectName . ' extends DistriXSvcData {' . "\r\n");
 
         if ($hasStatusField) {
           fputs($f, '  const ' . $tableNameUpper . '_STATUS_AVAILABLE     = 0;' . "\r\n");
