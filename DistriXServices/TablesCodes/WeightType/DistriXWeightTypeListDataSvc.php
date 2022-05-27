@@ -6,9 +6,9 @@ include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Database Data
-include(__DIR__ . "/../../../DistrixSecurity/Data/WeightTypeNameStorData.php");
 include(__DIR__ . "/Data/WeightTypeNameStorData.php");
 include(__DIR__ . "/Data/WeightTypeStorData.php");
+include(__DIR__ . "/Data/LanguageStorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/WeightTypeNameStor.php");
@@ -22,32 +22,15 @@ $weightType    = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  
-  list($dataLanguage, $jsonError) = BrandStorData::getJsonData($dataSvc->getParameter("data"));
-  
-  $dataLanguage = $dataSvc->getParameter("dataLanguage");
-  
+  list($dataLanguage, $jsonError) = LanguageStorData::getJsonData($dataSvc->getParameter("data"));
+
   list($weightTypeStor, $weightTypeStorInd) = WeightTypeStor::getList(true, $dbConnection);
   foreach ($weightTypeStor as $WeightType) {
     $weightTypeNameStorData = new WeightTypeNameStorData();
     $weightTypeNameStorData->setIdWeightType($WeightType->getId());
     $weightTypeNameStorData->setIdLanguage($dataLanguage->getId());
     $weightTypeNameStor = WeightTypeNameStor::findByWeightTypeIdLanguage($weightTypeNameStorData, $dbConnection);
-    
-    $distriXCodeTableWeightTypeNameData = new DistriXCodeTableWeightTypeNameData();
-    $distriXCodeTableWeightTypeNameData->setId($weightTypeNameStor->getId());
-    $distriXCodeTableWeightTypeNameData->setIdWeightType($weightTypeNameStor->getIdWeightType());
-    $distriXCodeTableWeightTypeNameData->setIdLanguage($weightTypeNameStor->getIdLanguage());
-    $distriXCodeTableWeightTypeNameData->setCode($WeightType->getCode());
-    $distriXCodeTableWeightTypeNameData->setName($weightTypeNameStor->getName());
-    $distriXCodeTableWeightTypeNameData->setDescription($weightTypeNameStor->getDescription());
-    $distriXCodeTableWeightTypeNameData->setAbbreviation($weightTypeNameStor->getAbbreviation());
-    $distriXCodeTableWeightTypeNameData->setIsSolid($WeightType->getIsSolid());
-    $distriXCodeTableWeightTypeNameData->setIsLiquid($WeightType->getIsLiquid());
-    $distriXCodeTableWeightTypeNameData->setIsOther($WeightType->getIsOther());
-    $distriXCodeTableWeightTypeNameData->setElemState($WeightType->getElemState());
-    $distriXCodeTableWeightTypeNameData->setTimestamp($WeightType->getTimestamp());
-    $weightType[] = $distriXCodeTableWeightTypeNameData;
+    $WeightType->setName($weightTypeNameStor->getName());
   }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
@@ -56,7 +39,7 @@ if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListWeightType", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListWeightType", $weightType);
+$dataSvc->addToResponse("ListWeightType", $weightTypeStor);
 
 // Return response
 $dataSvc->endOfService();

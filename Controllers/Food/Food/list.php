@@ -47,23 +47,21 @@ $output           = array();
 $outputok         = false;
 $servicesCaller   = new DistriXServicesCaller();
 
-// $listLanguages        = DistriXStyLanguage::listLanguages();
-
 list($distriXFoodFoodData, $errorJson)    = DistriXFoodFoodData::getJsonData($_POST);
 $infoProfil[0]['idLanguage'] = 1;
 $_POST['id'] = $infoProfil[0]['idLanguage']; // NG 27-05-22 - until a solution is found
 list($distriXStyLanguageData, $errorJson) = DistriXStyLanguageData::getJsonData($_POST);
 
-$foodListCaller = new DistriXServicesCaller();
-$foodListCaller->setServiceName("DistriXServices/Food/Food/DistriXFoodListDataSvc.php");
-$foodListCaller->setMethodName("ListFoods");
-$foodListCaller->addParameter("dataLanguage", $distriXStyLanguageData);
-$foodListCaller->addParameter("dataFood", $distriXFoodFoodData);
+$foodCaller = new DistriXServicesCaller();
+$foodCaller->setServiceName("DistriXServices/Food/Food/DistriXFoodListDataSvc.php");
+$foodCaller->setMethodName("ListFoods");
+$foodCaller->addParameter("dataLanguage", $distriXStyLanguageData);
+$foodCaller->addParameter("dataFood", $distriXFoodFoodData);
 
-$weightTypeListCaller = new DistriXServicesCaller();
-$weightTypeListCaller->setMethodName("ListWeightType");
-$weightTypeListCaller->addParameter("dataLanguage", $distriXStyLanguageData);
-$weightTypeListCaller->setServiceName("DistriXServices/TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
+$weightTypeCaller = new DistriXServicesCaller();
+$weightTypeCaller->setMethodName("ListWeightType");
+$weightTypeCaller->addParameter("dataLanguage", $distriXStyLanguageData);
+$weightTypeCaller->setServiceName("DistriXServices/TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
 
 $foodBrandCaller = new DistriXServicesCaller();
 $foodBrandCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandListDataSvc.php");
@@ -87,8 +85,8 @@ $nutriScoreCaller->setMethodName("ListNutriScores");
 
 // Add Caller to multi caller
 $svc = new DistriXSvc();
-$svc->addToCall("Food", $foodListCaller);
-$svc->addToCall("WeightType", $weightTypeListCaller);
+$svc->addToCall("Food", $foodCaller);
+$svc->addToCall("WeightType", $weightTypeCaller);
 $svc->addToCall("FoodBrand", $foodBrandCaller);
 $svc->addToCall("FoodLabel", $foodLabelCaller);
 $svc->addToCall("EcoScore", $ecoScoreCaller);

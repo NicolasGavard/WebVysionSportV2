@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS `weighttype`;
 CREATE TABLE `weighttype` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(20) NOT NULL,
+  `name` varchar(200) NOT NULL,
   `issolid` tinyint unsigned NOT NULL,
   `isliquid` tinyint unsigned NOT NULL,
   `isother` tinyint unsigned NOT NULL,
@@ -11,21 +12,21 @@ CREATE TABLE `weighttype` (
   UNIQUE KEY `indcodeunique` (`code`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Weight Type' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO weighttype(id,code,issolid,isliquid,isother,elemstate,timestamp) VALUES 
-(1,'KG',1,0,0,0,0),
-(2,'G',1,0,0,0,0),
-(3,'MG',1,0,0,0,0),
-(4,'UG',1,0,0,0,0),
-(5,'LIBRA',1,0,0,0,0),
-(6,'ONZA',1,0,0,0,0),
-(7,'ML',0,1,0,0,0),
-(8,'CL',0,1,0,0,0),
-(9,'DL',0,1,0,0,0),
-(10,'DAL',0,1,0,0,0),
-(11,'HL',0,1,0,0,0),
-(12,'L',0,1,0,0,0),
-(13,'KCAL',0,0,1,0,0),
-(14,'CAL',0,0,1,0,0);
+INSERT INTO weighttype(id,code,name,issolid,isliquid,isother,elemstate,timestamp) VALUES 
+(1,'KG','Kilogramme',1,0,0,0,0),
+(2,'G','Gramme',1,0,0,0,0),
+(3,'MG','Miligramme',1,0,0,0,0),
+(4,'UG','Microgramme',1,0,0,0,0),
+(5,'LIBRA','Pound',1,0,0,0,0),
+(6,'ONZA','Ounce',1,0,0,0,0),
+(7,'ML','Mililitre',0,1,0,0,0),
+(8,'CL','Centilitre',0,1,0,0,0),
+(9,'DL','Décilitre',0,1,0,0,0),
+(10,'DAL','Décalitre',0,1,0,0,0),
+(11,'HL','Hectolitre',0,1,0,0,0),
+(12,'L','Litre',0,1,0,0,0),
+(13,'KCAL','Kilocalorie',0,0,1,0,0),
+(14,'CAL','Calorie',0,0,1,0,0);
 
 -- 1 kilogramme 	(kg) 	=1 000 g
 -- 1 gramme 	(g) 	=1 g
