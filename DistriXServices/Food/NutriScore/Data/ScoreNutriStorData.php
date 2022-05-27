@@ -3,15 +3,15 @@ class ScoreNutriStorData extends DistriXSvcAppData {
   const SCORENUTRI_STATUS_AVAILABLE     = 0;
   const SCORENUTRI_STATUS_NOT_AVAILABLE = 1;
 
-  private $id;
-  private $letter;
-  private $color;
-  private $description;
-  private $linktopicture;
-  private $size;
-  private $type;
-  private $statut;
-  private $timestamp;
+  protected $id;
+  protected $letter;
+  protected $color;
+  protected $description;
+  protected $linktopicture;
+  protected $size;
+  protected $type;
+  protected $statut;
+  protected $timestamp;
 
   public function __construct() {
       $this->id = 0;

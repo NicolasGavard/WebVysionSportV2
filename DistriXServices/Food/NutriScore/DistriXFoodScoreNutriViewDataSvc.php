@@ -14,9 +14,9 @@ include(__DIR__ . "/Storage/ScoreNutriStor.php");
 include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
 include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
 
-$databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
-$dbConnection = null;
-$errorData    = null;
+$databasefile   = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
+$dbConnection   = null;
+$errorData      = null;
 $scoreNutriStor = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);

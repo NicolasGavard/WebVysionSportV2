@@ -141,8 +141,8 @@ function ListNovaScore(statut){
       if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
-                    ' <td>'+val.letter+'</td>'+
+                    ' <td><img style="max-height:80px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td>'+val.number+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
@@ -150,8 +150,8 @@ function ListNovaScore(statut){
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
                     '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddNovaScore" onclick="ViewNovaScore(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelNovaScore(\''+val.id+'\', \''+val.letter+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestNovaScore(\''+val.id+'\', \''+val.letter+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelNovaScore(\''+val.id+'\', \''+val.number+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestNovaScore(\''+val.id+'\', \''+val.number+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -176,7 +176,7 @@ function ViewNovaScore(id){
 
       $('.AddNovaScoreFormIdNovaScore').val(id);
       $('.AddNovaScoreFormCode').val(data.ViewNovaScore.code);
-      $('.AddNovaScoreFormName').val(data.ViewNovaScore.letter);
+      $('.AddNovaScoreFormName').val(data.ViewNovaScore.number);
       $(".avatar-NovaScore").attr("src", data.ViewNovaScore.linktopicture);
       $('.AddNovaScoreFormTimestamp').val(data.ViewNovaScore.timestamp);
       $('.AddNovaScoreFormStatut').val(data.ViewNovaScore.statut);

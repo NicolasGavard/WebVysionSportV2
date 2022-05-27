@@ -3,15 +3,15 @@ class ScoreNovaStorData extends DistriXSvcAppData {
   const SCORENOVA_STATUS_AVAILABLE     = 0;
   const SCORENOVA_STATUS_NOT_AVAILABLE = 1;
 
-  private $id;
-  private $number;
-  private $color;
-  private $description;
-  private $linktopicture;
-  private $size;
-  private $type;
-  private $statut;
-  private $timestamp;
+  protected $id;
+  protected $number;
+  protected $color;
+  protected $description;
+  protected $linktopicture;
+  protected $size;
+  protected $type;
+  protected $statut;
+  protected $timestamp;
 
   public function __construct() {
       $this->id = 0;

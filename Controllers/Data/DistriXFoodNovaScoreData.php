@@ -25,26 +25,26 @@ if (!class_exists("DistriXFoodNovaScoreData", false)) {
       $this->timestamp      = 0;
     }
     // Gets
-    public function getId() { return $this->id; }
-    public function getNumber() { return $this->number; }
-    public function getColor() { return $this->color; }
-    public function getDescription() { return $this->description; }
-    public function getLinkToPicture() { return $this->linkToPicture; }
-    public function getSize() { return $this->size; }
-    public function getType() { return $this->type; }
-    public function getStatut() { return $this->statut; }
-    public function getTimestamp() { return $this->timestamp; }
+    public function getId():int { return $this->id; }
+    public function getNumber():int { return $this->number; }
+    public function getColor():string { return $this->color; }
+    public function getDescription():string { return $this->description; }
+    public function getLinkToPicture():string { return $this->linkToPicture; }
+    public function getSize():int { return $this->size; }
+    public function getType():string { return $this->type; }
+    public function getStatut():int { return $this->statut; }
+    public function getTimestamp():int { return $this->timestamp; }
 
     // Sets
-    public function setId($id) { $this->id = $id; }
-    public function setNumber($number) { $this->number = $number; }
-    public function setColor($color) { $this->color = $color; }
-    public function setDescription($description) { $this->description = $description; }
-    public function setLinkToPicture($linkToPicture) { $this->linkToPicture = $linkToPicture; }
-    public function setSize($size) { $this->size = $size; }
-    public function setType($type) { $this->type = $type; }
-    public function setStatut($statut) { $this->statut = $statut; }
-    public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+    public function setId(int $id) { $this->id = $id; }
+    public function setNumber(int $number) { $this->number = $number; }
+    public function setColor(string $color) { $this->color = $color; }
+    public function setDescription(string $description) { $this->description = $description; }
+    public function setLinkToPicture(string $linkToPicture) { $this->linkToPicture = $linkToPicture; }
+    public function setSize(int $size) { $this->size = $size; }
+    public function setType(string $type) { $this->type = $type; }
+    public function setStatut(int $statut) { $this->statut = $statut; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }
