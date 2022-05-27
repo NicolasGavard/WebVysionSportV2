@@ -1,4 +1,28 @@
-ListEcoScore(0);
+// Dropzone.autoDiscover = false;
+
+datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
+$.ajax({
+  url : 'Controllers/Food/EcoScore/list.php',
+  type : 'POST',
+  dataType : 'JSON',
+  success : function(data) {
+    localStorage.setItem("dataTable", JSON.stringify(data.ListEcoScores));
+    $('.btn-success').trigger('click');
+  },
+  error : function(data) {
+    console.log(data);
+  }
+});
+
+$(".btnChangeImage").on('click', function() {
+  $(".dropzoneImage").addClass("d-none");
+  $(".dropzoneNoImage").removeClass("d-none");
+});
+
+$(".btnChangeImageCancel").on('click', function() {
+  $(".dropzoneImage").removeClass("d-none");
+  $(".dropzoneNoImage").addClass("d-none");
+});
 
 $(".btn-warning").on('click', function() {
   $(".btn-success").removeClass("disabled");
@@ -6,6 +30,8 @@ $(".btn-warning").on('click', function() {
   
   $(".btn-warning").addClass("disabled");
   $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
+
+  datatable.clear();
   ListEcoScore(1);
 });
 
@@ -15,62 +41,68 @@ $(".btn-success").on('click', function() {
   
   $(".btn-warning").removeClass("disabled");
   $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
+
+  datatable.clear();
   ListEcoScore(0);
 });
 
 $(".AddNewEcoScore").on('click', function() {
-  $(".page_food_eco_score_add_title").html(language.page_food_eco_score_add_title);
-      
+  $(".add_title").removeClass("d-none");
+  $(".update_title").addClass("d-none");
+
   $('.AddEcoScoreFormIdEcoScore').val(0);
   $('.AddEcoScoreFormCode').val('');
   $('.AddEcoScoreFormName').val('');
-  $(".avatar-eco_score").attr("src", '');
+  $(".avatar-EcoScore").attr("src", '');
   $('.AddEcoScoreFormTimestamp').val(0);
   $('.AddEcoScoreFormStatut').val(0);
 });
 
 $(".btnAddEcoScore").on('click', function() {
+  $(".page_food_EcoScore_update_title").removeClass("d-none");
+  
   var name = $('.AddEcoScoreFormName').val();
   if (name != ""){
     var data = $('#FormAddEcoScore').serializeArray(); // convert form to array
     data.push({name: "name", value: name});
     
     $.ajax({
-      url : 'Controllers/Food/ScoreEco/save.php',
+      url : 'Controllers/Food/EcoScore/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodEcoScoreList.php";}, 500);
+        setTimeout(function() {window.location.href = "./foodEcoScoreList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
       }
     });
+    $(".btnAddEcoScore").attr("data-dismiss", "modal");
   } else {
     if (name == ''){
       $('.AddEcoScoreFormName').addClass("form-control-danger");
-      $('#danger-name').html(errorData_txt_code);
+      $('.danger-name').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddEcoScoreFormName").removeClass("form-control-danger");
+        $('.danger-name').addClass("d-none");
+      }, 3000 );
     }
   } 
-
-  if (errorData !== ''){
-    $('.alert-danger').show("slow").delay(5000).hide("slow");
-    $('.alert-danger p').html(errorData);
-  }
 });
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/ScoreEco/delete.php',
+    url : 'Controllers/Food/EcoScore/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodEcoScoreList.php";}, 500);
+        setTimeout(function() {window.location.href = "./foodEcoScoreList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -83,14 +115,14 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/ScoreEco/restore.php',
+    url : 'Controllers/Food/EcoScore/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodEcoScoreList.php";}, 500);
+        setTimeout(function() {window.location.href = "./foodEcoScoreList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -102,65 +134,52 @@ $("#btnRest").on('click', function() {
 });
 
 function ListEcoScore(statut){
-  $('#listEcoScoresTbody').empty();
-
-  $.ajax({
-    url : 'Controllers/Food/ScoreEco/list.php',
-    type : 'POST',
-    dataType : 'JSON',
-    data: {'statut': statut},
-    success : function(data) {
-      console.log(data.ListScoresEco);
-      $.map(data.ListScoresEco, function(val, key) {
-        if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
-        if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
-        
-        $('#listEcoScoresTbody').append(
-          '<tr>'+
-          ' <td><img style="max-height:60px; max-width:60px;" src="'+val.linkToPicture+'"/></td>'+
-          ' <td>'+
-          '   <div class="progress" style="height:40px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>'+
-          ' </td>'+    
-          ' <td>'+val.letter+'</td>'+
-          ' <td>'+
-          '   <div class="dropdown">'+
-          '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
-          '       <i class="dw dw-more"></i>'+
-          '     </a>'+
-          '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-          '       <a class="dropdown-item btnViewEcoScore"                      data-toggle="modal" data-target="#modalAddEcoScore" onclick="ViewEcoScore(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> '+page_all_update+'</a>'+
-          '       <a class="dropdown-item btnDeleEcoScore '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelEcoScore(\''+val.id+'\', \''+val.letter+'\');"  href="#"><i class="dw dw-delete-3"></i> '+page_all_delete+'</a>'+
-          '       <a class="dropdown-item btnRestEcoScore '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestEcoScore(\''+val.id+'\', \''+val.letter+'\');" href="#"><i class="dw dw-share-2"></i> '+page_all_restore+'</a>'+
-          '     </div>'+
-          '   </div>'+
-          ' </td>'+
-          '</tr>')
-      });
-    },
-    error : function(data) {
-      console.log(data);
+  var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
+  $.map(dataTableData, function(val, key) {
+    if(val.statut == statut){
+      if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
+      if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
+      
+      const line =  '<tr>'+
+                    ' <td><img style="max-width:20%;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td>'+val.name+'</td>'+
+                    ' <td>'+
+                    '   <div class="dropdown">'+
+                    '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+                    '       <i class="dw dw-more"></i>'+
+                    '     </a>'+
+                    '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddEcoScore" onclick="ViewEcoScore(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelEcoScore(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestEcoScore(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '     </div>'+
+                    '   </div>'+
+                    ' </td>'+
+                    '</tr>';
+      datatable.row.add($(line)).draw();
     }
-  }); 
+  });
 }
 
 function ViewEcoScore(id){
   $.ajax({
-    url : 'Controllers/Food/ScoreEco/view.php',
+    url : 'Controllers/Food/EcoScore/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      $(".page_food_eco_score_add_title").html(language.page_food_eco_score_update_title);
-      
+      $(".add_title").addClass("d-none");
+      $(".update_title").removeClass("d-none");
+    
+      $(".dropzoneImage").removeClass("d-none");
+      $(".dropzoneNoImage").addClass("d-none");
+
       $('.AddEcoScoreFormIdEcoScore').val(id);
-      $('.AddEcoScoreFormName').val(data.ViewEcoScore.letter);
-      $('.AddEcoScoreFormColor').val(data.ViewEcoScore.color);
-      $(".avatar-eco_score").attr("src", data.ViewEcoScore.linkToPicture);
+      $('.AddEcoScoreFormCode').val(data.ViewEcoScore.code);
+      $('.AddEcoScoreFormName').val(data.ViewEcoScore.name);
+      $(".avatar-EcoScore").attr("src", data.ViewEcoScore.linktopicture);
       $('.AddEcoScoreFormTimestamp').val(data.ViewEcoScore.timestamp);
       $('.AddEcoScoreFormStatut').val(data.ViewEcoScore.statut);
-      $('.showPicture').removeClass("d-none");
-      
-      $('.asColorPicker-trigger span').attr("style", 'background:'+data.ViewEcoScore.color);
     },
     error : function(data) {
       console.log(data);
@@ -168,12 +187,12 @@ function ViewEcoScore(id){
   });
 }
 
-function DelEcoScore(id, letter){
+function DelEcoScore(id, name){
   $('.DelFormId').val(id);
-  $('.DelTxt').html(confirm_delete+' <b>'+letter+'</b> ?');
+  $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestEcoScore(id, letter){
+function RestEcoScore(id, name){
   $('.RestFormId').val(id);
-  $('.RestTxt').html(confirm_restore+' <b>'+letter+'</b> ?');
+  $('.RestTxt').html(' <b>'+name+'</b> ?');
 }
