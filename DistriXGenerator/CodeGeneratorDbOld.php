@@ -2,17 +2,6 @@
 if (!class_exists('CodeGeneratorDb', false)) {
   class CodeGeneratorDb
   {
-/* TO BE DONE
-
-public static function getListFromList(bool $all, string $className, DistriXPDOConnection $inDbConnection) {
-    if ($className == "" ) {
-    $className="StyUserStorData";
-    }
-  }
-*/
-
-
-
     const COMMENT_SEPARATOR = '//=============================================================================';
 
     public function generate(
@@ -143,11 +132,7 @@ public static function getListFromList(bool $all, string $className, DistriXPDOC
 
         fputs($f, '      $stmt = $inDbConnection->prepare($request);' . "\r\n");
         if ($hasStatusField) {
-          fputs($f, '      if (!$all) {' . "\r\n");
-          fputs($f, '        $stmt->execute([' . "'statut'" . '=> $data->getAvailableValue()]);' . "\r\n");
-          fputs($f, '      } else {' . "\r\n");
-          fputs($f, '        $stmt->execute();' . "\r\n");
-          fputs($f, '      }' . "\r\n");
+          fputs($f, '      $stmt->execute([' . "'statut'" . '=> $data->getAvailableValue()]);' . "\r\n");
         } else {
           fputs($f, '      $stmt->execute();' . "\r\n");
         }

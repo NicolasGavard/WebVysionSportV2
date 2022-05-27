@@ -109,9 +109,9 @@ if (!class_exists('CodeGeneratorData', false)) {
           }
         }
         if ($hasStatusField) {
-          fputs($f, '  public function isAvailable() { return ($this->statut == self::' . $tableNameUpper . '_STATUS_AVAILABLE); }' . "\r\n");
-          fputs($f, '  public function getAvailableValue() { return self::' . $tableNameUpper . '_STATUS_AVAILABLE; }' . "\r\n");
-          fputs($f, '  public function getUnavailableValue() { return self::' . $tableNameUpper . '_STATUS_NOT_AVAILABLE; }' . "\r\n");
+          fputs($f, '  public function isAvailable():bool { return ($this->statut == self::' . $tableNameUpper . '_STATUS_AVAILABLE); }' . "\r\n");
+          fputs($f, '  public function getAvailableValue():int { return self::' . $tableNameUpper . '_STATUS_AVAILABLE; }' . "\r\n");
+          fputs($f, '  public function getUnavailableValue():int { return self::' . $tableNameUpper . '_STATUS_NOT_AVAILABLE; }' . "\r\n");
         }
 
         fputs($f, '// Sets' . "\r\n");
