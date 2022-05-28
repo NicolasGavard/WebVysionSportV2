@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class WeightTypeNameStor {
+class WeightTypeStor {
 
 //=============================================================================
 //== DO NOT REMOVE !
@@ -10,9 +10,9 @@ class WeightTypeNameStor {
 //==
 //=============================================================================
 //=============================================================================
-  const TABLE_NAME = "weighttypename";
-  const SELECT = 'SELECT id,idweighttype,idlanguage,name,elemstate,timestamp';
-  const FROM = ' FROM weighttypename';
+  const TABLE_NAME = "weighttype";
+  const SELECT = 'SELECT id,code,name,abbreviation,issolid,isliquid,isother,elemstate,timestamp';
+  const FROM = ' FROM weighttype';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
   const SHOW_CREATE_REQUEST = FALSE;
@@ -25,7 +25,7 @@ class WeightTypeNameStor {
   public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new WeightTypeNameStorData();
+    $data = new WeightTypeStorData();
     $list = [];
 
     if ($inDbConnection != null) {
@@ -46,7 +46,7 @@ class WeightTypeNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeNameStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeStorData");
       }
     }
     return array($list, count($list));
@@ -56,12 +56,12 @@ class WeightTypeNameStor {
   public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new WeightTypeNameStorData();
+    $data = new WeightTypeStorData();
     $list = [];
 
     if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
       if ($className == "" || is_null($className)) {
-        $className = "WeightTypeNameStorData";
+        $className = "WeightTypeStorData";
       }
       $request  = self::SELECT;
       $request .= self::FROM;
@@ -88,94 +88,33 @@ class WeightTypeNameStor {
   }
   // End of getListFromList
 
-  public static function findByIdWeightTypeIdLanguage(WeightTypeNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByCode(WeightTypeStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new WeightTypeNameStorData();
+    $data = new WeightTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE idweighttype = :index0";
-      $request .= " AND idlanguage = :index1";
+      $request .= " WHERE code = :index0";
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['index0'=>  $dataIn->getIdWeightType(), 'index1'=>  $dataIn->getIdLanguage()]);
+      $stmt->execute(['index0'=>  $dataIn->getCode()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeNameStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeStorData");
         $data = $stmt->fetch();
       }
     }
     return $data;
   }
-  // End of IdWeightTypeIdLanguage
-
-  public static function findByIdWeightType(WeightTypeNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
-  {
-    $request = "";
-    $list = [];
-
-    if ($inDbConnection != null) {
-      $request  = self::SELECT;
-      $request .= self::FROM;
-      $request .= " WHERE idweighttype = :index0";
-      if (!$all) {
-        $request .= " AND elemstate = :statut";
-      }
-      $params = [];
-      $params["index0"] = $dataIn->getIdWeightType();
-      if (!$all) {
-        $params["statut"] = $dataIn->getAvailableValue();
-      }
-      $stmt = $inDbConnection->prepare($request);
-      $stmt->execute($params);
-      if (self::SHOW_FIND_REQUEST) {
-        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
-      }
-      if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeNameStorData");
-      }
-    }
-    return array($list, count($list));
-  }
-  // End of IdWeightType
-
-  public static function findByIdLanguage(WeightTypeNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
-  {
-    $request = "";
-    $list = [];
-
-    if ($inDbConnection != null) {
-      $request  = self::SELECT;
-      $request .= self::FROM;
-      $request .= " WHERE idlanguage = :index0";
-      if (!$all) {
-        $request .= " AND elemstate = :statut";
-      }
-      $params = [];
-      $params["index0"] = $dataIn->getIdLanguage();
-      if (!$all) {
-        $params["statut"] = $dataIn->getAvailableValue();
-      }
-      $stmt = $inDbConnection->prepare($request);
-      $stmt->execute($params);
-      if (self::SHOW_FIND_REQUEST) {
-        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
-      }
-      if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeNameStorData");
-      }
-    }
-    return array($list, count($list));
-  }
-  // End of IdLanguage
+  // End of Code
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new WeightTypeNameStorData();
+    $data = new WeightTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -187,7 +126,7 @@ class WeightTypeNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeNameStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -209,25 +148,31 @@ class WeightTypeNameStor {
   }
   // End of read
 
-  public static function update(WeightTypeNameStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(WeightTypeStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "UPDATE weighttypename SET ";
-      $request .= "idweighttype= :idweighttype,";
-      $request .= "idlanguage= :idlanguage,";
+      $request  = "UPDATE weighttype SET ";
+      $request .= "code= :code,";
       $request .= "name= :name,";
+      $request .= "abbreviation= :abbreviation,";
+      $request .= "issolid= :issolid,";
+      $request .= "isliquid= :isliquid,";
+      $request .= "isother= :isother,";
       $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
       $params = [];
       $params["id"] = $data->getId();
-      $params["idweighttype"] = $data->getIdWeightType();
-      $params["idlanguage"] = $data->getIdLanguage();
+      $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
+      $params["abbreviation"] = $data->getAbbreviation();
+      $params["issolid"] = $data->getIssolid();
+      $params["isliquid"] = $data->getIsliquid();
+      $params["isother"] = $data->getIsother();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
@@ -258,7 +203,7 @@ class WeightTypeNameStor {
   }
   // End of update
 
-  public static function save(WeightTypeNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(WeightTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -271,7 +216,7 @@ class WeightTypeNameStor {
   }
   // End of save
 
-  public static function remove(WeightTypeNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(WeightTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -283,7 +228,7 @@ class WeightTypeNameStor {
   }
   // End of remove
 
-  public static function restore(WeightTypeNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(WeightTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -301,7 +246,7 @@ class WeightTypeNameStor {
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "DELETE FROM weighttypename";
+      $request  = "DELETE FROM weighttype";
       $request .= " WHERE id = :id";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['id'=> $id]);
@@ -330,24 +275,30 @@ class WeightTypeNameStor {
   }
   // End of delete
 
-  public static function create(WeightTypeNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(WeightTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "INSERT INTO weighttypename(";
-      $request .= "idweighttype,idlanguage,name,elemstate,timestamp)";
+      $request  = "INSERT INTO weighttype(";
+      $request .= "code,name,abbreviation,issolid,isliquid,isother,elemstate,timestamp)";
       $request .= " VALUES(";
-      $request .= ":idweighttype,";
-      $request .= ":idlanguage,";
+      $request .= ":code,";
       $request .= ":name,";
+      $request .= ":abbreviation,";
+      $request .= ":issolid,";
+      $request .= ":isliquid,";
+      $request .= ":isother,";
       $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
-      $params["idweighttype"] = $data->getIdWeightType();
-      $params["idlanguage"] = $data->getIdLanguage();
+      $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
+      $params["abbreviation"] = $data->getAbbreviation();
+      $params["issolid"] = $data->getIssolid();
+      $params["isliquid"] = $data->getIsliquid();
+      $params["isother"] = $data->getIsother();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
