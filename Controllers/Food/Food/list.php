@@ -47,16 +47,28 @@ $output           = array();
 $outputok         = false;
 $servicesCaller   = new DistriXServicesCaller();
 
-list($distriXFoodFoodData, $errorJson)    = DistriXFoodFoodData::getJsonData($_POST);
 $infoProfil[0]['idLanguage'] = 1;
 $_POST['id'] = $infoProfil[0]['idLanguage']; // NG 27-05-22 - until a solution is found
 list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
+
+$servicesCaller = new DistriXServicesCaller();
+$servicesCaller->setMethodName("ListFoods");
+$servicesCaller->setServiceName("DistriXServices/Food/Food/DistriXFoodListBusSvc.php");
+$servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
+if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) {
+  list($listFoods, $jsonError) = DistriXFoodFoodData::getJsonArray($output["ListFoods"]);
+} else {
+  $error              = $errorData;
+  $resp["Error"]      = $error;
+}
+
+
 
 $foodCaller = new DistriXServicesCaller();
 $foodCaller->setServiceName("DistriXServices/Food/Food/DistriXFoodListDataSvc.php");
 $foodCaller->setMethodName("ListFoods");
 $foodCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
-$foodCaller->addParameter("dataFood", $distriXFoodFoodData);
 
 $weightTypeCaller = new DistriXServicesCaller();
 $weightTypeCaller->setMethodName("ListWeightTypes");
@@ -148,6 +160,50 @@ if ($outputok && isset($output["ListNutriScores"]) && is_array($output["ListNutr
   list($listNutriScores, $jsonError) = DistriXFoodNutriScoreData::getJsonArray($output["ListNutriScores"]);
 } else {
   $error = $errorData;
+}
+
+foreach ($listFoods as $food) {
+  $distriXFoodFoodData = new DistriXFoodFoodData();
+  $distriXFoodFoodData->setId($food->getId());
+  $distriXFoodFoodData->setIdBrand($food->getIdBrand());
+  
+  foreach ($listBrands as $brand) {
+    if ($brand->getId() == $food->getIdBrand()){
+      $distriXFoodFoodData->setNameBrand($brand->getName());
+      $distriXFoodFoodData->setPictureBrand($brand->getLinkToPicture());
+    }
+  }
+
+  $distriXFoodFoodData->setIdScoreEco($food->getIdScoreEco());
+  foreach ($listEcoScores as $ecoScore) {
+    if ($ecoScore->getId() == $food->getIdScoreEco()){
+      $distriXFoodFoodData->setPictureScoreEco($ecoScore->getLinkToPicture());
+    }
+  }
+  
+  $distriXFoodFoodData->setIdScoreNova($food->getIdScoreNova());
+  foreach ($listNovaScores as $novaScore) {
+    if ($novaScore->getId() == $food->getIdScoreNova()){
+      $distriXFoodFoodData->setPictureScoreNova($novaScore->getLinkToPicture());
+    }
+  }
+  
+  $distriXFoodFoodData->setIdScoreNutri($food->getIdScoreNutri());
+  foreach ($listNutriScores as $nutriScore) {
+    if ($nutriScore->getId() == $food->getIdScoreNutri()){
+      $distriXFoodFoodData->setPictureScoreNutri($nutriScore->getLinkToPicture());
+    }
+  }
+
+  $distriXFoodFoodData->setCode($code);
+  $distriXFoodFoodData->setName($name);
+  $distriXFoodFoodData->setDescription($description);
+  $distriXFoodFoodData->setFoodCategories($foodCategories);
+  $distriXFoodFoodData->setFoodLabels($foodLabels);
+  $distriXFoodFoodData->setFoodNutritionals($foodNutritionals);
+  $distriXFoodFoodData->setFoodWeights($foodWeights);
+  $distriXFoodFoodData->setElemState($elemState);
+  $distriXFoodFoodData->setTimestamp($timestamp);
 }
 
 $resp["ListFoods"]        = $listFoods;
