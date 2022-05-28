@@ -24,13 +24,13 @@ $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   list($dataLanguage, $jsonError)           = LanguageStorData::getJsonData($dataSvc->getParameter("dataLanguage"));
   list($weightTypeStor, $weightTypeStorInd) = WeightTypeStor::getList(true, $dbConnection);
-  foreach ($weightTypeStor as $WeightType) {
+  foreach ($weightTypeStor as $weightType) {
     $weightTypeNameStorData = new WeightTypeNameStorData();
-    $weightTypeNameStorData->setIdWeightType($WeightType->getId());
+    $weightTypeNameStorData->setIdWeightType($weightType->getId());
     $weightTypeNameStorData->setIdLanguage($dataLanguage->getId());
     $weightTypeNameStor = WeightTypeNameStor::findByIdWeightTypeIdLanguage($weightTypeNameStorData, $dbConnection);
     if ($weightTypeNameStor->getId() > 0) {
-      $WeightType->setName($weightTypeNameStor->getName());
+      $weightType->setName($weightTypeNameStor->getName());
     }
   }
 } else {

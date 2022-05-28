@@ -1,18 +1,18 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class FoodStorData {
+class FoodStorData extends DistriXSvcAppData {
   const FOOD_STATUS_AVAILABLE     = 0;
   const FOOD_STATUS_NOT_AVAILABLE = 1;
 
-  private $id;
-  private $idbrand;
-  private $idscorenutri;
-  private $idscorenova;
-  private $idscoreeco;
-  private $code;
-  private $name;
-  private $description;
-  private $elemstate;
-  private $timestamp;
+  protected $id;
+  protected $idbrand;
+  protected $idscorenutri;
+  protected $idscorenova;
+  protected $idscoreeco;
+  protected $code;
+  protected $name;
+  protected $description;
+  protected $elemstate;
+  protected $timestamp;
 
   public function __construct() {
       $this->id = 0;
@@ -27,30 +27,30 @@ class FoodStorData {
       $this->timestamp = 0;
     }
 // Gets
-  public function getId() { return $this->id; }
-  public function getIdBrand() { return $this->idbrand; }
-  public function getIdScoreNutri() { return $this->idscorenutri; }
-  public function getIdScoreNova() { return $this->idscorenova; }
-  public function getIdScoreEco() { return $this->idscoreeco; }
-  public function getCode() { return $this->code; }
-  public function getName() { return $this->name; }
-  public function getDescription() { return $this->description; }
-  public function getElemState() { return $this->elemstate; }
-  public function getTimestamp() { return $this->timestamp; }
-  public function isAvailable() { return ($this->elemstate == self::FOOD_STATUS_AVAILABLE); }
-  public function getAvailableValue() { return self::FOOD_STATUS_AVAILABLE; }
-  public function getUnavailableValue() { return self::FOOD_STATUS_NOT_AVAILABLE; }
+  public function getId():int { return $this->id; }
+  public function getIdBrand():int { return $this->idbrand; }
+  public function getIdScoreNutri():int { return $this->idscorenutri; }
+  public function getIdScoreNova():int { return $this->idscorenova; }
+  public function getIdScoreEco():int { return $this->idscoreeco; }
+  public function getCode():string { return $this->code; }
+  public function getName():string { return $this->name; }
+  public function getDescription():string { return $this->description; }
+  public function getElemState():int { return $this->elemstate; }
+  public function getTimestamp():int { return $this->timestamp; }
+  public function isAvailable():int { return ($this->elemstate == self::FOOD_STATUS_AVAILABLE); }
+  public function getAvailableValue():int { return self::FOOD_STATUS_AVAILABLE; }
+  public function getUnavailableValue():int { return self::FOOD_STATUS_NOT_AVAILABLE; }
 // Sets
-  public function setId($id) { $this->id = $id; }
-  public function setIdBrand($idBrand) { $this->idbrand = $idBrand; }
-  public function setIdScoreNutri($idScoreNutri) { $this->idscorenutri = $idScoreNutri; }
-  public function setIdScoreNova($idScoreNova) { $this->idscorenova = $idScoreNova; }
-  public function setIdScoreEco($idScoreEco) { $this->idscoreeco = $idScoreEco; }
-  public function setCode($code) { $this->code = $code; }
-  public function setName($name) { $this->name = $name; }
-  public function setDescription($description) { $this->description = $description; }
-  public function setElemState($elemstate) { $this->elemstate = $elemstate; }
-  public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+  public function setId(int $id) { $this->id = $id; }
+  public function setIdBrand(int $idBrand) { $this->idbrand = $idBrand; }
+  public function setIdScoreNutri(int $idScoreNutri) { $this->idscorenutri = $idScoreNutri; }
+  public function setIdScoreNova(int $idScoreNova) { $this->idscorenova = $idScoreNova; }
+  public function setIdScoreEco(int $idScoreEco) { $this->idscoreeco = $idScoreEco; }
+  public function setCode(string $code) { $this->code = $code; }
+  public function setName(string $name) { $this->name = $name; }
+  public function setDescription(string $description) { $this->description = $description; }
+  public function setElemState(int $elemstate) { $this->elemstate = $elemstate; }
+  public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->elemstate = self::FOOD_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->elemstate = self::FOOD_STATUS_NOT_AVAILABLE; }
 }

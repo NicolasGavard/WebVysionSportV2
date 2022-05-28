@@ -1,14 +1,14 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class NutritionalNameStorData {
+class NutritionalNameStorData extends DistriXSvcAppData {
   const NUTRITIONALNAME_STATUS_AVAILABLE     = 0;
   const NUTRITIONALNAME_STATUS_NOT_AVAILABLE = 1;
 
-  private $id;
-  private $idnutritional;
-  private $idlanguage;
-  private $name;
-  private $elemstate;
-  private $timestamp;
+  protected $id;
+  protected $idnutritional;
+  protected $idlanguage;
+  protected $name;
+  protected $elemstate;
+  protected $timestamp;
 
   public function __construct() {
       $this->id = 0;
