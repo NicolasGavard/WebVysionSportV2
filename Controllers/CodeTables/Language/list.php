@@ -11,7 +11,7 @@ include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
 $resp           = [];
-$listLanguages     = [];
+$listLanguages  = [];
 $error          = [];
 $output         = [];
 $outputok       = false;

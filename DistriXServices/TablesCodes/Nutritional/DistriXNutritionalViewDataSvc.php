@@ -21,13 +21,7 @@ $errorData    = null;
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   list($data, $jsonError) = NutritionalStorData::getJsonData($dataSvc->getParameter("data"));
-  $nutritionalStorData       = NutritionalStor::read($data->getId(), $dbConnection);
-  $urlPicture             = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $nutritionalStorData->getLinkToPicture();
-  $pictures_headers       = get_headers($urlPicture);
-  if ($nutritionalStorData->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $nutritionalStorData->getLinkToPicture() == '') {
-    $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/default.png';
-  }
-  $nutritionalStorData->setLinkToPicture($urlPicture);
+  $nutritionalStorData    = NutritionalStor::read($data->getId(), $dbConnection);
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }

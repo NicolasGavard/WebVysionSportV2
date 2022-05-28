@@ -53,7 +53,7 @@ class NutritionalNameStor {
   }
   // End of getList
 
-  public static function findByNutritionalIdLanguage(NutritionalNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdNutritionalIdLanguage(NutritionalNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new NutritionalNameStorData();
@@ -77,7 +77,7 @@ class NutritionalNameStor {
   }
   // End of NutritionalUnique
 
-  public static function findByNutritional(NutritionalNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdNutritional(NutritionalNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];

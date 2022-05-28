@@ -20,7 +20,7 @@ INSERT INTO nutritionalname(id,idnutritional,idlanguage,name,elemstate,timestamp
 (5,5,1,'Protéines',0,0),
 (6,6,1,'Sel',0,0),
 (7,7,1,'Alcool',0,0),
-(8,8,1,'Biotine (Vitamine B8',0,0),
+(8,8,1,'Biotine - Vitamine B8',0,0),
 (9,9,1,'Silice',0,0),
 (10,10,1,'Bicarbonate',0,0),
 (11,11,1,'Potassium',0,0),
