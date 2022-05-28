@@ -5,22 +5,6 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/../../../GlobalData/DistriXGeneralIdData.php");
-include(__DIR__ . "/Data/DistriXFoodFoodData.php");
-include(__DIR__ . "/Data/DistriXCodeTableFoodCategoryData.php");
-include(__DIR__ . "/Data/DistriXCodeTableFoodCategoryNameData.php");
-include(__DIR__ . "/Data/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/Data/DistriXCodeTableNutritionalNameData.php");
-include(__DIR__ . "/Data/DistriXCodeTableWeightTypeData.php");
-include(__DIR__ . "/Data/DistriXCodeTableWeightTypeNameData.php");
-include(__DIR__ . "/Data/DistriXFoodBrandData.php");
-include(__DIR__ . "/Data/DistriXFoodLabelData.php");
-include(__DIR__ . "/Data/DistriXFoodNutritionalData.php");
-include(__DIR__ . "/Data/DistriXFoodScoreEcoData.php");
-include(__DIR__ . "/Data/DistriXFoodScoreNovaData.php");
-include(__DIR__ . "/Data/DistriXFoodScoreNutriData.php");
-include(__DIR__ . "/Data/DistriXFoodWeightData.php");
 // Database Data
 include(__DIR__ . "/Data/FoodCategoryStorData.php");
 include(__DIR__ . "/Data/FoodLabelStorData.php");
@@ -72,7 +56,7 @@ if (is_null($dbConnection->getError())) {
 
 // list($data, $jsonError) = ScoreEcoStorData::getJsonData($dataSvc->getParameter("data"));
 
-  list($foodStor, $foodStorInd) = FoodStor::findByDatas($foodStorData, false, $dbConnection);
+  list($foodStor, $foodStorInd) = FoodStor::getList(true, $dbConnection);
   foreach ($foodStor as $food) {
     $foodCategories   = [];
     $foodLabels       = [];
