@@ -6,10 +6,10 @@ include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Database Data
-include(__DIR__ . "/Data/FoodlabelStorData.php");
+include(__DIR__ . "/Data/FoodLabelStorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
-include(__DIR__ . "/Storage/FoodlabelStor.php");
+include(__DIR__ . "/Storage/FoodLabelStor.php");
 
 // Cdn Location
 include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
@@ -19,20 +19,20 @@ $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 
 $dbConnection = null;
 $errorData    = null;
-$foodlabels   = [];
+$foodLabels   = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($foodlabelStor, $foodlabelStorInd) = FoodlabelStor::getList(true, $dbConnection);
+  list($foodLabelStor, $foodLabelStorInd) = FoodLabelStor::getList(true, $dbConnection);
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
 if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListFoodlabels", $dataSvc->getMethodName(), basename(__FILE__));
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListFoodLabels", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
 
-$dataSvc->addToResponse("ListFoodlabels", $foodlabelStor);
+$dataSvc->addToResponse("ListFoodLabels", $foodLabelStor);
 
 // Return response
 $dataSvc->endOfService();

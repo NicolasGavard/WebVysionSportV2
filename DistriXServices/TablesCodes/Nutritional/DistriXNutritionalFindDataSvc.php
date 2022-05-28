@@ -26,7 +26,7 @@ $Languages    = [];
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   $data = $dataSvc->getParameter("data");
-  list($styLanguagestor, $styLanguagestorInd) = StyLanguageStor::findByIndCode($data, true, $dbConnection);
+  list($styLanguagestor, $styLanguagestorInd) = StyLanguageStor::findByCode($data, true, $dbConnection);
   foreach ($styLanguagestor as $Language) {
     $infoLanguage = DistriXSvcUtil::setData($Language, "DistriXStyLanguageData");
     $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_LANGUAGES . '/' . $infoLanguage->getLinkToPicture();
@@ -41,7 +41,7 @@ if (is_null($dbConnection->getError())) {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
 if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListLanguages", $dataSvc->getMethodName(), basename(__FILE__));
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "FindBrand", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
 $dataSvc->addToResponse("ListLanguages", $Languages);

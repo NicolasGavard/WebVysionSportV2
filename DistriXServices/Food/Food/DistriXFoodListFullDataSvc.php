@@ -23,7 +23,52 @@ $foods        = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($foodStor, $foodStorInd) = FoodStor::getList(true, $dbConnection);
+  
+  
+  
+  foreach ($listFoods as $food) {
+    $distriXFoodFoodData = new DistriXFoodFoodData();
+    $distriXFoodFoodData->setId($food->getId());
+    $distriXFoodFoodData->setIdBrand($food->getIdBrand());
+    
+    foreach ($listBrands as $brand) {
+      if ($brand->getId() == $food->getIdBrand()){
+        $distriXFoodFoodData->setNameBrand($brand->getName());
+        $distriXFoodFoodData->setPictureBrand($brand->getLinkToPicture());
+      }
+    }
+  
+    $distriXFoodFoodData->setIdScoreEco($food->getIdScoreEco());
+    foreach ($listEcoScores as $ecoScore) {
+      if ($ecoScore->getId() == $food->getIdScoreEco()){
+        $distriXFoodFoodData->setPictureScoreEco($ecoScore->getLinkToPicture());
+      }
+    }
+    
+    $distriXFoodFoodData->setIdScoreNova($food->getIdScoreNova());
+    foreach ($listNovaScores as $novaScore) {
+      if ($novaScore->getId() == $food->getIdScoreNova()){
+        $distriXFoodFoodData->setPictureScoreNova($novaScore->getLinkToPicture());
+      }
+    }
+    
+    $distriXFoodFoodData->setIdScoreNutri($food->getIdScoreNutri());
+    foreach ($listNutriScores as $nutriScore) {
+      if ($nutriScore->getId() == $food->getIdScoreNutri()){
+        $distriXFoodFoodData->setPictureScoreNutri($nutriScore->getLinkToPicture());
+      }
+    }
+  
+    $distriXFoodFoodData->setCode($code);
+    $distriXFoodFoodData->setName($name);
+    $distriXFoodFoodData->setDescription($description);
+    $distriXFoodFoodData->setFoodCategories($foodCategories);
+    $distriXFoodFoodData->setFoodLabels($foodLabels);
+    $distriXFoodFoodData->setFoodNutritionals($foodNutritionals);
+    $distriXFoodFoodData->setFoodWeights($foodWeights);
+    $distriXFoodFoodData->setElemState($elemState);
+    $distriXFoodFoodData->setTimestamp($timestamp);
+  }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
