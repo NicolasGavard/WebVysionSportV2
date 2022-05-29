@@ -6,6 +6,7 @@ include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Database Data
+include(__DIR__ . "/Data/LanguageStorData.php");
 include(__DIR__ . "/Data/FoodStorData.php");
 include(__DIR__ . "/Data/FoodNameStorData.php");
 // Storage
@@ -28,10 +29,10 @@ if (is_null($dbConnection->getError())) {
   list($dataLanguage, $jsonError) = LanguageStorData::getJsonData($dataSvc->getParameter("dataLanguage"));
   list($foodStor, $foodStorInd)   = FoodStor::getList(true, $dbConnection);
   foreach ($foodStor as $food) {
-    $foodNameStorData = new WeightTypeNameStorData();
-    $foodNameStorData->setIdWeightType($food->getId());
+    $foodNameStorData = new FoodNameStorData();
+    $foodNameStorData->setIdFood($food->getId());
     $foodNameStorData->setIdLanguage($dataLanguage->getId());
-    $foodNameStor = WeightTypeNameStor::findByIdWeightTypeIdLanguage($foodNameStorData, $dbConnection);
+    $foodNameStor = FoodNameStor::findByIdFoodIdLanguage($foodNameStorData, $dbConnection);
     if ($foodNameStor->getId() > 0) {
       $food->setName($foodNameStor->getName());
     }
