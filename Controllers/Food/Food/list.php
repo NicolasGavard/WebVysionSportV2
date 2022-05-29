@@ -33,19 +33,20 @@ include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
 session_start();
-$resp             = array();
-$listFoods        = array();
-$listWeightTypes  = array();
-$listBrands       = array();
-$listLabels       = array();
-$listEcoScores    = array();
-$listNovaScores   = array();
-$listNutriScores  = array();
+$resp               = array();
+$listFoodFormFront  = array();
+$listFoods          = array();
+$listWeightTypes    = array();
+$listBrands         = array();
+$listLabels         = array();
+$listEcoScores      = array();
+$listNovaScores     = array();
+$listNutriScores    = array();
 
-$error            = array();
-$output           = array();
-$outputok         = false;
-$servicesCaller   = new DistriXServicesCaller();
+$error              = array();
+$output             = array();
+$outputok           = false;
+$servicesCaller     = new DistriXServicesCaller();
 
 $infoProfil[0]['idLanguage'] = 1;
 $_POST['id'] = $infoProfil[0]['idLanguage']; // NG 27-05-22 - until a solution is found
@@ -55,7 +56,7 @@ $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListFoods");
 $servicesCaller->setServiceName("DistriXServices/Food/Food/DistriXFoodListBusSvc.php");
 $servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
-list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) {
   list($listFoods, $jsonError) = DistriXFoodFoodData::getJsonArray($output["ListFoods"]);
@@ -93,7 +94,49 @@ if ($outputok && isset($output["ListNutriScores"]) && is_array($output["ListNutr
   $resp["Error"]      = $errorData;
 }
 
-$resp["ListFoods"]        = $listFoods;
+foreach ($listFoods as $food) {
+  $distriXFoodFoodData = new DistriXFoodFoodData();
+  $distriXFoodFoodData->setId($food->getId());
+  $distriXFoodFoodData->setIdBrand($food->getIdBrand());
+  $distriXFoodFoodData->setIdScoreNutri($food->getIdScoreNutri());
+  $distriXFoodFoodData->setIdScoreNova($food->getIdScoreNova());
+  $distriXFoodFoodData->setIdScoreEco($food->getIdScoreEco());
+  $distriXFoodFoodData->setCode($food->getCode());
+  $distriXFoodFoodData->setName($food->getName());
+  $distriXFoodFoodData->setDescription($food->getDescription());
+  $distriXFoodFoodData->setElemState($food->getElemState());
+  $distriXFoodFoodData->setTimestamp($food->getTimestamp());
+
+
+  foreach ($listBrands as $brand) {
+    if ($food->getId() == $brand->getId()) {
+      $distriXFoodFoodData->setNameBrand($brand->getName());
+      $distriXFoodFoodData->setPictureBrand($brand->getLinkToPicture());
+    }
+  }
+
+  foreach ($listEcoScores as $ecoScore) {
+    if ($food->getIdScoreEco() == $ecoScore->getId()) {
+      $distriXFoodFoodData->setPictureScoreNutri($ecoScore->getLinkToPicture());
+    }
+  }
+
+  foreach ($listNovaScores as $novaScore) {
+    if ($food->getIdScoreNova() == $novaScore->getId()) {
+      $distriXFoodFoodData->setPictureScoreNutri($novaScore->getLinkToPicture());
+    }
+  }
+
+  foreach ($listNutriScores as $nutriScore) {
+    if ($food->getIdScoreNutri() == $nutriScore->getId()) {
+      $distriXFoodFoodData->setPictureScoreNutri($nutriScore->getLinkToPicture());
+    }
+  }
+
+  $listFoodFormFront[] = $distriXFoodFoodData;
+}
+
+$resp["ListFoods"]        = $listFoodFormFront;
 $resp["ListBrands"]       = $listBrands;
 $resp["ListLabels"]       = $listLabels;
 $resp["ListEcoScores"]    = $listEcoScores;

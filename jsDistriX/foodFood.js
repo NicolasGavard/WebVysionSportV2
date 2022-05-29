@@ -139,8 +139,11 @@ function ListFood(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
                     ' <td>'+val.name+'</td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureBrand+'"/></td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureScoreNutri+'"/></td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureScoreNova+'"/></td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureScoreEco+'"/></td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+

@@ -103,25 +103,6 @@ if ($outputok && isset($output["ListNutriScores"]) && is_array($output["ListNutr
   $error = $errorData;
 }
 
-echo '<br><br>Je suis la : <br>';
-print_r($listFoods);
-echo '<br><br>';
-die();
-
-$servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ListFoods");
-$servicesCaller->setServiceName("DistriXServices/Food/Food/DistriXFoodListFullDataSvc.php");
-$servicesCaller->addParameter("dataFood", $listFoods);                        //print_r($listFoods);
-$servicesCaller->addParameter("dataFoodLabel", $listFoodLabels);              //print_r($listFoodLabels);
-$servicesCaller->addParameter("dataFoodNutritional", $listFoodNutritionals);  //print_r($listFoodNutritionals);
-$servicesCaller->addParameter("dataFoodWeight", $listFoodWeights);            //print_r($listFoodWeights);
-list($outputok, $output, $errorData) = $servicesCaller->call();               print_r($output);
-if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) {
-  list($listFoods, $jsonError) = DistriXFoodFoodData::getJsonArray($output["ListFoods"]);
-} else {
-  $resp["Error"]      = $errorData;
-}
-
 $busSvc->addToResponse("ListFoods", $listFoods);
 $busSvc->addToResponse("ListBrands", $listBrands);
 $busSvc->addToResponse("ListLabels", $listLabels);
