@@ -94,6 +94,7 @@ if ($outputok && isset($output["ListNutriScores"]) && is_array($output["ListNutr
   $resp["Error"]      = $errorData;
 }
 
+
 foreach ($listFoods as $food) {
   $distriXFoodFoodData = new DistriXFoodFoodData();
   $distriXFoodFoodData->setId($food->getId());
@@ -116,14 +117,14 @@ foreach ($listFoods as $food) {
   }
 
   foreach ($listEcoScores as $ecoScore) {
-    if ($food->getIdScoreEco() == $ecoScore->getId()) {
-      $distriXFoodFoodData->setPictureScoreNutri($ecoScore->getLinkToPicture());
+    if ($food->getidScoreEco() == $ecoScore->getId()) {
+      $distriXFoodFoodData->setPictureScoreEco($ecoScore->getLinkToPicture());
     }
   }
 
   foreach ($listNovaScores as $novaScore) {
     if ($food->getIdScoreNova() == $novaScore->getId()) {
-      $distriXFoodFoodData->setPictureScoreNutri($novaScore->getLinkToPicture());
+      $distriXFoodFoodData->setPictureScoreNova($novaScore->getLinkToPicture());
     }
   }
 
