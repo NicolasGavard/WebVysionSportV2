@@ -32,13 +32,13 @@ class NutritionalNameStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE elemstate = :elemstate";
+        $request .= " WHERE elemstate = :statut";
       }
       $request .= " ORDER BY idnutritional";
-      
+
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
-        $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
       } else {
         $stmt->execute();
       }
@@ -52,6 +52,41 @@ class NutritionalNameStor {
     return array($list, count($list));
   }
   // End of getList
+
+  public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new NutritionalNameStorData();
+    $list = [];
+
+    if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
+      if ($className == "" || is_null($className)) {
+        $className = "NutritionalNameStorData";
+      }
+      $request  = self::SELECT;
+      $request .= self::FROM;
+      $request .= " WHERE id IN('" . implode("','", array_map(function($data) { return $data->getId(); }, $inList))."')";
+      if (!$all) {
+        $request .= " AND elemstate = :statut";
+      }
+      $request .= " ORDER BY idnutritional";
+
+      $stmt = $inDbConnection->prepare($request);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $className);
+      }
+    }
+    return array($list, count($list));
+  }
+  // End of getListFromList
 
   public static function findByIdNutritionalIdLanguage(NutritionalNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
@@ -75,39 +110,9 @@ class NutritionalNameStor {
     }
     return $data;
   }
-  // End of NutritionalUnique
+  // End of IdNutritionalIdLanguage
 
-  public static function findByIdNutritional(NutritionalNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
-  {
-    $request = "";
-    $list = [];
-
-    if ($inDbConnection != null) {
-      $request  = self::SELECT;
-      $request .= self::FROM;
-      $request .= " WHERE idnutritional = :index0";
-      if (!$all) {
-        $request .= " AND elemstate = :elemstate";
-      }
-      $params = [];
-      $params["index0"] = $dataIn->getIdNutritional();
-      if (!$all) {
-        $params["elemstate"] = $dataIn->getElemState();
-      }
-      $stmt = $inDbConnection->prepare($request);
-      $stmt->execute($params);
-      if (self::SHOW_FIND_REQUEST) {
-        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
-      }
-      if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "NutritionalNameStorData");
-      }
-    }
-    return array($list, count($list));
-  }
-  // End of Nutritional
-
-  public static function findByLanguage(NutritionalNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdLanguage(NutritionalNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -117,12 +122,12 @@ class NutritionalNameStor {
       $request .= self::FROM;
       $request .= " WHERE idlanguage = :index0";
       if (!$all) {
-        $request .= " AND elemstate = :elemstate";
+        $request .= " AND elemstate = :statut";
       }
       $params = [];
       $params["index0"] = $dataIn->getIdLanguage();
       if (!$all) {
-        $params["elemstate"] = $dataIn->getElemState();
+        $params["statut"] = $dataIn->getAvailableValue();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -135,7 +140,7 @@ class NutritionalNameStor {
     }
     return array($list, count($list));
   }
-  // End of Language
+  // End of IdLanguage
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {

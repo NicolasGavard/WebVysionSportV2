@@ -25,7 +25,7 @@ class NutritionalNameStorData extends DistriXSvcAppData {
   public function getName():string { return $this->name; }
   public function getElemState():int { return $this->elemstate; }
   public function getTimestamp():int { return $this->timestamp; }
-  public function isAvailable():int { return ($this->elemstate == self::NUTRITIONALNAME_STATUS_AVAILABLE); }
+  public function isAvailable():bool { return ($this->elemstate == self::NUTRITIONALNAME_STATUS_AVAILABLE); }
   public function getAvailableValue():int { return self::NUTRITIONALNAME_STATUS_AVAILABLE; }
   public function getUnavailableValue():int { return self::NUTRITIONALNAME_STATUS_NOT_AVAILABLE; }
 // Sets
@@ -33,7 +33,7 @@ class NutritionalNameStorData extends DistriXSvcAppData {
   public function setIdNutritional(int $idNutritional) { $this->idnutritional = $idNutritional; }
   public function setIdLanguage(int $idLanguage) { $this->idlanguage = $idLanguage; }
   public function setName(string $name) { $this->name = $name; }
-  public function setElemState(int $elemstate) { $this->elemstate = $elemstate; }
+  public function setElemState(int $elemState) { $this->elemstate = $elemState; }
   public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->elemstate = self::NUTRITIONALNAME_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->elemstate = self::NUTRITIONALNAME_STATUS_NOT_AVAILABLE; }
