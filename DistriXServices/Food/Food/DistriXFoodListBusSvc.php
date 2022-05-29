@@ -68,7 +68,7 @@ $nutritionalCaller->setServiceName("DistriXServices/TablesCodes/Nutritional/Dist
 $weightTypeCaller = new DistriXServicesCaller();
 $weightTypeCaller->setMethodName("ListWeightTypes");
 $weightTypeCaller->addParameter("dataLanguage", $dataLanguage);
-$weightTypeCaller->setServiceName("DistriXServices/TablesCodes/WeightType/DistriXNutritionalListDataSvc.php");
+$weightTypeCaller->setServiceName("DistriXServices/TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
 
 // Add Caller to multi caller
 $svc = new DistriXSvc();
@@ -96,7 +96,7 @@ if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) 
   $error = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("FoodLabels"); //var_dump($output);
+list($outputok, $output, $errorData) = $svc->getResult("FoodLabels"); var_dump($output);
 if ($outputok && isset($output["ListFoodLabels"]) && is_array($output["ListFoodLabels"])) {
   list($listFoodLabels, $jsonError) = FoodLabelStorData::getJsonArray($output["ListFoodLabels"]);
 } else {
@@ -153,7 +153,7 @@ if ($outputok && isset($output["ListNutriScores"]) && is_array($output["ListNutr
   $error = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("Nutritional"); var_dump($output);
+list($outputok, $output, $errorData) = $svc->getResult("Nutritional"); //var_dump($output);
 if ($outputok && isset($output["ListNutritionals"]) && is_array($output["ListNutritionals"])) {
   list($listNutritionals, $jsonError) = NutritionalStorData::getJsonArray($output["ListNutritionals"]);
 } else {
@@ -169,8 +169,11 @@ if ($outputok && isset($output["ListWeightTypes"]) && is_array($output["ListWeig
 
 echo '<br><br>Je suis la : <br>';
 print_r($listFoods);
+echo '<br><br>';
 print_r($listFoodLabels);
+echo '<br><br>';
 print_r($listFoodNutritionals);
+echo '<br><br>';
 print_r($listFoodWeights);
 die();
 

@@ -10,7 +10,6 @@ include(__DIR__ . "/Data/FoodLabelStorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/FoodLabelStor.php");
-
 // Cdn Location
 include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
 include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
