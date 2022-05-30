@@ -98,7 +98,7 @@ class DistriXStyUser
     $styServicesCaller->setMethodName("ListUsers");
     $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserListDataSvc.php");
     $styServicesCaller->addParameter("data", $data);
-    list($outputok, $output, $errorData) = $styServicesCaller->call(); //var_dump($output);
+    list($outputok, $output, $errorData) = $styServicesCaller->call(); var_dump($output);
 
     if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
       $logInfoData = new DistriXLoggerInfoData();

@@ -30,7 +30,7 @@ if ($dataSvc->getMethodName() == "ListUsers") {
 
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
-    $data = $dataSvc->getParameter("data");
+    list($data, $jsonError)       = StyUserStorData::getJsonData($dataSvc->getParameter("data"));
     
     if ($data->getIdStyEnterprise() == 0) {
       list($styUserstor, $styUserstorInd) = StyUserStor::getList(true, $dbConnection);
@@ -39,6 +39,7 @@ if ($dataSvc->getMethodName() == "ListUsers") {
       $styUserstorData->setIdStyEnterprise($data->getIdStyEnterprise());
       list($styUserstor, $styUserstorInd) = StyUserStor::findByEnterpise($styUserstorData, true, $dbConnection);
     }
+    
     foreach ($styUserstor as $user) {
       $infoUser   = DistriXSvcUtil::setData($user, "DistriXStyUserData");
       
@@ -51,7 +52,6 @@ if ($dataSvc->getMethodName() == "ListUsers") {
         $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USERS . '/profilDefault.png';
       }
       $infoUser->setLinkToPicture($urlPicture);
-      $users[] = $infoUser;
     }
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
@@ -60,7 +60,7 @@ if ($dataSvc->getMethodName() == "ListUsers") {
     $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ListUsers", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
-  $dataSvc->addToResponse("ListUsers", $users);
+  $dataSvc->addToResponse("ListUsers", $styUserstor);
 }
 
 // Return response
