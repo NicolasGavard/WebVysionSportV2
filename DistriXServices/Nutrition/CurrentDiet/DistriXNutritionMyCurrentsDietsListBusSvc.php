@@ -17,7 +17,7 @@ $servicesCaller->addParameter("data", $busSvc->getParameter("data"));
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 // Current Diet
 if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
-  $listMyCurrentDiets = $output["ListMyCurrentsDiets"];
+  list($listMyCurrentDiets, $jsonError) = DietStorData::getJsonArray($output["ListMyCurrentsDiets"]);
 
   $myTemplateDietsCaller = new DistriXServicesCaller();
   $myTemplateDietsCaller->setMethodName("ListMyTemplatesDiets");

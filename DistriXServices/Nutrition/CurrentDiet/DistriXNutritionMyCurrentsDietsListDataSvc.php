@@ -31,6 +31,7 @@ if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ListMyCurrentsDiets", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
+
 $dataSvc->addToResponse("ListMyCurrentsDiets", $dietStor);
 
 // Return response

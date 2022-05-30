@@ -46,6 +46,36 @@ class DietTemplateStor {
     return array($list, count($list));
   }
   // End of getList
+  
+  public static function getListByList(array $idsDietTemplate, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new DietTemplateStorData();
+    $list = [];
+
+    if ($inDbConnection != null) {
+      $request  = self::SELECT;
+      $request .= self::FROM;
+      $request .= " WHERE id in ('',";
+      foreach ($idsDietTemplate as $idDietTemplate) {
+        $request .= ", ".$idDietTemplate->getId();
+      }
+      $request .= " )";
+
+      $request .= " ORDER BY id";
+
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute();
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DietTemplateStorData");
+      }
+    }
+    return array($list, count($list));
+  }
+  // End of getListByList
 
   public static function findByIdUserNameDuration(DietTemplateStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {

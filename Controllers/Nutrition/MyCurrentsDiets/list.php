@@ -20,7 +20,7 @@ $error              = [];
 $output             = [];
 $outputok           = false;
 
-$_POST['idUser']             = 1;
+$_POST['idUser']              = 1;
 $listMyCurrentDiets           = [];
 $listMyCurrentDietsFormFront  = [];
 $listMyTemplateDiets          = [];
@@ -33,7 +33,7 @@ $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListMyCurrentsDiets");
 $servicesCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListBusSvc.php");
 $servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
-list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 // Current Diet
 if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
@@ -96,7 +96,7 @@ foreach ($listMyCurrentDiets as $currentDiet) {
 $resp["ListMyCurrentsDiets"]  = $listMyCurrentDietsFormFront;
 $resp["ListMyTemplatesDiets"] = $listMyTemplateDiets;
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"]              = $error;
 }
 
 echo json_encode($resp);

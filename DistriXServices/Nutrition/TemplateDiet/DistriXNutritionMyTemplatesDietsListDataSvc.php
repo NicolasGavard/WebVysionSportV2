@@ -19,26 +19,14 @@ include(__DIR__ . "/Data/DietStorData.php");
 include(__DIR__ . "/Data/DietTemplateStorData.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
-
 $dbConnection     = null;
 $errorData        = null;
-$myTemplatesDiets = [];
 
-$dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
+$dietTemplateStor = [];
+$dbConnection     = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($data, $jsonError)       = DietStorData::getJsonData($dataSvc->getParameter("data"));
-
-  list($dietTemplateStor, $dietTemplateStorInd) = DietTemplateStor::findByIdUser($dietTemplateStorData, $dietTemplateStorData->getElemState(), $dbConnection);
-  foreach ($dietTemplateStor as $diet) {
-    $currentDietAssignedUsers         = [];
-    $distriXNutritionTemplateDietData = DistriXSvcUtil::setData($diet, "DistriXNutritionTemplateDietData");
-        
-    $dietStudentStorData = new DietStudentStorData();
-    $dietStudentStorData->setIdDiet($diet->getId());
-    list($dietStudentStor, $dietStudentStorInd) = DietStudentStor::findByIdDiet($dietStudentStorData, false, $dbConnection);
-    $distriXNutritionTemplateDietData->setNbStudentAssigned($dietStudentStorInd);
-    $myTemplatesDiets[]  = $distriXNutritionTemplateDietData;
-  }
+  list($data, $jsonError)                       = DietStorData::getJsonData($dataSvc->getParameter("data"));
+  list($dietTemplateStor, $dietTemplateStorInd) = DietTemplateStor::getListByList($data, $dbConnection);
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
@@ -46,7 +34,7 @@ if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ListMyTemplatesDiets", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListMyTemplatesDiets", $myTemplatesDiets);
+$dataSvc->addToResponse("ListMyTemplatesDiets", $dietTemplateStor);
 
 // Return response
 $dataSvc->endOfService();

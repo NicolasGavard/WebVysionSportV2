@@ -13,13 +13,13 @@ if (!class_exists("DistriXNutritionCurrentDietUsersData", false)) {
       $this->firstNameUser  = "";
     }
     // Gets
-    public function getIdUser() { return $this->idUser; }
-    public function getNameUser() { return $this->nameUser; }
-    public function getFirstNameUser() { return $this->firstNameUser; }
+    public function getIdUser():int { return $this->idUser; }
+    public function getNameUser():string { return $this->nameUser; }
+    public function getFirstNameUser():string { return $this->firstNameUser; }
     // Sets
-    public function setIdUser($idUser) { $this->idUser = $idUser; }
-    public function setNameUser($nameUser) { $this->nameUser = $nameUser; }
-    public function setFirstNameUser($firstNameUser) { $this->firstNameUser = $firstNameUser; }
+    public function setIdUser(int $idUser) { $this->idUser = $idUser; }
+    public function setNameUser(string $nameUser) { $this->nameUser = $nameUser; }
+    public function setFirstNameUser(string $firstNameUser) { $this->firstNameUser = $firstNameUser; }
   }
   // End of class
 }

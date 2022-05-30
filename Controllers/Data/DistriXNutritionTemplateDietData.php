@@ -26,28 +26,28 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
       $this->timestamp      = 0;
     }
     // Gets
-    public function getId() { return $this->id; }
-    public function getIdUser() { return $this->idUser; }
-    public function getNameUser() { return $this->nameUser; }
-    public function getFirstNameUser() { return $this->firstNameUser; }
-    public function getName() { return $this->name; }
-    public function getDuration() { return $this->duration; }
-    public function getTags() { return $this->tags; }
-    public function getNbStudentAssigned() { return $this->nbStudentAssigned; }
-    public function getElemState() { return $this->elemState; }
-    public function getTimestamp() { return $this->timestamp; }
+    public function getId():int { return $this->id; }
+    public function getIdUser():int { return $this->idUser; }
+    public function getNameUser():string { return $this->nameUser; }
+    public function getFirstNameUser():string { return $this->firstNameUser; }
+    public function getName():string { return $this->name; }
+    public function getDuration():int { return $this->duration; }
+    public function getTags():string { return $this->tags; }
+    public function getNbStudentAssigned():int { return $this->nbStudentAssigned; }
+    public function getElemState():int { return $this->elemState; }
+    public function getTimestamp():int { return $this->timestamp; }
 
     // Sets
-    public function setId($id) { $this->id = $id; }
-    public function setIdUser($idUser) { $this->idUser = $idUser; }
-    public function setNameUser($nameUser) { $this->nameUser = $nameUser; }
-    public function setFirstNameUser($firstNameUser) { $this->firstNameUser = $firstNameUser; }
-    public function setName($name) { $this->name = $name; }
-    public function setDuration($duration) { $this->duration = $duration; }
-    public function setTags($tags) { $this->tags = $tags; }
-    public function setNbStudentAssigned($nbStudentAssigned) { $this->nbStudentAssigned = $nbStudentAssigned; }
-    public function setElemState($elemState) { $this->elemState = $elemState; }
-    public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+    public function setId(int $id) { $this->id = $id; }
+    public function setIdUser(int $idUser) { $this->idUser = $idUser; }
+    public function setNameUser(string $nameUser) { $this->nameUser = $nameUser; }
+    public function setFirstNameUser(string $firstNameUser) { $this->firstNameUser = $firstNameUser; }
+    public function setName(string $name) { $this->name = $name; }
+    public function setDuration(int $duration) { $this->duration = $duration; }
+    public function setTags(string $tags) { $this->tags = $tags; }
+    public function setNbStudentAssigned(array $nbStudentAssigned) { $this->nbStudentAssigned = $nbStudentAssigned; }
+    public function setElemState(int $elemState) { $this->elemState = $elemState; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }
