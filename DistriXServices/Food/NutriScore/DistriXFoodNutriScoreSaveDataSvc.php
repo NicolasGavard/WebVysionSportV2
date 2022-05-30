@@ -25,25 +25,20 @@ $errorData    = null;
 
 // SaveNutriScore
 if ($dataSvc->getMethodName() == "SaveNutriScore") {
-  $dbConnection = null;
-  $errorData    = null;
   $insere       = false;
-  $infoScoreNutri = new DistriXFoodScoreNutriData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoScoreNutri     = $dataSvc->getParameter("data");
-      $scoreNutriData     = DistriXSvcUtil::setData($infoScoreNutri, "ScoreNutriStorData");
+      list($data, $jsonError) = ScoreNutriStorData::getJsonData($dataSvc->getParameter("data"));
       $canSaveScoreNutri  = true;
-      if ($infoScoreNutri->getId() == 0) {
+      if ($data->getId() == 0) {
         // Verify Code Exist
-        list($scoresNutriStor, $scoresNutriStorInd) = ScoreNutriStor::findByLetter($scoreNutriData, true, $dbConnection);
+        list($scoresNutriStor, $scoresNutriStorInd) = ScoreNutriStor::findByLetter($data, true, $dbConnection);
         if ($scoresNutriStorInd > 0) {
           $canSaveScoreNutri     = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
-          $distriXSvcErrorData->setDefaultText("The Code " . $infoScoreNutri->getCode() . " is already in use");
+          $distriXSvcErrorData->setDefaultText("The Code " . $data->getCode() . " is already in use");
           $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
           $errorData = $distriXSvcErrorData;
         }
@@ -51,21 +46,21 @@ if ($dataSvc->getMethodName() == "SaveNutriScore") {
 
       if ($canSaveScoreNutri) {
         $scoreNutriStorData = new ScoreNutriStorData();
-        $scoreNutriStorData->setId($infoScoreNutri->getId());
-        $scoreNutriStorData->setLetter($infoScoreNutri->getLetter());
-        $scoreNutriStorData->setColor($infoScoreNutri->getColor());
-        $scoreNutriStorData->setDescription($infoScoreNutri->getDescription());
-        $scoreNutriStorData->setElemState($infoScoreNutri->getElemState());
-        $scoreNutriStorData->setTimestamp($infoScoreNutri->getTimestamp());
+        $scoreNutriStorData->setId($data->getId());
+        $scoreNutriStorData->setLetter($data->getLetter());
+        $scoreNutriStorData->setColor($data->getColor());
+        $scoreNutriStorData->setDescription($data->getDescription());
+        $scoreNutriStorData->setElemState($data->getElemState());
+        $scoreNutriStorData->setTimestamp($data->getTimestamp());
         
-        if ($infoScoreNutri->getLinkToPicture() != "") {
-          $image          = file_get_contents($infoScoreNutri->getLinkToPicture());
+        if ($data->getLinkToPicture() != "") {
+          $image          = file_get_contents($data->getLinkToPicture());
           $imageInfo      = getimagesizefromstring($image);
           $imageExtension = str_replace("image/", "", $imageInfo['mime']);
 
           if ($imageExtension == "jpg" || $imageExtension == "png" || $imageExtension == "jpeg" || $imageExtension == "gif") {
             $imageName    = DistriXSvcUtil::generateRandomText(50);
-            $imageFile    = substr($infoScoreNutri->getLinkToPicture(), strpos($infoScoreNutri->getLinkToPicture(), ",") + 1);
+            $imageFile    = substr($data->getLinkToPicture(), strpos($data->getLinkToPicture(), ",") + 1);
 
             $cdn          = new DistriXCdn();
             $data         = new DistriXCdnData();
@@ -94,8 +89,8 @@ if ($dataSvc->getMethodName() == "SaveNutriScore") {
             $distriXSvcErrorData->setText("BAD_IMAGE_EXTENSION");
           }
         } else {
-          if($infoScoreNutri->getId() > 0){
-            $scoreNutriStor = ScoreNutriStor::read($infoScoreNutri->getId(), $dbConnection);
+          if($data->getId() > 0){
+            $scoreNutriStor = ScoreNutriStor::read($data->getId(), $dbConnection);
             $scoreNutriData = DistriXSvcUtil::setData($scoreNutriStor, "DistriXFoodScoreNutriData");
             $scoreNutriStorData->setLinkToPicture($scoreNutriData->getLinkToPicture());
             $scoreNutriStorData->setSize($scoreNutriData->getSize());
@@ -108,7 +103,7 @@ if ($dataSvc->getMethodName() == "SaveNutriScore") {
           $dbConnection->commit();
         } else {
           $dbConnection->rollBack();
-          if ($infoScoreNutri->getId() > 0) {
+          if ($data->getId() > 0) {
             $errorData = ApplicationErrorData::warningUpdateData(1, 1);
           } else {
             $errorData = ApplicationErrorData::warningInsertData(1, 1);

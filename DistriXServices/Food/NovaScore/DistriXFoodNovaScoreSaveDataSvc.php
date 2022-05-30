@@ -25,25 +25,20 @@ $errorData    = null;
 
 // SaveNovaScore
 if ($dataSvc->getMethodName() == "SaveNovaScore") {
-  $dbConnection = null;
-  $errorData    = null;
   $insere       = false;
-  $infoScoreNova = new DistriXFoodScoreNovaData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoScoreNova     = $dataSvc->getParameter("data");
-      $scoreNovaData     = DistriXSvcUtil::setData($infoScoreNova, "ScoreNovaStorData");
+      list($data, $jsonError) = ScoreNovaStorData::getJsonData($dataSvc->getParameter("data"));
       $canSaveScoreNova  = true;
-      if ($infoScoreNova->getId() == 0) {
+      if ($data->getId() == 0) {
         // Verify Code Exist
-        list($scoresNovaStor, $scoresNovaStorInd) = ScoreNovaStor::findByLetter($scoreNovaData, true, $dbConnection);
+        list($scoresNovaStor, $scoresNovaStorInd) = ScoreNovaStor::findByLetter($data, true, $dbConnection);
         if ($scoresNovaStorInd > 0) {
           $canSaveScoreNova     = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
-          $distriXSvcErrorData->setDefaultText("The Code " . $infoScoreNova->getCode() . " is already in use");
+          $distriXSvcErrorData->setDefaultText("The Code " . $data->getCode() . " is already in use");
           $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
           $errorData = $distriXSvcErrorData;
         }
@@ -51,21 +46,21 @@ if ($dataSvc->getMethodName() == "SaveNovaScore") {
 
       if ($canSaveScoreNova) {
         $scoreNovaStorData = new ScoreNovaStorData();
-        $scoreNovaStorData->setId($infoScoreNova->getId());
-        $scoreNovaStorData->setLetter($infoScoreNova->getLetter());
-        $scoreNovaStorData->setColor($infoScoreNova->getColor());
-        $scoreNovaStorData->setDescription($infoScoreNova->getDescription());
-        $scoreNovaStorData->setElemState($infoScoreNova->getElemState());
-        $scoreNovaStorData->setTimestamp($infoScoreNova->getTimestamp());
+        $scoreNovaStorData->setId($data->getId());
+        $scoreNovaStorData->setLetter($data->getLetter());
+        $scoreNovaStorData->setColor($data->getColor());
+        $scoreNovaStorData->setDescription($data->getDescription());
+        $scoreNovaStorData->setElemState($data->getElemState());
+        $scoreNovaStorData->setTimestamp($data->getTimestamp());
         
-        if ($infoScoreNova->getLinkToPicture() != "") {
-          $image          = file_get_contents($infoScoreNova->getLinkToPicture());
+        if ($data->getLinkToPicture() != "") {
+          $image          = file_get_contents($data->getLinkToPicture());
           $imageInfo      = getimagesizefromstring($image);
           $imageExtension = str_replace("image/", "", $imageInfo['mime']);
 
           if ($imageExtension == "jpg" || $imageExtension == "png" || $imageExtension == "jpeg" || $imageExtension == "gif") {
             $imageName    = DistriXSvcUtil::generateRandomText(50);
-            $imageFile    = substr($infoScoreNova->getLinkToPicture(), strpos($infoScoreNova->getLinkToPicture(), ",") + 1);
+            $imageFile    = substr($data->getLinkToPicture(), strpos($data->getLinkToPicture(), ",") + 1);
 
             $cdn          = new DistriXCdn();
             $data         = new DistriXCdnData();
@@ -94,12 +89,12 @@ if ($dataSvc->getMethodName() == "SaveNovaScore") {
             $distriXSvcErrorData->setText("BAD_IMAGE_EXTENSION");
           }
         } else {
-          if($infoScoreNova->getId() > 0){
-            $scoreNovaStor = ScoreNovaStor::read($infoScoreNova->getId(), $dbConnection);
-            $scoreNovaData = DistriXSvcUtil::setData($scoreNovaStor, "DistriXFoodScoreNovaData");
-            $scoreNovaStorData->setLinkToPicture($scoreNovaData->getLinkToPicture());
-            $scoreNovaStorData->setSize($scoreNovaData->getSize());
-            $scoreNovaStorData->setType($scoreNovaData->getType());
+          if($data->getId() > 0){
+            $scoreNovaStor = ScoreNovaStor::read($data->getId(), $dbConnection);
+            $data = DistriXSvcUtil::setData($scoreNovaStor, "DistriXFoodScoreNovaData");
+            $scoreNovaStorData->setLinkToPicture($data->getLinkToPicture());
+            $scoreNovaStorData->setSize($data->getSize());
+            $scoreNovaStorData->setType($data->getType());
           }
         }
         list($insere, $idStyScoresNova) = ScoreNovaStor::save($scoreNovaStorData, $dbConnection);
@@ -108,7 +103,7 @@ if ($dataSvc->getMethodName() == "SaveNovaScore") {
           $dbConnection->commit();
         } else {
           $dbConnection->rollBack();
-          if ($infoScoreNova->getId() > 0) {
+          if ($data->getId() > 0) {
             $errorData = ApplicationErrorData::warningUpdateData(1, 1);
           } else {
             $errorData = ApplicationErrorData::warningInsertData(1, 1);
