@@ -58,13 +58,12 @@ $(".AddNewNovaScore").on('click', function() {
 });
 
 $(".btnAddNovaScore").on('click', function() {
-  $(".page_food_NovaScore_update_title").removeClass("d-none");
-  
   var name  = $('.AddNovaScoreFormName').val();
   var color = $('.AddNovaScoreFormColor').val();
   if (name != "" || color != ""){
     var data = $('#FormAddNovaScore').serializeArray(); // convert form to array
-    data.push({name: "name", value: name});
+    data.push({name: "number", value: name});
+    data.push({name: "color", value: color});
     
     $.ajax({
       url : 'Controllers/Food/NovaScore/save.php',

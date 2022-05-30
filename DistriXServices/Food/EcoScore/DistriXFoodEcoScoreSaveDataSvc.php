@@ -47,7 +47,7 @@ if ($dataSvc->getMethodName() == "SaveEcoScore") {
         $scoreEcoStorData->setId($data->getId());
         $scoreEcoStorData->setLetter($data->getLetter());
         $scoreEcoStorData->setColor($data->getColor());
-        $scoreEcoStorData->setDescription($data->getDescription());
+        $scoreEcoStorData->setDescription($data->getLetter());
         $scoreEcoStorData->setElemState($data->getElemState());
         $scoreEcoStorData->setTimestamp($data->getTimestamp());
         
@@ -89,10 +89,9 @@ if ($dataSvc->getMethodName() == "SaveEcoScore") {
         } else {
           if($data->getId() > 0){
             $scoreEcoStor = ScoreEcoStor::read($data->getId(), $dbConnection);
-            $scoreEcoData = DistriXSvcUtil::setData($scoreEcoStor, "DistriXFoodScoreEcoData");
-            $scoreEcoStorData->setLinkToPicture($scoreEcoData->getLinkToPicture());
-            $scoreEcoStorData->setSize($scoreEcoData->getSize());
-            $scoreEcoStorData->setType($scoreEcoData->getType());
+            $scoreEcoStorData->setLinkToPicture($scoreEcoStor->getLinkToPicture());
+            $scoreEcoStorData->setSize($scoreEcoStor->getSize());
+            $scoreEcoStorData->setType($scoreEcoStor->getType());
           }
         }
         list($insere, $idStyScoresEco) = ScoreEcoStor::save($scoreEcoStorData, $dbConnection);

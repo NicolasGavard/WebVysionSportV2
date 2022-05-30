@@ -89,10 +89,9 @@ if ($dataSvc->getMethodName() == "SaveNutriScore") {
         } else {
           if($data->getId() > 0){
             $scoreNutriStor = ScoreNutriStor::read($data->getId(), $dbConnection);
-            $scoreNutriData = DistriXSvcUtil::setData($scoreNutriStor, "DistriXFoodScoreNutriData");
-            $scoreNutriStorData->setLinkToPicture($scoreNutriData->getLinkToPicture());
-            $scoreNutriStorData->setSize($scoreNutriData->getSize());
-            $scoreNutriStorData->setType($scoreNutriData->getType());
+            $scoreNutriStorData->setLinkToPicture($scoreNutriStor->getLinkToPicture());
+            $scoreNutriStorData->setSize($scoreNutriStor->getSize());
+            $scoreNutriStorData->setType($scoreNutriStor->getType());
           }
         }
         list($insere, $idStyScoresNutri) = ScoreNutriStor::save($scoreNutriStorData, $dbConnection);

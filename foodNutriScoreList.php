@@ -95,7 +95,7 @@
               <div class="padding-bottom-30 row" style="margin: 0 auto;">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
-                  <button type="button" class="btn btn-primary btnAddNutrizScore" id="btnAddNutriScore"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
+                  <button type="button" class="btn btn-primary btnAddNutriScore" id="btnAddNutriScore"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
                 </div>
               </div>
             </div>
