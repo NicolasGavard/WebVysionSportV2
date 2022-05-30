@@ -5,13 +5,10 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/../../../GlobalData/DistriXGeneralIdData.php");
-include(__DIR__ . "/Data/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/Data/DistriXCodeTableNutritionalNameData.php");
 // Database Data
 include(__DIR__ . "/Data/NutritionalNameStorData.php");
 include(__DIR__ . "/Data/NutritionalStorData.php");
+include(__DIR__ . "/Data/LanguageStorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/NutritionalNameStor.php");
@@ -21,37 +18,29 @@ $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 
 $dbConnection = null;
 $errorData    = null;
-$weightType    = [];
+$nutritional    = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  $dataLanguage = $dataSvc->getParameter("dataLanguage");
-  
-  list($weightTypeStor, $weightTypeStorInd) = NutritionalStor::getList(true, $dbConnection);
-  foreach ($weightTypeStor as $Nutritional) {
-    $weightTypeNameStorData = new NutritionalNameStorData();
-    $weightTypeNameStorData->setIdNutritional($Nutritional->getId());
-    $weightTypeNameStorData->setIdLanguage($dataLanguage->getId());
-    $weightTypeNameStor = NutritionalNameStor::findByNutritionalIdLanguage($weightTypeNameStorData, $dbConnection);
-    
-    $distriXCodeTableNutritionalNameData =  new DistriXCodeTableNutritionalNameData();
-    $distriXCodeTableNutritionalNameData->setId($weightTypeNameStor->getId());
-    $distriXCodeTableNutritionalNameData->setIdNutritional($weightTypeNameStor->getIdNutritional());
-    $distriXCodeTableNutritionalNameData->setIdLanguage($weightTypeNameStor->getIdLanguage());
-    $distriXCodeTableNutritionalNameData->setCode($Nutritional->getCode());
-    $distriXCodeTableNutritionalNameData->setName($weightTypeNameStor->getName());
-    $distriXCodeTableNutritionalNameData->setElemState($Nutritional->getElemState());
-    $distriXCodeTableNutritionalNameData->setTimestamp($Nutritional->getTimestamp());
-    $weightType[]  = $distriXCodeTableNutritionalNameData;
+  list($dataLanguage, $jsonError)           = LanguageStorData::getJsonData($dataSvc->getParameter("dataLanguage"));
+  list($nutritionalStor, $nutritionalStorInd) = NutritionalStor::getList(true, $dbConnection);
+  foreach ($nutritionalStor as $nutritional) {
+    $nutritionalNameStorData = new NutritionalNameStorData();
+    $nutritionalNameStorData->setIdNutritional($nutritional->getId());
+    $nutritionalNameStorData->setIdLanguage($dataLanguage->getId());
+    $nutritionalNameStor = NutritionalNameStor::findByIdNutritionalIdLanguage($nutritionalNameStorData, $dbConnection);
+    if ($nutritionalNameStor->getId() > 0) {
+      $nutritional->setName($nutritionalNameStor->getName());
+    }
   }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
 if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListNutritional", $dataSvc->getMethodName(), basename(__FILE__));
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListNutritionals", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListNutritional", $weightType);
+$dataSvc->addToResponse("ListNutritionals", $nutritionalStor);
 
 // Return response
 $dataSvc->endOfService();

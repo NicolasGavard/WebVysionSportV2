@@ -4,9 +4,9 @@ include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXGeneralIdData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableNutritionalData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableNutritionalNameData.php");
+include(__DIR__ . "/../../Data/DistriXCodeTableLanguageData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -15,43 +15,51 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp           = array();
-$listNutritional = array();
-$error          = array();
-$output         = array();
-$outputok       = false;
-
 session_start();
-$infoProfil           = DistriXStyAppInterface::getUserInformation();
-$distriXGeneralIdData = new DistriXGeneralIdData();
-$distriXGeneralIdData->setId($infoProfil->getIdLanguage());
+$resp             = array();
+$listLanguages    = array();
+$listNutritionals = array();
+$error            = array();
+$output           = array();
+$outputok         = false;
 
-$servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ListNutritional");
-$servicesCaller->addParameter("dataLanguage", $distriXGeneralIdData);
-$servicesCaller->setServiceName("DistriXServices/TablesCodes/Nutritional/DistriXNutritionalListDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+$infoProfil[0]['idLanguage'] = 1;
+$_POST['id'] = $infoProfil[0]['idLanguage']; // NG 27-05-22 - until a solution is found
+list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Nutritional")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXNutritionalListDataSvc");
-  $logInfoData->setLogFunction("ListNutritional");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
+$languageCaller = new DistriXServicesCaller();
+$languageCaller->setMethodName("ListLanguages");
+$languageCaller->setServiceName("DistriXServices/TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ListNutritional"])) {
-    $listNutritional = $output["ListNutritional"];
-  }
+$weightTypeCaller = new DistriXServicesCaller();
+$weightTypeCaller->setMethodName("ListNutritionals");
+$weightTypeCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+$weightTypeCaller->setServiceName("DistriXServices/TablesCodes/Nutritional/DistriXNutritionalListDataSvc.php");
+
+$svc = new DistriXSvc();
+$svc->addToCall("Language", $languageCaller);
+$svc->addToCall("Nutritional", $weightTypeCaller);
+
+$callsOk = $svc->call();
+
+list($outputok, $output, $errorData) = $svc->getResult("Language"); //var_dump($output);
+if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLanguages"])) {
+  list($listLanguages, $jsonError) = DistriXCodeTableLanguageData::getJsonArray($output["ListLanguages"]);
 } else {
   $error = $errorData;
 }
 
-$resp["ListNutritional"]  = $listNutritional;
+list($outputok, $output, $errorData) = $svc->getResult("Nutritional"); var_dump($output);
+if ($outputok && isset($output["ListNutritionals"]) && is_array($output["ListNutritionals"])) {
+  list($listNutritionals, $jsonError) = DistriXCodeTableNutritionalData::getJsonArray($output["ListNutritionals"]);
+} else {
+  $error = $errorData;
+}
+
+$resp["ListNutritionals"]  = $listNutritionals;
+$resp["ListLanguages"]    = $listLanguages;
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"]          = $error;
 }
 
 echo json_encode($resp);

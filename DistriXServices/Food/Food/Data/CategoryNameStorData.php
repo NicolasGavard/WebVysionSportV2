@@ -1,14 +1,14 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class CategoryNameStorData {
+class CategoryNameStorData extends DistriXSvcAppData {
   const CATEGORYNAME_STATUS_AVAILABLE     = 0;
   const CATEGORYNAME_STATUS_NOT_AVAILABLE = 1;
 
-  private $id;
-  private $idcategory;
-  private $idlanguage;
-  private $name;
-  private $elemstate;
-  private $timestamp;
+  protected $id;
+  protected $idcategory;
+  protected $idlanguage;
+  protected $name;
+  protected $elemstate;
+  protected $timestamp;
 
   public function __construct() {
       $this->id = 0;
@@ -19,22 +19,22 @@ class CategoryNameStorData {
       $this->timestamp = 0;
     }
 // Gets
-  public function getId() { return $this->id; }
-  public function getIdCategory() { return $this->idcategory; }
-  public function getIdLanguage() { return $this->idlanguage; }
-  public function getName() { return $this->name; }
-  public function getElemState() { return $this->elemstate; }
-  public function getTimestamp() { return $this->timestamp; }
-  public function isAvailable() { return ($this->elemstate == self::CATEGORYNAME_STATUS_AVAILABLE); }
-  public function getAvailableValue() { return self::CATEGORYNAME_STATUS_AVAILABLE; }
-  public function getUnavailableValue() { return self::CATEGORYNAME_STATUS_NOT_AVAILABLE; }
+  public function getId():int { return $this->id; }
+  public function getIdCategory():int { return $this->idcategory; }
+  public function getIdLanguage():int { return $this->idlanguage; }
+  public function getName():string { return $this->name; }
+  public function getElemState():int { return $this->elemstate; }
+  public function getTimestamp():int { return $this->timestamp; }
+  public function isAvailable():int { return ($this->elemstate == self::CATEGORYNAME_STATUS_AVAILABLE); }
+  public function getAvailableValue():int { return self::CATEGORYNAME_STATUS_AVAILABLE; }
+  public function getUnavailableValue():int { return self::CATEGORYNAME_STATUS_NOT_AVAILABLE; }
 // Sets
-  public function setId($id) { $this->id = $id; }
-  public function setIdCategory($idCategory) { $this->idcategory = $idCategory; }
-  public function setIdLanguage($idLanguage) { $this->idlanguage = $idLanguage; }
-  public function setName($name) { $this->name = $name; }
-  public function setElemState($elemstate) { $this->elemstate = $elemstate; }
-  public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+  public function setId(int $id) { $this->id = $id; }
+  public function setIdCategory(int $idCategory) { $this->idcategory = $idCategory; }
+  public function setIdLanguage(int $idLanguage) { $this->idlanguage = $idLanguage; }
+  public function setName(string $name) { $this->name = $name; }
+  public function setElemState(int $elemstate) { $this->elemstate = $elemstate; }
+  public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->elemstate = self::CATEGORYNAME_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->elemstate = self::CATEGORYNAME_STATUS_NOT_AVAILABLE; }
 }

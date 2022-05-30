@@ -11,7 +11,7 @@ class NutritionalStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "nutritional";
-  const SELECT = 'SELECT id,code,elemstate,timestamp';
+  const SELECT = 'SELECT id,code,name,elemstate,timestamp';
   const FROM = ' FROM nutritional';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,16 @@ class NutritionalStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE elemstate = :elemstate";
+        $request .= " WHERE elemstate = :statut";
       }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -49,33 +53,61 @@ class NutritionalStor {
   }
   // End of getList
 
-  public static function findByCode(NutritionalStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
+    $data = new NutritionalStorData();
     $list = [];
+
+    if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
+      if ($className == "" || is_null($className)) {
+        $className = "NutritionalStorData";
+      }
+      $request  = self::SELECT;
+      $request .= self::FROM;
+      $request .= " WHERE id IN('" . implode("','", array_map(function($data) { return $data->getId(); }, $inList))."')";
+      if (!$all) {
+        $request .= " AND elemstate = :statut";
+      }
+      $request .= " ORDER BY id";
+
+      $stmt = $inDbConnection->prepare($request);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $className);
+      }
+    }
+    return array($list, count($list));
+  }
+  // End of getListFromList
+
+  public static function findByCode(NutritionalStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new NutritionalStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE code = :index0";
-      if (!$all) {
-        $request .= " AND elemstate = :elemstate";
-      }
-      $params = [];
-      $params["index0"] = $dataIn->getCode();
-      if (!$all) {
-        $params["elemstate"] = $dataIn->getElemState();
-      }
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute($params);
+      $stmt->execute(['index0'=>  $dataIn->getCode()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "NutritionalStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "NutritionalStorData");
+        $data = $stmt->fetch();
       }
     }
-    return array($list, count($list));
+    return $data;
   }
   // End of Code
 
@@ -124,6 +156,7 @@ class NutritionalStor {
     if ($inDbConnection != null) {
       $request  = "UPDATE nutritional SET ";
       $request .= "code= :code,";
+      $request .= "name= :name,";
       $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
@@ -131,6 +164,7 @@ class NutritionalStor {
       $params = [];
       $params["id"] = $data->getId();
       $params["code"] = $data->getCode();
+      $params["name"] = $data->getName();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
@@ -240,13 +274,15 @@ class NutritionalStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO nutritional(";
-      $request .= "code,elemstate,timestamp)";
+      $request .= "code,name,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";
+      $request .= ":name,";
       $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["code"] = $data->getCode();
+      $params["name"] = $data->getName();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);

@@ -58,13 +58,12 @@ $(".AddNewNutriScore").on('click', function() {
 });
 
 $(".btnAddNutriScore").on('click', function() {
-  $(".page_food_NutriScore_update_title").removeClass("d-none");
-  
   var name  = $('.AddNutriScoreFormName').val();
   var color = $('.AddNutriScoreFormColor').val();
   if (name != "" || color != ""){
     var data = $('#FormAddNutriScore').serializeArray(); // convert form to array
-    data.push({name: "name", value: name});
+    data.push({name: "letter", value: name});
+    data.push({name: "color", value: color});
     
     $.ajax({
       url : 'Controllers/Food/NutriScore/save.php',

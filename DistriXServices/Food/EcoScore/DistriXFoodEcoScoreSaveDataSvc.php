@@ -5,8 +5,6 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/Data/DistriXFoodScoreEcoData.php");
 // Database Data
 include(__DIR__ . "/Data/ScoreEcoStorData.php");
 // Storage
@@ -25,25 +23,20 @@ $errorData    = null;
 
 // SaveEcoScore
 if ($dataSvc->getMethodName() == "SaveEcoScore") {
-  $dbConnection = null;
-  $errorData    = null;
   $insere       = false;
-  $infoScoreEco = new DistriXFoodScoreEcoData();
-
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      $infoScoreEco     = $dataSvc->getParameter("data");
-      $scoreEcoData     = DistriXSvcUtil::setData($infoScoreEco, "ScoreEcoStorData");
+      list($data, $jsonError) = ScoreEcoStorData::getJsonData($dataSvc->getParameter("data"));
       $canSaveScoreEco  = true;
-      if ($infoScoreEco->getId() == 0) {
+      if ($data->getId() == 0) {
         // Verify Code Exist
-        list($scoresEcoStor, $scoresEcoStorInd) = ScoreEcoStor::findByLetter($scoreEcoData, true, $dbConnection);
+        list($scoresEcoStor, $scoresEcoStorInd) = ScoreEcoStor::findByLetter($data, true, $dbConnection);
         if ($scoresEcoStorInd > 0) {
           $canSaveScoreEco     = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
-          $distriXSvcErrorData->setDefaultText("The Code " . $infoScoreEco->getCode() . " is already in use");
+          $distriXSvcErrorData->setDefaultText("The Code " . $data->getCode() . " is already in use");
           $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
           $errorData = $distriXSvcErrorData;
         }
@@ -51,21 +44,21 @@ if ($dataSvc->getMethodName() == "SaveEcoScore") {
 
       if ($canSaveScoreEco) {
         $scoreEcoStorData = new ScoreEcoStorData();
-        $scoreEcoStorData->setId($infoScoreEco->getId());
-        $scoreEcoStorData->setLetter($infoScoreEco->getLetter());
-        $scoreEcoStorData->setColor($infoScoreEco->getColor());
-        $scoreEcoStorData->setDescription($infoScoreEco->getDescription());
-        $scoreEcoStorData->setElemState($infoScoreEco->getElemState());
-        $scoreEcoStorData->setTimestamp($infoScoreEco->getTimestamp());
+        $scoreEcoStorData->setId($data->getId());
+        $scoreEcoStorData->setLetter($data->getLetter());
+        $scoreEcoStorData->setColor($data->getColor());
+        $scoreEcoStorData->setDescription($data->getLetter());
+        $scoreEcoStorData->setElemState($data->getElemState());
+        $scoreEcoStorData->setTimestamp($data->getTimestamp());
         
-        if ($infoScoreEco->getLinkToPicture() != "") {
-          $image          = file_get_contents($infoScoreEco->getLinkToPicture());
+        if ($data->getLinkToPicture() != "") {
+          $image          = file_get_contents($data->getLinkToPicture());
           $imageInfo      = getimagesizefromstring($image);
           $imageExtension = str_replace("image/", "", $imageInfo['mime']);
 
           if ($imageExtension == "jpg" || $imageExtension == "png" || $imageExtension == "jpeg" || $imageExtension == "gif") {
             $imageName    = DistriXSvcUtil::generateRandomText(50);
-            $imageFile    = substr($infoScoreEco->getLinkToPicture(), strpos($infoScoreEco->getLinkToPicture(), ",") + 1);
+            $imageFile    = substr($data->getLinkToPicture(), strpos($data->getLinkToPicture(), ",") + 1);
 
             $cdn          = new DistriXCdn();
             $data         = new DistriXCdnData();
@@ -94,12 +87,11 @@ if ($dataSvc->getMethodName() == "SaveEcoScore") {
             $distriXSvcErrorData->setText("BAD_IMAGE_EXTENSION");
           }
         } else {
-          if($infoScoreEco->getId() > 0){
-            $scoreEcoStor = ScoreEcoStor::read($infoScoreEco->getId(), $dbConnection);
-            $scoreEcoData = DistriXSvcUtil::setData($scoreEcoStor, "DistriXFoodScoreEcoData");
-            $scoreEcoStorData->setLinkToPicture($scoreEcoData->getLinkToPicture());
-            $scoreEcoStorData->setSize($scoreEcoData->getSize());
-            $scoreEcoStorData->setType($scoreEcoData->getType());
+          if($data->getId() > 0){
+            $scoreEcoStor = ScoreEcoStor::read($data->getId(), $dbConnection);
+            $scoreEcoStorData->setLinkToPicture($scoreEcoStor->getLinkToPicture());
+            $scoreEcoStorData->setSize($scoreEcoStor->getSize());
+            $scoreEcoStorData->setType($scoreEcoStor->getType());
           }
         }
         list($insere, $idStyScoresEco) = ScoreEcoStor::save($scoreEcoStorData, $dbConnection);
@@ -108,7 +100,7 @@ if ($dataSvc->getMethodName() == "SaveEcoScore") {
           $dbConnection->commit();
         } else {
           $dbConnection->rollBack();
-          if ($infoScoreEco->getId() > 0) {
+          if ($data->getId() > 0) {
             $errorData = ApplicationErrorData::warningUpdateData(1, 1);
           } else {
             $errorData = ApplicationErrorData::warningInsertData(1, 1);

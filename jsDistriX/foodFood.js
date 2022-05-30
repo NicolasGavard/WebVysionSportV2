@@ -5,6 +5,23 @@ $.ajax({
   dataType : 'JSON',
   success : function(data) {
     localStorage.setItem("dataTable", JSON.stringify(data.ListFoods));
+
+    $.map(data.ListBrands, function(val, key) {
+      $('#listBrands').append('<option value="'+val.id+'">'+val.name+'</option>');
+    });
+
+    $.map(data.ListEcoScores, function(val, key) {
+      $('#listEcoScores').append('<option value="'+val.id+'">'+val.description+'</option>');
+    });
+
+    $.map(data.ListNovaScores, function(val, key) {
+      $('#listNovaScores').append('<option value="'+val.id+'">'+val.description+'</option>');
+    });
+
+    $.map(data.ListNutriScores, function(val, key) {
+      $('#listNutriScores').append('<option value="'+val.id+'">'+val.description+'</option>');
+    });
+
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -139,17 +156,21 @@ function ListFood(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
                     ' <td>'+val.name+'</td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureBrand+'"/></td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureScoreNutri+'"/></td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureScoreNova+'"/></td>'+
+                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureScoreEco+'"/></td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFood"   onclick="ViewFood(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelFood(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFood"     onclick="ViewDetailFood(\''+val.id+'\');"             href="#"><i class="dw dw-analytics-5"></i> Détail</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalDetailFood"  onclick="ViewFood(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelFood(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -168,14 +189,10 @@ function ViewFood(id){
     success : function(data) {
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
-    
-      $(".dropzoneImage").removeClass("d-none");
-      $(".dropzoneNoImage").addClass("d-none");
 
       $('.AddFoodFormIdFood').val(id);
       $('.AddFoodFormCode').val(data.ViewFood.code);
       $('.AddFoodFormName').val(data.ViewFood.name);
-      $(".avatar-brand").attr("src", data.ViewFood.linktopicture);
       $('.AddFoodFormTimestamp').val(data.ViewFood.timestamp);
       $('.AddFoodFormStatut').val(data.ViewFood.elemState);
     },

@@ -34,3 +34,8 @@
   $page_add_weight          = "Ajouter une taille";
   $page_update_weight       = "Modifier une taille";
   $page_delete_weight       = "Supprimer une taille";
+
+  $errorData_txt_brand        = "Le nom de la marque est manquant !!";
+  $errorData_txt_score_nutri  = "Le nutri score est manquant !!";
+  $errorData_txt_score_nova   = "Le nova score est manquant !!";
+  $errorData_txt_score_eco    = "L'éco score est manquant !!";

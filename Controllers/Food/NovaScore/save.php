@@ -16,6 +16,9 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
+if ($_POST["base64Img"] != '') {
+  $_POST["linkToPicture"] = $_POST["base64Img"];
+}
 list($distriXFoodNovaScoreData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
@@ -33,8 +36,8 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && isset($output["ConfirmSave"])) {
-  list($confirmSave, $jsonError) = DistriXFoodNovaScoreData::getJsonArray($output["ConfirmSave"]);
+if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
+  $confirmSave = $output["ConfirmSave"];
 } else {
   $error = $errorData;
 }

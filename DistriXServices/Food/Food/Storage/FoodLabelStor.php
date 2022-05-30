@@ -35,9 +35,13 @@ class FoodLabelStor {
         $request .= " WHERE elemstate = :elemstate";
       }
       $request .= " ORDER BY idfood";
-
+      
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
+      if (!$all) {
+        $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }

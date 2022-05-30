@@ -33,11 +33,14 @@
           <div class="pb-20">
 						<table class="table stripe hover nowrap" id="datatable">
 							<thead>
-								<tr>                 
-                  <th width="30%"><span><?php echo $page_name; ?></span></th>
-                  <th width="30%"><span><?php echo $page_description; ?></span></th>
+                <input class="weightTypeType_solid"   type="hidden" value="<?php echo $page_solid_title; ?>">
+                <input class="weightTypeType_liquid"  type="hidden" value="<?php echo $page_liquid_title; ?>">
+                <input class="weightTypeType_other"   type="hidden" value="<?php echo $page_other_title; ?>">
+              
+                <tr>                 
                   <th width="15%"><span><?php echo $page_abbreviation; ?></span></th>
-                  <th width="15%"><span><?php echo $page_type; ?></span></th>
+                  <th width="55%"><span><?php echo $page_name; ?></span></th>
+                  <th width="20%"><span><?php echo $page_type; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
@@ -55,6 +58,14 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_abbreviation; ?></label>
+                    <input class="form-control AddWeightTypeFormName" type="text" name="name" placeholder="<?php echo $page_abbreviation; ?>">
+                    <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                  </div>
+                </div>
+
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
@@ -121,7 +132,7 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/foodWeightType.js"></script>
+      <script src="jsDistrix/codeTableWeightType.js"></script>
   </body>
 </html>
 

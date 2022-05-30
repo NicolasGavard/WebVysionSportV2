@@ -58,13 +58,12 @@ $(".AddNewEcoScore").on('click', function() {
 });
 
 $(".btnAddEcoScore").on('click', function() {
-  $(".page_food_EcoScore_update_title").removeClass("d-none");
-  
   var name  = $('.AddEcoScoreFormName').val();
   var color = $('.AddEcoScoreFormColor').val();
   if (name != "" || color != ""){
     var data = $('#FormAddEcoScore').serializeArray(); // convert form to array
-    data.push({name: "name", value: name});
+    data.push({name: "letter", value: name});
+    data.push({name: "color", value: color});
     
     $.ajax({
       url : 'Controllers/Food/EcoScore/save.php',

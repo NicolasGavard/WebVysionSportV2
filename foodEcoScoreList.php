@@ -72,7 +72,7 @@
                 <div class="dropzoneNoImage col-md-12 col-sm-12 d-none">
                   <div class="pd-20 card-box mb-30">
                     <form class="dropzone FormAddEcoScore" action="#" id="FormAddEcoScore" style="max-height: 200px;">
-                      <input class="form-control AddEcoScoreFormIdEcoScore"       type="hidden" name="id"         value="0">
+                      <input class="form-control AddEcoScoreFormIdEcoScore"    type="hidden" name="id"         value="0">
                       <input class="form-control AddEcoScoreFormTimestamp"     type="hidden" name="timestamp"  value="0">
                       <input class="form-control AddEcoScoreFormStatut"        type="hidden" name="statut"     value="0">
                       <input class="form-control AddEcoScoreFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">

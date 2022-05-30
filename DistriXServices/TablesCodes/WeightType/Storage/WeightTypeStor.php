@@ -11,7 +11,7 @@ class WeightTypeStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "weighttype";
-  const SELECT = 'SELECT id,code,issolid,isliquid,isother,elemstate,timestamp';
+  const SELECT = 'SELECT id,code,name,abbreviation,issolid,isliquid,isother,elemstate,timestamp';
   const FROM = ' FROM weighttype';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,12 +32,16 @@ class WeightTypeStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE elemstate = :elemstate";
+        $request .= " WHERE elemstate = :statut";
       }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['elemstate'=> $data->getAvailableValue()]);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -49,33 +53,61 @@ class WeightTypeStor {
   }
   // End of getList
 
-  public static function findByCode(WeightTypeStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
+    $data = new WeightTypeStorData();
     $list = [];
+
+    if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
+      if ($className == "" || is_null($className)) {
+        $className = "WeightTypeStorData";
+      }
+      $request  = self::SELECT;
+      $request .= self::FROM;
+      $request .= " WHERE id IN('" . implode("','", array_map(function($data) { return $data->getId(); }, $inList))."')";
+      if (!$all) {
+        $request .= " AND elemstate = :statut";
+      }
+      $request .= " ORDER BY id";
+
+      $stmt = $inDbConnection->prepare($request);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $className);
+      }
+    }
+    return array($list, count($list));
+  }
+  // End of getListFromList
+
+  public static function findByCode(WeightTypeStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new WeightTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
       $request .= " WHERE code = :index0";
-      if (!$all) {
-        $request .= " AND elemstate = :elemstate";
-      }
-      $params = [];
-      $params["index0"] = $dataIn->getCode();
-      if (!$all) {
-        $params["elemstate"] = $dataIn->getElemState();
-      }
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute($params);
+      $stmt->execute(['index0'=>  $dataIn->getCode()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "WeightTypeStorData");
+        $data = $stmt->fetch();
       }
     }
-    return array($list, count($list));
+    return $data;
   }
   // End of Code
 
@@ -124,6 +156,8 @@ class WeightTypeStor {
     if ($inDbConnection != null) {
       $request  = "UPDATE weighttype SET ";
       $request .= "code= :code,";
+      $request .= "name= :name,";
+      $request .= "abbreviation= :abbreviation,";
       $request .= "issolid= :issolid,";
       $request .= "isliquid= :isliquid,";
       $request .= "isother= :isother,";
@@ -134,9 +168,11 @@ class WeightTypeStor {
       $params = [];
       $params["id"] = $data->getId();
       $params["code"] = $data->getCode();
-      $params["issolid"] = $data->getIsSolid();
-      $params["isliquid"] = $data->getIsLiquid();
-      $params["isother"] = $data->getIsOther();
+      $params["name"] = $data->getName();
+      $params["abbreviation"] = $data->getAbbreviation();
+      $params["issolid"] = $data->getIssolid();
+      $params["isliquid"] = $data->getIsliquid();
+      $params["isother"] = $data->getIsother();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
@@ -246,9 +282,11 @@ class WeightTypeStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO weighttype(";
-      $request .= "code,issolid,isliquid,isother,elemstate,timestamp)";
+      $request .= "code,name,abbreviation,issolid,isliquid,isother,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";
+      $request .= ":name,";
+      $request .= ":abbreviation,";
       $request .= ":issolid,";
       $request .= ":isliquid,";
       $request .= ":isother,";
@@ -256,9 +294,11 @@ class WeightTypeStor {
       $request .= ":timestamp)";
       $params = [];
       $params["code"] = $data->getCode();
-      $params["issolid"] = $data->getIsSolid();
-      $params["isliquid"] = $data->getIsLiquid();
-      $params["isother"] = $data->getIsOther();
+      $params["name"] = $data->getName();
+      $params["abbreviation"] = $data->getAbbreviation();
+      $params["issolid"] = $data->getIssolid();
+      $params["isliquid"] = $data->getIsliquid();
+      $params["isother"] = $data->getIsother();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
