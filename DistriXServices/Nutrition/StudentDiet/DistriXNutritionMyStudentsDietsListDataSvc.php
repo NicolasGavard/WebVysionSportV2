@@ -13,39 +13,40 @@ include(__DIR__ . "/../../../DistriXSvc/Data/DistriXSvcErrorData.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
-include(__DIR__ . "/Storage/DietTemplateStor.php");
+include(__DIR__ . "/Storage/DietStudentStor.php");
 // STOR Data
-include(__DIR__ . "/Data/DietTemplateStorData.php");
+include(__DIR__ . "/Data/DietStorData.php");
+include(__DIR__ . "/Data/DietStudentStorData.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 
 $dbConnection     = null;
 $errorData        = null;
-$myTemplatesDiets = [];
+$myStudentsDiets = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($data, $jsonError)       = DietTemplateStorData::getJsonData($dataSvc->getParameter("data"));
+  list($data, $jsonError)       = DietStudentStorData::getJsonData($dataSvc->getParameter("data"));
 
-  list($dietTemplateStor, $dietTemplateStorInd) = DietTemplateStor::findByIdUser($dietTemplateStorData, $dietTemplateStorData->getElemState(), $dbConnection);
-  foreach ($dietTemplateStor as $diet) {
+  list($dietStudentStor, $dietStudentStorInd) = DietStudentStor::findByIdUser($dietStudentStorData, $dietStudentStorData->getElemState(), $dbConnection);
+  foreach ($dietStudentStor as $diet) {
     $currentDietAssignedUsers         = [];
-    $distriXNutritionTemplateDietData = DistriXSvcUtil::setData($diet, "DistriXNutritionTemplateDietData");
+    $distriXNutritionStudentDietData = DistriXSvcUtil::setData($diet, "DistriXNutritionStudentDietData");
         
     $dietStudentStorData = new DietStudentStorData();
     $dietStudentStorData->setIdDiet($diet->getId());
     list($dietStudentStor, $dietStudentStorInd) = DietStudentStor::findByIdDiet($dietStudentStorData, false, $dbConnection);
-    $distriXNutritionTemplateDietData->setNbStudentAssigned($dietStudentStorInd);
-    $myTemplatesDiets[]  = $distriXNutritionTemplateDietData;
+    $distriXNutritionStudentDietData->setNbStudentAssigned($dietStudentStorInd);
+    $myStudentsDiets[]  = $distriXNutritionStudentDietData;
   }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
 if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ListMyTemplatesDiets", $dataSvc->getMethodName(), basename(__FILE__));
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ListMyStudentsDiets", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListMyTemplatesDiets", $myTemplatesDiets);
+$dataSvc->addToResponse("ListMyStudentsDiets", $myStudentsDiets);
 
 // Return response
 $dataSvc->endOfService();

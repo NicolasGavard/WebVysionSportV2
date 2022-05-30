@@ -37,14 +37,14 @@ if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["List
   $listMyTemplateDiets  = [];
   $listMyStudentDiets   = [];
   
-  list($outputok, $output, $errorData) = $svc->getResult("TemplateDiets"); var_dump($output);
+  list($outputok, $output, $errorData) = $svc->getResult("TemplateDiets"); //var_dump($output);
   if ($outputok && isset($output["ListTemplateDiets"]) && is_array($output["ListTemplateDiets"])) {
     list($listMyTemplateDiets, $jsonError) = DietTemplateStorData::getJsonArray($output["ListTemplateDiets"]);
   } else {
     $error = $errorData;
   }
   
-  list($outputok, $output, $errorData) = $svc->getResult("StudentDiets"); var_dump($output);
+  list($outputok, $output, $errorData) = $svc->getResult("StudentDiets"); //var_dump($output);
   if ($outputok && isset($output["ListStudentDiets"]) && is_array($output["ListStudentDiets"])) {
     list($listMyStudentDiets, $jsonError) = DietStudentStorData::getJsonArray($output["ListStudentDiets"]);
   } else {
