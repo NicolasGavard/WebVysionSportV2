@@ -16,7 +16,7 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
-if($_POST["base64Img"] != ''){
+if ($_POST["base64Img"] != '') {
   $_POST["linkToPicture"] = $_POST["base64Img"];
 }
 list($distriXFoodNovaScoreData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
