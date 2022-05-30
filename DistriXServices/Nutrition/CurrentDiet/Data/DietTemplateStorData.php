@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class DietTemplateStorData {
+class DietTemplateStorData extends DistriXSvcAppData {
   const DIETTEMPLATE_STATUS_AVAILABLE     = 0;
   const DIETTEMPLATE_STATUS_NOT_AVAILABLE = 1;
 
@@ -21,24 +21,24 @@ class DietTemplateStorData {
       $this->timestamp = 0;
     }
 // Gets
-  public function getId() { return $this->id; }
-  public function getIdUser() { return $this->iduser; }
-  public function getName() { return $this->name; }
-  public function getDuration() { return $this->duration; }
-  public function getTags() { return $this->tags; }
-  public function getElemState() { return $this->elemstate; }
-  public function getTimestamp() { return $this->timestamp; }
-  public function isAvailable() { return ($this->elemstate == self::DIETTEMPLATE_STATUS_AVAILABLE); }
-  public function getAvailableValue() { return self::DIETTEMPLATE_STATUS_AVAILABLE; }
-  public function getUnavailableValue() { return self::DIETTEMPLATE_STATUS_NOT_AVAILABLE; }
+  public function getId():int { return $this->id; }
+  public function getIdUser():int { return $this->iduser; }
+  public function getName():string { return $this->name; }
+  public function getDuration():int { return $this->duration; }
+  public function getTags():string { return $this->tags; }
+  public function getElemState():int { return $this->elemstate; }
+  public function getTimestamp():int { return $this->timestamp; }
+  public function isAvailable():int { return ($this->elemstate == self::DIETTEMPLATE_STATUS_AVAILABLE); }
+  public function getAvailableValue():int { return self::DIETTEMPLATE_STATUS_AVAILABLE; }
+  public function getUnavailableValue():int { return self::DIETTEMPLATE_STATUS_NOT_AVAILABLE; }
 // Sets
-  public function setId($id) { $this->id = $id; }
-  public function setIdUser($idUser) { $this->iduser = $idUser; }
-  public function setName($name) { $this->name = $name; }
-  public function setDuration($duration) { $this->duration = $duration; }
-  public function setTags($tags) { $this->tags = $tags; }
-  public function setElemState($elemstate) { $this->elemstate = $elemstate; }
-  public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+  public function setId(int $id) { $this->id = $id; }
+  public function setIdUser(int $idUser) { $this->iduser = $idUser; }
+  public function setName(string $name) { $this->name = $name; }
+  public function setDuration(int $duration) { $this->duration = $duration; }
+  public function setTags(string $tags) { $this->tags = $tags; }
+  public function setElemState(int $elemstate) { $this->elemstate = $elemstate; }
+  public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->elemstate = self::DIETTEMPLATE_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->elemstate = self::DIETTEMPLATE_STATUS_NOT_AVAILABLE; }
 }

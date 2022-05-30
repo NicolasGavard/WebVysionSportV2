@@ -33,19 +33,20 @@ include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
 session_start();
-$resp               = array();
-$listFoodFormFront  = array();
-$listFoods          = array();
-$listWeightTypes    = array();
-$listBrands         = array();
-$listLabels         = array();
-$listEcoScores      = array();
-$listNovaScores     = array();
-$listNutriScores    = array();
-
-$error              = array();
-$output             = array();
+$error              = [];
+$output             = [];
 $outputok           = false;
+
+$resp               = [];
+$listFoodFormFront  = [];
+$listFoods          = [];
+$listWeightTypes    = [];
+$listBrands         = [];
+$listLabels         = [];
+$listEcoScores      = [];
+$listNovaScores     = [];
+$listNutriScores    = [];
+
 $servicesCaller     = new DistriXServicesCaller();
 
 $infoProfil[0]['idLanguage'] = 1;

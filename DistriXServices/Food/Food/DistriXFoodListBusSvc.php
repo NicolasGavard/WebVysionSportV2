@@ -21,11 +21,9 @@ include(__DIR__ . "/Data/WeightTypeStorData.php");
 // Layer
 include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 
-list($dataLanguage, $jsonError) = LanguageStorData::getJsonData($busSvc->getParameter("dataLanguage"));
-
 $foodCaller = new DistriXServicesCaller();
 $foodCaller->setMethodName("ListFoods");
-$foodCaller->addParameter("dataLanguage", $dataLanguage);
+$foodCaller->addParameter("dataLanguage", $busSvc->getParameter("dataLanguage"));
 $foodCaller->setServiceName("DistriXServices/Food/Food/DistriXFoodListDataSvc.php");
 
 $brandCaller = new DistriXServicesCaller();

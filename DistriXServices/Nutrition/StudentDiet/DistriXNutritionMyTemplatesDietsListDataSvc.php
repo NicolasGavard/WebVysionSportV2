@@ -15,7 +15,6 @@ include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php"
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/DietTemplateStor.php");
 // STOR Data
-include(__DIR__ . "/Data/DietStorData.php");
 include(__DIR__ . "/Data/DietTemplateStorData.php");
 
 $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
@@ -26,7 +25,7 @@ $myTemplatesDiets = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($data, $jsonError)       = DietStorData::getJsonData($dataSvc->getParameter("data"));
+  list($data, $jsonError)       = DietTemplateStorData::getJsonData($dataSvc->getParameter("data"));
 
   list($dietTemplateStor, $dietTemplateStorInd) = DietTemplateStor::findByIdUser($dietTemplateStorData, $dietTemplateStorData->getElemState(), $dbConnection);
   foreach ($dietTemplateStor as $diet) {
