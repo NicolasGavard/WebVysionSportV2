@@ -14,7 +14,6 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     protected $duration;
     protected $tags;
     protected $dateStart;
-    protected $assignedUsers;
     protected $advancement;
     protected $elemState;
     protected $timestamp;
@@ -33,7 +32,6 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
       $this->duration             = 0;
       $this->tags                 = "";
       $this->dateStart            = "";
-      $this->assignedUsers        = [];
       $this->advancement          = 0;
       $this->elemState            = 0;
       $this->timestamp            = 0;
@@ -51,7 +49,6 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     public function getDuration():int { return $this->duration; }
     public function getTags():string { return $this->tags; }
     public function getDateStart():int { return $this->dateStart; }
-    public function getAssignedUsers():array { return $this->assignedUsers; }
     public function getAdvancement():int { return $this->advancement; }
     public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
@@ -69,7 +66,6 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     public function setDuration(int $duration) { $this->duration = $duration; }
     public function setTags(string $tags) { $this->tags = $tags; }
     public function setDateStart(int $dateStart) { $this->dateStart = $dateStart; }
-    public function setAssignedUsers(array $assignedUsers) { $this->assignedUsers = $assignedUsers; }
     public function setAdvancement(int $advancement) { $this->advancement = $advancement; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }

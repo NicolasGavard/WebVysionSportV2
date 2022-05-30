@@ -88,7 +88,7 @@ class DietStor {
   }
   // End of getListFromList
 
-  public static function findByIdusercoatchIduserstudentIddiettemplateDatestart(DietStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoatchIdUserStudentIdDietTemplateDateStart(DietStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DietStorData();
@@ -114,7 +114,7 @@ class DietStor {
   }
   // End of IdusercoatchIduserstudentIddiettemplateDatestart
 
-  public static function findByIddiettemplate(DietStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdDietTemplate(DietStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -144,7 +144,7 @@ class DietStor {
   }
   // End of Iddiettemplate
 
-  public static function findByIdusercoatch(DietStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoatch(DietStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -174,7 +174,7 @@ class DietStor {
   }
   // End of Idusercoatch
 
-  public static function findByIduserstudent(DietStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserStudent(DietStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];

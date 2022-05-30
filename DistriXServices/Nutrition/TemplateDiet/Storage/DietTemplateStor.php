@@ -88,7 +88,7 @@ class DiettemplateStor {
   }
   // End of getListFromList
 
-  public static function findByIdusercoatchNameDuration(DiettemplateStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoatchNameDuration(DiettemplateStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DiettemplateStorData();
@@ -113,7 +113,7 @@ class DiettemplateStor {
   }
   // End of IdusercoatchNameDuration
 
-  public static function findByIdusercoatch(DiettemplateStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoatch(DiettemplateStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];

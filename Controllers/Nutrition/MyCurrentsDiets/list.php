@@ -2,6 +2,8 @@
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
+// STY APP
+include(__DIR__ . "/../../../DistriXSvc/DistriXSvcUtil.php");
 // DATA
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
 include(__DIR__ . "/../../Data/DistriXNutritionCurrentDietData.php");
@@ -19,7 +21,7 @@ $error              = [];
 $output             = [];
 $outputok           = false;
 
-$_POST['idUser']              = 1;
+$_POST['idUserCoatch']        = 1;
 $listMyCurrentDiets           = [];
 $listMyTemplateDiets          = [];
 $listMyCurrentDietsFormFront  = [];
@@ -31,8 +33,8 @@ list($distriXNutritionTemplateDietData, $errorJson) = DistriXNutritionTemplateDi
 // All My Current Diets
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
-$servicesCaller->addParameter("dataCurrent", $distriXNutritionCurrentDietData);
-list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
+$servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
   list($listMyCurrentDiets, $jsonError) = DistriXNutritionCurrentDietData::getJsonArray($output["ListMyCurrentsDiets"]);
 } else {
@@ -42,8 +44,8 @@ if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["List
 // All My Templates Diets
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
-$servicesCaller->addParameter("dataTemplate", $distriXNutritionTemplateDietData);
-list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
+$servicesCaller->addParameter("data", $distriXNutritionTemplateDietData);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 if ($outputok && isset($output["ListMyTemplatesDiets"]) && is_array($output["ListMyTemplatesDiets"])) {
   list($listMyTemplateDiets, $jsonError) = DistriXNutritionTemplateDietData::getJsonArray($output["ListMyTemplatesDiets"]);
 } else {
@@ -53,24 +55,23 @@ if ($outputok && isset($output["ListMyTemplatesDiets"]) && is_array($output["Lis
 foreach ($listMyCurrentDiets as $currentDiet) {
   $distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
   $distriXNutritionCurrentDietData->setId($currentDiet->getId());
-  $distriXNutritionCurrentDietData->setIdUser($currentDiet->getIdUser());
+  $distriXNutritionCurrentDietData->setIdUserCoatch($currentDiet->getIdUserCoatch());
   $distriXNutritionCurrentDietData->setIdDietTemplate($currentDiet->getIdDietTemplate());
   
+  $duration = 0;
   foreach ($listMyTemplateDiets as $templateDiet) {
     if ($currentDiet->getIdDietTemplate() == $templateDiet->getId()) {
       $distriXNutritionCurrentDietData->setName($templateDiet->getName());
       $distriXNutritionCurrentDietData->setDuration($templateDiet->getDuration());
       $distriXNutritionCurrentDietData->setTags($templateDiet->getTags());
+      $duration = $templateDiet->getDuration();
     }
   }
   $distriXNutritionCurrentDietData->setDateStart($currentDiet->getDateStart());
-  $distriXNutritionCurrentDietData->setAssignedUsers($assignedUsers);
 
-  $date_start       = DistriXSvcUtil::getjmaDate($diet->getDateStart());
+  $date_start       = DistriXSvcUtil::getjmaDate($currentDiet->getDateStart());
   $date_start       = $date_start[0].'-'.$date_start[1].'-'.$date_start[2];
   $date_rest        = new DateTime('now'); 
-  // Ajouter le nombre de jour de la diet
-  $duration         = $dietTemplateStorData->getDuration();
   // Trouver la date de fin
   $date_end         =  date('Y-m-d', strtotime($date_start. ' + '.$duration.' days'));
   $date_fin         = new DateTime($date_end);

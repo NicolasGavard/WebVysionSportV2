@@ -35,7 +35,7 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table class="data-table table stripe hover nowrap">
+            <table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>
                   <th width="30%" class="table-plus"><span class="page_nutrition_my_template_diet_name"></span></th>
