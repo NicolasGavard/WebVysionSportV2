@@ -2,12 +2,15 @@
 // DISTRIX Init
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
-include(__DIR__ . "/../../Const/DistriXStyKeys.php");
+// STY Const
+include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
+// Error
+include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // STY Data
 include(__DIR__ . "/../../Data/DistriXStyApplicationData.php");
-include(__DIR__ . "/../../Data/DistriXStyInfoSessionData.php");
+include(__DIR__ . "/../../Data/DistriXStyUserData.php");
 include(__DIR__ . "/../../Data/DistriXStyLoginData.php");
-include(__DIR__ . "/../../Data/DistriXStyUserRightsData.php");
+include(__DIR__ . "/../../Data/DistriXStyUserRightData.php");
 // Database Data
 include(__DIR__ . "/Data/StyUserAllRightStorData.php");
 include(__DIR__ . "/Data/StyUserRightStorData.php");
@@ -22,18 +25,18 @@ $userRights   = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if ($dbConnection != null) {
-  list($_data, $jsonError) = DistriXStyLoginData::getJsonData($dataSvc->getParameter("data"));
-  list($_infosSession, $jsonError) =  DistriXStyInfoSessionData::getJsonData($dataSvc->getParameter("infoSession"));
+  $_data         = $dataSvc->getParameter("data");
+  $_infosSession = $dataSvc->getParameter("infoSession");
   if ($_data != null && $_infosSession != null) {
     $styUserAllRightStorData = new StyUserAllRightStorData();
+    $styUserAllRightStorData->setIdStyUser($_infosSession->getId());
     $styUserAllRightStorData->setStyApplicationCode($_data->getApplication());
-    $styUserAllRightStorData->setIdStyUser($_infosSession->getIdUser());
     list($allRights, $allRightsInd) = StyUserRightStor::findAllByUserApp($styUserAllRightStorData, $dbConnection);
     foreach ($allRights as $right) {
-      $data = new DistriXStyUserRightsData();
-      $data->setApplicationCode($right->getStyApplicationCode());
-      $data->setModuleCode($right->getStyModuleCode());
-      $data->setFunctionalityCode($right->getStyFunctionalityCode());
+      $data = new DistriXStyUserRightData();
+      $data->setCodeApplication($right->getStyApplicationCode());
+      $data->setCodeModule($right->getStyModuleCode());
+      $data->setCodeFunctionality($right->getStyFunctionalityCode());
       $data->setSumOfRights($right->getSumOfRights());
       $userRights[] = $data;
     }

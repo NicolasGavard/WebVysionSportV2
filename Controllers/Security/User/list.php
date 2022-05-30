@@ -12,10 +12,10 @@ $idStyEnterprise  = 1;
 
 if (isset($_POST['idStyEnterprise']) && $_POST['idStyEnterprise'] > 0) {$idStyEnterprise = $_POST['idStyEnterprise'];}
 
-$ListUsers        = DistriXStyUser::listUsers($idStyEnterprise);
+$ListUsers        = DistriXStyAppUser::listUsers($idStyEnterprise);
 $resp["ListUsers"]  = $ListUsers;
 
-$ListEnterprises  = DistriXStyEnterprise::listEnterprises();
+$ListEnterprises  = DistriXStyAppEnterprise::listEnterprises();
 $resp["ListEnterprises"]  = $ListEnterprises;
 
 echo json_encode($resp);

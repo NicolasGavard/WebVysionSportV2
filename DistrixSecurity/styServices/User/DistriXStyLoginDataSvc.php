@@ -2,11 +2,14 @@
 // DISTRIX Init
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
-include(__DIR__ . "/../../Const/DistriXStyKeys.php");
+// STY Const
+include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
+// Error
+include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // STY Data
-include(__DIR__ . "/../../Data/DistriXStyApplicationData.php");
-include(__DIR__ . "/../../Data/DistriXStyInfoSessionData.php");
 include(__DIR__ . "/../../Data/DistriXStyLoginData.php");
+include(__DIR__ . "/../../Data/DistriXStyApplicationData.php");
+include(__DIR__ . "/../../Data/DistriXStyUserData.php");
 // Database Data
 include(__DIR__ . "/Data/StyUserStorData.php");
 // Storage
@@ -22,35 +25,33 @@ $databasefile = __DIR__ . "/../Db/Infodb.php";
 if ($dataSvc->getMethodName() == "Login") {
   $dbConnection = null;
   $errorData    = null;
-  $infoSession  = new DistriXStyInfoSessionData();
-
+  $infoUser     = new DistriXStyUserData();
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
-  if ($dbConnection != null) {
-    list($data, $jsonError) = DistriXStyLoginData::getJsonData($dataSvc->getParameter("data"));
-    $storData = new StyUserStorData();
+  if (is_null($dbConnection->getError())) {
+    $data       = $dataSvc->getParameter("data");
+    $storData   = new StyUserStorData();
     $storData->setLogin($data->getLogin());
-    $storData = StyUserStor::findByLogin($storData, $dbConnection);
+    $storData   = StyUserStor::findByLogin($storData, $dbConnection);
     if ($storData->getPass() == $data->getPassword()) {
-      $infoSession = DistriXSvcUtil::setData($storData, "DistriXStyInfoSessionData");
+      $infoUser = DistriXSvcUtil::setData($storData, "DistriXStyUserData");
 
-      $urlPicture       = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USER . '/' . $storData->getLinkToPicture();
-      $pictures_headers = @get_headers($urlPicture);
+      $urlPicture       = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USERS . '/' . $storData->getLinkToPicture();
+      $pictures_headers = get_headers($urlPicture);
       if (!$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found') {
-        $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USER . '/profilDefault.png';
+        $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USERS . '/profilDefault.png';
       }
-      $infoSession->setLinkToPicture($urlPicture);
+      $infoUser->setLinkToPicture($urlPicture);
 
-      $infoSession->setIdUser($storData->getId());
-      $infoSession->setConnected(true);
+      $infoUser->setId($storData->getId());
     }
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }
   if ($errorData != null) {
     $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "Login", $dataSvc->getMethodName(), basename(__FILE__));
-    $dataSvc->addToResponse("ApplicationError", $errorData);
+    $dataSvc->addErrorToResponse($errorData);
   }
-  $dataSvc->addToResponse("StyInfoSession", $infoSession);
+  $dataSvc->addToResponse("StyInfoUser", $infoUser);
 }
 
 // Return response

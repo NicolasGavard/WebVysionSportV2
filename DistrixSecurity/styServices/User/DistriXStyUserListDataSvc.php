@@ -30,28 +30,23 @@ if ($dataSvc->getMethodName() == "ListUsers") {
 
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
-    list($data, $jsonError)       = StyUserStorData::getJsonData($dataSvc->getParameter("data"));
+    // $data = $dataSvc->getParameter("data");
+    list($data, $jsonError) = StyUserStorData::getJsonData($dataSvc->getParameter("data"));
     
     if ($data->getIdStyEnterprise() == 0) {
-      list($styUserstor, $styUserstorInd) = StyUserStor::getList(true, $dbConnection);
+      list($styUserstor, $styUserstorInd) = StyUserStorData::getList(true, $dbConnection);
     } else if ($data->getIdStyEnterprise() > 0) {
       $styUserstorData = New StyUserStorData();
       $styUserstorData->setIdStyEnterprise($data->getIdStyEnterprise());
       list($styUserstor, $styUserstorInd) = StyUserStor::findByEnterpise($styUserstorData, true, $dbConnection);
     }
-    
     foreach ($styUserstor as $user) {
-      $infoUser   = DistriXSvcUtil::setData($user, "DistriXStyUserData");
-      
-      $styEnterpriseStor = StyEnterpriseStor::read($user->getIdStyEnterprise(), $dbConnection);
-      $infoUser->setNameEnterprise($styEnterpriseStor->getName());
-      
       $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USERS . '/' . $user->getLinkToPicture();
       $pictures_headers = get_headers($urlPicture);
       if ($user->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $user->getLinkToPicture() == '') {
         $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USERS . '/profilDefault.png';
       }
-      $infoUser->setLinkToPicture($urlPicture);
+      $user->setLinkToPicture($urlPicture);
     }
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);

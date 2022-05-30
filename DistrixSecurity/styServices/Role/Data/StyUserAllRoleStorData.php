@@ -1,29 +1,14 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class StyUserAllRoleStorData
-{
-  private $idstyrole;
-  private $styrolename;
+class StyUserAllRoleStorData extends DistriXSvcAppData {
+  
+  protected $idstyrole;
+  protected $styrolename;
 
-  public function __construct()
-  {
-    $this->idstyrole = 0;
-  }
+  public function __construct(){$this->idstyrole = 0;}
   // Gets
-  public function getIdStyRole()
-  {
-    return $this->idstyrole;
-  }
-  public function getStyRoleName()
-  {
-    return $this->styrolename;
-  }
+  public function getIdStyRole():int {return $this->idstyrole;}
+  public function getStyRoleName():string {return $this->styrolename;}
   // Sets
-  public function setIdStyRole($idStyRole)
-  {
-    $this->idstyrole = $idStyRole;
-  }
-  public function setStyRoleName($styRoleName)
-  {
-    $this->styrolename = $styRoleName;
-  }
+  public function setIdStyRole(int $idStyRole) {$this->idstyrole = $idStyRole;}
+  public function setStyRoleName(string $styRoleName) {$this->styrolename = $styRoleName;}
 }

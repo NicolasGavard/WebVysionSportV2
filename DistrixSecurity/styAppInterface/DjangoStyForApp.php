@@ -75,13 +75,13 @@ class DjangoStyForApp
   // End of listUsersEnterprise
 
 
-  public static function listUsers($idEnterprise = "", $layerData)
+  public static function listUsers($idStyEnterprise = "", $layerData)
   {
     $listUsers = array();
     $listUsersInd = 0;
-    if (strlen($idEnterprise) > 0) {
+    if (strlen($idStyEnterprise) > 0) {
       $data = new DjangoStyInfoSessionData();
-      $data->setIdEnterprise($idEnterprise);
+      $data->setIdStyEnterprise($idStyEnterprise);
       $listUsers = self::listUsersEnterprise($data, $layerData);
     }
     return $listUsers;
@@ -574,7 +574,7 @@ class DjangoStyForApp
         $styUserInfos->setMobile($userListInfos[$indR]->getMobile());
         $styUserInfos->setInitPass($userListInfos[$indR]->getInitPass());
         $styUserInfos->setIdLanguage($userListInfos[$indR]->getIdLanguage());
-        $styUserInfos->setIdEnterprise($userListInfos[$indR]->getIdEnterprise());
+        $styUserInfos->setIdStyEnterprise($userListInfos[$indR]->getIdStyEnterprise());
         $styUserInfos->setRoles($userListInfos[$indR]->getRoles());                   // Nico : Must loop for all Roles by Users
         $styUserInfos->setStatus($userListInfos[$indR]->getStatus());
         $userList[$userListInd++] = $styUserInfos;
@@ -620,7 +620,7 @@ class DjangoStyForApp
         $styEnterprisesInfos->setMailUserManager($enterprisesListInfos[$indR]->getMailUserManager());
         $styEnterprisesInfos->setPhoneUserManager($enterprisesListInfos[$indR]->getPhoneUserManager());
         $styEnterprisesInfos->setMobileUserManager($enterprisesListInfos[$indR]->getMobileUserManager());
-        $styEnterprisesInfos->setIdEnterpriseParent($enterprisesListInfos[$indR]->getIdEnterpriseParent());
+        $styEnterprisesInfos->setIdStyEnterpriseParent($enterprisesListInfos[$indR]->getIdStyEnterpriseParent());
         $styEnterprisesInfos->setStatut($enterprisesListInfos[$indR]->getStatut());
         $enterprisesList[$enterprisesListInd++] = $styEnterprisesInfos;
       }
