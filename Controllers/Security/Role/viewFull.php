@@ -1,12 +1,12 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyApplication.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyModule.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyRight.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyRole.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyRoleRight.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyFunctionality.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppApplication.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppModule.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppRight.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppRole.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppRoleRight.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppFunctionality.php");
 // DATA
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyApplicationData.php");
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyModuleData.php");
@@ -24,24 +24,24 @@ $resp             = [];
 $resp["ViewRole"] = DistriXStyRole::viewRole($_POST['idRole']);
 
 // Applications list
-$resp["ListApplications"] = DistriXStyApplication::listApplications();
+$resp["ListApplications"] = DistriXStyAppApplication::listApplications();
 
 if(isset($_POST['idStyApplication']) && $_POST['idStyApplication'] > 0){
   // Modules list
   $idStyApplication     = "";
   if (isset($_POST['idStyApplication']) && $_POST['idStyApplication'] > 0) {$idStyApplication = $_POST['idStyApplication'];}
-  $resp["ListModules"]  = DistriXStyModule::listModules($idStyApplication); 
+  $resp["ListModules"]  = DistriXStyAppModule::listModules($idStyApplication); 
 }
 
 // Functionalities list
 if(isset($_POST['idStyModule']) && $_POST['idStyModule'] > 0){
   $idStyModule                  = "";
   if (isset($_POST['idStyModule']) && $_POST['idStyModule'] > 0) {$idStyModule = $_POST['idStyModule'];}
-  $resp["ListFunctionalities"]  = DistriXStyFunctionality::listFunctionalities($idStyApplication, $idStyModule);
+  $resp["ListFunctionalities"]  = DistriXStyAppFunctionality::listFunctionalities($idStyApplication, $idStyModule);
 }
 
 // Rights list
-$resp["ListRights"] = DistriXStyRight::listRights();
+$resp["ListRights"] = DistriXStyAppRight::listRights();
 
 // Applications, Modules, Functionalities list for this Role
 $distriXStyRoleRightData = new DistriXStyRoleRightData();
@@ -49,6 +49,6 @@ $distriXStyRoleRightData->setIdStyRole($_POST['idRole']);
 $distriXStyRoleRightData->setIdStyApplication($_POST['idStyApplication']);
 $distriXStyRoleRightData->setIdStyModule($_POST['idStyModule']);
 $distriXStyRoleRightData->setIdStyFunctionality($_POST['idStyFunctionality']);
-$resp["ListModulesByRole"]    = DistriXStyRoleRight::roleRightByRole($distriXStyRoleRightData);
+$resp["ListModulesByRole"]    = DistriXStyAppRoleRight::roleRightByRole($distriXStyRoleRightData);
 
 echo json_encode($resp);

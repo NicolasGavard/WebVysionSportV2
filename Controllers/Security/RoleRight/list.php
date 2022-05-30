@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyRoleRight.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppRoleRight.php");
 // DATA
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyRoleRightData.php");
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyRoleRightsData.php");
@@ -15,7 +15,7 @@ $resp                   = [];
 $distriXStyRoleRightData =  new DistriXStyRoleRightData();
 $distriXStyRoleRightData->setIdStyRole($_POST['idStyRole']);
 
-$ListRolesRights        = DistriXStyRoleRight::roleRightByRole($distriXStyRoleRightData);
+$ListRolesRights        = DistriXStyAppRoleRight::roleRightByRole($distriXStyRoleRightData);
 $resp["ListRolesRights"]= $ListRolesRights;
 
 echo json_encode($resp);

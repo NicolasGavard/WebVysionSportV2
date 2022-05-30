@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyEnterprise.php");
 // DATA
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
@@ -25,7 +25,7 @@ $distriXStyUserData->setInitPass($_POST['initPass']);
 $distriXStyUserData->setIdLanguage($_POST['idLanguage']);
 $distriXStyUserData->setIdStyEnterprise($_POST['idStyEnterprise']);
 $distriXStyUserData->setStatus($_POST['statut']);
-list($confirmSave, $errorData) = DistriXStyUser::saveUser($distriXStyUserData);
+list($confirmSave, $errorData) = DistriXStyAppUser::saveUser($distriXStyUserData);
 
 $resp["confirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
