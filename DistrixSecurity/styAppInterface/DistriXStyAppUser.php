@@ -76,20 +76,113 @@ class DistriXStyUser
   }
   // End of getIdCountry
 
-  // public static function getIdPos() // A REVOIR. Yvan 23-Feb-22
-  // {
-  //   $idPos = 0;
-  //   if (isset($_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"])) {
-  //     $userData  = unserialize($_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]);
-  //     for ($indEp = 0; $indEp < count($userData); $indEp++) {
-  //       if ($indEp == 0) {
-  //         $idPos = $userData[$indEp]->getIdPos();
-  //       }
-  //     }
-  //   }
-  //   return $idPos;
-  // }
-  // // End of getIdPos
+  public static function listUsers($idStyEnterprise = "")
+  {
+    $listUsers  = array();
+    $data       = new DistriXStyUserData();
+    if ($idStyEnterprise > 0) {
+      $data->setIdStyEnterprise($idStyEnterprise);
+    }
+    list($data, $errorJson) = DistriXStyUserData::getJsonData($data);
+    $listUsers = self::listUsersEnterprise($data);
+    return $listUsers;
+  }
+  // End of listUsers 
+
+  public static function listUsersEnterprise(DistriXStyUserData $data): array
+  {
+    $outputok          = false;
+    $output            = array();
+    $return            = array();
+    $styServicesCaller = new DistriXStySvcCaller();
+    $styServicesCaller->setMethodName("ListUsers");
+    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserListDataSvc.php");
+    $styServicesCaller->addParameter("data", $data);
+    list($outputok, $output, $errorData) = $styServicesCaller->call(); //var_dump($output);
+
+    if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
+      $logInfoData = new DistriXLoggerInfoData();
+      $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+      $logInfoData->setLogApplication("DistriXStyUserListDataSvc");
+      $logInfoData->setLogFunction("listUsersEnterprise");
+      $logInfoData->setLogData(print_r($output, true));
+      DistriXLogger::log($logInfoData);
+    }
+
+    if ($outputok && !empty($output) > 0) {
+      if (isset($output["ListUsers"])) {
+        $return = $output["ListUsers"];
+      }
+    } else {
+      $return = $errorData;
+    }
+    return $return;
+  }
+  // End of listUsersEnterprise
+
+  public static function viewUser($idUser = "")
+  {
+    $user  = new DistriXStyUserData();
+    if ($idUser > 0) {
+      $user->setId($idUser);
+      $user = self::user($user);
+    }
+    return $user;
+  }
+  // End of viewUser 
+
+  public static function findUserByEmail($email = "")
+  {
+    $user  = new DistriXStyUserData();
+    if ($email != '') {
+      $user->setEmail($email);
+      $user = self::user($user);
+    }
+    return $user;
+  }
+  // End of findUserByEmail 
+
+  public static function findUserByEmailBackup($emailBackup = "")
+  {
+    $user  = new DistriXStyUserData();
+    if ($emailBackup != '') {
+      $user->setEmailBackup($emailBackup);
+      $user = self::user($user);
+    }
+    return $user;
+  }
+  // End of findUserByEmailBackup 
+
+  public static function user(DistriXStyUserData $user): object
+  {
+    $outputok          = false;
+    $output            = array();
+    $return            = new DistriXStyUserData();
+    $styServicesCaller = new DistriXStySvcCaller();
+    $styServicesCaller->setMethodName("ViewUser");
+    $styServicesCaller->addParameter("data", $user);                    //print_r($user);
+    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserViewDataSvc.php");
+    list($outputok, $output, $errorData) = $styServicesCaller->call();  //print_r($output);
+
+    if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
+      $logInfoData = new DistriXLoggerInfoData();
+      $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+      $logInfoData->setLogApplication("DistriXStyUserViewDataSvc");
+      $logInfoData->setLogFunction("user");
+      $logInfoData->setLogData(print_r($output, true));
+      DistriXLogger::log($logInfoData);
+    }
+
+    if ($outputok && !empty($output) > 0) {
+      if (isset($output["ViewUser"])) {
+        $return = $output["ViewUser"];
+      }
+    } else {
+      $return = $errorData;
+    }
+    return $return;
+  }
+  // End of listUser
 
 
   public static function saveUser(DistriXStyInfoSessionData $data): array

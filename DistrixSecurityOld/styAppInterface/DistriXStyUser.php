@@ -77,6 +77,7 @@ class DistriXStyUser
     if ($idStyEnterprise > 0) {
       $data->setIdStyEnterprise($idStyEnterprise);
     }
+    list($data, $errorJson) = DistriXStyUserData::getJsonData($data);
     $listUsers = self::listUsersEnterprise($data);
     return $listUsers;
   }

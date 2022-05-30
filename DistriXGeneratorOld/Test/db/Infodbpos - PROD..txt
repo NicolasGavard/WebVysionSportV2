@@ -1,6 +1,0 @@
-<?php
-$host = "localhost";
-$user = "root"; // empty or "root" in local
-$passBD = "123"; // password
-$bdd = "mikepos"; // DB name
-?>

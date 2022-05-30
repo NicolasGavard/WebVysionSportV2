@@ -1,6 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Data
-include(__DIR__ . "/../Data/DistriXStyEnterprise.php");
+include(__DIR__ . "/../Data/DistriXStyEnterpriseData.php");
 // Layer
 include(__DIR__ . "/../Layers/DistriXStySvcCaller.php");
 
@@ -11,102 +11,158 @@ include(__DIR__ . "/../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
 class DistriXStyEnterprise
 {
-  
-  public static function saveUser(DistriXStyInfoSessionData $data): array
+  public static function listEnterprises(): array
   {
     $outputok          = false;
     $output            = array();
+    $return            = array();
+    $styServicesCaller = new DistriXStySvcCaller();
+    $styServicesCaller->setMethodName("ListEnterprises");
+    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterprisesListDataSvc.php");
+    list($outputok, $output, $errorData) = $styServicesCaller->call(); //print_r($output);
+
+    if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
+      $logInfoData = new DistriXLoggerInfoData();
+      $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+      $logInfoData->setLogApplication("DistriXStyEnterprisesListDataSvc");
+      $logInfoData->setLogFunction("listEnterprises");
+      $logInfoData->setLogData(print_r($output, true));
+      DistriXLogger::log($logInfoData);
+    }
+
+    if ($outputok && !empty($output) > 0) {
+      if (isset($output["ListEnterprises"])) {
+        $return = $output["ListEnterprises"];
+      }
+    } else {
+      $return = $errorData;
+    }
+    return $return;
+  }
+  // End of listEnterprises
+
+  public static function viewEnterprise($id = "")
+  {
+    $enterprise  = new DistriXStyEnterpriseData();
+    if ($id > 0) {
+      $enterprise->setId($id);
+      $enterprise = self::enterprise($enterprise);
+    }
+    return $enterprise;
+  }
+  // End of viewEnterprise 
+
+  public static function enterprise(DistriXStyEnterpriseData $enterprise): object
+  {
+    $outputok          = false;
+    $output            = array();
+    $return            = array();
+    $styServicesCaller = new DistriXStySvcCaller();
+    $styServicesCaller->setMethodName("ViewEnterprise");
+    $styServicesCaller->addParameter("data", $enterprise);
+    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseViewDataSvc.php");
+    list($outputok, $output, $errorData) = $styServicesCaller->call(); //var_dump($output);
+
+    if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
+      $logInfoData = new DistriXLoggerInfoData();
+      $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+      $logInfoData->setLogApplication("DistriXStyEnterpriseViewDataSvc");
+      $logInfoData->setLogFunction("enterprise");
+      $logInfoData->setLogData(print_r($output, true));
+      DistriXLogger::log($logInfoData);
+    }
+
+    if ($outputok && !empty($output) > 0) {
+      if (isset($output["ViewEnterprise"])) {
+        $return = $output["ViewEnterprise"];
+      }
+    } else {
+      $return = $errorData;
+    }
+    return $return;
+  }
+  // End of listEnterprise
+
+  public static function saveEnterprise(DistriXStyEnterpriseData $data): array
+  {
+    $outputok               = false;
+    $confirmSaveEnterprise  = false;
+    $idStyEnterprise       = 0;
+    $output                 = array();
     $styServicesCaller = new DistriXStySvcCaller();
     $styServicesCaller->addParameter("data", $data);
-    $styServicesCaller->setMethodName("SaveUser");
-    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyProfilSaveDataSvc.php");
+    $styServicesCaller->setMethodName("SaveEnterprise");
+    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseSaveDataSvc.php");
+    list($outputok, $output, $errorData) = $styServicesCaller->call();    //print_r($output);
+
+    if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
+      $logInfoData = new DistriXLoggerInfoData();
+      $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+      $logInfoData->setLogApplication("DistriXStyEnterpriseSaveDataSvc");
+      $logInfoData->setLogFunction("saveEnterprise");
+      $logInfoData->setLogData(print_r($output, true));
+      DistriXLogger::log($logInfoData);
+    }
+
+    if ($outputok && !empty($output) > 0) {
+      $confirmSaveEnterprise  = $output["ConfirmSaveEnterprise"];
+      $idStyEnterprise        = $output["idStyEnterprise"];
+    }
+    return array($confirmSaveEnterprise, $idStyEnterprise, $errorData);
+  }
+  // End of saveEnterprise
+
+  public static function delEnterprise(DistriXStyEnterpriseData $data): array
+  {
+    $outputok          = false;
+    $confirmDelEnterprise    = false;
+    $output            = array();
+    $styServicesCaller = new DistriXStySvcCaller();
+    $styServicesCaller->addParameter("data", $data);
+    $styServicesCaller->setMethodName("DelEnterprise");
+    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseDelDataSvc.php");
     list($outputok, $output, $errorData) = $styServicesCaller->call();
 
-    // Must manager $errorData. Yvan 23-Feb-22
-    $logInfoData = new DistriXLoggerInfoData();
-    $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-    $logInfoData->setLogApplication("DistriXStyAppInterface");
-    $logInfoData->setLogFunction("saveUser");
-    $logInfoData->setLogData(print_r($output, true));
-    // DistriXLogger::log(__DIR__ . "/../DistriXLoggerSettings.php", $logInfoData);
-
-    if ($outputok && !empty($output) > 0) {
-      $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($output["StyInfoSession"]);
-      $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($output["StyUserRoles"]);
-      $_SESSION["DistriXSvcSecurity"]["StyUserRights"]      = serialize($output["StyUserRights"]);
-      $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($output["StyUserEnterprises"]);
-      $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($output["StyEnterprises"]);
-      $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($output["StyEnterprisePos"]);
+    if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
+      $logInfoData = new DistriXLoggerInfoData();
+      $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+      $logInfoData->setLogApplication("DistriXStyEnterpriseDelDataSvc");
+      $logInfoData->setLogFunction("delEnterprise");
+      $logInfoData->setLogData(print_r($output, true));
+      DistriXLogger::log($logInfoData);
     }
 
-    $confirmSaveUser  = false;
-
-    $outputok      = false;
-    $output        = array();
-    $layerData     = new DjangoSvcLayerData();
-    $clientSvcCall = new DjangoSvcCallerSty();
-    $clientSvcCall->setServiceName(DJANGOSTY_TWO_LEVEL_UP . "styServices/Users/StyUsersDataSvc.php");
-    $clientSvcCall->setMethodName("SaveUser");
-    $clientSvcCall->addParameter("djangoSty", $djangoSty);    //print_r($djangoSty);
-    $clientSvcCall->addParameter("data", $data);              //print_r($data);
-    $clientSvcCall->setLayerData($layerData);
-    list($outputok, $output) = $clientSvcCall->call();        //echo " STY Save User : ".print_r($output);
     if ($outputok && !empty($output) > 0) {
-      if (isset($output["ConfirmSaveUser"])) {
-        $confirmSaveUser = $output["ConfirmSaveUser"];
-        $appErrorSvcData = $output["Error"];
-      }
+      $confirmDelEnterprise  = true;
     }
-    return array($confirmSaveUser, $appErrorSvcData);
+    return array($confirmDelEnterprise, $errorData);
   }
-  // End of saveUser
+  // End of delEnterprise
 
-  public static function delUser($application, $data)
+  public static function restoreEnterprise(DistriXStyEnterpriseData $data): array
   {
-    $djangoSty = new DjangoStyInitPassData();
-    $djangoSty->setApplication($application);
+    $outputok          = false;
+    $confirmRestoreEnterprise= false;
+    $output            = array();
+    $styServicesCaller = new DistriXStySvcCaller();
+    $styServicesCaller->addParameter("data", $data);
+    $styServicesCaller->setMethodName("RestoreEnterprise");
+    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseRestoreDataSvc.php");
+    list($outputok, $output, $errorData) = $styServicesCaller->call();
 
-    $confirmDelUser = false;
-    $outputok       = false;
-    $output         = array();
-    $layerData      = new DjangoSvcLayerData();
-    $clientSvcCall  = new DjangoSvcCallerSty();
-    $clientSvcCall->setServiceName(DJANGOSTY_TWO_LEVEL_UP . "styServices/Users/StyUsersDataSvc.php");
-    $clientSvcCall->setMethodName("DelUser");
-    $clientSvcCall->addParameter("djangoSty", $djangoSty);
-    print_r($djangoSty);
-    $clientSvcCall->addParameter("data", $data);
-    print_r($data);
-    $clientSvcCall->setLayerData($layerData);
-    list($outputok, $output) = $clientSvcCall->call();
-    echo " STY Delete User : " . print_r($output);
-    if ($outputok && !empty($output) > 0) {
-      if (isset($output["ConfirmDelUser"])) $confirmDelUser = $output["ConfirmDelUser"];
+    if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
+      $logInfoData = new DistriXLoggerInfoData();
+      $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+      $logInfoData->setLogApplication("DistriXStyEnterpriseRestoreDataSvc");
+      $logInfoData->setLogFunction("restoreEnterprise");
+      $logInfoData->setLogData(print_r($output, true));
+      DistriXLogger::log($logInfoData);
     }
-    return $confirmDelUser;
-  }
-  // End of delUser
 
-  public static function restoreUser($application, $data)
-  {
-    $djangoSty = new DjangoStyInitPassData();
-    $djangoSty->setApplication($application);
-
-    $outputok           = false;
-    $output             = array();
-    $layerData          = new DjangoSvcLayerData();
-    $clientSvcCall      = new DjangoSvcCallerSty();
-    $confirmRestoreUser = false;
-    $clientSvcCall->setServiceName(DJANGOSTY_TWO_LEVEL_UP . "styServices/Users/StyUsersDataSvc.php");
-    $clientSvcCall->setMethodName("RestoreUser");
-    $clientSvcCall->addParameter("djangoSty", $djangoSty);
-    $clientSvcCall->addParameter("data", $data);
-    $clientSvcCall->setLayerData($layerData);
-    list($outputok, $output) = $clientSvcCall->call(); //echo " STY Restore User : ".print_r($output);
     if ($outputok && !empty($output) > 0) {
-      if (isset($output["ConfirmRestoreUser"])) $confirmRestoreUser = $output["ConfirmRestoreUser"];
+      $confirmRestoreEnterprise  = true;
     }
-    return $confirmRestoreUser;
+    return array($confirmRestoreEnterprise, $errorData);
   }
-  // End of restoreUser
+  // End of restoreEnterprise
 }

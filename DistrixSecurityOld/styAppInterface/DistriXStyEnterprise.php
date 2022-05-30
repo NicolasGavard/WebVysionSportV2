@@ -1,6 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Data
-include(__DIR__ . "/../Data/DistriXStyApplicationData.php");
 include(__DIR__ . "/../Data/DistriXStyEnterpriseData.php");
 // Layer
 include(__DIR__ . "/../Layers/DistriXStySvcCaller.php");
