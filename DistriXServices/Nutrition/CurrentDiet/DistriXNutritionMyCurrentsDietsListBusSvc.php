@@ -11,9 +11,15 @@ include(__DIR__ . "/Data/DietStudentStorData.php");
 include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 
 $servicesCaller = new DistriXServicesCaller();
+$servicesCaller->setMethodName("ListMyTemplatesDiets");
+$servicesCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
+$servicesCaller->addParameter("data", $busSvc->getParameter("dataTemplate"));
+list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
+
+$servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListMyCurrentsDiets");
 $servicesCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
-$servicesCaller->addParameter("data", $busSvc->getParameter("data"));
+$servicesCaller->addParameter("data", $busSvc->getParameter("dataCurrent"));
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 // Current Diet
 if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
@@ -22,12 +28,12 @@ if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["List
   $myTemplateDietsCaller = new DistriXServicesCaller();
   $myTemplateDietsCaller->setMethodName("ListMyTemplatesDiets");
   $myTemplateDietsCaller->addParameter("data", $listMyCurrentDiets);
-  $myTemplateDietsCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
+  $myTemplateDietsCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListByListDataSvc.php");
   
   $myStudentDietsCaller = new DistriXServicesCaller();
   $myStudentDietsCaller->setMethodName("ListMyStudentsDiets");
   $myStudentDietsCaller->addParameter("data", $listMyCurrentDiets);
-  $myStudentDietsCaller->setServiceName("DistriXServices/Nutrition/StudentDiet/DistriXNutritionMyStudentsDietsListDataSvc.php");
+  $myStudentDietsCaller->setServiceName("DistriXServices/Nutrition/StudentDiet/DistriXNutritionMyStudentsDietsListByListDataSvc.php");
   
   // Add Caller to multi caller
   $svc = new DistriXSvc();

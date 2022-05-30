@@ -28,14 +28,17 @@ $listMyCurrentDietsFormFront  = [];
 
 // Current Diet
 list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
+list($distriXNutritionTemplateDietData, $errorJson) = DistriXNutritionTemplateDietData::getJsonData($_POST);
 
+// All My Templates Diets
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListMyCurrentsDiets");
 $servicesCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListBusSvc.php");
-$servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
+$servicesCaller->addParameter("dataCurrent", $distriXNutritionCurrentDietData);
+$servicesCaller->addParameter("dataTemplate", $distriXNutritionTemplateDietData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
 
-// Current Diet
+// All my Currents Diets
 if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
   list($listMyCurrentDiets, $jsonError) = DistriXNutritionCurrentDietData::getJsonArray($output["ListMyCurrentsDiets"]);
 } else {
