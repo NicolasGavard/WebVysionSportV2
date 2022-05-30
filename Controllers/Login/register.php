@@ -1,8 +1,8 @@
 <?php
 include(__DIR__ . "/../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../DistriXSecurity/StyAppInterface/DistriXStyEnterprise.php");
-include(__DIR__ . "/../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
+include(__DIR__ . "/../../DistriXSecurity/StyAppInterface/DistriXStyAppEnterprise.php");
+include(__DIR__ . "/../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ . "/../../DistriXSecurity/Data/DistriXStyEnterpriseData.php");
 include(__DIR__ . "/../../DistriXSecurity/Data/DistriXStyUserData.php");
@@ -19,7 +19,7 @@ if (!empty($_POST['nameEnterprise']) && !empty($_POST['emailEnterprise'])) {
   if (!empty($_POST['nameEnterprise']))   { $distriXStyEnterpriseData->setName($_POST['nameEnterprise']);}
   if (!empty($_POST['emailEnterprise']))  { $distriXStyEnterpriseData->setEmail($_POST['emailEnterprise']);}
   if (!empty($_POST['idLanguage']))       { $distriXStyEnterpriseData->setIdLanguage($_POST['idLanguage']);}
-  list($confirmSaveEnterprise, $idStyEnterprise, $errorData) = DistriXStyEnterprise::saveEnterprise($distriXStyEnterpriseData);
+  list($confirmSaveEnterprise, $idStyEnterprise, $errorData) = DistriXStyAppEnterprise::saveEnterprise($distriXStyEnterpriseData);
   
   if (!$confirmSaveEnterprise) {
     $resp["errorData"] = $errorData;
@@ -37,7 +37,7 @@ if ($confirmSaveEnterprise) {
   if (!empty($_POST['phone']))      { $distriXStyUserData->setPhone($_POST['phone']);}
   if (!empty($_POST['initPass']))   { $distriXStyUserData->setInitPass($_POST['initPass']);}
   if (!empty($_POST['idLanguage'])) { $distriXStyUserData->setIdLanguage($_POST['idLanguage']);}
-  list($confirmSaveUser, $errorData) = DistriXStyUser::saveUser($distriXStyUserData);
+  list($confirmSaveUser, $errorData) = DistriXStyAppUser::saveUser($distriXStyUserData);
   
   if (!$confirmSaveUser) {
     $resp["errorData"] = $errorData;

@@ -30,7 +30,6 @@ if ($dataSvc->getMethodName() == "ListUsers") {
 
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
-    // $data = $dataSvc->getParameter("data");
     list($data, $jsonError) = StyUserStorData::getJsonData($dataSvc->getParameter("data"));
     
     if ($data->getIdStyEnterprise() == 0) {

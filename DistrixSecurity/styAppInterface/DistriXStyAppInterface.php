@@ -3,16 +3,16 @@
 include(__DIR__ . "/../const/DistriXStyAuthenticationConst.php");
 include(__DIR__ . "/../const/DistriXStyRightConst.php");
 // Data
-include(__DIR__ . "/../data/DistriXStyApplicationData.php");
-include(__DIR__ . "/../data/DistriXStyEnterpriseData.php");
-include(__DIR__ . "/../data/DistriXStyEnterprisePosData.php");
-include(__DIR__ . "/../data/DistriXStyInfoSessionData.php");
-include(__DIR__ . "/../data/DistriXStyLoginData.php");
-include(__DIR__ . "/../data/DistriXStyUserData.php");
-include(__DIR__ . "/../data/DistriXStyUserEnterpriseData.php");
-include(__DIR__ . "/../data/DistriXStyUserRightData.php");
-include(__DIR__ . "/../data/DistriXStyUserRightsData.php");
-include(__DIR__ . "/../data/DistriXStyUserRolesData.php");
+include(__DIR__ . "/../Data/DistriXStyApplicationData.php");
+include(__DIR__ . "/../Data/DistriXStyEnterpriseData.php");
+include(__DIR__ . "/../Data/DistriXStyEnterprisePosData.php");
+include(__DIR__ . "/../Data/DistriXStyInfoSessionData.php");
+include(__DIR__ . "/../Data/DistriXStyLoginData.php");
+include(__DIR__ . "/../Data/DistriXStyUserData.php");
+include(__DIR__ . "/../Data/DistriXStyUserEnterpriseData.php");
+include(__DIR__ . "/../Data/DistriXStyUserRightData.php");
+include(__DIR__ . "/../Data/DistriXStyUserRightsData.php");
+include(__DIR__ . "/../Data/DistriXStyUserRolesData.php");
 // Layer
 include(__DIR__ . "/../layers/DistriXStySvcCaller.php");
 // Distrix Crypto
@@ -47,10 +47,10 @@ class DistriXStyAppInterface
       $outputok          = false;
       $output            = array();
       $styServicesCaller = new DistriXStySvcCaller();
-      $styServicesCaller->addParameter("data", $data);                        //print_r($data);
+      $styServicesCaller->addParameter("data", $data);                        print_r($data);
       $styServicesCaller->setMethodName("Login");
       $styServicesCaller->setServiceName("DistriXSecurity/styServices/Login/DistriXStyLoginBusSvc.php");
-      list($outputok, $output, $errorData) = $styServicesCaller->call();      //print_r($output);
+      list($outputok, $output, $errorData) = $styServicesCaller->call();      print_r($output);
 
       if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
         $logInfoData = new DistriXLoggerInfoData();
