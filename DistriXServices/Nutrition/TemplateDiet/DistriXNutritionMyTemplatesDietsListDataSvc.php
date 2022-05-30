@@ -24,7 +24,12 @@ $errorData        = null;
 $dietTemplateStor = [];
 $dbConnection     = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($data, $jsonError)                       = DietTemplateStorData::getJsonData($dataSvc->getParameter("data"));
+  list($data, $jsonError) = DietTemplateStorData::getJsonData($dataSvc->getParameter("data"));
+
+  echo '</br>';
+  print_r($data);
+  echo '</br>';
+
   list($dietTemplateStor, $dietTemplateStorInd) = DietTemplateStor::findByIdUser($data, true, $dbConnection);
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
