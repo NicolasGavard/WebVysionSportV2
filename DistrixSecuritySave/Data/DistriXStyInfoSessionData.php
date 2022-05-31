@@ -15,40 +15,16 @@ if (!class_exists("DistriXStyInfoSessionData", false)) {
       $this->timeConnected  = 0;
     }
     // Gets
-    public function getIdUser()
-    {
-      return $this->idUser;
-    }
-    public function getApplication()
-    {
-      return $this->application;
-    }
-    public function getConnected()
-    {
-      return $this->connected;
-    }
-    public function getTimeConnected()
-    {
-      return $this->timeConnected;
-    }
+    public function getIdUser():int  { return $this->idUser; }
+    public function getApplication():string  { return $this->application; }
+    public function getConnected():int  { return $this->connected; }
+    public function getTimeConnected():int  { return $this->timeConnected; }
     
     // Sets
-    public function setIdUser($idUser)
-    {
-      $this->idUser = $idUser;
-    }
-    public function setApplication($application)
-    {
-      $this->application = $application;
-    }
-    public function setConnected($connected)
-    {
-      $this->connected = $connected;
-    }
-    public function setTimeConnected($timeConnected)
-    {
-      $this->timeConnected = $timeConnected;
-    }
+    public function setIdUser(int $idUser) { $this->idUser = $idUser; }
+    public function setApplication(string $application) { $this->application = $application; }
+    public function setConnected(int $connected) { $this->connected = $connected; }
+    public function setTimeConnected(int $timeConnected) { $this->timeConnected = $timeConnected; }
   }
   // End of class
 }

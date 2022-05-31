@@ -115,7 +115,6 @@
 
     <!-- js DistriX -->
     <script src="jsDistriX/main.js"></script>
-    <script src="jsDistrix/profil.js"></script>
 
     <script>
       window.addEventListener('DOMContentLoaded', function () {

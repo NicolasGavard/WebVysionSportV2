@@ -17,48 +17,18 @@ if (!class_exists("DistriXStyLoginData", false)) {
       $this->authType     = "";
     }
     // Gets
-    public function getApplication()
-    {
-      return $this->application;
-    }
-    public function getIdUser()
-    {
-      return $this->idUser;
-    }
-    public function getLogin()
-    {
-      return $this->login;
-    }
-    public function getPassword()
-    {
-      return $this->password;
-    }
-    public function getAuthType()
-    {
-      return $this->authType;
-    }
+    public function getApplication():string  { return $this->application; }
+    public function getIdUser():int  { return $this->idUser; }
+    public function getLogin():string  { return $this->login; }
+    public function getPassword():string  { return $this->password; }
+    public function getAuthType():string  { return $this->authType; }
 
     // Sets
-    public function setApplication($application)
-    {
-      $this->application = $application;
-    }
-    public function setIdUser($idUser)
-    {
-      $this->idUser = $idUser;
-    }
-    public function setLogin($login)
-    {
-      $this->login = $login;
-    }
-    public function setPassword($password)
-    {
-      $this->password = $password;
-    }
-    public function setAuthType($authType)
-    {
-      $this->authType = $authType;
-    }
+    public function setApplication(string $application) { $this->application = $application; }
+    public function setIdUser(int $idUser) { $this->idUser = $idUser; }
+    public function setLogin(string $login) { $this->login = $login; }
+    public function setPassword(string $password) { $this->password = $password; }
+    public function setAuthType(string $authType) { $this->authType = $authType; }
   }
   // End of class
 }

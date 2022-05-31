@@ -19,56 +19,20 @@ if (!class_exists("DistriXStyUserRoleData", false)) {
       $this->timestamp  = 0;
     }
     // Gets
-    public function getId()
-    {
-      return $this->id;
-    }
-    public function getIdStyUser()
-    {
-      return $this->idStyUser;
-    }
-    public function getIdStyRole()
-    {
-      return $this->idStyRole;
-    }
-    public function getCodeRole()
-    {
-      return $this->codeRole;
-    }
-    public function getNameRole()
-    {
-      return $this->nameRole;
-    }
-    public function getTimestamp()
-    {
-      return $this->timestamp;
-    }
+    public function getId():int  { return $this->id; }
+    public function getIdStyUser():int  { return $this->idStyUser; }
+    public function getIdStyRole():int  { return $this->idStyRole; }
+    public function getCodeRole():string  { return $this->codeRole; }
+    public function getNameRole():string  { return $this->nameRole; }
+    public function getTimestamp():int  { return $this->timestamp; }
 
     // Sets
-    public function setId($id)
-    {
-      $this->id = $id;
-    }
-    public function setIdStyUser($idStyUser)
-    {
-      $this->idStyUser = $idStyUser;
-    }
-    public function setIdStyRole($idStyRole)
-    {
-      $this->idStyRole = $idStyRole;
-    }
-    public function setCodeRole($codeRole)
-    {
-      $this->codeRole = $codeRole;
-    }
-    public function setNameRole($nameRole)
-    {
-      $this->nameRole = $nameRole;
-    }
-    public function setTimestamp($timestamp)
-    {
-      $this->timestamp = $timestamp;
-    }
+    public function setId(int $id) { $this->id = $id; }
+    public function setIdStyUser(int $idStyUser) { $this->idStyUser = $idStyUser; }
+    public function setIdStyRole(int $idStyRole) { $this->idStyRole = $idStyRole; }
+    public function setCodeRole(string $codeRole) { $this->codeRole = $codeRole; }
+    public function setNameRole(string $nameRole) { $this->nameRole = $nameRole; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }
