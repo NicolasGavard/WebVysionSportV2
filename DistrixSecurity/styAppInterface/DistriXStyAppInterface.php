@@ -29,27 +29,36 @@ class DistriXStyAppInterface
   {
     $logged = false;
     if (strlen($application) > 0 && strlen($user) > 0 && strlen($password) > 0) {
-      $data = new DistriXStyLoginData();
-      $data->setApplication($application);
-      $data->setLogin($user);
+      $dataApp = new DistriXStyApplicationData();
+      $dataApp->setCode($application);
+      
+      $dataUser = new DistriXStyUserData();
+      $dataUser->setLogin($user);
       $pwd = DistriXCrypto::encodeOneWay(trim($password));
-      $data->setPass(trim($pwd));
-      $data->setAuthType(DISTRIX_STY_AUTH_PASSWORD);
-      $logged = self::login($data);
+      $dataUser->setPass(trim($pwd));
+
+      $dataLogin = new DistriXStyLoginData();
+      $dataLogin->setAuthType(DISTRIX_STY_AUTH_PASSWORD);
+      
+      list($dataApp, $errorJson)    = DistriXStyApplicationData::getJsonData($dataApp);
+      list($dataUser, $errorJson)   = DistriXStyUserData::getJsonData($dataUser);
+      list($dataLogin, $errorJson)  = DistriXStyLoginData::getJsonData($dataLogin);
+      $logged = self::login($dataApp, $dataUser, $dataLogin);
     }
     return $logged;
   }
   // End of loginPassword
 
-  private static function login(DistriXStyLoginData $data): bool
+  private static function login(DistriXStyApplicationData $dataApp, DistriXStyUserData $dataUser, DistriXStyLoginData $dataLogin): bool
   {
-    if (strlen($data->getAuthType()) > 0) {     
+    if (strlen($dataLogin->getAuthType()) > 0) {     
       $outputok          = false;
       $output            = array();
       $styServicesCaller = new DistriXStySvcCaller();
-      $styServicesCaller->addParameter("data", $data);                        print_r($data);
-      $styServicesCaller->setMethodName("Login");
       $styServicesCaller->setServiceName("DistriXSecurity/styServices/Login/DistriXStyLoginBusSvc.php");
+      $styServicesCaller->setMethodName("Login");
+      $styServicesCaller->addParameter("dataApp", $dataApp);                  //print_r($dataApp);
+      $styServicesCaller->addParameter("dataUser", $dataUser);                //print_r($dataUser);
       list($outputok, $output, $errorData) = $styServicesCaller->call();      print_r($output);
 
       if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {

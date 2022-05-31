@@ -14,16 +14,16 @@ if (! class_exists("DistriXStyUserEnterpriseData", false)) {
       $this->idStyEnterprise = 0;
     }
 // Gets
-    public function getId() { return $this->id; }
-    public function getName() { return $this->name; }
-    public function getCity() { return $this->city; }
-    public function getIdStyEnterprise() { return $this->idStyEnterprise; }
+    public function getId():int { return $this->id; }
+    public function getName():string { return $this->name; }
+    public function getCity():string { return $this->city; }
+    public function getIdStyEnterprise():int { return $this->idStyEnterprise; }
 
 // Sets
-    public function setId($id) { $this->id = $id; }
-    public function setName($name) { $this->name = $name; }
-    public function setCity($city) { $this->city = $city; }
-    public function setIdStyEnterprise($idStyEnterprise) { $this->idStyEnterprise = $idStyEnterprise; }
+    public function setId(int $id) { $this->id = $id; }
+    public function setName(string $name) { $this->name = $name; }
+    public function setCity(string $city) { $this->city = $city; }
+    public function setIdStyEnterprise(int $idStyEnterprise) { $this->idStyEnterprise = $idStyEnterprise; }
   }
   // End of class
 }

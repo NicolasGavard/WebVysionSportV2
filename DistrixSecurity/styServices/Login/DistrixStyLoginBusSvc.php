@@ -29,15 +29,18 @@ if ($busSvc->getMethodName() == "Login") {
   $userEnterprises  = [];
   $styGlobalSession = new DistriXStyInfoSessionData();
   $infoUser         = new DistriXStyUserData();
-  $data             = $busSvc->getParameter("data");
+  
+  $dataApp          = $busSvc->getParameter("dataApp");
+  $dataUser         = $busSvc->getParameter("dataUser");
+  list($dataAppBus, $errorJson) = DistriXStyApplicationData::getJsonData($dataApp);
 
-  if ($data != null) {
-    $styServicesCaller->addParameter("data", $data);
-    $styServicesCaller->setMethodName("Login");
+  if ($dataApp != null && $dataUser != null)  {
     $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyLoginDataSvc.php");
+    $styServicesCaller->setMethodName("Login");
+    $styServicesCaller->addParameter("data", $dataUser);
     list($outputok, $output, $errorData) = $styServicesCaller->call();
     // echo " Security BUS Svc-$outputok--------<br><br>";
-    // echo " Security DATA Svc-" . print_r($data, true) . "<br><br>";
+    // echo " Security DATA Svc-" . print_r($dataUser, true) . "<br><br>";
     // echo " Security BUS Svc-" . print_r($output, true) . "<br><br>";
     // echo " Security BUS Svc Error -" . print_r($errorData, true) . "<br><br>";
 
@@ -47,30 +50,31 @@ if ($busSvc->getMethodName() == "Login") {
         $connected  = true;
         $svc        = new DistriXSvc();
 
-        $styServicesCaller->addParameter("data", $data);
-        $styServicesCaller->addParameter("infoSession", $infoUser);
-        $styServicesCaller->setMethodName("FindByApplicationCode");
         $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Right/DistriXStyRightFindByUserDataSvc.php");
-        $svc->addToCall("Rights", $styServicesCaller);
-
+        // $styServicesCaller->setMethodName("FindByApplicationCode");
+        $styServicesCaller->addParameter("data", $dataApp);
+        $styServicesCaller->addParameter("infoSession", $infoUser);
+        
         $styRolesCaller = new DistriXStySvcCaller();
-        $styRolesCaller->addParameter("infoSession", $infoUser);
-        $styRolesCaller->setMethodName("FindByApplicationCode");
         $styRolesCaller->setServiceName("DistriXSecurity/StyServices/Role/DistriXStyRoleFindByUserDataSvc.php");
-        $svc->addToCall("Roles", $styRolesCaller);
-
+        // $styRolesCaller->setMethodName("FindByApplicationCode");
+        $styRolesCaller->addParameter("data", $dataApp);
+        $styRolesCaller->addParameter("infoSession", $infoUser);
+        
         $styEnterprisesCaller = new DistriXStySvcCaller();
+        $styEnterprisesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseFindByUserDataSvc.php");
+        // $styEnterprisesCaller->setMethodName("FindByUser");
         $styEnterprisesCaller->addParameter("infoSession", $infoUser);
-        $styEnterprisesCaller->setMethodName("FindByUser");
-        $styEnterprisesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterprisesListDataSvc.php");
+        
+        $svc->addToCall("Rights", $styServicesCaller);
+        $svc->addToCall("Roles", $styRolesCaller);
         $svc->addToCall("Enterprises", $styEnterprisesCaller);
-
         $callsOk = $svc->call();
 
         list($outputok, $output, $errorData) = $svc->getResult("Rights");
-        echo " Security Rights Svc-$outputok--------<br><br>";
-        echo " Security Rights Svc-" . print_r($output, true) . "<br><br>";
-        echo " Security Rights Svc Error -" . print_r($errorData, true) . "<br><br>";
+        // echo " Security Rights Svc-$outputok--------<br><br>";
+        // echo " Security Rights Svc-" . print_r($output, true) . "<br><br>";
+        // echo " Security Rights Svc Error -" . print_r($errorData, true) . "<br><br>";
         if ($outputok && is_array($output) && isset($output["StyUserRights"])) {
           $userRights = $output["StyUserRights"];
         }
@@ -100,12 +104,13 @@ if ($busSvc->getMethodName() == "Login") {
           }
         }
         $styGlobalSession->setidUser($infoUser->getId());
-        $styGlobalSession->setApplication($data->getApplication());
+        $styGlobalSession->setApplication($dataAppBus->getCode());
         $styGlobalSession->setConnected($connected);
         $styGlobalSession->setTimeConnected(date('His'));
       };
     }
   }
+
   $busSvc->addToResponse("StyGlobalSession", $styGlobalSession);
   $busSvc->addToResponse("StyInfoUser", $infoUser);
   $busSvc->addToResponse("StyUserRights", $userRights);

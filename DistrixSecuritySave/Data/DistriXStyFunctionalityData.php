@@ -28,88 +28,28 @@ if (!class_exists("DistriXStyFunctionalityData", false)) {
     }
 
     // Gets
-    public function getId()
-    {
-      return $this->id;
-    }
-    public function getIdStyApplication()
-    {
-      return $this->idStyApplication;
-    }
-    public function getCodeStyApplication()
-    {
-      return $this->codeStyApplication;
-    }
-    public function getIdStyModule()
-    {
-      return $this->idStyModule;
-    }
-    public function getCodeStyModule()
-    {
-      return $this->codeStyModule;
-    }
-    public function getCode()
-    {
-      return $this->code;
-    }
-    public function getDescription()
-    {
-      return $this->description;
-    }
-    public function getStyRights()
-    {
-      return $this->styRights;
-    }
-    public function getStatus()
-    {
-      return $this->status;
-    }
-    public function getTimestamp()
-    {
-      return $this->timestamp;
-    }
+    public function getId():int  { return $this->id; }
+    public function getIdStyApplication():int  { return $this->idStyApplication; }
+    public function getCodeStyApplication():string  { return $this->codeStyApplication; }
+    public function getIdStyModule():int  { return $this->idStyModule; }
+    public function getCodeStyModule():string  { return $this->codeStyModule; }
+    public function getCode():string  { return $this->code; }
+    public function getDescription():string  { return $this->description; }
+    public function getStyRights():int  { return $this->styRights; }
+    public function getStatus():int  { return $this->status; }
+    public function getTimestamp():int  { return $this->timestamp; }
 
     // Sets
-    public function setId($id)
-    {
-      $this->id = $id;
-    }
-    public function setIdStyApplication($idStyApplication)
-    {
-      $this->idStyApplication = $idStyApplication;
-    }
-    public function setCodeStyApplication($codeStyApplication)
-    {
-      $this->codeStyApplication = $codeStyApplication;
-    }
-    public function setIdStyModule($idStyModule)
-    {
-      $this->idStyModule = $idStyModule;
-    }
-    public function setCodeStyModule($codeStyModule)
-    {
-      $this->codeStyModule = $codeStyModule;
-    }
-    public function setCode($code)
-    {
-      $this->code = $code;
-    }
-    public function setDescription($description)
-    {
-      $this->description = $description;
-    }
-    public function setStyRights($styRights)
-    {
-      $this->styRights = $styRights;
-    }
-    public function setStatus($status)
-    {
-      $this->status = $status;
-    }
-    public function setTimestamp($timestamp)
-    {
-      $this->timestamp = $timestamp;
-    }
+    public function setId(int $id) { $this->id = $id; }
+    public function setIdStyApplication(int $idStyApplication) { $this->idStyApplication = $idStyApplication; }
+    public function setCodeStyApplication(string $codeStyApplication) { $this->codeStyApplication = $codeStyApplication; }
+    public function setIdStyModule(int $idStyModule) { $this->idStyModule = $idStyModule; }
+    public function setCodeStyModule(string $codeStyModule) { $this->codeStyModule = $codeStyModule; }
+    public function setCode(string $code) { $this->code = $code; }
+    public function setDescription(string $description) { $this->description = $description; }
+    public function setStyRights(int $styRights) { $this->styRights = $styRights; }
+    public function setStatus(int $status) { $this->status = $status; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }
