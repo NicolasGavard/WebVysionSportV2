@@ -13,6 +13,7 @@ include(__DIR__ . "/../Data/DistriXStyUserEnterpriseData.php");
 include(__DIR__ . "/../Data/DistriXStyUserRightData.php");
 include(__DIR__ . "/../Data/DistriXStyUserRightsData.php");
 include(__DIR__ . "/../Data/DistriXStyUserRoleData.php");
+include(__DIR__ . "/../Data/DistriXStyUserAllRightData.php");
 // Layer
 include(__DIR__ . "/../layers/DistriXStySvcCaller.php");
 // Distrix Crypto
@@ -72,14 +73,14 @@ class DistriXStyAppInterface
         $styGlobalSession->setConnected(true);
         $styGlobalSession->setTimeConnected(date('His'));
 
-        $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Right/DistriXStyRightFindByUserDataSvc.php");
-        $styServicesCaller->addParameter("data", $dataApp);
-        $styServicesCaller->addParameter("infoSession", $infoUser);
-        
         $styRolesCaller = new DistriXStySvcCaller();
         $styRolesCaller->setServiceName("DistriXSecurity/StyServices/Role/DistriXStyRoleFindByUserDataSvc.php");
         $styRolesCaller->addParameter("data", $dataApp);
         $styRolesCaller->addParameter("infoSession", $infoUser);
+        
+        $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Right/DistriXStyRightFindByUserDataSvc.php");
+        $styServicesCaller->addParameter("data", $dataApp);
+        $styServicesCaller->addParameter("infoSession", $infoUser);
         
         $styEnterprisesCaller = new DistriXStySvcCaller();
         $styEnterprisesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseFindByUserDataSvc.php");
@@ -105,7 +106,9 @@ class DistriXStyAppInterface
         // echo " Security Rights Svc-" . print_r($output, true) . "<br><br>";
         // echo " Security Rights Svc Error -" . print_r($errorData, true) . "<br><br>";
         if ($outputok && is_array($output) && isset($output["StyUserRights"])) {
-          list($userRights, $errorJson)       = DistriXStyUserRightData::getJsonData($output["StyUserRights"]);
+          // print_r($output["StyUserRights"]);
+          list($userRights, $errorJson)       = DistriXStyUserAllRightData::getJsonData($output["StyUserRights"]);
+          print_r($userRights);
         }
 
         list($outputok, $output, $errorData) = $svc->getResult("Enterprises");
@@ -124,6 +127,9 @@ class DistriXStyAppInterface
           }
         }
       }
+
+      
+
       $_SESSION["DistriXSvcSecurity"]["StyGlobal"]          = serialize($styGlobalSession);
       $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($infoUser);
       $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($userRoles);

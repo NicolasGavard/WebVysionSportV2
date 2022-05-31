@@ -63,232 +63,64 @@ if (!class_exists("DistriXStyEnterpriseData", false)) {
       $this->timestamp = 0;
     }
     // Gets
-    public function getId()
-    {
-      return $this->id;
-    }
-    public function getCode()
-    {
-      return $this->code;
-    }
-    public function getName()
-    {
-      return $this->name;
-    }
-    public function getEmail()
-    {
-      return $this->email;
-    }
-    public function getPhone()
-    {
-      return $this->phone;
-    }
-    public function getMobile()
-    {
-      return $this->mobile;
-    }
-    public function getCo()
-    {
-      return $this->co;
-    }
-    public function getStreet()
-    {
-      return $this->street;
-    }
-    public function getZipCode()
-    {
-      return $this->zipCode;
-    }
-    public function getCity()
-    {
-      return $this->city;
-    }
-    public function getLinkToPicture()
-    {
-      return $this->linkToPicture;
-    }
-    public function getLogoImageHtmlName()
-    {
-      return $this->logoImageHtmlName;
-    }
-    public function getLogoImageName()
-    {
-      return $this->logoImageName;
-    }
-    public function getLogoSize()
-    {
-      return $this->logoSize;
-    }
-    public function getLogoType()
-    {
-      return $this->logoType;
-    }
-    public function getIdRegion()
-    {
-      return $this->idRegion;
-    }
-    public function getIdCountry()
-    {
-      return $this->idCountry;
-    }
-    public function getIdLanguage()
-    {
-      return $this->idLanguage;
-    }
-    public function getIdUserManager()
-    {
-      return $this->idUserManager;
-    }
-    public function getNameUserManager()
-    {
-      return $this->nameUserManager;
-    }
-    public function getFirstNameUserManager()
-    {
-      return $this->firstNameUserManager;
-    }
-    public function getImgUserManager()
-    {
-      return $this->imgUserManager;
-    }
-    public function getMailUserManager()
-    {
-      return $this->mailUserManager;
-    }
-    public function getPhoneUserManager()
-    {
-      return $this->phoneUserManager;
-    }
-    public function getMobileUserManager()
-    {
-      return $this->mobileUserManager;
-    }
-    public function getIdStyEnterpriseParent()
-    {
-      return $this->idStyEnterpriseParent;
-    }
-    public function getStatut()
-    {
-      return $this->statut;
-    }
-    public function getTimestamp()
-    {
-      return $this->timestamp;
-    }
+    public function getId(){return $this->id;}
+    public function getCode(){return $this->code;}
+    public function getName(){return $this->name;}
+    public function getEmail(){return $this->email;}
+    public function getPhone(){return $this->phone;}
+    public function getMobile(){return $this->mobile;}
+    public function getCo(){return $this->co;}
+    public function getStreet(){return $this->street;}
+    public function getZipCode(){return $this->zipCode;}
+    public function getCity(){return $this->city;}
+    public function getLinkToPicture(){return $this->linkToPicture;}
+    public function getLogoImageHtmlName(){return $this->logoImageHtmlName;}
+    public function getLogoImageName(){return $this->logoImageName;}
+    public function getLogoSize(){return $this->logoSize;}
+    public function getLogoType(){return $this->logoType;}
+    public function getIdRegion(){return $this->idRegion;}
+    public function getIdCountry(){return $this->idCountry;}
+    public function getIdLanguage(){return $this->idLanguage;}
+    public function getIdUserManager(){return $this->idUserManager;}
+    public function getNameUserManager(){return $this->nameUserManager;}
+    public function getFirstNameUserManager(){return $this->firstNameUserManager;}
+    public function getImgUserManager(){return $this->imgUserManager;}
+    public function getMailUserManager(){return $this->mailUserManager;}
+    public function getPhoneUserManager(){return $this->phoneUserManager;}
+    public function getMobileUserManager(){return $this->mobileUserManager;}
+    public function getIdStyEnterpriseParent(){return $this->idStyEnterpriseParent;}
+    public function getStatut(){return $this->statut;}
+    public function getTimestamp(){return $this->timestamp;}
 
     // Sets
-    public function setId($id)
-    {
-      $this->id = $id;
-    }
-    public function setCode($code)
-    {
-      $this->code = $code;
-    }
-    public function setName($name)
-    {
-      $this->name = $name;
-    }
-    public function setEmail($email)
-    {
-      $this->email = $email;
-    }
-    public function setPhone($phone)
-    {
-      $this->phone = $phone;
-    }
-    public function setMobile($mobile)
-    {
-      $this->mobile = $mobile;
-    }
-    public function setCo($co)
-    {
-      $this->co = $co;
-    }
-    public function setStreet($street)
-    {
-      $this->street = $street;
-    }
-    public function setZipCode($zipCode)
-    {
-      $this->zipCode = $zipCode;
-    }
-    public function setCity($city)
-    {
-      $this->city = $city;
-    }
-    public function setLinkToPicture($linkToPicture)
-    {
-      $this->linkToPicture = $linkToPicture;
-    }
-    public function setLogoImageHtmlName($logoImageHtmlName)
-    {
-      $this->logoImageHtmlName = $logoImageHtmlName;
-    }
-    public function setLogoImageName($logoImageName)
-    {
-      $this->logoImageName = $logoImageName;
-    }
-    public function setLogoSize($logoSize)
-    {
-      $this->logoSize = $logoSize;
-    }
-    public function setLogoType($logoType)
-    {
-      $this->logoType = $logoType;
-    }
-    public function setIdRegion($idRegion)
-    {
-      $this->idRegion = $idRegion;
-    }
-    public function setIdCountry($idCountry)
-    {
-      $this->idCountry = $idCountry;
-    }
-    public function setIdLanguage($idLanguage)
-    {
-      $this->idLanguage = $idLanguage;
-    }
-    public function setIdUserManager($idUserManager)
-    {
-      $this->idUserManager = $idUserManager;
-    }
-    public function setNameUserManager($nameUserManager)
-    {
-      $this->nameUserManager = $nameUserManager;
-    }
-    public function setFirstNameUserManager($firstNameUserManager)
-    {
-      $this->firstNameUserManager = $firstNameUserManager;
-    }
-    public function setImgUserManager($imgUserManager)
-    {
-      $this->imgUserManager = $imgUserManager;
-    }
-    public function setMailUserManager($mailUserManager)
-    {
-      $this->mailUserManager = $mailUserManager;
-    }
-    public function setPhoneUserManager($phoneUserManager)
-    {
-      $this->phoneUserManager = $phoneUserManager;
-    }
-    public function setMobileUserManager($mobileUserManager)
-    {
-      $this->mobileUserManager = $mobileUserManager;
-    }
-    public function setIdStyEnterpriseParent($idStyEnterpriseParent)
-    {
-      $this->idStyEnterpriseParent = $idStyEnterpriseParent;
-    }
-    public function setStatut($statut)
-    {
-      $this->statut = $statut;
-    }
-    public function setTimestamp($timestamp)
-    {
-      $this->timestamp = $timestamp;
-    }
+    public function setId($id){$this->id = $id;}
+    public function setCode($code){$this->code = $code;}
+    public function setName($name){$this->name = $name;}
+    public function setEmail($email){$this->email = $email;}
+    public function setPhone($phone){$this->phone = $phone;}
+    public function setMobile($mobile){$this->mobile = $mobile;}
+    public function setCo($co){$this->co = $co;}
+    public function setStreet($street){$this->street = $street;}
+    public function setZipCode($zipCode){$this->zipCode = $zipCode;}
+    public function setCity($city){$this->city = $city;}
+    public function setLinkToPicture($linkToPicture){$this->linkToPicture = $linkToPicture;}
+    public function setLogoImageHtmlName($logoImageHtmlName){$this->logoImageHtmlName = $logoImageHtmlName;}
+    public function setLogoImageName($logoImageName){$this->logoImageName = $logoImageName;}
+    public function setLogoSize($logoSize){$this->logoSize = $logoSize;}
+    public function setLogoType($logoType){$this->logoType = $logoType;}
+    public function setIdRegion($idRegion){$this->idRegion = $idRegion;}
+    public function setIdCountry($idCountry){$this->idCountry = $idCountry;}
+    public function setIdLanguage($idLanguage){$this->idLanguage = $idLanguage;}
+    public function setIdUserManager($idUserManager){$this->idUserManager = $idUserManager;}
+    public function setNameUserManager($nameUserManager){$this->nameUserManager = $nameUserManager;}
+    public function setFirstNameUserManager($firstNameUserManager){$this->firstNameUserManager = $firstNameUserManager;}
+    public function setImgUserManager($imgUserManager){$this->imgUserManager = $imgUserManager;}
+    public function setMailUserManager($mailUserManager){$this->mailUserManager = $mailUserManager;}
+    public function setPhoneUserManager($phoneUserManager){$this->phoneUserManager = $phoneUserManager;}
+    public function setMobileUserManager($mobileUserManager){$this->mobileUserManager = $mobileUserManager;}
+    public function setIdStyEnterpriseParent($idStyEnterpriseParent){$this->idStyEnterpriseParent = $idStyEnterpriseParent;}
+    public function setStatut($statut){$this->statut = $statut;}
+    public function setTimestamp($timestamp){$this->timestamp = $timestamp;}
   }
   // End of class
 }

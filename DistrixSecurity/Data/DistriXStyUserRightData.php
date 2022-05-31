@@ -33,112 +33,34 @@ if (!class_exists("DistriXStyUserRightData", false)) {
       $this->timestamp          = 0;
     }
     // Gets
-    public function getId()
-    {
-      return $this->id;
-    }
-    public function getIdStyUser()
-    {
-      return $this->idStyUser;
-    }
-    public function getIdStyApplication()
-    {
-      return $this->idStyApplication;
-    }
-    public function getCodeApplication()
-    {
-      return $this->codeApplication;
-    }
-    public function getNameApplication()
-    {
-      return $this->nameApplication;
-    }
-    public function getIdStyModule()
-    {
-      return $this->idStyModule;
-    }
-    public function getCodeModule()
-    {
-      return $this->codeModule;
-    }
-    public function getNameModule()
-    {
-      return $this->nameModule;
-    }
-    public function getIdStyFunctionality()
-    {
-      return $this->idStyFunctionality;
-    }
-    public function getCodeFunctionality()
-    {
-      return $this->codeFunctionality;
-    }
-    public function getNameFunctionality()
-    {
-      return $this->nameFunctionality;
-    }
-    public function getSumOfRights()
-    {
-      return $this->sumOfRights;
-    }
-    public function getTimestamp()
-    {
-      return $this->timestamp;
-    }
+    public function getId(){return $this->id;}
+    public function getIdStyUser(){return $this->idStyUser;}
+    public function getIdStyApplication(){return $this->idStyApplication;}
+    public function getCodeApplication(){return $this->codeApplication;}
+    public function getNameApplication(){return $this->nameApplication;}
+    public function getIdStyModule(){return $this->idStyModule;}
+    public function getCodeModule(){return $this->codeModule;}
+    public function getNameModule(){return $this->nameModule;}
+    public function getIdStyFunctionality(){return $this->idStyFunctionality;}
+    public function getCodeFunctionality(){return $this->codeFunctionality;}
+    public function getNameFunctionality(){return $this->nameFunctionality;}
+    public function getSumOfRights(){return $this->sumOfRights;}
+    public function getTimestamp(){return $this->timestamp;}
 
     // Sets
-    public function setId($id)
-    {
-      $this->id = $id;
-    }
-    public function setIdStyUser($idStyUser)
-    {
-      $this->idStyUser = $idStyUser;
-    }
-    public function setIdStyApplication($idStyApplication)
-    {
-      $this->idStyApplication = $idStyApplication;
-    }
-    public function setCodeApplication($codeApplication)
-    {
-      $this->codeApplication = $codeApplication;
-    }
-    public function setNameApplication($nameApplication)
-    {
-      $this->nameApplication = $nameApplication;
-    }
-    public function setIdStyModule($idStyModule)
-    {
-      $this->idStyModule = $idStyModule;
-    }
-    public function setCodeModule($codeModule)
-    {
-      $this->codeModule = $codeModule;
-    }
-    public function setNameModule($nameModule)
-    {
-      $this->nameModule = $nameModule;
-    }
-    public function setIdStyFunctionality($idStyFunctionality)
-    {
-      $this->idStyFunctionality = $idStyFunctionality;
-    }
-    public function setCodeFunctionality($codeFunctionality)
-    {
-      $this->codeFunctionality = $codeFunctionality;
-    }
-    public function setNameFunctionality($nameFunctionality)
-    {
-      $this->nameFunctionality = $nameFunctionality;
-    }
-    public function setSumOfRights($sumOfRights)
-    {
-      $this->SsmOfRights = $sumOfRights;
-    }
-    public function setTimestamp($timestamp)
-    {
-      $this->timestamp = $timestamp;
-    }
+    public function setId($id){$this->id = $id;}
+    public function setIdStyUser($idStyUser){$this->idStyUser = $idStyUser;}
+    public function setIdStyApplication($idStyApplication){$this->idStyApplication = $idStyApplication;}
+    public function setCodeApplication($codeApplication){$this->codeApplication = $codeApplication;}
+    public function setNameApplication($nameApplication){$this->nameApplication = $nameApplication;}
+    public function setIdStyModule($idStyModule){$this->idStyModule = $idStyModule;}
+    public function setCodeModule($codeModule){$this->codeModule = $codeModule;}
+    public function setNameModule($nameModule){$this->nameModule = $nameModule;}
+    public function setIdStyFunctionality($idStyFunctionality){$this->idStyFunctionality = $idStyFunctionality;}
+    public function setCodeFunctionality($codeFunctionality){$this->codeFunctionality = $codeFunctionality;}
+    public function setNameFunctionality($nameFunctionality){$this->nameFunctionality = $nameFunctionality;}
+    public function setSumOfRights($sumOfRights){$this->SsmOfRights = $sumOfRights;}
+    public function setTimestamp($timestamp){$this->timestamp = $timestamp;}
   }
   // End of class
 }

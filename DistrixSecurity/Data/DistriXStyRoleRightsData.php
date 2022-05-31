@@ -17,48 +17,18 @@ if (!class_exists("DistriXStyRoleRightsData", false)) {
       $this->styApplications    = array();
     }
     // Gets
-    public function getId()
-    {
-      return $this->id;
-    }
-    public function getIdStyRole()
-    {
-      return $this->idStyRole;
-    }
-    public function getCodeStyRole()
-    {
-      return $this->codeRole;
-    }
-    public function getNameRole()
-    {
-      return $this->nameRole;
-    }
-    public function getStyApplications()
-    {
-      return $this->styApplications;
-    }
+    public function getId(){return $this->id;}
+    public function getIdStyRole(){return $this->idStyRole;}
+    public function getCodeStyRole(){return $this->codeRole;}
+    public function getNameRole(){return $this->nameRole;}
+    public function getStyApplications(){return $this->styApplications;}
     
     // Sets
-    public function setId($id)
-    {
-      $this->id = $id;
-    }
-    public function setIdStyRole($idStyRole)
-    {
-      $this->idStyRole = $idStyRole;
-    }
-    public function setCodeRole($codeRole)
-    {
-      $this->codeRole = $codeRole;
-    }
-    public function setNameRole($nameRole)
-    {
-      $this->nameRole = $nameRole;
-    }
-    public function setStyApplications($styApplications)
-    {
-      $this->styApplications = $styApplications;
-    }   
+    public function setId($id){$this->id = $id;}
+    public function setIdStyRole($idStyRole){$this->idStyRole = $idStyRole;}
+    public function setCodeRole($codeRole){$this->codeRole = $codeRole;}
+    public function setNameRole($nameRole){$this->nameRole = $nameRole;}
+    public function setStyApplications($styApplications){$this->styApplications = $styApplications;}
   }
   // End of class
 }

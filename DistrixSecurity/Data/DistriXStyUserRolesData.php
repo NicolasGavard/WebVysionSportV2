@@ -15,39 +15,15 @@ if (!class_exists("DistriXStyUserRolesData", false)) {
       $this->nameStyRole = "";
     }
     // Gets
-    public function getId()
-    {
-      return $this->id;
-    }
-    public function getIdUser()
-    {
-      return $this->idUser;
-    }
-    public function getIdStyRole()
-    {
-      return $this->idStyRole;
-    }
-    public function getNameStyRole()
-    {
-      return $this->nameStyRole;
-    }
+    public function getId(){return $this->id;}
+    public function getIdUser(){return $this->idUser;}
+    public function getIdStyRole(){return $this->idStyRole;}
+    public function getNameStyRole(){return $this->nameStyRole;}
     // Sets
-    public function setId($id)
-    {
-      $this->id = $id;
-    }
-    public function setIdUser($idUser)
-    {
-      $this->idUser = $idUser;
-    }
-    public function setIdStyRole($idStyRole)
-    {
-      $this->idStyRole = $idStyRole;
-    }
-    public function setNameStyRole($nameStyRole)
-    {
-      $this->nameStyRole = $nameStyRole;
-    }
+    public function setId($id){$this->id = $id;}
+    public function setIdUser($idUser){$this->idUser = $idUser;}
+    public function setIdStyRole($idStyRole){$this->idStyRole = $idStyRole;}
+    public function setNameStyRole($nameStyRole){$this->nameStyRole = $nameStyRole;}
   }
   // End of class
 }

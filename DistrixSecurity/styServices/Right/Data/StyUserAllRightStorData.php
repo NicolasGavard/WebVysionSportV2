@@ -11,13 +11,13 @@ class StyUserAllRightStorData extends DistriXSvcAppData {
 
   public function __construct()
   {
-    $this->id = 0;
-    $this->idstyuser = 0;
-    $this->idstyapplication = 0;
-    $this->styapplicationcode = "";
-    $this->stymodulecode = 0;
+    $this->id                   = 0;
+    $this->idstyuser            = 0;
+    $this->idstyapplication     = 0;
+    $this->styapplicationcode   = "";
+    $this->stymodulecode        = 0;
     $this->styfunctionalitycode = 0;
-    $this->sumofrights = 0;
+    $this->sumofrights          = 0;
   }
   // Gets
   public function getId():int { return $this->id;}

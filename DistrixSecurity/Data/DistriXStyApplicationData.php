@@ -19,56 +19,20 @@ if (!class_exists("DistriXStyApplicationData", false)) {
       $this->timestamp    = 0;
     }
     // Gets
-    public function getId()
-    {
-      return $this->id;
-    }
-    public function getCode()
-    {
-      return $this->code;
-    }
-    public function getDescription()
-    {
-      return $this->description;
-    }
-    public function getStyModules()
-    {
-      return $this->styModules;
-    }
-    public function getStatus()
-    {
-      return $this->status;
-    }
-    public function getTimestamp()
-    {
-      return $this->timestamp;
-    }
+    public function getId():int { return $this->id; }
+    public function getCode():string { return $this->code; }
+    public function getDescription():string { return $this->description; }
+    public function getStyModules():array { return $this->styModules; }
+    public function getStatus():int { return $this->status; }
+    public function getTimestamp():int { return $this->timestamp; }
 
     // Sets
-    public function setId($id)
-    {
-      $this->id = $id;
-    }
-    public function setCode($code)
-    {
-      $this->code = $code;
-    }
-    public function setDescription($description)
-    {
-      $this->description = $description;
-    }
-    public function setStyModules($styModules)
-    {
-      $this->styModules = $styModules;
-    }
-    public function setStatus($status)
-    {
-      $this->status = $status;
-    }
-    public function setTimestamp($timestamp)
-    {
-      $this->timestamp = $timestamp;
-    }
+    public function setId(int $id) { $this->id = $id; }
+    public function setCode(string $code) { $this->code = $code; }
+    public function setDescription(string $description) { $this->description = $description; }
+    public function setStyModules(array $styModules) { $this->styModules = $styModules; }
+    public function setStatus(int $status) { $this->status = $status; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }

@@ -54,10 +54,6 @@ function logOut(){
         localStorage.removeItem("email");
         localStorage.removeItem("emailBackup");
         localStorage.removeItem("language");
-
-        var base_url  = window.location.origin;
-        var pathArray = window.location.pathname.split( '/' );
-        window.location.replace(base_url+'/'+pathArray[1]);
       }
     },
     error : function(data) {
