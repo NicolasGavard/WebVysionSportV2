@@ -24,7 +24,7 @@ if ($dataSvc->getMethodName() == "Login") {
   
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if ($dbConnection != null) {
-    list($data, $jsonError) = StyUserStorData::getJsonData($dataSvc->getParameter("data"));
+    list($data, $jsonError) = StyUserStorData::getJsonData($dataSvc->getParameter("dataUser"));
     $storData     = new StyUserStorData();
     $storData->setLogin($data->getLogin());
     $styUserStor = StyUserStor::findByLogin($storData, $dbConnection);

@@ -12,7 +12,7 @@ include(__DIR__ . "/../Data/DistriXStyUserData.php");
 include(__DIR__ . "/../Data/DistriXStyUserEnterpriseData.php");
 include(__DIR__ . "/../Data/DistriXStyUserRightData.php");
 include(__DIR__ . "/../Data/DistriXStyUserRightsData.php");
-include(__DIR__ . "/../Data/DistriXStyUserRolesData.php");
+include(__DIR__ . "/../Data/DistriXStyUserRoleData.php");
 // Layer
 include(__DIR__ . "/../layers/DistriXStySvcCaller.php");
 // Distrix Crypto
@@ -55,30 +55,82 @@ class DistriXStyAppInterface
       $outputok          = false;
       $output            = array();
       $styServicesCaller = new DistriXStySvcCaller();
-      $styServicesCaller->setServiceName("DistriXSecurity/styServices/Login/DistriXStyLoginBusSvc.php");
+      $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyLoginDataSvc.php");
       $styServicesCaller->setMethodName("Login");
       $styServicesCaller->addParameter("dataApp", $dataApp);                  //print_r($dataApp);
       $styServicesCaller->addParameter("dataUser", $dataUser);                //print_r($dataUser);
-      list($outputok, $output, $errorData) = $styServicesCaller->call();      print_r($output);
+      list($outputok, $output, $errorData) = $styServicesCaller->call();      //print_r($output);
+      list($infoUser, $errorJson) = DistriXStyUserData::getJsonData($output["StyInfoSession"]);
 
-      if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
-        $logInfoData = new DistriXLoggerInfoData();
-        $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-        $logInfoData->setLogApplication("DistriXStyLoginBusSvc");
-        $logInfoData->setLogFunction("login");
-        $logInfoData->setLogData(print_r($output, true));
-        DistriXLogger::log($logInfoData);
-      }
+      $styGlobalSession = new DistriXStyInfoSessionData();
+      $styGlobalSession->setApplication($dataApp->getCode());
+      $styGlobalSession->setConnected(false);
+      $styGlobalSession->setTimeConnected(date('His'));
 
-      if ($outputok && !empty($output) > 0 && isset($output["StyInfoUser"])) {
-        $_SESSION["DistriXSvcSecurity"]["StyGlobal"]          = serialize($output["StyGlobalSession"]);
-        $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($output["StyInfoUser"]);
-        $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($output["StyUserRoles"]);
-        $_SESSION["DistriXSvcSecurity"]["StyUserRights"]      = serialize($output["StyUserRights"]);
-        $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($output["StyUserEnterprises"]);
-        $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($output["StyEnterprises"]);
-        $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($output["StyEnterprisePos"]);
+      if ($infoUser->getId() > 0) {
+        $styGlobalSession->setApplication($dataApp->getCode());
+        $styGlobalSession->setConnected(true);
+        $styGlobalSession->setTimeConnected(date('His'));
+
+        $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Right/DistriXStyRightFindByUserDataSvc.php");
+        $styServicesCaller->addParameter("data", $dataApp);
+        $styServicesCaller->addParameter("infoSession", $infoUser);
+        
+        $styRolesCaller = new DistriXStySvcCaller();
+        $styRolesCaller->setServiceName("DistriXSecurity/StyServices/Role/DistriXStyRoleFindByUserDataSvc.php");
+        $styRolesCaller->addParameter("data", $dataApp);
+        $styRolesCaller->addParameter("infoSession", $infoUser);
+        
+        $styEnterprisesCaller = new DistriXStySvcCaller();
+        $styEnterprisesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseFindByUserDataSvc.php");
+        $styEnterprisesCaller->addParameter("infoSession", $infoUser);
+        
+        $svc = new DistriXSvc();
+        $svc->addToCall("Rights", $styServicesCaller);
+        $svc->addToCall("Roles", $styRolesCaller);
+        $svc->addToCall("Enterprises", $styEnterprisesCaller);
+        $callsOk = $svc->call();
+
+        list($outputok, $output, $errorData) = $svc->getResult("Roles");
+        // echo " Security Roles Svc-$outputok--------<br><br>";
+        // echo " Security Roles Svc-" . print_r($output, true) . "<br><br>";
+        // echo " Security Roles Svc Error -" . print_r($errorData, true) . "<br><br>";
+        if ($outputok && is_array($output) && isset($output["StyUserRoles"])) {
+          list($userRoles, $errorJson)  = DistriXStyUserRoleData::getJsonData($output["StyUserRoles"]);
+          $infoUser->setRoles($userRoles);
+        }
+
+        list($outputok, $output, $errorData) = $svc->getResult("Rights");
+        // echo " Security Rights Svc-$outputok--------<br><br>";
+        // echo " Security Rights Svc-" . print_r($output, true) . "<br><br>";
+        // echo " Security Rights Svc Error -" . print_r($errorData, true) . "<br><br>";
+        if ($outputok && is_array($output) && isset($output["StyUserRights"])) {
+          list($userRights, $errorJson)       = DistriXStyUserRightData::getJsonData($output["StyUserRights"]);
+        }
+
+        list($outputok, $output, $errorData) = $svc->getResult("Enterprises");
+        // echo " Security Enterprises Svc-$outputok--------<br><br>";
+        // echo " Security Enterprises Svc-" . print_r($output, true) . "<br><br>";
+        // echo " Security Enterprises Svc Error -" . print_r($errorData, true) . "<br><br>";
+        if ($outputok && is_array($output)) {
+          if (isset($output["StyUserEnterprises"])) {
+            list($userEnterprises, $errorJson)  = DistriXStyUserEnterpriseData::getJsonData($output["StyUserEnterprises"]);
+          }
+          if (isset($output["StyEnterprises"])) {
+            list($enterprisesData, $errorJson)  = DistriXStyEnterpriseData::getJsonData($output["StyEnterprises"]);
+          }
+          if (isset($output["StyEnterprisePos"])) {
+            list($enterprisesPos, $errorJson)   = DistriXStyEnterprisePosData::getJsonData($output["StyEnterprisePos"]);
+          }
+        }
       }
+      $_SESSION["DistriXSvcSecurity"]["StyGlobal"]          = serialize($styGlobalSession);
+      $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($infoUser);
+      $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($userRoles);
+      $_SESSION["DistriXSvcSecurity"]["StyUserRights"]      = serialize($userRights);
+      $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($userEnterprises);
+      $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($enterprisesData);
+      $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($enterprisesPos);
     }
     return self::isUserConnected();
   }
@@ -147,7 +199,7 @@ class DistriXStyAppInterface
     }
     return $userData;
   }
-  // End of getIdUser
+  // End of getUserInformation
 
   public static function getIdPos()
   {
@@ -212,6 +264,7 @@ class DistriXStyAppInterface
     // return (self::isUserConnected() && self::hasAnyRight($application, $module, $functionality));
     return $isSecurityOk;
   }
+  // End of isSecurityOk
 
   public static function hasRight(string $app, string $module, string $functionality, int $right): string
   {
@@ -285,64 +338,19 @@ class DistriXStyAppInterface
   }
   // End of hasAnyRight
 
-  public static function getRightView()
-  {
-    return DISTRIX_STY_RIGHT_VIEW;
-  }
-  public static function getRightChange()
-  {
-    return DISTRIX_STY_RIGHT_CHANGE;
-  }
-  public static function getRightAdd()
-  {
-    return DISTRIX_STY_RIGHT_ADD;
-  }
-  public static function getRightRemove()
-  {
-    return DISTRIX_STY_RIGHT_REMOVE;
-  }
-  public static function getRightDelete()
-  {
-    return DISTRIX_STY_RIGHT_DELETE;
-  }
-  public static function getRightPrint()
-  {
-    return DISTRIX_STY_RIGHT_PRINT;
-  }
-  public static function getRightList()
-  {
-    return DISTRIX_STY_RIGHT_LIST;
-  }
-  public static function getRightFollow()
-  {
-    return DISTRIX_STY_RIGHT_FOLLOW;
-  }
-  public static function getRightSecurity()
-  {
-    return DISTRIX_STY_RIGHT_SECURITY;
-  }
-  public static function getRightPublish()
-  {
-    return DISTRIX_STY_RIGHT_PUBLISH;
-  }
-  public static function getRightRestore()
-  {
-    return DISTRIX_STY_RIGHT_RESTORE;
-  }
-  public static function getRightDuplicate()
-  {
-    return DISTRIX_STY_RIGHT_DUPLICATE;
-  }
-  public static function getRightAgenda()
-  {
-    return DISTRIX_STY_RIGHT_AGENDA;
-  }
-  public static function getRightUse()
-  {
-    return DISTRIX_STY_RIGHT_USE;
-  }
-  public static function getRightManage()
-  {
-    return DISTRIX_STY_RIGHT_MANAGE;
-  }
+  public static function getRightView():int       { return DISTRIX_STY_RIGHT_VIEW; }
+  public static function getRightChange():int     { return DISTRIX_STY_RIGHT_CHANGE; }
+  public static function getRightAdd():int        { return DISTRIX_STY_RIGHT_ADD; }
+  public static function getRightRemove():int     { return DISTRIX_STY_RIGHT_REMOVE; }
+  public static function getRightDelete():int     { return DISTRIX_STY_RIGHT_DELETE; }
+  public static function getRightPrint():int      { return DISTRIX_STY_RIGHT_PRINT; }
+  public static function getRightList():int       { return DISTRIX_STY_RIGHT_LIST; }
+  public static function getRightFollow():int     { return DISTRIX_STY_RIGHT_FOLLOW; }
+  public static function getRightSecurity():int   { return DISTRIX_STY_RIGHT_SECURITY; }
+  public static function getRightPublish():int    { return DISTRIX_STY_RIGHT_PUBLISH; }
+  public static function getRightRestore():int    { return DISTRIX_STY_RIGHT_RESTORE; }
+  public static function getRightDuplicate():int  { return DISTRIX_STY_RIGHT_DUPLICATE; }
+  public static function getRightAgenda():int     { return DISTRIX_STY_RIGHT_AGENDA; }
+  public static function getRightUse():int        { return DISTRIX_STY_RIGHT_USE; }
+  public static function getRightManage():int     { return DISTRIX_STY_RIGHT_MANAGE; }
 }

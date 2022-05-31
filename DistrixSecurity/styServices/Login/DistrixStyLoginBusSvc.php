@@ -48,24 +48,21 @@ if ($busSvc->getMethodName() == "Login") {
       list($infoUser, $errorJson) = DistriXStyUserData::getJsonData($output["StyInfoSession"]);
       if ($infoUser->getId() > 0) {
         $connected  = true;
-        $svc        = new DistriXSvc();
-
+        
         $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Right/DistriXStyRightFindByUserDataSvc.php");
-        // $styServicesCaller->setMethodName("FindByApplicationCode");
         $styServicesCaller->addParameter("data", $dataApp);
         $styServicesCaller->addParameter("infoSession", $infoUser);
         
         $styRolesCaller = new DistriXStySvcCaller();
         $styRolesCaller->setServiceName("DistriXSecurity/StyServices/Role/DistriXStyRoleFindByUserDataSvc.php");
-        // $styRolesCaller->setMethodName("FindByApplicationCode");
         $styRolesCaller->addParameter("data", $dataApp);
         $styRolesCaller->addParameter("infoSession", $infoUser);
         
         $styEnterprisesCaller = new DistriXStySvcCaller();
         $styEnterprisesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseFindByUserDataSvc.php");
-        // $styEnterprisesCaller->setMethodName("FindByUser");
         $styEnterprisesCaller->addParameter("infoSession", $infoUser);
         
+        $svc = new DistriXSvc();
         $svc->addToCall("Rights", $styServicesCaller);
         $svc->addToCall("Roles", $styRolesCaller);
         $svc->addToCall("Enterprises", $styEnterprisesCaller);
@@ -110,7 +107,6 @@ if ($busSvc->getMethodName() == "Login") {
       };
     }
   }
-
   $busSvc->addToResponse("StyGlobalSession", $styGlobalSession);
   $busSvc->addToResponse("StyInfoUser", $infoUser);
   $busSvc->addToResponse("StyUserRights", $userRights);
