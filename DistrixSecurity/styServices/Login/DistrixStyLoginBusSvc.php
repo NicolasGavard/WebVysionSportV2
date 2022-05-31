@@ -36,14 +36,13 @@ if ($busSvc->getMethodName() == "Login") {
     $styServicesCaller->setMethodName("Login");
     $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyLoginDataSvc.php");
     list($outputok, $output, $errorData) = $styServicesCaller->call();
-    echo " Security BUS Svc-$outputok--------<br><br>";
-    echo " Security DATA Svc-" . print_r($data, true) . "<br><br>";
-    echo " Security BUS Svc-" . print_r($output, true) . "<br><br>";
-    echo " Security BUS Svc Error -" . print_r($errorData, true) . "<br><br>";
+    // echo " Security BUS Svc-$outputok--------<br><br>";
+    // echo " Security DATA Svc-" . print_r($data, true) . "<br><br>";
+    // echo " Security BUS Svc-" . print_r($output, true) . "<br><br>";
+    // echo " Security BUS Svc Error -" . print_r($errorData, true) . "<br><br>";
 
-    if ($outputok && is_array($output) && isset($output["StyInfoUser"])) {
-      $infoUser = $output["StyInfoUser"];
-
+    if ($outputok && isset($output["StyInfoSession"]) && is_array($output["StyInfoSession"])) {
+      list($infoUser, $errorJson) = DistriXStyUserData::getJsonData($output["StyInfoSession"]);
       if ($infoUser->getId() > 0) {
         $connected  = true;
         $svc        = new DistriXSvc();
@@ -69,9 +68,9 @@ if ($busSvc->getMethodName() == "Login") {
         $callsOk = $svc->call();
 
         list($outputok, $output, $errorData) = $svc->getResult("Rights");
-        // echo " Security Rights Svc-$outputok--------<br><br>";
-        // echo " Security Rights Svc-" . print_r($output, true) . "<br><br>";
-        // echo " Security Rights Svc Error -" . print_r($errorData, true) . "<br><br>";
+        echo " Security Rights Svc-$outputok--------<br><br>";
+        echo " Security Rights Svc-" . print_r($output, true) . "<br><br>";
+        echo " Security Rights Svc Error -" . print_r($errorData, true) . "<br><br>";
         if ($outputok && is_array($output) && isset($output["StyUserRights"])) {
           $userRights = $output["StyUserRights"];
         }

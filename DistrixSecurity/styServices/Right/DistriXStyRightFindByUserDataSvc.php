@@ -27,6 +27,10 @@ $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if ($dbConnection != null) {
   $_data         = $dataSvc->getParameter("data");
   $_infosSession = $dataSvc->getParameter("infoSession");
+
+  list($data, $jsonError) = StyUserStorData::getJsonData($dataSvc->getParameter("data"));
+  list($_infosSession, $jsonError) = StyUserStorData::getJsonData($dataSvc->getParameter("data"));
+  
   if ($_data != null && $_infosSession != null) {
     $styUserAllRightStorData = new StyUserAllRightStorData();
     $styUserAllRightStorData->setIdStyUser($_infosSession->getId());
