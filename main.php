@@ -1,23 +1,12 @@
 <?php
 	session_start();
-
-	// include(__DIR__ . "/DistriXInit/DistriXSvcControllerInit.php");
-  // include(__DIR__ . "/DistrixSecurity/styAppInterface/DistriXStyAppInterface.php");
-  // include(__DIR__ . "/DistrixSecurity/Const/DistriXStyRightConst.php");
-
-	// echo $_SESSION["DistriXSvcSecurity"]["StyUserRights"];
-
-	// $hasRight_ADMIN_ENTERPRISE       = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'ADMIN_ENTERPRISE');
-	// echo $hasRight_ADMIN_ENTERPRISE;
-	// die();
-
 	include('i18/FR/header.php');
 	include('i18/FR/main.php');
 
 	include('_header.php');
 	include('_headerLoader.php');
 	include('_headerMenuTop.php');
-	// include('_headerMenuLeft.php');
+	include('_headerMenuLeft.php');
 ?>
 
 	<div class="mobile-menu-overlay"></div>

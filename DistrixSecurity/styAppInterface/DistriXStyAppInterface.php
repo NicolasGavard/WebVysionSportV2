@@ -97,7 +97,7 @@ class DistriXStyAppInterface
         // echo " Security Roles Svc-" . print_r($output, true) . "<br><br>";
         // echo " Security Roles Svc Error -" . print_r($errorData, true) . "<br><br>";
         if ($outputok && is_array($output) && isset($output["StyUserRoles"])) {
-          list($userRoles, $errorJson)  = DistriXStyUserRoleData::getJsonData($output["StyUserRoles"]);
+          list($userRoles, $errorJson)  = DistriXStyUserRoleData::getJsonArray($output["StyUserRoles"]);
           $infoUser->setRoles($userRoles);
         }
 
@@ -106,9 +106,10 @@ class DistriXStyAppInterface
         // echo " Security Rights Svc-" . print_r($output, true) . "<br><br>";
         // echo " Security Rights Svc Error -" . print_r($errorData, true) . "<br><br>";
         if ($outputok && is_array($output) && isset($output["StyUserRights"])) {
+          list($userRights, $errorJson) = DistriXStyUserAllRightData::getJsonArray($output["StyUserRights"]);
+          // print_r($userRights);
+          // echo '</br></br>';
           // print_r($output["StyUserRights"]);
-          list($userRights, $errorJson)       = DistriXStyUserAllRightData::getJsonData($output["StyUserRights"]);
-          print_r($userRights);
         }
 
         list($outputok, $output, $errorData) = $svc->getResult("Enterprises");
@@ -117,19 +118,16 @@ class DistriXStyAppInterface
         // echo " Security Enterprises Svc Error -" . print_r($errorData, true) . "<br><br>";
         if ($outputok && is_array($output)) {
           if (isset($output["StyUserEnterprises"])) {
-            list($userEnterprises, $errorJson)  = DistriXStyUserEnterpriseData::getJsonData($output["StyUserEnterprises"]);
+            list($userEnterprises, $errorJson) = DistriXStyUserEnterpriseData::getJsonData($output["StyUserEnterprises"]);
           }
           if (isset($output["StyEnterprises"])) {
-            list($enterprisesData, $errorJson)  = DistriXStyEnterpriseData::getJsonData($output["StyEnterprises"]);
+            list($enterprisesData, $errorJson) = DistriXStyEnterpriseData::getJsonData($output["StyEnterprises"]);
           }
           if (isset($output["StyEnterprisePos"])) {
-            list($enterprisesPos, $errorJson)   = DistriXStyEnterprisePosData::getJsonData($output["StyEnterprisePos"]);
+            list($enterprisesPos, $errorJson) = DistriXStyEnterprisePosData::getJsonData($output["StyEnterprisePos"]);
           }
         }
       }
-
-      
-
       $_SESSION["DistriXSvcSecurity"]["StyGlobal"]          = serialize($styGlobalSession);
       $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($infoUser);
       $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($userRoles);
@@ -332,9 +330,9 @@ class DistriXStyAppInterface
       for ($indR = 0; $indR < $userRightsInd && !$hasRight; $indR++) {
         $dataRight = $userRights[$indR];
         if (
-          $dataRight->getCodeApplication() == $app &&
-          ($dataRight->getCodeModule() == $module || $module == "") &&
-          ($dataRight->getCodeFunctionality() == $functionality || $functionality == "")
+          $dataRight->getStyApplicationCode() == $app &&
+          ($dataRight->getStyModuleCode() == $module || $module == "") &&
+          ($dataRight->getStyFunctionalityCode() == $functionality || $functionality == "")
         ) {
           $hasRight = true;
         }
