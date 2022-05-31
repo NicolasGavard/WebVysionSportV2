@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 include(__DIR__ . "/../../DistriXSvc/Config/DistriXFolderPath.php");
 include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
@@ -9,15 +9,21 @@ include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/Data/DistriXStyInf
 include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/Data/DistriXStyUserData.php");
 include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/Data/DistriXStyRoleData.php");
 
-$resp                   = [];
-$isConnected            = false;
-$infoProfil             = new DistriXStyUserData();
+session_set_cookie_params([
+  'SameSite' => 'None',
+  'Secure' => true
+]);
+
+session_start();
+$resp                 = [];
+$isConnected          = false;
+$infoProfil           = new DistriXStyUserData();
 
 if (isset($_POST['login']) && isset($_POST['password'])) {
-  $login                = DistriXStyAppInterface::loginPassword("WEBVYSION_SPORT", $_POST['login'], $_POST['password']);
-  $isConnected          = DistriXStyAppInterface::isUserConnected();
+  $login              = DistriXStyAppInterface::loginPassword("WEBVYSION_SPORT", $_POST['login'], $_POST['password']);
+  $isConnected        = DistriXStyAppInterface::isUserConnected();
   if ($isConnected) {
-    $infoProfil         = DistriXStyAppInterface::getUserInformation();
+    $infoProfil       = DistriXStyAppInterface::getUserInformation();
   }
 }
 

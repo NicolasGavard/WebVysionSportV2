@@ -29,12 +29,14 @@ if ($dataSvc->getMethodName() == "Login") {
     $storData->setLogin($data->getLogin());
     $styUserStor = StyUserStor::findByLogin($storData, $dbConnection);
     if ($styUserStor->getPass() == $data->getPass()) {
-      $urlPicture       = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USERS . '/' . $storData->getLinkToPicture();
+      $urlPicture       = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USERS . '/' . $styUserStor->getLinkToPicture();
       $pictures_headers = @get_headers($urlPicture);
       if (!$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found') {
         $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_USERS . '/profilDefault.png';
       }
       $styUserStor->setLinkToPicture($urlPicture);
+    } else {
+      $styUserStor = StyUserStorData();
     }
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
