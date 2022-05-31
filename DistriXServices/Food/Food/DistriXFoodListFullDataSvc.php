@@ -23,9 +23,6 @@ $foods        = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  
-  
-  
   foreach ($listFoods as $food) {
     $distriXFoodFoodData = new DistriXFoodFoodData();
     $distriXFoodFoodData->setId($food->getId());

@@ -2,11 +2,14 @@
 // DISTRIX Init
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
-include(__DIR__ . "/../../Const/DistriXStyKeys.php");
+// STY Const
+include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
+// Error
+include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // STY Data
-include(__DIR__ . "/../../Data/DistriXStyApplicationData.php");
-include(__DIR__ . "/../../Data/DistriXStyInfoSessionData.php");
 include(__DIR__ . "/../../Data/DistriXStyLoginData.php");
+include(__DIR__ . "/../../Data/DistriXStyApplicationData.php");
+include(__DIR__ . "/../../Data/DistriXStyUserData.php");
 // Database Data
 include(__DIR__ . "/Data/StyUserStorData.php");
 // Storage
@@ -22,7 +25,7 @@ $databasefile = __DIR__ . "/../Db/Infodb.php";
 if ($dataSvc->getMethodName() == "Login") {
   $dbConnection = null;
   $errorData    = null;
-  $infoSession  = new DistriXStyInfoSessionData();
+  $storData     = new StyUserStorData();
 
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if ($dbConnection != null) {
@@ -55,3 +58,4 @@ if ($dataSvc->getMethodName() == "Login") {
 
 // Return response
 $dataSvc->endOfService();
+

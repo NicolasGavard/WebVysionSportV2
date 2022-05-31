@@ -95,7 +95,6 @@ if ($outputok && isset($output["ListNutriScores"]) && is_array($output["ListNutr
   $resp["Error"]      = $errorData;
 }
 
-
 foreach ($listFoods as $food) {
   $distriXFoodFoodData = new DistriXFoodFoodData();
   $distriXFoodFoodData->setId($food->getId());
@@ -108,8 +107,7 @@ foreach ($listFoods as $food) {
   $distriXFoodFoodData->setDescription($food->getDescription());
   $distriXFoodFoodData->setElemState($food->getElemState());
   $distriXFoodFoodData->setTimestamp($food->getTimestamp());
-
-
+ 
   foreach ($listBrands as $brand) {
     if ($food->getId() == $brand->getId()) {
       $distriXFoodFoodData->setNameBrand($brand->getName());

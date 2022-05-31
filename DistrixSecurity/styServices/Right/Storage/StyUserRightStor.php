@@ -3,8 +3,8 @@ class StyUserRightStor
 {
   public static function findAllByUserApp(StyUserAllRightStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
-    $request = "";
-    $list = [];
+    $request  = "";
+    $list     = [];
 
     if ($inDbConnection != null) {
       $request  = "SELECT app.code styapplicationcode, modu.code stymodulecode, funct.code styfunctionalitycode, styrights.id id, styrights.idstyuser idstyuser, styrights.sumofrights";
@@ -42,8 +42,8 @@ class StyUserRightStor
   const TABLE_NAME = "styuserright";
   const SELECT = 'SELECT id,idstyuser,idstyapplication,idstymodule,idstyfunctionality,sumofrights';
   const FROM = ' FROM styuserright';
-  const SHOW_READ_REQUEST = FALSE;
-  const SHOW_FIND_REQUEST = FALSE;
+  const SHOW_READ_REQUEST   = FALSE;
+  const SHOW_FIND_REQUEST   = FALSE;
   const SHOW_CREATE_REQUEST = FALSE;
   const SHOW_UPDATE_REQUEST = FALSE;
   const SHOW_DELETE_REQUEST = FALSE;

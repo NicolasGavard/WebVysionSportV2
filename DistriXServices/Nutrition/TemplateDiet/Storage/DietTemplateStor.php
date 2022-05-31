@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class DietTemplateStor {
+class DiettemplateStor {
 
 //=============================================================================
 //== DO NOT REMOVE !
@@ -11,7 +11,7 @@ class DietTemplateStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "diettemplate";
-  const SELECT = 'SELECT id,iduser,name,duration,tags,elemstate,timestamp';
+  const SELECT = 'SELECT id,idusercoatch,name,duration,tags,elemstate,timestamp';
   const FROM = ' FROM diettemplate';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -22,87 +22,98 @@ class DietTemplateStor {
   const BREAK = "<br/>";
   const DOUBLE_BREAK = "<br/><br/>";
 
-  public static function getList(int $elemstate, DistriXPDOConnection $inDbConnection)
+  public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new DietTemplateStorData();
+    $data = new DiettemplateStorData();
     $list = [];
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE elemstate = :elemstate";
+      if (!$all) {
+        $request .= " WHERE elemstate = :statut";
+      }
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['elemstate'=> $elemstate]);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DietTemplateStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DiettemplateStorData");
       }
     }
     return array($list, count($list));
   }
   // End of getList
-  
-  public static function getListByList(array $idsDietTemplate, DistriXPDOConnection $inDbConnection)
+
+  public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new DietTemplateStorData();
+    $data = new DiettemplateStorData();
     $list = [];
 
-    if ($inDbConnection != null) {
+    if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
+      if ($className == "" || is_null($className)) {
+        $className = "DiettemplateStorData";
+      }
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE id in ('',";
-      foreach ($idsDietTemplate as $idDietTemplate) {
-        $request .= ", ".$idDietTemplate->getId();
+      $request .= " WHERE id IN('" . implode("','", array_map(function($data) { return $data->getId(); }, $inList))."')";
+      if (!$all) {
+        $request .= " AND elemstate = :statut";
       }
-      $request .= " )";
-
       $request .= " ORDER BY id";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute();
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DietTemplateStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $className);
       }
     }
     return array($list, count($list));
   }
-  // End of getListByList
+  // End of getListFromList
 
-  public static function findByIdUserNameDuration(DietTemplateStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoatchNameDuration(DiettemplateStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new DietTemplateStorData();
+    $data = new DiettemplateStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE iduser = :index0";
+      $request .= " WHERE idusercoatch = :index0";
       $request .= " AND name = :index1";
       $request .= " AND duration = :index2";
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['index0'=>  $dataIn->getIdUser(), 'index1'=>  $dataIn->getName(), 'index2'=>  $dataIn->getDuration()]);
+      $stmt->execute(['index0'=>  $dataIn->getIdUserCoatch(), 'index1'=>  $dataIn->getName(), 'index2'=>  $dataIn->getDuration()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DietTemplateStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DiettemplateStorData");
         $data = $stmt->fetch();
       }
     }
     return $data;
   }
-  // End of iduserNameDuration
+  // End of IdusercoatchNameDuration
 
-  public static function findByIdUser(DietTemplateStorData $dataIn, int $elemstate, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoatch(DiettemplateStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -110,28 +121,32 @@ class DietTemplateStor {
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE iduser = :index0";
-      $request .= " AND elemstate = :elemstate";
+      $request .= " WHERE idusercoatch = :index0";
+      if (!$all) {
+        $request .= " AND elemstate = :statut";
+      }
       $params = [];
-      $params["index0"] = $dataIn->getIdUser();
-      $params["elemstate"] = $elemstate;
+      $params["index0"] = $dataIn->getIdUserCoatch();
+      if (!$all) {
+        $params["statut"] = $dataIn->getAvailableValue();
+      }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DietTemplateStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DiettemplateStorData");
       }
     }
     return array($list, count($list));
   }
-  // End of iduser
+  // End of Idusercoatch
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new DietTemplateStorData();
+    $data = new DiettemplateStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -143,7 +158,7 @@ class DietTemplateStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DietTemplateStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "DiettemplateStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -165,14 +180,14 @@ class DietTemplateStor {
   }
   // End of read
 
-  public static function update(DietTemplateStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(DiettemplateStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
       $request  = "UPDATE diettemplate SET ";
-      $request .= "iduser= :iduser,";
+      $request .= "idusercoatch= :idusercoatch,";
       $request .= "name= :name,";
       $request .= "duration= :duration,";
       $request .= "tags= :tags,";
@@ -182,7 +197,7 @@ class DietTemplateStor {
       $request .= " AND timestamp = :oldtimestamp";
       $params = [];
       $params["id"] = $data->getId();
-      $params["iduser"] = $data->getIdUser();
+      $params["idusercoatch"] = $data->getIdUserCoatch();
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();
@@ -216,7 +231,7 @@ class DietTemplateStor {
   }
   // End of update
 
-  public static function save(DietTemplateStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(DiettemplateStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -229,7 +244,7 @@ class DietTemplateStor {
   }
   // End of save
 
-  public static function remove(DietTemplateStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(DiettemplateStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -241,7 +256,7 @@ class DietTemplateStor {
   }
   // End of remove
 
-  public static function restore(DietTemplateStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(DiettemplateStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -288,23 +303,23 @@ class DietTemplateStor {
   }
   // End of delete
 
-  public static function create(DietTemplateStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(DiettemplateStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO diettemplate(";
-      $request .= "iduser,name,duration,tags,elemstate,timestamp)";
+      $request .= "idusercoatch,name,duration,tags,elemstate,timestamp)";
       $request .= " VALUES(";
-      $request .= ":iduser,";
+      $request .= ":idusercoatch,";
       $request .= ":name,";
       $request .= ":duration,";
       $request .= ":tags,";
       $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
-      $params["iduser"] = $data->getIdUser();
+      $params["idusercoatch"] = $data->getIdUserCoatch();
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();

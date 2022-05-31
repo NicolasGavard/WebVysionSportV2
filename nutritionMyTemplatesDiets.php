@@ -18,31 +18,31 @@
 				<!-- Simple Datatable start -->
         <div class="pd-20 card-box mb-30">
 					<div class="clearfix">
-            <div class="row">
+          <div class="row">
               <div class="col-md-4 col-sm-12">
-                <h4 class="text-blue h4 page_nutrition_my_template_diet_title"></h4>
+                <h4 class="text-blue h4"><?php echo $page_title; ?></h4>
               </div>
-
-              <div class="col-md-4 col-sm-12" style="padding-bottom:10px;"></div>
               
-              <div class="col-md-4 col-sm-12">
-                <button type="button" style="margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> Actifs</buttons>
-                <button type="button" style="margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> Inactifs</button>
-                <button type="button" style="margin-right: 0px;" class="btn btn-primary AddNewMyTemplatesDiets" data-toggle="modal" data-target="#modalAddMyTemplatesDiets"><i class="fa fa-plus"></i> Ajouter</button>
+              <div class="col-md-2"></div>
+              
+              <div class="col-xs-12 col-md-6 col-sm-12">
+                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> <?php echo $page_all_active; ?></buttons>
+                <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> <?php echo $page_all_inactive; ?></button>
+                <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
               </div>
             </div>
           </div>
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table class="data-table table stripe hover nowrap">
+            <table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>
-                  <th width="30%" class="table-plus"><span class="page_nutrition_my_template_diet_name"></span></th>
-                  <th width="20%"><span class="page_nutrition_my_template_diet_assigned_for"></span></th>
-                  <th width="10%"><span class="page_nutrition_my_template_diet_duration"></span></th>
-                  <th width="30%"><span class="page_nutrition_my_template_diet_tags"></span></th>
-                  <th width="10%" class="datatable-nosort"><span class="page_nutrition_my_Diet_action"></span></th>
+                  <th width="30%" class="table-plus table-plus"><span><?php echo $page_name; ?></span></th>
+                  <th width="20%"><span><?php echo $page_assigned_for; ?></span></th>
+                  <th width="10%"><span><?php echo $page_duration; ?></span></th>
+                  <th width="30%"><span><?php echo $page_tags; ?></span></th>
+                  <th width="10%" class="datatable-nosort"><span><?php echo $page_actions; ?></span></th>
 								</tr>
 							</thead>
 							<tbody id="listMyTemplatesDietsTbody">

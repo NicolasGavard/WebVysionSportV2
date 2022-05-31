@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
+include(__DIR__ . "/../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ . "/../../DistriXSecurity/Data/DistriXStyUserData.php");
 // Error
@@ -12,16 +12,16 @@ $viewUser         = new DistriXStyUserData();
 $confirmSaveUser  = false;
 
 if (!empty($_POST['email'])) { 
-  $viewUser   = DistriXStyUser::findUserByEmail($_POST['email']);
+  $viewUser   = DistriXStyAppUser::findUserByEmail($_POST['email']);
   if ($viewUser->getId() == 0) {
-    $viewUser = DistriXStyUser::findUserByEmailBackup($_POST['email']);
+    $viewUser = DistriXStyAppUser::findUserByEmailBackup($_POST['email']);
   }
 }
 
 if ($viewUser->getId() > 0){
   $distriXStyUserData = DistriXSvcUtil::setData($viewUser, "DistriXStyUserData");
   $distriXStyUserData->setPass($_POST['password']);
-  list($sendMail, $errorData) = DistriXStyUser::saveUser($distriXStyUserData);
+  list($sendMail, $errorData) = DistriXStyAppUser::saveUser($distriXStyUserData);
 }
 
 $resp["confirmSaveUser"] = $confirmSaveUser;

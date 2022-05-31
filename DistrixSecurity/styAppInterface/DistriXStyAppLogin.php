@@ -16,7 +16,7 @@ include(__DIR__ . "/../Layers/DistriXStySvcCaller.php");
 // ------------------------------------
 // -----------L O G G E R ---------------
 include(__DIR__ . "/../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../DistriXLogger/Data/DistriXLoggerInfoData.php");
 
 class DistriXStyAppLogin
 {
@@ -27,8 +27,8 @@ class DistriXStyAppLogin
       $data = new DistriXStyLoginData();
       $data->setApplication($application);
       $data->setLogin($user);
-      // $pwd = DjangoStyCrypto::cryptOneWay(trim($password));
-      $data->setPassword(trim($password));
+      $pwd = DistriXCrypto::encodeOneWay(trim($password));
+      $data->setPassword(trim($pwd));
       $data->setAuthType(DISTRIX_STY_AUTH_PASSWORD);
       $logged = self::login($data);
     }
@@ -42,23 +42,23 @@ class DistriXStyAppLogin
       $outputok          = false;
       $output            = array();
       $styServicesCaller = new DistriXStySvcCaller();
-      $styServicesCaller->addParameter("data", $data);
+      $styServicesCaller->addParameter("data", $data);                  //print_r($data);
       $styServicesCaller->setMethodName("Login");
       $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Login/DistriXStyLoginBusSvc.php");
-      list($outputok, $output, $errorData) = $styServicesCaller->call();
+      list($outputok, $output, $errorData) = $styServicesCaller->call(); //print_r($output);
 
-      print_r($output);
+      if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
+        $logInfoData = new DistriXLoggerInfoData();
+        $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
+        $logInfoData->setLogApplication("DistriXStyLoginBusSvc");
+        $logInfoData->setLogFunction("login");
+        $logInfoData->setLogData(print_r($output, true));
+        DistriXLogger::log($logInfoData);
+      }
 
-      // Must manager $errorData. Yvan 23-Feb-22
-      $logInfoData = new DistriXLoggerInfoData();
-      $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-      $logInfoData->setLogApplication("DistriXStyAppInterface");
-      $logInfoData->setLogFunction("login");
-      $logInfoData->setLogData(print_r($output, true));
-      // DistriXLogger::log(__DIR__ . "/../DistriXLoggerSettings.php", $logInfoData);
-
-      if ($outputok && !empty($output) > 0 && isset($output["StyInfoSession"])) {
-        $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($output["StyInfoSession"]);
+      if ($outputok && !empty($output) > 0 && isset($output["StyInfoUser"])) {
+        $_SESSION["DistriXSvcSecurity"]["StyGlobal"]          = serialize($output["StyGlobalSession"]);
+        $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($output["StyInfoUser"]);
         $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($output["StyUserRoles"]);
         $_SESSION["DistriXSvcSecurity"]["StyUserRights"]      = serialize($output["StyUserRights"]);
         $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($output["StyUserEnterprises"]);
@@ -107,6 +107,7 @@ class DistriXStyAppLogin
     if (isset($_SESSION["DistriXSvcSecurity"]["StyListApplications"])) {
       unset($_SESSION["DistriXSvcSecurity"]["StyListApplications"]);
     }
+    return true;
   }
   // End of logout
 }

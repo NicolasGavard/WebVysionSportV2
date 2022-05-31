@@ -1,6 +1,0 @@
-<?php
-$host = "192.168.1.2";
-$user = "root"; // empty or "root" in local
-$passBD = "123"; // password
-$bdd = "pizzeria"; // DB name
-?>

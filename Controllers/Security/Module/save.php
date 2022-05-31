@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyModule.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppModule.php");
 // DATA
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyModuleData.php");
 
@@ -14,7 +14,7 @@ $distriXStyModuleData->setCode($_POST['code']);
 $distriXStyModuleData->setDescription($_POST['description']);
 $distriXStyModuleData->setStatus($_POST['status']);
 $distriXStyModuleData->setTimestamp($_POST['timestamp']);
-list($confirmSave, $errorData) = DistriXStyModule::saveModule($distriXStyModuleData);
+list($confirmSave, $errorData) = DistriXStyAppModule::saveModule($distriXStyModuleData);
 
 $resp["confirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}

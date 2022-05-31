@@ -23,7 +23,7 @@ $myCurrentsDiets  = [];
 $dbConnection     = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   list($data, $jsonError)       = DietStorData::getJsonData($dataSvc->getParameter("data"));
-  list($dietStor, $dietStorInd) = DietStor::findByIdUser($data, true, $dbConnection);
+  list($dietStor, $dietStorInd) = DietStor::findByIdUserCoatch($data, true, $dbConnection);
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }

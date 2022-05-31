@@ -36,10 +36,10 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table class="data-table table stripe hover nowrap">
+            <table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>
-                  <th width="15%" class="table-plus"><span><?php echo $page_name; ?></span></th>
+                  <th width="15%" class="table-plus table-plus"><span><?php echo $page_name; ?></span></th>
                   <th width="20%"><span><?php echo $page_assigned_for; ?></span></th>
                   <th width="10%"><span><?php echo $page_date_duration; ?></span></th>
                   <th width="10%"><span><?php echo $page_date_begin; ?></span></th>

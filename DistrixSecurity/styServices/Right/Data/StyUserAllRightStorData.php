@@ -1,13 +1,13 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class StyUserAllRightStorData
-{
-  private $id;
-  private $idstyuser;
-  private $idstyapplication;
-  private $styapplicationcode;
-  private $stymodulecode;
-  private $styfunctionalitycode;
-  private $sumofrights;
+class StyUserAllRightStorData extends DistriXSvcAppData {
+  
+  protected $id;
+  protected $idstyuser;
+  protected $idstyapplication;
+  protected $styapplicationcode;
+  protected $stymodulecode;
+  protected $styfunctionalitycode;
+  protected $sumofrights;
 
   public function __construct()
   {
@@ -20,61 +20,19 @@ class StyUserAllRightStorData
     $this->sumofrights = 0;
   }
   // Gets
-  public function getId()
-  {
-    return $this->id;
-  }
-  public function getIdStyUser()
-  {
-    return $this->idstyuser;
-  }
-  public function getIdStyApplication()
-  {
-    return $this->idstyapplication;
-  }
-  public function getStyApplicationCode()
-  {
-    return $this->styapplicationcode;
-  }
-  public function getStyModuleCode()
-  {
-    return $this->stymodulecode;
-  }
-  public function getStyFunctionalityCode()
-  {
-    return $this->styfunctionalitycode;
-  }
-  public function getSumOfRights()
-  {
-    return $this->sumofrights;
-  }
+  public function getId():int { return $this->id;}
+  public function getIdStyUser():int { return $this->idstyuser;}
+  public function getIdStyApplication():int { return $this->idstyapplication;}
+  public function getStyApplicationCode():string { return $this->styapplicationcode;}
+  public function getStyModuleCode():string { return $this->stymodulecode;}
+  public function getStyFunctionalityCode():string { return $this->styfunctionalitycode;}
+  public function getSumOfRights():int { return $this->sumofrights;}
   // Sets
-  public function setId($id)
-  {
-    $this->id = $id;
-  }
-  public function setIdStyUser($idStyUser)
-  {
-    $this->idstyuser = $idStyUser;
-  }
-  public function setIdStyApplication($idStyApplication)
-  {
-    $this->idstyapplication = $idStyApplication;
-  }
-  public function setStyApplicationCode($styApplicationCode)
-  {
-    $this->styapplicationcode = $styApplicationCode;
-  }
-  public function setStyModuleCode($styModuleCode)
-  {
-    $this->stymodulecode = $styModuleCode;
-  }
-  public function setStyFunctionalityCode($styFunctionalityCode)
-  {
-    $this->styfunctionalitycode = $styFunctionalityCode;
-  }
-  public function setSumOfRights($sumOfRights)
-  {
-    $this->sumofrights = $sumOfRights;
-  }
+  public function setId(int $id) { $this->id = $id;}
+  public function setIdStyUser(int $idStyUser) { $this->idstyuser = $idStyUser;}
+  public function setIdStyApplication(int $idStyApplication) { $this->idstyapplication = $idStyApplication;}
+  public function setStyApplicationCode(string $styApplicationCode) { $this->styapplicationcode = $styApplicationCode;}
+  public function setStyModuleCode(string $styModuleCode) { $this->stymodulecode = $styModuleCode;}
+  public function setStyFunctionalityCode(string $styFunctionalityCode) { $this->styfunctionalitycode = $styFunctionalityCode;}
+  public function setSumOfRights(int $sumOfRights) { $this->sumofrights = $sumOfRights;}
 }

@@ -4,6 +4,7 @@
   $page_assigned_for        = "Nombre d'élèves assignés";
   $page_duration            = "Durée";
   $page_tags                = "Tags";
+  $page_actions             = "Actions";
   $page_add_tag             = "Ajouter un tag";
   $page_add_title           = "Ajouter une template de diète";
   $page_update_title        = "Modifier la template de diète";
