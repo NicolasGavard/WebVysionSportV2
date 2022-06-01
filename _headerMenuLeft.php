@@ -53,9 +53,17 @@
           <?php
             $dataOption = '';
             $navActiveMenunutritionMyCurrentsDiets = $navActiveMenuNutritionMyTemplatesDiets = $navActiveMenuNutritionMyRecipes = "";
-            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDiets')   !== false) { $dataOption="on"; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDiets')  !== false) { $dataOption="on"; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipes')         !== false) { $dataOption="on"; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsList')   !== false) { $dataOption="on"; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDietsList')  !== false) { $dataOption="on"; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipesList')         !== false) { $dataOption="on"; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
+
+            $navActiveMenuFoodFood = $navActiveMenuFoodBrand = $navActiveMenuFoodEcoScore = $navActiveMenuFoodNovaScore = $navActiveMenuFoodNutriScore = $navActiveMenuFoodLabel = '';
+            if (stripos($_SERVER['PHP_SELF'], 'foodFoodList')       !== false) { $dataOption="on"; $navActiveMenuFoodFood       = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodBrandList')      !== false) { $dataOption="on"; $navActiveMenuFoodBrand      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodEcoScoreList')   !== false) { $dataOption="on"; $navActiveMenuFoodEcoScore   = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodNovaScoreList')  !== false) { $dataOption="on"; $navActiveMenuFoodNovaScore  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodNutriScoreList') !== false) { $dataOption="on"; $navActiveMenuFoodNutriScore = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodLabelList')      !== false) { $dataOption="on"; $navActiveMenuFoodLabel      = 'class="active"'; }
           ?>
           
           <li class="dropdown">
@@ -65,9 +73,9 @@
               &nbsp;<img src="vendors/images/coming-soon.png" alt="" width="25">
             </a>
             <ul class="submenu">
-              <?php if ($hasNutrition_MyDiet)           { ?><li <?php echo $navActiveMenunutritionMyCurrentsDiets ?>><a class="nav-link" href="nutritionMyCurrentsDiets.php"><?php echo $menu_nutrition_myDiet; ?></a></li><?php } ?>
-              <?php if ($hasNutrition_MyTemplatesDiets) { ?><li <?php echo $navActiveMenuNutritionMyTemplatesDiets ?>><a class="nav-link" href="nutritionMyTemplatesDiets.php"><?php echo $menu_nutrition_myTempletDiet; ?></a></li><?php } ?>
-              <?php if ($hasNutrition_Recipe)           { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link" href="nutritionMyRecipes.php"><?php echo $menu_nutrition_myRecipe; ?></a></li><?php } ?>
+              <?php if ($hasNutrition_MyDiet)           { ?><li <?php echo $navActiveMenunutritionMyCurrentsDiets ?>><a class="nav-link" href="nutritionMyCurrentsDietsList.php"><?php echo $menu_nutrition_myDiet; ?></a></li><?php } ?>
+              <?php if ($hasNutrition_MyTemplatesDiets) { ?><li <?php echo $navActiveMenuNutritionMyTemplatesDiets ?>><a class="nav-link" href="nutritionMyTemplatesDietsList.php"><?php echo $menu_nutrition_myTempletDiet; ?></a></li><?php } ?>
+              <?php if ($hasNutrition_Recipe)           { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link" href="nutritionMyRecipesList.php"><?php echo $menu_nutrition_myRecipe; ?></a></li><?php } ?>
               
               <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
               <!-- //                                           MENU FOOD                                             // -->
@@ -92,18 +100,8 @@
               ?>
               
               <?php if ($hasFood) { ?>
-                <?php
-                  $dataOption = '';
-                  $navActiveMenuFoodFood = $navActiveMenuFoodBrand = $navActiveMenuFoodEcoScore = $navActiveMenuFoodNovaScore = $navActiveMenuFoodNutriScore = $navActiveMenuFoodLabel = '';
-                  if (stripos($_SERVER['PHP_SELF'], 'foodFood')       !== false) { $dataOption="on"; $navActiveMenuFoodFood       = 'class="active"'; }
-                  if (stripos($_SERVER['PHP_SELF'], 'foodBrand')      !== false) { $dataOption="on"; $navActiveMenuFoodBrand      = 'class="active"'; }
-                  if (stripos($_SERVER['PHP_SELF'], 'foodEcoScore')   !== false) { $dataOption="on"; $navActiveMenuFoodEcoScore   = 'class="active"'; }
-                  if (stripos($_SERVER['PHP_SELF'], 'foodNovaScore')  !== false) { $dataOption="on"; $navActiveMenuFoodNovaScore  = 'class="active"'; }
-                  if (stripos($_SERVER['PHP_SELF'], 'foodNutriScore') !== false) { $dataOption="on"; $navActiveMenuFoodNutriScore = 'class="active"'; }
-                  if (stripos($_SERVER['PHP_SELF'], 'foodLabel')      !== false) { $dataOption="on"; $navActiveMenuFoodLabel      = 'class="active"'; }
-                ?>
                 <li class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle">
+                  <a href="javascript:;" class="dropdown-toggle" <?php echo $dataOption; ?>>
                     <span class="micon dw dw-harvest"></span>
                     <span class="mtext"><?php echo $menu_food; ?></span>
                   </a>

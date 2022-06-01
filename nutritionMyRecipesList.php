@@ -18,20 +18,17 @@
 				<!-- Simple Datatable start -->
         <div class="pd-20 card-box mb-30">
 					<div class="clearfix">
-            <div class="row">
-              <div class="col-md-4 col-sm-12">
-                <h4 class="text-blue h4 page_nutrition_my_recipe_title"></h4>
-              </div>
-              <div class="col-md-4 col-sm-12" style="padding-bottom:10px;">
-                <select class="custom-select2 form-control InfoMyCurrentsDietsFormListStudents" name="state" style="width: 100%; height: 38px;">
-                  <option value="0">Choix</option>
-                </select>
-              </div>
-              <div class="col-md-4 col-sm-12">
-                <button type="button" style="margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> Actifs</buttons>
-                <button type="button" style="margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> Inactifs</button>
-                <button type="button" style="margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> Ajouter</button>
-              </div>
+            <div class="pull-left">
+              <h4 class="text-blue h4 page_nutrition_my_recipe_title"></h4>
+            </div>
+
+            <div class="pull-right">
+              <select class="custom-select2 form-control InfoMyCurrentsDietsFormListStudents" name="state" style="width: 100%; height: 38px;">
+                <option value="0">Choix</option>
+              </select>
+              <button type="button" style="margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> Actifs</buttons>
+              <button type="button" style="margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> Inactifs</button>
+              <button type="button" style="margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> Ajouter</button>
             </div>
           </div>
           
