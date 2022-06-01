@@ -26,9 +26,8 @@ $listMyCurrentDiets           = [];
 $listMyTemplateDiets          = [];
 $listMyCurrentDietsFormFront  = [];
 
+// List Users
 $ListUsers                    = DistriXStyAppUser::listUsers();
-print_r($ListUsers);
-die();
 
 // Current Diet
 list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
@@ -60,6 +59,18 @@ foreach ($listMyCurrentDiets as $currentDiet) {
   $distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
   $distriXNutritionCurrentDietData->setId($currentDiet->getId());
   $distriXNutritionCurrentDietData->setIdUserCoatch($currentDiet->getIdUserCoatch());
+  
+  foreach ($ListUsers as $user) {
+    if ($currentDiet->getIdUserCoatch() == $user->getId()){
+      $distriXNutritionCurrentDietData->setNameUserCoatch($user->getName());
+      $distriXNutritionCurrentDietData->setFirstNameUserCoatch($user->getFirstName());
+    }
+    if ($currentDiet->getIdUserStudent() == $user->getId()){
+      $distriXNutritionCurrentDietData->setNameUserStudent($user->getName());
+      $distriXNutritionCurrentDietData->setFirstNameUserStudent($user->getFirstName());
+    }
+  }
+
   $distriXNutritionCurrentDietData->setIdDietTemplate($currentDiet->getIdDietTemplate());
   
   $duration = 0;
