@@ -222,33 +222,16 @@ class DistriXStyAppInterface
 
   public static function logout()
   {
-    if (isset($_SESSION["DistriXSvcSecurity"]["StyGlobal"])) {
-      unset($_SESSION["DistriXSvcSecurity"]['StyGlobal']);
-    }
-    if (isset($_SESSION["DistriXSvcSecurity"]["StyUser"])) {
-      unset($_SESSION["DistriXSvcSecurity"]['StyUser']);
-    }
-    if (isset($_SESSION["DistriXSvcSecurity"]["StyUserRoles"])) {
-      unset($_SESSION["DistriXSvcSecurity"]['StyUserRoles']);
-    }
-    if (isset($_SESSION["DistriXSvcSecurity"]["StyUserRights"])) {
-      unset($_SESSION["DistriXSvcSecurity"]['StyUserRights']);
-    }
-    if (isset($_SESSION["DistriXSvcSecurity"]["StyListUsers"])) {
-      unset($_SESSION["DistriXSvcSecurity"]["StyListUsers"]);
-    }
-    if (isset($_SESSION["DistriXSvcSecurity"]["StyListEnterprises"])) {
-      unset($_SESSION["DistriXSvcSecurity"]["StyListEnterprises"]);
-    }
-    if (isset($_SESSION["DistriXSvcSecurity"]["StyListUsersTypes"])) {
-      unset($_SESSION["DistriXSvcSecurity"]["StyListUsersTypes"]);
-    }
-    if (isset($_SESSION["DistriXSvcSecurity"]["StyListRoles"])) {
-      unset($_SESSION["DistriXSvcSecurity"]["StyListRoles"]);
-    }
-    if (isset($_SESSION["DistriXSvcSecurity"]["StyListApplications"])) {
-      unset($_SESSION["DistriXSvcSecurity"]["StyListApplications"]);
-    }
+    if (isset($_SESSION["DistriXSvcSecurity"]["StyGlobal"]))            { unset($_SESSION["DistriXSvcSecurity"]['StyGlobal']); }
+    if (isset($_SESSION["DistriXSvcSecurity"]["StyUser"]))              { unset($_SESSION["DistriXSvcSecurity"]['StyUser']); }
+    if (isset($_SESSION["DistriXSvcSecurity"]["StyUserRoles"]))         { unset($_SESSION["DistriXSvcSecurity"]['StyUserRoles']); }
+    if (isset($_SESSION["DistriXSvcSecurity"]["StyUserRights"]))        { unset($_SESSION["DistriXSvcSecurity"]['StyUserRights']); }
+    if (isset($_SESSION["DistriXSvcSecurity"]["StyListUsers"]))         { unset($_SESSION["DistriXSvcSecurity"]["StyListUsers"]); }
+    if (isset($_SESSION["DistriXSvcSecurity"]["StyListEnterprises"]))   { unset($_SESSION["DistriXSvcSecurity"]["StyListEnterprises"]); }
+    if (isset($_SESSION["DistriXSvcSecurity"]["StyListUsersTypes"]))    { unset($_SESSION["DistriXSvcSecurity"]["StyListUsersTypes"]); }
+    if (isset($_SESSION["DistriXSvcSecurity"]["StyListRoles"]))         { unset($_SESSION["DistriXSvcSecurity"]["StyListRoles"]); }
+    if (isset($_SESSION["DistriXSvcSecurity"]["StyListApplications"]))  { unset($_SESSION["DistriXSvcSecurity"]["StyListApplications"]); }
+    return true;
   }
   // End of logout
 

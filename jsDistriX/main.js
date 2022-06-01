@@ -54,6 +54,8 @@ function logOut(){
         localStorage.removeItem("email");
         localStorage.removeItem("emailBackup");
         localStorage.removeItem("language");
+
+        window.location.replace("index.html");
       }
     },
     error : function(data) {
