@@ -23,6 +23,8 @@ $foodType = new DistriXCodeTableFoodTypeData();
 $foodType->setId($_POST['id'] ?? 0);
 
 $foodType->setId(1);
+$foodType->setId(3);
+// $foodType->setId(4);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $foodType);
@@ -45,6 +47,7 @@ if ($outputok && isset($output["ViewFoodType"])) {
 if ($outputok && isset($output["ViewFoodTypeNames"]) && is_array($output["ViewFoodTypeNames"])) {
   list($listFoodTypeNames, $jsonError) = DistriXCodeTableFoodTypeNameData::getJsonArray($output["ViewFoodTypeNames"]);
   $foodType->setNames($listFoodTypeNames);
+  $foodType->setNbLanguages(count($listFoodTypeNames));
 } else {
   $error = $errorData;
 }
