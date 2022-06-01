@@ -2,7 +2,6 @@
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-// include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyLanguage.php");
 // include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
 include(__DIR__ . "/Data/DistriXCodeTableFoodTypeData.php");
@@ -28,7 +27,7 @@ $foodType->setId(1);
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $foodType);
 $servicesCaller->setServiceName("DistriXServices/TablesCodes/FoodType/DistriXFoodTypeViewDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_FoodCategory")) {
   $logInfoData = new DistriXLoggerInfoData();
