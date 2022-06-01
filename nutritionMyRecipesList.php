@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$international  = 'nutritionMyRecipes';
+	$international  = 'nutritionMyRecipesList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('i18/FR/header.php');
@@ -126,6 +126,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/nutritionMyRecipes.js"></script>
+      <script src="jsDistrix/nutritionMyRecipesList.js"></script>
   </body>
 </html>
