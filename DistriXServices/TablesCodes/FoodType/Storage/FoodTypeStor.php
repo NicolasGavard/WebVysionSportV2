@@ -113,6 +113,61 @@ class FoodTypeStor {
   }
   // End of findByIndCodeNames
 
+  public static function readNames(int $id, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new FoodTypeStorData();
+    $listNames = [];
+
+    if ($inDbConnection != null) {
+      $request  = "SELECT foodtype.id,foodtype.code,foodtype.name,foodtype.elemstate,foodtype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idfoodtype";
+      $request .= " WHERE ".self::TABLE_NAME.".id = :id";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['id'=> $id]);
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new FoodTypeNameStorData();
+          if (! is_null($row["foodtypenameid"])) {
+            $dataName->setId($row["foodtypenameid"]);
+            $dataName->setIdFoodType($row["foodtypenameidfoodtype"]);
+            $dataName->setIdLanguage($row["foodtypenameidlanguage"]);
+            $dataName->setName($row["foodtypename"]);
+            $dataName->setElemState($row["foodtypenameelemstate"]);
+            $dataName->setTimestamp($row["foodtypenametimestamp"]);
+            $listNames[] = $dataName;
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+        }
+      }
+      $trace = $inDbConnection->getTrace();
+      if (!is_null($trace) && !$trace->getManualTrace()) {
+        $traceData = new DistriXTraceData();
+        $traceData->setIdUser($trace->getIdUser());
+        $traceData->setApplication($trace->getApplicationName());
+        $traceData->setSchema($trace->getDbSchemaName());
+        $traceData->setOperationCode($traceData::TRACE_READ);
+        $traceData->setOperationId($id);
+        $traceData->setOperationTable(self::TABLE_NAME);
+        $traceData->setOperationData(print_r($data, true));
+        $traceData->setOperationDate(DistriXSvcUtil::getCurrentNumDate());
+        $traceData->setOperationTime(DistriXSvcUtil::getCurrentNumTime());
+        $trace->addToTrace($traceData);
+      }
+    }
+    return array($data, $listNames);
+  }
+  // End of readNames
 
 //=============================================================================
 //== DO NOT REMOVE !

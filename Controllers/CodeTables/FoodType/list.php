@@ -6,7 +6,6 @@ include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterf
 // include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyLanguage.php");
 // include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyLanguageData.php");
 include(__DIR__ . "/Data/DistriXCodeTableFoodTypeData.php");
 include(__DIR__ . "/Data/DistriXCodeTableFoodTypeNameData.php");
 // Error
@@ -28,10 +27,10 @@ $dataName = new DistriXCodeTableFoodTypeNameData();
 // $dataName->setIdLanguage(1);
 // $dataName->setIdLanguage(2);
 
-$caller = new DistriXServicesCaller();
-$caller->addParameter("dataName", $dataName);
-$caller->setServiceName("DistriXServices/TablesCodes/FoodType/DistriXFoodTypeListDataSvc.php");
-list($outputok, $output, $errorData) = $caller->call(); //print_r($output);
+$servicesCaller = new DistriXServicesCaller();
+$servicesCaller->addParameter("dataName", $dataName);
+$servicesCaller->setServiceName("DistriXServices/TablesCodes/FoodType/DistriXFoodTypeListDataSvc.php");
+list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 if ($outputok && isset($output["ListFoodTypes"]) && is_array($output["ListFoodTypes"])) {
   list($listFoodTypes, $jsonError) = DistriXCodeTableFoodTypeData::getJsonArray($output["ListFoodTypes"]);
