@@ -1,7 +1,8 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // DISTRIX Init
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
-// STY Const
+if (! $dataSvc->isAuthorized()) {
+  // STY Const
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
@@ -37,3 +38,4 @@ $dataSvc->addToResponse("ViewFoodTypeNames", $foodTypeNames);
 
 // Return response
 $dataSvc->endOfService();
+}
