@@ -33,7 +33,7 @@ if ($dataSvc->getMethodName() == "ListUsers") {
     list($data, $jsonError) = StyUserStorData::getJsonData($dataSvc->getParameter("data"));
     
     if ($data->getIdStyEnterprise() == 0) {
-      list($styUserstor, $styUserstorInd) = StyUserStorData::getList(true, $dbConnection);
+      list($styUserstor, $styUserstorInd) = StyUserStor::getList(true, $dbConnection);
     } else if ($data->getIdStyEnterprise() > 0) {
       $styUserstorData = New StyUserStorData();
       $styUserstorData->setIdStyEnterprise($data->getIdStyEnterprise());

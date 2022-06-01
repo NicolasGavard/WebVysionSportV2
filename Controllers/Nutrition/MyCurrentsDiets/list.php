@@ -1,9 +1,9 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
-// STY APP
 include(__DIR__ . "/../../../DistriXSvc/DistriXSvcUtil.php");
+// STY APP
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
 include(__DIR__ . "/../../Data/DistriXNutritionCurrentDietData.php");
@@ -25,6 +25,10 @@ $_POST['idUserCoatch']        = 1;
 $listMyCurrentDiets           = [];
 $listMyTemplateDiets          = [];
 $listMyCurrentDietsFormFront  = [];
+
+$ListUsers                    = DistriXStyAppUser::listUsers();
+print_r($ListUsers);
+die();
 
 // Current Diet
 list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
@@ -81,11 +85,13 @@ foreach ($listMyCurrentDiets as $currentDiet) {
 
   // Faire pourcentage
   $advancement_rest   = 100;
-  if ($duration > 0 ) {
-    $advancement_rest = round(($nbDaysInterval / $duration) * 100, 2);
+  $advancement_done   = 100;
+  if (str_replace("-", "", $date_end) > date('Ymd')){
+    if ($duration > 0) {
+      $advancement_rest = round(($nbDaysInterval / $duration) * 100, 2);
+    }
+    $advancement_done   = 100 - round($advancement_rest,2);
   }
-  $advancement_done   = 100 - round($advancement_rest,2);
-
   $distriXNutritionCurrentDietData->setAdvancement($advancement_done);
   $distriXNutritionCurrentDietData->setElemState($currentDiet->getElemState());
   $distriXNutritionCurrentDietData->setTimestamp($currentDiet->getTimestamp());

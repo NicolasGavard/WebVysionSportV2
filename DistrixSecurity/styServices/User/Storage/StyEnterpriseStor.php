@@ -69,7 +69,11 @@ class StyEnterpriseStor
       $request .= " ORDER BY code";
 
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['statut' => $data->getAvailableValue()]);
+      if (!$all) {
+        $stmt->execute(['statut' => $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
       if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
