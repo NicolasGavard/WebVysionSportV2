@@ -26,38 +26,53 @@ $foodTypeNames = [];
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if (!is_null($dataSvc->getParameter("data"))) {
-    list($foodTypeStor, $jsonError) = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
+    list($foodTypeStorData, $jsonError) = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
   }
   if (!is_null($dataSvc->getParameter("dataNames"))) {
-    list($foodTypeNamesStor, $jsonError) = FoodTypeNameStorData::getJsonArray($dataSvc->getParameter("dataNames"));
+    list($foodTypeNamesStorData, $jsonError) = FoodTypeNameStorData::getJsonArray($dataSvc->getParameter("dataNames"));
   }
 
 // print_r($foodTypeStor);
 // print_r($foodTypeNamesStor);
 
-  if (! is_null($foodTypeStor)) {
+  if (! is_null($foodTypeStorData)) {
     if ($dbConnection->beginTransaction()) {
-      list($insere, $idFoodTypeStor) = FoodTypeStor::save($foodTypeStor, $dbConnection);
-      if ($insere) {
-        foreach ($foodTypeNamesStor as $foodTypeNameStor) {
-          $foodTypeNameStor->setIdFoodType($idFoodTypeStor);
-          list($insere, $idFoodTypeNameStor) = FoodTypeNameStor::save($foodTypeNameStor, $dbConnection);
-          if (!$insere) { break; }
+      $canSave = true;
+      if ($foodTypeStorData->getId() == 0) {
+        // Verify Code Exist
+        $currentFoodTypeStorData = FoodTypeStor::findByIndCode($foodTypeStorData, $dbConnection);
+        if ($currentFoodTypeStorData->getId() > 0) {
+          $canSave             = false;
+          $distriXSvcErrorData = new DistriXSvcErrorData();
+          $distriXSvcErrorData->setCode("400");
+          $distriXSvcErrorData->setDefaultText("The Code " . $foodTypeStorData->getCode() . " is already in use");
+          $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
+          $errorData = $distriXSvcErrorData;
         }
-        if (!$insere) {
-          // Error with FoodTypeNames
-        }
-      } else {
-        // Error with FoodType
       }
-      if ($insere) {
-        $dbConnection->commit();
-      } else {
-        $dbConnection->rollBack();
-        if ($foodTypeStor->getId() > 0) {
-          $errorData = ApplicationErrorData::warningUpdateData(1, 1);
+      if ($canSave) {
+        list($insere, $idFoodTypeStorData) = FoodTypeStor::save($foodTypeStorData, $dbConnection);
+        if ($insere) {
+          foreach ($foodTypeNamesStorData as $foodTypeNameStorData) {
+            $foodTypeNameStorData->setIdFoodType($idFoodTypeStorData);
+            list($insere, $idFoodTypeNameStorData) = FoodTypeNameStor::save($foodTypeNameStorData, $dbConnection);
+            if (!$insere) { break; }
+          }
+          if (!$insere) {
+            // Error with FoodTypeNames
+          }
         } else {
-          $errorData = ApplicationErrorData::warningInsertData(1, 1);
+          // Error with FoodType
+        }
+        if ($insere) {
+          $dbConnection->commit();
+        } else {
+          $dbConnection->rollBack();
+          if ($foodTypeStorData->getId() > 0) {
+            $errorData = ApplicationErrorData::warningUpdateData(1, 1);
+          } else {
+            $errorData = ApplicationErrorData::warningInsertData(1, 1);
+          }
         }
       }
     } else {
