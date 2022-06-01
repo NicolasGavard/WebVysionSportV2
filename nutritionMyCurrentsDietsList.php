@@ -102,35 +102,36 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
-                      <label class="page_nutrition_my_diet_template"></label>
-                      <select class="custom-select2 form-control InfoMyCurrentsDietsFormListMyTemplates" name="idDietTemplate" style="width: 100%; height: 38px;">  
-                    </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-12">
-                    <div class="form-group">
-                      <label class="page_nutrition_my_diet_assigned_for"></label>
-                      <select class="selectpicker form-control InfoMyCurrentsDietsFormListStudents" data-size="5" data-style="btn-outline-info" multiple data-actions-box="true" data-selected-text-format="count" name="assignedUsers">
+                      <label><?php echo $page_name; ?></label>
+                      <select class="custom-select2 form-control listMyTemplates" id="listMyTemplates" name="idDietTemplate" style="width: 100%; height: 38px;">  
+                        <option value="0"><?php echo $page_all_choice; ?></option>
                       </select>
+                      <div class="form-control-feed back danger-template has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_template; ?> </div>
                     </div>
                   </div>
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
-                      <label class="page_nutrition_my_diet_date_begin"></label>
-                      <input class="form-control date-picker page_nutrition_my_diet_add_date_begin" placeholder="Sélectionnez une date" type="text" name="date_start">
+                      <label><?php echo $page_list_assigned_for_one; ?></label>
+                      <select class="custom-select2 form-control listStudents" id="listStudents" name="idUserStudent" style="width: 100%; height: 38px;">
+                        <option value="0"><?php echo $page_all_choice; ?></option>
+                      </select>
+                      <div class="form-control-feed back danger-student has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_student; ?> </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
+                      <label><?php echo $page_date_begin; ?></label>
+                      <input class="form-control date-picker dateBegin" id="dateBegin" placeholder="<?php echo $page_add_date_begin; ?>" type="text" name="date_start">
+                      <div class="form-control-feed back danger-dateBegin has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_dateBegin; ?> </div>
                     </div>
                   </div>
                 </form>
               </div>
               
-              <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
-                <div class="col-6">
-                  <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                  <span class="page_all_close"></span>
-                </div>
-                <div class="col-6">
-                  <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn btnAddMyCurrentsDiets" data-dismiss="modal" id="btnAddMyCurrentsDiets"><i class="fa fa-check"></i></button>
-                  <span class="page_all_add"></span>
+              <div class="padding-bottom-30 row" style="margin: 0 auto;">
+              <div class="col-12">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
+                  <button type="button" class="btn btn-primary btnAddMyCurrentDiet" id="btnAddMyCurrentDiet"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
                 </div>
               </div>
             </div>

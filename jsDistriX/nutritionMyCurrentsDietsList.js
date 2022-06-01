@@ -5,6 +5,15 @@ $.ajax({
   dataType : 'JSON',
   success : function(data) {
     localStorage.setItem("dataTable", JSON.stringify(data.ListMyCurrentsDiets));
+
+    $.map(data.ListMyTemplatesDiets, function(val, key) {
+      $('.listMyTemplates').append('<option value="'+val.id+'">'+val.name+'</option>');
+    });
+    
+    $.map(data.ListMyStudents, function(val, key) {
+      $('.listStudents').append('<option value="'+val.id+'">'+val.firstName+' '+val.name+'</option>');
+    });
+
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -49,10 +58,15 @@ $(".AddNewMyCurrentDiet").on('click', function() {
 $(".btnAddMyCurrentDiet").on('click', function() {
   $(".page_food_brand_update_title").removeClass("d-none");
   
-  var name = $('.AddMyCurrentDietFormName').val();
-  if (name != ""){
+  var template  = $('.listMyTemplates').val();
+  var student   = $('.listStudents').val();
+  var dateBegin = $('.dateBegin').val();
+
+  if (template != '' && student != '' && dateBegin != '' ){
     var data = $('#FormAddMyCurrentDiet').serializeArray(); // convert form to array
-    data.push({name: "name", value: name});
+    data.push({name: "idDietTemplate", value: template});
+    data.push({name: "idUserStudent", value: student});
+    data.push({name: "date_start", value: dateBegin});
     
     $.ajax({
       url : 'Controllers/Nutrition/MyCurrentsDiets/save.php',
@@ -69,7 +83,25 @@ $(".btnAddMyCurrentDiet").on('click', function() {
     });
     $(".btnAddMyCurrentDiet").attr("data-dismiss", "modal");
   } else {
-    if (name == ''){
+    if (template == ''){
+      $('.AddMyCurrentDietFormName').addClass("form-control-danger");
+      $('.danger-name').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddMyCurrentDietFormName").removeClass("form-control-danger");
+        $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (student == ''){
+      $('.AddMyCurrentDietFormName').addClass("form-control-danger");
+      $('.danger-name').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddMyCurrentDietFormName").removeClass("form-control-danger");
+        $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (dateBegin == ''){
       $('.AddMyCurrentDietFormName').addClass("form-control-danger");
       $('.danger-name').removeClass("d-none");
 

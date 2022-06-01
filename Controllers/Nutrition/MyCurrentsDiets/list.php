@@ -111,6 +111,7 @@ foreach ($listMyCurrentDiets as $currentDiet) {
 
 $resp["ListMyCurrentsDiets"]  = $listMyCurrentDietsFormFront;
 $resp["ListMyTemplatesDiets"] = $listMyTemplateDiets;
+$resp["ListMyStudents"]       = $ListUsers;
 if(!empty($error)){
   $resp["Error"]              = $error;
 }
