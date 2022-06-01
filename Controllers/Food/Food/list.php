@@ -4,7 +4,7 @@ include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 include(__DIR__ . "/../../Data/DistriXGeneralIdData.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ . "/../../Data/DistriXFoodFoodData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableFoodCategoryData.php");

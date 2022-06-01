@@ -68,6 +68,55 @@
               <?php if ($hasNutrition_MyDiet)           { ?><li <?php echo $navActiveMenunutritionMyCurrentsDiets ?>><a class="nav-link" href="nutritionMyCurrentsDiets.php"><?php echo $menu_nutrition_myDiet; ?></a></li><?php } ?>
               <?php if ($hasNutrition_MyTemplatesDiets) { ?><li <?php echo $navActiveMenuNutritionMyTemplatesDiets ?>><a class="nav-link" href="nutritionMyTemplatesDiets.php"><?php echo $menu_nutrition_myTempletDiet; ?></a></li><?php } ?>
               <?php if ($hasNutrition_Recipe)           { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link" href="nutritionMyRecipes.php"><?php echo $menu_nutrition_myRecipe; ?></a></li><?php } ?>
+              
+              <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
+              <!-- //                                           MENU FOOD                                             // -->
+              <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
+              <?php
+                $hasRight_FOOD_FOOD         = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_FOOD');
+                $hasRight_FOOD_BRAND        = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_BRAND');
+                $hasRight_FOOD_ECO_SCORE    = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_ECO_SCORE');
+                $hasRight_FOOD_NOVA_SCORE   = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_NOVA_SCORE');
+                $hasRight_FOOD_NUTRI_SCORE  = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_NUTRI_SCORE');
+                $hasRight_FOOD_LABEL        = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_LABEL');
+                $hasFood                    = false;
+                if(
+                  $hasRight_FOOD_FOOD         || 
+                  $hasRight_FOOD_BRAND        || 
+                  $hasRight_FOOD_NOVA_SCORE   || 
+                  $hasRight_FOOD_NUTRI_SCORE  || 
+                  $hasRight_FOOD_LABEL) {
+                    $hasAdministration      = true;
+                    $hasFood                = true;
+                }
+              ?>
+              
+              <?php if ($hasFood) { ?>
+                <?php
+                  $dataOption = '';
+                  $navActiveMenuFoodFood = $navActiveMenuFoodBrand = $navActiveMenuFoodEcoScore = $navActiveMenuFoodNovaScore = $navActiveMenuFoodNutriScore = $navActiveMenuFoodLabel = '';
+                  if (stripos($_SERVER['PHP_SELF'], 'foodFood')       !== false) { $dataOption="on"; $navActiveMenuFoodFood       = 'class="active"'; }
+                  if (stripos($_SERVER['PHP_SELF'], 'foodBrand')      !== false) { $dataOption="on"; $navActiveMenuFoodBrand      = 'class="active"'; }
+                  if (stripos($_SERVER['PHP_SELF'], 'foodEcoScore')   !== false) { $dataOption="on"; $navActiveMenuFoodEcoScore   = 'class="active"'; }
+                  if (stripos($_SERVER['PHP_SELF'], 'foodNovaScore')  !== false) { $dataOption="on"; $navActiveMenuFoodNovaScore  = 'class="active"'; }
+                  if (stripos($_SERVER['PHP_SELF'], 'foodNutriScore') !== false) { $dataOption="on"; $navActiveMenuFoodNutriScore = 'class="active"'; }
+                  if (stripos($_SERVER['PHP_SELF'], 'foodLabel')      !== false) { $dataOption="on"; $navActiveMenuFoodLabel      = 'class="active"'; }
+                ?>
+                <li class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle">
+                    <span class="micon dw dw-harvest"></span>
+                    <span class="mtext"><?php echo $menu_food; ?></span>
+                  </a>
+                  <ul class="submenu child">
+                    <?php if ($hasRight_FOOD_FOOD)        { ?><li <?php echo $navActiveMenuFoodFood ?>><a class="nav-link" href="foodFoodList.php"><?php echo $menu_food_food_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_BRAND)       { ?><li <?php echo $navActiveMenuFoodBrand ?>><a class="nav-link" href="foodBrandList.php"><?php echo $menu_food_brand_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_ECO_SCORE)   { ?><li <?php echo $navActiveMenuFoodEcoScore ?>><a class="nav-link" href="foodEcoScoreList.php"><?php echo $menu_food_ecoScore_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_NOVA_SCORE)  { ?><li <?php echo $navActiveMenuFoodNovaScore ?>><a class="nav-link" href="foodNovaScoreList.php"><?php echo $menu_food_novaScore_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_NUTRI_SCORE) { ?><li <?php echo $navActiveMenuFoodNutriScore ?>><a class="nav-link" href="foodNutriScoreList.php"><?php echo $menu_food_nutriScore_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_LABEL)       { ?><li <?php echo $navActiveMenuFoodLabel ?>><a class="nav-link" href="foodLabelList.php"><?php echo $menu_food_label_list; ?></a></li><?php } ?>
+                  </ul>
+                </li>
+              <?php } ?>
             </ul>
           </li>
         <?php } ?>
@@ -224,23 +273,6 @@
               $hasAdministration           = true;
               $hasSecurity                 = true;
           }
-          $hasRight_FOOD_FOOD         = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_FOOD');
-          $hasRight_FOOD_BRAND        = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_BRAND');
-          $hasRight_FOOD_ECO_SCORE    = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_ECO_SCORE');
-          $hasRight_FOOD_NOVA_SCORE   = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_NOVA_SCORE');
-          $hasRight_FOOD_NUTRI_SCORE  = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_NUTRI_SCORE');
-          $hasRight_FOOD_LABEL        = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_LABEL');
-          $hasFood                    = false;
-          if(
-            $hasRight_FOOD_FOOD         || 
-            $hasRight_FOOD_BRAND        || 
-            $hasRight_FOOD_NOVA_SCORE   || 
-            $hasRight_FOOD_NUTRI_SCORE  || 
-            $hasRight_FOOD_LABEL) {
-              $hasAdministration        = true;
-              $hasFood                  = true;
-          }
-        
           $hasRight_CODE_TABLE_WEIGHT_TYPE    = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_WEIGHT_TYPE');
           $hasRight_CODE_TABLE_FOOD_CATEGORY  = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_FOOD_CATEGORY');
           $hasRight_CODE_TABLE_NUTRITIONAL    = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_NUTRITIONAL');
@@ -340,36 +372,6 @@
           <?php } ?>
         <?php } ?>
        
-        <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
-        <!-- //                                           MENU FOOD                                             // -->
-        <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
-        <?php if ($hasFood) { ?>
-          <?php
-            $dataOption = '';
-            $navActiveMenuFoodFood = $navActiveMenuFoodBrand = $navActiveMenuFoodEcoScore = $navActiveMenuFoodNovaScore = $navActiveMenuFoodNutriScore = $navActiveMenuFoodLabel = '';
-            if (stripos($_SERVER['PHP_SELF'], 'foodFood')       !== false) { $dataOption="on"; $navActiveMenuFoodFood       = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodBrand')      !== false) { $dataOption="on"; $navActiveMenuFoodBrand      = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodEcoScore')   !== false) { $dataOption="on"; $navActiveMenuFoodEcoScore   = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodNovaScore')  !== false) { $dataOption="on"; $navActiveMenuFoodNovaScore  = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodNutriScore') !== false) { $dataOption="on"; $navActiveMenuFoodNutriScore = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodLabel')      !== false) { $dataOption="on"; $navActiveMenuFoodLabel      = 'class="active"'; }
-          ?>
-          <li>
-            <a href="javascript:;" class="dropdown-toggle">
-              <span class="micon dw dw-harvest"></span>
-              <span class="mtext"><?php echo $menu_food; ?></span>
-            </a>
-            <ul class="submenu">
-              <?php if ($hasRight_FOOD_FOOD)        { ?><li <?php echo $navActiveMenuFoodFood ?>><a class="nav-link" href="foodFoodList.php"><?php echo $menu_food_food_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_FOOD_BRAND)       { ?><li <?php echo $navActiveMenuFoodBrand ?>><a class="nav-link" href="foodBrandList.php"><?php echo $menu_food_brand_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_FOOD_ECO_SCORE)   { ?><li <?php echo $navActiveMenuFoodEcoScore ?>><a class="nav-link" href="foodEcoScoreList.php"><?php echo $menu_food_ecoScore_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_FOOD_NOVA_SCORE)  { ?><li <?php echo $navActiveMenuFoodNovaScore ?>><a class="nav-link" href="foodNovaScoreList.php"><?php echo $menu_food_novaScore_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_FOOD_NUTRI_SCORE) { ?><li <?php echo $navActiveMenuFoodNutriScore ?>><a class="nav-link" href="foodNutriScoreList.php"><?php echo $menu_food_nutriScore_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_FOOD_LABEL)       { ?><li <?php echo $navActiveMenuFoodLabel ?>><a class="nav-link" href="foodLabelList.php"><?php echo $menu_food_label_list; ?></a></li><?php } ?>
-            </ul>
-          </li>
-        <?php } ?>
-        
         <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
         <!-- //                                       MENU CODES TABLES                                         // -->
         <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
