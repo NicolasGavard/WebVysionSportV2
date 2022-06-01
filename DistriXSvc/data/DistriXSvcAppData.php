@@ -102,19 +102,24 @@ if (!class_exists("DistriXSvcAppData", false)) {
 
       $className = get_called_class();
       $classInstance = new $className();
-      if (is_string($json)) {
-        $json = json_decode($json);
-      }
-      foreach ($json as $key => $value) {
-        $setMethodName = "set" . ucfirst($key);
-        if (method_exists($classInstance, $setMethodName)) {
-          try {
-            $classInstance->$setMethodName($value);
-          } catch (\Throwable $th) {
-            $errorData->setCode(DISTRIX_SVC_ERROR_DATA_VALUE);
-            $errorData->setTextToAllText("Method : " . $setMethodName);
+      if (!is_null($json)) {
+        if (is_string($json)) {
+          $json = json_decode($json);
+        }
+        foreach ($json as $key => $value) {
+          $setMethodName = "set" . ucfirst($key);
+          if (method_exists($classInstance, $setMethodName)) {
+            try {
+              $classInstance->$setMethodName($value);
+            } catch (\Throwable $th) {
+              $errorData->setCode(DISTRIX_SVC_ERROR_DATA_VALUE);
+              $errorData->setTextToAllText("Method : " . $setMethodName);
+            }
           }
         }
+      } else {
+        $errorData->setCode(DISTRIX_SVC_ERROR_DATA_VALUE);
+        $errorData->setTextToAllText("Data is null");
       }
       return array($classInstance, $errorData);
     }
@@ -126,15 +131,21 @@ if (!class_exists("DistriXSvcAppData", false)) {
     public static function getJsonArray($json): array
     {
       $errorData = new DistriXSvcErrorData();
-      if (is_string($json)) {
-        $json = json_decode($json);
-      }
       $items = [];
-      foreach ($json as $item) {
-        list($data, $errorData) = self::getJsonData($item);
-        if ($errorData->getCode() == "") {
-          $items[] = $data;
+
+      if (!is_null($json)) {
+        if (is_string($json)) {
+          $json = json_decode($json);
         }
+        foreach ($json as $item) {
+          list($data, $errorData) = self::getJsonData($item);
+          if ($errorData->getCode() == "") {
+            $items[] = $data;
+          }
+        }
+      } else {
+        $errorData->setCode(DISTRIX_SVC_ERROR_DATA_VALUE);
+        $errorData->setTextToAllText("Data is null");
       }
       return array($items, $errorData);
     }

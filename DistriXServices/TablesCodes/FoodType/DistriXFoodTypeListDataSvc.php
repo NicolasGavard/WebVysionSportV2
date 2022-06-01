@@ -23,12 +23,10 @@ $foodTypeNames = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  $dataName = new FoodTypeNameStorData();
-  if (!is_null($dataSvc->getParameter("dataName"))) {
-    // list($dataName, $jsonError) = FoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
-    list($foodTypes, $foodTypeNames) = FoodTypeStor::getListNames(true, FoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"))[0], $dbConnection);
-  }
+  // $dataName = new FoodTypeNameStorData();
+  // list($dataName, $jsonError) = FoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
   // list($foodTypes, $foodTypeNames) = FoodTypeStor::getListNames(true, $dataName, $dbConnection);
+  list($foodTypes, $foodTypeNames) = FoodTypeStor::getListNames(true, FoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"))[0], $dbConnection);
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }

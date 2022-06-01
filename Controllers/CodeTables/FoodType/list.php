@@ -5,8 +5,8 @@ include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
-include(__DIR__ . "/Data/DistriXCodeTableFoodTypeData.php");
-include(__DIR__ . "/Data/DistriXCodeTableFoodTypeNameData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableLanguageData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
@@ -23,10 +23,10 @@ $error         = [];
 $output        = [];
 $outputok      = false;
 
+// CALL
 $languageCaller = new DistriXServicesCaller();
 $languageCaller->setMethodName("ListLanguages");
 $languageCaller->setServiceName("DistriXServices/TablesCodes/Language/DistriXLanguageListDataSvc.php");
-
 
 $dataName = new DistriXCodeTableFoodTypeNameData();
 // $dataName->setIdLanguage(1);
@@ -41,13 +41,13 @@ $svc->addToCall("Language", $languageCaller);
 $svc->addToCall("FoodType", $servicesCaller);
 $callsOk = $svc->call();
 
+// RESPONSES
 list($outputok, $output, $errorData) = $svc->getResult("Language"); //print_r($output);
 if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLanguages"])) {
   list($listLanguages, $jsonError) = DistriXCodeTableLanguageData::getJsonArray($output["ListLanguages"]);
 } else {
   $error = $errorData;
 }
-
 list($outputok, $output, $errorData) = $svc->getResult("FoodType"); //print_r($output);
 if ($outputok && isset($output["ListFoodTypes"]) && is_array($output["ListFoodTypes"])) {
   list($listFoodTypes, $jsonError) = DistriXCodeTableFoodTypeData::getJsonArray($output["ListFoodTypes"]);
@@ -56,20 +56,22 @@ if ($outputok && isset($output["ListFoodTypes"]) && is_array($output["ListFoodTy
 }
 if ($outputok && isset($output["ListFoodTypeNames"]) && is_array($output["ListFoodTypeNames"])) {
   list($listFoodTypeNames, $jsonError) = DistriXCodeTableFoodTypeNameData::getJsonArray($output["ListFoodTypeNames"]);
-  $nbLanguagesTotal = count($listLanguages);
-  foreach ($listFoodTypes as $foodType) {
-    $foodType->setNbLanguagesTotal($nbLanguagesTotal);
-    $names = [];
-    foreach ($listFoodTypeNames as $foodTypeName) {
-      if ($foodTypeName->getIdFoodType() == $foodType->getId()) {
-        $names[] = $foodTypeName;
-      }
-    }
-    $foodType->setNames($names);
-    $foodType->setNbLanguages(count($names));
-  }
 } else {
   $error = $errorData;
+}
+
+// TREATMENT
+$nbLanguagesTotal = count($listLanguages);
+foreach ($listFoodTypes as $foodType) {
+  $foodType->setNbLanguagesTotal($nbLanguagesTotal);
+  $names = [];
+  foreach ($listFoodTypeNames as $foodTypeName) {
+    if ($foodTypeName->getIdFoodType() == $foodType->getId()) {
+      $names[] = $foodTypeName;
+    }
+  }
+  $foodType->setNames($names);
+  $foodType->setNbLanguages(count($names));
 }
 
 $resp["ListFoodTypes"] = $listFoodTypes;
