@@ -20,22 +20,16 @@ $databasefile  = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 $dbConnection  = null;
 $errorData     = null;
 $insere        = false;
-$foodType      = null;
-$foodTypeNames = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  if (!is_null($dataSvc->getParameter("data"))) {
-    list($foodTypeStorData, $jsonError) = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
-  }
-  if (!is_null($dataSvc->getParameter("dataNames"))) {
-    list($foodTypeNamesStorData, $jsonError) = FoodTypeNameStorData::getJsonArray($dataSvc->getParameter("dataNames"));
-  }
+  list($foodTypeStorData, $jsonError) = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
+  list($foodTypeNamesStorData, $jsonErrorName) = FoodTypeNameStorData::getJsonArray($dataSvc->getParameter("dataNames"));
 
 // print_r($foodTypeStor);
 // print_r($foodTypeNamesStor);
 
-  if (! is_null($foodTypeStorData)) {
+  if ($jsonError->getCode() == "") {
     if ($dbConnection->beginTransaction()) {
       $canSave = true;
       if ($foodTypeStorData->getId() == 0) {

@@ -4,8 +4,8 @@ include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
-include(__DIR__ . "/Data/DistriXCodeTableFoodTypeData.php");
-include(__DIR__ . "/Data/DistriXCodeTableFoodTypeNameData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -68,7 +68,7 @@ $_POST['names'] = $names;
 
 list($foodType, $jsonError) = DistriXCodeTableFoodTypeData::getJsonData($_POST);
 list($foodTypeNames, $jsonError) = DistriXCodeTableFoodTypeNameData::getJsonArray($foodType->getNames());
-$foodType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not objects. Yvan 01 June 22
+$foodType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. Yvan 01 June 22
 
 // print_r($foodType);
 // print_r($foodTypeNames);

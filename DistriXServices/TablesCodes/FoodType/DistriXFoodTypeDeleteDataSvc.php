@@ -22,10 +22,7 @@ $insere       = false;
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if ($dbConnection->beginTransaction()) {
-    $foodTypeStor = new FoodTypeStorData();
-    if (!is_null($dataSvc->getParameter("data"))) {
-      list($foodTypeStor, $jsonError) = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
-    }
+    list($foodTypeStor, $jsonError) = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
     $insere = FoodTypeStor::remove($foodTypeStor, $dbConnection);
     if ($insere) {
       $dbConnection->commit();

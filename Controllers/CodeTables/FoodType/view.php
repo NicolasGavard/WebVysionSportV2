@@ -4,8 +4,8 @@ include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
-include(__DIR__ . "/Data/DistriXCodeTableFoodTypeData.php");
-include(__DIR__ . "/Data/DistriXCodeTableFoodTypeNameData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -19,6 +19,7 @@ $error      = [];
 $output     = [];
 $outputok   = false;
 
+// DATA
 $foodType = new DistriXCodeTableFoodTypeData();
 $foodType->setId($_POST['id'] ?? 0);
 
@@ -26,6 +27,7 @@ $foodType->setId(1);
 // $foodType->setId(3);
 // $foodType->setId(4);
 
+// CALL
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $foodType);
 $servicesCaller->setServiceName("DistriXServices/TablesCodes/FoodType/DistriXFoodTypeViewDataSvc.php");
@@ -39,6 +41,8 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   $logInfoData->setLogData(print_r($output, true));
   DistriXLogger::log($logInfoData);
 }
+
+// RESPONSE
 if ($outputok && isset($output["ViewFoodType"])) {
   list($foodType, $jsonError) = DistriXCodeTableFoodTypeData::getJsonData($output["ViewFoodType"]);
 } else {
@@ -46,14 +50,16 @@ if ($outputok && isset($output["ViewFoodType"])) {
 }
 if ($outputok && isset($output["ViewFoodTypeNames"]) && is_array($output["ViewFoodTypeNames"])) {
   list($listFoodTypeNames, $jsonError) = DistriXCodeTableFoodTypeNameData::getJsonArray($output["ViewFoodTypeNames"]);
-  $foodType->setNames($listFoodTypeNames);
-  $foodType->setNbLanguages(count($listFoodTypeNames));
 } else {
   $error = $errorData;
 }
+
+// TREATMENT
+$foodType->setNames($listFoodTypeNames);
+$foodType->setNbLanguages(count($listFoodTypeNames));
+
 $resp["ViewFoodType"] = $foodType;
 if (!empty($error)) {
   $resp["Error"] = $error;
 }
-
 echo json_encode($resp);
