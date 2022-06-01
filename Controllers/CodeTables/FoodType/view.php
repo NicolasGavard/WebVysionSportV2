@@ -27,6 +27,8 @@ $foodType->setId(1);
 // $foodType->setId(3);
 // $foodType->setId(4);
 
+$listFoodTypeNames = [];
+
 // CALL
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $foodType);
