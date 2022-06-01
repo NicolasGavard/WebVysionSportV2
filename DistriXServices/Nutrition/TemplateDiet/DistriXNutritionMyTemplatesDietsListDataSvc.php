@@ -9,8 +9,6 @@ include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 include(__DIR__ . "/../../../DistriXTrace/data/DistriXTraceData.php");
 // Error Data
 include(__DIR__ . "/../../../DistriXSvc/Data/DistriXSvcErrorData.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/DietTemplateStor.php");

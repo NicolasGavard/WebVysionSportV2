@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSvc/DistriXSvcUtil.php");
 // DATA
@@ -69,18 +69,22 @@ foreach ($listMyCurrentDiets as $currentDiet) {
   }
   $distriXNutritionCurrentDietData->setDateStart($currentDiet->getDateStart());
 
-  $date_start       = DistriXSvcUtil::getjmaDate($currentDiet->getDateStart());
-  $date_start       = $date_start[0].'-'.$date_start[1].'-'.$date_start[2];
-  $date_rest        = new DateTime('now'); 
+  $date_start         = DistriXSvcUtil::getjmaDate($currentDiet->getDateStart());
+  $date_start         = $date_start[0].'-'.$date_start[1].'-'.$date_start[2];
+  $date_rest          = new DateTime('now'); 
   // Trouver la date de fin
-  $date_end         =  date('Y-m-d', strtotime($date_start. ' + '.$duration.' days'));
-  $date_fin         = new DateTime($date_end);
+  $date_end           =  date('Y-m-d', strtotime($date_start. ' + '.$duration.' days'));
+  $date_fin           = new DateTime($date_end);
   // Nombre de jours restant
-  $interval         = $date_rest->diff($date_fin);
-  $nbDaysInterval   = $interval->format('%d');
+  $interval           = $date_rest->diff($date_fin);
+  $nbDaysInterval     = $interval->format('%d');
+
   // Faire pourcentage
-  $advancement_rest = round(($nbDaysInterval / $duration) * 100, 2);
-  $advancement_done = 100 - round($advancement_rest,2);
+  $advancement_rest   = 100;
+  if ($duration > 0 ) {
+    $advancement_rest = round(($nbDaysInterval / $duration) * 100, 2);
+  }
+  $advancement_done   = 100 - round($advancement_rest,2);
 
   $distriXNutritionCurrentDietData->setAdvancement($advancement_done);
   $distriXNutritionCurrentDietData->setElemState($currentDiet->getElemState());
