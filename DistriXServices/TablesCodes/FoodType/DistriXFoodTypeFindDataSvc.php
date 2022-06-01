@@ -18,17 +18,21 @@ $databasefile = __DIR__ . "/../../../DistriXServices/Db/Infodb.php";
 
 $dbConnection  = null;
 $errorData     = null;
-$foodTypes     = [];
+$foodType      = new FoodTypeStorData();
 $foodTypeNames = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
+  if (!is_null($dataSvc->getParameter("data"))) {
+    list($foodType, $jsonError) = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
+  }
   $dataName = new FoodTypeNameStorData();
   if (!is_null($dataSvc->getParameter("dataName"))) {
-    // list($dataName, $jsonError) = FoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
-    list($foodTypes, $foodTypeNames) = FoodTypeStor::getListNames(true, FoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"))[0], $dbConnection);
+    list($dataName, $jsonError) = FoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
   }
-  // list($foodTypes, $foodTypeNames) = FoodTypeStor::getListNames(true, $dataName, $dbConnection);
+  list($foodType, $foodTypeNames) = FoodTypeStor::findByIndCodeNames($foodType, $dataName, $dbConnection);
+  // print_r($foodTypeNamesStor);
+  
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
@@ -36,8 +40,8 @@ if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListFoodType", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListFoodTypes", $foodTypes);
-$dataSvc->addToResponse("ListFoodTypeNames", $foodTypeNames);
+$dataSvc->addToResponse("FindFoodType", $foodType);
+$dataSvc->addToResponse("FindFoodTypeNames", $foodTypeNames);
 
 // Return response
 $dataSvc->endOfService();
