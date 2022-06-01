@@ -1,7 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // DISTRIX Init
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
-if (! $dataSvc->isAuthorized()) {
+if ($dataSvc->isAuthorized()) {
   // STY Const
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
@@ -33,7 +33,7 @@ if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ViewFoodType", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ViewFoodTypes", $foodType);
+$dataSvc->addToResponse("ViewFoodType", $foodType);
 $dataSvc->addToResponse("ViewFoodTypeNames", $foodTypeNames);
 
 // Return response

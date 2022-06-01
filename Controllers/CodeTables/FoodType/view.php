@@ -23,13 +23,13 @@ $foodType = new DistriXCodeTableFoodTypeData();
 $foodType->setId($_POST['id'] ?? 0);
 
 $foodType->setId(1);
-$foodType->setId(3);
+// $foodType->setId(3);
 // $foodType->setId(4);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $foodType);
 $servicesCaller->setServiceName("DistriXServices/TablesCodes/FoodType/DistriXFoodTypeViewDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_FoodCategory")) {
   $logInfoData = new DistriXLoggerInfoData();
