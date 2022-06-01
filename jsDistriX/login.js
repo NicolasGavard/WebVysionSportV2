@@ -1,3 +1,8 @@
+  if (localStorage.getItem("saveDataLogin") !== null && localStorage.getItem("saveDataPassword") !== null) {
+    $("#login").val(localStorage.getItem("saveDataLogin"));
+    $("#password").val(localStorage.getItem("saveDataPassword"));
+  }
+
   $("#btnLogin").click(function() {
     $.ajax({ 
       url: 'Controllers/Login/login.php',
@@ -6,15 +11,21 @@
       dataType: "json",
       success: function(output) {       
         if (output.isConnected) {
+          
+          if( $('#saveDataLogin').is(':checked') ){
+            localStorage.setItem("saveDataLogin", $("#login").val());
+            localStorage.setItem("saveDataPassword", $("#password").val());
+          }
+          
           if (output.infoProfil.initPass == 0){
             // Add All Info in local Storage
-            localStorage.setItem("idUser",output.infoProfil.id);
-            localStorage.setItem("name",output.infoProfil.name);
-            localStorage.setItem("firstName",output.infoProfil.firstName);
-            localStorage.setItem("linkToPicture",output.infoProfil.linkToPicture);
-            localStorage.setItem("email",output.infoProfil.email);
-            localStorage.setItem("emailBackup",output.infoProfil.emailBackup);
-            localStorage.setItem("idLanguage",output.infoProfil.idLanguage);
+            localStorage.setItem("idUser", output.infoProfil.id);
+            localStorage.setItem("name", output.infoProfil.name);
+            localStorage.setItem("firstName", output.infoProfil.firstName);
+            localStorage.setItem("linkToPicture", output.infoProfil.linkToPicture);
+            localStorage.setItem("email", output.infoProfil.email);
+            localStorage.setItem("emailBackup", output.infoProfil.emailBackup);
+            localStorage.setItem("idLanguage", output.infoProfil.idLanguage);
             window.location.replace("main.php");
           } else {
             localStorage.setItem("idUser",output.infoProfil.id);
