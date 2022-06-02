@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/Nutrition/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -15,15 +15,13 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-$label  = new DistriXNutritionCurrentDietData();
-if ($_POST['id'] > 0) {
-  $label->setId($_POST['id']);
-}
+$currentDiet = new DistriXNutritionCurrentDietData();
+$currentDiet->setId($_POST['id'] ?? 0);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewMyCurrentDiet");
-$servicesCaller->addParameter("data", $label);
-$servicesCaller->setServiceName("DistriXServices/Food/MyCurrentDiet/DistriXFoodMyCurrentDietViewDataSvc.php");
+$servicesCaller->addParameter("data", $currentDiet);
+$servicesCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_MyCurrentDiet")) {
@@ -35,15 +33,13 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewMyCurrentDiet"])) {
-    $label = $output["ViewMyCurrentDiet"];
-  }
+if ($outputok && isset($output["ViewMyCurrentDiet"])) {
+  list($currentDiet, $jsonError) = DistriXNutritionCurrentDietData::getJsonData($output["ViewMyCurrentDiet"]);
 } else {
   $error = $errorData;
 }
 
-$resp["ViewMyCurrentDiet"]  = $label;
+$resp["ViewMyCurrentDiet"]  = $currentDiet;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }
