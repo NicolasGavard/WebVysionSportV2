@@ -12,6 +12,7 @@
       success: function(output) {       
         if (output.isConnected) {
           
+          // Save Login in Storage if the box is checked
           if( $('#saveDataLogin').is(':checked') ){
             localStorage.setItem("saveDataLogin", $("#login").val());
             localStorage.setItem("saveDataPassword", $("#password").val());
@@ -26,6 +27,7 @@
             localStorage.setItem("email", output.infoProfil.email);
             localStorage.setItem("emailBackup", output.infoProfil.emailBackup);
             localStorage.setItem("idLanguage", output.infoProfil.idLanguage);
+
             window.location.replace("main.php");
           } else {
             localStorage.setItem("idUser",output.infoProfil.id);
