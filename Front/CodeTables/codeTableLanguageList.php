@@ -3,12 +3,11 @@
   $international  = 'codeTableLanguageList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-	include('i18/'.$i18cdlangue.'/header.php');
-  include("i18/_i18.php");
-
-  include('_header.php');
-	include('_headerMenuTop.php');
-	include('_headerMenuLeft.php');
+	include('../../i18/'.$i18cdlangue.'/header.php');
+  include("../../i18/_i18.php");
+  include('../Home/_header.php');
+	include('../Home/_headerMenuTop.php');
+	include('../Home/_headerMenuLeft.php')
 ?>
 	<div class="mobile-menu-overlay"></div>
 
@@ -102,10 +101,10 @@
       </div>
 
       <?php
-        include('_headerFooter.php');
+        include('../Home/_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/CodeTables/codeTableLanguages.js"></script>
+      <script src="../../jsWebVysionSport/CodeTables/codeTableLanguages.js"></script>
   </body>
 </html>
 

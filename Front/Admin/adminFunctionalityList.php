@@ -188,9 +188,9 @@
   </div>
 
   <?php
-        include('_headerFooter.php');
+        include('../Home/_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/adminFunctionalities.js"></script>
+      <script src="../../jsWebVysionSport/adminFunctionalities.js"></script>
   </body>
 </html>

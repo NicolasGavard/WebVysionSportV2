@@ -179,9 +179,9 @@
   </div>
 
       <?php
-        include('_headerFooter.php');
+        include('../Home/_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/adminRoles.js"></script>
+      <script src="../../jsWebVysionSport/adminRoles.js"></script>
   </body>
 </html>

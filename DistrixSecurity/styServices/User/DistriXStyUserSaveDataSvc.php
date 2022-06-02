@@ -217,7 +217,7 @@ if ($dataSvc->getMethodName() == "SaveUser") {
           }
 
           $i18cdlangue  = DISTRIX_LANG_DEFAULT;
-          $filename     = "i18/$i18cdlangue/$international";
+          $filename     = "../../i18/$i18cdlangue/$international";
           $filename    .= "Txt$i18cdlangue.php";
           include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/".$filename);
           include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/header.php");

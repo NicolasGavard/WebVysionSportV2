@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include('i18/'.$i18cdlangue.'/header.php');
+	include('../../i18/'.$i18cdlangue.'/header.php');
 	
 	include('_header.php');
 	include('_headerMenuTop.php');
@@ -264,9 +264,9 @@
 			</div>
 
 			<?php
-        include('_headerFooter.php');
+        include('../Home/_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/adminApplications.js"></script>
+      <script src="../../jsWebVysionSport/adminApplications.js"></script>
   </body>
 </html>

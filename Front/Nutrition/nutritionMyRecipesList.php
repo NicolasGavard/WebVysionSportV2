@@ -3,8 +3,8 @@
 	$international  = 'nutritionMyRecipesList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-	include('i18/'.$i18cdlangue.'/header.php');
-  include("i18/_i18.php");
+	include('../../i18/'.$i18cdlangue.'/header.php');
+  include("../../i18/_i18.php");
   
   include('_header.php');
 	include('_headerMenuTop.php');
@@ -123,9 +123,9 @@
       </div> 
 
       <?php
-        include('_headerFooter.php');
+        include('../Home/_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/Nutrition/nutritionMyRecipesList.js"></script>
+      <script src="../../jsWebVysionSport/Nutrition/nutritionMyRecipesList.js"></script>
   </body>
 </html>

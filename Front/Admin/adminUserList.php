@@ -296,9 +296,9 @@
   </div>
 
       <?php
-        include('_headerFooter.php');
+        include('../Home/_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/adminUsers.js"></script>
+      <script src="../../jsWebVysionSport/adminUsers.js"></script>
   </body>
 </html>

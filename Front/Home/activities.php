@@ -1,7 +1,10 @@
 <?php
 	session_start();
-	include('i18/'.$i18cdlangue.'/header.php');
-	
+  $international  = '';
+  $i18cdlangue    = 'FR';
+  // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/header.php');
+	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/main.php');
 	include('_header.php');
 	include('_headerMenuTop.php');
 	include('_headerMenuLeft.php');
@@ -226,5 +229,5 @@
 	</div>	
 
 <?php
-	include('_headerFooter.php');
+	include('../Home/_headerFooter.php');
 ?>
