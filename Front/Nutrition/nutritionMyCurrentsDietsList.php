@@ -95,6 +95,7 @@
           <div class="modal-content">
             <div class="modal-body text-center font-18">
               <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_add_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_update_title; ?></h4>
               <form class="FormAddMyCurrentDiet" action="#" id="FormAddMyCurrentDiet">
                 <input class="form-control AddMyCurrentsDietsFormId"            type="hidden" name="id"           value="0">
                 <input class="form-control AddMyCurrentsDietsFormIdUserCoatch"  type="hidden" name="idusercoach"  value="0">
@@ -145,6 +146,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/nutritionMyCurrentsDietsList.js"></script>
+      <script src="jsWebVysionSport/Nutrition/nutritionMyCurrentsDietsList.js"></script>
   </body>
 </html>

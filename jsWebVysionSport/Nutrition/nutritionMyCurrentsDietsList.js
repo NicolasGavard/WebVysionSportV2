@@ -213,9 +213,6 @@ function ViewMyCurrentDiet(id){
     success : function(data) {
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
-    
-      $(".dropzoneImage").removeClass("d-none");
-      $(".dropzoneNoImage").addClass("d-none");
 
       $('.AddMyCurrentDietFormIdMyCurrentDiet').val(id);
       $('.AddMyCurrentDietFormCode').val(data.ViewMyCurrentDiet.code);

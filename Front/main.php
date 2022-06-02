@@ -1,12 +1,12 @@
 <?php
 	session_start();
-	include('i18/FR/header.php');
-	include('i18/FR/main.php');
+	include(__DIR__ . '/../i18/FR/header.php');
+	include(__DIR__ . '/../i18/FR/main.php');
 
-	include('_header.php');
-	include('_headerLoader.php');
-	include('_headerMenuTop.php');
-	include('_headerMenuLeft.php');
+	include(__DIR__ . '/_header.php');
+	include(__DIR__ . '/_headerLoader.php');
+	include(__DIR__ . '/_headerMenuTop.php');
+	include(__DIR__ . '/_headerMenuLeft.php');
 ?>
 
 	<div class="mobile-menu-overlay"></div>
@@ -16,7 +16,7 @@
 			<div class="card-box pd-10 height-100-p mb-20">
 				<div class="row align-items-center">
 					<div class="col-md-4">
-						<img src="vendors/images/banner-img.png" alt="">
+						<img src="../vendors/images/banner-img.png" alt="">
 					</div>
 					<div class="col-md-8">
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">
@@ -98,5 +98,5 @@
 			</div>
 			
 <?php
-	include('_headerFooter.php');
+	include(__DIR__ . '/_headerFooter.php');
 ?>

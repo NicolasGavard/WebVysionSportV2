@@ -1,7 +1,7 @@
 <?php
 	session_start();
 
-  $international  = 'foodNovaScoreList';
+  $international  = 'foodEcoScoreList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('i18/FR/header.php');
@@ -25,7 +25,7 @@
             <div class="pull-right">
               <button type="button" class="btn btn-success disabled"><i class="icon-copy dw dw-checked"></i>&nbsp;<?php echo $page_all_active; ?></button>
               <button type="button" class="btn btn-warning"><i class="icon-copy dw dw-ban"></i>&nbsp;<?php echo $page_all_inactive; ?></button>
-              <button type="button" class="btn btn-primary AddNewNovaScore" data-toggle="modal" data-target="#modalAddNovaScore"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
+              <button type="button" class="btn btn-primary AddNewEcoScore" data-toggle="modal" data-target="#modalAddEcoScore"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
         		</div>
 					</div>
           
@@ -40,14 +40,14 @@
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
-							<tbody id="listNovaScoresTbody">            
+							<tbody id="listEcoScoresTbody">            
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
       
-      <div class="modal fade" id="modalAddNovaScore" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade" id="modalAddEcoScore" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
@@ -57,27 +57,27 @@
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
-                    <input class="form-control AddNovaScoreFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
+                    <input class="form-control AddEcoScoreFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_color; ?></label>
-                    <input class="colorpicker form-control AddNovaScoreFormColor" type="text" name="color" placeholder="<?php echo $page_color; ?>">
+                    <input class="colorpicker form-control AddEcoScoreFormColor" type="text" name="color" placeholder="<?php echo $page_color; ?>">
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_color; ?> </div>
                   </div>
                 </div>
                 
                 <div class="dropzoneNoImage col-md-12 col-sm-12 d-none">
                   <div class="pd-20 card-box mb-30">
-                    <form class="dropzone FormAddNovaScore" action="#" id="FormAddNovaScore" style="max-height: 200px;">
-                      <input class="form-control AddNovaScoreFormIdNovaScore"       type="hidden" name="id"         value="0">
-                      <input class="form-control AddNovaScoreFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddNovaScoreFormStatut"        type="hidden" name="statut"     value="0">
-                      <input class="form-control AddNovaScoreFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
+                    <form class="dropzone FormAddEcoScore" action="#" id="FormAddEcoScore" style="max-height: 200px;">
+                      <input class="form-control AddEcoScoreFormIdEcoScore"    type="hidden" name="id"         value="0">
+                      <input class="form-control AddEcoScoreFormTimestamp"     type="hidden" name="timestamp"  value="0">
+                      <input class="form-control AddEcoScoreFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddEcoScoreFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
-                        <input type="file" name="file" class="AddNovaScoreFormPicture" />
+                        <input type="file" name="file" class="AddEcoScoreFormPicture" />
                       </div>
                     </form>
                     <button type="button" class="btn btn-info btnChangeImageCancel"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_cancel; ?></button>
@@ -87,7 +87,7 @@
               
               <div class="dropzoneImage padding-bottom-30 col-md-12 col-sm-12 d-none">
                 <div class="profile-photo">
-                  <img src="" alt="" style="max-width:180px; max-height:180px; border-radius: 10px;" class="avatar-photo avatar-NovaScore">
+                  <img src="" alt="" style="max-width:180px; max-height:180px; border-radius: 10px;" class="avatar-photo avatar-EcoScore">
                 </div>
                 <button type="button" class="btn btn-info btnChangeImage"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_change_picture; ?></button>
               </div>
@@ -95,7 +95,7 @@
               <div class="padding-bottom-30 row" style="margin: 0 auto;">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
-                  <button type="button" class="btn btn-primary btnAddNovaScore" id="btnAddNovaScore"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
+                  <button type="button" class="btn btn-primary btnAddEcoScore" id="btnAddEcoScore"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
                 </div>
               </div>
             </div>
@@ -107,6 +107,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/foodNovaScore.js"></script>
+      <script src="jsWebVysionSport/Nutrition/Food/foodEcoScore.js"></script>
   </body>
 </html>
