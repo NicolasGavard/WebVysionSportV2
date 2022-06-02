@@ -178,12 +178,16 @@ function ListMyCurrentDiet(elemState){
         progressColor = "success";
       }
 
+      var date  = String(val.dateStart);
+      var year  = date.substr(0, 4);
+      var month = date.substr(4, 2);
+      var day   = date.substr(6, 2);
+
       const line =  '<tr>'+
                     ' <td>'+val.name+'</td>'+
                     ' <td>'+val.firstNameUserStudent+' '+val.nameUserStudent+'</td>'+
                     ' <td>'+val.duration+' jours</td>'+
-                    // ' <td>'+ConvertIntToDateFr(val.dateStart)+'</td>'+
-                    ' <td>'+val.dateStart+'</td>'+
+                    ' <td>'+day+'/'+month+'/'+year+'</td>'+
                     ' <td>'+val.tags+'</td>'+
                     ' <td><div class="progress mb-20"><div class="progress-bar progress-bar-striped bg-'+progressColor+'" role="progressbar" style="width: '+val.advancement+'%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">'+val.advancement+'%</div></div></td>'+
                     ' <td>'+

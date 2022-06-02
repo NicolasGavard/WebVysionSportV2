@@ -82,8 +82,9 @@ foreach ($listMyCurrentDiets as $currentDiet) {
       $duration = $templateDiet->getDuration();
     }
   }
-  $distriXNutritionCurrentDietData->setDateStart($currentDiet->getDateStart());
 
+  $distriXNutritionCurrentDietData->setDateStart($currentDiet->getDateStart());
+  
   $date_start         = DistriXSvcUtil::getjmaDate($currentDiet->getDateStart());
   $date_start         = $date_start[0].'-'.$date_start[1].'-'.$date_start[2];
   $date_rest          = new DateTime('now'); 
