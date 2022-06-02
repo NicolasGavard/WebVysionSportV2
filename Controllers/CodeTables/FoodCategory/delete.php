@@ -10,7 +10,7 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp         = array();
+$resp         = array(); 
 $confirmSave  = false;
 $error        = array();
 $output       = array();
