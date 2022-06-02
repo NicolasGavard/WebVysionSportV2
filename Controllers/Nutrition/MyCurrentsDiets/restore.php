@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -17,14 +17,12 @@ $output       = array();
 $outputok     = false;
 
 if (isset($_POST)) {
-  $label  = new DistriXNutritionCurrentDietData();
-  if (isset($_POST['id']) && $_POST['id'] > 0) {
-    $label->setId($_POST['id']);
-  }
+  $currentDiet = new DistriXNutritionCurrentDietData();
+  $currentDiet->setId($_POST['id'] ?? 0);
   
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setMethodName("RestoreCurrentDiet");
-  $servicesCaller->addParameter("data", $label);
+  $servicesCaller->addParameter("data", $currentDiet);
   $servicesCaller->setServiceName("DistriXServices/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsRestoreDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   

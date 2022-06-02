@@ -17,7 +17,7 @@
             startDate: new Date(),
             firstDay: '',
             weekends: [6, 0],
-            dateFormat: 'dd-mm-yyyy',
+            dateFormat: 'dd/mm/yyyy',
             altField: '',
             altFieldDateFormat: '@',
             toggleSelected: true,
@@ -1480,7 +1480,7 @@
             monthsShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
             today: 'Сегодня',
             clear: 'Очистить',
-            dateFormat: 'dd-mm-yyyy',
+            dateFormat: 'dd/mm/yyyy',
             timeFormat: 'hh:ii',
             firstDay: 1
         },
@@ -1492,7 +1492,7 @@
             monthsShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
             today: 'Aujourd\'hui',
             clear: 'Vider',
-            dateFormat: 'dd-mm-yyyy',
+            dateFormat: 'dd/mm/yyyy',
             timeFormat: 'hh:ii',
             firstDay: 1
         }
