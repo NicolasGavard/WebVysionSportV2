@@ -1,6 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXStudentCoatchUserData", false)) {
-  class DistriXStudentCoatchUserData extends DistriXSvcAppData
+if (!class_exists("DistriXStudentCoachUserData", false)) {
+  class DistriXStudentCoachUserData extends DistriXSvcAppData
   {
     protected $id;
     protected $idUserCoach;

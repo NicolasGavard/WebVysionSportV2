@@ -23,7 +23,7 @@
   $menu_bilan_4 = "Bilan";
   
   $menu_student             = "Elèves";
-  $menu_student_list_coatch = "Liste des coatchs";
+  $menu_student_list_coach = "Liste des coachs";
   $menu_student_2 = "Elèves";
   $menu_student_3 = "Elèves";
   $menu_student_4 = "Elèves";

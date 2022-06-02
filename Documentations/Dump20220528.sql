@@ -832,35 +832,35 @@ INSERT INTO `styapplication` VALUES (1,'WEBVYSION_SPORT','WebVysion Sport',0,2);
 UNLOCK TABLES;
 
 --
--- Table structure for table `stycoatchuser`
+-- Table structure for table `stycoachuser`
 --
 
-DROP TABLE IF EXISTS `stycoatchuser`;
+DROP TABLE IF EXISTS `stycoachuser`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `stycoatchuser` (
+CREATE TABLE `stycoachuser` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `idusercoatch` int unsigned NOT NULL,
+  `idusercoach` int unsigned NOT NULL,
   `iduser` int unsigned NOT NULL,
   `datestart` int unsigned NOT NULL,
   `dateend` int unsigned NOT NULL,
   `statut` tinyint unsigned NOT NULL,
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `indstycoatchuserunique` (`idusercoatch`,`iduser`,`statut`) USING BTREE,
-  KEY `indusercoatch` (`idusercoatch`),
+  UNIQUE KEY `indstycoachuserunique` (`idusercoach`,`iduser`,`statut`) USING BTREE,
+  KEY `indusercoach` (`idusercoach`),
   KEY `induser` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='All user assigned User Coatch';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='All user assigned User Coach';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `stycoatchuser`
+-- Dumping data for table `stycoachuser`
 --
 
-LOCK TABLES `stycoatchuser` WRITE;
-/*!40000 ALTER TABLE `stycoatchuser` DISABLE KEYS */;
-INSERT INTO `stycoatchuser` VALUES (1,1,2,20220101,20221231,0,0);
-/*!40000 ALTER TABLE `stycoatchuser` ENABLE KEYS */;
+LOCK TABLES `stycoachuser` WRITE;
+/*!40000 ALTER TABLE `stycoachuser` DISABLE KEYS */;
+INSERT INTO `stycoachuser` VALUES (1,1,2,20220101,20221231,0,0);
+/*!40000 ALTER TABLE `stycoachuser` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1117,7 +1117,7 @@ CREATE TABLE `styrole` (
 
 LOCK TABLES `styrole` WRITE;
 /*!40000 ALTER TABLE `styrole` DISABLE KEYS */;
-INSERT INTO `styrole` VALUES (1,'SEC_MAN','Security Manager','Security Manager',0,0),(2,'WEB_MAN','WebVysion Manager','WebVysion Manager',0,0),(3,'WEB_USER','WebVysion User','WebVysion User',0,0),(4,'ENT_MAN','Enterprise Manager','Enterprise Manager',0,0),(5,'COATCH_MAN','Coatch Manager','Coatch Manager',0,0),(6,'COATCH','Coatch','Coatch',0,0),(7,'STUDENT','Elève','Elève',0,0);
+INSERT INTO `styrole` VALUES (1,'SEC_MAN','Security Manager','Security Manager',0,0),(2,'WEB_MAN','WebVysion Manager','WebVysion Manager',0,0),(3,'WEB_USER','WebVysion User','WebVysion User',0,0),(4,'ENT_MAN','Enterprise Manager','Enterprise Manager',0,0),(5,'COATCH_MAN','Coach Manager','Coach Manager',0,0),(6,'COATCH','Coach','Coach',0,0),(7,'STUDENT','Elève','Elève',0,0);
 /*!40000 ALTER TABLE `styrole` ENABLE KEYS */;
 UNLOCK TABLES;
 

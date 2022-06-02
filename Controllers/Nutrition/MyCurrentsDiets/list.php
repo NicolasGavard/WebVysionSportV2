@@ -21,7 +21,7 @@ $error              = [];
 $output             = [];
 $outputok           = false;
 
-$_POST['idUserCoatch']        = 1;
+$_POST['idUserCoach']        = 1;
 $listMyCurrentDiets           = [];
 $listMyTemplateDiets          = [];
 $listMyCurrentDietsFormFront  = [];
@@ -58,12 +58,12 @@ if ($outputok && isset($output["ListMyTemplatesDiets"]) && is_array($output["Lis
 foreach ($listMyCurrentDiets as $currentDiet) {
   $distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
   $distriXNutritionCurrentDietData->setId($currentDiet->getId());
-  $distriXNutritionCurrentDietData->setIdUserCoatch($currentDiet->getIdUserCoatch());
+  $distriXNutritionCurrentDietData->setIdUserCoach($currentDiet->getIdUserCoach());
   
   foreach ($ListUsers as $user) {
-    if ($currentDiet->getIdUserCoatch() == $user->getId()){
-      $distriXNutritionCurrentDietData->setNameUserCoatch($user->getName());
-      $distriXNutritionCurrentDietData->setFirstNameUserCoatch($user->getFirstName());
+    if ($currentDiet->getIdUserCoach() == $user->getId()){
+      $distriXNutritionCurrentDietData->setNameUserCoach($user->getName());
+      $distriXNutritionCurrentDietData->setFirstNameUserCoach($user->getFirstName());
     }
     if ($currentDiet->getIdUserStudent() == $user->getId()){
       $distriXNutritionCurrentDietData->setNameUserStudent($user->getName());

@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXStudentCoatchUserData.php");
+include(__DIR__ . "/../../Data/DistriXStudentCoachUserData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -16,13 +16,13 @@ $error          = array();
 $output         = array();
 $outputok       = false;
 
-$distriXStudentCoatchUserData = new DistriXStudentCoatchUserData();
-$distriXStudentCoatchUserData->setIdUserCoach($_POST['idUser']);
+$distriXStudentCoachUserData = new DistriXStudentCoachUserData();
+$distriXStudentCoachUserData->setIdUserCoach($_POST['idUser']);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListMyStudents");
 $servicesCaller->setServiceName("DistriXServices/Student/DistriXStudentMyStudentsListDataSvc.php");
-$servicesCaller->addParameter("data", $distriXStudentCoatchUserData);
+$servicesCaller->addParameter("data", $distriXStudentCoachUserData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 if ($outputok && !empty($output) > 0) {
   if (isset($output["ListMyStudents"])) {

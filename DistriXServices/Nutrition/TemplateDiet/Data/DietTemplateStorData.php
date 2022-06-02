@@ -4,7 +4,7 @@ class DiettemplateStorData extends DistriXSvcAppData {
   const DIETTEMPLATE_STATUS_NOT_AVAILABLE = 1;
 
   protected $id;
-  protected $idusercoatch;
+  protected $idusercoach;
   protected $name;
   protected $duration;
   protected $tags;
@@ -13,7 +13,7 @@ class DiettemplateStorData extends DistriXSvcAppData {
 
   public function __construct() {
       $this->id = 0;
-      $this->idusercoatch = 0;
+      $this->idusercoach = 0;
       $this->name = "";
       $this->duration = 0;
       $this->tags = "";
@@ -22,7 +22,7 @@ class DiettemplateStorData extends DistriXSvcAppData {
     }
 // Gets
   public function getId():int { return $this->id; }
-  public function getIdUserCoatch():int { return $this->idusercoatch; }
+  public function getIdUserCoach():int { return $this->idusercoach; }
   public function getName():string { return $this->name; }
   public function getDuration():int { return $this->duration; }
   public function getTags():string { return $this->tags; }
@@ -33,7 +33,7 @@ class DiettemplateStorData extends DistriXSvcAppData {
   public function getUnavailableValue():int { return self::DIETTEMPLATE_STATUS_NOT_AVAILABLE; }
 // Sets
   public function setId(int $id) { $this->id = $id; }
-  public function setIdUserCoatch(int $idUserCoatch) { $this->idusercoatch = $idUserCoatch; }
+  public function setIdUserCoach(int $idUserCoach) { $this->idusercoach = $idUserCoach; }
   public function setName(string $name) { $this->name = $name; }
   public function setDuration(int $duration) { $this->duration = $duration; }
   public function setTags(string $tags) { $this->tags = $tags; }

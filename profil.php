@@ -74,7 +74,7 @@
 								<div class="progress mb-20">
 									<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">25%</div>
 								</div>
-								<h6 class="mb-5 font-14">Note Coatch</h6>
+								<h6 class="mb-5 font-14">Note Coach</h6>
 								<div class="progress mb-20">
 									<div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">50%</div>
 								</div>
@@ -324,7 +324,7 @@
 																	<label class="custom-control-label" for="task-3"></label>
 																</div>
 																<div class="task-type">BackOffice</div>
-																Voir pour assigner un élève à un coatch ... !!!
+																Voir pour assigner un élève à un coach ... !!!
 																<div class="task-assign">Assigned to Ferdinand M. <div class="due-date">due date <span>22 February 2019</span></div></div>
 															</li>
 															<li>

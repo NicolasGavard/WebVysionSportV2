@@ -11,7 +11,7 @@ class DiettemplateStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "diettemplate";
-  const SELECT = 'SELECT id,idusercoatch,name,duration,tags,elemstate,timestamp';
+  const SELECT = 'SELECT id,idusercoach,name,duration,tags,elemstate,timestamp';
   const FROM = ' FROM diettemplate';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -88,7 +88,7 @@ class DiettemplateStor {
   }
   // End of getListFromList
 
-  public static function findByIdUserCoatchNameDuration(DiettemplateStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoachNameDuration(DiettemplateStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DiettemplateStorData();
@@ -96,11 +96,11 @@ class DiettemplateStor {
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE idusercoatch = :index0";
+      $request .= " WHERE idusercoach = :index0";
       $request .= " AND name = :index1";
       $request .= " AND duration = :index2";
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['index0'=>  $dataIn->getIdUserCoatch(), 'index1'=>  $dataIn->getName(), 'index2'=>  $dataIn->getDuration()]);
+      $stmt->execute(['index0'=>  $dataIn->getIdUserCoach(), 'index1'=>  $dataIn->getName(), 'index2'=>  $dataIn->getDuration()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
@@ -111,9 +111,9 @@ class DiettemplateStor {
     }
     return $data;
   }
-  // End of IdusercoatchNameDuration
+  // End of IdusercoachNameDuration
 
-  public static function findByIdUserCoatch(DiettemplateStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoach(DiettemplateStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -121,12 +121,12 @@ class DiettemplateStor {
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE idusercoatch = :index0";
+      $request .= " WHERE idusercoach = :index0";
       if (!$all) {
         $request .= " AND elemstate = :statut";
       }
       $params = [];
-      $params["index0"] = $dataIn->getIdUserCoatch();
+      $params["index0"] = $dataIn->getIdUserCoach();
       if (!$all) {
         $params["statut"] = $dataIn->getAvailableValue();
       }
@@ -141,7 +141,7 @@ class DiettemplateStor {
     }
     return array($list, count($list));
   }
-  // End of Idusercoatch
+  // End of Idusercoach
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
@@ -187,7 +187,7 @@ class DiettemplateStor {
 
     if ($inDbConnection != null) {
       $request  = "UPDATE diettemplate SET ";
-      $request .= "idusercoatch= :idusercoatch,";
+      $request .= "idusercoach= :idusercoach,";
       $request .= "name= :name,";
       $request .= "duration= :duration,";
       $request .= "tags= :tags,";
@@ -197,7 +197,7 @@ class DiettemplateStor {
       $request .= " AND timestamp = :oldtimestamp";
       $params = [];
       $params["id"] = $data->getId();
-      $params["idusercoatch"] = $data->getIdUserCoatch();
+      $params["idusercoach"] = $data->getIdUserCoach();
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();
@@ -310,16 +310,16 @@ class DiettemplateStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO diettemplate(";
-      $request .= "idusercoatch,name,duration,tags,elemstate,timestamp)";
+      $request .= "idusercoach,name,duration,tags,elemstate,timestamp)";
       $request .= " VALUES(";
-      $request .= ":idusercoatch,";
+      $request .= ":idusercoach,";
       $request .= ":name,";
       $request .= ":duration,";
       $request .= ":tags,";
       $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
-      $params["idusercoatch"] = $data->getIdUserCoatch();
+      $params["idusercoach"] = $data->getIdUserCoach();
       $params["name"] = $data->getName();
       $params["duration"] = $data->getDuration();
       $params["tags"] = $data->getTags();

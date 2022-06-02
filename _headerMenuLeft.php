@@ -157,10 +157,10 @@
                 $hasSTUDENT_LIST_COATCH = true;  
 
                 $dataOption = '';
-                $navActiveMenuStudentListCoatch = "";
-                if (stripos($_SERVER['PHP_SELF'], 'studentListCoatch')        !== false) { $dataOption="on"; $navActiveMenuStudentListCoatch = 'class="active"'; }
+                $navActiveMenuStudentListCoach = "";
+                if (stripos($_SERVER['PHP_SELF'], 'studentListCoach')        !== false) { $dataOption="on"; $navActiveMenuStudentListCoach = 'class="active"'; }
               ?> 
-              <?php if ($hasSTUDENT_LIST_COATCH) { ?><li <?php echo $navActiveMenuStudentListCoatch ?>><a class="nav-link" href="studentListCoatch.php"><?php echo $menu_student_list_coatch; ?></a></li><?php } ?>
+              <?php if ($hasSTUDENT_LIST_COATCH) { ?><li <?php echo $navActiveMenuStudentListCoach ?>><a class="nav-link" href="studentListCoach.php"><?php echo $menu_student_list_coach; ?></a></li><?php } ?>
             
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>

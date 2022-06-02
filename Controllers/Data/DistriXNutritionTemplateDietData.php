@@ -3,9 +3,9 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
   class DistriXNutritionTemplateDietData extends DistriXSvcAppData
   {
     protected $id;
-    protected $idUserCoatch;
-    protected $nameUserCoatch;
-    protected $firstNameUserCoatch;
+    protected $idUserCoach;
+    protected $nameUserCoach;
+    protected $firstNameUserCoach;
     protected $name;
     protected $duration;
     protected $tags;
@@ -16,9 +16,9 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
     public function __construct()
     {
       $this->id             = 0;
-      $this->idUserCoatch         = 0;
-      $this->nameUserCoatch       = "";
-      $this->firstNameUserCoatch  = "";
+      $this->idUserCoach         = 0;
+      $this->nameUserCoach       = "";
+      $this->firstNameUserCoach  = "";
       $this->name           = "";
       $this->duration       = 0;
       $this->tags           = "";
@@ -27,9 +27,9 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
     }
     // Gets
     public function getId():int { return $this->id; }
-    public function getIdUserCoatch():int { return $this->idUserCoatch; }
-    public function getNameUserCoatch():string { return $this->nameUserCoatch; }
-    public function getFirstNameUserCoatch():string { return $this->firstNameUserCoatch; }
+    public function getIdUserCoach():int { return $this->idUserCoach; }
+    public function getNameUserCoach():string { return $this->nameUserCoach; }
+    public function getFirstNameUserCoach():string { return $this->firstNameUserCoach; }
     public function getName():string { return $this->name; }
     public function getDuration():int { return $this->duration; }
     public function getTags():string { return $this->tags; }
@@ -39,9 +39,9 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
 
     // Sets
     public function setId(int $id) { $this->id = $id; }
-    public function setIdUserCoatch(int $idUserCoatch) { $this->idUserCoatch = $idUserCoatch; }
-    public function setNameUserCoatch(string $nameUserCoatch) { $this->nameUserCoatch = $nameUserCoatch; }
-    public function setFirstNameUserCoatch(string $firstNameUserCoatch) { $this->firstNameUserCoatch = $firstNameUserCoatch; }
+    public function setIdUserCoach(int $idUserCoach) { $this->idUserCoach = $idUserCoach; }
+    public function setNameUserCoach(string $nameUserCoach) { $this->nameUserCoach = $nameUserCoach; }
+    public function setFirstNameUserCoach(string $firstNameUserCoach) { $this->firstNameUserCoach = $firstNameUserCoach; }
     public function setName(string $name) { $this->name = $name; }
     public function setDuration(int $duration) { $this->duration = $duration; }
     public function setTags(string $tags) { $this->tags = $tags; }

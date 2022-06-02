@@ -20,7 +20,7 @@ $error              = [];
 $output             = [];
 $outputok           = false;
 
-$_POST['idUserCoatch']        = 1;
+$_POST['idUserCoach']        = 1;
 $listMyTemplateDiets          = [];
 $listMyCurrentDietsFormFront  = [];
 

@@ -59,7 +59,7 @@
 											<label class="custom-control-label" for="task-3"></label>
 										</div>
 										<div class="task-type">BackOffice</div>
-										Voir pour assigner un élève à un coatch ... !!!
+										Voir pour assigner un élève à un coach ... !!!
 										<div class="task-assign">Assigné par Nicolas G. <div class="due-date">due date <span>22/05/2022</span></div></div>
 									</li>
 									<li>

@@ -4,7 +4,7 @@ class DietStorData extends DistriXSvcAppData {
   const DIET_STATUS_NOT_AVAILABLE = 1;
 
   protected $id;
-  protected $idusercoatch;
+  protected $idusercoach;
   protected $iduserstudent;
   protected $iddiettemplate;
   protected $datestart;
@@ -13,7 +13,7 @@ class DietStorData extends DistriXSvcAppData {
 
   public function __construct() {
       $this->id = 0;
-      $this->idusercoatch = 0;
+      $this->idusercoach = 0;
       $this->iduserstudent = 0;
       $this->iddiettemplate = 0;
       $this->datestart = 0;
@@ -22,7 +22,7 @@ class DietStorData extends DistriXSvcAppData {
     }
 // Gets
   public function getId():int { return $this->id; }
-  public function getIdUserCoatch():int { return $this->idusercoatch; }
+  public function getIdUserCoach():int { return $this->idusercoach; }
   public function getIdUserStudent():int { return $this->iduserstudent; }
   public function getIdDietTemplate():int { return $this->iddiettemplate; }
   public function getDateStart():int { return $this->datestart; }
@@ -33,7 +33,7 @@ class DietStorData extends DistriXSvcAppData {
   public function getUnavailableValue():int { return self::DIET_STATUS_NOT_AVAILABLE; }
 // Sets
   public function setId(int $id) { $this->id = $id; }
-  public function setIdUserCoatch(int $idUserCoatch) { $this->idusercoatch = $idUserCoatch; }
+  public function setIdUserCoach(int $idUserCoach) { $this->idusercoach = $idUserCoach; }
   public function setIdUserStudent(int $idUserStudent) { $this->iduserstudent = $idUserStudent; }
   public function setIdDietTemplate(int $idDietTemplate) { $this->iddiettemplate = $idDietTemplate; }
   public function setDateStart(int $dateStart) { $this->datestart = $dateStart; }

@@ -10,7 +10,7 @@ include(__DIR__ . "/../../DistriXSecurity/Data/DistriXStyUserData.php");
 // Error
 include(__DIR__ . "/../../GlobalData/ApplicationErrorData.php");
 // DATA
-include(__DIR__ . "/Data/DistriXStudentCoatchUserData.php");
+include(__DIR__ . "/Data/DistriXStudentCoachUserData.php");
 // Database Data
 include(__DIR__ . "/Data/CoachUserStorData.php");
 // Storage
@@ -25,29 +25,29 @@ $listMyStudents = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  $distriXStudentCoatchUserData = $dataSvc->getParameter("data");
+  $distriXStudentCoachUserData = $dataSvc->getParameter("data");
   $coachUserStorData = new CoachUserStorData();
-  $coachUserStorData->setStyIdUserCoach($distriXStudentCoatchUserData->getIdUserCoach());
+  $coachUserStorData->setStyIdUserCoach($distriXStudentCoachUserData->getIdUserCoach());
   list($coachUserStorData, $coachUserStorDataInd) = CoachUserStor::findByStyIdUserCoach($coachUserStorData, false, $dbConnection);
   foreach ($coachUserStorData as $coachUser) {
-    $distriXStudentCoatchUserData = new DistriXStudentCoatchUserData();
-    $distriXStudentCoatchUserData->setId($coachUser->getId());
-    $distriXStudentCoatchUserData->setIdUserCoach($coachUser->getStyIdUserCoach());
+    $distriXStudentCoachUserData = new DistriXStudentCoachUserData();
+    $distriXStudentCoachUserData->setId($coachUser->getId());
+    $distriXStudentCoachUserData->setIdUserCoach($coachUser->getStyIdUserCoach());
     
     $infoUser = DistriXStyUser::viewUser($coachUser->getStyIdUserCoach());
-    $distriXStudentCoatchUserData->setNameUserCoach($infoUser->getName());
-    $distriXStudentCoatchUserData->setFirstNameUserCoach($infoUser->getFirstName());
+    $distriXStudentCoachUserData->setNameUserCoach($infoUser->getName());
+    $distriXStudentCoachUserData->setFirstNameUserCoach($infoUser->getFirstName());
     
-    $distriXStudentCoatchUserData->setIdUser($coachUser->getStyIdUser());
+    $distriXStudentCoachUserData->setIdUser($coachUser->getStyIdUser());
     $infoUser = DistriXStyUser::viewUser($coachUser->getStyIdUser());
-    $distriXStudentCoatchUserData->setNameUser($infoUser->getName());
-    $distriXStudentCoatchUserData->setFirstNameUser($infoUser->getFirstName());
+    $distriXStudentCoachUserData->setNameUser($infoUser->getName());
+    $distriXStudentCoachUserData->setFirstNameUser($infoUser->getFirstName());
 
-    $distriXStudentCoatchUserData->setDateStart($coachUser->getDateStart());
-    $distriXStudentCoatchUserData->setDateEnd($coachUser->getDateEnd());
-    $distriXStudentCoatchUserData->setElemState($coachUser->getElemState());
-    $distriXStudentCoatchUserData->setTimestamp($coachUser->getTimestamp());
-    $listMyStudents[] = $distriXStudentCoatchUserData;
+    $distriXStudentCoachUserData->setDateStart($coachUser->getDateStart());
+    $distriXStudentCoachUserData->setDateEnd($coachUser->getDateEnd());
+    $distriXStudentCoachUserData->setElemState($coachUser->getElemState());
+    $distriXStudentCoachUserData->setTimestamp($coachUser->getTimestamp());
+    $listMyStudents[] = $distriXStudentCoachUserData;
   }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
