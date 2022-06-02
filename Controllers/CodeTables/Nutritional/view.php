@@ -33,7 +33,7 @@ if ($_POST['id'] > 0) {
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewScoresNutri");
 $servicesCaller->addParameter("data", $weightType);
-$servicesCaller->setServiceName("DistriXServices/TablesCodes/Nutritional/DistriXNutritionalViewDataSvc.php");
+$servicesCaller->setServiceName("Services/TablesCodes/Nutritional/DistriXNutritionalViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Nutritional")) {

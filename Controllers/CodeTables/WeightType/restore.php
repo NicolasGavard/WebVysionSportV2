@@ -24,7 +24,7 @@ if ($_POST['id'] > 0) {
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("RestoreWeightType");
 $servicesCaller->addParameter("data", $scoreNutri);
-$servicesCaller->setServiceName("DistriXServices/TablesCodes/WeightType/DistriXWeightTypeRestoreDataSvc.php");
+$servicesCaller->setServiceName("Services/TablesCodes/WeightType/DistriXWeightTypeRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_WeightType")) {

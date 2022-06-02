@@ -37,7 +37,7 @@ $distriXCodeTableDietData->setStatus($_POST['statut']);
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveDiet");
 $servicesCaller->addParameter("data", $distriXCodeTableDietData);
-$servicesCaller->setServiceName("DistriXServices/Food/Diet/DistriXFoodDietSaveDataSvc.php");
+$servicesCaller->setServiceName("Services/Food/Diet/DistriXFoodDietSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Diet")) {

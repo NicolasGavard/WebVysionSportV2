@@ -20,7 +20,7 @@ list($distriXCodeTableBandData, $errorJson) = DistriXCodeTableLanguageData::getJ
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewLanguage");
 $servicesCaller->addParameter("data", $distriXCodeTableBandData);
-$servicesCaller->setServiceName("DistriXServices/TablesCodes/Language/DistriXLanguageViewDataSvc.php");
+$servicesCaller->setServiceName("Services/TablesCodes/Language/DistriXLanguageViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Language")) {

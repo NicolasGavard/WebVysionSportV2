@@ -24,7 +24,7 @@ list($distriXFoodNutriScoreData, $errorJson) = DistriXFoodNutriScoreData::getJso
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveNutriScore");
 $servicesCaller->addParameter("data", $distriXFoodNutriScoreData);
-$servicesCaller->setServiceName("DistriXServices/Food/NutriScore/DistriXFoodNutriScoreSaveDataSvc.php");
+$servicesCaller->setServiceName("Services/Food/NutriScore/DistriXFoodNutriScoreSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NutriScore")) {

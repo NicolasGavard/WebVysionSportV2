@@ -44,7 +44,7 @@ $distriXCodeTableWeightTypeData->setTimestamp($_POST['timestamp']);
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveWeightType");
 $servicesCaller->addParameter("data", $distriXCodeTableWeightTypeData);
-$servicesCaller->setServiceName("DistriXServices/TablesCodes/WeightType/DistriXWeightTypeSaveDataSvc.php");
+$servicesCaller->setServiceName("Services/TablesCodes/WeightType/DistriXWeightTypeSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_WeightType")) {

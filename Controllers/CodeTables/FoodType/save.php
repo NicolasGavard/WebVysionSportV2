@@ -76,7 +76,7 @@ $foodType->setNames([]); // Needed to be sent without an array fulfilled with el
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $foodType);
 $servicesCaller->addParameter("dataNames", $foodTypeNames);
-$servicesCaller->setServiceName("DistriXServices/TablesCodes/FoodType/DistriXFoodTypeSaveDataSvc.php");
+$servicesCaller->setServiceName("Services/TablesCodes/FoodType/DistriXFoodTypeSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); 
 echo "--"; print_r($output);
 

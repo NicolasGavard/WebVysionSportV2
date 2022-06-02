@@ -23,7 +23,7 @@ if ($_POST['id'] > 0) {
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewBrand");
 $servicesCaller->addParameter("data", $label);
-$servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandViewDataSvc.php");
+$servicesCaller->setServiceName("Services/Food/Brand/DistriXFoodBrandViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {

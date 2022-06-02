@@ -26,7 +26,7 @@ $outputok      = false;
 // CALL
 $languageCaller = new DistriXServicesCaller();
 $languageCaller->setMethodName("ListLanguages");
-$languageCaller->setServiceName("DistriXServices/TablesCodes/Language/DistriXLanguageListDataSvc.php");
+$languageCaller->setServiceName("Services/TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
 $dataName = new DistriXCodeTableFoodTypeNameData();
 // $dataName->setIdLanguage(1);
@@ -34,7 +34,7 @@ $dataName = new DistriXCodeTableFoodTypeNameData();
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("dataName", $dataName);
-$servicesCaller->setServiceName("DistriXServices/TablesCodes/FoodType/DistriXFoodTypeListDataSvc.php");
+$servicesCaller->setServiceName("Services/TablesCodes/FoodType/DistriXFoodTypeListDataSvc.php");
 
 $svc = new DistriXSvc();
 $svc->addToCall("Language", $languageCaller);

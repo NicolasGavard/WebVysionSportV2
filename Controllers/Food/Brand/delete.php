@@ -22,7 +22,7 @@ if (isset($_POST)) {
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setMethodName("DelBrand");
   $servicesCaller->addParameter("data", $distriXFoodBandData);
-  $servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandDeleteDataSvc.php");
+  $servicesCaller->setServiceName("Services/Food/Brand/DistriXFoodBrandDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
   if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {

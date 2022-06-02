@@ -24,7 +24,7 @@ list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POS
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveBrand");
 $servicesCaller->addParameter("data", $distriXFoodBandData);
-$servicesCaller->setServiceName("DistriXServices/Food/Brand/DistriXFoodBrandSaveDataSvc.php");
+$servicesCaller->setServiceName("Services/Food/Brand/DistriXFoodBrandSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {

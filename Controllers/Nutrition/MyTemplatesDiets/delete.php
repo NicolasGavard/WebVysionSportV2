@@ -25,7 +25,7 @@ if (isset($_POST)) {
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setMethodName("DelTemplateDiet");
   $servicesCaller->addParameter("data", $label);
-  $servicesCaller->setServiceName("DistriXServices/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsDeleteDataSvc.php");
+  $servicesCaller->setServiceName("Services/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
   if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_TemplateDiet")) {

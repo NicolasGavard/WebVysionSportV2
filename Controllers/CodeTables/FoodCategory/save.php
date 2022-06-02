@@ -33,7 +33,7 @@ $distriXCodeTableFoodCategoryData->setTimestamp($_POST['timestamp']);
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveFoodCategory");
 $servicesCaller->addParameter("data", $distriXCodeTableFoodCategoryData);
-$servicesCaller->setServiceName("DistriXServices/TablesCodes/FoodCategory/DistriXFoodCategorySaveDataSvc.php");
+$servicesCaller->setServiceName("Services/TablesCodes/FoodCategory/DistriXFoodCategorySaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_FoodCategory")) {

@@ -31,7 +31,7 @@ $distriXFoodData->setTimestamp($_POST['timestamp']);
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveFood");
 $servicesCaller->addParameter("data", $distriXCodeTableData);
-$servicesCaller->setServiceName("DistriXServices/Food/DistriXFoodSaveDataSvc.php");
+$servicesCaller->setServiceName("Services/Food/DistriXFoodSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_")) {

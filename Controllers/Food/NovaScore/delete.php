@@ -22,7 +22,7 @@ if (isset($_POST)) {
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setMethodName("DelNovaScore");
   $servicesCaller->addParameter("data", $distriXFoodNovaScoreData);
-  $servicesCaller->setServiceName("DistriXServices/Food/NovaScore/DistriXFoodNovaScoreDeleteDataSvc.php");
+  $servicesCaller->setServiceName("Services/Food/NovaScore/DistriXFoodNovaScoreDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
   if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NovaScore")) {

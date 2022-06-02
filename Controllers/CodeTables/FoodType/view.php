@@ -32,7 +32,7 @@ $listFoodTypeNames = [];
 // CALL
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $foodType);
-$servicesCaller->setServiceName("DistriXServices/TablesCodes/FoodType/DistriXFoodTypeViewDataSvc.php");
+$servicesCaller->setServiceName("Services/TablesCodes/FoodType/DistriXFoodTypeViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_FoodCategory")) {
