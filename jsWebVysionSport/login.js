@@ -33,6 +33,8 @@
           }
         } else {
           errorData = "Erreur de connexion, nom d'utilisateur ou mot de passe invalide";
+          if (output.error.errorData.text === 'ERROR_PASSWORD'){errorData = "Erreur de connexion, mot de passe invalide";}
+          if (output.error.errorData.text === 'ERROR_LOGIN')   {errorData = "Erreur de connexion, nom d'utilisateur invalide";}
           $('#sa-error-distrix').trigger('click');
           $('#swal2-content').html('<ul class="list-group list-group-flush">'+errorData+'</ul>');
         }
