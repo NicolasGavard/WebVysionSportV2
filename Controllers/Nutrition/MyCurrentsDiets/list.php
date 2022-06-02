@@ -6,8 +6,8 @@ include(__DIR__ . "/../../../DistriXSvc/DistriXSvcUtil.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
-include(__DIR__ . "/../../Data/DistriXNutritionCurrentDietData.php");
-include(__DIR__ . "/../../Data/DistriXNutritionTemplateDietData.php");
+include(__DIR__ . "/../../Data/Nutrition/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../../Data/Nutrition/DistriXNutritionTemplateDietData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer

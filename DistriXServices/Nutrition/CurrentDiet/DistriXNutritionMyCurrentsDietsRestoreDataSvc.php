@@ -2,7 +2,6 @@
 // DISTRIX Init
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
-// STY Const
 include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");

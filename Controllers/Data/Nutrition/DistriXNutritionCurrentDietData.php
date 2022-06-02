@@ -31,7 +31,7 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
       $this->name                 = "";
       $this->duration             = 0;
       $this->tags                 = "";
-      $this->dateStart            = "";
+      $this->dateStart            = 0;
       $this->advancement          = 0;
       $this->elemState            = 0;
       $this->timestamp            = 0;

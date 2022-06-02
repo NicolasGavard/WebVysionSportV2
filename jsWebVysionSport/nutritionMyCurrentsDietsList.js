@@ -1,3 +1,18 @@
+$( "#dateStart" ).datepicker({
+  altField: "#dateStart",
+  closeText: 'Fermer',
+  prevText: 'Précédent',
+  nextText: 'Suivant',
+  currentText: 'Aujourd\'hui',
+  monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+  monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+  dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+  dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+  dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+  weekHeader: 'Sem.',
+  dateFormat: 'dd/mm/yyyy'
+});
+
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : 'Controllers/Nutrition/MyCurrentsDiets/list.php',
@@ -57,22 +72,21 @@ $(".AddNewMyCurrentDiet").on('click', function() {
 
 $(".btnAddMyCurrentDiet").on('click', function() {
   $(".page_food_brand_update_title").removeClass("d-none");
+  $('.AddMyCurrentsDietsFormIdUserCoatch').val(localStorage.getItem("idUser"));
   
-  var template  = $('.listMyTemplates').val();
-  var student   = $('.listStudents').val();
-  var dateBegin = $('.dateBegin').val();
+  var template        = $('.listMyTemplates').val();
+  var student         = $('.listStudents').val();
+  var dateStart       = $('.dateStart').val();
+  var dateStartSplit  = $(".dateStart").val().split("/")
+  // var dateStartDb     = dateStartSplit[2]+''+dateStartSplit[1]+''+dateStartSplit[0];
 
-  if (template != '' && student != '' && dateBegin != '' ){
-    var data = $('#FormAddMyCurrentDiet').serializeArray(); // convert form to array
-    data.push({name: "idDietTemplate", value: template});
-    data.push({name: "idUserStudent", value: student});
-    data.push({name: "date_start", value: dateBegin});
-    
+  if (template != 0 && student != 0 && dateStart != '' ){
     $.ajax({
       url : 'Controllers/Nutrition/MyCurrentsDiets/save.php',
       type : 'POST',
       dataType : 'JSON',
-      data: $.param(data),
+      // data: $.param(data),
+      data: $('#FormAddMyCurrentDiet').serialize(),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
         setTimeout(function() {window.location.href = "./nutritionMyCurrentsDiets.php";}, 800);
@@ -83,31 +97,25 @@ $(".btnAddMyCurrentDiet").on('click', function() {
     });
     $(".btnAddMyCurrentDiet").attr("data-dismiss", "modal");
   } else {
-    if (template == ''){
-      $('.AddMyCurrentDietFormName').addClass("form-control-danger");
-      $('.danger-name').removeClass("d-none");
-
+    if (template == 0){
+      $('.danger-template').removeClass("d-none");
       setTimeout( () => { 
-        $(".AddMyCurrentDietFormName").removeClass("form-control-danger");
-        $('.danger-name').addClass("d-none");
+        $('.danger-template').addClass("d-none");
       }, 3000 );
     }
-    if (student == ''){
-      $('.AddMyCurrentDietFormName').addClass("form-control-danger");
-      $('.danger-name').removeClass("d-none");
-
+    if (student == 0){
+      $('.danger-student').removeClass("d-none");
       setTimeout( () => { 
-        $(".AddMyCurrentDietFormName").removeClass("form-control-danger");
-        $('.danger-name').addClass("d-none");
+        $('.danger-student').addClass("d-none");
       }, 3000 );
     }
-    if (dateBegin == ''){
-      $('.AddMyCurrentDietFormName').addClass("form-control-danger");
-      $('.danger-name').removeClass("d-none");
+    if (dateStart == ''){
+      $('.dateStart').addClass("form-control-danger");
+      $('.danger-dateStart').removeClass("d-none");
 
       setTimeout( () => { 
-        $(".AddMyCurrentDietFormName").removeClass("form-control-danger");
-        $('.danger-name').addClass("d-none");
+        $(".dateStart").removeClass("form-control-danger");
+        $('.danger-dateStart').addClass("d-none");
       }, 3000 );
     }
   } 
