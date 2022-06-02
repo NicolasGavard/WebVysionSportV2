@@ -7,13 +7,12 @@ if ($dataSvc->isAuthorized()) {
     $dbConnection = null;
     $errorData    = null;
     $insere       = false;
-    $infoCurrentDiet     = new DistriXNutritionCurrentDietData();
-
+    
     $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
     if (is_null($dbConnection->getError())) {
       if ($dbConnection->beginTransaction()) {
         list($dietStorData, $jsonError) = DietStorData::getJsonData($dataSvc->getParameter("data"));
-        $insere              = DietStor::remove($dietStorData, $dbConnection);
+        $insere = DietStor::remove($dietStorData, $dbConnection);
         if ($insere) {
           $dbConnection->commit();
         } else {
