@@ -94,7 +94,7 @@
         include('../Home/_headerFooter.php');
       ?>
       
-      <script src="../../jsWebVysionSport/CodeTables/foodFoodCategory.js"></script>
+      <script src="../../jsWebVysionSport/CodeTables/codeTableFoodCategory.js"></script>
   </body>
 </html>
 

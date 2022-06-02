@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXCodeTableFoodCategoryData.php");
+include(__DIR__ . "/Data/DistriXCodeTableFoodCategoryData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -10,22 +10,19 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp         = array(); 
-$confirmSave  = false;
-$error        = array();
-$output       = array();
-$outputok     = false;
+$resp        = [];
+$confirmSave = false;
+$error       = [];
+$output      = [];
+$outputok    = false;
 
-$scoreNutri  = new DistriXCodeTableFoodCategoryData();
-if ($_POST['id'] > 0) {
-  $scoreNutri->setId($_POST['id']);
-}
+$foodCategory = new DistriXCodeTableFoodCategoryData();
+$foodCategory->setId($_POST['id'] ?? 0);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("DelFoodCategory");
-$servicesCaller->addParameter("data", $scoreNutri);
+$servicesCaller->addParameter("data", $foodCategory);
 $servicesCaller->setServiceName("TablesCodes/FoodCategory/DistriXFoodCategoryDeleteDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_FoodCategory")) {
   $logInfoData = new DistriXLoggerInfoData();
@@ -44,9 +41,9 @@ if ($outputok && !empty($output) > 0) {
   $error = $errorData;
 }
 
-$resp["confirmSave"]  = $confirmSave;
+$resp["confirmSave"] = $confirmSave;
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"] = $error;
 }
 
 echo json_encode($resp);

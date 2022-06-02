@@ -2,13 +2,10 @@
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyLanguage.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
+// include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyLanguageData.php");
-include(__DIR__ . "/../../Data/DistriXGeneralIdData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableFoodCategoryData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableFoodCategoryNameData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodCategory/DistriXCodeTableFoodCategoryData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodCategory/DistriXCodeTableFoodCategoryNameData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -17,24 +14,26 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp               = array();
-$error              = array();
-$output             = array();
-$outputok           = false;
+$resp       = [];
+$error      = [];
+$output     = [];
+$outputok   = false;
 
-$listLanguages      = DistriXStyLanguage::listLanguages();
+// DATA
+$foodCategory = new DistriXCodeTableFoodCategoryData();
+$foodCategory->setId($_POST['id'] ?? 0);
 
-$foodCategory       = new DistriXCodeTableFoodCategoryNameData();
-if ($_POST['id'] > 0) {
-  $foodCategory->setId($_POST['id']);
-  $foodCategory->setIdCategory($_POST['idCategory']);
-}
+$foodCategory->setId(1);
+// $foodCategory->setId(3);
+// $foodCategory->setId(4);
 
+$listFoodCategoryNames = [];
+
+// CALL
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewFoodCategory");
 $servicesCaller->addParameter("data", $foodCategory);
 $servicesCaller->setServiceName("TablesCodes/FoodCategory/DistriXFoodCategoryViewDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_FoodCategory")) {
   $logInfoData = new DistriXLoggerInfoData();
@@ -45,18 +44,24 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewFoodCategory"])) {
-    $foodCategory = $output["ViewFoodCategory"];
-  }
+// RESPONSE
+if ($outputok && isset($output["ViewFoodCategory"])) {
+  list($foodCategory, $jsonError) = DistriXCodeTableFoodCategoryData::getJsonData($output["ViewFoodCategory"]);
+} else {
+  $error = $errorData;
+}
+if ($outputok && isset($output["ViewFoodCategoryNames"]) && is_array($output["ViewFoodCategoryNames"])) {
+  list($listFoodCategoryNames, $jsonError) = DistriXCodeTableFoodCategoryNameData::getJsonArray($output["ViewFoodCategoryNames"]);
 } else {
   $error = $errorData;
 }
 
-$resp["ViewFoodCategory"] = $foodCategory;
-$resp["ListLanguages"]  = $listLanguages;
-if(!empty($error)){
-  $resp["Error"]        = $error;
-}
+// TREATMENT
+$foodCategory->setNames($listFoodCategoryNames);
+$foodCategory->setNbLanguages(count($listFoodCategoryNames));
 
+$resp["ViewFoodCategory"] = $foodCategory;
+if (!empty($error)) {
+  $resp["Error"] = $error;
+}
 echo json_encode($resp);

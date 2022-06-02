@@ -7,7 +7,7 @@ include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterf
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
 include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
