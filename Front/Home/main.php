@@ -1,8 +1,8 @@
 <?php
 	session_start();
 	$path = '../';
-	include(__DIR__ . '/../i18/FR/header.php');
-	include(__DIR__ . '/../i18/FR/main.php');
+	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/header.php');
+	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/main.php');
 	include(__DIR__ . '/_header.php');
 	include(__DIR__ . '/_headerLoader.php');
 	include(__DIR__ . '/_headerMenuTop.php');
@@ -16,7 +16,7 @@
 			<div class="card-box pd-10 height-100-p mb-20">
 				<div class="row align-items-center">
 					<div class="col-md-4">
-						<img src="<?php echo $path.'vendors/images/banner-img.png'; ?>" alt="">
+						<img src="../../vendors/images/banner-img.png" alt="">
 					</div>
 					<div class="col-md-8">
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">

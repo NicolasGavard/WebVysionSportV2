@@ -28,7 +28,7 @@
             localStorage.setItem("emailBackup", output.infoProfil.emailBackup);
             localStorage.setItem("idLanguage", output.infoProfil.idLanguage);
 
-            window.location.replace("Front/main.php");
+            window.location.replace("Front/Home/main.php");
           } else {
             localStorage.setItem("idUser",output.infoProfil.id);
             window.location.replace("loginInitPassword.php");
