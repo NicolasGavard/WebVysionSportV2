@@ -107,6 +107,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/foodEcoScore.js"></script>
+      <script src="jsWebVysionSport/foodEcoScore.js"></script>
   </body>
 </html>

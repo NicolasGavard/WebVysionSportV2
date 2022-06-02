@@ -121,6 +121,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/nutritionMyTemplatesDietsList.js"></script>
+      <script src="jsWebVysionSport/nutritionMyTemplatesDietsList.js"></script>
   </body>
 </html>

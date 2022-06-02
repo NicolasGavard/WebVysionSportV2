@@ -54,9 +54,10 @@ if ($dataSvc->getMethodName() == "Login") {
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }
+  
   if ($errorData != null) {
     $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "Login", $dataSvc->getMethodName(), basename(__FILE__));
-    $dataSvc->addErrorToResponse("ApplicationError", $errorData);
+    $dataSvc->addErrorToResponse($errorData);
   }
   $dataSvc->addToResponse("StyInfoSession", $styUserStor);
 }

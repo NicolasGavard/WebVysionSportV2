@@ -111,6 +111,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/foodFood.js"></script>
+      <script src="jsWebVysionSport/foodFood.js"></script>
   </body>
 </html>

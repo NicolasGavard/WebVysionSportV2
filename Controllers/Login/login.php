@@ -38,10 +38,6 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
   }
 }
 
-echo '$isConnected : '.$isConnected.'<br>';
-print_r($errorData);
-die();
-
 $resp["infoProfil"]   = $infoProfil;
 $resp["isConnected"]  = $isConnected;
 if(!empty($errorData)){

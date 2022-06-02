@@ -95,7 +95,7 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/foodFoodCategory.js"></script>
+      <script src="jsWebVysionSport/foodFoodCategory.js"></script>
   </body>
 </html>
 

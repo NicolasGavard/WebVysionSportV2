@@ -18,6 +18,8 @@ include(__DIR__ . "/../Data/DistriXStyUserAllRightData.php");
 include(__DIR__ . "/../layers/DistriXStySvcCaller.php");
 // Distrix Crypto
 include(__DIR__ . "/../../DistrixCrypto/DistriXCrypto.php");
+// Distrix Error
+include(__DIR__ . "/../../DistriXSvc/Data/DistriXSvcErrorData.php");
 // Distrix Logger
 include(__DIR__ . "/../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../DistriXLogger/data/DistriXLoggerInfoData.php");
@@ -30,7 +32,7 @@ class DistriXStyAppInterface
   {
     $return     = [];
     $logged     = false;
-    $errorData  = array();
+    $errorData  = new DistriXSvcErrorData();
     if (strlen($application) > 0 && strlen($user) > 0 && strlen($password) > 0) {
       $dataApp = new DistriXStyApplicationData();
       $dataApp->setCode($application);
@@ -56,6 +58,7 @@ class DistriXStyAppInterface
   {
     if (strlen($dataLogin->getAuthType()) > 0) {     
       $outputok          = false;
+      $isUserConnected   = false;
       $output            = array();
       $errorData         = array();
       $styServicesCaller = new DistriXStySvcCaller();
@@ -63,15 +66,12 @@ class DistriXStyAppInterface
       $styServicesCaller->setMethodName("Login");
       $styServicesCaller->addParameter("dataApp", $dataApp);                  //print_r($dataApp);
       $styServicesCaller->addParameter("dataUser", $dataUser);                //print_r($dataUser);
-      list($outputok, $output, $errorData) = $styServicesCaller->call();      print_r($output);
+      list($outputok, $output, $errorData) = $styServicesCaller->call();      //print_r($output);
       list($infoUser, $errorJson) = DistriXStyUserData::getJsonData($output["StyInfoSession"]);
-
+      
       $styGlobalSession = new DistriXStyInfoSessionData();
       $styGlobalSession->setApplication($dataApp->getCode());
       $styGlobalSession->setConnected(false);
-      
-      print_r($errorData);
-      echo '</br>';
 
       if ($infoUser->getId() > 0) {
         $styGlobalSession->setIdUser($infoUser->getId());
@@ -140,24 +140,11 @@ class DistriXStyAppInterface
         $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($userEnterprises);
         $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($enterprisesData);
         $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($enterprisesPos);
+        $isUserConnected                                      = true;
       }
     }
-    // $isUserConnected = self::isUserConnected();
-    $isUserConnected = true;
-
-    echo $isUserConnected;
-    echo '</br>';
-    print_r($errorData);
-    echo '</br>';
-    die(); 
-    // $return = list($isUserConnected, $errorData);
-
     $return[]['isUserConnected']  = self::isUserConnected();
     $return[]['errorData']        = $errorData;
-    
-    print_r($errorData);
-    die();
-    
     return $return;
   }
   // End of login
