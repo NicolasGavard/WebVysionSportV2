@@ -16,7 +16,7 @@ include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
 $resp          = [];
-$listFoodCategorys = [];
+$listFoodCategories = [];
 $listLanguages = [];
 $error         = [];
 $output        = [];
@@ -48,8 +48,8 @@ if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLangua
   $error = $errorData;
 }
 list($outputok, $output, $errorData) = $svc->getResult("FoodCategory"); //print_r($output);
-if ($outputok && isset($output["ListFoodCategorys"]) && is_array($output["ListFoodCategorys"])) {
-  list($listFoodCategorys, $jsonError) = DistriXCodeTableFoodCategoryData::getJsonArray($output["ListFoodCategorys"]);
+if ($outputok && isset($output["ListFoodCategories"]) && is_array($output["ListFoodCategories"])) {
+  list($listFoodCategories, $jsonError) = DistriXCodeTableFoodCategoryData::getJsonArray($output["ListFoodCategories"]);
 } else {
   $error = $errorData;
 }
@@ -61,7 +61,7 @@ if ($outputok && isset($output["ListFoodCategoryNames"]) && is_array($output["Li
 
 // TREATMENT
 $nbLanguagesTotal = count($listLanguages);
-foreach ($listFoodCategorys as $foodCategory) {
+foreach ($listFoodCategories as $foodCategory) {
   $foodCategory->setNbLanguagesTotal($nbLanguagesTotal);
   $names = [];
   foreach ($listFoodCategoryNames as $foodCategoryName) {
@@ -73,7 +73,7 @@ foreach ($listFoodCategorys as $foodCategory) {
   $foodCategory->setNbLanguages(count($names));
 }
 
-$resp["ListFoodCategorys"] = $listFoodCategorys;
+$resp["ListFoodCategories"] = $listFoodCategories;
 $resp["ListLanguages"] = $listLanguages;
 if (!empty($error)) {
   $resp["Error"] = $error;
