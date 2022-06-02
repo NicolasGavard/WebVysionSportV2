@@ -1,6 +1,6 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : 'Controllers/Food/NutriScore/list.php',
+  url : '../../Controllers/Food/NutriScore/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
@@ -66,7 +66,7 @@ $(".btnAddNutriScore").on('click', function() {
     data.push({name: "color", value: color});
     
     $.ajax({
-      url : 'Controllers/Food/NutriScore/save.php',
+      url : '../../Controllers/Food/NutriScore/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
@@ -103,7 +103,7 @@ $(".btnAddNutriScore").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/NutriScore/delete.php',
+    url : '../../Controllers/Food/NutriScore/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -123,7 +123,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/NutriScore/restore.php',
+    url : '../../Controllers/Food/NutriScore/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -172,7 +172,7 @@ function ListNutriScore(elemState){
 
 function ViewNutriScore(id){
   $.ajax({
-    url : 'Controllers/Food/NutriScore/view.php',
+    url : '../../Controllers/Food/NutriScore/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

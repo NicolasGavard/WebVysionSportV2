@@ -2,7 +2,7 @@
 ListMyCurrentsDiets(0);
 
 $.ajax({
-  url : 'Controllers/Student/MyStudent/list.php',
+  url : '../../Controllers/Student/MyStudent/list.php',
   type : 'POST',
   dataType : 'JSON',
   data: {'idUser': localStorage.getItem("idUser")},
@@ -50,7 +50,7 @@ $(".btnAddMyCurrentsDiets").on('click', function() {
   assignedUsers = 1;
   if (assignedUsers != 0 || duration != 0 || date_start != ""){
     $.ajax({
-      url : 'Controllers/Nutrition/MyCurrentsDiets/save.php',
+      url : '../../Controllers/Nutrition/MyCurrentsDiets/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormAddMyCurrentsDiets').serialize(),
@@ -82,7 +82,7 @@ $(".btnAddMyCurrentsDiets").on('click', function() {
 
 $("#btnDelMyCurrentsDiets").on('click', function() {
   $.ajax({
-    url : 'Controllers/Nutrition/MyCurrentsDiets/delete.php',
+    url : '../../Controllers/Nutrition/MyCurrentsDiets/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDelMyCurrentsDiets').serialize(),
@@ -102,7 +102,7 @@ $("#btnDelMyCurrentsDiets").on('click', function() {
 
 $("#btnRestMyCurrentsDiets").on('click', function() {
   $.ajax({
-    url : 'Controllers/Nutrition/MyCurrentsDiets/restore.php',
+    url : '../../Controllers/Nutrition/MyCurrentsDiets/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRestMyCurrentsDiets').serialize(),
@@ -124,7 +124,7 @@ function ListMyCurrentsDiets(elemState){
   $('#listMyCurrentsDietsTbody').empty();
 
   $.ajax({
-    url : 'Controllers/Nutrition/MyCurrentsDiets/list.php',
+    url : '../../Controllers/Nutrition/MyCurrentsDiets/list.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'elemState': elemState, 'idUser': localStorage.getItem("idUser")},
@@ -218,7 +218,7 @@ function ListMyCurrentsDiets(elemState){
 
 function ViewMyCurrentsDiets(id){
   $.ajax({
-    url : 'Controllers/Nutrition/MyCurrentsDiets/view.php',
+    url : '../../Controllers/Nutrition/MyCurrentsDiets/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

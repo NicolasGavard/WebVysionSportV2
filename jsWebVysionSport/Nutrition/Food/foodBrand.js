@@ -1,6 +1,6 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : 'Controllers/Food/Brand/list.php',
+  url : '../../Controllers/Food/Brand/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
@@ -65,7 +65,7 @@ $(".btnAddBrand").on('click', function() {
     data.push({name: "name", value: name});
     
     $.ajax({
-      url : 'Controllers/Food/Brand/save.php',
+      url : '../../Controllers/Food/Brand/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
@@ -93,7 +93,7 @@ $(".btnAddBrand").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/Brand/delete.php',
+    url : '../../Controllers/Food/Brand/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -113,7 +113,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/Brand/restore.php',
+    url : '../../Controllers/Food/Brand/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -161,7 +161,7 @@ function ListBrand(elemState){
 
 function ViewBrand(id){
   $.ajax({
-    url : 'Controllers/Food/Brand/view.php',
+    url : '../../Controllers/Food/Brand/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

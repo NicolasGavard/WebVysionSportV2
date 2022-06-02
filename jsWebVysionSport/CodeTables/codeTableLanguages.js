@@ -1,6 +1,6 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : 'Controllers/CodeTables/Language/list.php',
+  url : '../../Controllers/CodeTables/Language/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
@@ -65,7 +65,7 @@ $(".btnAddLanguage").on('click', function() {
     data.push({name: "name", value: name});
     
     $.ajax({
-      url : 'Controllers/CodeTables/Language/save.php',
+      url : '../../Controllers/CodeTables/Language/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
@@ -93,7 +93,7 @@ $(".btnAddLanguage").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : 'Controllers/CodeTables/Language/delete.php',
+    url : '../../Controllers/CodeTables/Language/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -113,7 +113,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : 'Controllers/CodeTables/Language/restore.php',
+    url : '../../Controllers/CodeTables/Language/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -162,7 +162,7 @@ function ListLanguage(elemState){
 
 function ViewLanguage(id){
   $.ajax({
-    url : 'Controllers/CodeTables/Language/view.php',
+    url : '../../Controllers/CodeTables/Language/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

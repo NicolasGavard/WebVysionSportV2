@@ -35,7 +35,7 @@ $(".btnAddMyCurrentsDiets").on('click', function() {
   assignedUsers = 1;
   if (assignedUsers != 0 || duration != 0 || date_start != ""){
     $.ajax({
-      url : 'Controllers/Nutrition/MyCurrentsDiets/save.php',
+      url : '../../Controllers/Nutrition/MyCurrentsDiets/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormAddMyCurrentsDiets').serialize(),
@@ -67,7 +67,7 @@ $(".btnAddMyCurrentsDiets").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : 'Controllers/Nutrition/MyCurrentsDiets/delete.php',
+    url : '../../Controllers/Nutrition/MyCurrentsDiets/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -87,7 +87,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : 'Controllers/Nutrition/MyCurrentsDiets/restore.php',
+    url : '../../Controllers/Nutrition/MyCurrentsDiets/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -110,7 +110,7 @@ function ListMyCurrentsDiets(elemState){
   $('.InfoMyCurrentsDietsFormListMyTemplates').empty();
 
   $.ajax({
-    url : 'Controllers/Nutrition/MyCurrentsDiets/list.php',
+    url : '../../Controllers/Nutrition/MyCurrentsDiets/list.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'elemState': elemState, 'idUser': localStorage.getItem("idUser")},
@@ -209,7 +209,7 @@ function ListMyCurrentsDiets(elemState){
 
 function ViewMyCurrentsDiets(id){
   $.ajax({
-    url : 'Controllers/Nutrition/MyCurrentsDiets/view.php',
+    url : '../../Controllers/Nutrition/MyCurrentsDiets/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

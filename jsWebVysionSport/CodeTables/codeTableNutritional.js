@@ -1,6 +1,6 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : 'Controllers/CodeTables/Nutritional/list.php',
+  url : '../../Controllers/CodeTables/Nutritional/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
@@ -65,7 +65,7 @@ $(".btnAddNutritional").on('click', function() {
     data.push({name: "name", value: name});
     
     $.ajax({
-      url : 'Controllers/CodeTables/Nutritional/save.php',
+      url : '../../Controllers/CodeTables/Nutritional/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
@@ -93,7 +93,7 @@ $(".btnAddNutritional").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : 'Controllers/CodeTables/Nutritional/delete.php',
+    url : '../../Controllers/CodeTables/Nutritional/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -113,7 +113,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : 'Controllers/CodeTables/Nutritional/restore.php',
+    url : '../../Controllers/CodeTables/Nutritional/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -161,7 +161,7 @@ function ListNutritional(elemState){
 
 function ViewNutritional(id){
   $.ajax({
-    url : 'Controllers/CodeTables/Nutritional/view.php',
+    url : '../../Controllers/CodeTables/Nutritional/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

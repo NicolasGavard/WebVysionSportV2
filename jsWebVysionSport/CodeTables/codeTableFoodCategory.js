@@ -1,7 +1,7 @@
 
 
 $.ajax({
-  url : 'Controllers/CodeTables/FoodCategory/list.php',
+  url : '../../Controllers/CodeTables/FoodCategory/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
@@ -54,7 +54,7 @@ $("#btnAddFoodCategory").on('click', function() {
   var abbreviation  = $('#InputFoodCategoryAbbreviation').val();
   if (code != "" || description != "" || abbreviation != ""){
     $.ajax({
-      url : 'Controllers/CodeTables/FoodCategory/save.php',
+      url : '../../Controllers/CodeTables/FoodCategory/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormAddFoodCategory').serialize(),
@@ -93,7 +93,7 @@ $("#btnAddFoodCategory").on('click', function() {
 
 $("#btnDelFoodCategory").on('click', function() {
   $.ajax({
-    url : 'Controllers/CodeTables/FoodCategory/delete.php',
+    url : '../../Controllers/CodeTables/FoodCategory/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDelFoodCategory').serialize(),
@@ -110,7 +110,7 @@ $("#btnDelFoodCategory").on('click', function() {
 
 $("#btnRestFoodCategory").on('click', function() {
   $.ajax({
-    url : 'Controllers/CodeTables/FoodCategory/restore.php',
+    url : '../../Controllers/CodeTables/FoodCategory/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRestFoodCategory').serialize(),
@@ -129,7 +129,7 @@ function ViewFoodCategory(id, idCategory,idLanguage){
   $('.AddFoodCategoryFormLanguage').append('');
   
   $.ajax({
-    url : 'Controllers/CodeTables/FoodCategory/view.php',
+    url : '../../Controllers/CodeTables/FoodCategory/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id, 'idCategory': idCategory},

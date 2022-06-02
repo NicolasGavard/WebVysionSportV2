@@ -19,7 +19,7 @@ $(document).ready(function() {
     } else {
       if (code != ""){
         $.ajax({
-          url : 'Controllers/Security/Module/save.php',
+          url : '../../Controllers/Security/Module/save.php',
           type : 'POST',
           dataType : 'JSON',
           data: $('#FormAddModule').serialize(),
@@ -47,7 +47,7 @@ $(document).ready(function() {
 
 function showData(idStyApplication){
   $.ajax({
-    url : 'Controllers/Security/Module/list.php',
+    url : '../../Controllers/Security/Module/list.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'idStyApplication': idStyApplication},
@@ -94,7 +94,7 @@ function showData(idStyApplication){
 
   $("#btnDelModule").click(function() {
     $.ajax({
-      url : 'Controllers/Security/Module/delete.php',
+      url : '../../Controllers/Security/Module/delete.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormDelModule').serialize(),
@@ -111,7 +111,7 @@ function showData(idStyApplication){
 
   $("#btnRestModule").click(function() {
     $.ajax({
-      url : 'Controllers/Security/Module/restore.php',
+      url : '../../Controllers/Security/Module/restore.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormRestModule').serialize(),
@@ -129,7 +129,7 @@ function showData(idStyApplication){
 
 function ViewModule(id){
   $.ajax({
-    url : 'Controllers/Security/Module/view.php',
+    url : '../../Controllers/Security/Module/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

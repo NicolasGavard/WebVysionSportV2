@@ -26,7 +26,7 @@ $(document).ready(function() {
         if ($('#inputNewPassword').val() == $('#inputConfirmNewPassword').val()) {
           $('#inputIdUser').val(localStorage.getItem("idUser"));
           $.ajax({ 
-            url: 'Controllers/Login/initPassword.php',
+            url: '../../Controllers/Login/initPassword.php',
             data: $('#FormInitPassword').serialize(),
             type: 'post',
             dataType: "json",

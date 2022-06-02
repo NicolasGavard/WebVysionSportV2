@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url : 'Controllers/Security/UserType/list.php',
+    url : '../../Controllers/Security/UserType/list.php',
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {
@@ -29,7 +29,7 @@ $(document).ready(function() {
     
     if (code != "" || name != ""){
       $.ajax({
-        url : 'Controllers/Security/UserType/save.php',
+        url : '../../Controllers/Security/UserType/save.php',
         type : 'POST',
         dataType : 'JSON',
         data: $('#FormAddUserType').serialize(),

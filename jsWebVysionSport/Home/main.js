@@ -38,7 +38,7 @@ function setIdleTimeout(millis, onIdle, onUnidle) {
 
 function logOut(){
   $.ajax({
-    url : 'Controllers/Login/logout.php',
+    url : '../../Controllers/Login/logout.php',
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {    
@@ -55,7 +55,7 @@ function logOut(){
         localStorage.removeItem("emailBackup");
         localStorage.removeItem("language");
 
-        window.location.replace("index.html");
+        window.location.replace("../../index.html");
       }
     },
     error : function(data) {

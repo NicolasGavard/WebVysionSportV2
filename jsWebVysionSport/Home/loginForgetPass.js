@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     if (canForgetPass) {
       $.ajax({ 
-        url: 'Controllers/Login/forgetPassword.php',
+        url: '../../Controllers/Login/forgetPassword.php',
         data: $('#FormForgetPassword').serialize(),
         type: 'post',
         dataType: "json",

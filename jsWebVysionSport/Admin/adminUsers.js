@@ -26,7 +26,7 @@ $(document).ready(function() {
         
         if (pass == confirmPass && (validEmail || validEmailBackup)){
           $.ajax({
-            url : 'Controllers/Security/User/save.php',
+            url : '../../Controllers/Security/User/save.php',
             type : 'POST',
             dataType : 'JSON',
             data: $('#FormAddProfil').serialize(),
@@ -65,7 +65,7 @@ $(document).ready(function() {
   
   $("#btnInitProfil").click(function() {
     $.ajax({
-      url : 'Controllers/Security/User/initPass.php',
+      url : '../../Controllers/Security/User/initPass.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormInitProfil').serialize(),
@@ -82,7 +82,7 @@ $(document).ready(function() {
 
   $("#btnDelProfil").click(function() {
     $.ajax({
-      url : 'Controllers/Security/User/delete.php',
+      url : '../../Controllers/Security/User/delete.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormDelProfil').serialize(),
@@ -99,7 +99,7 @@ $(document).ready(function() {
 
   $("#btnRestProfil").click(function() {
     $.ajax({
-      url : 'Controllers/Security/User/restore.php',
+      url : '../../Controllers/Security/User/restore.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormRestProfil').serialize(),
@@ -117,7 +117,7 @@ $(document).ready(function() {
 
 function showData(idStyEnterprise){
   $.ajax({
-    url : 'Controllers/Security/User/list.php',
+    url : '../../Controllers/Security/User/list.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'idStyEnterprise': idStyEnterprise},
@@ -220,7 +220,7 @@ function showData(idStyEnterprise){
 
 function ViewUser(id){
   $.ajax({
-    url : 'Controllers/Security/User/view.php',
+    url : '../../Controllers/Security/User/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
@@ -280,7 +280,7 @@ function ViewAllRightsByIdUser(idUser, nameUser, idApplication, idModule, idFunc
   $('#listRoleByApplicationModuleFunctionalityRole').append();
 
   $.ajax({
-    url : 'Controllers/Security/UserRole/view.php',
+    url : '../../Controllers/Security/UserRole/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'idUser': idUser},
@@ -299,7 +299,7 @@ function ViewAllRightsByIdUser(idUser, nameUser, idApplication, idModule, idFunc
   });
 
   $.ajax({
-    url : 'Controllers/Security/Role/viewFull.php',
+    url : '../../Controllers/Security/Role/viewFull.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDetailUserRight').serialize(),
@@ -333,7 +333,7 @@ function ViewAllRightsByIdUser(idUser, nameUser, idApplication, idModule, idFunc
   
   var idUser = $('.ViewUserRightFormId').val();
   $.ajax({
-    url : 'Controllers/Security/UserRight/list.php',
+    url : '../../Controllers/Security/UserRight/list.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'idStyUser': idUser},
@@ -365,7 +365,7 @@ function ViewAllRightsByIdUser(idUser, nameUser, idApplication, idModule, idFunc
   });
   // var idStyRole = $('.ViewUserRightFormIdUserRole').val();
   // $.ajax({
-  //   url : 'Controllers/Security/RoleRight/list.php',
+  //   url : '../../Controllers/Security/RoleRight/list.php',
   //   type : 'POST',
   //   dataType : 'JSON',
   //   data: {'idStyRole': idStyRole},

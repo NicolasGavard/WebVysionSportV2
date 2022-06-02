@@ -69,7 +69,7 @@ $(document).ready(function() {
 
     if (canAddUserAccount) {
       $.ajax({ 
-        url: 'Controllers/Login/register.php',
+        url: '../../Controllers/Login/register.php',
         data: $('#FormRegister').serialize(),
         type: 'post',
         dataType: "json",

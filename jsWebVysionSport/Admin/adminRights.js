@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url : 'Controllers/Security/Right/list.php',
+    url : '../../Controllers/Security/Right/list.php',
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {    
@@ -30,7 +30,7 @@ $(document).ready(function() {
     
     if (code != "" || name != ""){
       $.ajax({
-        url : 'Controllers/Security/Right/save.php',
+        url : '../../Controllers/Security/Right/save.php',
         type : 'POST',
         dataType : 'JSON',
         data: $('#FormAddRight').serialize(),

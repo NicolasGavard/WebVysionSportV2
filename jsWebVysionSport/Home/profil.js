@@ -1,6 +1,6 @@
 // Load Info Page
 $.ajax({ 
-  url: 'Controllers/Security/User/view.php',
+  url: '../../Controllers/Security/User/view.php',
   data: {'id': localStorage.getItem("idUser")},
   type: 'post',
   dataType: "json",
@@ -52,7 +52,7 @@ $.ajax({
 // Change Language
 $(".InfoProfilFormIdLanguage").change(function() {
   $.ajax({
-    url : 'Controllers/Security/Language/view.php',
+    url : '../../Controllers/Security/Language/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': this.value},
@@ -116,7 +116,7 @@ $(".InfoProfilFormIdLanguage").change(function() {
 // SAVE PROFIL
 $("#btnSaveProfil").click(function() {
   $.ajax({ 
-    url: 'Controllers/Security/User/save.php',
+    url: '../../Controllers/Security/User/save.php',
     data: $('#FormSaveProfil').serialize(),
     type: 'post',
     dataType: "json",
@@ -147,7 +147,7 @@ $("#btnSaveProfil").click(function() {
 // CHANGE PASSWORD PROFIL
 $("#btnSaveChangePassword").click(function() {
   $.ajax({ 
-    url: 'Controllers/Profil/changePassword.php',
+    url: '../../Controllers/Profil/changePassword.php',
     data: $('#FormChangePasswordProfil').serialize(),
     type: 'post',
     dataType: "json",

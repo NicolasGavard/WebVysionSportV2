@@ -35,7 +35,7 @@ $(".btnAddMyTemplatesDiets").on('click', function() {
   assignedUsers = 1;
   if (assignedUsers != 0 || duration != 0 || date_start != ""){
     $.ajax({
-      url : 'Controllers/Nutrition/MyTemplatesDiets/save.php',
+      url : '../../Controllers/Nutrition/MyTemplatesDiets/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormAddMyTemplatesDiets').serialize(),
@@ -67,7 +67,7 @@ $(".btnAddMyTemplatesDiets").on('click', function() {
 
 $("#btnDelMyTemplatesDiets").on('click', function() {
   $.ajax({
-    url : 'Controllers/Nutrition/MyTemplatesDiets/delete.php',
+    url : '../../Controllers/Nutrition/MyTemplatesDiets/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDelMyTemplatesDiets').serialize(),
@@ -87,7 +87,7 @@ $("#btnDelMyTemplatesDiets").on('click', function() {
 
 $("#btnRestMyTemplatesDiets").on('click', function() {
   $.ajax({
-    url : 'Controllers/Nutrition/MyTemplatesDiets/restore.php',
+    url : '../../Controllers/Nutrition/MyTemplatesDiets/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRestMyTemplatesDiets').serialize(),
@@ -109,7 +109,7 @@ function ListMyTemplatesDiets(elemState){
   $('#listMyTemplatesDietsTbody').empty();
 
   $.ajax({
-    url : 'Controllers/Nutrition/MyTemplatesDiets/list.php',
+    url : '../../Controllers/Nutrition/MyTemplatesDiets/list.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'elemState': elemState, 'idUser': localStorage.getItem("idUser")},
@@ -150,7 +150,7 @@ function ListMyTemplatesDiets(elemState){
 
 function ViewMyTemplatesDiets(id){
   $.ajax({
-    url : 'Controllers/Nutrition/MyTemplatesDiets/view.php',
+    url : '../../Controllers/Nutrition/MyTemplatesDiets/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

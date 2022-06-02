@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url : 'Controllers/Security/Enterprise/list.php',
+    url : '../../Controllers/Security/Enterprise/list.php',
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {    
@@ -30,7 +30,7 @@ $(document).ready(function() {
     var validEmail        = ValidateEmail($('#InputEmail').val());
     if (validEmail){
       $.ajax({
-        url : 'Controllers/Security/Enterprise/save.php',
+        url : '../../Controllers/Security/Enterprise/save.php',
         type : 'POST',
         dataType : 'JSON',
         data: $('#FormAddStyEnterprise').serialize(),

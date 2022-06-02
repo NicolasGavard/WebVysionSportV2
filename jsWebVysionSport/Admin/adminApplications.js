@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url : 'Controllers/Security/Application/list.php',
+    url : '../../Controllers/Security/Application/list.php',
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {    
@@ -37,7 +37,7 @@ $(document).ready(function() {
     
     if (code != ""){
       $.ajax({
-        url : 'Controllers/Security/Application/save.php',
+        url : '../../Controllers/Security/Application/save.php',
         type : 'POST',
         dataType : 'JSON',
         data: $('#FormAddApplication').serialize(),
@@ -63,7 +63,7 @@ $(document).ready(function() {
 
   $("#btnDelApplication").click(function() {
     $.ajax({
-      url : 'Controllers/Security/Application/delete.php',
+      url : '../../Controllers/Security/Application/delete.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormDelApplication').serialize(),
@@ -85,7 +85,7 @@ $(document).ready(function() {
 
   $("#btnRestApplication").click(function() {
     $.ajax({
-      url : 'Controllers/Security/Application/restore.php',
+      url : '../../Controllers/Security/Application/restore.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormRestApplication').serialize(),
@@ -103,7 +103,7 @@ $(document).ready(function() {
 
 function ViewApplication(id){
   $.ajax({
-    url : 'Controllers/Security/Application/view.php',
+    url : '../../Controllers/Security/Application/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

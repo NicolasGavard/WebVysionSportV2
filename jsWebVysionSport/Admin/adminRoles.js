@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url : 'Controllers/Security/Role/list.php',
+    url : '../../Controllers/Security/Role/list.php',
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {    
@@ -31,7 +31,7 @@ $(document).ready(function() {
     
     if (code != "" || name != ""){
       $.ajax({
-        url : 'Controllers/Security/Role/save.php',
+        url : '../../Controllers/Security/Role/save.php',
         type : 'POST',
         dataType : 'JSON',
         data: $('#FormAddRole').serialize(),
@@ -84,7 +84,7 @@ $(document).ready(function() {
     var sumOfRights        = $('.ViewRoleFormSumOfRights').val();
     
     $.ajax({
-      url : 'Controllers/Security/RoleRight/save.php',
+      url : '../../Controllers/Security/RoleRight/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: {'idStyRole': idStyRole, 'idStyApplication': idStyApplication, 'idStyModule': idStyModule, 'idStyFunctionality': idStyFunctionality, 'sumOfRights': sumOfRights},
@@ -109,7 +109,7 @@ $(document).ready(function() {
     var saveRole            = false;
 
     $.ajax({
-      url : 'Controllers/Security/RoleRight/save.php',
+      url : '../../Controllers/Security/RoleRight/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: {'idStyRole': idStyRole, 'idStyApplication': idStyApplication, 'idStyModule': idStyModule, 'idStyFunctionality': idStyFunctionality, 'sumOfRights': sumOfRights},
@@ -125,7 +125,7 @@ $(document).ready(function() {
 
     if(saveRole){
       $.ajax({
-        url : 'Controllers/Security/UserRight/saveRightAllUser.php',
+        url : '../../Controllers/Security/UserRight/saveRightAllUser.php',
         type : 'POST',
         dataType : 'JSON',
         data: {'idStyRole': idStyRole, 'idStyApplication': idStyApplication, 'idStyModule': idStyModule, 'idStyFunctionality': idStyFunctionality, 'sumOfRights': sumOfRights},
@@ -169,7 +169,7 @@ function ViewAllRightsByRole(idRole, nameRole, idApplication, idModule, idFuncti
   $('.ViewRoleFormIdFunctionality').val(idFunctionality);
   
   $.ajax({
-    url : 'Controllers/Security/Role/viewFull.php',
+    url : '../../Controllers/Security/Role/viewFull.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDetailRole').serialize(),

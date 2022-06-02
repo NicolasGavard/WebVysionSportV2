@@ -1,6 +1,6 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : 'Controllers/Food/EcoScore/list.php',
+  url : '../../Controllers/Food/EcoScore/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
@@ -66,7 +66,7 @@ $(".btnAddEcoScore").on('click', function() {
     data.push({name: "color", value: color});
     
     $.ajax({
-      url : 'Controllers/Food/EcoScore/save.php',
+      url : '../../Controllers/Food/EcoScore/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
@@ -103,7 +103,7 @@ $(".btnAddEcoScore").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/EcoScore/delete.php',
+    url : '../../Controllers/Food/EcoScore/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -123,7 +123,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/EcoScore/restore.php',
+    url : '../../Controllers/Food/EcoScore/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -172,7 +172,7 @@ function ListEcoScore(elemState){
 
 function ViewEcoScore(id){
   $.ajax({
-    url : 'Controllers/Food/EcoScore/view.php',
+    url : '../../Controllers/Food/EcoScore/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

@@ -1,6 +1,6 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : 'Controllers/Food/Label/list.php',
+  url : '../../Controllers/Food/Label/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
@@ -65,7 +65,7 @@ $(".btnAddLabel").on('click', function() {
     data.push({name: "name", value: name});
     
     $.ajax({
-      url : 'Controllers/Food/Label/save.php',
+      url : '../../Controllers/Food/Label/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
@@ -93,7 +93,7 @@ $(".btnAddLabel").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/Label/delete.php',
+    url : '../../Controllers/Food/Label/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -113,7 +113,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : 'Controllers/Food/Label/restore.php',
+    url : '../../Controllers/Food/Label/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -161,7 +161,7 @@ function ListLabel(elemState){
 
 function ViewLabel(id){
   $.ajax({
-    url : 'Controllers/Food/Label/view.php',
+    url : '../../Controllers/Food/Label/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

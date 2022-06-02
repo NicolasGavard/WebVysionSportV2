@@ -1,7 +1,7 @@
 $(document).ready(function() {    
   if ($('#inputEmail').val() != '' && $('#inputDateEnd').val() != ''){
     $.ajax({ 
-      url: 'Controllers/Login/newPasswordControl.php',
+      url: '../../Controllers/Login/newPasswordControl.php',
       data: $('#FormNewPassword').serialize(),
       type: 'post',
       dataType: "json",
@@ -43,7 +43,7 @@ $(document).ready(function() {
   if (canNewPass) {
     $("#btnFormNewPassword").click(function() {
       $.ajax({ 
-        url: 'Controllers/Login/changePassword.php',
+        url: '../../Controllers/Login/changePassword.php',
         data: $('#FormNewPassword').serialize(),
         type: 'post',
         dataType: "json",
