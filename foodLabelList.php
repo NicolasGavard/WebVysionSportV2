@@ -99,6 +99,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/foodLabel.js"></script>
+      <script src="jsWebVysionSport/foodLabel.js"></script>
   </body>
 </html>

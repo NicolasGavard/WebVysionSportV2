@@ -17,29 +17,13 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
-
-$distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
-$distriXNutritionCurrentDietData->setId($_POST['id']);
-$distriXNutritionCurrentDietData->setIdUser($_POST['id']);
-$distriXNutritionCurrentDietData->setIdDietTemplace($_POST['id']);
-$distriXNutritionCurrentDietData->setDateStart($_POST['dateStart']);
-$distriXNutritionCurrentDietData->setStatus($_POST['statut']);
-$distriXNutritionCurrentDietData->setTimestamp($_POST['timestamp']);
-
-
-$distriXCodeTableDietData = new DistriXFoodDietData();
-$distriXCodeTableDietData->setId($_POST['id']);
-$distriXCodeTableDietData->setName($_POST['name']);
-$distriXCodeTableDietData->setLinkToPicture('');
-if($_POST['base64Img'] != '') { $distriXCodeTableDietData->setLinkToPicture($_POST['base64Img']);}
-$distriXCodeTableDietData->setTimestamp($_POST['timestamp']);
-$distriXCodeTableDietData->setStatus($_POST['statut']);
+list($distriXNutritionCurrentDietData, $errorJson) = DistriXNutritionCurrentDietData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveDiet");
-$servicesCaller->addParameter("data", $distriXCodeTableDietData);
+$servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
 $servicesCaller->setServiceName("DistriXServices/Food/Diet/DistriXFoodDietSaveDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Diet")) {
   $logInfoData = new DistriXLoggerInfoData();
@@ -50,10 +34,8 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
-  }
+if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
+  $confirmSave = $output["ConfirmSave"];
 } else {
   $error = $errorData;
 }

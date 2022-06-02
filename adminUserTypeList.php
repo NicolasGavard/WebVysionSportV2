@@ -101,6 +101,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/adminUserTypes.js"></script>
+      <script src="jsWebVysionSport/adminUserTypes.js"></script>
   </body>
 </html>

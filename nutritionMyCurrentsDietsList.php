@@ -143,6 +143,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/nutritionMyCurrentsDietsList.js"></script>
+      <script src="jsWebVysionSport/nutritionMyCurrentsDietsList.js"></script>
   </body>
 </html>

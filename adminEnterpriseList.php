@@ -50,6 +50,6 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsDistrix/adminEnterprises.js"></script>
+      <script src="jsWebVysionSport/adminEnterprises.js"></script>
   </body>
 </html>
