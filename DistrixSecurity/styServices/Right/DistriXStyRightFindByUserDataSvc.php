@@ -35,7 +35,7 @@ if ($dbConnection != null) {
 }
 if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "Login", $dataSvc->getMethodName(), basename(__FILE__));
-  $dataSvc->addToResponse("ApplicationError", $errorData);
+  $dataSvc->addErrorToResponse("ApplicationError", $errorData);
 }
 $dataSvc->addToResponse("StyUserRights", $allRights);
 

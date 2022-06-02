@@ -13,3 +13,8 @@ Base de données :
 -	Mot de passe : uribdpreprodfitness2022$$
 -	Type et version : MariaDB 10.5
 -	Espace : 2 GB
+
+
+- contact@distrix.cloud
+- mdp : KKf$#_m_w5C4P0q4
+- FTP user : 3f0ur_DistriX
