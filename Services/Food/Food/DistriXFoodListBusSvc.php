@@ -24,27 +24,27 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 $foodCaller = new DistriXServicesCaller();
 $foodCaller->setMethodName("ListFoods");
 $foodCaller->addParameter("dataLanguage", $busSvc->getParameter("dataLanguage"));
-$foodCaller->setServiceName("Services/Food/Food/DistriXFoodListDataSvc.php");
+$foodCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
 
 $brandCaller = new DistriXServicesCaller();
 $brandCaller->setMethodName("ListBrands");
-$brandCaller->setServiceName("Services/Food/Brand/DistriXFoodBrandListDataSvc.php");
+$brandCaller->setServiceName("Food/Brand/DistriXFoodBrandListDataSvc.php");
 
 $labelCaller = new DistriXServicesCaller();
 $labelCaller->setMethodName("ListLabels");
-$labelCaller->setServiceName("Services/Food/Label/DistriXFoodLabelListDataSvc.php");
+$labelCaller->setServiceName("Food/Label/DistriXFoodLabelListDataSvc.php");
 
 $ecoScoreCaller = new DistriXServicesCaller();
 $ecoScoreCaller->setMethodName("ListEcoScores");
-$ecoScoreCaller->setServiceName("Services/Food/EcoScore/DistriXFoodEcoScoreListDataSvc.php");
+$ecoScoreCaller->setServiceName("Food/EcoScore/DistriXFoodEcoScoreListDataSvc.php");
 
 $novaScoreCaller = new DistriXServicesCaller();
 $novaScoreCaller->setMethodName("ListNovaScores");
-$novaScoreCaller->setServiceName("Services/Food/NovaScore/DistriXFoodNovaScoreListDataSvc.php");
+$novaScoreCaller->setServiceName("Food/NovaScore/DistriXFoodNovaScoreListDataSvc.php");
 
 $nutriScoreCaller = new DistriXServicesCaller();
 $nutriScoreCaller->setMethodName("ListNutriScores");
-$nutriScoreCaller->setServiceName("Services/Food/NutriScore/DistriXFoodNutriScoreListDataSvc.php");
+$nutriScoreCaller->setServiceName("Food/NutriScore/DistriXFoodNutriScoreListDataSvc.php");
 
 // Add Caller to multi caller
 $svc = new DistriXSvc();

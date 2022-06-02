@@ -21,7 +21,7 @@ $distriXStudentCoachUserData->setIdUserCoach($_POST['idUser']);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListMyStudents");
-$servicesCaller->setServiceName("Services/Student/DistriXStudentMyStudentsListDataSvc.php");
+$servicesCaller->setServiceName("Student/DistriXStudentMyStudentsListDataSvc.php");
 $servicesCaller->addParameter("data", $distriXStudentCoachUserData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 if ($outputok && !empty($output) > 0) {

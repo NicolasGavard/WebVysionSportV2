@@ -26,29 +26,29 @@ list($dataLanguage, $jsonError) = LanguageStorData::getJsonData($busSvc->getPara
 $foodCaller = new DistriXServicesCaller();
 $foodCaller->setMethodName("ListFoods");
 $foodCaller->addParameter("dataLanguage", $dataLanguage);
-$foodCaller->setServiceName("Services/Food/Food/DistriXFoodListDataSvc.php");
+$foodCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
 
 $foodLabelCaller = new DistriXServicesCaller();
 $foodLabelCaller->setMethodName("ListFoodLabels");
-$foodLabelCaller->setServiceName("Services/Food/Food/DistriXFoodLabelListDataSvc.php");
+$foodLabelCaller->setServiceName("Food/Food/DistriXFoodLabelListDataSvc.php");
 
 $foodNutritionalCaller = new DistriXServicesCaller();
 $foodNutritionalCaller->setMethodName("ListFoodNutritionals");
-$foodNutritionalCaller->setServiceName("Services/Food/Food/DistriXFoodNutritionalListDataSvc.php");
+$foodNutritionalCaller->setServiceName("Food/Food/DistriXFoodNutritionalListDataSvc.php");
 
 $foodWeightTypeCaller = new DistriXServicesCaller();
 $foodWeightTypeCaller->setMethodName("ListFoodWeights");
-$foodWeightTypeCaller->setServiceName("Services/Food/Food/DistriXFoodWeightListDataSvc.php");
+$foodWeightTypeCaller->setServiceName("Food/Food/DistriXFoodWeightListDataSvc.php");
 
 $nutritionalCaller = new DistriXServicesCaller();
 $nutritionalCaller->setMethodName("ListNutritionals");
 $nutritionalCaller->addParameter("dataLanguage", $dataLanguage);
-$nutritionalCaller->setServiceName("Services/TablesCodes/Nutritional/DistriXNutritionalListDataSvc.php");
+$nutritionalCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalListDataSvc.php");
 
 $weightTypeCaller = new DistriXServicesCaller();
 $weightTypeCaller->setMethodName("ListWeightTypes");
 $weightTypeCaller->addParameter("dataLanguage", $dataLanguage);
-$weightTypeCaller->setServiceName("Services/TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
+$weightTypeCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
 
 // Add Caller to multi caller
 $svc = new DistriXSvc();
@@ -125,7 +125,7 @@ die();
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListFoods");
-$servicesCaller->setServiceName("Services/Food/Food/DistriXFoodListFullDataSvc.php");
+$servicesCaller->setServiceName("Food/Food/DistriXFoodListFullDataSvc.php");
 $servicesCaller->addParameter("dataFood", $listFoods);                        //print_r($listFoods);
 $servicesCaller->addParameter("dataFoodLabel", $listFoodLabels);              //print_r($listFoodLabels);
 $servicesCaller->addParameter("dataFoodNutritional", $listFoodNutritionals);  //print_r($listFoodNutritionals);

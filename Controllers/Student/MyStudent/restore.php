@@ -24,7 +24,7 @@ if ($_POST['id'] > 0) {
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("RestoreBrand");
 $servicesCaller->addParameter("data", $label);
-$servicesCaller->setServiceName("Services/Food/Brand/DistriXFoodBrandRestoreDataSvc.php");
+$servicesCaller->setServiceName("Food/Brand/DistriXFoodBrandRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {

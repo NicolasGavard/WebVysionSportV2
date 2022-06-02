@@ -20,7 +20,7 @@ list($distriXFoodEcoScoreData, $errorJson) = DistriXFoodEcoScoreData::getJsonDat
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewEcoScore");
 $servicesCaller->addParameter("data", $distriXFoodEcoScoreData);
-$servicesCaller->setServiceName("Services/Food/EcoScore/DistriXFoodEcoScoreViewDataSvc.php");
+$servicesCaller->setServiceName("Food/EcoScore/DistriXFoodEcoScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_EcoScore")) {

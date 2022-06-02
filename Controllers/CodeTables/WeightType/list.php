@@ -29,12 +29,12 @@ list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::
 
 $languageCaller = new DistriXServicesCaller();
 $languageCaller->setMethodName("ListLanguages");
-$languageCaller->setServiceName("Services/TablesCodes/Language/DistriXLanguageListDataSvc.php");
+$languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
 $weightTypeCaller = new DistriXServicesCaller();
 $weightTypeCaller->setMethodName("ListWeightTypes");
 $weightTypeCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
-$weightTypeCaller->setServiceName("Services/TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
+$weightTypeCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
 
 $svc = new DistriXSvc();
 $svc->addToCall("Language", $languageCaller);

@@ -20,7 +20,7 @@ list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POS
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewBrand");
 $servicesCaller->addParameter("data", $distriXFoodBandData);
-$servicesCaller->setServiceName("Services/Food/Brand/DistriXFoodBrandViewDataSvc.php");
+$servicesCaller->setServiceName("Food/Brand/DistriXFoodBrandViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {

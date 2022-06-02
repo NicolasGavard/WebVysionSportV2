@@ -18,7 +18,7 @@ $outputok       = false;
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListBrands");
-$servicesCaller->setServiceName("Services/Food/Brand/DistriXFoodBrandListDataSvc.php");
+$servicesCaller->setServiceName("Food/Brand/DistriXFoodBrandListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {

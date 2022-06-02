@@ -21,7 +21,7 @@ list($distriXNutritionCurrentDietData, $errorJson) = DistriXNutritionCurrentDiet
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveCurrentDiet");
 $servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
-$servicesCaller->setServiceName("Services/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsSaveDataSvc.php");
+$servicesCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Diet")) {

@@ -36,7 +36,7 @@ $distriXGeneralIdData->setId($infoProfil->getIdLanguage());
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListFoodCategory");
 $servicesCaller->addParameter("dataLanguage", $distriXGeneralIdData);
-$servicesCaller->setServiceName("Services/TablesCodes/FoodCategory/DistriXFoodCategoryListDataSvc.php");
+$servicesCaller->setServiceName("TablesCodes/FoodCategory/DistriXFoodCategoryListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_FoodCategory")) {

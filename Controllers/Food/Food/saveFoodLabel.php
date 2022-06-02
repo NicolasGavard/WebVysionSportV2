@@ -29,7 +29,7 @@ $distriXFoodLabelData->setTimestamp($_POST['timestamp']);
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveFoodLabel");
 $servicesCaller->addParameter("data", $distriXFoodLabelData);
-$servicesCaller->setServiceName("Services/Food/Food/DistriXFoodLabelSaveDataSvc.php");
+$servicesCaller->setServiceName("Food/Food/DistriXFoodLabelSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Label")) {

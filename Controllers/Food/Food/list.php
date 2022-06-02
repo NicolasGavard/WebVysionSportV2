@@ -55,7 +55,7 @@ list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListFoods");
-$servicesCaller->setServiceName("Services/Food/Food/DistriXFoodListBusSvc.php");
+$servicesCaller->setServiceName("Food/Food/DistriXFoodListBusSvc.php");
 $servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 

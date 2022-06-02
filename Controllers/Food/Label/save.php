@@ -24,7 +24,7 @@ list($distriXFoodBandData, $errorJson) = DistriXFoodLabelData::getJsonData($_POS
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveLabel");
 $servicesCaller->addParameter("data", $distriXFoodBandData);
-$servicesCaller->setServiceName("Services/Food/Label/DistriXFoodLabelSaveDataSvc.php");
+$servicesCaller->setServiceName("Food/Label/DistriXFoodLabelSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Label")) {

@@ -25,7 +25,7 @@ $foodType->setId(1);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $foodType);
-$servicesCaller->setServiceName("Services/TablesCodes/FoodType/DistriXFoodTypeRestoreDataSvc.php");
+$servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_FoodType")) {

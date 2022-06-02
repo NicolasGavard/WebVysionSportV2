@@ -33,7 +33,7 @@ $distriXCodeTableNutritionalData->setTimestamp($_POST['timestamp']);
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveNutritional");
 $servicesCaller->addParameter("data", $distriXCodeTableNutritionalData);
-$servicesCaller->setServiceName("Services/TablesCodes/Nutritional/DistriXNutritionalSaveDataSvc.php");
+$servicesCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Nutritional")) {

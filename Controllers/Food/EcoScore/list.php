@@ -18,7 +18,7 @@ $outputok       = false;
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListEcoScores");
-$servicesCaller->setServiceName("Services/Food/EcoScore/DistriXFoodEcoScoreListDataSvc.php");
+$servicesCaller->setServiceName("Food/EcoScore/DistriXFoodEcoScoreListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_EcoScore")) {

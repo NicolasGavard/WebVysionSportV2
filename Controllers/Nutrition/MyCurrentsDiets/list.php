@@ -35,7 +35,7 @@ list($distriXNutritionTemplateDietData, $errorJson) = DistriXNutritionTemplateDi
 
 // All My Current Diets
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setServiceName("Services/Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
+$servicesCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
 $servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
@@ -46,7 +46,7 @@ if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["List
 
 // All My Templates Diets
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setServiceName("Services/Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
+$servicesCaller->setServiceName("Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
 $servicesCaller->addParameter("data", $distriXNutritionTemplateDietData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 if ($outputok && isset($output["ListMyTemplatesDiets"]) && is_array($output["ListMyTemplatesDiets"])) {

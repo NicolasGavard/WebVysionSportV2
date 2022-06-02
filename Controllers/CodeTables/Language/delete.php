@@ -22,7 +22,7 @@ if (isset($_POST)) {
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setMethodName("DelLanguage");
   $servicesCaller->addParameter("data", $distriXCodeTableBandData);
-  $servicesCaller->setServiceName("Services/TablesCodes/Language/DistriXLanguageDeleteDataSvc.php");
+  $servicesCaller->setServiceName("TablesCodes/Language/DistriXLanguageDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
   if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Language")) {
