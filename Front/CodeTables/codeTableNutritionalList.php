@@ -96,7 +96,7 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/codeTableNutritional.js"></script>
+      <script src="jsWebVysionSport/CodeTables/codeTableNutritional.js"></script>
   </body>
 </html>
 

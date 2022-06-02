@@ -132,7 +132,7 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/codeTableWeightType.js"></script>
+      <script src="jsWebVysionSport/CodeTables/codeTableWeightType.js"></script>
   </body>
 </html>
 

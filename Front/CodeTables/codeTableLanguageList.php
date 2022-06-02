@@ -105,7 +105,7 @@
         include('_headerFooter.php');
       ?>
       
-      <script src="jsWebVysionSport/codeTableLanguages.js"></script>
+      <script src="jsWebVysionSport/CodeTables/codeTableLanguages.js"></script>
   </body>
 </html>
 
