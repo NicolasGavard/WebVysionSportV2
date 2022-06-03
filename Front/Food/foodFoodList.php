@@ -110,6 +110,6 @@
         include('../Home/_headerFooter.php');
       ?>
       
-      <script src="../../jsWebVysionSport/Nutrition/Food/foodFood.js"></script>
+      <script src="../../jsWebVysionSport/Food/foodFood.js"></script>
   </body>
 </html>

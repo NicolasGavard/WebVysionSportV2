@@ -106,6 +106,6 @@
         include('../Home/_headerFooter.php');
       ?>
       
-      <script src="../../jsWebVysionSport/Nutrition/Food/foodNutriScore.js"></script>
+      <script src="../../jsWebVysionSport/Food/foodNutriScore.js"></script>
   </body>
 </html>

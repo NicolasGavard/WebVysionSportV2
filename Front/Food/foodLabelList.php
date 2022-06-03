@@ -98,6 +98,6 @@
         include('../Home/_headerFooter.php');
       ?>
       
-      <script src="../../jsWebVysionSport/Nutrition/Food/foodLabel.js"></script>
+      <script src="../../jsWebVysionSport/Food/foodLabel.js"></script>
   </body>
 </html>
