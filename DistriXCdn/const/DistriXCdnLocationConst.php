@@ -58,10 +58,10 @@ switch (DISTRIX_ENV) {
     break;
   case DISTRIX_ENV_PROD:
     if (!defined('DISTRIX_CDN_URL_IMAGES')) {
-      define("DISTRIX_CDN_URL_IMAGES", "https://www.pazzicdn.com/images/");
+      define("DISTRIX_CDN_URL_IMAGES", "https://www.distrix.cloud/WebVysionSport/DistriXCdn/sent/images/");
     }
     if (!defined('DISTRIX_CDN_URL_MOVIES')) {
-      define("DISTRIX_CDN_URL_MOVIES", "https://www.pazzicdn.com/movies/");
+      define("DISTRIX_CDN_URL_MOVIES", "https://www.distrix.cloud/WebVysionSport/DistriXCdn/sent/movies/");
     }
     if (!defined('DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES')) {
       define("DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES", "../../../images/");

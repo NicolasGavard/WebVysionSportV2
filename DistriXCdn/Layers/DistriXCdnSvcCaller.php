@@ -11,7 +11,7 @@ if (!class_exists('DistriXCdnSvcCaller', false)) {
 		const CLIENT_SRV_INT     = "www.pazzidjango.com";
 		const CLIENT_SRV_VER     = "www.pazzidjango.com";
 		const CLIENT_SRV_VAL     = "www.pazzidjango.com";
-		const CLIENT_SRV_PROD    = "www.pazzicdn.com";
+		const CLIENT_SRV_PROD    = "www.distrix.cloud";
 
 		/* Business Servers Kind of Call Values */
 		const CLIENT_CALL_DEV     = "http";
@@ -25,7 +25,7 @@ if (!class_exists('DistriXCdnSvcCaller', false)) {
 		const CLIENT_DIR_INT     = "CdnServices";
 		const CLIENT_DIR_VER     = "CdnServices";
 		const CLIENT_DIR_VAL     = "CdnServices";
-		const CLIENT_DIR_PROD    = "CdnServices";
+		const CLIENT_DIR_PROD    = "WebVysionSport";
 
 		/* Client Servers Timeout Values */
 		const CLIENT_SRV_DEV_TIMEOUT              = "localhost";
@@ -48,10 +48,10 @@ if (!class_exists('DistriXCdnSvcCaller', false)) {
 		const CLIENT_CALL_VAL_TIMEOUT_NB_SECONDS  = 5;
 		const CLIENT_DIR_VAL_TIMEOUT              = "";
 
-		const CLIENT_SRV_PROD_TIMEOUT             = "";
+		const CLIENT_SRV_PROD_TIMEOUT             = "www.distrix.cloud";
 		const CLIENT_CALL_PROD_TIMEOUT            = "https";
 		const CLIENT_CALL_PROD_TIMEOUT_NB_SECONDS = 5;
-		const CLIENT_DIR_PROD_TIMEOUT             = "";
+		const CLIENT_DIR_PROD_TIMEOUT             = "WebVysionSport";
 
 		public function __construct($svcCaller = null)
 		{
