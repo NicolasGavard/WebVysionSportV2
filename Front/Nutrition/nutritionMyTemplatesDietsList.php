@@ -60,7 +60,7 @@
               <form class="FormAddMyTemplatesDiets" action="#" id="FormAddMyTemplatesDiets">
                 <input class="form-control AddMyTemplatesDietsFormId"        type="hidden" name="id"         value="0">
                 <input class="form-control AddMyTemplatesDietsFormTimestamp" type="hidden" name="timestamp"  value="0">
-                <input class="form-control AddMyTemplatesDietsFormStatut"    type="hidden" name="statut"     value="0">
+                <input class="form-control AddMyTemplatesDietsFormStatut"    type="hidden" name="elemState"     value="0">
                 <div class="row">
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">

@@ -73,7 +73,7 @@
                     <form class="dropzone FormAddEcoScore" action="#" id="FormAddEcoScore" style="max-height: 200px;">
                       <input class="form-control AddEcoScoreFormIdEcoScore"    type="hidden" name="id"         value="0">
                       <input class="form-control AddEcoScoreFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddEcoScoreFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddEcoScoreFormStatut"        type="hidden" name="elemState"     value="0">
                       <input class="form-control AddEcoScoreFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
                         <input type="file" name="file" class="AddEcoScoreFormPicture" />

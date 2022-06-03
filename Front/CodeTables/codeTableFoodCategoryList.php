@@ -69,7 +69,7 @@
                     <form class="dropzone FormAddFoodCategory" action="#" id="FormAddFoodCategory" style="max-height: 200px;">
                       <input class="form-control AddFoodCategoryFormIdFoodCategory"       type="hidden" name="id"         value="0">
                       <input class="form-control AddFoodCategoryFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddFoodCategoryFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddFoodCategoryFormStatut"        type="hidden" name="elemState"     value="0">
                       <input class="form-control AddFoodCategoryFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
                         <input type="file" name="file" class="AddFoodCategoryFormPicture" />

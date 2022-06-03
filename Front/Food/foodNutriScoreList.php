@@ -73,7 +73,7 @@
                     <form class="dropzone FormAddNutriScore" action="#" id="FormAddNutriScore" style="max-height: 200px;">
                       <input class="form-control AddNutriScoreFormIdNutriScore"       type="hidden" name="id"         value="0">
                       <input class="form-control AddNutriScoreFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddNutriScoreFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddNutriScoreFormStatut"        type="hidden" name="elemState"     value="0">
                       <input class="form-control AddNutriScoreFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
                         <input type="file" name="file" class="AddNutriScoreFormPicture" />

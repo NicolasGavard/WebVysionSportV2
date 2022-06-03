@@ -70,7 +70,7 @@
                     <form class="dropzone FormAddNutritional" action="#" id="FormAddNutritional" style="max-height: 200px;">
                       <input class="form-control AddNutritionalFormIdNutritional"       type="hidden" name="id"         value="0">
                       <input class="form-control AddNutritionalFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddNutritionalFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddNutritionalFormStatut"        type="hidden" name="elemState"     value="0">
                       <input class="form-control AddNutritionalFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
                         <input type="file" name="file" class="AddNutritionalFormPicture" />

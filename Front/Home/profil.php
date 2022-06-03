@@ -215,7 +215,7 @@
 																<form class="dropzone" action="#" id="my-awesome-dropzone">
 																	<input class="form-control AddBrandFormId"       	type="hidden" name="id"         value="0">
 																	<input class="form-control AddBrandFormTimestamp" type="hidden" name="timestamp"  value="0">
-																	<input class="form-control AddBrandFormStatut"    type="hidden" name="statut"     value="0">
+																	<input class="form-control AddBrandFormStatut"    type="hidden" name="elemState"     value="0">
 																	<div class="fallback">
 																		<input type="file" name="file" class="AddBrandFormPicture" />
 																	</div>
