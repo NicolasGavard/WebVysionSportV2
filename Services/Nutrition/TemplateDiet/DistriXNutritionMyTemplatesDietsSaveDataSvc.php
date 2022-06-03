@@ -16,12 +16,12 @@ if ($dataSvc->isAuthorized()) {
         $canSaveTemplateDiet  = true;
         if ($dietTemplateStorData->getId() == 0) {
           // Possibility to save datas
-          $styTemplateDietStor = DietTemplateStor::findByIdUserCoachIdUserStudentIdDietTemplateDateStart($dietTemplateStorData, $dbConnection);
+          $styTemplateDietStor = DietTemplateStor::findByIdUserCoachNameDuration($dietTemplateStorData, $dbConnection);
           if ($styTemplateDietStor->getId() > 0) {
             $canSaveTemplateDiet  = false;
             $distriXSvcErrorData = new DistriXSvcErrorData();
             $distriXSvcErrorData->setCode("400");
-            $distriXSvcErrorData->setDefaultText("This diet is already in use");
+            $distriXSvcErrorData->setDefaultText("This diet template is already in use");
             $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
             $errorData = $distriXSvcErrorData;
           }
