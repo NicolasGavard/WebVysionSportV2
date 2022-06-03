@@ -1,8 +1,8 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/Init/DistriXCurrentDietInitDataSvc.php");
-if ($dataSvc->isAuthorized()) {
+include(__DIR__ . "/Init/DistriXTemplateDietInitDataSvc.php");
 
+if ($dataSvc->isAuthorized()) {
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     list($dietStorData, $jsonError)   = DietStorData::getJsonData($dataSvc->getParameter("data"));
@@ -10,11 +10,14 @@ if ($dataSvc->isAuthorized()) {
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }
+  
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ViewMyCurrentDiet", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ViewMyTemplateDiet", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
-  $dataSvc->addToResponse("ViewMyCurrentDiet", $dietStor);
+
+  $dataSvc->addToResponse("ViewMyTemplateDiet", $dietStor);
 }
+
 // Return response
 $dataSvc->endOfService();

@@ -1,8 +1,8 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
 include(__DIR__ . "/Init/DistriXCurrentDietInitDataSvc.php");
-if ($dataSvc->isAuthorized()) {
 
+if ($dataSvc->isAuthorized()) {
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     list($dietStorData, $jsonError)   = DietStorData::getJsonData($dataSvc->getParameter("data"));
