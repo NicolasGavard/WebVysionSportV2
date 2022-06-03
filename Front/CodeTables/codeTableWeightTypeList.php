@@ -106,7 +106,7 @@
                     <form class="dropzone FormAddWeightType" action="#" id="FormAddWeightType" style="max-height: 200px;">
                       <input class="form-control AddWeightTypeFormIdWeightType"  type="hidden" name="id"         value="0">
                       <input class="form-control AddWeightTypeFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddWeightTypeFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddWeightTypeFormStatut"        type="hidden" name="elemState"     value="0">
                       <input class="form-control AddWeightTypeFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
                         <input type="file" name="file" class="AddWeightTypeFormPicture" />

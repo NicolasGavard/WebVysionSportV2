@@ -65,7 +65,7 @@
               <form class="FormAddMyCurrentsDiets" action="#" id="FormAddMyCurrentsDiets">
                 <input class="form-control AddMyCurrentsDietsFormId"        type="hidden" name="id"         value="0">
                 <input class="form-control AddMyCurrentsDietsFormTimestamp" type="hidden" name="timestamp"  value="0">
-                <input class="form-control AddMyCurrentsDietsFormStatut"    type="hidden" name="statut"     value="0">
+                <input class="form-control AddMyCurrentsDietsFormStatut"    type="hidden" name="elemState"     value="0">
                 <div class="row">
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">

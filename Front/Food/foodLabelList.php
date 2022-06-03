@@ -65,7 +65,7 @@
                     <form class="dropzone FormAddLabel" action="#" id="FormAddLabel" style="max-height: 200px;">
                       <input class="form-control AddLabelFormIdLabel"       type="hidden" name="id"         value="0">
                       <input class="form-control AddLabelFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddLabelFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddLabelFormStatut"        type="hidden" name="elemState"     value="0">
                       <input class="form-control AddLabelFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
                         <input type="file" name="file" class="AddLabelFormPicture" />

@@ -73,7 +73,7 @@
                     <form class="dropzone FormAddNovaScore" action="#" id="FormAddNovaScore" style="max-height: 200px;">
                       <input class="form-control AddNovaScoreFormIdNovaScore"       type="hidden" name="id"         value="0">
                       <input class="form-control AddNovaScoreFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddNovaScoreFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddNovaScoreFormStatut"        type="hidden" name="elemState"     value="0">
                       <input class="form-control AddNovaScoreFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
                         <input type="file" name="file" class="AddNovaScoreFormPicture" />

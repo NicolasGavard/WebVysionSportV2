@@ -65,7 +65,7 @@
                     <form class="dropzone FormAddBrand" action="#" id="FormAddBrand" style="max-height: 200px;">
                       <input class="form-control AddBrandFormIdBrand"       type="hidden" name="id"         value="0">
                       <input class="form-control AddBrandFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddBrandFormStatut"        type="hidden" name="statut"     value="0">
+                      <input class="form-control AddBrandFormStatut"        type="hidden" name="elemState"     value="0">
                       <input class="form-control AddBrandFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
                         <input type="file" name="file" class="AddBrandFormPicture" />
