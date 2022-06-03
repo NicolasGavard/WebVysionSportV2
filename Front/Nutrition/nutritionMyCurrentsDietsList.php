@@ -25,7 +25,7 @@
               <!-- <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-info AddSearchMyCurrentsDiets" data-toggle="modal" data-target="#modalSearchMyCurrentsDiets"><i class="icon-copy dw-info dw dw-search"></i> <?php echo $page_all_filter; ?></buttons> -->
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> <?php echo $page_all_active; ?></buttons>
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> <?php echo $page_all_inactive; ?></button>
-              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentsDiets"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
+              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentDiet"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
             </div>
           </div>
           
@@ -89,7 +89,7 @@
         </div>
       </div> 
 
-      <div class="modal fade bs-example-modal-lg" id="modalAddMyCurrentsDiets" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade bs-example-modal-lg" id="modalAddMyCurrentDiet" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
@@ -99,7 +99,7 @@
                 <input class="form-control AddMyCurrentsDietsFormId"            type="hidden" name="id"           value="0">
                 <input class="form-control AddMyCurrentsDietsFormIdUserCoatch"  type="hidden" name="idusercoach"  value="0">
                 <input class="form-control AddMyCurrentsDietsFormTimestamp"     type="hidden" name="timestamp"    value="0">
-                <input class="form-control AddMyCurrentsDietsFormStatut"        type="hidden" name="elemState"       value="0">
+                <input class="form-control AddMyCurrentsDietsFormStatut"        type="hidden" name="elemState"    value="0">
                 <div class="row">
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
