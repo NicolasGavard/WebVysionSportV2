@@ -18,6 +18,7 @@ $.ajax({
   url : '../../Controllers/Nutrition/MyCurrentsDiets/list.php',
   type : 'POST',
   dataType : 'JSON',
+  data: {'idUserCoach': localStorage.getItem("idUser")},
   success : function(data) {
     localStorage.setItem("dataTable", JSON.stringify(data.ListMyCurrentsDiets));
 
@@ -178,16 +179,17 @@ function ListMyCurrentDiet(elemState){
         progressColor = "success";
       }
 
-      var date  = String(val.dateStart);
-      var year  = date.substr(0, 4);
-      var month = date.substr(4, 2);
-      var day   = date.substr(6, 2);
+      var date    = String(val.dateStart);
+      var year    = date.substr(0, 4);
+      var month   = date.substr(4, 2);
+      var day     = date.substr(6, 2);
+      var dateFr  = day+'/'+month+'/'+year;
 
       const line =  '<tr>'+
                     ' <td>'+val.name+'</td>'+
                     ' <td>'+val.firstNameUserStudent+' '+val.nameUserStudent+'</td>'+
                     ' <td>'+val.duration+' jours</td>'+
-                    ' <td>'+day+'/'+month+'/'+year+'</td>'+
+                    ' <td>'+dateFr+'</td>'+
                     ' <td>'+val.tags+'</td>'+
                     ' <td><div class="progress mb-20"><div class="progress-bar progress-bar-striped bg-'+progressColor+'" role="progressbar" style="width: '+val.advancement+'%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">'+val.advancement+'%</div></div></td>'+
                     ' <td>'+
@@ -219,9 +221,23 @@ function ViewMyCurrentDiet(id){
       $(".update_title").removeClass("d-none");
 
       $('.AddMyCurrentDietFormIdMyCurrentDiet').val(id);
-      $('.AddMyCurrentDietFormCode').val(data.ViewMyCurrentDiet.code);
-      $('.AddMyCurrentDietFormName').val(data.ViewMyCurrentDiet.name);
-      $(".avatar-brand").attr("src", data.ViewMyCurrentDiet.linktopicture);
+      $('.AddMyCurrentsDietsFormIdUserCoatch').val(data.ViewMyCurrentDiet.idUserCoach);
+            
+      $('.listMyTemplates option[value="'+data.ViewMyCurrentDiet.idDietTemplate+'"]').prop('selected', true);
+      nameTemplate = $('.listMyTemplates option[value="'+data.ViewMyCurrentDiet.idDietTemplate+'"]').text();
+      $('#select2-listMyTemplates-container').html(nameTemplate);
+      
+      $('.listStudents option[value="'+data.ViewMyCurrentDiet.idUserStudent+'"]').prop('selected', true);
+      nameStudent = $('.listStudents option[value="'+data.ViewMyCurrentDiet.idUserStudent+'"]').text();
+      $('#select2-listStudents-container').html(nameStudent);
+      
+      var date    = String(data.ViewMyCurrentDiet.dateStart);
+      var year    = date.substr(0, 4);
+      var month   = date.substr(4, 2);
+      var day     = date.substr(6, 2);
+      var dateFr  = day+'/'+month+'/'+year;
+      $('.dateStart').val(dateFr);
+
       $('.AddMyCurrentDietFormTimestamp').val(data.ViewMyCurrentDiet.timestamp);
       $('.AddMyCurrentDietFormStatut').val(data.ViewMyCurrentDiet.elemState);
     },

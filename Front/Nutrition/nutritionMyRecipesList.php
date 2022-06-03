@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$international  = 'nutritionMyRecipesList';
+	$international  = 'Nutrition/nutritionMyRecipesList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('../../i18/'.$i18cdlangue.'/header.php');

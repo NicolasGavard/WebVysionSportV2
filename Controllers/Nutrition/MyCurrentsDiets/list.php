@@ -21,7 +21,6 @@ $error              = [];
 $output             = [];
 $outputok           = false;
 
-$_POST['idUserCoach']        = 1;
 $listMyCurrentDiets           = [];
 $listMyTemplateDiets          = [];
 $listMyCurrentDietsFormFront  = [];

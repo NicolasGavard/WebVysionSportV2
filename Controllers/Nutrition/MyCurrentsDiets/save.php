@@ -16,13 +16,16 @@ $error        = array();
 $output       = array();
 $outputok     = false;
 
+$date               = $_POST['dateStart'];
+$newDate            = date("Ymd", strtotime($date));
+$_POST['dateStart'] = $newDate;
 list($distriXNutritionCurrentDietData, $errorJson) = DistriXNutritionCurrentDietData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveCurrentDiet");
 $servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
 $servicesCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsSaveDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Diet")) {
   $logInfoData = new DistriXLoggerInfoData();
