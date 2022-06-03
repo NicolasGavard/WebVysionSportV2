@@ -18,6 +18,7 @@ $.ajax({
   url : '../../Controllers/Nutrition/MyCurrentsDiets/list.php',
   type : 'POST',
   dataType : 'JSON',
+  data: {'idUserCoach': localStorage.getItem("idUser")},
   success : function(data) {
     localStorage.setItem("dataTable", JSON.stringify(data.ListMyCurrentsDiets));
 

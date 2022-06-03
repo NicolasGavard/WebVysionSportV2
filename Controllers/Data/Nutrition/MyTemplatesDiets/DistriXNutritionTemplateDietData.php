@@ -15,15 +15,16 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
 
     public function __construct()
     {
-      $this->id             = 0;
-      $this->idUserCoach         = 0;
-      $this->nameUserCoach       = "";
-      $this->firstNameUserCoach  = "";
-      $this->name           = "";
-      $this->duration       = 0;
-      $this->tags           = "";
-      $this->elemState      = 0;
-      $this->timestamp      = 0;
+      $this->id                 = 0;
+      $this->idUserCoach        = 0;
+      $this->nameUserCoach      = "";
+      $this->firstNameUserCoach = "";
+      $this->name               = "";
+      $this->duration           = 0;
+      $this->tags               = "";
+      $this->nbStudentAssigned  = 0;
+      $this->elemState          = 0;
+      $this->timestamp          = 0;
     }
     // Gets
     public function getId():int { return $this->id; }
@@ -45,7 +46,7 @@ if (!class_exists("DistriXNutritionTemplateDietData", false)) {
     public function setName(string $name) { $this->name = $name; }
     public function setDuration(int $duration) { $this->duration = $duration; }
     public function setTags(string $tags) { $this->tags = $tags; }
-    public function setNbStudentAssigned(array $nbStudentAssigned) { $this->nbStudentAssigned = $nbStudentAssigned; }
+    public function setNbStudentAssigned(int $nbStudentAssigned) { $this->nbStudentAssigned = $nbStudentAssigned; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
