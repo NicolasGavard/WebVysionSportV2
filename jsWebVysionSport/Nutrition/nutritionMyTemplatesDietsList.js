@@ -140,22 +140,26 @@ function ListMyTemplateDiet(elemState){
       }
 
       const line =  '<tr>'+
-                    ' <td>'+val.name+'</td>'+
-                    ' <td>'+val.nbStudentAssigned+'</td>'+
-                    ' <td>'+val.duration+' jours</td>'+
-                    ' <td>'+val.tags+'</td>'+
-                    ' <td>'+
-                    '   <div class="dropdown">'+
-                    '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
-                    '       <i class="dw dw-more"></i>'+
-                    '     </a>'+
-                    '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyTemplateDiet"   onclick="ViewMyTemplateDiet(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelMyTemplateDiet(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestMyTemplateDiet(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
-                    '     </div>'+
-                    '   </div>'+
-                    ' </td>'+
+                    '  <td>'+val.name+'</td>'+                  
+                    '  <td>'+
+                    // '    <button type="button" class="btn btn-outline-primary margin-5" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="popover">'+
+                    '     '+val.nbStudentAssigned+''+
+                    // '    </button>'+
+                    '  </td>'+
+                    '  <td>'+val.duration+' jours</td>'+
+                    '  <td>'+val.tags+'</td>'+
+                    '  <td>'+
+                    '    <div class="dropdown">'+
+                    '      <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+                    '        <i class="dw dw-more"></i>'+
+                    '      </a>'+
+                    '      <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyTemplateDiet"   onclick="ViewMyTemplateDiet(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '        <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelMyTemplateDiet(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '        <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestMyTemplateDiet(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '      </div>'+
+                    '    </div>'+
+                    '  </td>'+
                     '</tr>';
       datatable.row.add($(line)).draw();
     }
@@ -178,7 +182,6 @@ function ViewMyTemplateDiet(id){
       $('.AddMyTemplateDietFormIdMyTemplateDiet').val(id);
       $('.AddMyTemplateDietFormCode').val(data.ViewMyTemplateDiet.code);
       $('.AddMyTemplateDietFormName').val(data.ViewMyTemplateDiet.name);
-      $(".avatar-brand").attr("src", data.ViewMyTemplateDiet.linktopicture);
       $('.AddMyTemplateDietFormTimestamp').val(data.ViewMyTemplateDiet.timestamp);
       $('.AddMyTemplateDietFormStatut').val(data.ViewMyTemplateDiet.elemState);
     },

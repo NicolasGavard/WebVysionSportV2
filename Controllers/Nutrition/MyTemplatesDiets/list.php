@@ -74,7 +74,6 @@ foreach ($listMyTemplateDiets as $templateDiet) {
   
   $distriXNutritionTemplateDietData->setElemState($templateDiet->getElemState());
   $distriXNutritionTemplateDietData->setTimestamp($templateDiet->getTimestamp());
-
   $listMyTemplateDietsFormFront[] = $distriXNutritionTemplateDietData;
 }
 
