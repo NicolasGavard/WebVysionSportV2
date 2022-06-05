@@ -77,6 +77,7 @@
   $menu_codeTables_weightType_list    = "Liste des contenances";
   $menu_codeTables_food_category_list = "Liste des catégories d'aliments";
   $menu_codeTables_nutritional_list   = "Liste des info. nutritionnelles";
+  $menu_codeTables_food_type_list     = "Liste des types d'aliments";
   $menu_codeTables_language_list      = "Liste des langues";
 
   $menu_profil_myProfil   = "Mon profil";
