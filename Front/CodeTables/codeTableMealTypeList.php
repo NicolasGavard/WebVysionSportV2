@@ -52,6 +52,10 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
+                <input class="form-control AddMealTypeFormIdMealType" type="hidden" name="id"         value="0">
+                <input class="form-control AddMealTypeFormTimestamp"  type="hidden" name="timestamp"  value="0">
+                <input class="form-control AddMealTypeFormStatut"     type="hidden" name="elemState"  value="0">
+                
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_code; ?></label>
@@ -59,6 +63,7 @@
                     <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
                   </div>
                 </div>
+                
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
