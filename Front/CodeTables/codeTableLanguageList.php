@@ -79,7 +79,7 @@
                     <form class="dropzone FormAddLanguage" action="#" id="FormAddLanguage" style="max-height: 200px;">
                       <input class="form-control AddLanguageFormIdLanguage"    type="hidden" name="id"         value="0">
                       <input class="form-control AddLanguageFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddLanguageFormStatut"        type="hidden" name="elemState"     value="0">
+                      <input class="form-control AddLanguageFormStatut"        type="hidden" name="elemState"  value="0">
                       <input class="form-control AddLanguageFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
                       <div class="fallback" style="margin: 1em 0;">
                         <input type="file" name="file" class="AddLanguageFormPicture" />

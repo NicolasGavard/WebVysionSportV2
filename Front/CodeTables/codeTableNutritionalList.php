@@ -51,6 +51,10 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
+                <input class="form-control AddNutritionalFormIdNutritional" type="hidden" name="id"         value="0">
+                <input class="form-control AddNutritionalFormTimestamp"     type="hidden" name="timestamp"  value="0">
+                <input class="form-control AddNutritionalFormStatut"        type="hidden" name="elemState"  value="0">
+
                 <div class="col-md-12 col-sm-12 d-none showPicture">
                   <div class="profile-photo">
                     <img src="" alt="" class="avatar-photo avatar-Nutritional">
@@ -62,20 +66,6 @@
                     <label><?php echo $page_name; ?></label>
                     <input class="form-control AddNutritionalFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
-                  </div>
-                </div>
-                
-                <div class="col-md-12 col-sm-12">
-                  <div class="pd-20 card-box mb-30">
-                    <form class="dropzone FormAddNutritional" action="#" id="FormAddNutritional" style="max-height: 200px;">
-                      <input class="form-control AddNutritionalFormIdNutritional"       type="hidden" name="id"         value="0">
-                      <input class="form-control AddNutritionalFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddNutritionalFormStatut"        type="hidden" name="elemState"     value="0">
-                      <input class="form-control AddNutritionalFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
-                      <div class="fallback" style="margin: 1em 0;">
-                        <input type="file" name="file" class="AddNutritionalFormPicture" />
-                      </div>
-                    </form>
                   </div>
                 </div>
               </div>

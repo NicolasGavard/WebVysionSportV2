@@ -57,6 +57,10 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <div class="row">
+                <input class="form-control AddWeightTypeFormIdWeightType"  type="hidden" name="id"         value="0">
+                <input class="form-control AddWeightTypeFormTimestamp"     type="hidden" name="timestamp"  value="0">
+                <input class="form-control AddWeightTypeFormStatut"        type="hidden" name="elemState"  value="0">
+
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_abbreviation; ?></label>
@@ -98,20 +102,6 @@
                         <span class="micon dw dw-house-1">&nbsp;<?php echo $page_other_title; ?></span>
                       </label>
                     </div>
-                  </div>
-                </div>
-                
-                <div class="col-md-12 col-sm-12">
-                  <div class="pd-20 card-box mb-30">
-                    <form class="dropzone FormAddWeightType" action="#" id="FormAddWeightType" style="max-height: 200px;">
-                      <input class="form-control AddWeightTypeFormIdWeightType"  type="hidden" name="id"         value="0">
-                      <input class="form-control AddWeightTypeFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddWeightTypeFormStatut"        type="hidden" name="elemState"     value="0">
-                      <input class="form-control AddWeightTypeFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
-                      <div class="fallback" style="margin: 1em 0;">
-                        <input type="file" name="file" class="AddWeightTypeFormPicture" />
-                      </div>
-                    </form>
                   </div>
                 </div>
               </div>

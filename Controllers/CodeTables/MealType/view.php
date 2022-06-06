@@ -22,10 +22,6 @@ $outputok   = false;
 $foodType = new DistriXCodeTableMealTypeData();
 $foodType->setId($_POST['id'] ?? 0);
 
-$foodType->setId(1);
-// $foodType->setId(3);
-// $foodType->setId(4);
-
 $listMealTypeNames = [];
 
 // CALL
@@ -49,6 +45,7 @@ if ($outputok && isset($output["ViewMealType"])) {
 } else {
   $error = $errorData;
 }
+
 if ($outputok && isset($output["ViewMealTypeNames"]) && is_array($output["ViewMealTypeNames"])) {
   list($listMealTypeNames, $jsonError) = DistriXCodeTableMealTypeNameData::getJsonArray($output["ViewMealTypeNames"]);
 } else {

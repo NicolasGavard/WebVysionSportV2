@@ -4,7 +4,6 @@ include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 include(__DIR__ . "/../../Data/DistriXGeneralIdData.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ . "/../../Data/DistriXFoodFoodData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableFoodCategoryData.php");
@@ -49,8 +48,8 @@ $listNutriScores    = [];
 
 $servicesCaller     = new DistriXServicesCaller();
 
-$infoProfil[0]['idLanguage'] = 1;
-$_POST['id'] = $infoProfil[0]['idLanguage']; // NG 27-05-22 - until a solution is found
+$infoProfil = DistriXStyAppInterface::getUserInformation();
+$_POST['id'] = $infoProfil->getIdLanguage(); // NG 27-05-22 - until a solution is found
 list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
