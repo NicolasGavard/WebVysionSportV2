@@ -54,12 +54,6 @@
                 <input class="form-control AddFoodCategoryFormTimestamp"      type="hidden" name="timestamp"  value="0">
                 <input class="form-control AddFoodCategoryFormStatut"         type="hidden" name="elemState"  value="0">
               
-                <div class="col-md-12 col-sm-12 d-none showPicture">
-                  <div class="profile-photo">
-                    <img src="" alt="" class="avatar-photo avatar-FoodCategory">
-                  </div>
-                </div>
-
                 <div class="col-md-12 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
