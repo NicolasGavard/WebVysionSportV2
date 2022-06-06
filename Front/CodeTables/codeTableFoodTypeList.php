@@ -32,7 +32,7 @@
 						<table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>                 
-                  <th><span><?php echo $page_code; ?></span></th>
+                  <th class="table-plus datatable-nosort"><span><?php echo $page_code; ?></span></th>
                   <th><span><?php echo $page_name; ?></span></th>
                   <th><span><?php echo $page_translation; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
