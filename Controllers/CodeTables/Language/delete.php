@@ -6,11 +6,11 @@ include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.
 $confirmSave  = false;
 
 if (isset($_POST)) {
-  list($distriXCodeTableBandData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
+  list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
   
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setMethodName("DelLanguage");
-  $servicesCaller->addParameter("data", $distriXCodeTableBandData);
+  $servicesCaller->addParameter("data", $distriXCodeTableLanguageData);
   $servicesCaller->setServiceName("TablesCodes/Language/DistriXLanguageDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
@@ -32,9 +32,9 @@ if (isset($_POST)) {
   }
 }
 
-$resp["confirmSave"]  = $confirmSave;
-if(!empty($error)){
-  $resp["Error"]        = $error;
+$resp["confirmSave"] = $confirmSave;
+if (!empty($error)) {
+  $resp["Error"] = $error;
 }
 
 echo json_encode($resp);
