@@ -1,10 +1,10 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/CodeTables/FoodCategory/list.php',
+  url : '../../Controllers/CodeTables/MealType/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
-    localStorage.setItem("dataTable", JSON.stringify(data.ListFoodCategorys));
+    localStorage.setItem("dataTable", JSON.stringify(data.ListMealTypes));
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -30,7 +30,7 @@ $(".btn-warning").on('click', function() {
   $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
   datatable.clear();
-  ListFoodCategory(1);
+  ListMealType(1);
 });
 
 $(".btn-success").on('click', function() {
@@ -41,50 +41,50 @@ $(".btn-success").on('click', function() {
   $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
   datatable.clear();
-  ListFoodCategory(0);
+  ListMealType(0);
 });
 
-$(".AddNewFoodCategory").on('click', function() {
+$(".AddNewMealType").on('click', function() {
   $(".add_title").removeClass("d-none");
   $(".update_title").addClass("d-none");
 
-  $('.AddFoodCategoryFormIdFoodCategory').val(0);
-  $('.AddFoodCategoryFormCode').val('');
-  $('.AddFoodCategoryFormName').val('');
+  $('.AddMealTypeFormIdMealType').val(0);
+  $('.AddMealTypeFormCode').val('');
+  $('.AddMealTypeFormName').val('');
   $(".avatar-food_category").attr("src", '');
-  $('.AddFoodCategoryFormTimestamp').val(0);
-  $('.AddFoodCategoryFormStatut').val(0);
+  $('.AddMealTypeFormTimestamp').val(0);
+  $('.AddMealTypeFormStatut').val(0);
 });
 
-$(".btnAddFoodCategory").on('click', function() {
+$(".btnAddMealType").on('click', function() {
   $(".page_food_food_category_update_title").removeClass("d-none");
   
-  var name = $('.AddFoodCategoryFormName').val();
+  var name = $('.AddMealTypeFormName').val();
   if (name != ""){
-    var data = $('#FormAddFoodCategory').serializeArray(); // convert form to array
+    var data = $('#FormAddMealType').serializeArray(); // convert form to array
     data.push({name: "name", value: name});
     
     $.ajax({
-      url : '../../Controllers/CodeTables/FoodCategory/save.php',
+      url : '../../Controllers/CodeTables/MealType/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodCategoryList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodMealTypeList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
       }
     });
-    $(".btnAddFoodCategory").attr("data-dismiss", "modal");
+    $(".btnAddMealType").attr("data-dismiss", "modal");
   } else {
     if (name == ''){
-      $('.AddFoodCategoryFormName').addClass("form-control-danger");
+      $('.AddMealTypeFormName').addClass("form-control-danger");
       $('.danger-name').removeClass("d-none");
 
       setTimeout( () => { 
-        $(".AddFoodCategoryFormName").removeClass("form-control-danger");
+        $(".AddMealTypeFormName").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
       }, 3000 );
     }
@@ -93,14 +93,14 @@ $(".btnAddFoodCategory").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : '../../Controllers/CodeTables/FoodCategory/delete.php',
+    url : '../../Controllers/CodeTables/MealType/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodCategoryList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodMealTypeList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -113,14 +113,14 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : '../../Controllers/CodeTables/FoodCategory/restore.php',
+    url : '../../Controllers/CodeTables/MealType/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodCategoryList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodMealTypeList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -131,7 +131,7 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListFoodCategory(elemState){
+function ListMealType(elemState){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
     if(val.elemState == elemState){
@@ -147,9 +147,9 @@ function ListFoodCategory(elemState){
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodCategory"   onclick="ViewFoodCategory(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelFoodCategory(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestFoodCategory(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMealType"   onclick="ViewMealType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelMealType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestMealType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -159,9 +159,9 @@ function ListFoodCategory(elemState){
   });
 }
 
-function ViewFoodCategory(id){
+function ViewMealType(id){
   $.ajax({
-    url : '../../Controllers/CodeTables/FoodCategory/view.php',
+    url : '../../Controllers/CodeTables/MealType/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
@@ -172,12 +172,12 @@ function ViewFoodCategory(id){
       $(".dropzoneImage").removeClass("d-none");
       $(".dropzoneNoImage").addClass("d-none");
 
-      $('.AddFoodCategoryFormIdFoodCategory').val(id);
-      $('.AddFoodCategoryFormCode').val(data.ViewFoodCategory.codeshort);
-      $('.AddFoodCategoryFormName').val(data.ViewFoodCategory.name);
-      $(".avatar-food_category").attr("src", data.ViewFoodCategory.linktopicture);
-      $('.AddFoodCategoryFormTimestamp').val(data.ViewFoodCategory.timestamp);
-      $('.AddFoodCategoryFormStatut').val(data.ViewFoodCategory.elemState);
+      $('.AddMealTypeFormIdMealType').val(id);
+      $('.AddMealTypeFormCode').val(data.ViewMealType.codeshort);
+      $('.AddMealTypeFormName').val(data.ViewMealType.name);
+      $(".avatar-food_category").attr("src", data.ViewMealType.linktopicture);
+      $('.AddMealTypeFormTimestamp').val(data.ViewMealType.timestamp);
+      $('.AddMealTypeFormStatut').val(data.ViewMealType.elemState);
     },
     error : function(data) {
       console.log(data);
@@ -185,12 +185,12 @@ function ViewFoodCategory(id){
   });
 }
 
-function DelFoodCategory(id, name){
+function DelMealType(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestFoodCategory(id, name){
+function RestMealType(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

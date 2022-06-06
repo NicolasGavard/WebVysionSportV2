@@ -9,12 +9,12 @@ if (!class_exists("DistriXCodeTableFoodTypeNameData", false)) {
     protected $timestamp;
   
     public function __construct() {
-      $this->id = 0;
+      $this->id         = 0;
       $this->idfoodtype = 0;
       $this->idlanguage = 0;
-      $this->name = "";
-      $this->elemState = 0;
-      $this->timestamp = 0;
+      $this->name       = "";
+      $this->elemState  = 0;
+      $this->timestamp  = 0;
       }
   // Gets
     public function getId():int { return $this->id; }

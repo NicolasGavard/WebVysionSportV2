@@ -11,14 +11,14 @@ if (!class_exists("DistriXCodeTableFoodCategoryData", false)) {
     protected $names;
 
     public function __construct() {
-      $this->id = 0;
-      $this->code = "";
-      $this->name = "";
-      $this->elemState = 0;
-      $this->timestamp = 0;
-      $this->nbLanguages = 0;
+      $this->id               = 0;
+      $this->code             = "";
+      $this->name             = "";
+      $this->elemState        = 0;
+      $this->timestamp        = 0;
+      $this->nbLanguages      = 0;
       $this->nbLanguagesTotal = 0;
-      $this->names = [];
+      $this->names            = [];
     }
     // Gets
     public function getId():int { return $this->id; }
