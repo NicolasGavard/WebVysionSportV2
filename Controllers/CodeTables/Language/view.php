@@ -11,14 +11,7 @@ $servicesCaller->addParameter("data", $distriXCodeTableBandData);
 $servicesCaller->setServiceName("TablesCodes/Language/DistriXLanguageViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Language")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXLanguageViewDataSvc");
-  $logInfoData->setLogFunction("ViewLanguage");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
+$logOk = logController("Security_Language", "DistriXLanguageDeleteDataSvc", "DelLanguage", $output);
 
 if ($outputok && isset($output["ViewLanguage"])) {
   $distriXCodeTableBandData = $output["ViewLanguage"];
