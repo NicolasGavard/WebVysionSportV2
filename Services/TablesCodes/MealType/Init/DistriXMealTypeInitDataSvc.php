@@ -6,12 +6,12 @@ include(__DIR__ . "/../../../../DistrixSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../../GlobalData/ApplicationErrorData.php");
 // Database Data
-include(__DIR__ . "/../Data/FoodTypeStorData.php");
-include(__DIR__ . "/../Data/FoodTypeNameStorData.php");
+include(__DIR__ . "/../Data/MealTypeStorData.php");
+include(__DIR__ . "/../Data/MealTypeNameStorData.php");
 // Storage
 include(__DIR__ . "/../../../../DistriXDbConnection/DistriXPDOConnection.php");
-include(__DIR__ . "/../Storage/FoodTypeStor.php");
-include(__DIR__ . "/../Storage/FoodTypeNameStor.php");
+include(__DIR__ . "/../Storage/MealTypeStor.php");
+include(__DIR__ . "/../Storage/MealTypeNameStor.php");
 // Trace Data
 include(__DIR__ . "/../../../../DistriXTrace/data/DistriXTraceData.php");
 

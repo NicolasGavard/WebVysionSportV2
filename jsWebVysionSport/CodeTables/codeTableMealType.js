@@ -12,16 +12,6 @@ $.ajax({
   }
 });
 
-$(".btnChangeImage").on('click', function() {
-  $(".dropzoneImage").addClass("d-none");
-  $(".dropzoneNoImage").removeClass("d-none");
-});
-
-$(".btnChangeImageCancel").on('click', function() {
-  $(".dropzoneImage").removeClass("d-none");
-  $(".dropzoneNoImage").addClass("d-none");
-});
-
 $(".btn-warning").on('click', function() {
   $(".btn-success").removeClass("disabled");
   $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
@@ -51,13 +41,12 @@ $(".AddNewMealType").on('click', function() {
   $('.AddMealTypeFormIdMealType').val(0);
   $('.AddMealTypeFormCode').val('');
   $('.AddMealTypeFormName').val('');
-  $(".avatar-food_category").attr("src", '');
   $('.AddMealTypeFormTimestamp').val(0);
   $('.AddMealTypeFormStatut').val(0);
 });
 
 $(".btnAddMealType").on('click', function() {
-  $(".page_food_food_category_update_title").removeClass("d-none");
+  $(".page_food_meal_type_update_title").removeClass("d-none");
   
   var name = $('.AddMealTypeFormName').val();
   if (name != ""){
@@ -139,20 +128,21 @@ function ListMealType(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td>'+val.codeShort+'</td>'+
-                    ' <td>'+val.name+'</td>'+
-                    ' <td>'+
-                    '   <div class="dropdown">'+
-                    '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
-                    '       <i class="dw dw-more"></i>'+
-                    '     </a>'+
-                    '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMealType"   onclick="ViewMealType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelMealType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestMealType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
-                    '     </div>'+
-                    '   </div>'+
-                    ' </td>'+
+                    '  <td>'+val.code+'</td>'+
+                    '  <td>'+val.name+'</td>'+
+                    '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal+'</td>'+
+                    '  <td>'+
+                    '    <div class="dropdown">'+
+                    '      <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+                    '        <i class="dw dw-more"></i>'+
+                    '      </a>'+
+                    '      <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMealType" onclick="ViewMealType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '        <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelMealType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '        <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestMealType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '      </div>'+
+                    '    </div>'+
+                    '  </td>'+
                     '</tr>';
       datatable.row.add($(line)).draw();
     }
@@ -168,14 +158,9 @@ function ViewMealType(id){
     success : function(data) {
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
-    
-      $(".dropzoneImage").removeClass("d-none");
-      $(".dropzoneNoImage").addClass("d-none");
-
       $('.AddMealTypeFormIdMealType').val(id);
       $('.AddMealTypeFormCode').val(data.ViewMealType.codeshort);
       $('.AddMealTypeFormName').val(data.ViewMealType.name);
-      $(".avatar-food_category").attr("src", data.ViewMealType.linktopicture);
       $('.AddMealTypeFormTimestamp').val(data.ViewMealType.timestamp);
       $('.AddMealTypeFormStatut').val(data.ViewMealType.elemState);
     },

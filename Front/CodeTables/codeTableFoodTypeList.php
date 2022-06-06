@@ -35,7 +35,6 @@
                   <th><span><?php echo $page_code; ?></span></th>
                   <th><span><?php echo $page_name; ?></span></th>
                   <th><span><?php echo $page_translation; ?></span></th>
-                  <th><span><?php echo $page_status; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>

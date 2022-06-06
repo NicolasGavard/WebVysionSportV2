@@ -48,7 +48,7 @@ if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLangua
   $error = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("MealType"); print_r($output);
+list($outputok, $output, $errorData) = $svc->getResult("MealType"); //print_r($output);
 if ($outputok && isset($output["ListMealTypes"]) && is_array($output["ListMealTypes"])) {
   list($listMealTypes, $jsonError) = DistriXCodeTableMealTypeData::getJsonArray($output["ListMealTypes"]);
 } else {
