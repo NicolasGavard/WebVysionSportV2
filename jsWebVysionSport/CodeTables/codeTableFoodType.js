@@ -139,8 +139,9 @@ function ListFoodType(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td>'+val.codeShort+'</td>'+
-                    ' <td>'+val.name+'</td>'+
+                    '  <td>'+val.code+'</td>'+
+                    '  <td>'+val.name+'</td>'+
+                    '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
