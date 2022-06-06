@@ -1,53 +1,34 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/Data/DistriXCodeTableFoodTypeData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
 
-$resp        = [];
 $confirmSave = false;
-$error       = [];
-$output      = [];
-$outputok    = false;
 
-$foodType = new DistriXCodeTableFoodTypeData();
-$foodType->setId($_POST['id'] ?? 0);
+// TESTS
+//$_POST["id"] = 1;
+// $_POST["id"] = 3;
+// $_POST["id"] = 4;
 
-$foodType->setId(1);
-// $foodType->setId(3);
-// $foodType->setId(4);
+if (isset($_POST)) {
+  list($foodType, $errorJson) = DistriXCodeTableFoodTypeData::getJsonData($_POST);
 
-$servicesCaller = new DistriXServicesCaller();
-$servicesCaller->addParameter("data", $foodType);
-$servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeDeleteDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
+  $servicesCaller = new DistriXServicesCaller();
+  $servicesCaller->addParameter("data", $foodType);
+  $servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeDeleteDataSvc.php");
+  list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_FoodType")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXFoodTypeDeleteDataSvc");
-  $logInfoData->setLogFunction("DelFoodType");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
+  $logOk = logController("Security_FoodType", "DistriXFoodTypeDeleteDataSvc", "DelFoodType", $output);
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
+  if ($outputok && !empty($output) && isset($output["ConfirmSave"])) {
     $confirmSave = $output["ConfirmSave"];
+  } else {
+    $error = $errorData;
   }
-} else {
-  $error = $errorData;
 }
-
 $resp["confirmSave"] = $confirmSave;
-if(!empty($error)){
+if (!empty($error)) {
   $resp["Error"] = $error;
 }
-
 echo json_encode($resp);
