@@ -3,7 +3,6 @@ include(__DIR__ . "/../../../DistriXSvc/Config/DistriXFolderPath.php");
 include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-// include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyUser.php");
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/MealType/DistriXCodeTableMealTypeData.php");
 include(__DIR__ . "/../../Data/CodeTables/MealType/DistriXCodeTableMealTypeNameData.php");
@@ -28,9 +27,9 @@ $languageCaller = new DistriXServicesCaller();
 $languageCaller->setMethodName("ListLanguages");
 $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
-$dataName = new DistriXCodeTableMealTypeNameData();
-// $dataName->setIdLanguage(1);
-// $dataName->setIdLanguage(2);
+$infoProfil = DistriXStyAppInterface::getUserInformation();
+$dataName   = new DistriXCodeTableMealTypeNameData();
+$dataName->setIdLanguage($infoProfil->getIdLanguage());
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("dataName", $dataName);
@@ -48,12 +47,14 @@ if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLangua
 } else {
   $error = $errorData;
 }
-list($outputok, $output, $errorData) = $svc->getResult("MealType"); //print_r($output);
+
+list($outputok, $output, $errorData) = $svc->getResult("MealType"); print_r($output);
 if ($outputok && isset($output["ListMealTypes"]) && is_array($output["ListMealTypes"])) {
   list($listMealTypes, $jsonError) = DistriXCodeTableMealTypeData::getJsonArray($output["ListMealTypes"]);
 } else {
   $error = $errorData;
 }
+
 if ($outputok && isset($output["ListMealTypeNames"]) && is_array($output["ListMealTypeNames"])) {
   list($listMealTypeNames, $jsonError) = DistriXCodeTableMealTypeNameData::getJsonArray($output["ListMealTypeNames"]);
 } else {
