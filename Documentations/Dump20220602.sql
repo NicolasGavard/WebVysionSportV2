@@ -617,7 +617,9 @@ DROP TABLE IF EXISTS `recipe`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `recipe` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idusercoach` int(10) unsigned NOT NULL,
   `code` varchar(40) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `description` varchar(255) NOT NULL,
   `linktopicture` varchar(255) NOT NULL,
   `size` int(10) unsigned NOT NULL,
@@ -626,7 +628,9 @@ CREATE TABLE `recipe` (
   `statut` tinyint(3) unsigned NOT NULL,
   `timestamp` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `indcode` (`code`)
+  KEY `indcode` (`code`),
+  KEY `indidusercoach` (`idusercoach`),
+  UNIQUE KEY `indrcodeidusercoach` (`code`,`idusercoach`) USING BTREE,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Recipes';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -673,66 +677,6 @@ CREATE TABLE `recipeingredient` (
 LOCK TABLES `recipeingredient` WRITE;
 /*!40000 ALTER TABLE `recipeingredient` DISABLE KEYS */;
 /*!40000 ALTER TABLE `recipeingredient` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `recipename`
---
-
-DROP TABLE IF EXISTS `recipename`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recipename` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `idrecipe` int(10) unsigned NOT NULL,
-  `idlanguage` int(10) unsigned NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `statut` tinyint(3) unsigned NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `indrecipelanguageunique` (`idrecipe`,`idlanguage`) USING BTREE,
-  KEY `indrecipe` (`idrecipe`),
-  KEY `indrecipelanguage` (`idrecipe`,`idlanguage`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Recipes Names';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `recipename`
---
-
-LOCK TABLES `recipename` WRITE;
-/*!40000 ALTER TABLE `recipename` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recipename` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `recipeuser`
---
-
-DROP TABLE IF EXISTS `recipeuser`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recipeuser` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `idrecipe` int(10) unsigned NOT NULL,
-  `idstyuser` int(10) unsigned NOT NULL,
-  `statut` tinyint(3) unsigned NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `indrecipeuserunique` (`idrecipe`,`idstyuser`) USING BTREE,
-  KEY `indrecipe` (`idrecipe`),
-  KEY `induser` (`idstyuser`),
-  KEY `indrecipeuser` (`idrecipe`,`idstyuser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Recipes User';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `recipeuser`
---
-
-LOCK TABLES `recipeuser` WRITE;
-/*!40000 ALTER TABLE `recipeuser` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recipeuser` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

@@ -1,6 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXCodeTableFoodTypeData", false)) {
-  class DistriXCodeTableFoodTypeData extends DistriXSvcAppData {
+if (!class_exists("DistriXCodeTableMealTypeData", false)) {
+  class DistriXCodeTableMealTypeData extends DistriXSvcAppData {
     protected $id;
     protected $code;
     protected $name;
