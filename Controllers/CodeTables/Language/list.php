@@ -1,20 +1,9 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+include(__DIR__ . "/../../Init/DistriXControlerInit.php");
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp           = [];
 $listLanguages  = [];
-$error          = [];
-$output         = [];
-$outputok       = false;
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ListLanguages");

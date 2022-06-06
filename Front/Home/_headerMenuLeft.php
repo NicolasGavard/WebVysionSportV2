@@ -38,7 +38,7 @@
               $show       = '';
               $style      = 'none';
             ?>
-            <ul class="submenu" style='display: <?php echo $style; ?>'>
+            <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <li><a href="#">1</a></li>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
@@ -61,17 +61,17 @@
             $style1 = 'none';
             $style2 = 'none';
             $navActiveMenunutritionMyCurrentsDiets = $navActiveMenuNutritionMyTemplatesDiets = $navActiveMenuNutritionMyRecipes = "";
-            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsList')   !== false) { $dataOption="on"; $show1="show;"; $style1='block'; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDietsList')  !== false) { $dataOption="on"; $show1="show;"; $style1='block'; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipesList')         !== false) { $dataOption="on"; $show1="show;"; $style1='block'; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsList')   !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDietsList')  !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipesList')         !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
 
             $navActiveMenuFoodFood = $navActiveMenuFoodBrand = $navActiveMenuFoodEcoScore = $navActiveMenuFoodNovaScore = $navActiveMenuFoodNutriScore = $navActiveMenuFoodLabel = '';
-            if (stripos($_SERVER['PHP_SELF'], 'foodFoodList')       !== false) { $dataOption="on"; $show1="show;"; $show2="show;"; $style1='block'; $style2='block'; $navActiveMenuFoodFood       = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodBrandList')      !== false) { $dataOption="on"; $show1="show;"; $show2="show;"; $style1='block'; $style2='block'; $navActiveMenuFoodBrand      = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodEcoScoreList')   !== false) { $dataOption="on"; $show1="show;"; $show2="show;"; $style1='block'; $style2='block'; $navActiveMenuFoodEcoScore   = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodNovaScoreList')  !== false) { $dataOption="on"; $show1="show;"; $show2="show;"; $style1='block'; $style2='block'; $navActiveMenuFoodNovaScore  = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodNutriScoreList') !== false) { $dataOption="on"; $show1="show;"; $show2="show;"; $style1='block'; $style2='block'; $navActiveMenuFoodNutriScore = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodLabelList')      !== false) { $dataOption="on"; $show1="show;"; $show2="show;"; $style1='block'; $style2='block'; $navActiveMenuFoodLabel      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodFoodList')       !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodFood       = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodBrandList')      !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodBrand      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodEcoScoreList')   !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodEcoScore   = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodNovaScoreList')  !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodNovaScore  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodNutriScoreList') !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodNutriScore = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodLabelList')      !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodLabel      = 'class="active"'; }
           ?>
           
           <li class="dropdown <?php echo $show1; ?>">
@@ -80,7 +80,7 @@
               <span class="mtext"><?php echo $menu_nutrition; ?></span>
               &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
             </a>
-            <ul class="submenu" style='display: <?php echo $style1; ?>'>
+            <ul class="submenu <?php echo $show1; ?>" style='display: <?php echo $style1; ?>'>
               <?php if ($hasNutrition_MyDiet)           { ?><li <?php echo $navActiveMenunutritionMyCurrentsDiets ?>><a class="nav-link" href="../Nutrition/nutritionMyCurrentsDietsList.php"><?php echo $menu_nutrition_myDiet; ?></a></li><?php } ?>
               <?php if ($hasNutrition_MyTemplatesDiets) { ?><li <?php echo $navActiveMenuNutritionMyTemplatesDiets ?>><a class="nav-link" href="../Nutrition/nutritionMyTemplatesDietsList.php"><?php echo $menu_nutrition_myTempletDiet; ?></a></li><?php } ?>
               <?php if ($hasNutrition_Recipe)           { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link" href="../Nutrition/nutritionMyRecipesList.php"><?php echo $menu_nutrition_myRecipe; ?></a></li><?php } ?>
@@ -113,7 +113,7 @@
                     <span class="micon dw dw-harvest"></span>
                     <span class="mtext"><?php echo $menu_food; ?></span>
                   </a>
-                  <ul class="submenu child" style='display: <?php echo $style2; ?>'>
+                  <ul class="submenu child <?php echo $show2; ?>" style='display: <?php echo $style2; ?>'>
                     <?php if ($hasRight_FOOD_FOOD)        { ?><li <?php echo $navActiveMenuFoodFood ?>><a class="nav-link" href="../Food/foodFoodList.php"><?php echo $menu_food_food_list; ?></a></li><?php } ?>
                     <?php if ($hasRight_FOOD_BRAND)       { ?><li <?php echo $navActiveMenuFoodBrand ?>><a class="nav-link" href="../Food/foodBrandList.php"><?php echo $menu_food_brand_list; ?></a></li><?php } ?>
                     <?php if ($hasRight_FOOD_ECO_SCORE)   { ?><li <?php echo $navActiveMenuFoodEcoScore ?>><a class="nav-link" href="../Food/foodEcoScoreList.php"><?php echo $menu_food_ecoScore_list; ?></a></li><?php } ?>
@@ -135,12 +135,12 @@
         ?>
         <?php if ($hasBilan) { ?>
           <li class="dropdown <?php echo $show; ?>">
-            <a href="javascript:;" class="dropdown-toggle">
+            <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-board"></span>
               <span class="mtext"><?php echo $menu_bilan; ?></span>
               &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
             </a>
-            <ul class="submenu" style='display: <?php echo $style; ?>'>
+            <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <li><a href="#">1</a></li>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
@@ -157,12 +157,12 @@
         ?>
         <?php if ($hasStudent) { ?>
           <li class="dropdown <?php echo $show; ?>">
-            <a href="javascript:;" class="dropdown-toggle">
+            <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-user-2"></span>
               <span class="mtext"><?php echo $menu_student; ?></span>
               &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
             </a>
-            <ul class="submenu" style='display: <?php echo $style; ?>'>
+            <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <?php
                 $hasSTUDENT_LIST_COATCH = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'STUDENT', 'LIST_COATCH');
                 $hasSTUDENT_LIST_COATCH = true;  
@@ -171,7 +171,7 @@
                 $show       =  '';
                 $style      = 'none';
                 $navActiveMenuStudentListCoach = "";
-                if (stripos($_SERVER['PHP_SELF'], 'studentListCoach')        !== false) { $dataOption="on"; $show="show;"; $style='block'; $navActiveMenuStudentListCoach = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'studentListCoach')        !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuStudentListCoach = 'class="active"'; }
               ?> 
               <?php if ($hasSTUDENT_LIST_COATCH) { ?><li <?php echo $navActiveMenuStudentListCoach ?>><a class="nav-link" href="../Student/studentListCoach.php"><?php echo $menu_student_list_coach; ?></a></li><?php } ?>
             
@@ -190,12 +190,12 @@
         ?>
         <?php if ($hasResource) { ?>
           <li class="dropdown <?php echo $show; ?>">
-            <a href="javascript:;" class="dropdown-toggle">
+            <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-human-resources"></span>
               <span class="mtext"><?php echo $menu_ressource; ?></span>
               &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
             </a>
-            <ul class="submenu" style='display: <?php echo $style; ?>'>
+            <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <li><a href="#">1</a></li>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
@@ -212,12 +212,12 @@
         ?>
         <?php if ($hasFormule) { ?>
           <li class="dropdown <?php echo $show; ?>">
-            <a href="javascript:;" class="dropdown-toggle">
+            <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-money-1"></span>
               <span class="mtext"><?php echo $menu_formule; ?></span>
               &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
             </a>
-            <ul class="submenu" style='display: <?php echo $style; ?>'>
+            <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <li><a href="#">1</a></li>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
@@ -234,12 +234,12 @@
         ?>
         <?php if ($hasParam) { ?>
           <li class="dropdown <?php echo $show; ?>">
-            <a href="javascript:;" class="dropdown-toggle">
+            <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-settings"></span>
               <span class="mtext"><?php echo $menu_parametre; ?></span>
               &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
             </a>
-            <ul class="submenu" style='display: <?php echo $style; ?>'>
+            <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <li><a href="#">1</a></li>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
@@ -256,12 +256,12 @@
         ?>
         <?php if ($hasMessaging) { ?>
           <li class="dropdown <?php echo $show; ?>">
-            <a href="javascript:;" class="dropdown-toggle">
+            <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-message"></span>
               <span class="mtext"><?php echo $menu_messagerie; ?></span>
               &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
             </a>
-            <ul class="submenu" style='display: <?php echo $style; ?>'>
+            <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <li><a href="#">1</a></li>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
@@ -363,16 +363,16 @@
               $style1     = $style2 = 'none';
             ?>
             <li class="dropdown <?php echo $show; ?>">
-              <a href="javascript:;" class="dropdown-toggle">
+              <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
                 <span class="micon dw dw-user-13"></span>
                 <span class="mtext"><?php echo $menu_admin_users; ?></span>
               </a>
-              <ul class="submenu" style='display: <?php echo $style; ?>'>
+              <ul class="submenu <?php echo $show1; ?>" style='display: <?php echo $style; ?>'>
                 <?php
                   $navActiveMenuAdminUser = $navActiveMenuAdminEnterprise = $navActiveMenuAdminUserType = "";
-                  if (stripos($_SERVER['PHP_SELF'], 'adminUserList')        !== false) { $dataOption="on"; $show1="show;"; $style1='block'; $navActiveMenuAdminUser        = 'class="active"'; }
-                  if (stripos($_SERVER['PHP_SELF'], 'adminEnterpriseList')  !== false) { $dataOption="on"; $show1="show;"; $style1='block'; $navActiveMenuAdminEnterprise  = 'class="active"'; }
-                  if (stripos($_SERVER['PHP_SELF'], 'adminUserTypeList')    !== false) { $dataOption="on"; $show1="show;"; $style1='block'; $navActiveMenuAdminUserType    = 'class="active"'; }
+                  if (stripos($_SERVER['PHP_SELF'], 'adminUserList')        !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUser        = 'class="active"'; }
+                  if (stripos($_SERVER['PHP_SELF'], 'adminEnterpriseList')  !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminEnterprise  = 'class="active"'; }
+                  if (stripos($_SERVER['PHP_SELF'], 'adminUserTypeList')    !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUserType    = 'class="active"'; }
                 ?> 
                 <?php if ($hasRight_ADMIN_USER)       { ?><li <?php echo $navActiveMenuAdminUser ?>><a class="nav-link" href="../Admin/adminUserList.php"><?php echo $menu_admin_users_list; ?></a></li><?php } ?>
                 <?php if ($hasRight_ADMIN_ENTERPRISE) { ?><li <?php echo $navActiveMenuAdminEnterprise ?>><a class="nav-link" href="../Admin/adminEnterpriseList.php"><?php echo $menu_admin_enterprises_list; ?></a></li><?php } ?>
@@ -381,18 +381,18 @@
                 <?php if ($hasSecurity) { ?>
                   <?php
                     $navActiveMenuAdminApplication = $navActiveMenuAdminModule = $navActiveMenuAdminFunctionality = $navActiveMenuAdminRole = $navActiveMenuAdminRight = "";
-                    if (stripos($_SERVER['PHP_SELF'], 'adminApplication')     !== false) { $dataOption="on"; $show2="show;"; $style2='block'; $navActiveMenuAdminApplication    = 'class="active"'; }
-                    if (stripos($_SERVER['PHP_SELF'], 'adminModule')          !== false) { $dataOption="on"; $show2="show;"; $style2='block'; $navActiveMenuAdminModule         = 'class="active"'; }
-                    if (stripos($_SERVER['PHP_SELF'], 'adminFunctionality')   !== false) { $dataOption="on"; $show2="show;"; $style2='block'; $navActiveMenuAdminFunctionality  = 'class="active"'; }
-                    if (stripos($_SERVER['PHP_SELF'], 'adminRoleList')        !== false) { $dataOption="on"; $show2="show;"; $style2='block'; $navActiveMenuAdminRole           = 'class="active"'; }
-                    if (stripos($_SERVER['PHP_SELF'], 'adminRightList')       !== false) { $dataOption="on"; $show2="show;"; $style2='block'; $navActiveMenuAdminRight          = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminApplication')     !== false) { $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminApplication    = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminModule')          !== false) { $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminModule         = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminFunctionality')   !== false) { $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminFunctionality  = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminRoleList')        !== false) { $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminRole           = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminRightList')       !== false) { $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminRight          = 'class="active"'; }
                   ?>
                   <li class="dropdown <?php echo $show2; ?>">
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
                       <span class="micon fa fa-cogs"></span>
                       <span class="mtext "><?php echo $menu_right; ?></span>
                     </a>
-                    <ul class="submenu child" style='display: <?php echo $style2; ?>'>
+                    <ul class="submenu child <?php echo $show2; ?>" style='display: <?php echo $style2; ?>'>
                       <?php if ($hasRight_SECURITY_APPLICATION) {    ?><li <?php echo $navActiveMenuAdminApplication ?>><a class="nav-link" href="../Admin/adminApplicationList.php"><?php echo $menu_right_applications_list; ?>/a></li><?php } ?>
                       <?php if ($hasRight_SECURITY_MODULE) {         ?><li <?php echo $navActiveMenuAdminModule ?>><a class="nav-link" href="../Admin/adminModuleList.php"><?php echo $menu_right_modules_list; ?></a></li><?php } ?>
                       <?php if ($hasRight_SECURITY_FUNCTIONALITY) {  ?><li <?php echo $navActiveMenuAdminFunctionality ?>><a class="nav-link" href="../Admin/adminFunctionalityList.php"><?php echo $menu_right_functionalities_list; ?></a></li><?php } ?>
@@ -417,19 +417,19 @@
             $navActiveMenuCodeTableWeightType   = $navActiveMenuCodeTableFoodCategory = $navActiveMenuCodeTableFoodType = $navActiveMenuCodeTableMealType = "";
             $navActiveMenuCodeTableNutritionale = $navActiveMenuCodeTableLanguage     = "";
             $navActiveMenuCodeTableFoodType     = "";
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableWeightTypeList')    !== false) { $dataOption="on"; $show="show;"; $style='block'; $navActiveMenuCodeTableWeightType    = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableFoodCategoryList')  !== false) { $dataOption="on"; $show="show;"; $style='block'; $navActiveMenuCodeTableFoodCategory  = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableFoodTypeList')      !== false) { $dataOption="on"; $show="show;"; $style='block'; $navActiveMenuCodeTableFoodType      = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableMealTypeList')      !== false) { $dataOption="on"; $show="show;"; $style='block'; $navActiveMenuCodeTableMealType      = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableNutritionalList')   !== false) { $dataOption="on"; $show="show;"; $style='block'; $navActiveMenuCodeTableNutritionale  = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableLanguageList')      !== false) { $dataOption="on"; $show="show;"; $style='block'; $navActiveMenuCodeTableLanguage      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableWeightTypeList')    !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableWeightType    = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableFoodCategoryList')  !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableFoodCategory  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableFoodTypeList')      !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableFoodType      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableMealTypeList')      !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableMealType      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableNutritionalList')   !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableNutritionale  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableLanguageList')      !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableLanguage      = 'class="active"'; }
           ?>
           <li>
-            <a href="javascript:;" class="dropdown-toggle">
+            <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-library"></span>
               <span class="mtext"><?php echo $menu_codeTables; ?></span>
             </a>
-            <ul class="submenu <?php echo $show; ?>">
+            <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <?php if ($hasRight_CODE_TABLE_WEIGHT_TYPE)   { ?><li <?php echo $navActiveMenuCodeTableWeightType ?>><a class="nav-link" href="../CodeTables/codeTableWeightTypeList.php"><?php echo $menu_codeTables_weightType_list; ?></a></li><?php } ?>
               <?php if ($hasRight_CODE_TABLE_FOOD_CATEGORY) { ?><li <?php echo $navActiveMenuCodeTableFoodCategory ?>><a class="nav-link" href="../CodeTables/codeTableFoodCategoryList.php"><?php echo $menu_codeTables_food_category_list; ?></a></li><?php } ?>
               <?php if ($hasRight_CODE_TABLE_FOOD_TYPE)     { ?><li <?php echo $navActiveMenuCodeTableFoodType ?>><a class="nav-link" href="../CodeTables/codeTableFoodTypeList.php"><?php echo $menu_codeTables_food_type_list; ?></a></li><?php } ?>
