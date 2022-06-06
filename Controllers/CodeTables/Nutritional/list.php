@@ -3,9 +3,9 @@ include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableNutritionalNameData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalData.php");
+include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalNameData.php");
+include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -48,12 +48,14 @@ if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLangua
   $error = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("Nutritional"); var_dump($output);
+list($outputok, $output, $errorData) = $svc->getResult("Nutritional"); //var_dump($output);
 if ($outputok && isset($output["ListNutritionals"]) && is_array($output["ListNutritionals"])) {
   list($listNutritionals, $jsonError) = DistriXCodeTableNutritionalData::getJsonArray($output["ListNutritionals"]);
 } else {
   $error = $errorData;
 }
+
+
 
 $resp["ListNutritionals"]  = $listNutritionals;
 $resp["ListLanguages"]    = $listLanguages;
