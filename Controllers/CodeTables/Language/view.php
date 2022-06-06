@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . "/../../Init/DistriXControlerInit.php");
+include(__DIR__ . "/../../Init/DistriXControllerInit.php");
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
 
