@@ -43,9 +43,6 @@ function logOut(){
     dataType : 'JSON',
     success : function(data) {    
       if (data.isConnected) {
-        localStorage.clear();
-        window.localStorage.clear();
-
         localStorage.removeItem("idUser");
         localStorage.removeItem("name");
         localStorage.removeItem("firstName");
