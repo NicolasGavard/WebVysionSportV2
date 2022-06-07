@@ -15,12 +15,12 @@ include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
 include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp          = [];
+$resp               = [];
 $listFoodCategories = [];
-$listLanguages = [];
-$error         = [];
-$output        = [];
-$outputok      = false;
+$listLanguages      = [];
+$error              = [];
+$output             = [];
+$outputok           = false;
 
 // CALL
 $languageCaller = new DistriXServicesCaller();
@@ -48,7 +48,7 @@ if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLangua
   $error = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("FoodCategory"); //print_r($output);
+list($outputok, $output, $errorData) = $svc->getResult("FoodCategory"); print_r($output);
 if ($outputok && isset($output["ListFoodCategories"]) && is_array($output["ListFoodCategories"])) {
   list($listFoodCategories, $jsonError) = DistriXCodeTableFoodCategoryData::getJsonArray($output["ListFoodCategories"]);
 } else {
