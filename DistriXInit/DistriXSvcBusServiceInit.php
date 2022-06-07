@@ -21,3 +21,4 @@ if ($busSvc->getJsonCall()) {
   }
   $busSvc->setMethodName($busSvc->getParameter("function"));
 }
+$busSvc->startDebug();
