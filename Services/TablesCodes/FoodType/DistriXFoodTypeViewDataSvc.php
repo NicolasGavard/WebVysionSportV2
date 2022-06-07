@@ -1,7 +1,15 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/Init/DistriXFoodTypeInitDataSvc.php");
+include(__DIR__ . "/../../Init/DataSvcInit.php");
 if ($dataSvc->isAuthorized()) {
+  // Database Data
+  include(__DIR__ . "/Data/FoodTypeStorData.php");
+  include(__DIR__ . "/Data/FoodTypeNameStorData.php");
+  // Storage
+  include(__DIR__ . "/Storage/FoodTypeStor.php");
+  include(__DIR__ . "/Storage/FoodTypeNameStor.php");
+
+  // Data
   $foodType      = new FoodTypeStorData();
   $foodTypeNames = [];
 

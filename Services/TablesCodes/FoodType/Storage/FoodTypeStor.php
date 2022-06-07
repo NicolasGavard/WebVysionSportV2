@@ -349,7 +349,13 @@ class FoodTypeStor {
           $traceData->setIdUser($trace->getIdUser());
           $traceData->setApplication($trace->getApplicationName());
           $traceData->setSchema($trace->getDbSchemaName());
-          $traceData->setOperationCode($traceType);
+          $operationCode = DistriXTraceData::TRACE_UPDATE;
+          if ($traceType == "TRACE_REMOVE") {
+            $operationCode = DistriXTraceData::TRACE_REMOVE;
+          } elseif ($traceType == "TRACE_RESTORE") {
+            $operationCode = DistriXTraceData::TRACE_RESTORE;
+          }
+          $traceData->setOperationCode($operationCode);
           $traceData->setOperationId($data->getId());
           $traceData->setOperationTable(self::TABLE_NAME);
           $traceData->setOperationData(print_r($data, true));
@@ -368,7 +374,7 @@ class FoodTypeStor {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
       $id = $data->getId();
-      $insere = self::update($data, DistriXTraceData::TRACE_UPDATE, $inDbConnection);
+      $insere = self::update($data, "TRACE_UPDATE", $inDbConnection);
     } else {
       list($insere, $id) = self::create($data, $inDbConnection);
     }
@@ -382,7 +388,7 @@ class FoodTypeStor {
     if ($data->getId() > 0) {
       $data = self::read($data->getId(), $inDbConnection);
       $data->setUnavailable();
-      $insere = self::update($data, DistriXTraceData::TRACE_REMOVE, $inDbConnection);
+      $insere = self::update($data, "TRACE_REMOVE", $inDbConnection);
     }
     return $insere;
   }
@@ -394,7 +400,7 @@ class FoodTypeStor {
     if ($data->getId() > 0) {
       $data = self::read($data->getId(), $inDbConnection);
       $data->setAvailable();
-      $insere = self::update($data, DistriXTraceData::TRACE_RESTORE, $inDbConnection);
+      $insere = self::update($data, "Restore", $inDbConnection);
     }
     return $insere;
   }

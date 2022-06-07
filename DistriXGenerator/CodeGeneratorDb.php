@@ -458,7 +458,13 @@ if (!class_exists('CodeGeneratorDb', false)) {
           fputs($f, '          $traceData->setIdUser($trace->getIdUser());' . "\r\n");
           fputs($f, '          $traceData->setApplication($trace->getApplicationName());' . "\r\n");
           fputs($f, '          $traceData->setSchema($trace->getDbSchemaName());' . "\r\n");
-          fputs($f, '          $traceData->setOperationCode($traceType);' . "\r\n");
+          fputs($f, '          $operationCode = DistriXTraceData::TRACE_UPDATE;' . "\r\n");
+          fputs($f, '          if ($traceType == "TRACE_REMOVE") {' . "\r\n");
+          fputs($f, '            $operationCode = DistriXTraceData::TRACE_REMOVE;' . "\r\n");
+          fputs($f, '          } elseif ($traceType == "TRACE_RESTORE") {' . "\r\n");
+          fputs($f, '            $operationCode = DistriXTraceData::TRACE_RESTORE;' . "\r\n");
+          fputs($f, '          }' . "\r\n");
+          fputs($f, '          $traceData->setOperationCode($operationCode);' . "\r\n");
           fputs($f, '          $traceData->setOperationId($data->getId());' . "\r\n");
           fputs($f, '          $traceData->setOperationTable(self::TABLE_NAME);' . "\r\n");
           for ($i = 0; $i < $fieldind; $i++) {
@@ -494,7 +500,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
         fputs($f, '    if ($data->getId() > 0) {' . "\r\n");
         fputs($f, '      $id = $data->getId();' . "\r\n");
         if ($generateFor == "P") {
-          fputs($f, '      $insere = self::update($data, DistriXTraceData::TRACE_UPDATE, $inDbConnection);' . "\r\n");
+          fputs($f, '      $insere = self::update($data, "TRACE_UPDATE", $inDbConnection);' . "\r\n");
         } else {
           fputs($f, '      $insere = self::update($data, $inDbConnection);' . "\r\n");
         }
@@ -519,7 +525,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
           fputs($f, '      $data = self::read($data->getId(), $inDbConnection);' . "\r\n");
           fputs($f, '      $data->setUnavailable();' . "\r\n");
           if ($generateFor == "P") {
-            fputs($f, '      $insere = self::update($data, DistriXTraceData::TRACE_REMOVE, $inDbConnection);' . "\r\n");
+            fputs($f, '      $insere = self::update($data, "TRACE_REMOVE", $inDbConnection);' . "\r\n");
           } else {
             fputs($f, '      $insere = self::update($data, $inDbConnection);' . "\r\n");
           }
@@ -542,7 +548,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
           fputs($f, '      $data = self::read($data->getId(), $inDbConnection);' . "\r\n");
           fputs($f, '      $data->setAvailable();' . "\r\n");
           if ($generateFor == "P") {
-            fputs($f, '      $insere = self::update($data, DistriXTraceData::TRACE_RESTORE, $inDbConnection);' . "\r\n");
+            fputs($f, '      $insere = self::update($data, "TRACE_RESTORE", $inDbConnection);' . "\r\n");
           } else {
             fputs($f, '      $insere = self::update($data, $inDbConnection);' . "\r\n");
           }

@@ -29,7 +29,7 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table class="table stripe hover nowrap" id="datatable">
+						<table class="table stripe responsive hover nowrap" id="datatable">
 							<thead>
 								<tr>                 
                   <th class="table-plus datatable-nosort"><span><?php echo $page_code; ?></span></th>
