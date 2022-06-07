@@ -27,9 +27,9 @@ $languageCaller = new DistriXServicesCaller();
 $languageCaller->setMethodName("ListLanguages");
 $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
+$infoProfil = DistriXStyAppInterface::getUserInformation();
 $dataName = new DistriXCodeTableFoodCategoryNameData();
-// $dataName->setIdLanguage(1);
-// $dataName->setIdLanguage(2);
+$dataName->setIdLanguage($infoProfil->getIdLanguage());
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("dataName", $dataName);
@@ -47,6 +47,7 @@ if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLangua
 } else {
   $error = $errorData;
 }
+
 list($outputok, $output, $errorData) = $svc->getResult("FoodCategory"); //print_r($output);
 if ($outputok && isset($output["ListFoodCategories"]) && is_array($output["ListFoodCategories"])) {
   list($listFoodCategories, $jsonError) = DistriXCodeTableFoodCategoryData::getJsonArray($output["ListFoodCategories"]);

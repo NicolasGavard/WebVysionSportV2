@@ -28,9 +28,9 @@ $languageCaller = new DistriXServicesCaller();
 $languageCaller->setMethodName("ListLanguages");
 $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
+$infoProfil = DistriXStyAppInterface::getUserInformation();
 $dataName = new DistriXCodeTableFoodTypeNameData();
-// $dataName->setIdLanguage(1);
-// $dataName->setIdLanguage(2);
+$dataName->setIdLanguage($infoProfil->getIdLanguage());
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("dataName", $dataName);

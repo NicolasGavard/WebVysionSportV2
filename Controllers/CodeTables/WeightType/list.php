@@ -23,7 +23,7 @@ $output           = array();
 $outputok         = false;
 
 $infoProfil = DistriXStyAppInterface::getUserInformation();
-$_POST['id'] = $infoProfil->getIdLanguage(); // NG 27-05-22 - until a solution is found
+$_POST['id'] = $infoProfil->getIdLanguage();
 list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
 
 $languageCaller = new DistriXServicesCaller();
