@@ -322,7 +322,7 @@ if (!class_exists('DistriXSvcBase', false)) {
 
     public function startDebug()
     {
-      if ($this->isAuthorized && $this->isDataSvcInDebugMode()) {
+      if ($this->isAuthorized && ($this->isBusSvcInDebugMode() || $this->isDataSvcInDebugMode())) {
         ob_start();
       }
       return -1;

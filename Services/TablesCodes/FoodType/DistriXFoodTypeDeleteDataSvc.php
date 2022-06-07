@@ -1,7 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
 include(__DIR__ . "/../../Init/DataSvcInit.php");
-if ($dataSvc->isAuthorized()) {
+if (isset($dataSvc) && !is_null($dataSvc) && $dataSvc->isAuthorized()) {
   // Database StorData
   include(__DIR__ . "/Data/FoodTypeStorData.php");
   // Storage
