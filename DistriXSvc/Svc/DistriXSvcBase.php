@@ -320,6 +320,14 @@ if (!class_exists('DistriXSvcBase', false)) {
       return -1;
     }
 
+    public function startDebug()
+    {
+      if ($this->isAuthorized && $this->isDataSvcInDebugMode()) {
+        ob_start();
+      }
+      return -1;
+    }
+
     public function getJsonCall()
     {
       if ($this->isAuthorized) {
@@ -447,9 +455,13 @@ if (!class_exists('DistriXSvcBase', false)) {
     {
       if ($this->isAuthorized) {
         if ($layer == DISTRIX_SVC_BUS_DEBUG && $this->isBusSvcInDebugMode()) {
+          $this->svcDebugBuffer .= ob_get_contents();
+          ob_end_clean();
           $this->addToResponse("debugBus", $this->svcDebugBuffer);
         }
         if ($layer == DISTRIX_SVC_DATA_DEBUG && $this->isDataSvcInDebugMode()) {
+          $this->svcDebugBuffer .= ob_get_contents();
+          ob_end_clean();
           $this->addToResponse("debugData", $this->svcDebugBuffer);
         }
         echo $this->getFormattedResponse();

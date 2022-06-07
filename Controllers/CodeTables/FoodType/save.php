@@ -60,11 +60,13 @@ if (isset($_POST)) {
   // print_r($foodTypeNames);
 
   $servicesCaller = new DistriXServicesCaller();
+  $servicesCaller->setDebugMode(DISTRIX_SVC_DATA_LAYER_IN_DEBUG_MODE);
+  // $servicesCaller->setDebugModeAllLayerOn();
   $servicesCaller->addParameter("data", $foodType);
   $servicesCaller->addParameter("dataNames", $foodTypeNames);
   $servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeSaveDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
-  echo "--"; print_r($output);
+  echo "-*/*/*/*/*/*/*/***/*/*/*/*/-"; print_r($output); echo "-*/*/*/*/*/*/*/***/*/*/*/*/-";
 
   $logOk = logController("Security_FoodType", "DistriXFoodTypeSaveDataSvc", "SaveFoodType", $output);
 
