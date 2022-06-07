@@ -300,7 +300,7 @@
               $hasSecurity                 = true;
           }
           $hasRight_CODE_TABLE_WEIGHT_TYPE    = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_WEIGHT_TYPE');
-          $hasRight_CODE_TABLE_FOOD_CATEGORY  = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_FOOD_CATEGORY');
+          $hasRight_CODE_TABLE_CATEGORY_FOOD_TYPE  = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_FOOD_CATEGORY');
           $hasRight_CODE_TABLE_NUTRITIONAL    = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_NUTRITIONAL');
           $hasRight_CODE_TABLE_FOOD_TYPE      = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_FOOD_TYPE');
           $hasRight_CODE_TABLE_MEAL_TYPE      = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_MEAL_TYPE');
@@ -308,7 +308,7 @@
           $hasCodeTable                       = false;
           if(
             $hasRight_CODE_TABLE_WEIGHT_TYPE  || 
-            $hasRight_CODE_TABLE_FOOD_CATEGORY|| 
+            $hasRight_CODE_TABLE_CATEGORY_FOOD_TYPE|| 
             $hasRight_CODE_TABLE_NUTRITIONAL  || 
             $hasRight_CODE_TABLE_FOOD_TYPE    || 
             $hasRight_CODE_TABLE_LANGUES) {
@@ -331,7 +331,7 @@
           $hasRight_FOOD_NUTRI_SCORE          = true;
           $hasRight_FOOD_LABEL                = true;
           $hasRight_CODE_TABLE_WEIGHT_TYPE    = true;
-          $hasRight_CODE_TABLE_FOOD_CATEGORY  = true;
+          $hasRight_CODE_TABLE_CATEGORY_FOOD_TYPE  = true;
           $hasRight_CODE_TABLE_NUTRITIONAL    = true;
           $hasRight_CODE_TABLE_LANGUES        = true;
           $hasRight_CODE_TABLE_FOOD_TYPE      = true;
@@ -414,11 +414,11 @@
             $dataOption = 'off';
             $show       =  '';
             $style      = 'none';
-            $navActiveMenuCodeTableWeightType   = $navActiveMenuCodeTableFoodCategory = $navActiveMenuCodeTableFoodType = $navActiveMenuCodeTableMealType = "";
+            $navActiveMenuCodeTableWeightType   = $navActiveMenuCodeTableCategoryFoodType = $navActiveMenuCodeTableFoodType = $navActiveMenuCodeTableMealType = "";
             $navActiveMenuCodeTableNutritionale = $navActiveMenuCodeTableLanguage     = "";
             $navActiveMenuCodeTableFoodType     = "";
             if (stripos($_SERVER['PHP_SELF'], 'codeTableWeightTypeList')    !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableWeightType    = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableFoodCategoryList')  !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableFoodCategory  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableCategoryFoodTypeList')  !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableCategoryFoodType  = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'codeTableFoodTypeList')      !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableFoodType      = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'codeTableMealTypeList')      !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableMealType      = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'codeTableNutritionalList')   !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableNutritionale  = 'class="active"'; }
@@ -430,12 +430,12 @@
               <span class="mtext"><?php echo $menu_codeTables; ?></span>
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
-              <?php if ($hasRight_CODE_TABLE_WEIGHT_TYPE)   { ?><li <?php echo $navActiveMenuCodeTableWeightType ?>><a class="nav-link" href="../CodeTables/codeTableWeightTypeList.php"><?php echo $menu_codeTables_weightType_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_FOOD_CATEGORY) { ?><li <?php echo $navActiveMenuCodeTableFoodCategory ?>><a class="nav-link" href="../CodeTables/codeTableFoodCategoryList.php"><?php echo $menu_codeTables_food_category_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_FOOD_TYPE)     { ?><li <?php echo $navActiveMenuCodeTableFoodType ?>><a class="nav-link" href="../CodeTables/codeTableFoodTypeList.php"><?php echo $menu_codeTables_food_type_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_MEAL_TYPE)     { ?><li <?php echo $navActiveMenuCodeTableMealType ?>><a class="nav-link" href="../CodeTables/codeTableMealTypeList.php"><?php echo $menu_codeTables_meal_type_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_NUTRITIONAL)   { ?><li <?php echo $navActiveMenuCodeTableNutritionale ?>><a class="nav-link" href="../CodeTables/codeTableNutritionalList.php"><?php echo $menu_codeTables_nutritional_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_LANGUES)       { ?><li <?php echo $navActiveMenuCodeTableLanguage ?>><a class="nav-link" href="../CodeTables/codeTableLanguageList.php"><?php echo $menu_codeTables_language_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_WEIGHT_TYPE)       { ?><li <?php echo $navActiveMenuCodeTableWeightType ?>><a class="nav-link" href="../CodeTables/codeTableWeightTypeList.php"><?php echo $menu_codeTables_weightType_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_CATEGORY_FOOD_TYPE){ ?><li <?php echo $navActiveMenuCodeTableCategoryFoodType ?>><a class="nav-link" href="../CodeTables/codeTableCategoryFoodTypeList.php"><?php echo $menu_codeTables_food_category_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_FOOD_TYPE)         { ?><li <?php echo $navActiveMenuCodeTableFoodType ?>><a class="nav-link" href="../CodeTables/codeTableFoodTypeList.php"><?php echo $menu_codeTables_food_type_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_MEAL_TYPE)         { ?><li <?php echo $navActiveMenuCodeTableMealType ?>><a class="nav-link" href="../CodeTables/codeTableMealTypeList.php"><?php echo $menu_codeTables_meal_type_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_NUTRITIONAL)       { ?><li <?php echo $navActiveMenuCodeTableNutritionale ?>><a class="nav-link" href="../CodeTables/codeTableNutritionalList.php"><?php echo $menu_codeTables_nutritional_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_LANGUES)           { ?><li <?php echo $navActiveMenuCodeTableLanguage ?>><a class="nav-link" href="../CodeTables/codeTableLanguageList.php"><?php echo $menu_codeTables_language_list; ?></a></li><?php } ?>
             </ul>
           </li>
         <?php } ?>
