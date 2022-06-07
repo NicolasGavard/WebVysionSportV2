@@ -3,6 +3,7 @@ include("Svc/DistriXSvcDataService.php");
 
 $dataSvc   = new DistriXSvcDataService();
 $layerData = $dataSvc->getLayerData();
+$obBuffer = "";
 
 if ($dataSvc->getJsonCall()) {
   if ($dataSvc->getParameter("layerData") != null) {
@@ -10,3 +11,4 @@ if ($dataSvc->getJsonCall()) {
   }
   $dataSvc->setMethodName($dataSvc->getParameter("function"));
 }
+$dataSvc->startDebug();
