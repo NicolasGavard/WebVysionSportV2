@@ -5,11 +5,6 @@ include(__DIR__ . "/../../Init/ControllerInit.php");
 include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableCategoryFoodTypeData.php");
 include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableCategoryFoodTypeNameData.php");
 
-// TESTS
-$_POST["id"] = 1;
-// $_POST["id"] = 3;
-// $_POST["id"] = 4;
-
 if (isset($_POST)) {
   list($foodType, $errorJson) = DistriXCodeTableCategoryFoodTypeData::getJsonData($_POST);
   $listCategoryFoodTypeNames = [];
