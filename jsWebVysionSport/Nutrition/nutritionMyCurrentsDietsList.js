@@ -198,14 +198,30 @@ function ListMyCurrentDiet(elemState){
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyCurrentDiet"  onclick="ViewMyCurrentDiet(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"               onclick="DelMyCurrentDiet(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"              onclick="RestMyCurrentDiet(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMealCurrentDiet"  onclick="ViewmealMyCurrentDiet(\''+val.id+'\');"               href="#"><i class="dw dw-harvest"></i> Repas</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyCurrentDiet"    onclick="ViewMyCurrentDiet(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                 onclick="DelMyCurrentDiet(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"                onclick="RestMyCurrentDiet(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
                     '</tr>';
       datatable.row.add($(line)).draw();
+    }
+  });
+}
+
+function ViewmealMyCurrentDiet(id){
+  $.ajax({
+    url : '../../Controllers/Nutrition/MyCurrentsDiets/view.php',
+    type : 'POST',
+    dataType : 'JSON',
+    data: {'id': id},
+    success : function(data) {
+      // A FINIR NG 07-06-22
+    },
+    error : function(data) {
+      console.log(data);
     }
   });
 }

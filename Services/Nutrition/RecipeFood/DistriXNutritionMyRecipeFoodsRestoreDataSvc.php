@@ -1,18 +1,17 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/../../Init/DataSvcInit.php");
+include(__DIR__ . "/Init/DistriXCurrentDietInitDataSvc.php");
 
 if ($dataSvc->isAuthorized()) {
-  // Storage
-  include(__DIR__ . "/Storage/RecipeStor.php");
-  // STOR Data
-  include(__DIR__ . "/Data/RecipeStorData.php");
-    
+  $dbConnection = null;
+  $errorData    = null;
+  $insere       = false;
+  
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
       list($dietStorData, $jsonError) = DietStorData::getJsonData($dataSvc->getParameter("data"));
-      $insere = DietStor::remove($dietStorData, $dbConnection);
+      $insere = DietStor::restore($dietStorData, $dbConnection);
       if ($insere) {
         $dbConnection->commit();
       } else {
@@ -31,7 +30,7 @@ if ($dataSvc->isAuthorized()) {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "DelRecipe", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "RestoreCurrentDiet", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 

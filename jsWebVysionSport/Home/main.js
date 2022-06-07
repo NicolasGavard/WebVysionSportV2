@@ -51,6 +51,8 @@ function logOut(){
         localStorage.removeItem("email");
         localStorage.removeItem("emailBackup");
         localStorage.removeItem("language");
+        
+        localStorage.removeItem("dataTable");
 
         window.location.replace("../../index.html");
       }

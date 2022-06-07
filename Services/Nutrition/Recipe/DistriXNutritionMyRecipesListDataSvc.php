@@ -1,22 +1,37 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/Init/DistriXCurrentDietInitDataSvc.php");
+include(__DIR__ . "/../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
-  $myCurrentsDiets  = [];
+  // Cdn Location
+  include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
+  include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
+  // Storage
+  include(__DIR__ . "/Storage/RecipeStor.php");
+  // STOR Data
+  include(__DIR__ . "/Data/RecipeStorData.php");
+  
   $dbConnection     = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
-    list($data, $jsonError)       = DietStorData::getJsonData($dataSvc->getParameter("data"));
-    list($dietStor, $dietStorInd) = DietStor::findByIdUserCoach($data, true, $dbConnection);
+    list($data, $jsonError)                 = RecipeStorData::getJsonData($dataSvc->getParameter("data"));
+    list($myRecipeStor, $myRecipeStorInd) = RecipeStor::findByIdUserCoach($data, true, $dbConnection);
+    foreach ($myRecipeStor as $myRecipe) {
+      $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_RECIPE . '/' . $myRecipe->getLinkToPicture();
+      $pictures_headers = get_headers($urlPicture);
+      if ($myRecipe->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $myRecipe->getLinkToPicture() == '') {
+        $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_RECIPE . '/default.png';
+      }
+      $myRecipe->setLinkToPicture($urlPicture);
+    }
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ListMyCurrentsDiets", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ListMyRecipes", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 
-  $dataSvc->addToResponse("ListMyCurrentsDiets", $dietStor);
+  $dataSvc->addToResponse("ListMyRecipes", $myRecipeStor);
 }
 
 // Return response
