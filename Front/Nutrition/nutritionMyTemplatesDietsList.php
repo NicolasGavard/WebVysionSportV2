@@ -33,7 +33,7 @@
             <table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>
-                  <th width="30%" class="table-plus table-plus"><span><?php echo $page_name; ?></span></th>
+                  <th width="30%" class="table-plus"><span><?php echo $page_name; ?></span></th>
                   <th width="20%"><span><?php echo $page_assigned_for; ?></span></th>
                   <th width="10%"><span><?php echo $page_duration; ?></span></th>
                   <th width="30%"><span><?php echo $page_tags; ?></span></th>

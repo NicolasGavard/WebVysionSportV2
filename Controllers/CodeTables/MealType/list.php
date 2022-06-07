@@ -1,35 +1,25 @@
-<?php session_start();
-include(__DIR__ . "/../../../DistriXSvc/Config/DistriXFolderPath.php");
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+<?php
+session_start();
+include(__DIR__ . "/../../Init/ControllerInit.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/MealType/DistriXCodeTableMealTypeData.php");
 include(__DIR__ . "/../../Data/CodeTables/MealType/DistriXCodeTableMealTypeNameData.php");
 include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp          = [];
 $listMealTypes = [];
 $listLanguages = [];
-$error         = [];
-$output        = [];
-$outputok      = false;
 
 // CALL
 $languageCaller = new DistriXServicesCaller();
 $languageCaller->setMethodName("ListLanguages");
 $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
-$infoProfil = DistriXStyAppInterface::getUserInformation();
-$dataName   = new DistriXCodeTableMealTypeNameData();
-$dataName->setIdLanguage($infoProfil->getIdLanguage());
+if (empty($_POST['idLanguage'])) {
+  $_POST['idLanguage']      = $infoProfil->getIdLanguage();
+}
+list($dataName, $errorJson) = DistriXCodeTableMealTypeNameData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("dataName", $dataName);

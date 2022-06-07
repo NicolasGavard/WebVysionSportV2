@@ -1,6 +1,8 @@
 <?php
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
+// STY APP
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
 include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
@@ -9,16 +11,15 @@ include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.
 $listFoodTypes = [];
 $listLanguages = [];
 
-// TESTS
-//$_POST["idLanguage"] = 1;
-//$_POST["idLanguage"] = 2;
-
 if (isset($_POST)) {
 // CALL
   $languageCaller = new DistriXServicesCaller();
   $languageCaller->setMethodName("ListLanguages");
   $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
+  if (empty($_POST['idLanguage'])) {
+    $_POST['idLanguage']      = $infoProfil->getIdLanguage();
+  }
   list($dataName, $errorJson) = DistriXCodeTableFoodTypeNameData::getJsonData($_POST);
 
   $servicesCaller = new DistriXServicesCaller();

@@ -1,10 +1,10 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class CategoryfoodTypeStor {
+class CategoryFoodTypeStor {
 
   const TABLE_NAME_TABLENAME = "categoryfoodtypename";
   const FIELDS_TABLENAME = ',categoryfoodtypename.id categoryfoodtypenameid,idcategoryfoodtype categoryfoodtypenameidcategoryfoodtype,idlanguage categoryfoodtypenameidlanguage,categoryfoodtypename.name categoryfoodtypename,categoryfoodtypename.elemstate categoryfoodtypenameelemstate,categoryfoodtypename.timestamp categoryfoodtypenametimestamp';
 
-  public static function getListNames(bool $all, FoodTypeNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function getListNames(bool $all, CategoryFoodTypeNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new CategoryFoodTypeStorData();
@@ -37,10 +37,10 @@ class CategoryfoodTypeStor {
         $oldValue = "";
         while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
           // print_r($row);
-          $dataName = new FoodTypeNameStorData();
+          $dataName = new CategoryFoodTypeNameStorData();
           if (! is_null($row["categoryfoodtypenameid"])) {
             $dataName->setId($row["categoryfoodtypenameid"]);
-            $dataName->setIdFoodType($row["categoryfoodtypenameidcategoryfoodtype"]);
+            $dataName->setIdCategoryFoodType($row["categoryfoodtypenameidcategoryfoodtype"]);
             $dataName->setIdLanguage($row["categoryfoodtypenameidlanguage"]);
             $dataName->setName($row["categoryfoodtypename"]);
             $dataName->setElemState($row["categoryfoodtypenameelemstate"]);
@@ -68,7 +68,7 @@ class CategoryfoodTypeStor {
     return array($list, $listNames);
   }
 
-  public static function findByIndCodeNames(CategoryFoodTypeStorData $dataIn, FoodTypeNameStorData $dataNameIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIndCodeNames(CategoryFoodTypeStorData $dataIn, CategoryFoodTypeNameStorData $dataNameIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new CategoryFoodTypeStorData();
@@ -91,10 +91,10 @@ class CategoryfoodTypeStor {
       if ($stmt->rowCount() > 0) {
         while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
           // print_r($row);
-          $dataName = new FoodTypeNameStorData();
+          $dataName = new CategoryFoodTypeNameStorData();
           if (! is_null($row["categoryfoodtypenameid"])) {
             $dataName->setId($row["categoryfoodtypenameid"]);
-            $dataName->setIdFoodType($row["categoryfoodtypenameidcategoryfoodtype"]);
+            $dataName->setIdCategoryFoodType($row["categoryfoodtypenameidcategoryfoodtype"]);
             $dataName->setIdLanguage($row["categoryfoodtypenameidlanguage"]);
             $dataName->setName($row["categoryfoodtypename"]);
             $dataName->setElemState($row["categoryfoodtypenameelemstate"]);
@@ -133,10 +133,10 @@ class CategoryfoodTypeStor {
       if ($stmt->rowCount() > 0) {
         while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
           // print_r($row);
-          $dataName = new FoodTypeNameStorData();
+          $dataName = new CategoryFoodTypeNameStorData();
           if (! is_null($row["categoryfoodtypenameid"])) {
             $dataName->setId($row["categoryfoodtypenameid"]);
-            $dataName->setIdFoodType($row["categoryfoodtypenameidcategoryfoodtype"]);
+            $dataName->setIdCategoryFoodType($row["categoryfoodtypenameidcategoryfoodtype"]);
             $dataName->setIdLanguage($row["categoryfoodtypenameidlanguage"]);
             $dataName->setName($row["categoryfoodtypename"]);
             $dataName->setElemState($row["categoryfoodtypenameelemstate"]);
@@ -178,9 +178,9 @@ class CategoryfoodTypeStor {
 //==
 //=============================================================================
 //=============================================================================
-  const TABLE_NAME = "categorycategoryfoodtype";
+  const TABLE_NAME = "categoryfoodtype";
   const SELECT = 'SELECT id,code,name,elemstate,timestamp';
-  const FROM = ' FROM categorycategoryfoodtype';
+  const FROM = ' FROM categoryfoodtype';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
   const SHOW_CREATE_REQUEST = FALSE;
@@ -193,7 +193,7 @@ class CategoryfoodTypeStor {
   public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CategoryfoodTypeStorData();
+    $data = new CategoryFoodTypeStorData();
     $list = [];
 
     if ($inDbConnection != null) {
@@ -214,7 +214,7 @@ class CategoryfoodTypeStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CategoryfoodTypeStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CategoryFoodTypeStorData");
       }
     }
     return array($list, count($list));
@@ -224,12 +224,12 @@ class CategoryfoodTypeStor {
   public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CategoryfoodTypeStorData();
+    $data = new CategoryFoodTypeStorData();
     $list = [];
 
     if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
       if ($className == "" || is_null($className)) {
-        $className = "CategoryfoodTypeStorData";
+        $className = "CategoryFoodTypeStorData";
       }
       $request  = self::SELECT;
       $request .= self::FROM;
@@ -256,10 +256,10 @@ class CategoryfoodTypeStor {
   }
   // End of getListFromList
 
-  public static function findByCode(CategoryfoodTypeStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByCode(CategoryFoodTypeStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CategoryfoodTypeStorData();
+    $data = new CategoryFoodTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -271,7 +271,7 @@ class CategoryfoodTypeStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CategoryfoodTypeStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CategoryFoodTypeStorData");
         $data = $stmt->fetch();
       }
     }
@@ -282,7 +282,7 @@ class CategoryfoodTypeStor {
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CategoryfoodTypeStorData();
+    $data = new CategoryFoodTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -294,7 +294,7 @@ class CategoryfoodTypeStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CategoryfoodTypeStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CategoryFoodTypeStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -316,7 +316,7 @@ class CategoryfoodTypeStor {
   }
   // End of read
 
-  public static function update(CategoryfoodTypeStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(CategoryFoodTypeStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
@@ -369,7 +369,7 @@ class CategoryfoodTypeStor {
   }
   // End of update
 
-  public static function save(CategoryfoodTypeStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(CategoryFoodTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -382,7 +382,7 @@ class CategoryfoodTypeStor {
   }
   // End of save
 
-  public static function remove(CategoryfoodTypeStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(CategoryFoodTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -394,7 +394,7 @@ class CategoryfoodTypeStor {
   }
   // End of remove
 
-  public static function restore(CategoryfoodTypeStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(CategoryFoodTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -441,7 +441,7 @@ class CategoryfoodTypeStor {
   }
   // End of delete
 
-  public static function create(CategoryfoodTypeStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(CategoryFoodTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";

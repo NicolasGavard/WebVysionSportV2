@@ -1,6 +1,6 @@
 <?php
 	session_start();
-  $international  = 'codeTableLanguageList';
+  $international  = 'CodeTables/codeTableLanguageList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('../../i18/'.$i18cdlangue.'/header.php');

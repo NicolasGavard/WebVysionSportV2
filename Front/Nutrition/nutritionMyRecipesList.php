@@ -37,7 +37,7 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr>
-                  <th width="15%"><span class="page_nutrition_my_recipe_name"></span></th>
+                  <th width="15%" class="table-plus"><span class="page_nutrition_my_recipe_name"></span></th>
                   <th width="20%"><span class="page_nutrition_my_recipe_assigned_for"></span></th>
                   <th width="10%"><span class="page_nutrition_my_recipe_duration"></span></th>
                   <th width="10%"><span class="page_nutrition_my_recipe_date_begin"></span></th>

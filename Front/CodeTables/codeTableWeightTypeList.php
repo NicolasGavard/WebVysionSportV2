@@ -1,7 +1,7 @@
 <?php
 	session_start();
 
-  $international  = 'codeTableWeightTypeList';
+  $international  = 'CodeTables/codeTableWeightTypeList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('../../i18/'.$i18cdlangue.'/header.php');
@@ -37,7 +37,7 @@
                 <input class="weightTypeType_other"   type="hidden" value="<?php echo $page_other_title; ?>">
               
                 <tr>                 
-                  <th width="15%"><span><?php echo $page_abbreviation; ?></span></th>
+                  <th width="15%" class="table-plus"><span><?php echo $page_abbreviation; ?></span></th>
                   <th width="55%"><span><?php echo $page_name; ?></span></th>
                   <th width="20%"><span><?php echo $page_type; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>

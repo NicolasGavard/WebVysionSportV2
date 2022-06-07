@@ -1,6 +1,6 @@
 <?php
 	session_start();
-  $international  = 'codeTableFoodCategoryList';
+  $international  = 'CodeTables/codeTableFoodCategoryList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('../../i18/'.$i18cdlangue.'/header.php');
@@ -32,7 +32,7 @@
 						<table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>                 
-                  <th width="90%"><span><?php echo $page_name; ?></span></th>
+                  <th width="90%" class="table-plus"><span><?php echo $page_name; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
