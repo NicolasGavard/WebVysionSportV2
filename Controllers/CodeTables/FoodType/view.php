@@ -6,7 +6,7 @@ include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.
 include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
 
 // TESTS
-//$_POST["id"] = 1;
+$_POST["id"] = 1;
 // $_POST["id"] = 3;
 // $_POST["id"] = 4;
 

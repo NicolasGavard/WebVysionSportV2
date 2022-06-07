@@ -10,46 +10,46 @@ $confirmSave  = false;
 // UPDATE
 $_POST['id'] = 1;
 $_POST['code'] = "FEC2";
-$_POST['name'] = "Féculents 2";
+$_POST['name'] = "Féculents 3";
 $_POST['elemState'] = 1;
 $_POST['timestamp'] = 4;
 
 $names[0]["id"] = 1;
 $names[0]["idfoodtype"] = 1;
 $names[0]["idlanguage"] = 1;
-$names[0]["name"] = "Féculents Name 2";
+$names[0]["name"] = "Féculents Name 3";
 $names[0]["elemState"] = 0;
 $names[0]["timestamp"] = 0;
 $names[1]["id"] = 4;
 $names[1]["idfoodtype"] = 1;
 $names[1]["idlanguage"] = 2;
-$names[1]["name"] = "Starches Name 2";
+$names[1]["name"] = "Starches Name 3";
 $names[1]["elemState"] = 0;
 $names[1]["timestamp"] = 0;
 
 $_POST['names'] = $names;
 
-// INSERT
-$_POST['id'] = 0;
-$_POST['code'] = "INS1";
-$_POST['name'] = "Insert 1";
-$_POST['elemState'] = 0;
-$_POST['timestamp'] = 0;
+// // INSERT
+// $_POST['id'] = 0;
+// $_POST['code'] = "INS1";
+// $_POST['name'] = "Insert 1";
+// $_POST['elemState'] = 0;
+// $_POST['timestamp'] = 0;
 
-$names[0]["id"] = 0;
-$names[0]["idfoodtype"] = 0;
-$names[0]["idlanguage"] = 1;
-$names[0]["name"] = "Insertion 1";
-$names[0]["elemState"] = 0;
-$names[0]["timestamp"] = 0;
-$names[1]["id"] = 0;
-$names[1]["idfoodtype"] = 0;
-$names[1]["idlanguage"] = 2;
-$names[1]["name"] = "It's an insertion 1";
-$names[1]["elemState"] = 0;
-$names[1]["timestamp"] = 0;
+// $names[0]["id"] = 0;
+// $names[0]["idfoodtype"] = 0;
+// $names[0]["idlanguage"] = 1;
+// $names[0]["name"] = "Insertion 1";
+// $names[0]["elemState"] = 0;
+// $names[0]["timestamp"] = 0;
+// $names[1]["id"] = 0;
+// $names[1]["idfoodtype"] = 0;
+// $names[1]["idlanguage"] = 2;
+// $names[1]["name"] = "It's an insertion 1";
+// $names[1]["elemState"] = 0;
+// $names[1]["timestamp"] = 0;
 
-$_POST['names'] = $names;
+// $_POST['names'] = $names;
 
 if (isset($_POST)) {
   list($foodType, $jsonError) = DistriXCodeTableFoodTypeData::getJsonData($_POST);
@@ -64,7 +64,7 @@ if (isset($_POST)) {
   $servicesCaller->addParameter("dataNames", $foodTypeNames);
   $servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeSaveDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
-  // echo "--"; print_r($output);
+  echo "--"; print_r($output);
 
   $logOk = logController("Security_FoodType", "DistriXFoodTypeSaveDataSvc", "SaveFoodType", $output);
 
