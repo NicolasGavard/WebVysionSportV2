@@ -139,21 +139,24 @@ function ListMyRecipe(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
-                    ' <td>'+val.codeShort+'</td>'+
-                    ' <td>'+val.name+'</td>'+
-                    ' <td>'+
-                    '   <div class="dropdown">'+
-                    '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+                    '  <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
+                    '  <td>'+val.name+'</td>'+
+                    '  <td>'+
+
+                    '  </td>'+
+                    '  <td>'+val.rating+'</td>'+
+                    '  <td>'+
+                    '    <div class="dropdown">'+
+                    '      <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
                     '       <i class="dw dw-more"></i>'+
-                    '     </a>'+
-                    '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyRecipe"   onclick="ViewMyRecipe(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelMyRecipe(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestMyRecipe(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
-                    '     </div>'+
-                    '   </div>'+
-                    ' </td>'+
+                    '      </a>'+
+                    '      <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyRecipe"   onclick="ViewMyRecipe(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '        <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelMyRecipe(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '        <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestMyRecipe(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '      </div>'+
+                    '    </div>'+
+                    '  </td>'+
                     '</tr>';
       datatable.row.add($(line)).draw();
     }
