@@ -4,13 +4,14 @@ $.ajax({
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
-    localStorage.setItem("dataTable", JSON.stringify(data.ListFoodTypes));
+    localStorage.setItem("FoodTypeDataTable", JSON.stringify(data.ListFoodTypes));
     $('.btn-success').trigger('click');
   },
   error : function(data) {
     console.log(data);
   }
 });
+// ListFoodType(0);
 
 $(".btnChangeImage").on('click', function() {
   $(".dropzoneImage").addClass("d-none");
@@ -71,7 +72,7 @@ $(".btnAddFoodType").on('click', function() {
       data: $.param(data),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodTypeList.php";}, 800);
+        setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
@@ -100,7 +101,7 @@ $("#btnDel").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodTypeList.php";}, 800);
+        setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -120,7 +121,7 @@ $("#btnRest").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodTypeList.php";}, 800);
+        setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -132,7 +133,7 @@ $("#btnRest").on('click', function() {
 });
 
 function ListFoodType(elemState){
-  var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
+  var dataTableData = JSON.parse(localStorage.getItem('FoodTypeDataTable'));
   $.map(dataTableData, function(val, key) {
     if(val.elemState == elemState){
       if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}

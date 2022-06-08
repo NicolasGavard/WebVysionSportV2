@@ -29,13 +29,13 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table class="table stripe responsive hover nowrap" id="datatable">
+						<table class="table responsive stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>                 
-                  <th class="table-plus datatable-nosort"><span><?php echo $page_code; ?></span></th>
+                  <th><span><?php echo $page_code; ?></span></th>
                   <th><span><?php echo $page_name; ?></span></th>
                   <th><span><?php echo $page_translation; ?></span></th>
-                  <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
+                  <th><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
 							<tbody id="listFoodTypesTbody">            
