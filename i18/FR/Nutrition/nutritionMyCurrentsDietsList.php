@@ -16,6 +16,16 @@
   $page_delete_title            = "Supprimer la diète";
   $page_restore_title           = "Restaurer la diète";
   
+  $page_meal_title              = "Voir les repas de la diète";
+  $page_days                    = "Jours";
+  $page_meal_type               = "Repas";
+  $page_meal_foods              = "Composition";
+  $page_meal_calorie            = "Calorie";
+  $page_meal_proetin            = "Protéine";
+  $page_meal_glucide            = "Glucide";
+  $page_meal_lipid              = "Lipide";
+  $page_meal_quantity           = "Quantité";
+
   $errorData_txt_template       = "Le modèle de la template de diète est manquant !!";
   $errorData_txt_student        = "Aucun élèves assignés sur la diète !!";
   $errorData_txt_dateBegin      = "La date de début de la diète est manquante !!";

@@ -34,7 +34,7 @@
             <table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>
-                  <th width="15%" class="table-plus table-plus"><span><?php echo $page_name; ?></span></th>
+                  <th width="15%" class="table-plus"><span><?php echo $page_name; ?></span></th>
                   <th width="20%"><span><?php echo $page_assigned_for; ?></span></th>
                   <th width="10%"><span><?php echo $page_date_duration; ?></span></th>
                   <th width="10%"><span><?php echo $page_date_begin; ?></span></th>
@@ -88,6 +88,36 @@
           </div>
         </div>
       </div> 
+      
+      <div class="modal fade bs-example-modal-lg" id="modalAddMealCurrentDiet" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center font-18">
+              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_meal_title; ?></h4>
+              <div class="row">
+                <table class="table stripe hover nowrap" id="datatable2">
+                  <thead>
+                    <tr>
+                      <th width="15%" class="table-plus"><span><?php echo $page_days; ?></span></th>
+                      <th width="15%"><span><?php echo $page_meal_type; ?></span></th>
+                      <th width="10%"><span><?php echo $page_meal_foods; ?></span></th>
+                      <th width="10%"><span><?php echo $page_meal_calorie; ?></span></th>
+                      <th width="10%"><span><?php echo $page_meal_proetin; ?></span></th>
+                      <th width="10%"><span><?php echo $page_meal_glucide; ?></span></th>
+                      <th width="10%"><span><?php echo $page_meal_lipid; ?></span></th>
+                      <th width="10%"><span><?php echo $page_meal_quantity; ?></span></th>
+                      <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div> 
+            </div> 
+          </div> 
+        </div> 
+      </div> 
+
 
       <div class="modal fade bs-example-modal-lg" id="modalAddMyCurrentDiet" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">

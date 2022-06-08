@@ -1,11 +1,12 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/Init/DistriXCurrentDietInitDataSvc.php");
+include(__DIR__ . "/../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
-  $dbConnection = null;
-  $errorData    = null;
-  $insere       = false;
+  // Storage
+  include(__DIR__ . "/Storage/RecipeStor.php");
+  // STOR Data
+  include(__DIR__ . "/Data/RecipeStorData.php");
   
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {

@@ -23,6 +23,9 @@ if (!defined('DISTRIX_CDN_FOLDER_LANGUAGES')) {
 if (!defined('DISTRIX_CDN_FOLDER_FOOD')) {
   define("DISTRIX_CDN_FOLDER_FOOD", "food");
 }
+if (!defined('DISTRIX_CDN_FOLDER_RECIPE')) {
+  define("DISTRIX_CDN_FOLDER_RECIPE", "recipe");
+}
 if (!defined('DISTRIX_CDN_FOLDER_CODE_TABLES')) {
   define("DISTRIX_CDN_FOLDER_CODE_TABLES", "codeTables");
 }

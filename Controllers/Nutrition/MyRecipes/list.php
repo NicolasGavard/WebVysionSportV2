@@ -1,85 +1,94 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSvc/DistriXSvcUtil.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
 include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
-include(__DIR__ . "/../../Data/Food/Food/DistriXFoodFoodData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeFoodData.php");
 
-$resp               = [];
-$error              = [];
-$output             = [];
-$outputok           = false;
+$listMyRecipesFormFront  = [];
+$listMyRecipes           = [];
+$listMyRecipesFoods      = [];
+list($distriXNutritionRecipeData, $errorJson)     = DistriXNutritionRecipeData::getJsonData($_POST);
 
-$listRecipesFormFront = [];
-$listRecipes          = [];
-$listFoods            = [];
+$infoProfil = DistriXStyAppInterface::getUserInformation();
+$distriXNutritionRecipeData->setIdUserCoach($infoProfil->getId());
 
-list($distriXNutritionRecipeData, $errorJson) = DistriXNutritionRecipeData::getJsonData($_POST);
-list($distriXFoodFoodData, $errorJson)        = DistriXFoodFoodData::getJsonData($_POST);
+$servicesCaller = new DistriXServicesCaller();
+$servicesCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDataSvc.php");
+$servicesCaller->addParameter("data", $distriXNutritionRecipeData);
 
 // CALL
-$templateDietCaller = new DistriXServicesCaller();
-$templateDietCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDataSvc.php");
-$templateDietCaller->addParameter("data", $distriXNutritionRecipeData);
+$receipeCaller = new DistriXServicesCaller();
+$receipeCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDataSvc.php");
+$receipeCaller->addParameter("data", $distriXNutritionRecipeData);
 
-$currentDietCaller = new DistriXServicesCaller();
-$currentDietCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
-$currentDietCaller->addParameter("data", $distriXFoodFoodData);
+$recipeFoodCaller = new DistriXServicesCaller();
+$recipeFoodCaller->setServiceName("Nutrition/RecipeFood/DistriXNutritionMyRecipesFoodsListDataSvc.php");
 
 $svc = new DistriXSvc();
-$svc->addToCall("templateDiet", $templateDietCaller);
-$svc->addToCall("currentDiet", $currentDietCaller);
+$svc->addToCall("receipe", $receipeCaller);
+$svc->addToCall("recipeFood", $recipeFoodCaller);
 $callsOk = $svc->call();
 
-
-list($outputok, $output, $errorData) = $svc->getResult("templateDiet"); //print_r($output);
+list($outputok, $output, $errorData) = $svc->getResult("receipe"); //print_r($output);
 if ($outputok && isset($output["ListMyRecipes"]) && is_array($output["ListMyRecipes"])) {
-  list($listRecipes, $jsonError) = DistriXNutritionRecipeData::getJsonArray($output["ListMyRecipes"]);
+  list($listMyRecipes, $jsonError) = DistriXNutritionRecipeData::getJsonArray($output["ListMyRecipes"]);
 } else {
   $error = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("currentDiet"); //print_r($output);
-if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
-  list($listMyCurrentDiets, $jsonError) = DistriXFoodFoodData::getJsonArray($output["ListMyCurrentsDiets"]);
+list($outputok, $output, $errorData) = $svc->getResult("recipeFood"); //print_r($output);
+if ($outputok && isset($output["ListMyRecipesFoods"]) && is_array($output["ListMyRecipesFoods"])) {
+  list($listMyRecipesFoods, $jsonError) = DistriXNutritionRecipeFoodData::getJsonArray($output["ListMyRecipesFoods"]);
 } else {
   $error = $errorData;
 }
 
-foreach ($listRecipes as $templateDiet) {
-  $distriXNutritionRecipeData = new DistriXNutritionRecipeData();
-  $distriXNutritionRecipeData->setId($templateDiet->getId());
-  $distriXNutritionRecipeData->setIdUserCoach($templateDiet->getIdUserCoach());
-  $distriXNutritionRecipeData->setName($templateDiet->getName());
-  $distriXNutritionRecipeData->setDuration($templateDiet->getDuration());
-  $distriXNutritionRecipeData->setTags($templateDiet->getTags());
+foreach ($listMyRecipes as $recipe) {
+  $distriXNutritionMyRecipeData = new DistriXNutritionRecipeData();
+  $distriXNutritionMyRecipeData->setId($recipe->getId());
+  $distriXNutritionMyRecipeData->setIdUserCoach($recipe->getIdUserCoach());
+  $distriXNutritionMyRecipeData->setCode($recipe->getCode());
+  $distriXNutritionMyRecipeData->setName($recipe->getName());
+  $distriXNutritionMyRecipeData->setDescription($recipe->getDescription());
+  $distriXNutritionMyRecipeData->setLinkToPicture($recipe->getLinkToPicture());
+  $distriXNutritionMyRecipeData->setSize($recipe->getSize());
+  $distriXNutritionMyRecipeData->setType($recipe->getType());
+  $distriXNutritionMyRecipeData->setRating($recipe->getRating());
+  $distriXNutritionMyRecipeData->setElemState($recipe->getElemState());
+  $distriXNutritionMyRecipeData->setTimestamp($recipe->getTimestamp());
 
-  $nbStudentAssigned = 0;
-  foreach ($listMyCurrentDiets as $currentDiet) {
-    if ($templateDiet->getId() == $currentDiet->getIdDietTemplate()){
-      $nbStudentAssigned++;
+  $nutritionalInfo = [];
+  foreach ($listMyRecipesFoods as $recipeFood) {
+    if($recipe->getId() == $recipeFood->getIdRecipe()){
+      $distriXNutritionMyRecipeFoodData = new DistriXNutritionRecipeFoodData();
+      $distriXNutritionMyRecipeFoodData->setId($recipeFood->getId());
+      $distriXNutritionMyRecipeFoodData->setIdRecipe($recipeFood->getIdRecipe());
+      $distriXNutritionMyRecipeFoodData->setNameRecipe($recipeFood->getNameRecipe());
+      $distriXNutritionMyRecipeFoodData->setIdFood($recipeFood->getIdFood());
+      $distriXNutritionMyRecipeFoodData->setNameFood($recipeFood->getNameFood());
+      $distriXNutritionMyRecipeFoodData->setWeight($recipeFood->getWeight());
+      $distriXNutritionMyRecipeFoodData->setWeightType($recipeFood->getWeightType());
+      $distriXNutritionMyRecipeFoodData->setNameWeightType($recipeFood->getNameWeightType());
+      $distriXNutritionMyRecipeFoodData->setAbbrWeightType($recipeFood->getAbbrWeightType());
+      $distriXNutritionMyRecipeFoodData->setCalorie($recipeFood->getCalorie());
+      $distriXNutritionMyRecipeFoodData->setProetin($recipeFood->getProetin());
+      $distriXNutritionMyRecipeFoodData->setGlucide($recipeFood->getGlucide());
+      $distriXNutritionMyRecipeFoodData->setLipid($recipeFood->getLipid());
+      $distriXNutritionMyRecipeFoodData->setElemState($recipeFood->getElemState());
+      $distriXNutritionMyRecipeFoodData->setTimestamp($recipeFood->getTimestamp());
+      $nutritionalInfo[] = $distriXNutritionMyRecipeFoodData;
     }
   }
-  $distriXNutritionRecipeData->setNbStudentAssigned($nbStudentAssigned);
-  
-  $distriXNutritionRecipeData->setElemState($templateDiet->getElemState());
-  $distriXNutritionRecipeData->setTimestamp($templateDiet->getTimestamp());
-  $listRecipesFormFront[] = $distriXNutritionRecipeData;
+  $distriXNutritionMyRecipeData->setNutritionalInfo($nutritionalInfo);
+  $listMyRecipesFormFront[] = $distriXNutritionMyRecipeData;
 }
 
-$resp["ListMyRecipes"] = $listRecipesFormFront;
+$resp["ListMyRecipes"]  = $listMyRecipesFormFront;
 if(!empty($error)){
-  $resp["Error"]              = $error;
+  $resp["Error"]        = $error;
 }
 
 echo json_encode($resp);

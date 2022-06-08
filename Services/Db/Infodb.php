@@ -19,10 +19,10 @@ switch (DISTRIX_ENV) {
     $bdd    = "jmgxvdmsty";
     break;
   case DISTRIX_ENV_PROD:
-    $host   = "";
-    $user   = "";
-    $passBD = "";
-    $bdd    = "";
+    $host   = "eHnB3aAeZjCk/6M2KsPFJd9+3nEOFnUvm6nm0UoTZaSe+aB+Mu+//vbzTLHbyVuhkSmjBghibP5ouYGq73ww8dmOFzgQloEx+86hgooAuV8=";
+    $user   = "KPbjJykPUPSlYF/s4ZN67JqApnyFJYlEkiegMMoO90+ZlxspiJKkEjod1iTZAOFhNFtXR6dvtfR3nlmE5IcFBQ==";
+    $passBD = "gjcb3BcoGkUTjOMEGoV84Clt5CLFsr9UzRjJQgP7TBqLbOCpYw6qDMlRGfd3MmDI6mt+pglA97od0lW0cm4tLu4eH1OL4dP+RnKUoNLXEbg=";
+    $bdd    = "8DcVsjRml8TNZo3XCWjZ+WSGmYIrgvM01JSHcA7dQXZhnblBMS6stENKLE6KVYB261PRp6xlk9IeDXL4QHNgCfSQF8LZOFZcSlCM/fWhcig=";
     break;
   default:
     break;

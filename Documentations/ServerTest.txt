@@ -24,5 +24,6 @@ Base de données :
 - url : https://h2-phpmyadmin.infomaniak.com/?pma_servername=3f0ur.myd.infomaniak.com&pma_username=3f0ur_
 - serveur : 3f0ur.myd.infomaniak.com
 - User : 3f0ur_distrix
+- Bdd  : 3f0ur_webvysionsport
 
 - User : 3f0ur_webvysionsport

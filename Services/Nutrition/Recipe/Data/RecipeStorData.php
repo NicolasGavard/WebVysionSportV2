@@ -4,6 +4,7 @@ class RecipeStorData extends DistriXSvcAppData {
   const RECIPE_STATUS_NOT_AVAILABLE = 1;
 
   protected $id;
+  protected $idusercoach;
   protected $code;
   protected $name;
   protected $description;
@@ -11,11 +12,12 @@ class RecipeStorData extends DistriXSvcAppData {
   protected $size;
   protected $type;
   protected $rating;
-  protected $statut;
+  protected $elemstate;
   protected $timestamp;
 
   public function __construct() {
       $this->id = 0;
+      $this->idusercoach = 0;
       $this->code = "";
       $this->name = "";
       $this->description = "";
@@ -23,11 +25,12 @@ class RecipeStorData extends DistriXSvcAppData {
       $this->size = 0;
       $this->type = "";
       $this->rating = 0;
-      $this->statut = 0;
+      $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
   public function getId():int { return $this->id; }
+  public function getIdUserCoach():int { return $this->idusercoach; }
   public function getCode():string { return $this->code; }
   public function getName():string { return $this->name; }
   public function getDescription():string { return $this->description; }
@@ -35,13 +38,14 @@ class RecipeStorData extends DistriXSvcAppData {
   public function getSize():int { return $this->size; }
   public function getType():string { return $this->type; }
   public function getRating():int { return $this->rating; }
-  public function getStatus():int { return $this->statut; }
+  public function getElemState():int { return $this->elemstate; }
   public function getTimestamp():int { return $this->timestamp; }
-  public function isAvailable():bool { return ($this->statut == self::RECIPE_STATUS_AVAILABLE); }
+  public function isAvailable():bool { return ($this->elemstate == self::RECIPE_STATUS_AVAILABLE); }
   public function getAvailableValue():int { return self::RECIPE_STATUS_AVAILABLE; }
   public function getUnavailableValue():int { return self::RECIPE_STATUS_NOT_AVAILABLE; }
 // Sets
   public function setId(int $id) { $this->id = $id; }
+  public function setIdUserCoach(int $idUserCoach) { $this->idusercoach = $idUserCoach; }
   public function setCode(string $code) { $this->code = $code; }
   public function setName(string $name) { $this->name = $name; }
   public function setDescription(string $description) { $this->description = $description; }
@@ -49,8 +53,8 @@ class RecipeStorData extends DistriXSvcAppData {
   public function setSize(int $size) { $this->size = $size; }
   public function setType(string $type) { $this->type = $type; }
   public function setRating(int $rating) { $this->rating = $rating; }
-  public function setStatus(int $status) { $this->statut = $status; }
+  public function setElemState(int $elemState) { $this->elemstate = $elemState; }
   public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->statut = self::RECIPE_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->statut = self::RECIPE_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::RECIPE_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::RECIPE_STATUS_NOT_AVAILABLE; }
 }

@@ -1,20 +1,10 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
 include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
 
-$resp         = array();
 $confirmSave  = false;
-$error        = array();
-$output       = array();
-$outputok     = false;
 
 if (isset($_POST)) {
   $label  = new DistriXNutritionRecipeData();
@@ -28,27 +18,17 @@ if (isset($_POST)) {
   $servicesCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
-  if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Recipe")) {
-    $logInfoData = new DistriXLoggerInfoData();
-    $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-    $logInfoData->setLogApplication("DistriXRecipeDeleteDataSvc");
-    $logInfoData->setLogFunction("DelRecipe");
-    $logInfoData->setLogData(print_r($output, true));
-    DistriXLogger::log($logInfoData);
-  }
+  $logOk = logController("Security_Recipe", "DistriXRecipeDeleteDataSvc", "DelRecipe", $output);
   
-  if ($outputok && !empty($output) > 0) {
-    if (isset($output["ConfirmSave"])) {
-      $confirmSave = $output["ConfirmSave"];
-    }
+  if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
+    $confirmSave = $output["ConfirmSave"];
   } else {
     $error = $errorData;
   }
-}
-
-$resp["confirmSave"]  = $confirmSave;
-if(!empty($error)){
-  $resp["Error"]        = $error;
-}
-
-echo json_encode($resp);
+  
+  $resp["confirmSave"]  = $confirmSave;
+  if(!empty($error)){
+    $resp["Error"]        = $error;
+  }
+  
+  echo json_encode($resp);

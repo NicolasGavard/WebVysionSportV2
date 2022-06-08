@@ -11,7 +11,7 @@ class RecipeStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "recipe";
-  const SELECT = 'SELECT id,code,name,description,linktopicture,size,type,rating,statut,timestamp';
+  const SELECT = 'SELECT id,idusercoach,code,name,description,linktopicture,size,type,rating,elemstate,timestamp';
   const FROM = ' FROM recipe';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -32,7 +32,7 @@ class RecipeStor {
       $request  = self::SELECT;
       $request .= self::FROM;
       if (!$all) {
-        $request .= " WHERE statut = :statut";
+        $request .= " WHERE elemstate = :statut";
       }
       $request .= " ORDER BY id";
 
@@ -67,7 +67,7 @@ class RecipeStor {
       $request .= self::FROM;
       $request .= " WHERE id IN('" . implode("','", array_map(function($data) { return $data->getId(); }, $inList))."')";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :statut";
       }
       $request .= " ORDER BY id";
 
@@ -88,6 +88,30 @@ class RecipeStor {
   }
   // End of getListFromList
 
+  public static function findByIdUserCoachCode(RecipeStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new RecipeStorData();
+
+    if ($inDbConnection != null) {
+      $request  = self::SELECT;
+      $request .= self::FROM;
+      $request .= " WHERE code = :index0";
+      $request .= " AND idusercoach = :index1";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['index0'=>  $dataIn->getCode(), 'index1'=>  $dataIn->getIdUserCoach()]);
+      if (self::SHOW_FIND_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "RecipeStorData");
+        $data = $stmt->fetch();
+      }
+    }
+    return $data;
+  }
+  // End of IdUserCoachCode
+
   public static function findByCode(RecipeStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
@@ -98,7 +122,7 @@ class RecipeStor {
       $request .= self::FROM;
       $request .= " WHERE code = :index0";
       if (!$all) {
-        $request .= " AND statut = :statut";
+        $request .= " AND elemstate = :statut";
       }
       $params = [];
       $params["index0"] = $dataIn->getCode();
@@ -117,6 +141,36 @@ class RecipeStor {
     return array($list, count($list));
   }
   // End of Code
+
+  public static function findByIdUserCoach(RecipeStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $list = [];
+
+    if ($inDbConnection != null) {
+      $request  = self::SELECT;
+      $request .= self::FROM;
+      $request .= " WHERE idusercoach = :index0";
+      if (!$all) {
+        $request .= " AND elemstate = :statut";
+      }
+      $params = [];
+      $params["index0"] = $dataIn->getIdUserCoach();
+      if (!$all) {
+        $params["statut"] = $dataIn->getAvailableValue();
+      }
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute($params);
+      if (self::SHOW_FIND_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "RecipeStorData");
+      }
+    }
+    return array($list, count($list));
+  }
+  // End of IdUserCoach
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
@@ -162,6 +216,7 @@ class RecipeStor {
 
     if ($inDbConnection != null) {
       $request  = "UPDATE recipe SET ";
+      $request .= "idusercoach= :idusercoach,";
       $request .= "code= :code,";
       $request .= "name= :name,";
       $request .= "description= :description,";
@@ -169,12 +224,13 @@ class RecipeStor {
       $request .= "size= :size,";
       $request .= "type= :type,";
       $request .= "rating= :rating,";
-      $request .= "statut= :statut,";
+      $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
       $params = [];
       $params["id"] = $data->getId();
+      $params["idusercoach"] = $data->getIdUserCoach();
       $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
       $params["description"] = $data->getDescription();
@@ -182,7 +238,7 @@ class RecipeStor {
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
       $params["rating"] = $data->getRating();
-      $params["statut"] = $data->getStatus();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -198,7 +254,13 @@ class RecipeStor {
           $traceData->setIdUser($trace->getIdUser());
           $traceData->setApplication($trace->getApplicationName());
           $traceData->setSchema($trace->getDbSchemaName());
-          $traceData->setOperationCode($traceType);
+          $operationCode = DistriXTraceData::TRACE_UPDATE;
+          if ($traceType == "TRACE_REMOVE") {
+            $operationCode = DistriXTraceData::TRACE_REMOVE;
+          } elseif ($traceType == "TRACE_RESTORE") {
+            $operationCode = DistriXTraceData::TRACE_RESTORE;
+          }
+          $traceData->setOperationCode($operationCode);
           $traceData->setOperationId($data->getId());
           $traceData->setOperationTable(self::TABLE_NAME);
           $traceData->setOperationData(print_r($data, true));
@@ -217,7 +279,7 @@ class RecipeStor {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
       $id = $data->getId();
-      $insere = self::update($data, DistriXTraceData::TRACE_UPDATE, $inDbConnection);
+      $insere = self::update($data, "TRACE_UPDATE", $inDbConnection);
     } else {
       list($insere, $id) = self::create($data, $inDbConnection);
     }
@@ -231,7 +293,7 @@ class RecipeStor {
     if ($data->getId() > 0) {
       $data = self::read($data->getId(), $inDbConnection);
       $data->setUnavailable();
-      $insere = self::update($data, DistriXTraceData::TRACE_REMOVE, $inDbConnection);
+      $insere = self::update($data, "TRACE_REMOVE", $inDbConnection);
     }
     return $insere;
   }
@@ -243,7 +305,7 @@ class RecipeStor {
     if ($data->getId() > 0) {
       $data = self::read($data->getId(), $inDbConnection);
       $data->setAvailable();
-      $insere = self::update($data, DistriXTraceData::TRACE_RESTORE, $inDbConnection);
+      $insere = self::update($data, "TRACE_RESTORE", $inDbConnection);
     }
     return $insere;
   }
@@ -291,8 +353,9 @@ class RecipeStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO recipe(";
-      $request .= "code,name,description,linktopicture,size,type,rating,statut,timestamp)";
+      $request .= "idusercoach,code,name,description,linktopicture,size,type,rating,elemstate,timestamp)";
       $request .= " VALUES(";
+      $request .= ":idusercoach,";
       $request .= ":code,";
       $request .= ":name,";
       $request .= ":description,";
@@ -300,9 +363,10 @@ class RecipeStor {
       $request .= ":size,";
       $request .= ":type,";
       $request .= ":rating,";
-      $request .= ":statut,";
+      $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
+      $params["idusercoach"] = $data->getIdUserCoach();
       $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
       $params["description"] = $data->getDescription();
@@ -310,7 +374,7 @@ class RecipeStor {
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
       $params["rating"] = $data->getRating();
-      $params["statut"] = $data->getStatus();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
