@@ -1,20 +1,10 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodBrandData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodBrandData.php");
 
-$resp         = [];
 $confirmSave  = false;
-$error        = [];
-$output       = [];
-$outputok     = false;
 
 list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
 
@@ -24,14 +14,7 @@ $servicesCaller->addParameter("data", $distriXFoodBandData);
 $servicesCaller->setServiceName("Food/Brand/DistriXFoodBrandRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXFoodBrandRestoreDataSvc");
-  $logInfoData->setLogFunction("RestoreBrand");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
+$logOk = logController("Security_Brand", "DistriXFoodBrandRestoreDataSvc", "RestoreBrand", $output);
 
 if ($outputok && isset($output["ConfirmSave"])) {
     $confirmSave = $output["ConfirmSave"];

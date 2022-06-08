@@ -1,20 +1,10 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodLabelData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodLabelData.php");
 
-$resp         = array();
 $confirmSave  = false;
-$error        = array();
-$output       = array();
-$outputok     = false;
 
 if ($_POST["base64Img"] != '') {
   $_POST["linkToPicture"] = $_POST["base64Img"];

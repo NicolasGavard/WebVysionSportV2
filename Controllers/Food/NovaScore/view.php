@@ -1,14 +1,8 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodNovaScoreData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodNovaScoreData.php");
 
 $resp              = array();
 $error             = array();
@@ -23,14 +17,7 @@ $servicesCaller->addParameter("data", $distriXFoodNovaScoreData);
 $servicesCaller->setServiceName("Food/NovaScore/DistriXFoodNovaScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_NovaScore")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXNovaScoreViewDataSvc");
-  $logInfoData->setLogFunction("ViewNovaScore");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
+$logOk = logController("Security_NovaScore", "DistriXNovaScoreViewDataSvc", "ViewNovaScore", $output);
 
 if ($outputok && isset($output["ViewNovaScore"])) {
   $distriXFoodNovaScoreData = $output["ViewNovaScore"];

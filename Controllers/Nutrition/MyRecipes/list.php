@@ -6,14 +6,20 @@ include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterf
 // DATA
 include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
 include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeFoodData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
+include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
 
-$listMyRecipesFormFront  = [];
-$listMyRecipes           = [];
-$listMyRecipesFoods      = [];
+$listMyRecipesFormFront = [];
+$listMyRecipes          = [];
+$listMyRecipesFoods     = [];
+$listFoods              = [];
 list($distriXNutritionRecipeData, $errorJson)     = DistriXNutritionRecipeData::getJsonData($_POST);
 
 $infoProfil = DistriXStyAppInterface::getUserInformation();
 $distriXNutritionRecipeData->setIdUserCoach($infoProfil->getId());
+
+$distriXCodeTableLanguageData = new DistriXCodeTableLanguageData();
+$distriXCodeTableLanguageData->setId($infoProfil->getIdLanguage());
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDataSvc.php");
@@ -27,9 +33,23 @@ $receipeCaller->addParameter("data", $distriXNutritionRecipeData);
 $recipeFoodCaller = new DistriXServicesCaller();
 $recipeFoodCaller->setServiceName("Nutrition/RecipeFood/DistriXNutritionMyRecipesFoodsListDataSvc.php");
 
+$foodCaller = new DistriXServicesCaller();
+$foodCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
+$servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+
+$weightTypeCaller = new DistriXServicesCaller();
+$weightTypeCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
+$servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+
+$nutritionalCaller = new DistriXServicesCaller();
+$nutritionalCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
+$servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+
 $svc = new DistriXSvc();
 $svc->addToCall("receipe", $receipeCaller);
 $svc->addToCall("recipeFood", $recipeFoodCaller);
+$svc->addToCall("food", $foodCaller);
+$svc->addToCall("weightType", $weightTypeCaller);
 $callsOk = $svc->call();
 
 list($outputok, $output, $errorData) = $svc->getResult("receipe"); //print_r($output);
@@ -45,6 +65,22 @@ if ($outputok && isset($output["ListMyRecipesFoods"]) && is_array($output["ListM
 } else {
   $error = $errorData;
 }
+
+list($outputok, $output, $errorData) = $svc->getResult("food"); print_r($output);
+if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) {
+  list($listFoods, $jsonError) = DistriXFoodFoodData::getJsonArray($output["ListFoods"]);
+} else {
+  $error = $errorData;
+}
+
+echo '<br/>';
+print_r($listMyRecipes);
+echo '<br/><br/>';
+print_r($listMyRecipesFoods);
+echo '<br/><br/>';
+print_r($listFoods);
+echo '<br/>';
+
 
 foreach ($listMyRecipes as $recipe) {
   $distriXNutritionMyRecipeData = new DistriXNutritionRecipeData();
