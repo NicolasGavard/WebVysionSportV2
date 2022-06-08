@@ -106,7 +106,7 @@
   $page_all_change_picture      = "Changer l'image";
 
   $confirm_delete               = "Confirmez la suppression pour ";
-  $confirm_restore              = "Confirmez la restoration pour ";
+  $confirm_restore              = "Confirmez la restauration pour ";
   
   $errorData_ok                 = "Traitement réussi !";
   $errorData_ko                 = "Erreur de traitement !";

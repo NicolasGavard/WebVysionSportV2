@@ -17,7 +17,8 @@ if (isset($_POST)) {
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $foodType);
   $servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeDeleteDataSvc.php");
-  list($outputok, $output, $errorData) = $servicesCaller->call(); print_r($output);
+  list($outputok, $output, $errorData) = $servicesCaller->call(); 
+  //print_r($output);
 
   $logOk = logController("Security_FoodType", "DistriXFoodTypeDeleteDataSvc", "DelFoodType", $output);
 

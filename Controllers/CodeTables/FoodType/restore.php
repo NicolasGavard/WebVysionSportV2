@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/Data/DistriXCodeTableFoodTypeData.php");
+include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
 
 $confirmSave = false;
 
@@ -17,7 +17,8 @@ if (isset($_POST)) {
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $foodType);
   $servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeRestoreDataSvc.php");
-  list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
+  list($outputok, $output, $errorData) = $servicesCaller->call(); 
+  // print_r($output);
 
   $logOk = logController("Security_FoodType", "DistriXFoodTypeRestoreDataSvc", "RestoreFoodType", $output);
 
