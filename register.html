@@ -34,7 +34,7 @@
 			</div>
 			<div class="login-menu">
 				<ul>
-					<li><a href="index.html">S'authentifier</a></li>
+					<li><a href="index.html">Se connecter</a></li>
 				</ul>
 			</div>
 		</div>
@@ -49,49 +49,49 @@
 					<div class="register-box bg-white box-shadow border-radius-10">
 						<div class="wizard-content">
 							<form class="tab-wizard2 wizard-circle wizard">
-								<h5>Informations de base sur le compte</h5>
+								<h5>Votre compte</h5>
 								<section>
 									<div class="form-wrap max-width-600 mx-auto">
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Adresse électronique*</label>
 											<div class="col-sm-8">
-												<input type="email" class="form-control">
+												<input type="email" id="email" class="form-control required">
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Nom d'utilisateur*</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control">
+												<input type="text" id="username" class="form-control">
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Mot de passe*</label>
 											<div class="col-sm-8">
-												<input type="password" class="form-control">
+												<input type="password" id="password" class="form-control">
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Confirmer le mot de passe*</label>
 											<div class="col-sm-8">
-												<input type="password" class="form-control">
+												<input type="password" id="password2" class="form-control">
 											</div>
 										</div>
 									</div>
 								</section>
 								<!-- Step 2 -->
-								<h5>Personal Information</h5>
+								<h5>Informations personnelles</h5>
 								<section>
 									<div class="form-wrap max-width-600 mx-auto">
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Nom*</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control">
+												<input type="text" id="personname" class="form-control">
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Prénom*</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control">
+												<input type="text" id="personfirstname" class="form-control">
 											</div>
 										</div>
 										<div class="form-group row align-items-center">
@@ -110,13 +110,13 @@
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Ville</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control">
+												<input type="text" id="personcity" class="form-control">
 											</div>
 										</div>
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Pays</label>
 											<div class="col-sm-8">
-												<input type="text" class="form-control">
+												<input type="text" id="personcountry" class="form-control">
 											</div>
 										</div>
 									</div>
@@ -128,7 +128,7 @@
 										<div class="form-group row">
 											<label class="col-sm-4 col-form-label">Formule</label>
 											<div class="col-sm-8">
-												<select class="form-control selectpicker" title="Selection de la Formule">
+												<select class="form-control selectpicker" id="formula" title="Sélection de la Formule">
 													<option value="1">Option 1</option>
 													<option value="2">Option 2</option>
 													<option value="3">Option 3</option>
@@ -138,44 +138,38 @@
 									</div>
 								</section>
 								<!-- Step 4 -->
-								<h5>Overview Information</h5>
+								<h5>Confirmation</h5>
 								<section>
 									<div class="form-wrap max-width-600 mx-auto">
 										<ul class="register-info">
 											<li>
 												<div class="row">
-													<div class="col-sm-4 weight-600">Adresse électronique</div>
-													<div class="col-sm-8">example@abc.com</div>
+													<div class="col-sm-6 weight-600">Adresse électronique</div>
+													<div class="col-sm-6"><span id="confemail"></span></div>
 												</div>
 											</li>
 											<li>
 												<div class="row">
-													<div class="col-sm-4 weight-600">Nom d'utilisateur</div>
-													<div class="col-sm-8">Example</div>
+													<div class="col-sm-6 weight-600">Nom d'utilisateur</div>
+													<div class="col-sm-6"><span id="confusername"></span></div>
 												</div>
 											</li>
 											<li>
 												<div class="row">
-													<div class="col-sm-4 weight-600">Mot de passe</div>
-													<div class="col-sm-8">.....000</div>
+													<div class="col-sm-6 weight-600">Nom</div>
+													<div class="col-sm-6"><span id="confpersonname"></span></div>
 												</div>
 											</li>
 											<li>
 												<div class="row">
-													<div class="col-sm-4 weight-600">Nom</div>
-													<div class="col-sm-8">john</div>
+													<div class="col-sm-6 weight-600">Prénom</div>
+													<div class="col-sm-6"><span id="confpersonfirstname"></span></div>
 												</div>
 											</li>
 											<li>
 												<div class="row">
-													<div class="col-sm-4 weight-600">Prénom</div>
-													<div class="col-sm-8">Smith</div>
-												</div>
-											</li>
-											<li>
-												<div class="row">
-													<div class="col-sm-4 weight-600">Formule</div>
-													<div class="col-sm-8">Option 1</div>
+													<div class="col-sm-6 weight-600">Formule</div>
+													<div class="col-sm-6"><span id="confformula"></span></div>
 												</div>
 											</li>
 										</ul>
@@ -200,7 +194,7 @@
 				<div class="modal-body text-center font-18">
 					<h3 class="mb-20">Formulaire soumis!</h3>
 					<div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
-					Félicitation, votre compte est crée
+					Félicitations, votre compte est créé.
 				</div>
 				<div class="modal-footer justify-content-center">
 					<a href="index.html" class="btn btn-primary">Fermer</a>
