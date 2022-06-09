@@ -17,11 +17,12 @@ if (isset($_POST)) {
   $languageCaller->setMethodName("ListLanguages");
   $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
-  $infoProfil = DistriXStyAppInterface::getUserInformation();
-  if (empty($_POST['idLanguage'])) {
-    $_POST['idLanguage'] = $infoProfil->getIdLanguage();
-  }
-  list($dataName, $errorJson) = DistriXCodeTableFoodTypeNameData::getJsonData($_POST);
+  // $infoProfil = DistriXStyAppInterface::getUserInformation();
+  // if (empty($_POST['idLanguage'])) {
+  //   $_POST['idLanguage'] = $infoProfil->getIdLanguage();
+  // }
+  // list($dataName, $errorJson) = DistriXCodeTableFoodTypeNameData::getJsonData($_POST);
+  $dataName = new DistriXCodeTableFoodTypeNameData();
 
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("dataName", $dataName);

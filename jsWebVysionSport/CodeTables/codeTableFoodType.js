@@ -1,10 +1,11 @@
-datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
+datatable = $('#datatable').DataTable({"language": {"url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : '../../Controllers/CodeTables/FoodType/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
     localStorage.setItem("FoodTypeDataTable", JSON.stringify(data.ListFoodTypes));
+    localStorage.setItem("FoodTypeLanguages", JSON.stringify(data.ListLanguages));
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -139,23 +140,40 @@ function ListFoodType(elemState){
       if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
-      const line =  '<tr>'+
-                    '  <td>'+val.code+'</td>'+
-                    '  <td>'+val.name+'</td>'+
-                    '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal+'</td>'+
-                    ' <td>'+
-                    '   <div class="dropdown">'+
-                    '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
-                    '       <i class="dw dw-more"></i>'+
-                    '     </a>'+
-                    '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodType"   onclick="ViewFoodType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelFoodType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestFoodType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
-                    '     </div>'+
-                    '   </div>'+
-                    ' </td>'+
-                    '</tr>';
+      let line =  '<tr>'+
+                    '  <td width="30%">'+val.code+'</td>'+
+                    '  <td width="30%">'+val.name+'</td>'+
+                    '  <td width="30%">'+val.nbLanguages+'/'+val.nbLanguagesTotal;
+      if (val.nbLanguages < val.nbLanguagesTotal) {
+        const languages = JSON.parse(localStorage.getItem('FoodTypeLanguages'));
+        $.map(languages, function(language, languageKey) {
+          var notFound = true;
+          if (val.names.length > 0) {
+            $.map(val.names, function(name, nameKey) {
+              if (name.idlanguage == language.id) {
+                notFound = false;
+              }
+            });
+          }
+          if (notFound) {
+            line += '<br/><span style="color:red;">'+language.name+'</span>';
+          }
+        });
+      }
+      line += '</td>'+
+              ' <td width="10%">'+
+              '   <div class="dropdown">'+
+              '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+              '       <i class="dw dw-more"></i>'+
+              '     </a>'+
+              '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+              '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodType"   onclick="ViewFoodType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+              '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelFoodType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+              '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestFoodType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+              '     </div>'+
+              '   </div>'+
+              ' </td>'+
+              '</tr>';
       datatable.row.add($(line)).draw();
     }
   });
