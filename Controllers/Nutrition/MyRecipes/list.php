@@ -7,6 +7,7 @@ include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterf
 include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
 include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeFoodData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodNutritionalData.php");
 include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
 include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
 
@@ -41,7 +42,7 @@ $foodCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
 $servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 
 $foodNutritionalCaller = new DistriXServicesCaller();
-$foodNutritionalCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
+$foodNutritionalCaller->setServiceName("Food/FoodNutritional/DistriXFoodNutritionalListDataSvc.php");
 
 $weightTypeCaller = new DistriXServicesCaller();
 $weightTypeCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
@@ -55,6 +56,7 @@ $svc = new DistriXSvc();
 $svc->addToCall("receipe", $receipeCaller);
 $svc->addToCall("recipeFood", $recipeFoodCaller);
 $svc->addToCall("food", $foodCaller);
+$svc->addToCall("foodNutritional", $foodNutritionalCaller);
 $svc->addToCall("weightType", $weightTypeCaller);
 $callsOk = $svc->call();
 
@@ -75,6 +77,13 @@ if ($outputok && isset($output["ListMyRecipesFoods"]) && is_array($output["ListM
 list($outputok, $output, $errorData) = $svc->getResult("food"); //print_r($output);
 if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) {
   list($listFoods, $jsonError) = DistriXFoodFoodData::getJsonArray($output["ListFoods"]);
+} else {
+  $error = $errorData;
+}
+
+list($outputok, $output, $errorData) = $svc->getResult("foodNutritional"); print_r($output);
+if ($outputok && isset($output["ListFoodNutritionals"]) && is_array($output["ListFoodNutritionals"])) {
+  list($listFoodNutritionals, $jsonError) = DistriXFoodNutritionalData::getJsonArray($output["ListFoodNutritionals"]);
 } else {
   $error = $errorData;
 }
@@ -116,6 +125,31 @@ foreach ($listMyRecipes as $recipe) {
       
       foreach ($listFoods as $food) {
         if($recipeFood->getIdFood() == $food->getId()){
+          
+
+
+          foreach ($listFoodNutritionals as $foodNutritinal) {
+            if ($food->getId() == $foodNutritinal->getIdFood()){
+
+              $calorie  = 50;
+              $proetin  = 40;
+              $glucide  = 30;
+              $lipid    = 20;
+              
+              $calorieTotal  += $calorie;
+              $proetinTotal  += $proetin;
+              $glucideTotal  += $glucide;
+              $lipidTotal    += $lipid;
+        
+              $distriXNutritionMyRecipeFoodData->setCalorie($calorie);
+              $distriXNutritionMyRecipeFoodData->setProetin($proetin);
+              $distriXNutritionMyRecipeFoodData->setGlucide($glucide);
+              $distriXNutritionMyRecipeFoodData->setLipid($lipid);
+
+            }
+          }
+          
+          
           $distriXNutritionMyRecipeFoodData->setNameFood($food->getName());
           break;
         }
@@ -132,20 +166,7 @@ foreach ($listMyRecipes as $recipe) {
         }
       }
 
-      $calorie  = 50;
-      $proetin  = 40;
-      $glucide  = 30;
-      $lipid    = 20;
-      
-      $calorieTotal  += $calorie;
-      $proetinTotal  += $proetin;
-      $glucideTotal  += $glucide;
-      $lipidTotal    += $lipid;
 
-      $distriXNutritionMyRecipeFoodData->setCalorie($calorie);
-      $distriXNutritionMyRecipeFoodData->setProetin($proetin);
-      $distriXNutritionMyRecipeFoodData->setGlucide($glucide);
-      $distriXNutritionMyRecipeFoodData->setLipid($lipid);
       $distriXNutritionMyRecipeFoodData->setElemState($recipeFood->getElemState());
       $distriXNutritionMyRecipeFoodData->setTimestamp($recipeFood->getTimestamp());
       $nutritionalInfo[] = $distriXNutritionMyRecipeFoodData;

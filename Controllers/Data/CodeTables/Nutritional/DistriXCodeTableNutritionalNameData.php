@@ -5,7 +5,6 @@ if (!class_exists("DistriXCodeTableNutritionalNameData", false)) {
     protected $id;
     protected $idNutritional;
     protected $idLanguage;
-    protected $code;
     protected $name;
     protected $elemState;
     protected $timestamp;
@@ -15,28 +14,25 @@ if (!class_exists("DistriXCodeTableNutritionalNameData", false)) {
       $this->id             = 0;
       $this->idNutritional  = 0;
       $this->idLanguage     = 0;
-      $this->code           = "";
       $this->name           = "";
       $this->elemState      = 0;
       $this->timestamp      = 0;
     }
     // Gets
-    public function getId() { return $this->id; }
-    public function getIdNutritional() { return $this->idNutritional; }
-    public function getIdLanguage() { return $this->idLanguage; }
-    public function getCode() { return $this->code; }
-    public function getName() { return $this->name; }
-    public function getElemState() { return $this->elemState; }
-    public function getTimestamp() { return $this->timestamp; }
+    public function getId():int { return $this->id; }
+    public function getIdNutritional():int { return $this->idNutritional; }
+    public function getIdLanguage():int { return $this->idLanguage; }
+    public function getName():string { return $this->name; }
+    public function getElemState():int { return $this->elemState; }
+    public function getTimestamp():int { return $this->timestamp; }
 
     // Sets
-    public function setId($id) { $this->id = $id; }
-    public function setIdNutritional($idNutritional) { $this->idNutritional = $idNutritional; }
-    public function setIdLanguage($idLanguage) { $this->idLanguage = $idLanguage; }
-    public function setCode($code) { $this->code = $code; }
-    public function setName($name) { $this->name = $name; }
-    public function setElemState($elemState) { $this->elemState = $elemState; }
-    public function setTimestamp($timestamp) { $this->timestamp = $timestamp; }
+    public function setId(int $id) { $this->id = $id; }
+    public function setIdNutritional(int $idNutritional) { $this->idNutritional = $idNutritional; }
+    public function setIdLanguage(int $idLanguage) { $this->idLanguage = $idLanguage; }
+    public function setName(string $name) { $this->name = $name; }
+    public function setElemState(int $elemState) { $this->elemState = $elemState; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
   // End of class
 }
