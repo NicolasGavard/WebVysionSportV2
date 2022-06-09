@@ -142,7 +142,12 @@ function ListMyRecipe(elemState){
                     '  <td><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
                     '  <td>'+val.name+'</td>'+
                     '  <td>'+
-
+                    '    <div class="row">'+
+                    '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flash"></span> '+val.calorie+'</div>'+
+                    '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-orange"></span> '+val.proetin+'</div>'+
+                    '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-chip"></span> '+val.glucide+'</div>'+
+                    '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flame"></span> '+val.lipid+'</div>'+
+                    '    </div>'+
                     '  </td>'+
                     '  <td>'+val.rating+'</td>'+
                     '  <td>'+

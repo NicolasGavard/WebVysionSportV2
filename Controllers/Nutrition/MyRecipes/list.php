@@ -8,11 +8,14 @@ include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.ph
 include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeFoodData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
 include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
 
 $listMyRecipesFormFront = [];
 $listMyRecipes          = [];
 $listMyRecipesFoods     = [];
 $listFoods              = [];
+$listWeightsTypes       = [];
+
 list($distriXNutritionRecipeData, $errorJson)     = DistriXNutritionRecipeData::getJsonData($_POST);
 
 $infoProfil = DistriXStyAppInterface::getUserInformation();
@@ -36,6 +39,9 @@ $recipeFoodCaller->setServiceName("Nutrition/RecipeFood/DistriXNutritionMyRecipe
 $foodCaller = new DistriXServicesCaller();
 $foodCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
 $servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+
+$foodNutritionalCaller = new DistriXServicesCaller();
+$foodNutritionalCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
 
 $weightTypeCaller = new DistriXServicesCaller();
 $weightTypeCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
@@ -66,21 +72,19 @@ if ($outputok && isset($output["ListMyRecipesFoods"]) && is_array($output["ListM
   $error = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("food"); print_r($output);
+list($outputok, $output, $errorData) = $svc->getResult("food"); //print_r($output);
 if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) {
   list($listFoods, $jsonError) = DistriXFoodFoodData::getJsonArray($output["ListFoods"]);
 } else {
   $error = $errorData;
 }
 
-echo '<br/>';
-print_r($listMyRecipes);
-echo '<br/><br/>';
-print_r($listMyRecipesFoods);
-echo '<br/><br/>';
-print_r($listFoods);
-echo '<br/>';
-
+list($outputok, $output, $errorData) = $svc->getResult("weightType"); //print_r($output);
+if ($outputok && isset($output["ListWeightTypes"]) && is_array($output["ListWeightTypes"])) {
+  list($listWeightsTypes, $jsonError) = DistriXCodeTableWeightTypeData::getJsonArray($output["ListWeightTypes"]);
+} else {
+  $error = $errorData;
+}
 
 foreach ($listMyRecipes as $recipe) {
   $distriXNutritionMyRecipeData = new DistriXNutritionRecipeData();
@@ -96,6 +100,11 @@ foreach ($listMyRecipes as $recipe) {
   $distriXNutritionMyRecipeData->setElemState($recipe->getElemState());
   $distriXNutritionMyRecipeData->setTimestamp($recipe->getTimestamp());
 
+  $calorieTotal  = 0;
+  $proetinTotal  = 0;
+  $glucideTotal  = 0;
+  $lipidTotal    = 0;
+
   $nutritionalInfo = [];
   foreach ($listMyRecipesFoods as $recipeFood) {
     if($recipe->getId() == $recipeFood->getIdRecipe()){
@@ -104,21 +113,52 @@ foreach ($listMyRecipes as $recipe) {
       $distriXNutritionMyRecipeFoodData->setIdRecipe($recipeFood->getIdRecipe());
       $distriXNutritionMyRecipeFoodData->setNameRecipe($recipeFood->getNameRecipe());
       $distriXNutritionMyRecipeFoodData->setIdFood($recipeFood->getIdFood());
-      $distriXNutritionMyRecipeFoodData->setNameFood($recipeFood->getNameFood());
+      
+      foreach ($listFoods as $food) {
+        if($recipeFood->getIdFood() == $food->getId()){
+          $distriXNutritionMyRecipeFoodData->setNameFood($food->getName());
+          break;
+        }
+      }
+      
       $distriXNutritionMyRecipeFoodData->setWeight($recipeFood->getWeight());
-      $distriXNutritionMyRecipeFoodData->setWeightType($recipeFood->getWeightType());
-      $distriXNutritionMyRecipeFoodData->setNameWeightType($recipeFood->getNameWeightType());
-      $distriXNutritionMyRecipeFoodData->setAbbrWeightType($recipeFood->getAbbrWeightType());
-      $distriXNutritionMyRecipeFoodData->setCalorie($recipeFood->getCalorie());
-      $distriXNutritionMyRecipeFoodData->setProetin($recipeFood->getProetin());
-      $distriXNutritionMyRecipeFoodData->setGlucide($recipeFood->getGlucide());
-      $distriXNutritionMyRecipeFoodData->setLipid($recipeFood->getLipid());
+      $distriXNutritionMyRecipeFoodData->setIdWeightType($recipeFood->getIdWeightType());
+      
+      foreach ($listWeightsTypes as $weightType) {
+        if($recipeFood->getIdWeightType() == $weightType->getId()){
+          $distriXNutritionMyRecipeFoodData->setNameWeightType($weightType->getName());
+          $distriXNutritionMyRecipeFoodData->setAbbrWeightType($weightType->getAbbreviation());
+          break;
+        }
+      }
+
+      $calorie  = 50;
+      $proetin  = 40;
+      $glucide  = 30;
+      $lipid    = 20;
+      
+      $calorieTotal  += $calorie;
+      $proetinTotal  += $proetin;
+      $glucideTotal  += $glucide;
+      $lipidTotal    += $lipid;
+
+      $distriXNutritionMyRecipeFoodData->setCalorie($calorie);
+      $distriXNutritionMyRecipeFoodData->setProetin($proetin);
+      $distriXNutritionMyRecipeFoodData->setGlucide($glucide);
+      $distriXNutritionMyRecipeFoodData->setLipid($lipid);
       $distriXNutritionMyRecipeFoodData->setElemState($recipeFood->getElemState());
       $distriXNutritionMyRecipeFoodData->setTimestamp($recipeFood->getTimestamp());
       $nutritionalInfo[] = $distriXNutritionMyRecipeFoodData;
+      break;
     }
   }
   $distriXNutritionMyRecipeData->setNutritionalInfo($nutritionalInfo);
+  
+  $distriXNutritionMyRecipeData->setCalorie($calorieTotal);
+  $distriXNutritionMyRecipeData->setProetin($proetinTotal);
+  $distriXNutritionMyRecipeData->setGlucide($glucideTotal);
+  $distriXNutritionMyRecipeData->setLipid($lipidTotal);
+  
   $listMyRecipesFormFront[] = $distriXNutritionMyRecipeData;
 }
 

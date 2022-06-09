@@ -85,7 +85,6 @@
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                       <label><?php echo $page_date_begin; ?></label>
-                      <!-- <input class="form-control date-picker dateStart" id="dateStart" placeholder="<?php //echo $page_add_date_begin; ?>" type="text" name="date_start"> -->
                       <input class="form-control dateStart" id="dateStart" placeholder="<?php echo $page_add_date_begin; ?>" type="text" name="dateStart">
                       <div class="form-control-feed back danger-dateStart has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_dateStart; ?> </div>
                     </div>

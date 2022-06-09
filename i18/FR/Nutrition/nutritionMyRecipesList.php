@@ -2,7 +2,7 @@
   $page_title             = "Liste de mes recettes";
   $page_code              = "Code";
   $page_name              = "Nom";
-  $page_picture           = "Langue";
+  $page_picture           = "Image";
   $page_info_nutritional  = "Informations nutritionnelles";
   $page_rating            = "Notes";
   $page_action            = "Actions";

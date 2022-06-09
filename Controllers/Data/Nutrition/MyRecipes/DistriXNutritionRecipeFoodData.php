@@ -8,7 +8,7 @@ if (!class_exists("DistriXNutritionRecipeFoodData", false)) {
     protected $idFood;
     protected $nameFood;
     protected $weight;
-    protected $weightType;
+    protected $idWeightType;
     protected $nameWeightType;
     protected $abbrWeightType;
     protected $calorie;
@@ -26,7 +26,7 @@ if (!class_exists("DistriXNutritionRecipeFoodData", false)) {
       $this->idFood         = 0;
       $this->nameFood       = "";
       $this->weight         = 0.0;
-      $this->weightType     = "";
+      $this->idWeightType   = 0;
       $this->nameWeightType = "";
       $this->abbrWeightType = "";
       $this->calorie        = 0.0;
@@ -43,13 +43,13 @@ if (!class_exists("DistriXNutritionRecipeFoodData", false)) {
     public function getIdFood():int { return $this->idFood; }
     public function getNameFood():string { return $this->nameFood; }
     public function getWeight():string { return $this->weight; }
-    public function getWeightType():string { return $this->weightType; }
+    public function getIdWeightType():int { return $this->idWeightType; }
     public function getNameWeightType():string { return $this->nameWeightType; }
     public function geAbbrWeightType():string { return $this->abbrWeightType; }
-    public function getCalorie():string { return $this->calorie; }
-    public function getProetin():int { return $this->proetin; }
-    public function getGlucide():string { return $this->glucide; }
-    public function getLipid():int { return $this->lipid; }
+    public function getCalorie():float { return $this->calorie; }
+    public function getProetin():float { return $this->proetin; }
+    public function getGlucide():float{ return $this->glucide; }
+    public function getLipid():float { return $this->lipid; }
     public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
 
@@ -60,13 +60,13 @@ if (!class_exists("DistriXNutritionRecipeFoodData", false)) {
     public function setIdFood(int $idFood) { $this->idFood = $idFood; }
     public function setNameFood(string $nameFood) { $this->nameFood = $nameFood; }
     public function setWeight(string $weight) { $this->weight = $weight; }
-    public function setWeightType(string $weightType) { $this->weightType = $weightType; }
+    public function setIdWeightType(int $idWeightType) { $this->idWeightType = $idWeightType; }
     public function setNameWeightType(string $nameWeightType) { $this->nameWeightType = $nameWeightType; }
     public function setAbbrWeightType(string $abbrWeightType) { $this->abbrWeightType = $abbrWeightType; }
-    public function setCalorie(string $calorie) { $this->calorie = $calorie; }
-    public function setProetin(int $proetin) { $this->proetin = $proetin; }
-    public function setGlucide(string $glucide) { $this->glucide = $glucide; }
-    public function setLipid(int $lipid) { $this->lipid = $lipid; }
+    public function setCalorie(float $calorie) { $this->calorie = $calorie; }
+    public function setProetin(float $proetin) { $this->proetin = $proetin; }
+    public function setGlucide(float $glucide) { $this->glucide = $glucide; }
+    public function setLipid(float $lipid) { $this->lipid = $lipid; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
