@@ -11,6 +11,10 @@ if (!class_exists("DistriXNutritionRecipeData", false)) {
     protected $size;
     protected $type;
     protected $nutritionalInfo;
+    protected $calorie;
+    protected $proetin;
+    protected $glucide;
+    protected $lipid;
     protected $rating;
     protected $elemState;
     protected $timestamp;
@@ -26,6 +30,10 @@ if (!class_exists("DistriXNutritionRecipeData", false)) {
       $this->size             = 0;
       $this->type             = "";
       $this->nutritionalInfo  = [];
+      $this->calorie          = 0.0;
+      $this->proetin          = 0.0;
+      $this->glucide          = 0.0;
+      $this->lipid            = 0.0;
       $this->rating           = 0;
       $this->elemState        = 0;
       $this->timestamp        = 0;
@@ -40,6 +48,10 @@ if (!class_exists("DistriXNutritionRecipeData", false)) {
     public function getSize():int { return $this->size; }
     public function getType():string { return $this->type; }
     public function getNutritionalInfo():array { return $this->nutritionalInfo; }
+    public function getCalorie():float { return $this->calorie; }
+    public function getProetin():float { return $this->proetin; }
+    public function getGlucide():float{ return $this->glucide; }
+    public function getLipid():float { return $this->lipid; }
     public function getRating():int { return $this->rating; }
     public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
@@ -54,6 +66,10 @@ if (!class_exists("DistriXNutritionRecipeData", false)) {
     public function setSize(int $size) { $this->size = $size; }
     public function setType(string $type) { $this->type = $type; }
     public function setNutritionalInfo(array $nutritionalInfo) { $this->nutritionalInfo = $nutritionalInfo; }
+    public function setCalorie(float $calorie) { $this->calorie = $calorie; }
+    public function setProetin(float $proetin) { $this->proetin = $proetin; }
+    public function setGlucide(float $glucide) { $this->glucide = $glucide; }
+    public function setLipid(float $lipid) { $this->lipid = $lipid; }
     public function setRating(int $rating) { $this->rating = $rating; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
