@@ -7,7 +7,7 @@ include(__DIR__ . "/../../DistriXSecurity/Data/DistriXStyUserData.php");
 // Error
 include(__DIR__ . "/../../GlobalData/ApplicationErrorData.php");
 // Distrix Crypto
-include(__DIR__ . "/../../DistrixCrypto/DistriXCrypto.php");
+include(__DIR__ . "/../../DistriXCrypto/DistriXCrypto.php");
 include(__DIR__ . "/../../DistriXSecurity/Const/DistriXStyKeys.php");
 
 $resp               = [];

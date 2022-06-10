@@ -5,10 +5,10 @@ include(__DIR__ . "/../Data/DistriXStyInfoSessionData.php");
 // Layer
 include(__DIR__ . "/../Layers/DistriXStySvcCaller.php");
 // DistriX LOGGER
-include(__DIR__ . "/../../DistrixCrypto/DistriXCrypto.php");
+include(__DIR__ . "/../../DistriXCrypto/DistriXCrypto.php");
 // DistriX LOGGER
 include(__DIR__ . "/../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../DistriXLogger/Data/DistriXLoggerInfoData.php");
 
 class DistriXStyAppUser
 {

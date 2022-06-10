@@ -28,7 +28,7 @@ include(__DIR__ . "/Storage/StyUserRoleStor.php");
 include(__DIR__ . "/Storage/StyUserRightStor.php");
 include(__DIR__ . "/Storage/StyRoleRightStor.php");
 // Distrix Crypto
-include(__DIR__ . "/../../../DistrixCrypto/DistriXCrypto.php");
+include(__DIR__ . "/../../../DistriXCrypto/DistriXCrypto.php");
 // Distrix CDN
 include(__DIR__ . "/../../../DistriXCdn/DistriXCdn.php");
 include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
