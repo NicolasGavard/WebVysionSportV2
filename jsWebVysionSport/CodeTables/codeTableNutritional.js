@@ -12,16 +12,6 @@ $.ajax({
   }
 });
 
-$(".btnChangeImage").on('click', function() {
-  $(".dropzoneImage").addClass("d-none");
-  $(".dropzoneNoImage").removeClass("d-none");
-});
-
-$(".btnChangeImageCancel").on('click', function() {
-  $(".dropzoneImage").removeClass("d-none");
-  $(".dropzoneNoImage").addClass("d-none");
-});
-
 $(".btn-warning").on('click', function() {
   $(".btn-success").removeClass("disabled");
   $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
@@ -51,7 +41,6 @@ $(".AddNewNutritional").on('click', function() {
   $('.AddNutritionalFormIdNutritional').val(0);
   $('.AddNutritionalFormCode').val('');
   $('.AddNutritionalFormName').val('');
-  $(".avatar-brand").attr("src", '');
   $('.AddNutritionalFormTimestamp').val(0);
   $('.AddNutritionalFormStatut').val(0);
 });
@@ -60,15 +49,13 @@ $(".btnAddNutritional").on('click', function() {
   $(".page_food_brand_update_title").removeClass("d-none");
   
   var name = $('.AddNutritionalFormName').val();
-  if (name != ""){
-    var data = $('#FormAddNutritional').serializeArray(); // convert form to array
-    data.push({name: "name", value: name});
-    
+  var code = $('.AddNutritionalFormCode').val();
+  if (name != "" || code != ""){
     $.ajax({
       url : '../../Controllers/CodeTables/Nutritional/save.php',
       type : 'POST',
       dataType : 'JSON',
-      data: $.param(data),
+      data: $('#FormAddNutritional').serialize(),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
         setTimeout(function() {window.location.href = "./foodNutritionalList.php";}, 800);
@@ -86,6 +73,15 @@ $(".btnAddNutritional").on('click', function() {
       setTimeout( () => { 
         $(".AddNutritionalFormName").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (code == ''){
+      $('.AddNutritionalFormCode').addClass("form-control-danger");
+      $('.danger-code').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddNutritionalFormCode").removeClass("form-control-danger");
+        $('.danger-code').addClass("d-none");
       }, 3000 );
     }
   } 
@@ -138,9 +134,20 @@ function ListNutritional(elemState){
       if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
+      nutritionalType = '';
+      if(val.isCalorie == 1)  {nutritionalType = '<span class="micon dw dw-flash"> Calorie';}
+      if(val.isProetin == 1)  {nutritionalType = '<span class="micon dw dw-orange"> Protéine';}
+      if(val.isGlucide == 1)  {nutritionalType = '<span class="micon dw dw-chip"> Glucide';}
+      if(val.isLipid == 1)    {nutritionalType = '<span class="micon dw dw-flame"> Lipide';}
+      
       const line =  '<tr>'+
-                    ' <td>'+val.codeShort+'</td>'+
+                    ' <td>'+val.code+'</td>'+
                     ' <td>'+val.name+'</td>'+
+                    ' <td>'+
+                    '    <div class="row">'+
+                    '      <div class="col-md-12 col-sm-12">'+nutritionalType+'</div>'+
+                    '    </div>'+
+                    '</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
@@ -173,9 +180,8 @@ function ViewNutritional(id){
       $(".dropzoneNoImage").addClass("d-none");
 
       $('.AddNutritionalFormIdNutritional').val(id);
-      $('.AddNutritionalFormCode').val(data.ViewNutritional.codeshort);
+      $('.AddNutritionalFormCode').val(data.ViewNutritional.code);
       $('.AddNutritionalFormName').val(data.ViewNutritional.name);
-      $(".avatar-brand").attr("src", data.ViewNutritional.linktopicture);
       $('.AddNutritionalFormTimestamp').val(data.ViewNutritional.timestamp);
       $('.AddNutritionalFormStatut').val(data.ViewNutritional.elemState);
     },

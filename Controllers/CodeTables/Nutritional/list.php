@@ -5,7 +5,6 @@ include(__DIR__ . "/../../Init/ControllerInit.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalNameData.php");
 include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
 
 $listLanguages    = array();
@@ -27,7 +26,6 @@ $weightTypeCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalLis
 $svc = new DistriXSvc();
 $svc->addToCall("Language", $languageCaller);
 $svc->addToCall("Nutritional", $weightTypeCaller);
-
 $callsOk = $svc->call();
 
 list($outputok, $output, $errorData) = $svc->getResult("Language"); //var_dump($output);
@@ -43,8 +41,6 @@ if ($outputok && isset($output["ListNutritionals"]) && is_array($output["ListNut
 } else {
   $error = $errorData;
 }
-
-
 
 $resp["ListNutritionals"]  = $listNutritionals;
 $resp["ListLanguages"]    = $listLanguages;

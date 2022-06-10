@@ -33,7 +33,9 @@
 						<table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>                 
-                  <th width="90%" class="table-plus"><span><?php echo $page_name; ?></span></th>
+                  <th width="20%" class="table-plus"><span><?php echo $page_code; ?></span></th>
+                  <th width="50%"><span><?php echo $page_name; ?></span></th>
+                  <th width="20%"><span><?php echo $page_type; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
@@ -55,17 +57,47 @@
                 <input class="form-control AddNutritionalFormTimestamp"     type="hidden" name="timestamp"  value="0">
                 <input class="form-control AddNutritionalFormStatut"        type="hidden" name="elemState"  value="0">
 
-                <div class="col-md-12 col-sm-12 d-none showPicture">
-                  <div class="profile-photo">
-                    <img src="" alt="" class="avatar-photo avatar-Nutritional">
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_code; ?></label>
+                    <input class="form-control AddNutritionalFormCode" type="text" name="code" placeholder="<?php echo $page_code; ?>">
+                    <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
                   </div>
                 </div>
-
-                <div class="col-md-12 col-sm-12">
+                
+                <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
                     <input class="form-control AddNutritionalFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                  </div>
+                </div>
+                
+                <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center col-md-12 col-lg-12" style="padding: 5px 0;">
+                  <div class="select-role">
+                    <label><?php echo $page_type; ?></label>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn" style="padding-left: 10px; width: calc(20% - 10px);">
+                        <input type="radio" name="isCalorie" id="<?php echo $page_isCalorie; ?>">
+                        <span class="micon dw dw-flash">&nbsp;<?php echo $page_isCalorie; ?></span>
+                      </label>
+                      <label class="btn" style="padding-left: 10px; width: calc(20% - 10px);">
+                        <input type="radio" name="isProetin" id="<?php echo $page_isProetin; ?>">
+                        <span class="micon dw dw-orange">&nbsp;<?php echo $page_isProetin; ?></span>
+                      </label>
+                      <label class="btn" style="padding-left: 10px; width: calc(20% - 10px);">
+                        <input type="radio" name="isGlucide" id="<?php echo $page_isGlucide; ?>">
+                        <span class="micon dw dw-chip">&nbsp;<?php echo $page_isGlucide; ?></span>
+                      </label>
+                      <label class="btn" style="padding-left: 10px; width: calc(20% - 10px);">
+                        <input type="radio" name="isLipid" id="<?php echo $page_isLipid; ?>">
+                        <span class="micon dw dw-flame">&nbsp;<?php echo $page_isLipid; ?></span>
+                      </label>
+                      <label class="btn" style="padding-left: 10px; width: calc(20% - 10px);">
+                        <input type="radio" name="isOther" id="<?php echo $page_isOther; ?>">
+                        <span class="micon dw dw-delete">&nbsp;<?php echo $page_isOther; ?></span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
