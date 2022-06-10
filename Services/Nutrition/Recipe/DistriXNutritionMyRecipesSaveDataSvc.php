@@ -8,33 +8,33 @@ if ($dataSvc->isAuthorized()) {
   // STOR Data
   include(__DIR__ . "/Data/RecipeStorData.php");
 
-  $dietStorData = new DietStorData();
+  $recipeStorData = new RecipeStorData();
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      list($dietStorData, $jsonError) = DietStorData::getJsonData($dataSvc->getParameter("data"));
-      $canSaveCurrentDiet  = true;
-      if ($dietStorData->getId() == 0) {
+      list($recipeStorData, $jsonError) = RecipeStorData::getJsonData($dataSvc->getParameter("data"));
+      $canSaveMyRecipe  = true;
+      if ($recipeStorData->getId() == 0) {
         // Possibility to save datas
-        $styCurrentDietStor = DietStor::findByIdUserCoachIdUserStudentIdDietTemplateDateStart($dietStorData, $dbConnection);
-        if ($styCurrentDietStor->getId() > 0) {
-          $canSaveCurrentDiet  = false;
+        $styMyRecipeStor = RecipeStor::findByIdUserCoachCode($recipeStorData, $dbConnection);
+        if ($styMyRecipeStor->getId() > 0) {
+          $canSaveMyRecipe  = false;
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
-          $distriXSvcErrorData->setDefaultText("This diet is already in use");
+          $distriXSvcErrorData->setDefaultText("This recipe is already in use");
           $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
           $errorData = $distriXSvcErrorData;
         }
       }
 
-      if ($canSaveCurrentDiet) {
-        list($insere, $idCurrentDiet) = DietStor::save($dietStorData, $dbConnection);
+      if ($canSaveMyRecipe) {
+        list($insere, $idMyRecipe) = RecipeStor::save($recipeStorData, $dbConnection);
 
         if ($insere) {
           $dbConnection->commit();
         } else {
           $dbConnection->rollBack();
-          if ($dietStorData->getId() > 0) {
+          if ($recipeStorData->getId() > 0) {
             $errorData = ApplicationErrorData::warningUpdateData(1, 1);
           } else {
             $errorData = ApplicationErrorData::warningInsertData(1, 1);
@@ -53,7 +53,7 @@ if ($dataSvc->isAuthorized()) {
     $dataSvc->addErrorToResponse($errorData);
   }
 
-  $dataSvc->addToResponse("ConfirmSaveCurrentDiet", $insere);
+  $dataSvc->addToResponse("ConfirmSave", $insere);
 }
 
 // Return response

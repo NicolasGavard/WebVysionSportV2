@@ -51,7 +51,8 @@ $(".AddNewMyRecipe").on('click', function() {
   $('.AddMyRecipeFormIdMyRecipe').val(0);
   $('.AddMyRecipeFormCode').val('');
   $('.AddMyRecipeFormName').val('');
-  $(".avatar-brand").attr("src", '');
+  $('.AddMyRecipeFormRating').val('');
+  $(".AddMyRecipePicture").attr("src", '');
   $('.AddMyRecipeFormTimestamp').val(0);
   $('.AddMyRecipeFormStatut').val(0);
 });
@@ -70,8 +71,12 @@ $(".btnAddMyRecipe").on('click', function() {
       dataType : 'JSON',
       data: $.param(data),
       success : function(data) {
-        $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodMyRecipeList.php";}, 800);
+        if (data.confirmSave){
+          $('#sa-success-distrix').trigger('click');
+          setTimeout(function() {window.location.href = "./nutritionMyRecipesList.php";}, 800);
+        } else {
+          $('#sa-error-distrix').trigger('click');
+        }
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
@@ -100,7 +105,7 @@ $("#btnDel").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodMyRecipeList.php";}, 800);
+        setTimeout(function() {window.location.href = "./nutritionMyRecipesList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -120,7 +125,7 @@ $("#btnRest").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodMyRecipeList.php";}, 800);
+        setTimeout(function() {window.location.href = "./nutritionMyRecipesList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -130,6 +135,16 @@ $("#btnRest").on('click', function() {
     }
   });
 });
+
+function encodeImgtoBase64(element) {
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    $("#linkToPictureBase64").val(reader.result);
+    $(".AddMyRecipePicture").attr("src", reader.result);
+  }
+  reader.readAsDataURL(file);
+}
 
 function ListMyRecipe(elemState){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
@@ -156,9 +171,10 @@ function ListMyRecipe(elemState){
                     '       <i class="dw dw-more"></i>'+
                     '      </a>'+
                     '      <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyRecipe"   onclick="ViewMyRecipe(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '        <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelMyRecipe(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '        <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestMyRecipe(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyRecipeFood"  onclick="ViewMyRecipeFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-harvest"></i> Aliments</a>'+
+                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyRecipe"      onclick="ViewMyRecipe(\''+val.id+'\', \''+val.name+'\');"     href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '        <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"              onclick="DelMyRecipe(\''+val.id+'\', \''+val.name+'\');"      href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '        <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"             onclick="RestMyRecipe(\''+val.id+'\', \''+val.name+'\');"     href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '      </div>'+
                     '    </div>'+
                     '  </td>'+
@@ -168,7 +184,31 @@ function ListMyRecipe(elemState){
   });
 }
 
-function ViewMyRecipe(id){
+function ViewMyRecipeFood(id, name){
+  $(".InfoSuppTitle").html(name);
+  $.ajax({
+    url : '../../Controllers/Nutrition/MyRecipeFood/list.php',
+    type : 'POST',
+    dataType : 'JSON',
+    data: {'id': id},
+    success : function(data) {
+      $.map(data.ListMyRecipesFood, function(val, key) {
+        const RecipeFood =  '<tr>'+
+                            '  <td>'+val.nameFood+'</td>'+
+                            '  <td>'+val.weight+'</td>'+
+                            '  <td>'+val.nameWeightType+'</td>'+
+                            '</tr>';
+        $("#listMyRecipeFoodTbody").append(RecipeFood);
+      });
+    },
+    error : function(data) {
+      console.log(data);
+    }
+  });
+}
+
+function ViewMyRecipe(id, name){
+  $(".InfoSuppTitle").html(name);
   $.ajax({
     url : '../../Controllers/Nutrition/MyRecipes/view.php',
     type : 'POST',
@@ -181,10 +221,12 @@ function ViewMyRecipe(id){
       $(".dropzoneImage").removeClass("d-none");
       $(".dropzoneNoImage").addClass("d-none");
 
-      $('.AddMyRecipeFormIdMyRecipe').val(id);
-      $('.AddMyRecipeFormCode').val(data.ViewMyRecipe.codeshort);
+      $('.AddMyRecipeFormId').val(id);
+      $('.AddMyRecipeFormIdUserCoatch').val(data.ViewMyRecipe.idusercoach);
+      $('.AddMyRecipeFormCode').val(data.ViewMyRecipe.code);
       $('.AddMyRecipeFormName').val(data.ViewMyRecipe.name);
-      $(".avatar-brand").attr("src", data.ViewMyRecipe.linktopicture);
+      $('.AddMyRecipeFormRating').val(data.ViewMyRecipe.rating);
+      $(".AddMyRecipePicture").attr("src", data.ViewMyRecipe.linktopicture);
       $('.AddMyRecipeFormTimestamp').val(data.ViewMyRecipe.timestamp);
       $('.AddMyRecipeFormStatut').val(data.ViewMyRecipe.elemState);
     },

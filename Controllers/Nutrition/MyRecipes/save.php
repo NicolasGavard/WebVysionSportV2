@@ -2,34 +2,19 @@
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/Nutrition/MyTemplatesDiets/DistriXNutritionTemplateDietData.php");
+include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
 
 $confirmSave  = false;
 
-$distriXNutritionTemplateDietData = new DistriXNutritionTemplateDietData();
-$distriXNutritionTemplateDietData->setId($_POST['id']);
-$distriXNutritionTemplateDietData->setIdUser($_POST['id']);
-$distriXNutritionTemplateDietData->setIdDietTemplace($_POST['id']);
-$distriXNutritionTemplateDietData->setDateStart($_POST['dateStart']);
-$distriXNutritionTemplateDietData->setStatus($_POST['statut']);
-$distriXNutritionTemplateDietData->setTimestamp($_POST['timestamp']);
-
-
-$distriXCodeTableDietData = new DistriXFoodDietData();
-$distriXCodeTableDietData->setId($_POST['id']);
-$distriXCodeTableDietData->setName($_POST['name']);
-$distriXCodeTableDietData->setLinkToPicture('');
-if($_POST['base64Img'] != '') { $distriXCodeTableDietData->setLinkToPicture($_POST['base64Img']);}
-$distriXCodeTableDietData->setTimestamp($_POST['timestamp']);
-$distriXCodeTableDietData->setStatus($_POST['statut']);
+list($distriXNutritionMyRecipeData, $errorJson) = DistriXNutritionRecipeData::getJsonData($_POST);
+if($_POST['base64Img'] != '') { $distriXNutritionMyRecipeData->setLinkToPicture($_POST['base64Img']);}
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("SaveDiet");
-$servicesCaller->addParameter("data", $distriXCodeTableDietData);
-$servicesCaller->setServiceName("Food/Diet/DistriXFoodDietSaveDataSvc.php");
+$servicesCaller->addParameter("data", $distriXNutritionMyRecipeData);
+$servicesCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-$logOk = logController("Security_CurrentDiet", "DistriXDietSaveDataSvc", "SaveDiet", $output);
+$logOk = logController("Security_MyRecipe", "DistriXNutritionMyRecipesSaveDataSvc", "SaveMyRecipe", $output);
 
 if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
   $confirmSave = $output["ConfirmSave"];

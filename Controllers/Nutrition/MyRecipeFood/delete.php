@@ -2,23 +2,23 @@
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
+include(__DIR__ . "/../../Data/Nutrition/MyRecipesFood/DistriXNutritionRecipeFoodData.php");
 
 $confirmSave  = false;
 
 if (isset($_POST)) {
-  $label  = new DistriXNutritionRecipeData();
+  $label  = new DistriXNutritionRecipeFoodData();
   if (isset($_POST['id']) && $_POST['id'] > 0) {
     $label->setId($_POST['id']);
   }
   
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->setMethodName("DelMyRecipe");
+  $servicesCaller->setMethodName("DelMyRecipeFood");
   $servicesCaller->addParameter("data", $label);
-  $servicesCaller->setServiceName("Nutrition/MyRecipe/DistriXNutritionMyRecipesDeleteDataSvc.php");
+  $servicesCaller->setServiceName("Nutrition/MyRecipeFood/DistriXNutritionMyRecipeFoodsDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
-  $logOk = logController("Security_MyRecipe", "DistriXNutritionMyRecipesDeleteDataSvc", "DelMyRecipe", $output);
+  $logOk = logController("Security_MyRecipeFood", "DistriXNutritionMyRecipeFoodsDeleteDataSvc", "DelMyRecipeFood", $output);
   
   if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
     $confirmSave = $output["ConfirmSave"];

@@ -27,10 +27,6 @@ $distriXNutritionRecipeData->setIdUserCoach($infoProfil->getId());
 $distriXCodeTableLanguageData = new DistriXCodeTableLanguageData();
 $distriXCodeTableLanguageData->setId($infoProfil->getIdLanguage());
 
-$servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDataSvc.php");
-$servicesCaller->addParameter("data", $distriXNutritionRecipeData);
-
 // CALL
 $receipeCaller = new DistriXServicesCaller();
 $receipeCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDataSvc.php");
@@ -41,18 +37,18 @@ $recipeFoodCaller->setServiceName("Nutrition/RecipeFood/DistriXNutritionMyRecipe
 
 $foodCaller = new DistriXServicesCaller();
 $foodCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
-$servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+$foodCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 
 $foodNutritionalCaller = new DistriXServicesCaller();
 $foodNutritionalCaller->setServiceName("Food/FoodNutritional/DistriXFoodNutritionalListDataSvc.php");
 
 $weightTypeCaller = new DistriXServicesCaller();
 $weightTypeCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
-$servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+$weightTypeCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 
 $nutritionalCaller = new DistriXServicesCaller();
 $nutritionalCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalListDataSvc.php");
-$servicesCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+$nutritionalCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 
 $svc = new DistriXSvc();
 $svc->addToCall("receipe", $receipeCaller);
