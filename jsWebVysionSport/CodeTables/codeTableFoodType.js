@@ -150,7 +150,7 @@ function ListFoodType(elemState){
           var notFound = true;
           if (val.names.length > 0) {
             $.map(val.names, function(name, nameKey) {
-              if (name.idlanguage == language.id) {
+              if (name.idLanguage == language.id) {
                 notFound = false;
               }
             });
