@@ -11,8 +11,10 @@ class NutritionalStor {
     $list = [];
     $listNames = [];
   
+    
+
     if ($inDbConnection != null) {
-      $request  = "SELECT nutritional.id,nutritional.code,nutritional.name,nutritional.elemstate,nutritional.timestamp";
+      $request  = "SELECT nutritional.id,nutritional.code,nutritional.name,nutritional.iscalorie,nutritional.isproetin,nutritional.isglucide,nutritional.islipid,nutritional.isvitamin,nutritional.istraceelement,nutritional.ismineral,nutritional.elemstate,nutritional.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
       $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idnutritional";
@@ -56,6 +58,13 @@ class NutritionalStor {
           $data->setId($row["id"]);
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
+          $data->setIsCalorie($row["iscalorie"]);
+          $data->setIsProetin($row["isproetin"]);
+          $data->setIsGlucide($row["isglucide"]);
+          $data->setIsLipid($row["islipid"]);
+          $data->setIsVitamin($row["isvitamin"]);
+          $data->setIstTaceElement($row["istraceelement"]);
+          $data->setIsMineral($row["ismineral"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
           if (! is_null($row["nutritionalnameid"])) {
@@ -75,7 +84,7 @@ class NutritionalStor {
     $listNames = [];
 
     if ($inDbConnection != null) {
-      $request  = "SELECT nutritional.id,nutritional.code,nutritional.name,nutritional.elemstate,nutritional.timestamp";
+      $request  = "SELECT nutritional.id,nutritional.code,nutritional.name,nutritional.iscalorie,nutritional.isproetin,nutritional.isglucide,nutritional.islipid,nutritional.isvitamin,nutritional.istraceelement,nutritional.ismineral,nutritional.elemstate,nutritional.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
       $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idnutritional";
@@ -104,6 +113,13 @@ class NutritionalStor {
           $data->setId($row["id"]);
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
+          $data->setIsCalorie($row["iscalorie"]);
+          $data->setIsProetin($row["isproetin"]);
+          $data->setIsGlucide($row["isglucide"]);
+          $data->setIsLipid($row["islipid"]);
+          $data->setIsVitamin($row["isvitamin"]);
+          $data->setIstTaceElement($row["istraceelement"]);
+          $data->setIsMineral($row["ismineral"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
         }
@@ -120,7 +136,7 @@ class NutritionalStor {
     $listNames = [];
 
     if ($inDbConnection != null) {
-      $request  = "SELECT nutritional.id,nutritional.code,nutritional.name,nutritional.elemstate,nutritional.timestamp";
+      $request  = "SELECT nutritional.id,nutritional.code,nutritional.name,nutritional.iscalorie,nutritional.isproetin,nutritional.isglucide,nutritional.islipid,nutritional.isvitamin,nutritional.istraceelement,nutritional.ismineral,nutritional.elemstate,nutritional.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
       $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idnutritional";
@@ -146,6 +162,13 @@ class NutritionalStor {
           $data->setId($row["id"]);
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
+          $data->setIsCalorie($row["iscalorie"]);
+          $data->setIsProetin($row["isproetin"]);
+          $data->setIsGlucide($row["isglucide"]);
+          $data->setIsLipid($row["islipid"]);
+          $data->setIsVitamin($row["isvitamin"]);
+          $data->setIstTaceElement($row["istraceelement"]);
+          $data->setIsMineral($row["ismineral"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
         }
