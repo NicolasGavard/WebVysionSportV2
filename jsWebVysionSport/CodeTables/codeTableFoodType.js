@@ -141,9 +141,9 @@ $(function() {
         if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         let line =  '<tr>'+
-                      '  <td width="30%">'+val.code+'</td>'+
-                      '  <td width="30%">'+val.name+'</td>'+
-                      '  <td width="30%">'+val.nbLanguages+'/'+val.nbLanguagesTotal;
+                      '  <td style="padding:1rem;">'+val.code+'</td>'+
+                      '  <td>'+val.name+'</td>'+
+                      '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {
           const languages = JSON.parse(localStorage.getItem('FoodTypeLanguages'));
           $.map(languages, function(language, languageKey) {
