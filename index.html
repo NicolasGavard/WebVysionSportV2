@@ -68,7 +68,9 @@
 							<div class="input-group custom">
 								<input type="password" class="form-control form-control-lg" placeholder="**********" name="password" id="password" value="">
 								<div class="input-group-append custom">
-									<span class="input-group-text"><i class="dw dw-padlock1"></i></span>
+									
+									<!-- <span class="input-group-text"><i class="dw dw-padlock1"></i></span> -->
+									<span class="input-group-text"><i class="dw dw-eye" id="togglePassword"></i></span>
 								</div>
 							</div>
 							<div class="row pb-30">
@@ -123,13 +125,24 @@
 	$(function() {
 		$("form input").keypress(function (e) {
 		if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-			$('#btnLogin').click();
+			$('#btnLogin').trigger('click');
 			return false;
 		}
 		else {
 			return true;
 		}
 		});
+	});
+	$('#togglePassword').on( "click", function() {
+		const type = $('#password').attr('type') === 'password' ? 'text' : 'password';
+		$('#password').attr('type', type);
+		if (type == 'text') {
+    	$(this).removeClass('dw-eye');
+    	$(this).addClass('dw-hide');
+		} else {
+    	$(this).removeClass('dw-hide');
+    	$(this).addClass('dw-eye');
+		}
 	});
 	</script>
 </body>
