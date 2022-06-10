@@ -1,48 +1,45 @@
 <?php
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalNameData.php");
 
-$infoProfil = DistriXStyAppInterface::getUserInformation();
-$_POST['id'] = $infoProfil->getIdLanguage();
-list($distriXCodeTableLanguageData, $errorJson)     = DistriXCodeTableLanguageData::getJsonData($_POST);
-list($distriXCodeTableNutritionalData, $errorJson)  = DistriXCodeTableNutritionalData::getJsonData($_POST);
+// TESTS
+// $_POST["id"] = 1;
+// $_POST["id"] = 3;
+// $_POST["id"] = 4;
 
-$languageCaller = new DistriXServicesCaller();
-$languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
+if (isset($_POST)) {
+  list($nutritional, $errorJson) = DistriXCodeTableNutritionalData::getJsonData($_POST);
+  $listNutritionalNames = [];
 
-$nutritionalCaller = new DistriXServicesCaller();
-$nutritionalCaller->addParameter("data", $distriXCodeTableNutritionalData);
-$nutritionalCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
-$nutritionalCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalViewDataSvc.php");
+// CALL
+  $servicesCaller = new DistriXServicesCaller();
+  $servicesCaller->addParameter("data", $nutritional);
+  $servicesCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalViewDataSvc.php");
+  list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
-$svc = new DistriXSvc();
-$svc->addToCall("Language", $languageCaller);
-$svc->addToCall("Nutritional", $nutritionalCaller);
-$callsOk = $svc->call();
+  $logOk = logController("Security_Nutritional", "DistriXNutritionalViewDataSvc", "ViewNutritional", $output);
 
-list($outputok, $output, $errorData) = $svc->getResult("Language"); //var_dump($output);
-if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLanguages"])) {
-  list($listLanguages, $jsonError) = DistriXCodeTableLanguageData::getJsonArray($output["ListLanguages"]);
-} else {
-  $error = $errorData;
+// RESPONSE
+  if ($outputok && isset($output["ViewNutritional"])) {
+    list($nutritional, $jsonError) = DistriXCodeTableNutritionalData::getJsonData($output["ViewNutritional"]);
+  } else {
+    $error = $errorData;
+  }
+  if ($outputok && isset($output["ViewNutritionalNames"]) && is_array($output["ViewNutritionalNames"])) {
+    list($listNutritionalNames, $jsonError) = DistriXCodeTableNutritionalNameData::getJsonArray($output["ViewNutritionalNames"]);
+  } else {
+    $error = $errorData;
+  }
+
+// TREATMENT
+  $nutritional->setNames($listNutritionalNames);
+  $nutritional->setNbLanguages(count($listNutritionalNames));
 }
-
-list($outputok, $output, $errorData) = $svc->getResult("Nutritional"); var_dump($output);
-if ($outputok && isset($output["ViewNutritional"]) && is_array($output["ViewNutritional"])) {
-  list($nutritional, $jsonError) = DistriXCodeTableNutritionalData::getJsonData($output["ViewNutritional"]);
-} else {
-  $error = $errorData;
+$resp["ViewNutritional"] = $nutritional;
+if (!empty($error)) {
+  $resp["Error"] = $error;
 }
-
-$resp["ViewNutritional"]  = $nutritional;
-$resp["ListLanguages"]    = $listLanguages;
-if(!empty($error)){
-  $resp["Error"]         = $error;
-}
-
 echo json_encode($resp);

@@ -1,50 +1,32 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// DISTRIX Init
-include("../DistriXInit/DistriXSvcDataServiceInit.php");
-// STY Const
-// STY Const
-include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/../../Data/DistriXStyLanguageData.php");
-// Database Data
-include(__DIR__ . "/Data/StyLanguageStorData.php");
-// Storage
-include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
-include(__DIR__ . "/Storage/StyLanguageStor.php");
-// Cdn Location
-include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
-include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
+// Service Init
+include(__DIR__ . "/../../Init/DataSvcInit.php");
+if ($dataSvc->isAuthorized()) {
+  // Database Data
+  include(__DIR__ . "/Data/NutritionalStorData.php");
+  include(__DIR__ . "/Data/NutritionalNameStorData.php");
+  // Storage
+  include(__DIR__ . "/Storage/NutritionalStor.php");
+  include(__DIR__ . "/Storage/NutritionalNameStor.php");
 
-$databasefile = __DIR__ . "/../Db/Infodb.php";
+  $nutritionals     = [];
+  $nutritionalNames = [];
 
-$dbConnection = null;
-$errorData    = null;
-$Languages    = [];
-
-$dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
-if (is_null($dbConnection->getError())) {
-  $data = $dataSvc->getParameter("data");
-  list($styLanguagestor, $styLanguagestorInd) = StyLanguageStor::findByCode($data, true, $dbConnection);
-  foreach ($styLanguagestor as $Language) {
-    $infoLanguage = DistriXSvcUtil::setData($Language, "DistriXStyLanguageData");
-    $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_LANGUAGES . '/' . $infoLanguage->getLinkToPicture();
-    $pictures_headers = get_headers($urlPicture);
-    if ($infoLanguage->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $infoLanguage->getLinkToPicture() == '') {
-      $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_LANGUAGES . '/languageDefault.png';
-    }
-    $infoLanguage->setLinkToPicture($urlPicture);
-    $Languages[]  = $infoLanguage;
+  $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
+  if (is_null($dbConnection->getError())) {
+    list($dataName, $jsonError) = NutritionalNameStorData::getJsonData($dataSvc->getParameter("dataName"));
+    list($nutritionals, $nutritionalNames) = NutritionalStor::getListNames(true, $dataName, $dbConnection);
+    // list($nutritionals, $nutritionalNames) = NutritionalStor::getListNames(true, NutritionalNameStorData::getJsonData($dataSvc->getParameter("dataName"))[0], $dbConnection);
+  } else {
+    $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }
-} else {
-  $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
-}
-if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "FindBrand", $dataSvc->getMethodName(), basename(__FILE__));
-  $dataSvc->addErrorToResponse($errorData);
-}
-$dataSvc->addToResponse("ListLanguages", $Languages);
+  if ($errorData != null) {
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListNutritional", $dataSvc->getMethodName(), basename(__FILE__));
+    $dataSvc->addErrorToResponse($errorData);
+  }
+  $dataSvc->addToResponse("ListNutritionals", $nutritionals);
+  $dataSvc->addToResponse("ListNutritionalNames", $nutritionalNames);
 
-// Return response
-$dataSvc->endOfService();
+  // Return response
+  $dataSvc->endOfService();
+}
