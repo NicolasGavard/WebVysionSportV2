@@ -23,10 +23,17 @@ $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   list($languageStor, $languageStorInd) = LanguageStor::getList(true, $dbConnection);
   foreach ($languageStor as $language) {
-    $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $language->getLinkToPicture();
-    $pictures_headers = get_headers($urlPicture);
-    if ($language->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $language->getLinkToPicture() == '') {
-      $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/default.png';
+    
+    if( ini_get('allow_url_fopen') ) {
+      $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $language->getLinkToPicture();
+      $pictures_headers = get_headers($urlPicture);
+      if ($language->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $language->getLinkToPicture() == '') {
+        $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/default.png';
+      }
+    }else {
+      if (strlen($language->getLinkToPicture() == 0)){
+        $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/default.png';
+      }
     }
     $language->setLinkToPicture($urlPicture);
   }

@@ -6,11 +6,6 @@ include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.
 
 $confirmSave = false;
 
-// TESTS
-// $_POST["id"] = 1;
-// $_POST["id"] = 3;
-// $_POST["id"] = 4;
-
 if (isset($_POST)) {
   list($foodType, $errorJson) = DistriXCodeTableFoodTypeData::getJsonData($_POST);
 

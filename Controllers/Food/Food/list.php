@@ -1,25 +1,26 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
-// DATA GENERAL
-include(__DIR__ . "/../../Data/DistriXGeneralIdData.php");
+session_start();
+include(__DIR__ . "/../../Init/ControllerInit.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodFoodData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableFoodCategoryData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableFoodCategoryNameData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableLanguageData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableNutritionalNameData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableWeightTypeData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableWeightTypeNameData.php");
-include(__DIR__ . "/../../Data/DistriXFoodBrandData.php");
-include(__DIR__ . "/../../Data/DistriXFoodLabelData.php");
-include(__DIR__ . "/../../Data/DistriXFoodNutritionalData.php");
-include(__DIR__ . "/../../Data/DistriXFoodEcoScoreData.php");
-include(__DIR__ . "/../../Data/DistriXFoodNovaScoreData.php");
-include(__DIR__ . "/../../Data/DistriXFoodNutriScoreData.php");
-include(__DIR__ . "/../../Data/DistriXFoodWeightData.php");
+include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableFoodCategoryData.php");
+include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableFoodCategoryNameData.php");
+
+include(__DIR__ . "/../../Data/Food/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../../Data/Food/DistriXCodeTableNutritionalData.php");
+include(__DIR__ . "/../../Data/Food/DistriXCodeTableNutritionalNameData.php");
+include(__DIR__ . "/../../Data/Food/DistriXCodeTableWeightTypeData.php");
+include(__DIR__ . "/../../Data/Food/DistriXCodeTableWeightTypeNameData.php");
+
+include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodBrandData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodLabelData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodNutritionalData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodEcoScoreData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodNovaScoreData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodNutriScoreData.php");
+include(__DIR__ . "/../../Data/Food/DistriXFoodWeightData.php");
 
 include(__DIR__ . "/../../Data/DistriXCodeTableWeightTypeData.php");
 include(__DIR__ . "/../../Data/DistriXCodeTableWeightTypeNameData.php");
