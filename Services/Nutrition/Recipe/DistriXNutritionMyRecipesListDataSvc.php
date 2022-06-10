@@ -4,8 +4,8 @@ include(__DIR__ . "/../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
   // Cdn Location
-  include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
-  include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
+  include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
+  include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
   // Storage
   include(__DIR__ . "/Storage/RecipeStor.php");
   // STOR Data

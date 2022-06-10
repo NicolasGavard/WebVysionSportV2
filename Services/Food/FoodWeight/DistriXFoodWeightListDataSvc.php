@@ -12,8 +12,8 @@ include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/FoodWeightStor.php");
 
 // Cdn Location
-include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
-include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
+include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
+include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
 
 $databasefile = __DIR__ . "/../../../Services/Db/Infodb.php";
 

@@ -17,8 +17,8 @@ include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/StyUserStor.php");
 include(__DIR__ . "/Storage/StyEnterpriseStor.php");
 // Cdn Location
-include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
-include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
+include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
+include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
 // Database
 $databasefile = __DIR__ . "/../Db/Infodb.php";
 
