@@ -1,6 +1,6 @@
 <?php
   include(__DIR__ . "/../../DistriXInit/DistriXSvcControllerInit.php");
-  include(__DIR__ . "/../../DistriXSecurity/styAppInterface/DistriXStyAppInterface.php");
+  include(__DIR__ . "/../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
   include(__DIR__ . "/../../DistriXSecurity/Const/DistriXStyRightConst.php");
 ?>
 

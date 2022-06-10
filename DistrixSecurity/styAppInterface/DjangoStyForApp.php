@@ -32,7 +32,7 @@ include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/data/DjangoStyEnterprisePosData.p
 // Cryptage
 include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/styCrypto/DjangoStyCrypto.php");
 // Layer
-include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/styAppInterface/layer/DjangoSvcCallerSty.php");
+include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/StyAppInterface/layer/DjangoSvcCallerSty.php");
 include(DJANGOSTY_APP_DJANGOSVC_ACCESS_PATH . "layer/DjangoSvcLayerData.php");
 
 class DjangoStyForApp
