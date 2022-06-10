@@ -6,7 +6,7 @@ include(__DIR__ . "/../../GlobalData/ApplicationErrorData.php");
 include(__DIR__ . "/../Layers/DistriXServicesCaller.php");
 // DistriX LOGGER
 include(__DIR__ . "/../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../DistriXLogger/Data/DistriXLoggerInfoData.php");
 
 $resp         = [];
 $error        = [];

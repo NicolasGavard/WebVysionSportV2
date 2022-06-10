@@ -1,7 +1,7 @@
 $(function() {
   var foodTypeTable = $('#FoodTypeTable').DataTable({
-    // responsive: true
     columnDefs: [
+      { orderable: false, targets: 2 },
       { orderable: false, targets: 3 }
     ],
     language: {
@@ -156,7 +156,7 @@ $(function() {
               });
             }
             if (notFound) {
-              line += '<br/><span style="color:red;">'+language.name+'</span>';
+              line += '<br/><span style="color:red;"><i class="dw dw-warning-1"></i> '+language.name+'</span>';
             }
           });
         }

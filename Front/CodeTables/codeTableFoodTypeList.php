@@ -30,13 +30,13 @@
           <div class="pb-20"></div>
           <div class="pb-20">
 						<!-- <table class="data-table table datastripe hover nowrap dataTable dtr-inline"> -->
-						<table id="FoodTypeTable" class="display responsive nowrap" width="100%">
+						<table id="FoodTypeTable" class="display responsive datastripe nowrap dataTable dtr-inline" width="100%">
 							<thead>
 								<tr>                 
-                  <th width="30%"><span><?php echo $page_code; ?></span></th>
-                  <th width="30%"><span><?php echo $page_name; ?></span></th>
-                  <th width="30%"><span><?php echo $page_translation; ?></span></th>
-                  <th width="10%"><span><?php echo $page_action; ?></span></th>
+                  <th><span><?php echo $page_code; ?></span></th>
+                  <th><span><?php echo $page_name; ?></span></th>
+                  <th><span><?php echo $page_translation; ?></span></th>
+                  <th><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
 							<tbody id="listFoodTypesTbody">
