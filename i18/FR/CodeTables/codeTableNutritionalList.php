@@ -1,11 +1,19 @@
 <?php
-  $page_title          = "Liste des informations nutritionnelles";
-  $page_picture        = "Image";
-  $page_name           = "Info. nutritionnelle";
-  $page_action         = "Actions";
-  $page_add_title      = "Ajouter une information nutritionnelle";
-  $page_update_title   = "Modifier l'information nutritionnelle";
-  $page_delete_title   = "Supprimer l'information nutritionnelle";
-  $page_restore_title  = "Restaurer l'information nutritionnelle";
-
-  $errorData_txt_name  = "Le nom de l'information nutritionnelle est manquant !!";
+  $page_title           = "Liste des informations nutritionnelles";
+  $page_picture         = "Image";
+  $page_code            = "Code";
+  $page_name            = "Nom";
+  $page_type            = "Type";
+  $page_action          = "Actions";
+  $page_add_title       = "Ajouter une information nutritionnelle";
+  $page_update_title    = "Modifier l'information nutritionnelle";
+  $page_delete_title    = "Supprimer l'information nutritionnelle";
+  $page_restore_title   = "Restaurer l'information nutritionnelle";
+  
+  $errorData_txt_name   = "Le nom de l'information nutritionnelle est manquant !!";
+  
+  $page_isCalorie       = "Calorie";
+  $page_isProetin       = "Protéine";
+  $page_isGlucide       = "Glucide";
+  $page_isLipid         = "Lipide";
+  $page_isOther         = "Autre";

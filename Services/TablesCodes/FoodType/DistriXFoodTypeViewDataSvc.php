@@ -15,7 +15,7 @@ if ($dataSvc->isAuthorized()) {
 
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
-    list($foodType, $jsonError) = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
+    list($foodType, $jsonError)     = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
     list($foodType, $foodTypeNames) = FoodTypeStor::readNames($foodType->getId(), $dbConnection);
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
