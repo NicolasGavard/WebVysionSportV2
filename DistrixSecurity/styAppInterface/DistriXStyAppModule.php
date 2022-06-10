@@ -7,7 +7,7 @@ include(__DIR__ . "/../Layers/DistriXStySvcCaller.php");
 // ------------------------------------
 // -----------L O G G E R ---------------
 include(__DIR__ . "/../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../DistriXLogger/Data/DistriXLoggerInfoData.php");
 
 class DistriXStyAppModule
 {

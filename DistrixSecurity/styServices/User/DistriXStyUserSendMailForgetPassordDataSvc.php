@@ -3,7 +3,7 @@
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
 // STY Const
-include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
+include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
 include(__DIR__ . "/../../Const/DistriXStyMailConst.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
@@ -19,7 +19,7 @@ include(__DIR__ . "/../../../DistriXSvc/Data/DistriXSvcErrorData.php");
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/StyUserStor.php");
 // Distrix Crypto
-include(__DIR__ . "/../../../DistrixCrypto/DistriXCrypto.php");
+include(__DIR__ . "/../../../DistriXCrypto/DistriXCrypto.php");
 
 $databasefile = __DIR__ . "/../Db/Infodb.php";
 
@@ -74,10 +74,10 @@ if ($dataSvc->getMethodName() == "SendMailForgetPassword") {
         $i18cdlangue  = DISTRIX_LANG_DEFAULT;
         $filename     = "../../i18/$i18cdlangue/$international";
         $filename    .= "Txt$i18cdlangue.php";
-        include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/".$filename);
-        include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/header.php");
-        include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/mailForgetPassUser.php");
-        include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/footer.php");
+        include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/".$filename);
+        include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/header.php");
+        include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/mailForgetPassUser.php");
+        include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/footer.php");
         $message  = $header . $body . $footer;
 
         $subject  = $title;
@@ -94,7 +94,7 @@ if ($dataSvc->getMethodName() == "SendMailForgetPassword") {
           mail($eMailRecipient, $subject, $message, $headers);
           $sendMail = true;
         } else {
-          file_put_contents(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/mailForgetPassUser.htm", $message);
+          file_put_contents(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/mailForgetPassUser.htm", $message);
           $sendMail = true;
         }
       }

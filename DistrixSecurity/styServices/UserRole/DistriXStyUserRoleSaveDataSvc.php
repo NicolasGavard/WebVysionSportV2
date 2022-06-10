@@ -3,7 +3,7 @@
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
 // STY Const
-include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
+include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // STY Data
@@ -19,7 +19,7 @@ include(__DIR__ . "/../../../DistriXSvc/Data/DistriXSvcErrorData.php");
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/StyUserStor.php");
 // Distrix Crypto
-include(__DIR__ . "/../../../DistrixCrypto/DistriXCrypto.php");
+include(__DIR__ . "/../../../DistriXCrypto/DistriXCrypto.php");
 // Distrix CDN
 include(__DIR__ . "/../../../DistriXCdn/DistriXCdn.php");
 include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");

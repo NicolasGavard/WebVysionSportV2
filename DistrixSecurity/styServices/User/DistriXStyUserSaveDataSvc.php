@@ -3,7 +3,7 @@
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
 // STY Const
-include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
+include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
 include(__DIR__ . "/../../Const/DistriXStyMailConst.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
@@ -28,7 +28,7 @@ include(__DIR__ . "/Storage/StyUserRoleStor.php");
 include(__DIR__ . "/Storage/StyUserRightStor.php");
 include(__DIR__ . "/Storage/StyRoleRightStor.php");
 // Distrix Crypto
-include(__DIR__ . "/../../../DistrixCrypto/DistriXCrypto.php");
+include(__DIR__ . "/../../../DistriXCrypto/DistriXCrypto.php");
 // Distrix CDN
 include(__DIR__ . "/../../../DistriXCdn/DistriXCdn.php");
 include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
@@ -219,10 +219,10 @@ if ($dataSvc->getMethodName() == "SaveUser") {
           $i18cdlangue  = DISTRIX_LANG_DEFAULT;
           $filename     = "../../i18/$i18cdlangue/$international";
           $filename    .= "Txt$i18cdlangue.php";
-          include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/".$filename);
-          include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/header.php");
-          include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/mailNewUser.php");
-          include(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/footer.php");
+          include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/".$filename);
+          include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/header.php");
+          include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/mailNewUser.php");
+          include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/footer.php");
           $message  = $header . $body . $footer;
 
           $eMailRecipient = $infoUser->getEmail();
@@ -245,7 +245,7 @@ if ($dataSvc->getMethodName() == "SaveUser") {
           if(DISTRIX_ENV != DISTRIX_ENV_DEV){
             mail($eMailRecipient, $subject, $message, $headers);
           } else {
-            file_put_contents(__DIR__ . "/../../../DistrixSecurity/styServices/Mails/NewUser.htm", $message);
+            file_put_contents(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/NewUser.htm", $message);
           }
         }
 

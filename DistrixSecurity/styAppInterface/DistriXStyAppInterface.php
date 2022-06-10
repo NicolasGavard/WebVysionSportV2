@@ -1,7 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Constants
-include(__DIR__ . "/../const/DistriXStyAuthenticationConst.php");
-include(__DIR__ . "/../const/DistriXStyRightConst.php");
+include(__DIR__ . "/../Const/DistriXStyAuthenticationConst.php");
+include(__DIR__ . "/../Const/DistriXStyRightConst.php");
 // Data
 include(__DIR__ . "/../Data/DistriXStyApplicationData.php");
 include(__DIR__ . "/../Data/DistriXStyEnterpriseData.php");
@@ -15,14 +15,14 @@ include(__DIR__ . "/../Data/DistriXStyUserRightsData.php");
 include(__DIR__ . "/../Data/DistriXStyUserRoleData.php");
 include(__DIR__ . "/../Data/DistriXStyUserAllRightData.php");
 // Layer
-include(__DIR__ . "/../layers/DistriXStySvcCaller.php");
+include(__DIR__ . "/../Layers/DistriXStySvcCaller.php");
 // Distrix Crypto
-include(__DIR__ . "/../../DistrixCrypto/DistriXCrypto.php");
+include(__DIR__ . "/../../DistriXCrypto/DistriXCrypto.php");
 // Distrix Error
 include(__DIR__ . "/../../DistriXSvc/Data/DistriXSvcErrorData.php");
 // Distrix Logger
 include(__DIR__ . "/../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../../DistriXLogger/Data/DistriXLoggerInfoData.php");
 
 class DistriXStyAppInterface
 {
@@ -137,9 +137,9 @@ class DistriXStyAppInterface
         $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($infoUser);
         $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($userRoles);
         $_SESSION["DistriXSvcSecurity"]["StyUserRights"]      = serialize($userRights);
-        $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($userEnterprises);
-        $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($enterprisesData);
-        $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($enterprisesPos);
+        // $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($userEnterprises);
+        // $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($enterprisesData);
+        // $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($enterprisesPos);
         $isUserConnected                                      = true;
       }
     }

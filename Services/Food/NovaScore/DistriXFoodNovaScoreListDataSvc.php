@@ -2,7 +2,7 @@
 // DISTRIX Init
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
-include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
+include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Database Data
@@ -11,8 +11,8 @@ include(__DIR__ . "/Data/ScoreNovaStorData.php");
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/ScoreNovaStor.php");
 // Cdn Location
-include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnLocationConst.php");
-include(__DIR__ . "/../../../DistriXCdn/const/DistriXCdnFolderConst.php");
+include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
+include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
 
 
 $databasefile = __DIR__ . "/../../../Services/Db/Infodb.php";

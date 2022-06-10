@@ -2,8 +2,8 @@
 // DjangoSvc
 include(DJANGOSTY_APP_DJANGOSVC_ACCESS_PATH . "DjangoAppInclude.php");
 // Constants
-include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/const/_DjangoStyAuthenticationConst.php");
-include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/const/_DjangoStyRightConst.php");
+include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/Const/_DjangoStyAuthenticationConst.php");
+include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/Const/_DjangoStyRightConst.php");
 // Utilities
 include(DJANGOSVC_TWO_LEVEL_UP . "_env.php"); // Always after _util.php (contains goToTopDirectory() function). Nico & Yvan  03-09-21
 // Data Error
@@ -32,7 +32,7 @@ include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/data/DjangoStyEnterprisePosData.p
 // Cryptage
 include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/styCrypto/DjangoStyCrypto.php");
 // Layer
-include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/styAppInterface/layer/DjangoSvcCallerSty.php");
+include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/StyAppInterface/layer/DjangoSvcCallerSty.php");
 include(DJANGOSTY_APP_DJANGOSVC_ACCESS_PATH . "layer/DjangoSvcLayerData.php");
 
 class DjangoStyForApp
