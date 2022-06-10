@@ -1,21 +1,23 @@
 <?php // Needed to encode in UTF8 ààéàé //
 class NutritionalStor {
   
-  const TABLE_NAME_TABLENAME = "nutritionalename";
-  const FIELDS_TABLENAME = ',nutritionalename.id nutritionalenameid,idnutritionale nutritionalenameidnutritionale,idlanguage nutritionalenameidlanguage,nutritionalename.name nutritionalename,nutritionalename.elemstate nutritionalenameelemstate,nutritionalename.timestamp nutritionalenametimestamp';
+  const TABLE_NAME_TABLENAME = "nutritionalname";
+  const FIELDS_TABLENAME = ',nutritionalname.id nutritionalnameid,idnutritional nutritionalnameidnutritional,idlanguage nutritionalnameidlanguage,nutritionalname.name nutritionalname,nutritionalname.elemstate nutritionalnameelemstate,nutritionalname.timestamp nutritionalnametimestamp';
 
-  public static function getListNames(bool $all, FoodTypeNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function getListNames(bool $all, NutritionalNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new FoodTypeStorData();
+    $data = new NutritionalStorData();
     $list = [];
     $listNames = [];
   
+    
+
     if ($inDbConnection != null) {
-      $request  = "SELECT nutritionale.id,nutritionale.code,nutritionale.name,nutritionale.elemstate,nutritionale.timestamp";
+      $request  = "SELECT nutritional.id,nutritional.code,nutritional.name,nutritional.iscalorie,nutritional.isproetin,nutritional.isglucide,nutritional.islipid,nutritional.isvitamin,nutritional.istraceelement,nutritional.ismineral,nutritional.elemstate,nutritional.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
-      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idnutritionale";
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idnutritional";
       if ($dataIn->getIdLanguage() > 0) {
         $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataIn->getIdLanguage();
       }
@@ -37,28 +39,35 @@ class NutritionalStor {
         $oldValue = "";
         while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
           // print_r($row);
-          $dataName = new FoodTypeNameStorData();
-          if (! is_null($row["nutritionalenameid"])) {
-            $dataName->setId($row["nutritionalenameid"]);
-            $dataName->setIdFoodType($row["nutritionalenameidnutritionale"]);
-            $dataName->setIdLanguage($row["nutritionalenameidlanguage"]);
-            $dataName->setName($row["nutritionalename"]);
-            $dataName->setElemState($row["nutritionalenameelemstate"]);
-            $dataName->setTimestamp($row["nutritionalenametimestamp"]);
+          $dataName = new NutritionalNameStorData();
+          if (! is_null($row["nutritionalnameid"])) {
+            $dataName->setId($row["nutritionalnameid"]);
+            $dataName->setIdNutritional($row["nutritionalnameidnutritional"]);
+            $dataName->setIdLanguage($row["nutritionalnameidlanguage"]);
+            $dataName->setName($row["nutritionalname"]);
+            $dataName->setElemState($row["nutritionalnameelemstate"]);
+            $dataName->setTimestamp($row["nutritionalnametimestamp"]);
           }
           if ($oldValue != $row["code"]) {
              $oldValue = $row["code"];
              if ($data->getId() > 0) {
                $list[] = $data;
-               $data = new FoodTypeStorData();
+               $data = new NutritionalStorData();
              }
           }
           $data->setId($row["id"]);
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
+          $data->setIsCalorie($row["iscalorie"]);
+          $data->setIsProetin($row["isproetin"]);
+          $data->setIsGlucide($row["isglucide"]);
+          $data->setIsLipid($row["islipid"]);
+          $data->setIsVitamin($row["isvitamin"]);
+          $data->setIstTaceElement($row["istraceelement"]);
+          $data->setIsMineral($row["ismineral"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
-          if (! is_null($row["nutritionalenameid"])) {
+          if (! is_null($row["nutritionalnameid"])) {
             $listNames[] = $dataName;
           }
         }
@@ -68,21 +77,21 @@ class NutritionalStor {
     return array($list, $listNames);
   }
 
-  public static function findByIndCodeNames(FoodTypeStorData $dataIn, FoodTypeNameStorData $dataNameIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIndCodeNames(NutritionalStorData $dataIn, NutritionalNameStorData $dataNameIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new FoodTypeStorData();
+    $data = new NutritionalStorData();
     $listNames = [];
 
     if ($inDbConnection != null) {
-      $request  = "SELECT nutritionale.id,nutritionale.code,nutritionale.name,nutritionale.elemstate,nutritionale.timestamp";
+      $request  = "SELECT nutritional.id,nutritional.code,nutritional.name,nutritional.iscalorie,nutritional.isproetin,nutritional.isglucide,nutritional.islipid,nutritional.isvitamin,nutritional.istraceelement,nutritional.ismineral,nutritional.elemstate,nutritional.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
-      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idnutritionale";
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idnutritional";
       if ($dataNameIn->getIdLanguage() > 0) {
         $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataNameIn->getIdLanguage();
       }
-      $request .= " WHERE nutritionale.code = :index0";
+      $request .= " WHERE nutritional.code = :index0";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['index0'=>  $dataIn->getCode()]);
       if (self::SHOW_FIND_REQUEST) {
@@ -91,19 +100,26 @@ class NutritionalStor {
       if ($stmt->rowCount() > 0) {
         while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
           // print_r($row);
-          $dataName = new FoodTypeNameStorData();
-          if (! is_null($row["nutritionalenameid"])) {
-            $dataName->setId($row["nutritionalenameid"]);
-            $dataName->setIdFoodType($row["nutritionalenameidnutritionale"]);
-            $dataName->setIdLanguage($row["nutritionalenameidlanguage"]);
-            $dataName->setName($row["nutritionalename"]);
-            $dataName->setElemState($row["nutritionalenameelemstate"]);
-            $dataName->setTimestamp($row["nutritionalenametimestamp"]);
+          $dataName = new NutritionalNameStorData();
+          if (! is_null($row["nutritionalnameid"])) {
+            $dataName->setId($row["nutritionalnameid"]);
+            $dataName->setIdNutritional($row["nutritionalnameidnutritional"]);
+            $dataName->setIdLanguage($row["nutritionalnameidlanguage"]);
+            $dataName->setName($row["nutritionalname"]);
+            $dataName->setElemState($row["nutritionalnameelemstate"]);
+            $dataName->setTimestamp($row["nutritionalnametimestamp"]);
             $listNames[] = $dataName;
           }
           $data->setId($row["id"]);
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
+          $data->setIsCalorie($row["iscalorie"]);
+          $data->setIsProetin($row["isproetin"]);
+          $data->setIsGlucide($row["isglucide"]);
+          $data->setIsLipid($row["islipid"]);
+          $data->setIsVitamin($row["isvitamin"]);
+          $data->setIstTaceElement($row["istraceelement"]);
+          $data->setIsMineral($row["ismineral"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
         }
@@ -116,14 +132,14 @@ class NutritionalStor {
   public static function readNames(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new FoodTypeStorData();
+    $data = new NutritionalStorData();
     $listNames = [];
 
     if ($inDbConnection != null) {
-      $request  = "SELECT nutritionale.id,nutritionale.code,nutritionale.name,nutritionale.elemstate,nutritionale.timestamp";
+      $request  = "SELECT nutritional.id,nutritional.code,nutritional.name,nutritional.iscalorie,nutritional.isproetin,nutritional.isglucide,nutritional.islipid,nutritional.isvitamin,nutritional.istraceelement,nutritional.ismineral,nutritional.elemstate,nutritional.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
-      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idnutritionale";
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idnutritional";
       $request .= " WHERE ".self::TABLE_NAME.".id = :id";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['id'=> $id]);
@@ -133,19 +149,26 @@ class NutritionalStor {
       if ($stmt->rowCount() > 0) {
         while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
           // print_r($row);
-          $dataName = new FoodTypeNameStorData();
-          if (! is_null($row["nutritionalenameid"])) {
-            $dataName->setId($row["nutritionalenameid"]);
-            $dataName->setIdFoodType($row["nutritionalenameidnutritionale"]);
-            $dataName->setIdLanguage($row["nutritionalenameidlanguage"]);
-            $dataName->setName($row["nutritionalename"]);
-            $dataName->setElemState($row["nutritionalenameelemstate"]);
-            $dataName->setTimestamp($row["nutritionalenametimestamp"]);
+          $dataName = new NutritionalNameStorData();
+          if (! is_null($row["nutritionalnameid"])) {
+            $dataName->setId($row["nutritionalnameid"]);
+            $dataName->setIdNutritional($row["nutritionalnameidnutritional"]);
+            $dataName->setIdLanguage($row["nutritionalnameidlanguage"]);
+            $dataName->setName($row["nutritionalname"]);
+            $dataName->setElemState($row["nutritionalnameelemstate"]);
+            $dataName->setTimestamp($row["nutritionalnametimestamp"]);
             $listNames[] = $dataName;
           }
           $data->setId($row["id"]);
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
+          $data->setIsCalorie($row["iscalorie"]);
+          $data->setIsProetin($row["isproetin"]);
+          $data->setIsGlucide($row["isglucide"]);
+          $data->setIsLipid($row["islipid"]);
+          $data->setIsVitamin($row["isvitamin"]);
+          $data->setIstTaceElement($row["istraceelement"]);
+          $data->setIsMineral($row["ismineral"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
         }

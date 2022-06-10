@@ -34,13 +34,12 @@
 							<thead>
 								<tr>                 
                   <th width="20%" class="table-plus"><span><?php echo $page_code; ?></span></th>
-                  <th width="50%"><span><?php echo $page_name; ?></span></th>
+                  <th width="30%"><span><?php echo $page_name; ?></span></th>
                   <th width="20%"><span><?php echo $page_type; ?></span></th>
+                  <th width="20%"><span><?php echo $page_translation; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
-							<tbody id="listNutritionalsTbody">            
-							</tbody>
 						</table>
 					</div>
 				</div>

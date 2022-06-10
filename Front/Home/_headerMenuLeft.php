@@ -6,7 +6,7 @@
 
 <div class="left-side-bar">
   <div class="brand-logo">
-    <a href="main.php">
+    <a href="../Home/main.php">
       <img src="../../images/WebVysionSport.png" alt="" class="light-logo" style="max-width: 75px;">
     </a>
     <div class="close-sidebar" data-toggle="left-sidebar-close">
@@ -17,7 +17,7 @@
     <div class="sidebar-menu">
       <ul id="accordion-menu">
         <li>
-          <a href="main.php" class="dropdown-toggle no-arrow">
+          <a href="../Home/main.php" class="dropdown-toggle no-arrow">
             <span class="micon dw dw-house-1"></span>
             <span class="mtext"><?php echo $menu_home; ?></span>
           </a>

@@ -52,43 +52,84 @@
 				</div>
 			</div>
       
+      <div class="modal fade bs-example-modal-lg" id="modalAddMyRecipeFood" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body text-center font-18">
+              <h4 class="padding-top-30 mb-30 weight-500 add_title"><?php echo $page_title_food; ?> <span class="InfoSuppTitle"></span></h4>
+
+              <table class="table stripe hover nowrap" id="datatable2">
+							<thead>
+								<tr>
+                  <th width="55%" class="table-plus datatable-nosort"><span><?php echo $page_food; ?></span></th>
+                  <th width="15%"><span><?php echo $page_weight; ?></span></th>
+                  <th width="20%"><span><?php echo $page_weightType; ?></span></th>
+								</tr>
+							</thead>
+						</table>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="modal fade bs-example-modal-lg" id="modalAddMyRecipe" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_add_title; ?></h4>
-              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_update_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?> <span class="InfoSuppTitle"></span></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?> <span class="InfoSuppTitle"></span></h4>
               <form class="FormAddMyRecipe" action="#" id="FormAddMyRecipe">
-                <input class="form-control AddMyRecipeFormId"            type="hidden" name="id"           value="0">
-                <input class="form-control AddMyRecipeFormIdUserCoatch"  type="hidden" name="idusercoach"  value="0">
-                <input class="form-control AddMyRecipeFormTimestamp"     type="hidden" name="timestamp"    value="0">
-                <input class="form-control AddMyRecipeFormStatut"        type="hidden" name="elemState"    value="0">
+                <input class="form-control AddMyRecipeFormId"             type="hidden" name="id"           value="0">
+                <input class="form-control AddMyRecipeFormIdUserCoatch"   type="hidden" name="idusercoach"  value="0">
+                <input class="form-control AddMyRecipeFormTimestamp"      type="hidden" name="timestamp"    value="0">
+                <input class="form-control AddMyRecipeFormStatut"         type="hidden" name="elemState"    value="0">
+                <input class="form-control AddMyRecipeFormPictureBase64"  type="hidden" name="base64Img"    id="linkToPictureBase64">
                 <div class="row">
-                  <div class="col-md-4 col-sm-12">
+                  
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label><?php echo $page_code; ?></label>
+                      <input class="form-control AddMyRecipeFormCode" type="text" name="code" placeholder="<?php echo $page_code; ?>">
+                      <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label><?php echo $page_rating; ?></label>
+                      <select class="custom-select col-12 AddMyRecipeFormRating" name="rating">
+                        <option selected="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                       <label><?php echo $page_name; ?></label>
-                      <select class="custom-select2 form-control listMyTemplates" data-style="btn-outline-danger" id="listMyTemplates" name="idDietTemplate" style="width: 100%; height: 38px;">  
-                        <option value="0"><?php echo $page_all_choice; ?></option>
-                      </select>
-                      <div class="form-control-feed back danger-template has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_template; ?> </div>
+                      <input class="form-control AddMyRecipeFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
+                      <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-12">
+                  
+                  <div class="padding-top-20 padding-bottom-20 col-md-12 col-sm-12">
                     <div class="form-group">
-                      <label><?php echo $page_list_assigned_for_one; ?></label>
-                      <select class="custom-select2 form-control listStudents" id="listStudents" name="idUserStudent" style="width: 100%; height: 38px;">
-                        <option value="0"><?php echo $page_all_choice; ?></option>
-                      </select>
-                      <div class="form-control-feed back danger-student has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_student; ?> </div>
+                      <img src="" alt="" style="margin-top:20px; margin-bottom:20px; max-width:120px; max-height:150px; border-radius: 10px;" class="avatar-photo AddMyRecipePicture">
+                      <div class="dropzoneNoImage d-none">
+                        <input type="file" name="file" class="AddMyRecipeFormPicture" onchange="encodeImgtoBase64(this);" />
+                        </br>
+                        <button type="button" class="btn btn-info btnChangeImageCancel"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_cancel; ?></button>
+                      </div>
+                      <div class="dropzoneImage d-none">
+                        <button type="button" class="btn btn-info btnChangeImage"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_change_picture; ?></button>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-12">
-                    <div class="form-group">
-                      <label><?php echo $page_date_begin; ?></label>
-                      <input class="form-control dateStart" id="dateStart" placeholder="<?php echo $page_add_date_begin; ?>" type="text" name="dateStart">
-                      <div class="form-control-feed back danger-dateStart has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_dateStart; ?> </div>
-                    </div>
-                  </div>
+
                 </form>
               </div>
               

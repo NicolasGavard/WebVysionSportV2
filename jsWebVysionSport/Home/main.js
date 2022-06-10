@@ -36,6 +36,17 @@ function setIdleTimeout(millis, onIdle, onUnidle) {
   }
 }
 
+function encodeImgtoBase64(element) {
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    $("#linkToPictureBase64").val(reader.result);
+    $("#convertImg").text(reader.result);
+    $("#base64Img").attr("src", reader.result);
+  }
+  reader.readAsDataURL(file);
+}
+
 function logOut(){
   $.ajax({
     url : '../../Controllers/Login/logout.php',

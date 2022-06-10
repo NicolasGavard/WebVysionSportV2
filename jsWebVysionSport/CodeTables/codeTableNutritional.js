@@ -4,7 +4,11 @@ $.ajax({
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
+    var dataTableFoodType           = JSON.stringify(data.ListNutritionals);
+    var dataTableFoodTypeLanguages  = JSON.stringify(data.ListNutritionals);
+    
     localStorage.setItem("dataTable", JSON.stringify(data.ListNutritionals));
+    localStorage.setItem("FoodTypeLanguages", JSON.stringify(data.ListLanguages));
     $('.btn-success').trigger('click');
   },
   error : function(data) {

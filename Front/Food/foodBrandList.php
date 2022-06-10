@@ -38,8 +38,6 @@
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
-							<tbody id="listBrandsTbody">            
-							</tbody>
 						</table>
 					</div>
 				</div>
@@ -76,7 +74,7 @@
                 </div>
               </div>
               
-              <div class="dropzoneImage padding-bottom-30 col-md-12 col-sm-12 d-none">
+              <div class="dropzoneImage padding-top-30 padding-bottom-30 col-md-12 col-sm-12 d-none">
                 <div class="profile-photo">
                   <img src="" alt="" style="max-width:120px; max-height:150px; border-radius: 10px;" class="avatar-photo avatar-brand">
                 </div>
