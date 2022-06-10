@@ -3,7 +3,7 @@
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 if ($dataSvc)
 // STY Const
-include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyKeys.php");
+include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Database Data

@@ -12,7 +12,7 @@ include(__DIR__ . "/../DistriXSvc/Svc/DistriXSvcBase.php");
 include(__DIR__ . "/../DistriXSvc/Svc/DistriXSvcCaller.php");
 include(__DIR__ . "/../DistriXSvc/Svc/DistriXSvcController.php");
 include(__DIR__ . "/../DistriXApiToken/Data/DistriXApiTokenData.php");
-include(__DIR__ . "/../DistrixSecurity/Const/DistriXStyRightConst.php");
+include(__DIR__ . "/../DistriXSecurity/Const/DistriXStyRightConst.php");
 
 $outputok   = false;
 $output     = null;

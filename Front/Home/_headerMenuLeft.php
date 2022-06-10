@@ -1,7 +1,7 @@
 <?php
   include(__DIR__ . "/../../DistriXInit/DistriXSvcControllerInit.php");
-  include(__DIR__ . "/../../DistrixSecurity/styAppInterface/DistriXStyAppInterface.php");
-  include(__DIR__ . "/../../DistrixSecurity/Const/DistriXStyRightConst.php");
+  include(__DIR__ . "/../../DistriXSecurity/styAppInterface/DistriXStyAppInterface.php");
+  include(__DIR__ . "/../../DistriXSecurity/Const/DistriXStyRightConst.php");
 ?>
 
 <div class="left-side-bar">

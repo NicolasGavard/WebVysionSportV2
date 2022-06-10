@@ -5,8 +5,8 @@ include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppApplic
 // DATA
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyApplicationData.php");
 // DISTRIX Security
-include(__DIR__ . "/../../../DistrixSecurity/styAppInterface/DistriXStyAppInterface.php");
-include(__DIR__ . "/../../../DistrixSecurity/Const/DistriXStyRightConst.php");
+include(__DIR__ . "/../../../DistriXSecurity/styAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyRightConst.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 
