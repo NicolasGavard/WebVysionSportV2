@@ -42,8 +42,6 @@
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
-							<tbody id="listFoodsTbody">            
-							</tbody>
 						</table>
 					</div>
 				</div>

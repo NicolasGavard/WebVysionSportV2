@@ -66,8 +66,6 @@
                   <th width="20%"><span><?php echo $page_weightType; ?></span></th>
 								</tr>
 							</thead>
-							<tbody id="listMyRecipeFoodTbody">
-							</tbody>
 						</table>
             </div>
           </div>

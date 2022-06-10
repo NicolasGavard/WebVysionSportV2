@@ -40,14 +40,8 @@
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_actions; ?></span></th>
 								</tr>
 							</thead>
-							<tbody id="listMyTemplatesDietsTbody">
-							</tbody>
 						</table>
-            
-            <div id="listMyTemplatesDietsModal">
-
-					  </div>
-					</div>
+          </div>
 				</div>
 			</div>
       

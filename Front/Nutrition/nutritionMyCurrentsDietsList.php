@@ -43,14 +43,8 @@
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
-							<tbody id="listMyCurrentsDietsTbody">
-							</tbody>
 						</table>
-            
-            <div id="listMyCurrentsDietsModal">
-
-					  </div>
-					</div>
+          </div>
 				</div>
 			</div>
       

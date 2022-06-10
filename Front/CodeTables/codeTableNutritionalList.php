@@ -40,8 +40,6 @@
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
-							<tbody id="listNutritionalsTbody">            
-							</tbody>
 						</table>
 					</div>
 				</div>
