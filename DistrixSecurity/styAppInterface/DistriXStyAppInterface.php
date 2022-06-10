@@ -137,9 +137,9 @@ class DistriXStyAppInterface
         $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($infoUser);
         $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($userRoles);
         $_SESSION["DistriXSvcSecurity"]["StyUserRights"]      = serialize($userRights);
-        $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($userEnterprises);
-        $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($enterprisesData);
-        $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($enterprisesPos);
+        // $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($userEnterprises);
+        // $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($enterprisesData);
+        // $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($enterprisesPos);
         $isUserConnected                                      = true;
       }
     }
