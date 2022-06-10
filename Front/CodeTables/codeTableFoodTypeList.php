@@ -29,15 +29,18 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table class="table stripe hover nowrap" id="datatable">
+						<!-- <table class="data-table table datastripe hover nowrap dataTable dtr-inline"> -->
+						<table id="FoodTypeTable" class="display responsive datastripe nowrap dataTable dtr-inline" width="100%">
 							<thead>
 								<tr>                 
-                  <th width="30%" class="table-plus"><span><?php echo $page_code; ?></span></th>
-                  <th width="30%"><span><?php echo $page_name; ?></span></th>
-                  <th width="30%"><span><?php echo $page_translation; ?></span></th>
-                  <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
+                  <th><span><?php echo $page_code; ?></span></th>
+                  <th><span><?php echo $page_name; ?></span></th>
+                  <th><span><?php echo $page_translation; ?></span></th>
+                  <th><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
+							<tbody id="listFoodTypesTbody">
+							</tbody>
 						</table>
 					</div>
 				</div>
