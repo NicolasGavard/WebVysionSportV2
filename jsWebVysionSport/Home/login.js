@@ -1,6 +1,7 @@
   if (localStorage.getItem("saveDataLogin") !== null && localStorage.getItem("saveDataPassword") !== null) {
     $("#login").val(localStorage.getItem("saveDataLogin"));
     $("#password").val(localStorage.getItem("saveDataPassword"));
+    $('#saveDataLogin').prop('checked', true);
   }
 
   $("#btnLogin").click(function() {
