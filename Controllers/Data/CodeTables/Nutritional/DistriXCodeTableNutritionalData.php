@@ -14,6 +14,9 @@ if (!class_exists("DistriXCodeTableNutritionalData", false)) {
     protected $isMineral;
     protected $elemState;
     protected $timestamp;
+    protected $nbLanguages;
+    protected $nbLanguagesTotal;
+    protected $names;
 
     public function __construct()
     {
@@ -29,6 +32,9 @@ if (!class_exists("DistriXCodeTableNutritionalData", false)) {
       $this->isMineral      = 0;
       $this->elemState      = 0;
       $this->timestamp      = 0;
+      $this->nbLanguages      = 0;
+      $this->nbLanguagesTotal = 0;
+      $this->names            = [];
     }
     // Gets
     public function getId():int { return $this->id; }
@@ -43,7 +49,9 @@ if (!class_exists("DistriXCodeTableNutritionalData", false)) {
     public function getIsMineral():int {return $this->isMineral;}
     public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
-
+    public function getNbLanguages():int { return $this->nbLanguages; }
+    public function getNbLanguagesTotal():int { return $this->nbLanguagesTotal; }
+    public function getNames():array { return $this->names; }
     // Sets
     public function setId(int $id) { $this->id = $id; }
     public function setCode(string $code) { $this->code = $code; }
@@ -57,6 +65,9 @@ if (!class_exists("DistriXCodeTableNutritionalData", false)) {
     public function setIsMineral(int $isMineral) { $this->isMineral = $isMineral; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
+    public function setNbLanguages(int $nbLanguages) { $this->nbLanguages = $nbLanguages; }
+    public function setNbLanguagesTotal(int $nbLanguagesTotal) { $this->nbLanguagesTotal = $nbLanguagesTotal; }
+    public function setNames(array $names) { $this->names = $names; }
   }
   // End of class
 }
