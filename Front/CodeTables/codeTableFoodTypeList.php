@@ -58,30 +58,34 @@ session_start();
             <div class="modal-body text-center font-18">
               <h4 class="padding-top-20 mb-20 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-20 mb-20 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
-              <div class="form-group row">
-                <input class="form-control AddFoodTypeFormIdFoodType" type="hidden" name="id"         value="0">
-                <input class="form-control AddFoodTypeFormTimestamp"  type="hidden" name="timestamp"  value="0">
-                <input class="form-control AddFoodTypeFormStatut"     type="hidden" name="elemState"  value="0">
-                <label class="col-sm-12 col-md-2 col-form-label"><?php echo $page_code; ?></label>
-                <div class="col-md-10 col-sm-12">
-                  <input class="form-control AddFoodTypeFormCode" type="text" name="foodTypecode" placeholder="<?php echo $page_code; ?>">
-                  <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?>
+              
+              <input class="form-control AddFoodTypeFormIdFoodType" type="hidden" name="id"         value="0">
+              <input class="form-control AddFoodTypeFormTimestamp"  type="hidden" name="timestamp"  value="0">
+              <input class="form-control AddFoodTypeFormStatut"     type="hidden" name="elemState"  value="0">
+              
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_code; ?></label>
+                    <input class="form-control AddFoodTypeFormCode" type="text" code="codeShort" placeholder="<?php echo $page_code; ?>">
+                    <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_code; ?></label>
+                    <input class="form-control AddFoodTypeFormName" type="text" code="foodTypeName" placeholder="<?php echo $page_name; ?>">
+                    <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
                   </div>
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-sm-12 col-md-2 col-form-label"><?php echo $page_name; ?></label>
-                <div class="col-md-10 col-sm-12">
-                  <input class="form-control AddFoodTypeFormName" type="text" name="foodTypeName" placeholder="<?php echo $page_name; ?>">
-                  <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?>
-                  </div>
-                </div>
-              </div>
+              
               <div class="row">
                 <label class="col-sm-12 col-md-12"><?php echo $page_languages; ?></label>
               </div>
-              <div id="foodTypeLanguages">
-              </div>
+              
+              <div id="foodTypeLanguages"></div>
+              
               <div class="padding-bottom-20 row" style="margin: 0 auto;">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>

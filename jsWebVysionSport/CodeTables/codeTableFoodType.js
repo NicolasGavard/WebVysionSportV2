@@ -63,22 +63,20 @@ $(function() {
     const languages = foodTypeTableLanguagesData;
     $.map(languages, function(language, languageKey) {
       var html = "";
-      html += '<div class="form-group row">';
-      html += '  <label class="col-sm-12 col-md-2 col-form-label">'+langueTxt+'</label>';
-      html += '  <div class="col-md-10 col-sm-12">';
-      html += '    <input class="form-control" type="text" disabled value="'+language.name+'">';
-      html += '  </div>';
-      html += '</div>';
-
-      html += '<div class="form-group row">';
-      html += '  <label class="col-sm-12 col-md-2 col-form-label">'+nameTranslatedTxt+'</label>';
-      html += '  <div class="col-md-10 col-sm-12">';
-      html += '    <input class="form-control AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" placeholder="'+nameTranslatedTxt+'">';
-      html += '    <div class="form-control-feed back danger-name has-danger d-none" style="font-size: 14px;">'+errorNameTxt;
+      html += '  <div class="row">';
+      html += '    <div class="col-md-6 col-sm-12">';
+      html += '      <div class="form-group">';
+      html += '        <input class="form-control" type="text" disabled value="'+language.name+'">';
+      html += '      </div>';
+      html += '    </div>';
+      html += '    <div class="col-md-6 col-sm-12">';
+      html += '      <div class="form-group">';
+      html += '        <input class="form-control AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" placeholder="'+nameTranslatedTxt+'">';
+      html += '        <div class="form-control-feed back danger-name has-danger d-none" style="font-size: 14px;">'+errorNameTxt+'';
+      html += '      </div>';
       html += '    </div>';
       html += '  </div>';
-      html += '</div>';
-
+      
       $('#foodTypeLanguages').append(html);
     });
   });
