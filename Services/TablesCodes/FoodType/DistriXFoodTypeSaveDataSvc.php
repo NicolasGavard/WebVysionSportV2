@@ -55,12 +55,23 @@ if ($dataSvc->isAuthorized()) {
               $foodTypeNameStorData->setIdFoodType($idFoodTypeStorData);
               if ($foodTypeNameStorData->getId() > 0) {
                 $currentFoodTypeNameStorData = FoodTypeNameStor::read($foodTypeNameStorData->getId(), $dbConnection);
-                $foodTypeNameStorData->setTimestamp($currentFoodTypeNameStorData->getTimestamp());
+                if ($foodTypeNameStorData->getId() == $currentFoodTypeNameStorData->getId() 
+                && $foodTypeNameStorData->getTimestamp() != $currentFoodTypeNameStorData->getTimestamp()) {
+                 $canSave = false;
+                 $distriXSvcErrorData = new DistriXSvcErrorData();
+                 $distriXSvcErrorData->setCode("402");
+                 $distriXSvcErrorData->setDefaultText("The language data of " . $foodTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
+                 $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
+                 $errorData = $distriXSvcErrorData;
+                 break;
+                }
               }
               list($insere, $idFoodTypeNameStorData) = FoodTypeNameStor::save($foodTypeNameStorData, $dbConnection);
               if (!$insere) { break; }
             }
           }
+        }
+        if ($canSave) {
           if ($insere) {
             $dbConnection->commit();
           } else {
@@ -85,7 +96,7 @@ if ($dataSvc->isAuthorized()) {
     $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "SaveFoodType", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
-  $dataSvc->addToResponse("ConfirmSave", $insere);
+  $dataSvc->addToResponse("ConfirmSave", $insere && $canSave);
 
   // Return response
   $dataSvc->endOfService();
