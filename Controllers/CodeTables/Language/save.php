@@ -5,18 +5,18 @@ include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.
 
 $confirmSave  = false;
 
-list($distriXCodeTableBandData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
+list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveLanguage");
-$servicesCaller->addParameter("data", $distriXCodeTableBandData);
+$servicesCaller->addParameter("data", $distriXCodeTableLanguageData);
 $servicesCaller->setServiceName("TablesCodes/Language/DistriXLanguageSaveDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
 
 $logOk = logController("Security_Language", "DistriXLanguageDeleteDataSvc", "DelLanguage", $output);
 
 if ($outputok && isset($output["ConfirmSave"])) {
-  list($confirmSave, $jsonError) = DistriXCodeTableLanguageData::getJsonArray($output["ConfirmSave"]);
+  $confirmSave = $output["ConfirmSave"];
 } else {
   $error = $errorData;
 }

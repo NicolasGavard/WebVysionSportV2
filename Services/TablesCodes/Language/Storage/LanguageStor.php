@@ -103,7 +103,7 @@ class LanguageStor {
       $params = [];
       $params["index0"] = $dataIn->getCode();
       if (!$all) {
-        $params["elemstate"] = $dataIn->getStatus();
+        $params["elemstate"] = $dataIn->getElemState();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -180,7 +180,7 @@ class LanguageStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["elemstate"] = $data->getStatus();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -306,7 +306,7 @@ class LanguageStor {
       $params["linktopicture"] = $data->getLinkToPicture();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
-      $params["elemstate"] = $data->getStatus();
+      $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

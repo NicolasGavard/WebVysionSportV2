@@ -49,43 +49,46 @@
             <div class="modal-body text-center font-18">
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
-              <div class="row">
-                <div class="col-md-12 col-sm-12 d-none showPicture">
-                  <div class="profile-photo">
-                    <img src="" alt="" class="avatar-photo avatar-Language">
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label><?php echo $page_code; ?></label>
-                    <input class="form-control AddLanguageFormCode" type="text" code="code" placeholder="<?php echo $page_code; ?>">
-                    <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
-                  </div>
-                </div>
+              <form class="FormAddLanguage" action="#" id="FormAddLanguage">
+                <input class="form-control AddLanguageFormIdLanguage"    type="hidden"  name="id"         value="0">
+                <input class="form-control AddLanguageFormCode"          type="hidden"  name="code"       value="">
+                <input class="form-control AddLanguageFormTimestamp"     type="hidden"  name="timestamp"  value="0">
+                <input class="form-control AddLanguageFormTimestamp"     type="hidden"  name="timestamp"  value="0">
+                <input class="form-control AddLanguageFormStatut"        type="hidden"  name="elemState"  value="0">
+                <input class="form-control AddLanguageFormPictureBase64" type="text"    name="base64Img"  id="linkToPictureBase64">
                 
-                <div class="col-md-6 col-sm-12">
-                  <div class="form-group">
-                    <label><?php echo $page_name; ?></label>
-                    <input class="form-control AddLanguageFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
-                    <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label><?php echo $page_code; ?></label>
+                      <input class="form-control AddLanguageFormCodeShort" type="text" code="codeShort" placeholder="<?php echo $page_code; ?>">
+                      <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
+                    </div>
                   </div>
-                </div>
-                
-                <div class="col-md-12 col-sm-12">
-                  <div class="pd-20 card-box mb-30">
-                    <form class="dropzone FormAddLanguage" action="#" id="FormAddLanguage" style="max-height: 200px;">
-                      <input class="form-control AddLanguageFormIdLanguage"    type="hidden" name="id"         value="0">
-                      <input class="form-control AddLanguageFormTimestamp"     type="hidden" name="timestamp"  value="0">
-                      <input class="form-control AddLanguageFormStatut"        type="hidden" name="elemState"  value="0">
-                      <input class="form-control AddLanguageFormPictureBase64" type="hidden" name="base64Img"  id="base64Img">
-                      <div class="fallback" style="margin: 1em 0;">
-                        <input type="file" name="file" class="AddLanguageFormPicture" />
+                  
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label><?php echo $page_name; ?></label>
+                      <input class="form-control AddLanguageFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
+                      <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                    </div>
+                  </div>
+                  
+                  <div class="padding-top-20 padding-bottom-20 col-md-12 col-sm-12">
+                    <div class="form-group">
+                      <img src="" alt="" style="margin-top:20px; margin-bottom:20px; max-width:120px; max-height:150px; border-radius: 10px;" class="avatar-photo AddLanguagePicture">
+                      <div class="dropzoneNoImage d-none">
+                        <input type="file" name="file" class="AddLanguageFormPicture" onchange="encodeImgtoBase64(this);" />
+                        </br>
+                        <button type="button" class="btn btn-info btnChangeImageCancel"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_cancel; ?></button>
                       </div>
-                    </form>
+                      <div class="dropzoneImage d-none">
+                        <button type="button" class="btn btn-info btnChangeImage"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_change_picture; ?></button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </form>
               
               <div class="padding-bottom-30 row" style="margin: 0 auto;">
                 <div class="col-12">

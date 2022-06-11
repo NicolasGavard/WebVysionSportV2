@@ -12,6 +12,16 @@ $.ajax({
   }
 });
 
+function encodeImgtoBase64(element) {
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    $("#linkToPictureBase64").val(reader.result);
+    $(".AddLanguagePicture").attr("src", reader.result);
+  }
+  reader.readAsDataURL(file);
+}
+
 $(".btnChangeImage").on('click', function() {
   $(".dropzoneImage").addClass("d-none");
   $(".dropzoneNoImage").removeClass("d-none");
@@ -51,7 +61,7 @@ $(".AddNewLanguage").on('click', function() {
   $('.AddLanguageFormIdLanguage').val(0);
   $('.AddLanguageFormCode').val('');
   $('.AddLanguageFormName').val('');
-  $(".avatar-brand").attr("src", '');
+  $(".AddLanguagePicture").attr("src", '');
   $('.AddLanguageFormTimestamp').val(0);
   $('.AddLanguageFormStatut').val(0);
 });
@@ -174,9 +184,10 @@ function ViewLanguage(id){
       $(".dropzoneNoImage").addClass("d-none");
 
       $('.AddLanguageFormIdLanguage').val(id);
-      $('.AddLanguageFormCode').val(data.ViewLanguage.codeshort);
+      $('.AddLanguageFormCodeShort').val(data.ViewLanguage.codeshort);
+      $('.AddLanguageFormCode').val(data.ViewLanguage.code);
       $('.AddLanguageFormName').val(data.ViewLanguage.name);
-      $(".avatar-brand").attr("src", data.ViewLanguage.linktopicture);
+      $(".AddLanguagePicture").attr("src", data.ViewLanguage.linktopicture);
       $('.AddLanguageFormTimestamp').val(data.ViewLanguage.timestamp);
       $('.AddLanguageFormStatut').val(data.ViewLanguage.elemState);
     },

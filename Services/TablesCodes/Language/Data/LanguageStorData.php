@@ -32,7 +32,7 @@ class LanguageStorData extends DistriXSvcAppData {
   public function getLinkToPicture():string { return $this->linktopicture; }
   public function getSize():int { return $this->size; }
   public function getType():string { return $this->type; }
-  public function getStatus():int { return $this->elemstate; }
+  public function getElemState():int { return $this->elemstate; }
   public function getTimestamp():int { return $this->timestamp; }
   public function isAvailable():bool { return ($this->elemstate == self::LANGUAGE_STATUS_AVAILABLE); }
   public function getAvailableValue():int { return self::LANGUAGE_STATUS_AVAILABLE; }
@@ -45,7 +45,7 @@ class LanguageStorData extends DistriXSvcAppData {
   public function setLinkToPicture(string $linkToPicture) { $this->linktopicture = $linkToPicture; }
   public function setSize(int $size) { $this->size = $size; }
   public function setType(string $type) { $this->type = $type; }
-  public function setStatus(int $status) { $this->elemstate = $status; }
+  public function setElemState(int $elemstate) { $this->elemstate = $elemstate; }
   public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->elemstate = self::LANGUAGE_STATUS_AVAILABLE; }
   public function setUnavailable() { $this->elemstate = self::LANGUAGE_STATUS_NOT_AVAILABLE; }
