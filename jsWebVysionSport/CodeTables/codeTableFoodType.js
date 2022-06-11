@@ -1,6 +1,6 @@
 $(function() {
   var foodTypeTableData = "";
-  var foodTypeTableNameData = "";
+  var foodTypeTableLanguagesData = "";
   var foodTypeTable = $('#FoodTypeTable').DataTable({
     columnDefs: [
       { orderable: false, targets: 2 },
@@ -16,7 +16,7 @@ $(function() {
     dataType : 'JSON',
     success : function(data) {
       foodTypeTableData = data.ListFoodTypes;
-      foodTypeTableNameData = data.ListLanguages;
+      foodTypeTableLanguagesData = data.ListLanguages;
       ListFoodType(0);
     },
     error : function(data) {
@@ -48,14 +48,38 @@ $(function() {
 
   $(".AddNewFoodType").on('click', function() {
     $(".add_title").removeClass("d-none");
+    $("#btnAddFoodType").removeClass("d-none");
     $(".update_title").addClass("d-none");
+    $("#btnUpdateFoodType").addClass("d-none");
 
     $('.AddFoodTypeFormIdFoodType').val(0);
     $('.AddFoodTypeFormCode').val('');
     $('.AddFoodTypeFormName').val('');
-    $(".avatar-food_category").attr("src", '');
     $('.AddFoodTypeFormTimestamp').val(0);
     $('.AddFoodTypeFormStatut').val(0);
+    
+    $('#foodTypeLanguages').html();
+    const languages = foodTypeTableLanguagesData;
+    $.map(languages, function(language, languageKey) {
+      var html = "";
+      html += '<div class="form-group row">';
+      html += '  <label class="col-sm-12 col-md-2 col-form-label">'+langueTxt+'</label>';
+      html += '  <div class="col-md-10 col-sm-12">';
+      html += '    <input class="form-control" type="text" disabled value="'+language.name+'">';
+      html += '  </div>';
+      html += '</div>';
+
+      html += '<div class="form-group row">';
+      html += '  <label class="col-sm-12 col-md-2 col-form-label">'+nameTranslatedTxt+'</label>';
+      html += '  <div class="col-md-10 col-sm-12">';
+      html += '    <input class="form-control AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" placeholder="'+nameTranslatedTxt+'">';
+      html += '    <div class="form-control-feed back danger-name has-danger d-none" style="font-size: 14px;">'+errorNameTxt;
+      html += '    </div>';
+      html += '  </div>';
+      html += '</div>';
+
+      $('#foodTypeLanguages').append(html);
+    });
   });
 
   $(".btnAddFoodType").on('click', function() {
@@ -145,7 +169,7 @@ $(function() {
                       '  <td>'+val.name+'</td>'+
                       '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {
-          const languages = foodTypeTableNameData;
+          const languages = foodTypeTableLanguagesData;
           $.map(languages, function(language, languageKey) {
             var notFound = true;
             if (val.names.length > 0) {
