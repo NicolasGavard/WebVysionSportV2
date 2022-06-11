@@ -81,6 +81,7 @@
   $menu_codeTables_nutritional_list   = "Liste des info. nutritionnelles";
   $menu_codeTables_food_type_list     = "Liste des types d'aliments";
   $menu_codeTables_language_list      = "Liste des langues";
+  $menu_codeTables_ticket_status_list = "Liste des statuts des incidents";
 
   $menu_profil_myProfil   = "Mon profil";
   $menu_profil_messages   = "Message(s)";
