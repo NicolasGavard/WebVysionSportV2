@@ -14,37 +14,52 @@ if ($dataSvc->isAuthorized()) {
     list($foodTypeStorData, $jsonError) = FoodTypeStorData::getJsonData($dataSvc->getParameter("data"));
     list($foodTypeNamesStorData, $jsonErrorName) = FoodTypeNameStorData::getJsonArray($dataSvc->getParameter("dataNames"));
 
-print_r($foodTypeStorData);
-print_r($foodTypeNamesStorData);
+// print_r($foodTypeStorData);
+// print_r($foodTypeNamesStorData);
 
     if ($jsonError->getCode() == "") {
       if ($dbConnection->beginTransaction()) {
         $canSave = true;
+        $currentFoodTypeStorData = new FoodTypeStorData();
+
         if ($foodTypeStorData->getId() == 0) {
           // Verify Code Exist
           $currentFoodTypeStorData = FoodTypeStor::findByIndCode($foodTypeStorData, $dbConnection);
           if ($currentFoodTypeStorData->getId() > 0) {
-            $canSave             = false;
+            $canSave = false;
             $distriXSvcErrorData = new DistriXSvcErrorData();
             $distriXSvcErrorData->setCode("400");
             $distriXSvcErrorData->setDefaultText("The Code " . $foodTypeStorData->getCode() . " is already in use");
             $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
             $errorData = $distriXSvcErrorData;
           }
+        } else {
+          // Verify no one has already modified the data
+          $currentFoodTypeStorData = FoodTypeStor::read($foodTypeStorData->getId(), $dbConnection);
+          if ($foodTypeStorData->getId() == $currentFoodTypeStorData->getId() 
+           && $foodTypeStorData->getTimestamp() != $currentFoodTypeStorData->getTimestamp()) {
+            $canSave = false;
+            $distriXSvcErrorData = new DistriXSvcErrorData();
+            $distriXSvcErrorData->setCode("401");
+            $distriXSvcErrorData->setDefaultText("The data of " . $foodTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
+            $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
+            $errorData = $distriXSvcErrorData;
+           }
         }
         if ($canSave) {
-          list($insere, $idFoodTypeStorData) = FoodTypeStor::save($foodTypeStorData, $dbConnection);
-          if ($insere) {
+          $currentFoodTypeStorData = FoodTypeStor::read($foodTypeStorData->getId(), $dbConnection);
+          if (($foodTypeStorData->getId() == $currentFoodTypeStorData->getId() && $foodTypeStorData->getTimestamp() == $currentFoodTypeStorData->getTimestamp())
+          || ($foodTypeStorData->getId() != $currentFoodTypeStorData->getId())) {
+            list($insere, $idFoodTypeStorData) = FoodTypeStor::save($foodTypeStorData, $dbConnection);
             foreach ($foodTypeNamesStorData as $foodTypeNameStorData) {
               $foodTypeNameStorData->setIdFoodType($idFoodTypeStorData);
+              if ($foodTypeNameStorData->getId() > 0) {
+                $currentFoodTypeNameStorData = FoodTypeNameStor::read($foodTypeNameStorData->getId(), $dbConnection);
+                $foodTypeNameStorData->setTimestamp($currentFoodTypeNameStorData->getTimestamp());
+              }
               list($insere, $idFoodTypeNameStorData) = FoodTypeNameStor::save($foodTypeNameStorData, $dbConnection);
               if (!$insere) { break; }
             }
-            if (!$insere) {
-              // Error with FoodTypeNames
-            }
-          } else {
-            // Error with FoodType
           }
           if ($insere) {
             $dbConnection->commit();

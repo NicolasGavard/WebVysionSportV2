@@ -12,7 +12,7 @@ $_POST['id'] = 1;
 $_POST['code'] = "FEC2";
 $_POST['name'] = "Féculents 3";
 $_POST['elemState'] = 1;
-$_POST['timestamp'] = 4;
+$_POST['timestamp'] = 33;
 
 $names[0]["id"] = 1;
 $names[0]["idfoodtype"] = 1;
@@ -31,21 +31,21 @@ $_POST['names'] = $names;
 
 // // INSERT
 // $_POST['id'] = 0;
-// $_POST['code'] = "INS1";
-// $_POST['name'] = "Insert 1";
+// $_POST['code'] = "INS2";
+// $_POST['name'] = "Insert 2";
 // $_POST['elemState'] = 0;
 // $_POST['timestamp'] = 0;
 
 // $names[0]["id"] = 0;
 // $names[0]["idfoodtype"] = 0;
 // $names[0]["idlanguage"] = 1;
-// $names[0]["name"] = "Insertion 1";
+// $names[0]["name"] = "Insertion 2";
 // $names[0]["elemState"] = 0;
 // $names[0]["timestamp"] = 0;
 // $names[1]["id"] = 0;
 // $names[1]["idfoodtype"] = 0;
 // $names[1]["idlanguage"] = 2;
-// $names[1]["name"] = "It's an insertion 1";
+// $names[1]["name"] = "It's an insertion 2";
 // $names[1]["elemState"] = 0;
 // $names[1]["timestamp"] = 0;
 

@@ -1,4 +1,6 @@
 $(function() {
+  var foodTypeTableData = "";
+  var foodTypeTableNameData = "";
   var foodTypeTable = $('#FoodTypeTable').DataTable({
     columnDefs: [
       { orderable: false, targets: 2 },
@@ -13,10 +15,8 @@ $(function() {
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {
-      // data = JSON.stringify(data.ListFoodTypes);
-      localStorage.setItem("FoodTypeDataTable", JSON.stringify(data.ListFoodTypes));
-      localStorage.setItem("FoodTypeLanguages", JSON.stringify(data.ListLanguages));
-      // $('.btn-success').trigger('click');
+      foodTypeTableData = data.ListFoodTypes;
+      foodTypeTableNameData = data.ListLanguages;
       ListFoodType(0);
     },
     error : function(data) {
@@ -134,18 +134,18 @@ $(function() {
   });
 
   function ListFoodType(elemState){
-    var dataTableData = JSON.parse(localStorage.getItem('FoodTypeDataTable'));
+    const dataTableData = foodTypeTableData;
     $.map(dataTableData, function(val, key) {
       if(val.elemState == elemState){
         if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
         if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
         let line =  '<tr>'+
-                      '  <td width="30%">'+val.code+'</td>'+
-                      '  <td width="30%">'+val.name+'</td>'+
-                      '  <td width="30%">'+val.nbLanguages+'/'+val.nbLanguagesTotal;
+                      '  <td style="padding:1rem;">'+val.code+'</td>'+
+                      '  <td>'+val.name+'</td>'+
+                      '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {
-          const languages = JSON.parse(localStorage.getItem('FoodTypeLanguages'));
+          const languages = foodTypeTableNameData;
           $.map(languages, function(language, languageKey) {
             var notFound = true;
             if (val.names.length > 0) {
