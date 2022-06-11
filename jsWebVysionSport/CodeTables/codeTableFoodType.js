@@ -10,6 +10,7 @@ $(function() {
       url: '../../i18/FR/DataTableFrench.json'
     }
   });
+
   $.ajax({
     url : '../../Controllers/CodeTables/FoodType/list.php',
     type : 'POST',
@@ -179,6 +180,7 @@ $(function() {
     });
   }
 });
+
 function ViewFoodType(id){
   $.ajax({
     url : '../../Controllers/CodeTables/FoodType/view.php',
