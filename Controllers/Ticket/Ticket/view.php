@@ -2,43 +2,38 @@
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
-
-// TESTS
-// $_POST["id"] = 1;
-// $_POST["id"] = 3;
-// $_POST["id"] = 4;
+include(__DIR__ . "/../../Data/Ticket/Ticket/DistriXTicketTicketData.php");
+include(__DIR__ . "/../../Data/Ticket/Ticket/DistriXTicketTicketNameData.php");
 
 if (isset($_POST)) {
-  list($foodType, $errorJson) = DistriXCodeTableFoodTypeData::getJsonData($_POST);
-  $listFoodTypeNames = [];
+  list($ticket, $errorJson) = DistriXTicketTicketData::getJsonData($_POST);
+  $listTicketNames = [];
 
 // CALL
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->addParameter("data", $foodType);
-  $servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeViewDataSvc.php");
+  $servicesCaller->addParameter("data", $ticket);
+  $servicesCaller->setServiceName("TablesCodes/Ticket/DistriXTicketViewDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
-  $logOk = logController("Security_FoodType", "DistriXFoodTypeViewDataSvc", "ViewFoodType", $output);
+  $logOk = logController("Security_Ticket", "DistriXTicketViewDataSvc", "ViewTicket", $output);
 
 // RESPONSE
-  if ($outputok && isset($output["ViewFoodType"])) {
-    list($foodType, $jsonError) = DistriXCodeTableFoodTypeData::getJsonData($output["ViewFoodType"]);
+  if ($outputok && isset($output["ViewTicket"])) {
+    list($ticket, $jsonError) = DistriXTicketTicketData::getJsonData($output["ViewTicket"]);
   } else {
     $error = $errorData;
   }
-  if ($outputok && isset($output["ViewFoodTypeNames"]) && is_array($output["ViewFoodTypeNames"])) {
-    list($listFoodTypeNames, $jsonError) = DistriXCodeTableFoodTypeNameData::getJsonArray($output["ViewFoodTypeNames"]);
+  if ($outputok && isset($output["ViewTicketNames"]) && is_array($output["ViewTicketNames"])) {
+    list($listTicketNames, $jsonError) = DistriXTicketTicketNameData::getJsonArray($output["ViewTicketNames"]);
   } else {
     $error = $errorData;
   }
 
 // TREATMENT
-  $foodType->setNames($listFoodTypeNames);
-  $foodType->setNbLanguages(count($listFoodTypeNames));
+  $ticket->setNames($listTicketNames);
+  $ticket->setNbLanguages(count($listTicketNames));
 }
-$resp["ViewFoodType"] = $foodType;
+$resp["ViewTicket"] = $ticket;
 if (!empty($error)) {
   $resp["Error"] = $error;
 }

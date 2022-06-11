@@ -2,16 +2,16 @@
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/Ticket/Ticket/DistriXCodeTableTicketData.php");
+include(__DIR__ . "/../../Data/Ticket/Ticket/DistriXTicketTicketData.php");
 
 $confirmSave = false;
 
 if (isset($_POST)) {
-  list($ticket, $errorJson) = DistriXCodeTableTicketData::getJsonData($_POST);
+  list($ticket, $errorJson) = DistriXTicketTicketData::getJsonData($_POST);
 
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $ticket);
-  $servicesCaller->setServiceName("TablesCodes/Ticket/DistriXTicketDeleteDataSvc.php");
+  $servicesCaller->setServiceName("Ticket/Ticket/DistriXTicketDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
   //print_r($output);
 
