@@ -10,22 +10,22 @@ $confirmSave  = false;
 // UPDATE
 $_POST['id'] = 1;
 $_POST['code'] = "FEC2";
-$_POST['name'] = "Féculents 3";
+$_POST['name'] = "Féculents 5";
 $_POST['elemState'] = 1;
-$_POST['timestamp'] = 33;
+$_POST['timestamp'] = 35;
 
 $names[0]["id"] = 1;
 $names[0]["idfoodtype"] = 1;
 $names[0]["idlanguage"] = 1;
-$names[0]["name"] = "Féculents Name 3";
+$names[0]["name"] = "Féculents Name 5";
 $names[0]["elemState"] = 0;
-$names[0]["timestamp"] = 0;
+$names[0]["timestamp"] = 2;
 $names[1]["id"] = 4;
 $names[1]["idfoodtype"] = 1;
 $names[1]["idlanguage"] = 2;
-$names[1]["name"] = "Starches Name 3";
+$names[1]["name"] = "Starches Name 5";
 $names[1]["elemState"] = 0;
-$names[1]["timestamp"] = 0;
+$names[1]["timestamp"] = 2;
 
 $_POST['names'] = $names;
 
