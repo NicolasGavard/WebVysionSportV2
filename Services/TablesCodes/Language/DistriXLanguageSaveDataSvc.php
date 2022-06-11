@@ -29,6 +29,7 @@ if ($dataSvc->getMethodName() == "SaveLanguage") {
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
       list($data, $jsonError) = LanguageStorData::getJsonData($dataSvc->getParameter("data"));
+
       $canSaveLanguage  = true;
       if ($data->getId() == 0) {
         // Verify Code Exist
@@ -55,7 +56,7 @@ if ($dataSvc->getMethodName() == "SaveLanguage") {
           $image          = file_get_contents($data->getLinkToPicture());
           $imageInfo      = getimagesizefromstring($image);
           $imageExtension = str_replace("image/", "", $imageInfo['mime']);
-
+          
           if ($imageExtension == "jpg" || $imageExtension == "png" || $imageExtension == "jpeg" || $imageExtension == "gif") {
             $imageName    = DistriXSvcUtil::generateRandomText(50);
             $imageFile    = substr($data->getLinkToPicture(), strpos($data->getLinkToPicture(), ",") + 1);
@@ -63,7 +64,7 @@ if ($dataSvc->getMethodName() == "SaveLanguage") {
             $cdn          = new DistriXCdn();
             $data         = new DistriXCdnData();
             $data->setImageGroup(DISTRIX_CDN_GROUP_IMAGES);
-            $data->setImageFamily(DISTRIX_CDN_FOLDER_FOOD);
+            $data->setImageFamily(DISTRIX_CDN_FOLDER_CODE_TABLES);
             $data->setImageName($imageName);
             $data->setImageType($imageInfo['mime']);
             $data->setImage($imageFile);

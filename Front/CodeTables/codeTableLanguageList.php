@@ -55,7 +55,7 @@
                 <input class="form-control AddLanguageFormTimestamp"     type="hidden"  name="timestamp"  value="0">
                 <input class="form-control AddLanguageFormTimestamp"     type="hidden"  name="timestamp"  value="0">
                 <input class="form-control AddLanguageFormStatut"        type="hidden"  name="elemState"  value="0">
-                <input class="form-control AddLanguageFormPictureBase64" type="text"    name="base64Img"  id="linkToPictureBase64">
+                <input class="form-control AddLanguageFormPictureBase64" type="hidden"  name="base64Img"  id="linkToPictureBase64">
                 
                 <div class="row">
                   <div class="col-md-6 col-sm-12">

@@ -17,10 +17,6 @@ if (isset($_POST)) {
   $languageCaller->setMethodName("ListLanguages");
   $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
 
-  $infoProfil                 = DistriXStyAppInterface::getUserInformation();
-  if (empty($_POST['idLanguage'])) {
-    $_POST['idLanguage']      = $infoProfil->getIdLanguage();
-  }
   list($dataName, $errorJson) = DistriXCodeTableCategoryFoodTypeNameData::getJsonData($_POST);
 
   $servicesCaller = new DistriXServicesCaller();
