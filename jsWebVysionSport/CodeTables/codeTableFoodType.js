@@ -1,6 +1,7 @@
+var foodTypeSelectedData = null;
+var foodTypeTableLanguagesData = "";
 $(function() {
   var foodTypeTableData = "";
-  var foodTypeTableLanguagesData = "";
   var foodTypeTable = $('#FoodTypeTable').DataTable({
     columnDefs: [
       { orderable: false, targets: 2 },
@@ -32,7 +33,7 @@ $(function() {
     $(".btn-warning").addClass("disabled");
     $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
-    foodTypeTable.clear().draw();
+    foodTypeTable.clear();
     ListFoodType(1);
   });
 
@@ -43,7 +44,7 @@ $(function() {
     $(".btn-warning").removeClass("disabled");
     $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
-    foodTypeTable.clear().draw();
+    foodTypeTable.clear();
     ListFoodType(0);
   });
 
@@ -52,27 +53,24 @@ $(function() {
     $("#btnAddFoodType").removeClass("d-none");
     $(".update_title").addClass("d-none");
     $("#btnUpdateFoodType").addClass("d-none");
-
-    $('.AddFoodTypeFormIdFoodType').val(0);
+    
+    foodTypeSelectedData = null;
     $('.AddFoodTypeFormCode').val('');
     $('.AddFoodTypeFormName').val('');
-    $('.AddFoodTypeFormTimestamp').val(0);
-    $('.AddFoodTypeFormStatut').val(0);
-    
-    $('#foodTypeLanguages').html();
+    $('#foodTypeLanguages').html("");
+
     const languages = foodTypeTableLanguagesData;
     $.map(languages, function(language, languageKey) {
       var html = "";
       html += '  <div class="row">';
-      html += '    <div class="col-md-6 col-sm-12">';
+      html += '    <div class="col-md-4 col-sm-12">';
       html += '      <div class="form-group">';
       html += '        <input class="form-control" type="text" disabled value="'+language.name+'">';
       html += '      </div>';
       html += '    </div>';
-      html += '    <div class="col-md-6 col-sm-12">';
+      html += '    <div class="col-md-8 col-sm-12">';
       html += '      <div class="form-group">';
       html += '        <input class="form-control AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" placeholder="'+nameTranslatedTxt+'">';
-      html += '        <div class="form-control-feed back danger-name has-danger d-none" style="font-size: 14px;">'+errorNameTxt+'';
       html += '      </div>';
       html += '    </div>';
       html += '  </div>';
@@ -81,30 +79,20 @@ $(function() {
     });
   });
 
-  $(".btnAddFoodType").on('click', function() {
-    $(".page_food_food_category_update_title").removeClass("d-none");
-    
-    var name = $('.AddFoodTypeFormName').val();
-    if (name != ""){
-      var data = $('#FormAddFoodType').serializeArray(); // convert form to array
-      data.push({name: "name", value: name});
-      
-      $.ajax({
-        url : '../../Controllers/CodeTables/FoodType/save.php',
-        type : 'POST',
-        dataType : 'JSON',
-        data: $.param(data),
-        success : function(data) {
-          $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);
-        },
-        error : function(data) {
-          $('#sa-error-distrix').trigger('click');
-        }
-      });
-      $(".btnAddFoodType").attr("data-dismiss", "modal");
-    } else {
-      if (name == ''){
+  $("#btnAddFoodType, #btnUpdateFoodType").on('click', function() {
+    var code = $('#AddFoodTypeFormCode').val();
+    var name = $('#AddFoodTypeFormName').val();
+    if (code == "" || name == '') {
+      if (code == '') {
+        $('.AddFoodTypeFormCode').addClass("form-control-danger");
+        $('.danger-code').removeClass("d-none");
+
+        setTimeout( () => { 
+          $(".AddFoodTypeFormCode").removeClass("form-control-danger");
+          $('.danger-code').addClass("d-none");
+        }, 3000 );
+      }
+      if (name == '') {
         $('.AddFoodTypeFormName').addClass("form-control-danger");
         $('.danger-name').removeClass("d-none");
 
@@ -113,6 +101,55 @@ $(function() {
           $('.danger-name').addClass("d-none");
         }, 3000 );
       }
+    } else {
+      var foodTypeNames = [];
+      $('input[name^="foodTypeLanguageName"]').each(function() {
+        var idNameLanguage = this.name.substr("foodTypeLanguageName".length);
+        var idName=0; var idFoodType=0; var timestampName=0; var elemStateName=0;
+        if (foodTypeSelectedData != null) {
+          $.map(foodTypeSelectedData.names, function(nameData, nameDataKey) {
+            if (nameData.idLanguage == idNameLanguage) { 
+              idName=nameData.id;
+              idFoodType=nameData.idFoodType;
+              timestampName=nameData.timestamp;
+              elemStateName=nameData.elemState;
+            }
+          });
+        }  
+        let foodTypeName = {
+          "id": idName,
+          "idFoodType": idFoodType,
+          "idLanguage": idNameLanguage,
+          "elemState": elemStateName,
+          "timestamp": timestampName,
+          "name": this.value
+        }
+        foodTypeNames.push(foodTypeName);
+      });
+      var id=0; var timestamp=0; var elemState=0;
+      if (foodTypeSelectedData != null) {
+        id=foodTypeSelectedData.id;
+        timestamp=foodTypeSelectedData.timestamp;
+        elemState=foodTypeSelectedData.elemState;
+      }
+      $.ajax({
+        url : '../../Controllers/CodeTables/FoodType/save.php',
+        type : 'POST',
+        dataType : 'JSON',
+        data: {id,code,name,elemState,timestamp, "names":foodTypeNames},
+        success : function(data) {
+          if (data.confirmSave) {
+            $('#sa-success-distrix').trigger('click');
+            setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);        
+          } else {
+            $('#sa-error-distrix').trigger('click');
+          }
+        },
+        error : function(data) {
+          $('#sa-error-distrix').trigger('click');
+        }
+      });
+      $(".btnAddFoodType").attr("data-dismiss", "modal");
     } 
   });
 
@@ -210,18 +247,39 @@ function ViewFoodType(id){
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      $(".add_title").addClass("d-none");
-      $(".update_title").removeClass("d-none");
-    
-      $(".dropzoneImage").removeClass("d-none");
-      $(".dropzoneNoImage").addClass("d-none");
+      foodTypeSelectedData = data.ViewFoodType;
 
-      $('.AddFoodTypeFormIdFoodType').val(id);
-      $('.AddFoodTypeFormCode').val(data.ViewFoodType.codeshort);
+      $(".add_title").addClass("d-none");
+      $("#btnAddFoodType").addClass("d-none");
+      $(".update_title").removeClass("d-none");
+      $("#btnUpdateFoodType").removeClass("d-none");
+  
+      $('.AddFoodTypeFormCode').val(data.ViewFoodType.code);
       $('.AddFoodTypeFormName').val(data.ViewFoodType.name);
-      $(".avatar-food_category").attr("src", data.ViewFoodType.linktopicture);
-      $('.AddFoodTypeFormTimestamp').val(data.ViewFoodType.timestamp);
-      $('.AddFoodTypeFormStatut').val(data.ViewFoodType.elemState);
+      $('#foodTypeLanguages').html("");
+
+      const languages = foodTypeTableLanguagesData;
+      $.map(languages, function(language, languageKey) {
+        var html = "";
+        html += '  <div class="row">';
+        html += '    <div class="col-md-4 col-sm-12">';
+        html += '      <div class="form-group">';
+        html += '        <input class="form-control" type="text" disabled value="'+language.name+'">';
+        html += '      </div>';
+        html += '    </div>';
+        html += '    <div class="col-md-8 col-sm-12">';
+        html += '      <div class="form-group">';
+        var updateName = "";
+        $.map(data.ViewFoodType.names, function(nameData, nameDataKey) {
+          if (nameData.idLanguage == language.id) { updateName=nameData.name;}
+        });
+        html += '        <input class="form-control AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" value="'+updateName+'" placeholder="'+nameTranslatedTxt+'">';
+        html += '      </div>';
+        html += '    </div>';
+        html += '  </div>';
+        
+        $('#foodTypeLanguages').append(html);
+      });
     },
     error : function(data) {
       console.log(data);

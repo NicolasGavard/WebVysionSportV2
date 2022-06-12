@@ -8,26 +8,26 @@ include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameD
 $confirmSave  = false;
 
 // UPDATE
-$_POST['id'] = 1;
-$_POST['code'] = "FEC2";
-$_POST['name'] = "Féculents 5";
-$_POST['elemState'] = 1;
-$_POST['timestamp'] = 35;
+// $_POST['id'] = 1;
+// $_POST['code'] = "FEC2";
+// $_POST['name'] = "Féculents 5";
+// $_POST['elemState'] = 1;
+// $_POST['timestamp'] = 35;
 
-$names[0]["id"] = 1;
-$names[0]["idfoodtype"] = 1;
-$names[0]["idlanguage"] = 1;
-$names[0]["name"] = "Féculents Name 5";
-$names[0]["elemState"] = 0;
-$names[0]["timestamp"] = 2;
-$names[1]["id"] = 4;
-$names[1]["idfoodtype"] = 1;
-$names[1]["idlanguage"] = 2;
-$names[1]["name"] = "Starches Name 5";
-$names[1]["elemState"] = 0;
-$names[1]["timestamp"] = 2;
+// $names[0]["id"] = 1;
+// $names[0]["idfoodtype"] = 1;
+// $names[0]["idlanguage"] = 1;
+// $names[0]["name"] = "Féculents Name 5";
+// $names[0]["elemState"] = 0;
+// $names[0]["timestamp"] = 2;
+// $names[1]["id"] = 4;
+// $names[1]["idfoodtype"] = 1;
+// $names[1]["idlanguage"] = 2;
+// $names[1]["name"] = "Starches Name 5";
+// $names[1]["elemState"] = 0;
+// $names[1]["timestamp"] = 2;
 
-$_POST['names'] = $names;
+// $_POST['names'] = $names;
 
 // // INSERT
 // $_POST['id'] = 0;
@@ -53,11 +53,14 @@ $_POST['names'] = $names;
 
 if (isset($_POST)) {
   list($foodType, $jsonError) = DistriXCodeTableFoodTypeData::getJsonData($_POST);
+  // print_r($foodType);
+
   list($foodTypeNames, $jsonError) = DistriXCodeTableFoodTypeNameData::getJsonArray($foodType->getNames());
   $foodType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. Yvan 01 June 22
 
-  // print_r($foodType);
+  // print_r($_POST);
   // print_r($foodTypeNames);
+  // die();
 
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setDebugMode(DISTRIX_SVC_DATA_LAYER_IN_DEBUG_MODE);
@@ -66,7 +69,7 @@ if (isset($_POST)) {
   $servicesCaller->addParameter("dataNames", $foodTypeNames);
   $servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeSaveDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
-  echo "-*/*/*/*/*/*/*/***/*/*/*/*/-"; print_r($output); echo "-*/*/*/*/*/*/*/***/*/*/*/*/-";
+  // echo "-*/*/*/*/*/*/*/***/*/*/*/*/-"; print_r($output); echo "-*/*/*/*/*/*/*/***/*/*/*/*/-";
 
   $logOk = logController("Security_FoodType", "DistriXFoodTypeSaveDataSvc", "SaveFoodType", $output);
 
