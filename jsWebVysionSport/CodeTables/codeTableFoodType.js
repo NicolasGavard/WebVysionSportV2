@@ -106,10 +106,9 @@ $(function() {
       $('input[name^="foodTypeLanguageName"]').each(function() {
         var idNameLanguage = this.name.substr("foodTypeLanguageName".length);
         var idName=0; var idFoodType=0; var timestampName=0; var elemStateName=0;
-        console.log('foodTypeSelectedData',foodTypeSelectedData);
         if (foodTypeSelectedData != null) {
           $.map(foodTypeSelectedData.names, function(nameData, nameDataKey) {
-            if (nameData.idLanguage == idNameLanguage.idLanguage) { 
+            if (nameData.idLanguage == idNameLanguage) { 
               idName=nameData.id;
               idFoodType=nameData.idFoodType;
               timestampName=nameData.timestamp;
