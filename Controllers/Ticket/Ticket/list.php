@@ -2,79 +2,140 @@
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
+include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
 include(__DIR__ . "/../../Data/Ticket/Ticket/DistriXTicketTicketData.php");
-include(__DIR__ . "/../../Data/Ticket/Ticket/DistriXTicketTicketNameData.php");
-include(__DIR__ . "/../../Data/Ticket/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../../Data/Ticket/TicketAdvancement/DistriXTicketTicketAdvancementData.php");
+include(__DIR__ . "/../../Data/Ticket/TicketComment/DistriXTicketTicketCommentData.php");
 
-$listTickets = [];
-$listLanguages = [];
+$listTicketStatus       = [];
+$listTickets            = [];
+$listTicketsAdvancement = [];
+$listTicketsComment     = [];
+$listTicketsFormFront   = [];
+$ListUsers              = [];
 
 if (isset($_POST)) {
-// CALL
-  $languageCaller = new DistriXServicesCaller();
-  $languageCaller->setMethodName("ListLanguages");
-  $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
+  $ListUsers            = DistriXStyAppUser::listUsers();
 
-  // $infoProfil = DistriXStyAppInterface::getUserInformation();
-  // if (empty($_POST['idLanguage'])) {
-  //   $_POST['idLanguage'] = $infoProfil->getIdLanguage();
-  // }
-  // list($dataName, $errorJson) = DistriXTicketTicketNameData::getJsonData($_POST);
+  // CALL
+  $ticketStatusCaller = new DistriXServicesCaller();
+  $ticketStatusCaller->setServiceName("TablesCodes/TicketStatus/DistriXTicketStatusListDataSvc.php");
 
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Pas de langue pour avoir toutes les langues ! Yvan 10-June-22
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  $dataName = new DistriXTicketTicketNameData();
+  $ticketsCaller = new DistriXServicesCaller();
+  $ticketsCaller->setServiceName("Ticket/Ticket/DistriXTicketListDataSvc.php");
 
-  $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->addParameter("dataName", $dataName);
-  $servicesCaller->setServiceName("TablesCodes/Ticket/DistriXTicketListDataSvc.php");
-
+  $ticketsAdvancementCaller = new DistriXServicesCaller();
+  $ticketsAdvancementCaller->setServiceName("Ticket/TicketAdvancement/DistriXTicketAdvancementListDataSvc.php");
+  
+  $ticketsCommentCaller = new DistriXServicesCaller();
+  $ticketsCommentCaller->setServiceName("Ticket/TicketComment/DistriXTicketCommentListDataSvc.php");
+  
   $svc = new DistriXSvc();
-  $svc->addToCall("Language", $languageCaller);
-  $svc->addToCall("Ticket", $servicesCaller);
+  $svc->addToCall("TicketStatus", $ticketStatusCaller);
+  $svc->addToCall("Ticket", $ticketsCaller);
+  $svc->addToCall("TicketAdvancement", $ticketsAdvancementCaller);
+  $svc->addToCall("TicketComment", $ticketsCommentCaller);
   $callsOk = $svc->call();
 
-// RESPONSES
-  list($outputok, $output, $errorData) = $svc->getResult("Language"); //print_r($output);
-  $logOk = logController("Security_Ticket", "DistriXTicketListDataSvc", "ListTicket-Languages", $output);
-  if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLanguages"])) {
-    list($listLanguages, $jsonError) = DistriXTicketLanguageData::getJsonArray($output["ListLanguages"]);
+  // RESPONSES
+  list($outputok, $output, $errorData) = $svc->getResult("TicketStatus"); //print_r($output);
+  if ($outputok && isset($output["ListTicketStatus"]) && is_array($output["ListTicketStatus"])) {
+    list($listTicketStatus, $jsonError) = DistriXCodeTableTicketStatusData::getJsonArray($output["ListTicketStatus"]);
   } else {
     $error = $errorData;
   }
-  list($outputok, $output, $errorData) = $svc->getResult("Ticket"); //print_r($output);
-  $logOk = logController("Security_Ticket", "DistriXTicketListDataSvc", "ListTicket-Tickets", $output);
+
+  list($outputok, $output, $errorData) = $svc->getResult("Ticket"); print_r($output);
   if ($outputok && isset($output["ListTickets"]) && is_array($output["ListTickets"])) {
     list($listTickets, $jsonError) = DistriXTicketTicketData::getJsonArray($output["ListTickets"]);
   } else {
     $error = $errorData;
   }
-  if ($outputok && isset($output["ListTicketNames"]) && is_array($output["ListTicketNames"])) {
-    list($listTicketNames, $jsonError) = DistriXTicketTicketNameData::getJsonArray($output["ListTicketNames"]);
+
+  if ($outputok && isset($output["ListTicketsAdvancement"]) && is_array($output["ListTicketsAdvancement"])) {
+    list($listTicketsAdvancement, $jsonError) = DistriXTicketTicketAdvancementData::getJsonArray($output["ListTicketsAdvancement"]);
   } else {
     $error = $errorData;
   }
-
-// TREATMENT
-  $nbLanguagesTotal = count($listLanguages);
-  foreach ($listTickets as $foodType) {
-    $foodType->setNbLanguagesTotal($nbLanguagesTotal);
-    $names = [];
-    foreach ($listTicketNames as $foodTypeName) {
-      if ($foodTypeName->getIdTicket() == $foodType->getId()) {
-        $names[] = $foodTypeName;
+  
+  if ($outputok && isset($output["ListTicketsComment"]) && is_array($output["ListTicketsComment"])) {
+    list($listTicketsComment, $jsonError) = DistriXTicketTicketCommentData::getJsonArray($output["ListTicketsComment"]);
+  } else {
+    $error = $errorData;
+  }
+  
+  // TREATMENT
+  foreach ($listTickets as $ticket) {
+    $ticketAdvancement  = [];
+    $ticketComment      = [];
+    $distriXTicketTicketStatusData = new DistriXTicketTicketData();
+    $distriXTicketTicketStatusData->setId($ticket->getId());
+    $distriXTicketTicketStatusData->setIdUserCreate($ticket->getIdUserCreate());
+    $distriXTicketTicketStatusData->setIdUserAssign($ticket->getIdUserAssign());
+    foreach ($ListUsers as $user) {
+      if ($user->getId() == $ticket->getIdUserCreate()){
+        $distriXTicketTicketStatusData->setNameUserCreate($user->getName());
+        $distriXTicketTicketStatusData->setFirstNameUserCreate($user->getFirstName());
+      }
+      if ($user->getId() == $ticket->getIdUserAssign()){
+        $distriXTicketTicketStatusData->setNameUserAssign($user->getName());
+        $distriXTicketTicketStatusData->setFirstNameUserAssign($user->getFirstName());
       }
     }
-    $foodType->setNames($names);
-    $foodType->setNbLanguages(count($names));
+    
+    $distriXTicketTicketStatusData->setIdTicketStatus($ticket->getIdTicketStatus());
+    foreach ($listTicketStatus as $ticketStatus) {
+      if ($ticketStatus->getId() == $ticket->getIdTicketStatus()){
+        $distriXTicketTicketStatusData->setNameTicketStatus($ticketStatus->getName());
+      }
+    }
+    
+    $distriXTicketTicketStatusData->setTitle($ticket->getTitle());
+    $distriXTicketTicketStatusData->setDescMessage($ticket->getDescMessage());
+    $distriXTicketTicketStatusData->setDate($ticket->getDate());
+    $distriXTicketTicketStatusData->setTime($ticket->getTime());
+    
+    foreach ($listTicketsComment as $ticketComment) {
+      if ($ticket->getId() == $ticketComment->getIdTicket()) {
+        $distriXTicketTicketCommentData = new DistriXTicketTicketCommentData();
+        $distriXTicketTicketCommentData->setId($ticketComment->getId());
+        $distriXTicketTicketCommentData->setIdTicket($ticketComment->getIdTicket());
+        $distriXTicketTicketCommentData->setIdUserCreate($ticketComment->getIdUserCreate());
+        
+        foreach ($ListUsers as $user) {
+          if ($user->getId() == $ticketComment->getIdUserCreate()){
+            $distriXTicketTicketCommentData->setNameUserCreate($user->getName());
+            $distriXTicketTicketCommentData->setFirstNameUserCreate($user->getFirstName());
+          }
+        }
+  
+        $distriXTicketTicketCommentData->setTitle($ticketComment->getTitle());
+        $distriXTicketTicketCommentData->setDescMessage($ticketComment->getDescMessage());
+        $distriXTicketTicketCommentData->setDate($ticketComment->getDate());
+        $distriXTicketTicketCommentData->setTime($ticketComment->getTime());
+  
+        $picture = [];
+        $distriXTicketTicketCommentData->setPicture($picture);
+        $distriXTicketTicketCommentData->setElemState($ticketComment->getElemState());
+        $distriXTicketTicketCommentData->setTimestamp($ticketComment->getTimestamp());
+        $ticketComment[] = $distriXTicketTicketCommentData;
+      }
+    }
+    $distriXTicketTicketStatusData->setComment($ticketComment);
+    
+    $picture      = [];
+    $advancement  = [];
+    $distriXTicketTicketStatusData->setAdvancement($advancement);
+    $distriXTicketTicketStatusData->setPicture($picture);
+    $distriXTicketTicketStatusData->setElemState($ticket->getElemState());
+    $distriXTicketTicketStatusData->setTimestamp($ticket->getTimestamp());
+    $listTicketsFormFront[] = $distriXTicketTicketStatusData;
   }
 }
-$resp["ListTickets"] = $listTickets;
-$resp["ListLanguages"] = $listLanguages;
+$resp["ListTickets"]    = $listTicketsFormFront;
 if (!empty($error)) {
   $resp["Error"] = $error;
-}
+} 
 echo json_encode($resp);
