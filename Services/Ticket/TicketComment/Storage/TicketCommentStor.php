@@ -25,7 +25,7 @@ class TicketcommentStor {
   public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketcommentStorData();
+    $data = new TicketCommentStorData();
     $list = [];
 
     if ($inDbConnection != null) {
@@ -46,7 +46,7 @@ class TicketcommentStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketcommentStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketCommentStorData");
       }
     }
     return array($list, count($list));
@@ -56,12 +56,12 @@ class TicketcommentStor {
   public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketcommentStorData();
+    $data = new TicketCommentStorData();
     $list = [];
 
     if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
       if ($className == "" || is_null($className)) {
-        $className = "TicketcommentStorData";
+        $className = "TicketCommentStorData";
       }
       $request  = self::SELECT;
       $request .= self::FROM;
@@ -88,10 +88,10 @@ class TicketcommentStor {
   }
   // End of getListFromList
 
-  public static function findByIdTicketIdUserDateTime(TicketcommentStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdTicketIdUserDateTime(TicketCommentStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketcommentStorData();
+    $data = new TicketCommentStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -106,7 +106,7 @@ class TicketcommentStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketcommentStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketCommentStorData");
         $data = $stmt->fetch();
       }
     }
@@ -114,7 +114,7 @@ class TicketcommentStor {
   }
   // End of IdTicketIdUserDateTime
 
-  public static function findByIdTicket(TicketcommentStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdTicket(TicketCommentStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -137,14 +137,14 @@ class TicketcommentStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketcommentStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketCommentStorData");
       }
     }
     return array($list, count($list));
   }
   // End of IdTicket
 
-  public static function findByIdUser(TicketcommentStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUser(TicketCommentStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -167,7 +167,7 @@ class TicketcommentStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketcommentStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketCommentStorData");
       }
     }
     return array($list, count($list));
@@ -177,7 +177,7 @@ class TicketcommentStor {
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketcommentStorData();
+    $data = new TicketCommentStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -189,7 +189,7 @@ class TicketcommentStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketcommentStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketCommentStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -211,7 +211,7 @@ class TicketcommentStor {
   }
   // End of read
 
-  public static function update(TicketcommentStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(TicketCommentStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
@@ -272,7 +272,7 @@ class TicketcommentStor {
   }
   // End of update
 
-  public static function save(TicketcommentStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(TicketCommentStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -285,7 +285,7 @@ class TicketcommentStor {
   }
   // End of save
 
-  public static function remove(TicketcommentStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(TicketCommentStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -297,7 +297,7 @@ class TicketcommentStor {
   }
   // End of remove
 
-  public static function restore(TicketcommentStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(TicketCommentStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -344,7 +344,7 @@ class TicketcommentStor {
   }
   // End of delete
 
-  public static function create(TicketcommentStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(TicketCommentStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";

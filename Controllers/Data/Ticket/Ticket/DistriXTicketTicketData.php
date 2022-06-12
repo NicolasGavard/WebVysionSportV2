@@ -5,7 +5,7 @@ if (!class_exists("DistriXTicketTicketData", false)) {
     protected $id;
     protected $idUserCreate;
     protected $nameUserCreate;
-    protected $firstNameidUserCreate;
+    protected $firstNameUserCreate;
     protected $idUserAssign;
     protected $nameUserAssign;
     protected $firstNameUserAssign;

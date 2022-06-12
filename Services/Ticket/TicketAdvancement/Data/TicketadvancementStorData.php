@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class TicketadvancementStorData extends DistriXSvcAppData {
+class TicketAdvancementStorData extends DistriXSvcAppData {
   const TICKETADVANCEMENT_STATUS_AVAILABLE     = 0;
   const TICKETADVANCEMENT_STATUS_NOT_AVAILABLE = 1;
 

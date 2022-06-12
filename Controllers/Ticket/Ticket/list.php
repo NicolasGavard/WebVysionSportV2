@@ -6,12 +6,10 @@ include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.p
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
 include(__DIR__ . "/../../Data/Ticket/Ticket/DistriXTicketTicketData.php");
-include(__DIR__ . "/../../Data/Ticket/TicketAdvancement/DistriXTicketTicketAdvancementData.php");
 include(__DIR__ . "/../../Data/Ticket/TicketComment/DistriXTicketTicketCommentData.php");
 
 $listTicketStatus       = [];
 $listTickets            = [];
-$listTicketsAdvancement = [];
 $listTicketsComment     = [];
 $listTicketsFormFront   = [];
 $ListUsers              = [];
@@ -25,9 +23,6 @@ if (isset($_POST)) {
 
   $ticketsCaller = new DistriXServicesCaller();
   $ticketsCaller->setServiceName("Ticket/Ticket/DistriXTicketListDataSvc.php");
-
-  $ticketsAdvancementCaller = new DistriXServicesCaller();
-  $ticketsAdvancementCaller->setServiceName("Ticket/TicketAdvancement/DistriXTicketAdvancementListDataSvc.php");
   
   $ticketsCommentCaller = new DistriXServicesCaller();
   $ticketsCommentCaller->setServiceName("Ticket/TicketComment/DistriXTicketCommentListDataSvc.php");
@@ -35,7 +30,6 @@ if (isset($_POST)) {
   $svc = new DistriXSvc();
   $svc->addToCall("TicketStatus", $ticketStatusCaller);
   $svc->addToCall("Ticket", $ticketsCaller);
-  $svc->addToCall("TicketAdvancement", $ticketsAdvancementCaller);
   $svc->addToCall("TicketComment", $ticketsCommentCaller);
   $callsOk = $svc->call();
 
@@ -47,19 +41,14 @@ if (isset($_POST)) {
     $error = $errorData;
   }
 
-  list($outputok, $output, $errorData) = $svc->getResult("Ticket"); print_r($output);
+  list($outputok, $output, $errorData) = $svc->getResult("Ticket"); //print_r($output);
   if ($outputok && isset($output["ListTickets"]) && is_array($output["ListTickets"])) {
     list($listTickets, $jsonError) = DistriXTicketTicketData::getJsonArray($output["ListTickets"]);
   } else {
     $error = $errorData;
   }
-
-  if ($outputok && isset($output["ListTicketsAdvancement"]) && is_array($output["ListTicketsAdvancement"])) {
-    list($listTicketsAdvancement, $jsonError) = DistriXTicketTicketAdvancementData::getJsonArray($output["ListTicketsAdvancement"]);
-  } else {
-    $error = $errorData;
-  }
   
+  list($outputok, $output, $errorData) = $svc->getResult("TicketComment"); //print_r($output);
   if ($outputok && isset($output["ListTicketsComment"]) && is_array($output["ListTicketsComment"])) {
     list($listTicketsComment, $jsonError) = DistriXTicketTicketCommentData::getJsonArray($output["ListTicketsComment"]);
   } else {
