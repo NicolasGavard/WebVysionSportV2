@@ -1,3 +1,4 @@
+var foodTypeSelectedData = null;
 $(function() {
   var foodTypeTableData = "";
   var foodTypeTableLanguagesData = "";
@@ -32,7 +33,7 @@ $(function() {
     $(".btn-warning").addClass("disabled");
     $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
-    foodTypeTable.clear().draw();
+    foodTypeTable.clear();
     ListFoodType(1);
   });
 
@@ -43,7 +44,7 @@ $(function() {
     $(".btn-warning").removeClass("disabled");
     $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
-    foodTypeTable.clear().draw();
+    foodTypeTable.clear();
     ListFoodType(0);
   });
 
@@ -52,27 +53,25 @@ $(function() {
     $("#btnAddFoodType").removeClass("d-none");
     $(".update_title").addClass("d-none");
     $("#btnUpdateFoodType").addClass("d-none");
-
-    $('.AddFoodTypeFormIdFoodType').val(0);
+    
+    foodTypeSelectedData = null;
     $('.AddFoodTypeFormCode').val('');
     $('.AddFoodTypeFormName').val('');
-    $('.AddFoodTypeFormTimestamp').val(0);
-    $('.AddFoodTypeFormStatut').val(0);
-    
-    $('#foodTypeLanguages').html();
+    $('#foodTypeLanguages').html("");
+
     const languages = foodTypeTableLanguagesData;
     $.map(languages, function(language, languageKey) {
       var html = "";
       html += '  <div class="row">';
-      html += '    <div class="col-md-6 col-sm-12">';
+      html += '    <div class="col-md-4 col-sm-12">';
       html += '      <div class="form-group">';
       html += '        <input class="form-control" type="text" disabled value="'+language.name+'">';
       html += '      </div>';
       html += '    </div>';
-      html += '    <div class="col-md-6 col-sm-12">';
+      html += '    <div class="col-md-8 col-sm-12">';
       html += '      <div class="form-group">';
       html += '        <input class="form-control AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" placeholder="'+nameTranslatedTxt+'">';
-      html += '        <div class="form-control-feed back danger-name has-danger d-none" style="font-size: 14px;">'+errorNameTxt+'';
+      html += '        <div class="form-control-feed back danger-languagename has-danger d-none" style="font-size: 14px;">'+errorNameTxt+'';
       html += '      </div>';
       html += '    </div>';
       html += '  </div>';
@@ -82,18 +81,43 @@ $(function() {
   });
 
   $(".btnAddFoodType").on('click', function() {
-    $(".page_food_food_category_update_title").removeClass("d-none");
-    
-    var name = $('.AddFoodTypeFormName').val();
-    if (name != ""){
-      var data = $('#FormAddFoodType').serializeArray(); // convert form to array
-      data.push({name: "name", value: name});
-      
+    var code = $('#AddFoodTypeFormCode').val();
+    var name = $('#AddFoodTypeFormName').val();
+    if (code == "" || name == '') {
+      if (code == '') {
+        $('.AddFoodTypeFormCode').addClass("form-control-danger");
+        $('.danger-code').removeClass("d-none");
+
+        setTimeout( () => { 
+          $(".AddFoodTypeFormCode").removeClass("form-control-danger");
+          $('.danger-code').addClass("d-none");
+        }, 3000 );
+      }
+      if (name == '') {
+        $('.AddFoodTypeFormName').addClass("form-control-danger");
+        $('.danger-name').removeClass("d-none");
+
+        setTimeout( () => { 
+          $(".AddFoodTypeFormName").removeClass("form-control-danger");
+          $('.danger-name').addClass("d-none");
+        }, 3000 );
+      }
+    } else {
+      var foodTypeNames = [];
+      $('input[name^="foodTypeLanguageName"]').each(function() {
+        var id = this.name.substr("foodTypeLanguageName".length);
+        let foodTypeName = {
+        "idLanguage": id,
+        "name": this.value
+        }
+        foodTypeNames.push(foodTypeName);
+      });
+      console.log('foodTypeNames', foodTypeNames)
       $.ajax({
         url : '../../Controllers/CodeTables/FoodType/save.php',
         type : 'POST',
         dataType : 'JSON',
-        data: $.param(data),
+        data: {"code":code,"name":name, "names":foodTypeNames},
         success : function(data) {
           $('#sa-success-distrix').trigger('click');
           setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);
@@ -103,16 +127,6 @@ $(function() {
         }
       });
       $(".btnAddFoodType").attr("data-dismiss", "modal");
-    } else {
-      if (name == ''){
-        $('.AddFoodTypeFormName').addClass("form-control-danger");
-        $('.danger-name').removeClass("d-none");
-
-        setTimeout( () => { 
-          $(".AddFoodTypeFormName").removeClass("form-control-danger");
-          $('.danger-name').addClass("d-none");
-        }, 3000 );
-      }
     } 
   });
 
@@ -210,16 +224,14 @@ function ViewFoodType(id){
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
+      foodTypeSelectedData = data.ViewFoodType;
+
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
     
-      $(".dropzoneImage").removeClass("d-none");
-      $(".dropzoneNoImage").addClass("d-none");
-
       $('.AddFoodTypeFormIdFoodType').val(id);
       $('.AddFoodTypeFormCode').val(data.ViewFoodType.codeshort);
       $('.AddFoodTypeFormName').val(data.ViewFoodType.name);
-      $(".avatar-food_category").attr("src", data.ViewFoodType.linktopicture);
       $('.AddFoodTypeFormTimestamp').val(data.ViewFoodType.timestamp);
       $('.AddFoodTypeFormStatut').val(data.ViewFoodType.elemState);
     },

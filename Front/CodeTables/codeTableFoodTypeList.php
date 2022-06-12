@@ -1,21 +1,21 @@
 <?php
 session_start();
-  $international  = 'CodeTables/codeTableFoodTypeList';
-  $i18cdlangue    = 'FR';
-  // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-	include('../../i18/'.$i18cdlangue.'/header.php');
-  include("../../i18/_i18.php");
-  include('../Home/_header.php');
-	include('../Home/_headerMenuTop.php');
-	include('../Home/_headerMenuLeft.php');
+$international  = 'CodeTables/codeTableFoodTypeList';
+$i18cdlangue    = 'FR';
+// If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+include('../../i18/'.$i18cdlangue.'/header.php');
+include("../../i18/_i18.php");
+include('../Home/_header.php');
+include('../Home/_headerMenuTop.php');
+include('../Home/_headerMenuLeft.php');
+include("../../_util.php");
 
-  echo "<script sync>";
-  echo " var langueTxt='".$page_language."';";
-  echo " var nameTranslatedTxt='".$page_name_translated."';";
-  echo ' var errorNameTxt="'.$errorData_txt_name.'";';
-  echo " </script>";
-  
-  ?>
+$toScript["langueTxt"] = $page_language;
+$toScript["nameTranslatedTxt"] = $page_name_translated;
+$toScript["errorCodeTxt"] = $errorData_txt_code;
+$toScript["errorNameTxt"] = $errorData_txt_name;
+echo convertToScript($toScript);
+?>
 	<div class="mobile-menu-overlay"></div>
 
 	<div class="main-container">
@@ -64,17 +64,17 @@ session_start();
               <input class="form-control AddFoodTypeFormStatut"     type="hidden" name="elemState"  value="0">
               
               <div class="row">
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_code; ?></label>
-                    <input class="form-control AddFoodTypeFormCode" type="text" code="codeShort" placeholder="<?php echo $page_code; ?>">
+                    <input class="form-control AddFoodTypeFormCode" id="AddFoodTypeFormCode" type="text" code="codeShort" placeholder="<?php echo $page_code; ?>">
                     <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-8 col-sm-12">
                   <div class="form-group">
-                    <label><?php echo $page_code; ?></label>
-                    <input class="form-control AddFoodTypeFormName" type="text" code="foodTypeName" placeholder="<?php echo $page_name; ?>">
+                    <label><?php echo $page_name; ?></label>
+                    <input class="form-control AddFoodTypeFormName" id="AddFoodTypeFormName" type="text" code="foodTypeName" placeholder="<?php echo $page_name; ?>">
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
                   </div>
                 </div>
