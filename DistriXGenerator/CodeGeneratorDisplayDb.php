@@ -52,7 +52,7 @@ $genTableName = $tablename;
 include("TypesPos.php");
 foreach ($typesPos as $typePos) {
   $found = strpos($genTableName, $typePos);
-  $ID_POS = 2; // 2 stands for fields starting with id which have already been processed. Yvan 11-11-20
+  $ID_POS = 2; // 2 stands for fields starting with id which have already been processed. Dev2 11-11-20
   if ($found !== FALSE && $found >= $ID_POS) $genTableName[$found] = strtoupper($genTableName[$found]);
 }
 $endsBy[] = "app";

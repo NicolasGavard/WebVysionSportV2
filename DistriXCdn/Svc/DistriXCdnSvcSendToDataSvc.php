@@ -16,7 +16,7 @@ $image      = null;
 $cdnSvcCall = new DistriXCdnSvcCaller();
 $errors     = [];
 
-$parameters = $dataSvc->getRawParameters(); // As we do not know the parameter name which is the image name. Yvan 08-Mar-22
+$parameters = $dataSvc->getRawParameters(); // As we do not know the parameter name which is the image name. Dev2 08-Mar-22
 if (is_array($parameters) && !empty($parameters)) {
   list($image, $jsonError) = DistriXCdnData::getJsonData($parameters[array_key_first($parameters)]); // Works from PHP 7.3.0
 }

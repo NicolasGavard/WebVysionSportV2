@@ -256,7 +256,7 @@ class DistriXStyAppInterface
         $isSecurityOk = self::isUserConnected() && self::hasRight($application, $module, $functionality, $right);
       }
     }
-    // Will need a rework for better security. Including function security level or finer rights for example. Yvan 13-9-19
+    // Will need a rework for better security. Including function security level or finer rights for example. Dev2 13-9-19
     // return (self::isUserConnected() && self::hasAnyRight($application, $module, $functionality));
     return $isSecurityOk;
   }
