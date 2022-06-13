@@ -5,7 +5,7 @@ include(DJANGOSTY_APP_DJANGOSVC_ACCESS_PATH . "DjangoAppInclude.php");
 include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/Const/_DjangoStyAuthenticationConst.php");
 include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/Const/_DjangoStyRightConst.php");
 // Utilities
-include(DJANGOSVC_TWO_LEVEL_UP . "_env.php"); // Always after _util.php (contains goToTopDirectory() function). Nico & Yvan  03-09-21
+include(DJANGOSVC_TWO_LEVEL_UP . "_env.php"); // Always after _util.php (contains goToTopDirectory() function). Nico & Dev2  03-09-21
 // Data Error
 include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/data/error/AppErrorSvcData.php");
 include(DJANGOSTY_STY_ACCESS_PATH . "DjangoSty/data/error/AppErrorSvcErrorData.php");

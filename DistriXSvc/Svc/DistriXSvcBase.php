@@ -180,7 +180,7 @@ if (!class_exists('DistriXSvcBase', false)) {
     public function getApiToken()
     {
       // Not really mandatory. Token must be used without Authorization.
-      // So Authorization will be set to *. Yvan 08-Dec-21
+      // So Authorization will be set to *. Dev2 08-Dec-21
       if ($this->isAuthorized) {
         return $this->apiToken;
       }
@@ -410,7 +410,7 @@ if (!class_exists('DistriXSvcBase', false)) {
     public function setApiToken($apiToken)
     {
       // Not really mandatory. Token must be used without Authorization.
-      // So Authorization will be set to *. Yvan 08-Dec-21
+      // So Authorization will be set to *. Dev2 08-Dec-21
       if ($this->isAuthorized) {
         $this->apiToken = $apiToken;
       }

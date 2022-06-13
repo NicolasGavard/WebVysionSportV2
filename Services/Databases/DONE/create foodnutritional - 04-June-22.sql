@@ -11,7 +11,7 @@ CREATE TABLE `foodnutritional` (
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `indnutritional` (`idnutritional`),
-  -- UNIQUE KEY `indfoodnutritionalunique` (`idfood`,`idnutritional`,`nutritional`,`idweighttypebase`) USING BTREE    A valider avec Nico. Yvan 04-June-22
+  -- UNIQUE KEY `indfoodnutritionalunique` (`idfood`,`idnutritional`,`nutritional`,`idweighttypebase`) USING BTREE    A valider avec Nico. Dev2 04-June-22
   UNIQUE KEY `indfoodnutritionalunique` (`idfood`,`idnutritional`,`idweighttypebase`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Food Nutritional' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 

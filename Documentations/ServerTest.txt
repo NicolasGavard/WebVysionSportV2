@@ -18,7 +18,7 @@ Base de données :
 - contact@distrix.cloud
 - mdp : KKf$#_m_w5C4P0q4
 - FTP hosting : 3f0ur.ftp.infomaniak.com
-- FTP user : 3f0ur_yvan
+- FTP user : 3f0ur_nicolas
 
 - Bdd :
 - url : https://h2-phpmyadmin.infomaniak.com/?pma_servername=3f0ur.myd.infomaniak.com&pma_username=3f0ur_
