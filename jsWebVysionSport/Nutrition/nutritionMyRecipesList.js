@@ -185,9 +185,8 @@ function ListMyRecipe(elemState){
 }
 
 function ViewMyRecipeFood(id, name){
-  window.location.href = 'nutritionMyRecipeFoodList.php?idRecipe='+id;
-  // $(location).prop('href', './nutritionMyRecipeFoodList.php?idRecipe='+id);
-  // $('<form action="nutritionMyRecipeFoodList.php" method="post"><input type="hidden" name="idRecipe" value="'+id+'"></input></form>').appendTo('body').submit().remove();
+  localStorage.setItem("idRecipe", id);
+  window.location.href = 'nutritionMyRecipeFoodList.php';
 }
 
 function ViewMyRecipe(id, name){

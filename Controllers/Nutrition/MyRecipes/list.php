@@ -67,8 +67,8 @@ if ($outputok && isset($output["ListMyRecipes"]) && is_array($output["ListMyReci
 }
 
 list($outputok, $output, $errorData) = $svc->getResult("recipeFood"); //print_r($output);
-if ($outputok && isset($output["ListMyRecipesFoods"]) && is_array($output["ListMyRecipesFoods"])) {
-  list($listMyRecipesFoods, $jsonError) = DistriXNutritionRecipeFoodData::getJsonArray($output["ListMyRecipesFoods"]);
+if ($outputok && isset($output["ListMyRecipeFoods"]) && is_array($output["ListMyRecipeFoods"])) {
+  list($listMyRecipesFoods, $jsonError) = DistriXNutritionRecipeFoodData::getJsonArray($output["ListMyRecipeFoods"]);
 } else {
   $error = $errorData;
 }

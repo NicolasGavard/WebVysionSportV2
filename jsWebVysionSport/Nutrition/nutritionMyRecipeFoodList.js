@@ -1,8 +1,10 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
+
 $.ajax({
   url : '../../Controllers/Nutrition/MyRecipeFood/list.php',
   type : 'POST',
-  dataType : 'JSON',
+  data: {'idRecipe': localStorage.getItem("idRecipe")},
+  // dataType : 'JSON',
   success : function(data) {
     $(".infoRecipeName").html(data.InfoMyRecipesFood.name);
     
