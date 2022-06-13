@@ -5,6 +5,13 @@ include(__DIR__ . "/../../Init/ControllerInit.php");
 include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
 include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
 
+$international  = 'CodeTables/codeTableFoodTypeList';
+$i18cdlangue    = 'FR';
+// If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+include(__DIR__ . "/../../../i18/_i18.php");
+
+include(__DIR__ . "/../../_utilController.php");
+
 $confirmSave  = false;
 
 // UPDATE
@@ -76,7 +83,13 @@ if (isset($_POST)) {
   if ($outputok && !empty($output) > 0 && isset($output["ConfirmSave"])) {
     $confirmSave = $output["ConfirmSave"];
   } else {
-    $error = $errorData;
+    // $error = $errorData;
+    list($error, $jsonError) = DistriXSvcErrorData::getJsonData($errorData);
+    $errorCode = "error_".$error->getCode()."_txt";
+    if (isset($$errorCode)) {
+      $codes[0] = $foodType->getCode();
+      $error->setDefaultText(getErrorText($$errorCode, $codes));
+    }
   }
 }
 $resp["confirmSave"] = $confirmSave;
