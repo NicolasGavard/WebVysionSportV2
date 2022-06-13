@@ -10,8 +10,6 @@ $i18cdlangue    = 'FR';
 // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 include(__DIR__ . "/../../../i18/_i18.php");
 
-include(__DIR__ . "/../../_utilController.php");
-
 $confirmSave  = false;
 
 // UPDATE
@@ -88,7 +86,8 @@ if (isset($_POST)) {
     $errorCode = "error_".$error->getCode()."_txt";
     if (isset($$errorCode)) {
       $codes[0] = $foodType->getCode();
-      $error->setDefaultText(getErrorText($$errorCode, $codes));
+      $codes[1] = $foodType->getId();
+      $error->setText(DistriXSvcErrorData::getErrorText($$errorCode, $codes));
     }
   }
 }

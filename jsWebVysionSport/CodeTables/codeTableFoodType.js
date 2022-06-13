@@ -143,7 +143,7 @@ $(function() {
             setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);        
           } else {
             $('#sa-error-distrix').trigger('click');
-            $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.Error.defaultText+'</ul>');
+            $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.Error.text+'</ul>');
           }
         },
         error : function(data) {
