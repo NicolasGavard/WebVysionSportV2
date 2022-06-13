@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeFoodData.php");
+include(__DIR__ . "/../../Data/Nutrition/MyRecipeFood/DistriXNutritionRecipeFoodData.php");
 
 $_POST['id'] = 1;
 

@@ -5,7 +5,7 @@ include(__DIR__ . "/../../Init/ControllerInit.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
 include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
-include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeFoodData.php");
+include(__DIR__ . "/../../Data/Nutrition/MyRecipeFood/DistriXNutritionRecipeFoodData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodNutritionalData.php");
 include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
@@ -17,7 +17,7 @@ $listFoods                  = [];
 $listWeightsTypes           = [];
 $listNutritionals           = [];
 
-list($distriXNutritionRecipeFoodData, $errorJson)     = DistriXNutritionRecipeFoodData::getJsonData($_POST);
+$_POST['idRecipe']          = 1;
 
 $infoProfil = DistriXStyAppInterface::getUserInformation();
 $distriXCodeTableLanguageData = new DistriXCodeTableLanguageData();
@@ -25,6 +25,8 @@ $distriXCodeTableLanguageData->setId($infoProfil->getIdLanguage());
 
 $distriXNutritionRecipeData = new DistriXNutritionRecipeData();
 $distriXNutritionRecipeData->setId($_POST['idRecipe']);
+
+list($distriXNutritionRecipeFoodData, $errorJson)     = DistriXNutritionRecipeFoodData::getJsonData($_POST);
 
 // CALL
 $recipeCaller = new DistriXServicesCaller();
