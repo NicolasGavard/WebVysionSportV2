@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class TicketstatusNameStor {
+class TicketStatusNameStor {
 
 //=============================================================================
 //== DO NOT REMOVE !
@@ -25,7 +25,7 @@ class TicketstatusNameStor {
   public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketstatusNameStorData();
+    $data = new TicketStatusNameStorData();
     $list = [];
 
     if ($inDbConnection != null) {
@@ -46,7 +46,7 @@ class TicketstatusNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketstatusNameStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
       }
     }
     return array($list, count($list));
@@ -56,12 +56,12 @@ class TicketstatusNameStor {
   public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketstatusNameStorData();
+    $data = new TicketStatusNameStorData();
     $list = [];
 
     if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
       if ($className == "" || is_null($className)) {
-        $className = "TicketstatusNameStorData";
+        $className = "TicketStatusNameStorData";
       }
       $request  = self::SELECT;
       $request .= self::FROM;
@@ -88,10 +88,10 @@ class TicketstatusNameStor {
   }
   // End of getListFromList
 
-  public static function findByIdTicketStatusIdLanguage(TicketstatusNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdTicketStatusIdLanguage(TicketStatusNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketstatusNameStorData();
+    $data = new TicketStatusNameStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -104,7 +104,7 @@ class TicketstatusNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketstatusNameStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
         $data = $stmt->fetch();
       }
     }
@@ -112,7 +112,7 @@ class TicketstatusNameStor {
   }
   // End of IdTicketStatusIdLanguage
 
-  public static function findByIdTicketStatus(TicketstatusNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdTicketStatus(TicketStatusNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -135,14 +135,14 @@ class TicketstatusNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketstatusNameStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
       }
     }
     return array($list, count($list));
   }
   // End of IdTicketStatus
 
-  public static function findByIdLanguage(TicketstatusNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
+  public static function findByIdLanguage(TicketStatusNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $list = [];
@@ -165,7 +165,7 @@ class TicketstatusNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketstatusNameStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
       }
     }
     return array($list, count($list));
@@ -175,7 +175,7 @@ class TicketstatusNameStor {
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketstatusNameStorData();
+    $data = new TicketStatusNameStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -187,7 +187,7 @@ class TicketstatusNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketstatusNameStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -209,7 +209,7 @@ class TicketstatusNameStor {
   }
   // End of read
 
-  public static function update(TicketstatusNameStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(TicketStatusNameStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
@@ -264,7 +264,7 @@ class TicketstatusNameStor {
   }
   // End of update
 
-  public static function save(TicketstatusNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(TicketStatusNameStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -277,7 +277,7 @@ class TicketstatusNameStor {
   }
   // End of save
 
-  public static function remove(TicketstatusNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(TicketStatusNameStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -289,7 +289,7 @@ class TicketstatusNameStor {
   }
   // End of remove
 
-  public static function restore(TicketstatusNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(TicketStatusNameStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -336,7 +336,7 @@ class TicketstatusNameStor {
   }
   // End of delete
 
-  public static function create(TicketstatusNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(TicketStatusNameStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";

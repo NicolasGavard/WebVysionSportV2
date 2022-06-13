@@ -11,15 +11,15 @@ $.ajax({
     });
 
     $.map(data.ListEcoScores, function(val, key) {
-      $('#listEcoScores').append('<option value="'+val.id+'">'+val.description+'</option>');
+      $('#listEcoScores').append('<option value="'+val.id+'">'+val.letter+'</option>');
     });
 
     $.map(data.ListNovaScores, function(val, key) {
-      $('#listNovaScores').append('<option value="'+val.id+'">'+val.description+'</option>');
+      $('#listNovaScores').append('<option value="'+val.id+'">'+val.number+'</option>');
     });
 
     $.map(data.ListNutriScores, function(val, key) {
-      $('#listNutriScores').append('<option value="'+val.id+'">'+val.description+'</option>');
+      $('#listNutriScores').append('<option value="'+val.id+'">'+val.letter+'</option>');
     });
 
     $('.btn-success').trigger('click');
@@ -157,10 +157,10 @@ function ListFood(elemState){
       
       const line =  '<tr>'+
                     ' <td>'+val.name+'</td>'+
-                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureBrand+'"/></td>'+
-                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureScoreNutri+'"/></td>'+
-                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureScoreNova+'"/></td>'+
-                    ' <td><img style="max-height:100px; max-width:100px;" src="'+val.pictureScoreEco+'"/></td>'+
+                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureBrand+'"/></td>'+
+                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNutri+'"/></td>'+
+                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNova+'"/></td>'+
+                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreEco+'"/></td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+

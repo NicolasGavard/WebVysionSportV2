@@ -12,12 +12,3 @@
   $page_restore_title     = "Restaurer la recette";
   
   $errorData_txt_name     = "Le nom de la recette est manquant !!";
-  
-  $page_title_food          = "Liste des aliments de la recette";
-  $page_food                = "Aliment";
-  $page_weight              = "Quantité";
-  $page_weightType          = "Unité de mesure";
-  $page_add_food_title      = "Ajouter un aliment à la recette";
-  $page_update_food_title   = "Modifier un aliment de la recette";
-  $page_delete_food_title   = "Supprimer un aliment de la recette";
-  $page_restore_food_title  = "Restaurer un aliment de la recette";

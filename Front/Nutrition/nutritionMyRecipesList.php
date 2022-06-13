@@ -58,12 +58,13 @@
             <div class="modal-body text-center font-18">
               <h4 class="padding-top-30 mb-30 weight-500 add_title"><?php echo $page_title_food; ?> <span class="InfoSuppTitle"></span></h4>
 
-              <table class="table stripe hover nowrap" id="datatable2">
+              <table class="table stripe hover nowrap" id="listMyRecipeFood">
 							<thead>
 								<tr>
-                  <th width="55%" class="table-plus datatable-nosort"><span><?php echo $page_food; ?></span></th>
+                  <th width="45%" class="table-plus datatable-nosort"><span><?php echo $page_food; ?></span></th>
                   <th width="15%"><span><?php echo $page_weight; ?></span></th>
                   <th width="20%"><span><?php echo $page_weightType; ?></span></th>
+                  <th width="10%"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
 						</table>

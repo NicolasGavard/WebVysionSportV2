@@ -17,7 +17,6 @@ $listFoods                  = [];
 $listWeightsTypes           = [];
 $listNutritionals           = [];
 
-$_POST['idRecipe']  = 1;
 list($distriXNutritionRecipeData, $errorJson)     = DistriXNutritionRecipeFoodData::getJsonData($_POST);
 
 $infoProfil = DistriXStyAppInterface::getUserInformation();

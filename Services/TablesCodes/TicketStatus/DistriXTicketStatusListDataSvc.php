@@ -9,14 +9,14 @@ if ($dataSvc->isAuthorized()) {
   include(__DIR__ . "/Storage/TicketStatusStor.php");
   include(__DIR__ . "/Storage/TicketStatusNameStor.php");
 
-  $ticketStatuss     = [];
+  $ticketStatus     = [];
   $ticketStatusNames = [];
 
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     list($dataName, $jsonError) = TicketStatusNameStorData::getJsonData($dataSvc->getParameter("dataName"));
-    list($ticketStatuss, $ticketStatusNames) = TicketStatusStor::getListNames(true, $dataName, $dbConnection);
-    // list($ticketStatuss, $ticketStatusNames) = TicketStatusStor::getListNames(true, TicketStatusNameStorData::getJsonData($dataSvc->getParameter("dataName"))[0], $dbConnection);
+    list($ticketStatus, $ticketStatusNames) = TicketStatusStor::getListNames(true, $dataName, $dbConnection);
+    // list($ticketStatus, $ticketStatusNames) = TicketStatusStor::getListNames(true, TicketStatusNameStorData::getJsonData($dataSvc->getParameter("dataName"))[0], $dbConnection);
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }
@@ -24,7 +24,7 @@ if ($dataSvc->isAuthorized()) {
     $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListTicketStatus", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
-  $dataSvc->addToResponse("ListTicketStatuss", $ticketStatuss);
+  $dataSvc->addToResponse("ListTicketStatus", $ticketStatus);
   $dataSvc->addToResponse("ListTicketStatusNames", $ticketStatusNames);
 
   // Return response

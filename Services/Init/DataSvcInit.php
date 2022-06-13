@@ -42,6 +42,8 @@ include(__DIR__ . "/../../DistriXSecurity/Const/DistriXStyKeys.php");
 include(__DIR__ . "/../../GlobalData/ApplicationErrorData.php");
 // Storage
 include(__DIR__ . "/../../DistriXDbConnection/DistriXPDOConnection.php");
+// Trace Data
+include(__DIR__ . "/../../DistriXTrace/data/DistriXTraceData.php");
 
 $databasefile = __DIR__ . "/../Db/Infodb.php";
 $dbConnection = null;

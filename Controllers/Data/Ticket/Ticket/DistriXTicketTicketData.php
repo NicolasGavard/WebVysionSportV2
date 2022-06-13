@@ -9,6 +9,8 @@ if (!class_exists("DistriXTicketTicketData", false)) {
     protected $idUserAssign;
     protected $nameUserAssign;
     protected $firstNameUserAssign;
+    protected $idTicketType;
+    protected $nameTicketType;
     protected $idTicketStatus;
     protected $nameTicketStatus;
     protected $title;
@@ -18,7 +20,7 @@ if (!class_exists("DistriXTicketTicketData", false)) {
     protected $comment;
     protected $advancement;
     protected $picture;
-    protected $elemstate;
+    protected $elemState;
     protected $timestamp;
 
     public function __construct() {
@@ -29,6 +31,8 @@ if (!class_exists("DistriXTicketTicketData", false)) {
         $this->idUserAssign         = 0;
         $this->nameUserAssign       = "";
         $this->firstNameUserAssign  = "";
+        $this->idTicketType         = 0;
+        $this->nameTicketType       = "";
         $this->idTicketStatus       = 0;
         $this->nameTicketStatus     = "";
         $this->title                = "";
@@ -38,7 +42,7 @@ if (!class_exists("DistriXTicketTicketData", false)) {
         $this->comment              = [];
         $this->advancement          = [];
         $this->picture              = [];
-        $this->elemstate            = 0;
+        $this->elemState            = 0;
         $this->timestamp            = 0;
       }
   // Gets
@@ -49,6 +53,8 @@ if (!class_exists("DistriXTicketTicketData", false)) {
     public function getIdUserAssign():int { return $this->idUserAssign; }
     public function getNameUserAssign():string { return $this->nameUserAssign; }
     public function getFirstNameUserAssign():string { return $this->firstNameUserAssign; }
+    public function getIdTicketType():int { return $this->idTicketType; }
+    public function getNameTicketType():string { return $this->nameTicketType; }
     public function getIdTicketStatus():int { return $this->idTicketStatus; }
     public function getNameTicketStatus():string { return $this->nameTicketStatus; }
     public function getTitle():string { return $this->title; }
@@ -58,7 +64,7 @@ if (!class_exists("DistriXTicketTicketData", false)) {
     public function getComment():array { return $this->comment; }
     public function getAdvancement():array { return $this->advancement; }
     public function getPicture():array { return $this->picture; }
-    public function getElemState():int { return $this->elemstate; }
+    public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
   // Sets
     public function setId(int $id) { $this->id = $id; }
@@ -68,6 +74,8 @@ if (!class_exists("DistriXTicketTicketData", false)) {
     public function setIdUserAssign(int $idUserAssign) { $this->idUserAssign = $idUserAssign; }
     public function setNameUserAssign(string $nameUserAssign) { $this->nameUserAssign = $nameUserAssign; }
     public function setFirstNameUserAssign(string $firstNameUserAssign) { $this->firstNameUserAssign = $firstNameUserAssign; }
+    public function setIdTicketType(int $idTicketType) { $this->idTicketType = $idTicketType; }
+    public function setNameTicketType(string $nameTicketType) { $this->nameTicketType = $nameTicketType; }
     public function setIdTicketStatus(int $idTicketStatus) { $this->idTicketStatus = $idTicketStatus; }
     public function setNameTicketStatus(string $nameTicketStatus) { $this->nameTicketStatus = $nameTicketStatus; }
     public function setTitle(string $title) { $this->title = $title; }
@@ -77,7 +85,7 @@ if (!class_exists("DistriXTicketTicketData", false)) {
     public function setComment(array $comment) { $this->comment = $comment; }
     public function setAdvancement(array $advancement) { $this->advancement = $advancement; }
     public function setPicture(array $picture) { $this->picture = $picture; }
-    public function setElemState(int $elemState) { $this->elemstate = $elemState; }
+    public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
 }

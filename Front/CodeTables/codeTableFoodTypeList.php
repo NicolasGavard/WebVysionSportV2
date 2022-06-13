@@ -10,10 +10,10 @@ include('../Home/_headerMenuTop.php');
 include('../Home/_headerMenuLeft.php');
 include("../../_util.php");
 
-$toScript["langueTxt"] = $page_language;
-$toScript["nameTranslatedTxt"] = $page_name_translated;
-$toScript["errorCodeTxt"] = $errorData_txt_code;
-$toScript["errorNameTxt"] = $errorData_txt_name;
+$toScript["langueTxt"]          = $page_language;
+$toScript["nameTranslatedTxt"]  = $page_name_translated;
+$toScript["errorCodeTxt"]       = $errorData_txt_code;
+$toScript["errorNameTxt"]       = $errorData_txt_name;
 echo convertToScript($toScript);
 ?>
 	<div class="mobile-menu-overlay"></div>

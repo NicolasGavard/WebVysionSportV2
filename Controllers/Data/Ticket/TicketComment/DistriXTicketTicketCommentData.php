@@ -12,7 +12,7 @@ if (!class_exists("DistriXTicketTicketCommentData", false)) {
     protected $date;
     protected $time;
     protected $picture;
-    protected $elemstate;
+    protected $elemState;
     protected $timestamp;
 
     public function __construct() {
@@ -26,7 +26,7 @@ if (!class_exists("DistriXTicketTicketCommentData", false)) {
         $this->date                 = 0;
         $this->time                 = 0;
         $this->picture              = [];
-        $this->elemstate            = 0;
+        $this->elemState            = 0;
         $this->timestamp            = 0;
       }
   // Gets
@@ -40,7 +40,7 @@ if (!class_exists("DistriXTicketTicketCommentData", false)) {
     public function getDate():int { return $this->date; }
     public function getTime():int { return $this->time; }
     public function getPicture():array { return $this->picture; }
-    public function getElemState():int { return $this->elemstate; }
+    public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
   // Sets
     public function setId(int $id) { $this->id = $id; }
@@ -53,7 +53,7 @@ if (!class_exists("DistriXTicketTicketCommentData", false)) {
     public function setDate(int $date) { $this->date = $date; }
     public function setTime(int $time) { $this->time = $time; }
     public function setPicture(array $picture) { $this->picture = $picture; }
-    public function setElemState(int $elemState) { $this->elemstate = $elemState; }
+    public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }
 }

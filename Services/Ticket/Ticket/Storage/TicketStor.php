@@ -11,7 +11,7 @@ class TicketStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "ticket";
-  const SELECT = 'SELECT id,idusercreate,iduserassign,idticketstatus,title,descmessage,date,time,elemstate,timestamp';
+  const SELECT = 'SELECT id,idusercreate,iduserassign,idtickettype,idticketstatus,title,descmessage,date,time,elemstate,timestamp';
   const FROM = ' FROM ticket';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -220,6 +220,7 @@ class TicketStor {
       $request  = "UPDATE ticket SET ";
       $request .= "idusercreate= :idusercreate,";
       $request .= "iduserassign= :iduserassign,";
+      $request .= "idtickettype= :idtickettype,";
       $request .= "idticketstatus= :idticketstatus,";
       $request .= "title= :title,";
       $request .= "descmessage= :descmessage,";
@@ -233,6 +234,7 @@ class TicketStor {
       $params["id"] = $data->getId();
       $params["idusercreate"] = $data->getIdUserCreate();
       $params["iduserassign"] = $data->getIdUserAssign();
+      $params["idtickettype"] = $data->getIdTicketType();
       $params["idticketstatus"] = $data->getIdTicketStatus();
       $params["title"] = $data->getTitle();
       $params["descmessage"] = $data->getDescMessage();
@@ -353,10 +355,11 @@ class TicketStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO ticket(";
-      $request .= "idusercreate,iduserassign,idticketstatus,title,descmessage,date,time,elemstate,timestamp)";
+      $request .= "idusercreate,iduserassign,idtickettype,idticketstatus,title,descmessage,date,time,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":idusercreate,";
       $request .= ":iduserassign,";
+      $request .= ":idtickettype,";
       $request .= ":idticketstatus,";
       $request .= ":title,";
       $request .= ":descmessage,";
@@ -367,6 +370,7 @@ class TicketStor {
       $params = [];
       $params["idusercreate"] = $data->getIdUserCreate();
       $params["iduserassign"] = $data->getIdUserAssign();
+      $params["idtickettype"] = $data->getIdTicketType();
       $params["idticketstatus"] = $data->getIdTicketStatus();
       $params["title"] = $data->getTitle();
       $params["descmessage"] = $data->getDescMessage();

@@ -5,9 +5,9 @@
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/header.php');
 	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/main.php');
-	include('_header.php');
-	include('_headerMenuTop.php');
-	include('_headerMenuLeft.php');
+	include('../Home/_header.php');
+	include('../Home/_headerMenuTop.php');
+	include('../Home/_headerMenuLeft.php');
 ?>
   
   <div class="mobile-menu-overlay"></div>

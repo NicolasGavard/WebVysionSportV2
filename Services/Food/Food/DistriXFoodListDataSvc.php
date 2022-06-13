@@ -2,7 +2,6 @@
 // Service Init
 include(__DIR__ . "/../../Init/DataSvcInit.php");
 
-
 if ($dataSvc->isAuthorized()) {
   include(__DIR__ . "/Data/LanguageStorData.php");
   include(__DIR__ . "/Data/FoodStorData.php");
