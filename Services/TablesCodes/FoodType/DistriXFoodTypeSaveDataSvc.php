@@ -27,8 +27,7 @@ if ($dataSvc->isAuthorized()) {
           $currentFoodTypeStorData = FoodTypeStor::findByIndCode($foodTypeStorData, $dbConnection);
           if ($currentFoodTypeStorData->getId() > 0) {
             $canSave = false;
-            $distriXSvcErrorData = new DistriXSvcErrorData();
-            $distriXSvcErrorData->setCode("400");
+            $distriXSvcErrorData = new ApplicationErrorData("400", 1, 1);
             $distriXSvcErrorData->setDefaultText("The Code " . $foodTypeStorData->getCode() . " is already in use");
             $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
             $errorData = $distriXSvcErrorData;
@@ -39,8 +38,7 @@ if ($dataSvc->isAuthorized()) {
           if ($foodTypeStorData->getId() == $currentFoodTypeStorData->getId() 
            && $foodTypeStorData->getTimestamp() != $currentFoodTypeStorData->getTimestamp()) {
             $canSave = false;
-            $distriXSvcErrorData = new DistriXSvcErrorData();
-            $distriXSvcErrorData->setCode("401");
+            $distriXSvcErrorData = new ApplicationErrorData("401", 1, 1);
             $distriXSvcErrorData->setDefaultText("The data of " . $foodTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
             $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
             $errorData = $distriXSvcErrorData;
@@ -58,8 +56,7 @@ if ($dataSvc->isAuthorized()) {
                 if ($foodTypeNameStorData->getId() == $currentFoodTypeNameStorData->getId() 
                 && $foodTypeNameStorData->getTimestamp() != $currentFoodTypeNameStorData->getTimestamp()) {
                  $canSave = false;
-                 $distriXSvcErrorData = new DistriXSvcErrorData();
-                 $distriXSvcErrorData->setCode("402");
+                 $distriXSvcErrorData = new ApplicationErrorData("402", 1, 1);
                  $distriXSvcErrorData->setDefaultText("The language data of " . $foodTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
                  $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
                  $errorData = $distriXSvcErrorData;

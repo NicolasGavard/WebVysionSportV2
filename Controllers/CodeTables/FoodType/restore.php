@@ -4,6 +4,15 @@ include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
 include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
 
+$international  = 'CodeTables/codeTableFoodTypeList';
+$i18cdlangue    = 'FR';
+// If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+include(__DIR__ . "/../../../i18/_i18.php");
+$international  = 'Global/globalTranslation';
+$i18cdlangue    = 'FR';
+// If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+include(__DIR__ . "/../../../i18/_i18.php");
+
 $confirmSave = false;
 
 // TESTS
@@ -25,7 +34,11 @@ if (isset($_POST)) {
   if ($outputok && !empty($output) && isset($output["ConfirmSave"])) {
     $confirmSave = $output["ConfirmSave"];
   } else {
-    $error = $errorData;
+    list($error, $jsonError) = ApplicationErrorData::getJsonData($errorData);
+    $errorCode = "error_".$error->getCode()."_txt";
+    if (isset($$errorCode)) {
+      $error->setText(ApplicationErrorData::getErrorText($$errorCode, []));
+    }
   }
 }
 $resp["confirmSave"] = $confirmSave;

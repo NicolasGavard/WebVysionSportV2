@@ -10,8 +10,6 @@ $i18cdlangue    = 'FR';
 // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 include(__DIR__ . "/../../../i18/_i18.php");
 
-include(__DIR__ . "/../../_utilController.php");
-
 $confirmSave  = false;
 
 // UPDATE
@@ -59,16 +57,15 @@ $confirmSave  = false;
 // $_POST['names'] = $names;
 
 if (isset($_POST)) {
-  list($foodType, $jsonError) = DistriXCodeTableFoodTypeData::getJsonData($_POST);
-  // print_r($foodType);
-
-  list($foodTypeNames, $jsonError) = DistriXCodeTableFoodTypeNameData::getJsonArray($foodType->getNames());
-  $foodType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. Dev2 01 June 22
-
   // print_r($_POST);
+  // print_r($foodType);
   // print_r($foodTypeNames);
   // die();
 
+  list($foodType, $jsonError) = DistriXCodeTableFoodTypeData::getJsonData($_POST);
+  list($foodTypeNames, $jsonError) = DistriXCodeTableFoodTypeNameData::getJsonArray($foodType->getNames());
+  $foodType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. Dev2 01 June 22
+  
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setDebugMode(DISTRIX_SVC_DATA_LAYER_IN_DEBUG_MODE);
   // $servicesCaller->setDebugModeAllLayerOn();
@@ -76,7 +73,7 @@ if (isset($_POST)) {
   $servicesCaller->addParameter("dataNames", $foodTypeNames);
   $servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeSaveDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
-  // echo "-*/*/*/*/*/*/*/***/*/*/*/*/-"; print_r($output); echo "-*/*/*/*/*/*/*/***/*/*/*/*/-";
+  // echo "-*/-"; print_r($output); echo "-*/-";
 
   $logOk = logController("Security_FoodType", "DistriXFoodTypeSaveDataSvc", "SaveFoodType", $output);
 
@@ -84,11 +81,12 @@ if (isset($_POST)) {
     $confirmSave = $output["ConfirmSave"];
   } else {
     // $error = $errorData;
-    list($error, $jsonError) = DistriXSvcErrorData::getJsonData($errorData);
+    list($error, $jsonError) = ApplicationErrorData::getJsonData($errorData);
     $errorCode = "error_".$error->getCode()."_txt";
     if (isset($$errorCode)) {
       $codes[0] = $foodType->getCode();
-      $error->setDefaultText(getErrorText($$errorCode, $codes));
+      $codes[1] = $foodType->getId();
+      $error->setText(ApplicationErrorData::getErrorText($$errorCode, $codes));
     }
   }
 }

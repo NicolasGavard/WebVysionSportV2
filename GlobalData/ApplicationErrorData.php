@@ -23,12 +23,19 @@ if (!class_exists("ApplicationErrorData", false)) {
       $this->idPos = $idPos;
     }
 
-    public function __construct($errorCode, $idPos, $idUser)
+    public function __construct()
     {
       parent::__construct();
-      $this->setCode($errorCode);
-      $this->setIdPos($idPos);
-      $this->setIdUser($idUser);
+      $arguments = func_get_args();
+      if (func_num_args() > 0) {
+        $this->setCode($arguments[0]);
+        if (func_num_args() > 1) {
+          $this->setIdPos($arguments[1]);
+          if (func_num_args() > 2) {
+            $this->setIdUser($arguments[2]);
+          }
+        }
+      }
     }
 
     public static function noDatabaseConnection($idPos, $idUser)

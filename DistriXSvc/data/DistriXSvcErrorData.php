@@ -51,6 +51,27 @@ if (!class_exists("DistriXSvcErrorData", false)) {
       return $instance;
     }
 
+    public static function getErrorText(string $errorCode, array $datas):string {
+      $errorText = $errorCode;
+      $posStart = 0;
+    
+      foreach ($datas as $index => $data) {
+        $needle = "{".$index."}";
+        $pos = strpos($errorText, $needle, $posStart);
+        if ($pos !== FALSE) {
+          $endText = substr($errorText, $pos + strlen($needle));
+          $errorText = substr($errorText, 0, $pos);
+          $errorText .= $data;
+          $errorText .= $endText;
+          
+          $posStart = $pos + strlen($data);
+        } else {
+          break;
+        }
+      }
+      return $errorText;
+    }
+
     // Gets
     public function isTypeApplication(): bool
     {
