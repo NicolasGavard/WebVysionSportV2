@@ -190,14 +190,17 @@ function ViewMyRecipeFood(id, name){
   $(form).attr("method", "POST");
   $(form).css("display", "none");
 
-  var input_employee_name = $("<input>")
+  var input_recipe_id = $("<input>")
   .attr("type", "text")
   .attr("name", "idRecipe")
   .val(id);
-  $(form).append($(input_employee_name));
+  $(form).append($(input_recipe_id));
 
   form.appendTo( document.body );
-  $(form).submit();
+
+  alert(form);
+
+  // $(form).submit();
 }
 
 function ViewMyRecipe(id, name){
