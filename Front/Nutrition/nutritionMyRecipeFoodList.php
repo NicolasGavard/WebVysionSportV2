@@ -1,6 +1,6 @@
 <?php
 	session_start();
-  $international  = 'Nutrition/nutritionMyRecipesList';
+  $international  = 'Nutrition/nutritionMyRecipeFoodList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('../../i18/'.$i18cdlangue.'/header.php');
@@ -14,6 +14,20 @@
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
 			<div class="min-height-200px">
+
+        <div class="page-header">
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="../Nutrition/FoodList.php"><?php echo $page_title_prev; ?></a></li>
+									<li class="breadcrumb-item active" aria-current="page"><?php echo $page_title; ?></li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+
 				<!-- Simple Datatable start -->
         <div class="pd-20 card-box mb-30">
 					<div class="clearfix">
@@ -22,7 +36,6 @@
             </div>
               
             <div class="pull-right">
-              <!-- <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-info AddSearchMyRecipes" data-toggle="modal" data-target="#modalSearchMyRecipes"><i class="icon-copy dw-info dw dw-search"></i> <?php echo $page_all_filter; ?></buttons> -->
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> <?php echo $page_all_active; ?></buttons>
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> <?php echo $page_all_inactive; ?></button>
               <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyRecipes" data-toggle="modal" data-target="#modalAddMyRecipe"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
@@ -34,45 +47,19 @@
             <table class="table stripe hover nowrap" id="datatable">
 							<thead>
 								<tr>
-                  <th width="20%" class="table-plus datatable-nosort"><span><?php echo $page_picture; ?></span></th>
-                  <th width="15%"><span><?php echo $page_name; ?></span></th>
-                  <th width="45%"><span><?php echo $page_info_nutritional; ?></span></th>
-                  <th width="10%"><span><?php echo $page_rating; ?></span></th>
+                  <th width="50%" class="table-plus"><span><?php echo $page_name; ?></span></th>
+                  <th width="20%"><span><?php echo $page_weight; ?></span></th>
+                  <th width="20%"><span><?php echo $page_weightType; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
 							<tbody id="listMyRecipesTbody">
 							</tbody>
 						</table>
-            
-            <div id="listMyRecipesModal">
-
-					  </div>
-					</div>
+          </div>
 				</div>
 			</div>
       
-      <div class="modal fade bs-example-modal-lg" id="modalAddMyRecipeFood" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500 add_title"><?php echo $page_title_food; ?> <span class="InfoSuppTitle"></span></h4>
-
-              <table class="table stripe hover nowrap" id="listMyRecipeFood">
-							<thead>
-								<tr>
-                  <th width="45%" class="table-plus datatable-nosort"><span><?php echo $page_food; ?></span></th>
-                  <th width="15%"><span><?php echo $page_weight; ?></span></th>
-                  <th width="20%"><span><?php echo $page_weightType; ?></span></th>
-                  <th width="10%"><span><?php echo $page_action; ?></span></th>
-								</tr>
-							</thead>
-						</table>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="modal fade bs-example-modal-lg" id="modalAddMyRecipe" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -80,11 +67,10 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?> <span class="InfoSuppTitle"></span></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?> <span class="InfoSuppTitle"></span></h4>
               <form class="FormAddMyRecipe" action="#" id="FormAddMyRecipe">
-                <input class="form-control AddMyRecipeFormId"             type="hidden" name="id"           value="0">
-                <input class="form-control AddMyRecipeFormIdUserCoatch"   type="hidden" name="idusercoach"  value="0">
-                <input class="form-control AddMyRecipeFormTimestamp"      type="hidden" name="timestamp"    value="0">
-                <input class="form-control AddMyRecipeFormStatut"         type="hidden" name="elemState"    value="0">
-                <input class="form-control AddMyRecipeFormPictureBase64"  type="hidden" name="base64Img"    id="linkToPictureBase64">
+                <input class="form-control AddMyRecipeFormId"             type="hidden" name="id"         value="0">
+                <input class="form-control AddMyRecipeFormIdRecipe"       type="hidden" name="idRecipe"   value="0">
+                <input class="form-control AddMyRecipeFormTimestamp"      type="hidden" name="timestamp"  value="0">
+                <input class="form-control AddMyRecipeFormStatut"         type="hidden" name="elemState"  value="0">
                 <div class="row">
                   
                   <div class="col-md-6 col-sm-12">
@@ -149,6 +135,6 @@
         include('../Home/_headerFooter.php');
       ?>
       
-      <script src="../../jsWebVysionSport/Nutrition/nutritionMyRecipesList.js"></script>
+      <script src="../../jsWebVysionSport/Nutrition/nutritionMyRecipeFoodList.js"></script>
   </body>
 </html>
