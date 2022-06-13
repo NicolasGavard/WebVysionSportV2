@@ -4,14 +4,14 @@ include(__DIR__ . "/../../Init/ControllerInit.php");
 // STY APP
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableFoodCategoryData.php");
-include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableFoodCategoryNameData.php");
+include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableCategoryFoodTypeData.php");
+include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableCategoryFoodTypeNameData.php");
 
-include(__DIR__ . "/../../Data/Food/DistriXCodeTableLanguageData.php");
-include(__DIR__ . "/../../Data/Food/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/../../Data/Food/DistriXCodeTableNutritionalNameData.php");
-include(__DIR__ . "/../../Data/Food/DistriXCodeTableWeightTypeData.php");
-include(__DIR__ . "/../../Data/Food/DistriXCodeTableWeightTypeNameData.php");
+include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalData.php");
+include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalNameData.php");
+include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
+include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeNameData.php");
 
 include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodBrandData.php");
@@ -21,21 +21,6 @@ include(__DIR__ . "/../../Data/Food/DistriXFoodEcoScoreData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodNovaScoreData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodNutriScoreData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodWeightData.php");
-
-include(__DIR__ . "/../../Data/DistriXCodeTableWeightTypeData.php");
-include(__DIR__ . "/../../Data/DistriXCodeTableWeightTypeNameData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
-
-session_start();
-$error              = [];
-$output             = [];
-$outputok           = false;
 
 $resp               = [];
 $listFoodFormFront  = [];
