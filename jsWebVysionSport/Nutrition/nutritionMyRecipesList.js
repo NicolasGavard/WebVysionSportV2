@@ -171,7 +171,7 @@ function ListMyRecipe(elemState){
                     '       <i class="dw dw-more"></i>'+
                     '      </a>'+
                     '      <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyRecipeFood"  onclick="ViewMyRecipeFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-harvest"></i> Aliments</a>'+
+                    '        <a class="dropdown-item"                                                                               onclick="ViewMyRecipeFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-harvest"></i> Aliments</a>'+
                     '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyRecipe"      onclick="ViewMyRecipe(\''+val.id+'\', \''+val.name+'\');"     href="#"><i class="dw dw-edit2"></i> Voir</a>'+
                     '        <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"              onclick="DelMyRecipe(\''+val.id+'\', \''+val.name+'\');"      href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
                     '        <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"             onclick="RestMyRecipe(\''+val.id+'\', \''+val.name+'\');"     href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
@@ -185,22 +185,9 @@ function ListMyRecipe(elemState){
 }
 
 function ViewMyRecipeFood(id, name){
-  var form = $(document.createElement('form'));
-  $(form).attr("action", "nutritionMyRecipeFoodList.php");
-  $(form).attr("method", "POST");
-  $(form).css("display", "none");
-
-  var input_recipe_id = $("<input>")
-  .attr("type", "text")
-  .attr("name", "idRecipe")
-  .val(id);
-  $(form).append($(input_recipe_id));
-
-  form.appendTo( document.body );
-
-  alert(form);
-
-  // $(form).submit();
+  window.location.href = 'nutritionMyRecipeFoodList.php?idRecipe='+id;
+  // $(location).prop('href', './nutritionMyRecipeFoodList.php?idRecipe='+id);
+  // $('<form action="nutritionMyRecipeFoodList.php" method="post"><input type="hidden" name="idRecipe" value="'+id+'"></input></form>').appendTo('body').submit().remove();
 }
 
 function ViewMyRecipe(id, name){

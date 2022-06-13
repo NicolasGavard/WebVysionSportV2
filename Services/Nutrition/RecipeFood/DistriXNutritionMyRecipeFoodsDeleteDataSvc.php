@@ -3,20 +3,21 @@
 include(__DIR__ . "/../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
-  $dbConnection = null;
-  $errorData    = null;
-  $insere       = false;
+  // Storage
+  include(__DIR__ . "/Storage/RecipeFoodStor.php");
+  // STOR Data
+  include(__DIR__ . "/Data/RecipeFoodStorData.php");
     
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      list($dietStorData, $jsonError) = DietStorData::getJsonData($dataSvc->getParameter("data"));
-      $insere = DietStor::remove($dietStorData, $dbConnection);
+      list($recipeFoodStorData, $jsonError) = RecipeFoodStorData::getJsonData($dataSvc->getParameter("data"));
+      $insere = RecipeFoodStor::remove($recipeFoodStorData, $dbConnection);
       if ($insere) {
         $dbConnection->commit();
       } else {
         $dbConnection->rollBack();
-        if ($dietStorData->getId() > 0) {
+        if ($recipeFoodStorData->getId() > 0) {
           $errorData = ApplicationErrorData::warningUpdateData(1, 1);
         } else {
           $errorData = ApplicationErrorData::warningInsertData(1, 1);
