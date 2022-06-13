@@ -20,8 +20,8 @@
 						<div class="col-md-12 col-sm-12">
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="../Nutrition/FoodList.php"><?php echo $page_title_prev; ?></a></li>
-									<li class="breadcrumb-item active" aria-current="page"><?php echo $page_title; ?></li>
+									<li class="breadcrumb-item"><a href="../Nutrition/nutritionMyRecipesList.php"><?php echo $page_title_prev; ?></a></li>
+									<li class="breadcrumb-item active" aria-current="page"><?php echo $page_title; ?> <span class='infoRecipeName'></span></li>
 								</ol>
 							</nav>
 						</div>
@@ -32,13 +32,13 @@
         <div class="pd-20 card-box mb-30">
 					<div class="clearfix">
             <div class="pull-left">
-              <h4 class="text-blue h4"><?php echo $page_title; ?></h4>
+              <h4 class="text-blue h4"><?php echo $page_title; ?> <span class='infoRecipeName'></span></h4>
             </div>
               
             <div class="pull-right">
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> <?php echo $page_all_active; ?></buttons>
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> <?php echo $page_all_inactive; ?></button>
-              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyRecipes" data-toggle="modal" data-target="#modalAddMyRecipe"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
+              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyRecipeFood" data-toggle="modal" data-target="#modalAddMyRecipeFood"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
             </div>
           </div>
           
@@ -60,12 +60,12 @@
 				</div>
 			</div>
       
-      <div class="modal fade bs-example-modal-lg" id="modalAddMyRecipe" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade bs-example-modal-lg" id="modalAddMyRecipeFood" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?> <span class="InfoSuppTitle"></span></h4>
-              <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?> <span class="InfoSuppTitle"></span></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?> <span class="infoRecipeName"></span></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?> <span class="infoRecipeName"></span></h4>
               <form class="FormAddMyRecipe" action="#" id="FormAddMyRecipe">
                 <input class="form-control AddMyRecipeFormId"             type="hidden" name="id"         value="0">
                 <input class="form-control AddMyRecipeFormIdRecipe"       type="hidden" name="idRecipe"   value="0">
@@ -73,47 +73,29 @@
                 <input class="form-control AddMyRecipeFormStatut"         type="hidden" name="elemState"  value="0">
                 <div class="row">
                   
-                  <div class="col-md-6 col-sm-12">
+                  <div class="col-md-5 col-sm-12">
                     <div class="form-group">
-                      <label><?php echo $page_code; ?></label>
-                      <input class="form-control AddMyRecipeFormCode" type="text" name="code" placeholder="<?php echo $page_code; ?>">
-                      <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <label><?php echo $page_rating; ?></label>
-                      <select class="custom-select col-12 AddMyRecipeFormRating" name="rating">
-                        <option selected="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                      <label><?php echo $page_name; ?></label>
+                      <select class="custom-select col-12 AddMyRecipeFormFood" name="idFood">
+                        <option selected="">Choix</option>
                       </select>
                     </div>
                   </div>
-                  
-                  <div class="col-md-12 col-sm-12">
+                
+                  <div class="col-md-2 col-sm-12">
                     <div class="form-group">
-                      <label><?php echo $page_name; ?></label>
-                      <input class="form-control AddMyRecipeFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
-                      <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                      <label><?php echo $page_weight; ?></label>
+                      <input class="form-control AddMyRecipeFormWeight" type="text" name="weight" placeholder="<?php echo $page_weight; ?>">
+                      <div class="form-control-feed back danger-weight has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_weight; ?> </div>
                     </div>
                   </div>
-                  
-                  <div class="padding-top-20 padding-bottom-20 col-md-12 col-sm-12">
+
+                  <div class="col-md-5 col-sm-12">
                     <div class="form-group">
-                      <img src="" alt="" style="margin-top:20px; margin-bottom:20px; max-width:120px; max-height:150px; border-radius: 10px;" class="avatar-photo AddMyRecipePicture">
-                      <div class="dropzoneNoImage d-none">
-                        <input type="file" name="file" class="AddMyRecipeFormPicture" onchange="encodeImgtoBase64(this);" />
-                        </br>
-                        <button type="button" class="btn btn-info btnChangeImageCancel"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_cancel; ?></button>
-                      </div>
-                      <div class="dropzoneImage d-none">
-                        <button type="button" class="btn btn-info btnChangeImage"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_change_picture; ?></button>
-                      </div>
+                      <label><?php echo $page_weightType; ?></label>
+                      <select class="custom-select col-12 AddMyRecipeFormWeightType" name="idWeightType">
+                        <option selected="">Choix</option>
+                      </select>
                     </div>
                   </div>
 

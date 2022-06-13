@@ -16,11 +16,11 @@ if ($dataSvc->isAuthorized()) {
     list($recipeStorData, $jsonError)   = RecipeStorData::getJsonData($dataSvc->getParameter("data"));
     $recipeStor                         = RecipeStor::read($recipeStorData->getId(), $dbConnection);
     $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_RECIPE . '/' . $recipeStor->getLinkToPicture();
-      $pictures_headers = get_headers($urlPicture);
-      if ($recipeStor->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $recipeStor->getLinkToPicture() == '') {
-        $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_RECIPE . '/default.png';
-      }
-      $recipeStor->setLinkToPicture($urlPicture);
+    $pictures_headers = get_headers($urlPicture);
+    if ($recipeStor->getLinkToPicture() == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found' || $recipeStor->getLinkToPicture() == '') {
+      $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_RECIPE . '/default.png';
+    }
+    $recipeStor->setLinkToPicture($urlPicture);
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }

@@ -20,7 +20,7 @@ if ($dataSvc->isAuthorized()) {
     $dataSvc->addErrorToResponse($errorData);
   }
 
-  $dataSvc->addToResponse("ListMyRecipesFoods", $recipeFoodStor);
+  $dataSvc->addToResponse("ListMyRecipeFoods", $recipeFoodStor);
 }
 
 // Return response

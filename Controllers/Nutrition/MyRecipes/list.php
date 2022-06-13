@@ -33,7 +33,7 @@ $receipeCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDa
 $receipeCaller->addParameter("data", $distriXNutritionRecipeData);
 
 $recipeFoodCaller = new DistriXServicesCaller();
-$recipeFoodCaller->setServiceName("Nutrition/RecipeFood/DistriXNutritionMyRecipesFoodsListDataSvc.php");
+$recipeFoodCaller->setServiceName("Nutrition/RecipeFood/DistriXNutritionMyRecipeFoodsListDataSvc.php");
 
 $foodCaller = new DistriXServicesCaller();
 $foodCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");

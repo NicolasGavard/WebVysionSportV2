@@ -7,11 +7,10 @@ include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeFoodDat
 $confirmSave  = false;
 
 list($distriXNutritionMyRecipeFoodData, $errorJson) = DistriXNutritionRecipeFoodData::getJsonData($_POST);
-if($_POST['base64Img'] != '') { $distriXNutritionMyRecipeFoodData->setLinkToPicture($_POST['base64Img']);}
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $distriXNutritionMyRecipeFoodData);
-$servicesCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesFoodSaveDataSvc.php");
+$servicesCaller->setServiceName("Nutrition/RecipeFood/DistriXNutritionMyRecipeFoodsSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_MyRecipe", "DistriXNutritionMyRecipesFoodSaveDataSvc", "SaveMyRecipeFood", $output);
