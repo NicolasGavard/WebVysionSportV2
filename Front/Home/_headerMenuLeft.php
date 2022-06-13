@@ -306,6 +306,7 @@
           $hasRight_CODE_TABLE_MEAL_TYPE          = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_MEAL_TYPE');
           $hasRight_CODE_TABLE_LANGUES            = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_LANGUES');
           $hasRight_CODE_TABLE_TICKET_STATUS      = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_TICKET_STATUS');
+          $hasRight_CODE_TABLE_TICKET_TYPE        = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'CODE_TABLE_TICKET_TYPE');
           $hasCodeTable                           = false;
           if(
             $hasRight_CODE_TABLE_WEIGHT_TYPE        || 
@@ -313,6 +314,7 @@
             $hasRight_CODE_TABLE_NUTRITIONAL        || 
             $hasRight_CODE_TABLE_FOOD_TYPE          || 
             $hasRight_CODE_TABLE_LANGUES            ||
+              $hasRight_CODE_TABLE_TICKET_TYPE      ||
               $hasRight_CODE_TABLE_TICKET_STATUS) {
               $hasAdministration            = true;
               $hasCodeTable                 = true;
@@ -338,6 +340,7 @@
           $hasRight_CODE_TABLE_LANGUES        = true;
           $hasRight_CODE_TABLE_FOOD_TYPE      = true;
           $hasRight_CODE_TABLE_MEAL_TYPE      = true;
+          $hasRight_CODE_TABLE_TICKET_TYPE    = true;
           $hasRight_CODE_TABLE_TICKET_STATUS  = true;
           
           $hasAdministration                  = true;
@@ -418,7 +421,7 @@
             $show       =  '';
             $style      = 'none';
             $navActiveMenuCodeTableWeightType   = $navActiveMenuCodeTableCategoryFoodType = $navActiveMenuCodeTableFoodType = $navActiveMenuCodeTableMealType = "";
-            $navActiveMenuCodeTableNutritionale = $navActiveMenuCodeTableLanguage         = $navActiveMenuCodeTableTicketStatus = "";
+            $navActiveMenuCodeTableNutritionale = $navActiveMenuCodeTableLanguage         = $navActiveMenuCodeTableTicketStatus = $navActiveMenuCodeTableTicketType ="";
             $navActiveMenuCodeTableFoodType     = "";
             if (stripos($_SERVER['PHP_SELF'], 'codeTableWeightTypeList')        !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableWeightType        = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'codeTableCategoryFoodTypeList')  !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableCategoryFoodType  = 'class="active"'; }
@@ -427,6 +430,7 @@
             if (stripos($_SERVER['PHP_SELF'], 'codeTableNutritionalList')       !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableNutritionale      = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'codeTableLanguageList')          !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableLanguage          = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'codeTableTicketStatusList')      !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableTicketStatus      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableTicketTypeList')        !== false) { $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableTicketType      = 'class="active"'; }
           ?>
           <li>
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
@@ -441,6 +445,7 @@
               <?php if ($hasRight_CODE_TABLE_NUTRITIONAL)       { ?><li <?php echo $navActiveMenuCodeTableNutritionale ?>><a class="nav-link" href="../CodeTables/codeTableNutritionalList.php"><?php echo $menu_codeTables_nutritional_list; ?></a></li><?php } ?>
               <?php if ($hasRight_CODE_TABLE_LANGUES)           { ?><li <?php echo $navActiveMenuCodeTableLanguage ?>><a class="nav-link" href="../CodeTables/codeTableLanguageList.php"><?php echo $menu_codeTables_language_list; ?></a></li><?php } ?>
               <?php if ($hasRight_CODE_TABLE_TICKET_STATUS)     { ?><li <?php echo $navActiveMenuCodeTableTicketStatus ?>><a class="nav-link" href="../CodeTables/codeTableTicketStatusList.php"><?php echo $menu_codeTables_ticket_status_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_TICKET_TYPE)       { ?><li <?php echo $navActiveMenuCodeTableTicketType ?>><a class="nav-link" href="../CodeTables/codeTableTicketTypeList.php"><?php echo $menu_codeTables_ticket_type_list; ?></a></li><?php } ?>
             </ul>
           </li>
         <?php } ?>

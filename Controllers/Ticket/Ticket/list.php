@@ -2,24 +2,35 @@
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // STY APP
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
 include(__DIR__ . "/../../Data/Ticket/Ticket/DistriXTicketTicketData.php");
 include(__DIR__ . "/../../Data/Ticket/TicketComment/DistriXTicketTicketCommentData.php");
+include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
+include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusNameData.php");
+include(__DIR__ . "/../../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeData.php");
+include(__DIR__ . "/../../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeNameData.php");
 
+$listTicketType         = [];
+$listTicketTypeNames    = [];
+$listTicketTypeFormFront= [];
 $listTicketStatus       = [];
 $listTickets            = [];
 $listTicketsComment     = [];
 $listTicketsFormFront   = [];
-$ListUsers              = [];
+$listUsers              = [];
 
 if (isset($_POST)) {
-  $ListUsers            = DistriXStyAppUser::listUsers();
+  $infoProfil           = DistriXStyAppInterface::getUserInformation();
+  $listUsers            = DistriXStyAppUser::listUsers();
 
   // CALL
   $ticketStatusCaller = new DistriXServicesCaller();
   $ticketStatusCaller->setServiceName("TablesCodes/TicketStatus/DistriXTicketStatusListDataSvc.php");
+
+  $ticketTypeCaller = new DistriXServicesCaller();
+  $ticketTypeCaller->setServiceName("TablesCodes/TicketType/DistriXTicketTypeListDataSvc.php");
 
   $ticketsCaller = new DistriXServicesCaller();
   $ticketsCaller->setServiceName("Ticket/Ticket/DistriXTicketListDataSvc.php");
@@ -29,6 +40,7 @@ if (isset($_POST)) {
   
   $svc = new DistriXSvc();
   $svc->addToCall("TicketStatus", $ticketStatusCaller);
+  $svc->addToCall("TicketType", $ticketTypeCaller);
   $svc->addToCall("Ticket", $ticketsCaller);
   $svc->addToCall("TicketComment", $ticketsCommentCaller);
   $callsOk = $svc->call();
@@ -37,6 +49,23 @@ if (isset($_POST)) {
   list($outputok, $output, $errorData) = $svc->getResult("TicketStatus"); //print_r($output);
   if ($outputok && isset($output["ListTicketStatus"]) && is_array($output["ListTicketStatus"])) {
     list($listTicketStatus, $jsonError) = DistriXCodeTableTicketStatusData::getJsonArray($output["ListTicketStatus"]);
+  } else {
+    $error = $errorData;
+  }
+  if ($outputok && isset($output["ListTicketStatusNames"]) && is_array($output["ListTicketStatusNames"])) {
+    list($listTicketStatusNames, $jsonError) = DistriXCodeTableTicketStatusNameData::getJsonArray($output["ListTicketStatusNames"]);
+  } else {
+    $error = $errorData;
+  }
+
+  list($outputok, $output, $errorData) = $svc->getResult("TicketType"); //print_r($output);
+  if ($outputok && isset($output["ListTicketTypes"]) && is_array($output["ListTicketTypes"])) {
+    list($listTicketType, $jsonError) = DistriXCodeTableTicketTypeData::getJsonArray($output["ListTicketTypes"]);
+  } else {
+    $error = $errorData;
+  }
+  if ($outputok && isset($output["ListTicketTypeNames"]) && is_array($output["ListTicketTypeNames"])) {
+    list($listTicketTypeNames, $jsonError) = DistriXCodeTableTicketTypeNameData::getJsonArray($output["ListTicketTypeNames"]);
   } else {
     $error = $errorData;
   }
@@ -56,35 +85,62 @@ if (isset($_POST)) {
   }
   
   // TREATMENT
+  foreach ($listTicketType as $ticketType) {
+    foreach ($listTicketTypeNames as $ticketTypeName) {
+      if ($ticketType->getId() == $ticketTypeName->getIdTicketType() && $ticketTypeName->getIdLanguage() == $infoProfil->getIdLanguage()){
+        $distriXCodeTableTicketTypeData =  new DistriXCodeTableTicketTypeData();
+        $distriXCodeTableTicketTypeData->setId($ticketType->getId());
+        $distriXCodeTableTicketTypeData->setCode($ticketType->getCode());
+        $distriXCodeTableTicketTypeData->setName($ticketTypeName->getName());
+        $listTicketTypeFormFront[] = $distriXCodeTableTicketTypeData;
+      }
+    }
+  }
+  
   foreach ($listTickets as $ticket) {
     $ticketAdvancement  = [];
     $ticketComment      = [];
-    $distriXTicketTicketStatusData = new DistriXTicketTicketData();
-    $distriXTicketTicketStatusData->setId($ticket->getId());
-    $distriXTicketTicketStatusData->setIdUserCreate($ticket->getIdUserCreate());
-    $distriXTicketTicketStatusData->setIdUserAssign($ticket->getIdUserAssign());
-    foreach ($ListUsers as $user) {
+    $distriXTicketTicketData = new DistriXTicketTicketData();
+    $distriXTicketTicketData->setId($ticket->getId());
+    $distriXTicketTicketData->setIdUserCreate($ticket->getIdUserCreate());
+    $distriXTicketTicketData->setIdUserAssign($ticket->getIdUserAssign());
+    foreach ($listUsers as $user) {
       if ($user->getId() == $ticket->getIdUserCreate()){
-        $distriXTicketTicketStatusData->setNameUserCreate($user->getName());
-        $distriXTicketTicketStatusData->setFirstNameUserCreate($user->getFirstName());
+        $distriXTicketTicketData->setNameUserCreate($user->getName());
+        $distriXTicketTicketData->setFirstNameUserCreate($user->getFirstName());
       }
       if ($user->getId() == $ticket->getIdUserAssign()){
-        $distriXTicketTicketStatusData->setNameUserAssign($user->getName());
-        $distriXTicketTicketStatusData->setFirstNameUserAssign($user->getFirstName());
+        $distriXTicketTicketData->setNameUserAssign($user->getName());
+        $distriXTicketTicketData->setFirstNameUserAssign($user->getFirstName());
       }
     }
     
-    $distriXTicketTicketStatusData->setIdTicketStatus($ticket->getIdTicketStatus());
+    $distriXTicketTicketData->setIdTicketType($ticket->getIdTicketType());
+    foreach ($listTicketType as $ticketType) {
+      if ($ticketType->getId() == $ticket->getIdTicketType()){
+        foreach ($listTicketTypeNames as $ticketTypeName) {
+          if ($ticketType->getId() == $ticketTypeName->getIdTicketType() && $ticketTypeName->getIdLanguage() == $infoProfil->getIdLanguage()){
+            $distriXTicketTicketData->setNameTicketType($ticketTypeName->getName());
+          }
+        }
+      }
+    }
+
+    $distriXTicketTicketData->setIdTicketStatus($ticket->getIdTicketStatus());
     foreach ($listTicketStatus as $ticketStatus) {
       if ($ticketStatus->getId() == $ticket->getIdTicketStatus()){
-        $distriXTicketTicketStatusData->setNameTicketStatus($ticketStatus->getName());
+        foreach ($listTicketStatusNames as $ticketStatusName) {
+          if ($ticketStatus->getId() == $ticketStatusName->getIdTicketStatus() && $ticketStatusName->getIdLanguage() == $infoProfil->getIdLanguage()){
+            $distriXTicketTicketData->setNameTicketStatus($ticketStatusName->getName());
+          }
+        }
       }
     }
     
-    $distriXTicketTicketStatusData->setTitle($ticket->getTitle());
-    $distriXTicketTicketStatusData->setDescMessage($ticket->getDescMessage());
-    $distriXTicketTicketStatusData->setDate($ticket->getDate());
-    $distriXTicketTicketStatusData->setTime($ticket->getTime());
+    $distriXTicketTicketData->setTitle($ticket->getTitle());
+    $distriXTicketTicketData->setDescMessage($ticket->getDescMessage());
+    $distriXTicketTicketData->setDate($ticket->getDate());
+    $distriXTicketTicketData->setTime($ticket->getTime());
     
     foreach ($listTicketsComment as $ticketComment) {
       if ($ticket->getId() == $ticketComment->getIdTicket()) {
@@ -93,7 +149,7 @@ if (isset($_POST)) {
         $distriXTicketTicketCommentData->setIdTicket($ticketComment->getIdTicket());
         $distriXTicketTicketCommentData->setIdUserCreate($ticketComment->getIdUserCreate());
         
-        foreach ($ListUsers as $user) {
+        foreach ($listUsers as $user) {
           if ($user->getId() == $ticketComment->getIdUserCreate()){
             $distriXTicketTicketCommentData->setNameUserCreate($user->getName());
             $distriXTicketTicketCommentData->setFirstNameUserCreate($user->getFirstName());
@@ -112,18 +168,21 @@ if (isset($_POST)) {
         $ticketComment[] = $distriXTicketTicketCommentData;
       }
     }
-    $distriXTicketTicketStatusData->setComment($ticketComment);
+    $distriXTicketTicketData->setComment($ticketComment);
     
     $picture      = [];
     $advancement  = [];
-    $distriXTicketTicketStatusData->setAdvancement($advancement);
-    $distriXTicketTicketStatusData->setPicture($picture);
-    $distriXTicketTicketStatusData->setElemState($ticket->getElemState());
-    $distriXTicketTicketStatusData->setTimestamp($ticket->getTimestamp());
-    $listTicketsFormFront[] = $distriXTicketTicketStatusData;
+    $distriXTicketTicketData->setAdvancement($advancement);
+    $distriXTicketTicketData->setPicture($picture);
+    $distriXTicketTicketData->setElemState($ticket->getElemState());
+    $distriXTicketTicketData->setTimestamp($ticket->getTimestamp());
+    $listTicketsFormFront[] = $distriXTicketTicketData;
   }
 }
-$resp["ListTickets"]    = $listTicketsFormFront;
+
+$resp["ListTickets"]      = $listTicketsFormFront;
+$resp["ListTicketTypes"]  = $listTicketTypeFormFront;
+$resp["ListUsers"]        = $listUsers;
 if (!empty($error)) {
   $resp["Error"] = $error;
 } 

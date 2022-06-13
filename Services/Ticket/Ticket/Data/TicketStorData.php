@@ -6,6 +6,7 @@ class TicketStorData extends DistriXSvcAppData {
   protected $id;
   protected $idusercreate;
   protected $iduserassign;
+  protected $idtickettype;
   protected $idticketstatus;
   protected $title;
   protected $descmessage;
@@ -18,6 +19,7 @@ class TicketStorData extends DistriXSvcAppData {
       $this->id = 0;
       $this->idusercreate = 0;
       $this->iduserassign = 0;
+      $this->idtickettype = 0;
       $this->idticketstatus = 0;
       $this->title = "";
       $this->descmessage = "";
@@ -30,6 +32,7 @@ class TicketStorData extends DistriXSvcAppData {
   public function getId():int { return $this->id; }
   public function getIdUserCreate():int { return $this->idusercreate; }
   public function getIdUserAssign():int { return $this->iduserassign; }
+  public function getIdTicketType():int { return $this->idtickettype; }
   public function getIdTicketStatus():int { return $this->idticketstatus; }
   public function getTitle():string { return $this->title; }
   public function getDescMessage() { return $this->descmessage; }
@@ -44,6 +47,7 @@ class TicketStorData extends DistriXSvcAppData {
   public function setId(int $id) { $this->id = $id; }
   public function setIdUserCreate(int $idUserCreate) { $this->idusercreate = $idUserCreate; }
   public function setIdUserAssign(int $idUserAssign) { $this->iduserassign = $idUserAssign; }
+  public function setIdTicketType(int $idTicketType) { $this->idtickettype = $idTicketType; }
   public function setIdTicketStatus(int $idTicketStatus) { $this->idticketstatus = $idTicketStatus; }
   public function setTitle(string $title) { $this->title = $title; }
   public function setDescMessage($descMessage) { $this->descmessage = $descMessage; }

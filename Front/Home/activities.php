@@ -1,15 +1,14 @@
 <?php
-	session_start();
-  $international  = '';
+  session_start();
+  $international  = 'Profil/Activity/profilMyActivitiesList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/header.php');
-	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/main.php');
-	include('_header.php');
-	include('_headerMenuTop.php');
-	include('_headerMenuLeft.php');
+  include('../../i18/'.$i18cdlangue.'/header.php');
+  include('../../i18/_i18.php');
+  include('../Home/_header.php');
+	include('../Home/_headerMenuTop.php');
+	include('../Home/_headerMenuLeft.php');
 ?>
-  
   <div class="mobile-menu-overlay"></div>
 
 	<div class="main-container">
@@ -19,118 +18,38 @@
 					<div class="clearfix">
 						<div class="task-title row align-items-center">
 							<div class="col-md-8 col-sm-12">
-								<h5>Open Tasks (5 Left)</h5>
+								<h5>
+                  <?php echo $page_title_opened; ?>
+                  <span class="NbTicketsOpened"> (5)</span>
+                </h5>
 							</div>
 							<div class="col-md-4 col-sm-12 text-right">
-								<a href="task-add" data-toggle="modal" data-target="#task-add" class="bg-light-blue btn text-blue weight-500"><i class="ion-plus-round"></i> Add</a>
+								<a href="task-add" data-toggle="modal" data-target="#task-add" class="bg-light-blue btn text-blue weight-500"><i class="ion-plus-round"></i> <?php echo $page_add_title; ?></a>
 							</div>
 						</div>
 
 						<div class="pb-20">
 							<div class="profile-task-list pb-30">
-								<ul>
-									<li>
-										<div class="custom-control custom-checkbox mb-5">
-											<input type="checkbox" class="custom-control-input" id="task-1">
-											<label class="custom-control-label" for="task-1"></label>
-										</div>
-										<div class="task-type">BackOffice</div>
-										Finir migration de l'administration sur la nouvelle template + 2 petits soucis sur l'ajout des aliments.
-										<div class="task-assign">Assigné par Nicolas G. <div class="due-date"><span>22/05/2022</span></div></div>
-									</li>
-									<li>
-										<div class="custom-control custom-checkbox mb-5">
-											<input type="checkbox" class="custom-control-input" id="task-1">
-											<label class="custom-control-label" for="task-1"></label>
-										</div>
-										<div class="task-type">BackOffice</div>
-										Voir pour développer un module de migration des aliments de openfoodfacts.
-										<div class="task-assign">Assigné par Nicolas G. <div class="due-date"><span>22/05/2022</span></div></div>
-									</li>
-									<li>
-										<div class="custom-control custom-checkbox mb-5">
-											<input type="checkbox" class="custom-control-input" id="task-2">
-											<label class="custom-control-label" for="task-2"></label>
-										</div>
-										<div class="task-type">BackOffice</div>
-										Finir migration du profil sur la nouvelle template.
-										<div class="task-assign">Assigné par Nicolas G. <div class="due-date"><span>22/05/2022</span></div></div>
-									</li>
-									<li>
-										<div class="custom-control custom-checkbox mb-5">
-											<input type="checkbox" class="custom-control-input" id="task-3">
-											<label class="custom-control-label" for="task-3"></label>
-										</div>
-										<div class="task-type">BackOffice</div>
-										Voir pour assigner un élève à un coach ... !!!
-										<div class="task-assign">Assigné par Nicolas G. <div class="due-date">due date <span>22/05/2022</span></div></div>
-									</li>
-									<li>
-										<div class="custom-control custom-checkbox mb-5">
-											<input type="checkbox" class="custom-control-input" id="task-3">
-											<label class="custom-control-label" for="task-3"></label>
-										</div>
-										<div class="task-type">BackOffice</div>
-										Voir pour mettre en place la possibilité de saisir plusieurs type d'adresses (Perso, facturation, livraison, ...)
-										<div class="task-assign">Assigné par Nicolas G. <div class="due-date">due date <span>22/05/2022</span></div></div>
-									</li>
-								</ul>
+								<ul id="SeeActivitiesOpened"></ul>
 							</div>
-							<!-- Open Task End -->
-							<!-- Close Task start -->
-							<div class="task-title row align-items-center">
+							
+              <div class="task-title row align-items-center">
 								<div class="col-md-12 col-sm-12">
-									<h5>Closed Tasks</h5>
+									<h5><?php echo $page_title_closed; ?></h5>
 								</div>
 							</div>
+
 							<div class="profile-task-list close-tasks">
-								<ul>
-									<li>
-										<div class="custom-control custom-checkbox mb-5">
-											<input type="checkbox" class="custom-control-input" id="task-close-1" checked="" disabled="">
-											<label class="custom-control-label" for="task-close-1"></label>
-										</div>
-										<div class="task-type">Email</div>
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id ea earum.
-										<div class="task-assign">Assigné par Nicolas G. <div class="due-date">due date <span>22/05/2022</span></div></div>
-									</li>
-									<li>
-										<div class="custom-control custom-checkbox mb-5">
-											<input type="checkbox" class="custom-control-input" id="task-close-2" checked="" disabled="">
-											<label class="custom-control-label" for="task-close-2"></label>
-										</div>
-										<div class="task-type">Email</div>
-										Lorem ipsum dolor sit amet.
-										<div class="task-assign">Assigné par Nicolas G. <div class="due-date">due date <span>22/05/2022</span></div></div>
-									</li>
-									<li>
-										<div class="custom-control custom-checkbox mb-5">
-											<input type="checkbox" class="custom-control-input" id="task-close-3" checked="" disabled="">
-											<label class="custom-control-label" for="task-close-3"></label>
-										</div>
-										<div class="task-type">Email</div>
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-										<div class="task-assign">Assigné par Nicolas G. <div class="due-date">due date <span>22/05/2022</span></div></div>
-									</li>
-									<li>
-										<div class="custom-control custom-checkbox mb-5">
-											<input type="checkbox" class="custom-control-input" id="task-close-4" checked="" disabled="">
-											<label class="custom-control-label" for="task-close-4"></label>
-										</div>
-										<div class="task-type">Email</div>
-										Lorem ipsum dolor sit amet. Id ea earum.
-										<div class="task-assign">Assigné par Nicolas G. <div class="due-date">due date <span>22/05/2022</span></div></div>
-									</li>
-								</ul>
-							</div>
-							<!-- Close Task start -->
-							<!-- add task popup start -->
+                <ul id="SeeActivitiesClosed"></ul>
+              </div>
+							
+              <!-- add task popup start -->
 							<div class="modal fade customscroll" id="task-add" tabindex="-1" role="dialog">
 								<div class="modal-dialog modal-dialog-centered" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLongTitle">Tasks Add</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Close Modal">
+											<h5 class="modal-title" id="exampleModalLongTitle"><?php echo $page_add_title; ?></h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="<?php echo $page_close_modal; ?>">
 												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
@@ -140,19 +59,25 @@
 													<li>
 														<form>
 															<div class="form-group row">
-																<label class="col-md-4">Task Type</label>
+																<label class="col-md-4"><?php echo $page_type; ?></label>
 																<div class="col-md-8">
 																	<input type="text" class="form-control">
 																</div>
 															</div>
 															<div class="form-group row">
-																<label class="col-md-4">Task Message</label>
+																<label class="col-md-4"><?php echo $page_title; ?></label>
+																<div class="col-md-8">
+                                <input type="text" class="form-control">
+																</div>
+															</div>
+															<div class="form-group row">
+																<label class="col-md-4"><?php echo $page_desc; ?></label>
 																<div class="col-md-8">
 																	<textarea class="form-control"></textarea>
 																</div>
 															</div>
 															<div class="form-group row">
-																<label class="col-md-4">Assigned to</label>
+																<label class="col-md-4"><?php echo $page_assigned_to; ?></label>
 																<div class="col-md-8">
 																	<select class="selectpicker form-control" data-style="btn-outline-primary" title="Not Chosen" multiple="" data-selected-text-format="count" data-count-selected-text= "{0} people selected">
 																		<option>Ferdinand M.</option>
@@ -164,59 +89,14 @@
 																	</select>
 																</div>
 															</div>
-															<div class="form-group row mb-0">
-																<label class="col-md-4">Due Date</label>
-																<div class="col-md-8">
-																	<input type="text" class="form-control date-picker">
-																</div>
-															</div>
 														</form>
 													</li>
-													<li>
-														<a href="javascript:;" class="remove-task"  data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Remove Task"><i class="ion-minus-circled"></i></a>
-														<form>
-															<div class="form-group row">
-																<label class="col-md-4">Task Type</label>
-																<div class="col-md-8">
-																	<input type="text" class="form-control">
-																</div>
-															</div>
-															<div class="form-group row">
-																<label class="col-md-4">Task Message</label>
-																<div class="col-md-8">
-																	<textarea class="form-control"></textarea>
-																</div>
-															</div>
-															<div class="form-group row">
-																<label class="col-md-4">Assigned to</label>
-																<div class="col-md-8">
-																	<select class="selectpicker form-control" data-style="btn-outline-primary" title="Not Chosen" multiple="" data-selected-text-format="count" data-count-selected-text= "{0} people selected">
-																		<option>Ferdinand M.</option>
-																		<option>Don H. Rabon</option>
-																		<option>Ann P. Harris</option>
-																		<option>Katie D. Verdin</option>
-																		<option>Christopher S. Fulghum</option>
-																		<option>Matthew C. Porter</option>
-																	</select>
-																</div>
-															</div>
-															<div class="form-group row mb-0">
-																<label class="col-md-4">Due Date</label>
-																<div class="col-md-8">
-																	<input type="text" class="form-control date-picker">
-																</div>
-															</div>
-														</form>
-													</li>
-												</ul>
-											</div>
-											<div class="add-more-task">
-												<a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Add Task"><i class="ion-plus-circled"></i> Add More Task</a>
+                        </ul>
 											</div>
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-primary">Add</button>
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $page_all_close; ?></button>
+											<button type="button" class="btn btn-primary"><?php echo $page_all_add; ?></button>
 										</div>
 									</div>
 								</div>
@@ -231,3 +111,6 @@
 <?php
 	include('../Home/_headerFooter.php');
 ?>
+    <script src="../../jsWebVysionSport/Home/actititiesList.js"></script>
+  </body>
+</html>

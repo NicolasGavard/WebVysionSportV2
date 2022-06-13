@@ -1,6 +1,172 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class TicketStatusNameStor {
+class TicketTypeStor {
+  const TABLE_NAME_TABLENAME = "tickettypename";
+  const FIELDS_TABLENAME = ',tickettypename.id tickettypenameid,idtickettype tickettypenameidtickettype,idlanguage tickettypenameidlanguage,tickettypename.name tickettypename,tickettypename.elemstate tickettypenameelemstate,tickettypename.timestamp tickettypenametimestamp';
 
+  public static function getListNames(bool $all, TicketTypeNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new TicketTypeStorData();
+    $list = [];
+    $listNames = [];
+  
+    if ($inDbConnection != null) {
+      $request  = "SELECT tickettype.id,tickettype.code,tickettype.name,tickettype.elemstate,tickettype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idtickettype";
+      if ($dataIn->getIdLanguage() > 0) {
+        $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataIn->getIdLanguage();
+      }
+      if (!$all) {
+        $request .= " WHERE ".self::TABLE_NAME.".elemstate = :statut";
+      }
+      $request .= " ORDER BY  ".self::TABLE_NAME.".code";
+
+      $stmt = $inDbConnection->prepare($request);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $oldValue = "";
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new TicketTypeNameStorData();
+          if (! is_null($row["tickettypenameid"])) {
+            $dataName->setId($row["tickettypenameid"]);
+            $dataName->setIdTicketType($row["tickettypenameidtickettype"]);
+            $dataName->setIdLanguage($row["tickettypenameidlanguage"]);
+            $dataName->setName($row["tickettypename"]);
+            $dataName->setElemState($row["tickettypenameelemstate"]);
+            $dataName->setTimestamp($row["tickettypenametimestamp"]);
+          }
+          if ($oldValue != $row["code"]) {
+             $oldValue = $row["code"];
+             if ($data->getId() > 0) {
+               $list[] = $data;
+               $data = new TicketTypeStorData();
+             }
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+          if (! is_null($row["tickettypenameid"])) {
+            $listNames[] = $dataName;
+          }
+        }
+        $list[] = $data;
+      }
+    }
+    return array($list, $listNames);
+  }
+
+  public static function findByIndCodeNames(TicketTypeStorData $dataIn, TicketTypeNameStorData $dataNameIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new TicketTypeStorData();
+    $listNames = [];
+
+    if ($inDbConnection != null) {
+      $request  = "SELECT tickettype.id,tickettype.code,tickettype.name,tickettype.elemstate,tickettype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idtickettype";
+      if ($dataNameIn->getIdLanguage() > 0) {
+        $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataNameIn->getIdLanguage();
+      }
+      $request .= " WHERE tickettype.code = :index0";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['index0'=>  $dataIn->getCode()]);
+      if (self::SHOW_FIND_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new TicketTypeNameStorData();
+          if (! is_null($row["tickettypenameid"])) {
+            $dataName->setId($row["tickettypenameid"]);
+            $dataName->setIdTicketType($row["tickettypenameidtickettype"]);
+            $dataName->setIdLanguage($row["tickettypenameidlanguage"]);
+            $dataName->setName($row["tickettypename"]);
+            $dataName->setElemState($row["tickettypenameelemstate"]);
+            $dataName->setTimestamp($row["tickettypenametimestamp"]);
+            $listNames[] = $dataName;
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+        }
+      }
+    }
+    return array($data, $listNames);
+  }
+  // End of findByIndCodeNames
+
+  public static function readNames(int $id, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new TicketTypeStorData();
+    $listNames = [];
+
+    if ($inDbConnection != null) {
+      $request  = "SELECT tickettype.id,tickettype.code,tickettype.name,tickettype.elemstate,tickettype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idtickettype";
+      $request .= " WHERE ".self::TABLE_NAME.".id = :id";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['id'=> $id]);
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new TicketTypeNameStorData();
+          if (! is_null($row["tickettypenameid"])) {
+            $dataName->setId($row["tickettypenameid"]);
+            $dataName->setIdTicketType($row["tickettypenameidtickettype"]);
+            $dataName->setIdLanguage($row["tickettypenameidlanguage"]);
+            $dataName->setName($row["tickettypename"]);
+            $dataName->setElemState($row["tickettypenameelemstate"]);
+            $dataName->setTimestamp($row["tickettypenametimestamp"]);
+            $listNames[] = $dataName;
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+        }
+      }
+      $trace = $inDbConnection->getTrace();
+      if (!is_null($trace) && !$trace->getManualTrace()) {
+        $traceData = new DistriXTraceData();
+        $traceData->setIdUser($trace->getIdUser());
+        $traceData->setApplication($trace->getApplicationName());
+        $traceData->setSchema($trace->getDbSchemaName());
+        $traceData->setOperationCode($traceData::TRACE_READ);
+        $traceData->setOperationId($id);
+        $traceData->setOperationTable(self::TABLE_NAME);
+        $traceData->setOperationData(print_r($data, true));
+        $traceData->setOperationDate(DistriXSvcUtil::getCurrentNumDate());
+        $traceData->setOperationTime(DistriXSvcUtil::getCurrentNumTime());
+        $trace->addToTrace($traceData);
+      }
+    }
+    return array($data, $listNames);
+  }
+  // End of readNames
 //=============================================================================
 //== DO NOT REMOVE !
 //== CODE UNDER WILL BE AUTOMATICALLY REGENERATED !
@@ -10,9 +176,9 @@ class TicketStatusNameStor {
 //==
 //=============================================================================
 //=============================================================================
-  const TABLE_NAME = "ticketstatusname";
-  const SELECT = 'SELECT id,idticketstatus,idlanguage,name,elemstate,timestamp';
-  const FROM = ' FROM ticketstatusname';
+  const TABLE_NAME = "tickettype";
+  const SELECT = 'SELECT id,code,name,elemstate,timestamp';
+  const FROM = ' FROM tickettype';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
   const SHOW_CREATE_REQUEST = FALSE;
@@ -25,7 +191,7 @@ class TicketStatusNameStor {
   public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketStatusNameStorData();
+    $data = new TicketTypeStorData();
     $list = [];
 
     if ($inDbConnection != null) {
@@ -46,7 +212,7 @@ class TicketStatusNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketTypeStorData");
       }
     }
     return array($list, count($list));
@@ -56,12 +222,12 @@ class TicketStatusNameStor {
   public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketStatusNameStorData();
+    $data = new TicketTypeStorData();
     $list = [];
 
     if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
       if ($className == "" || is_null($className)) {
-        $className = "TicketStatusNameStorData";
+        $className = "TicketTypeStorData";
       }
       $request  = self::SELECT;
       $request .= self::FROM;
@@ -88,94 +254,33 @@ class TicketStatusNameStor {
   }
   // End of getListFromList
 
-  public static function findByIdTicketStatusIdLanguage(TicketStatusNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByCode(TicketTypeStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketStatusNameStorData();
+    $data = new TicketTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE idticketstatus = :index0";
-      $request .= " AND idlanguage = :index1";
+      $request .= " WHERE code = :index0";
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['index0'=>  $dataIn->getIdTicketStatus(), 'index1'=>  $dataIn->getIdLanguage()]);
+      $stmt->execute(['index0'=>  $dataIn->getCode()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketTypeStorData");
         $data = $stmt->fetch();
       }
     }
     return $data;
   }
-  // End of IdTicketStatusIdLanguage
-
-  public static function findByIdTicketStatus(TicketStatusNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
-  {
-    $request = "";
-    $list = [];
-
-    if ($inDbConnection != null) {
-      $request  = self::SELECT;
-      $request .= self::FROM;
-      $request .= " WHERE idticketstatus = :index0";
-      if (!$all) {
-        $request .= " AND elemstate = :statut";
-      }
-      $params = [];
-      $params["index0"] = $dataIn->getIdTicketStatus();
-      if (!$all) {
-        $params["statut"] = $dataIn->getAvailableValue();
-      }
-      $stmt = $inDbConnection->prepare($request);
-      $stmt->execute($params);
-      if (self::SHOW_FIND_REQUEST) {
-        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
-      }
-      if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
-      }
-    }
-    return array($list, count($list));
-  }
-  // End of IdTicketStatus
-
-  public static function findByIdLanguage(TicketStatusNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
-  {
-    $request = "";
-    $list = [];
-
-    if ($inDbConnection != null) {
-      $request  = self::SELECT;
-      $request .= self::FROM;
-      $request .= " WHERE idlanguage = :index0";
-      if (!$all) {
-        $request .= " AND elemstate = :statut";
-      }
-      $params = [];
-      $params["index0"] = $dataIn->getIdLanguage();
-      if (!$all) {
-        $params["statut"] = $dataIn->getAvailableValue();
-      }
-      $stmt = $inDbConnection->prepare($request);
-      $stmt->execute($params);
-      if (self::SHOW_FIND_REQUEST) {
-        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
-      }
-      if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
-      }
-    }
-    return array($list, count($list));
-  }
-  // End of IdLanguage
+  // End of Code
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new TicketStatusNameStorData();
+    $data = new TicketTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -187,7 +292,7 @@ class TicketStatusNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketStatusNameStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "TicketTypeStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -209,15 +314,14 @@ class TicketStatusNameStor {
   }
   // End of read
 
-  public static function update(TicketStatusNameStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(TicketTypeStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "UPDATE ticketstatusname SET ";
-      $request .= "idticketstatus= :idticketstatus,";
-      $request .= "idlanguage= :idlanguage,";
+      $request  = "UPDATE tickettype SET ";
+      $request .= "code= :code,";
       $request .= "name= :name,";
       $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
@@ -225,8 +329,7 @@ class TicketStatusNameStor {
       $request .= " AND timestamp = :oldtimestamp";
       $params = [];
       $params["id"] = $data->getId();
-      $params["idticketstatus"] = $data->getIdTicketStatus();
-      $params["idlanguage"] = $data->getIdLanguage();
+      $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
@@ -264,7 +367,7 @@ class TicketStatusNameStor {
   }
   // End of update
 
-  public static function save(TicketStatusNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(TicketTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -277,7 +380,7 @@ class TicketStatusNameStor {
   }
   // End of save
 
-  public static function remove(TicketStatusNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(TicketTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -289,7 +392,7 @@ class TicketStatusNameStor {
   }
   // End of remove
 
-  public static function restore(TicketStatusNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(TicketTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -307,7 +410,7 @@ class TicketStatusNameStor {
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "DELETE FROM ticketstatusname";
+      $request  = "DELETE FROM tickettype";
       $request .= " WHERE id = :id";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['id'=> $id]);
@@ -336,23 +439,21 @@ class TicketStatusNameStor {
   }
   // End of delete
 
-  public static function create(TicketStatusNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(TicketTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "INSERT INTO ticketstatusname(";
-      $request .= "idticketstatus,idlanguage,name,elemstate,timestamp)";
+      $request  = "INSERT INTO tickettype(";
+      $request .= "code,name,elemstate,timestamp)";
       $request .= " VALUES(";
-      $request .= ":idticketstatus,";
-      $request .= ":idlanguage,";
+      $request .= ":code,";
       $request .= ":name,";
       $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
-      $params["idticketstatus"] = $data->getIdTicketStatus();
-      $params["idlanguage"] = $data->getIdLanguage();
+      $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
