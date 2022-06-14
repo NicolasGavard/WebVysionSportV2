@@ -11,10 +11,10 @@ list($distriXFoodFoodData, $errorJson) = DistriXFoodFoodData::getJsonData($_POST
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("RestoreFood");
 $servicesCaller->addParameter("data", $distriXFoodFoodData);
-$servicesCaller->setServiceName("Food/Food/DistriXFoodRestroreDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
+$servicesCaller->setServiceName("Food/Food/DistriXFoodRestoreDataSvc.php");
+list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-$logOk = logController("Security_Food", "DistriXBrandRestroreDataSvc", "RestoreFood", $output);
+$logOk = logController("Security_Food", "DistriXBrandRestoreDataSvc", "RestoreFood", $output);
 
 if ($outputok && !empty($output) && isset($output["ConfirmSave"])) {
   $confirmSave = $output["ConfirmSave"];

@@ -8,7 +8,6 @@ class FoodStorData extends DistriXSvcAppData {
   protected $idscorenutri;
   protected $idscorenova;
   protected $idscoreeco;
-  protected $qrCode;
   protected $code;
   protected $name;
   protected $description;
@@ -21,7 +20,6 @@ class FoodStorData extends DistriXSvcAppData {
       $this->idscorenutri = 0;
       $this->idscorenova = 0;
       $this->idscoreeco = 0;
-      $this->qrCode = "";
       $this->code = "";
       $this->name = "";
       $this->description = "";
@@ -34,7 +32,6 @@ class FoodStorData extends DistriXSvcAppData {
   public function getIdScoreNutri():int { return $this->idscorenutri; }
   public function getIdScoreNova():int { return $this->idscorenova; }
   public function getIdScoreEco():int { return $this->idscoreeco; }
-  public function getQrCode():string { return $this->qrCode; }
   public function getCode():string { return $this->code; }
   public function getName():string { return $this->name; }
   public function getDescription():string { return $this->description; }
@@ -49,7 +46,6 @@ class FoodStorData extends DistriXSvcAppData {
   public function setIdScoreNutri(int $idScoreNutri) { $this->idscorenutri = $idScoreNutri; }
   public function setIdScoreNova(int $idScoreNova) { $this->idscorenova = $idScoreNova; }
   public function setIdScoreEco(int $idScoreEco) { $this->idscoreeco = $idScoreEco; }
-  public function setQrCode(string $qrCode) { $this->qrCode = $qrCode; }
   public function setCode(string $code) { $this->code = $code; }
   public function setName(string $name) { $this->name = $name; }
   public function setDescription(string $description) { $this->description = $description; }

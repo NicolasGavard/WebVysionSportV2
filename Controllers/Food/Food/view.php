@@ -22,6 +22,7 @@ $infoProfil = DistriXStyAppInterface::getUserInformation();
 $_POST['id'] = $infoProfil->getIdLanguage(); // NG 27-05-22 - until a solution is found
 list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
 
+if (isset($_POST['idFood'])) {$_POST['id'] = $_POST['idFood'];}
 list($distriXFoodFoodData, $errorJson) = DistriXFoodFoodData::getJsonData($_POST);
 
 $foodCaller = new DistriXServicesCaller();

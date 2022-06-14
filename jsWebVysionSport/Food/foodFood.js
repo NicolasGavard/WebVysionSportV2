@@ -157,7 +157,7 @@ function ListFood(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td style="padding:1rem;">'+val.name+'</br><span style="font-size:13px; color:#90a4ae;">'+val.qrCode+'</span></td>'+
+                    ' <td style="padding:1rem;">'+val.name+'</br><span style="font-size:13px; color:#90a4ae;">'+val.code+'</span></td>'+
                     ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureBrand+'"/></td>'+
                     ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNutri+'"/></td>'+
                     ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNova+'"/></td>'+

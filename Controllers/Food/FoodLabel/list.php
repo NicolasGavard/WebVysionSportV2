@@ -8,7 +8,6 @@ include(__DIR__ . "/../../Data/Food/DistriXFoodFoodLabelData.php");
 $resp                     = [];
 $listFoodLabels           = [];
 $listFoodLabelsFromFront  = [];
-$_POST['idFood']          = 1;
 list($distriXFoodFoodLabelData, $errorJson) = DistriXFoodFoodLabelData::getJsonData($_POST);
 
 // CALL

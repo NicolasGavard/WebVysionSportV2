@@ -11,7 +11,7 @@ class FoodStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "food";
-  const SELECT = 'SELECT id,idbrand,idscorenutri,idscorenova,idscoreeco,code,qrcode,name,description,elemstate,timestamp';
+  const SELECT = 'SELECT id,idbrand,idscorenutri,idscorenova,idscoreeco,code,name,description,elemstate,timestamp';
   const FROM = ' FROM food';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -260,36 +260,6 @@ class FoodStor {
   }
   // End of Code
 
-  public static function findByQrCode(FoodStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
-  {
-    $request = "";
-    $list = [];
-
-    if ($inDbConnection != null) {
-      $request  = self::SELECT;
-      $request .= self::FROM;
-      $request .= " WHERE qrcode = :index0";
-      if (!$all) {
-        $request .= " AND elemstate = :elemstate";
-      }
-      $params = [];
-      $params["index0"] = $dataIn->getQrCode();
-      if (!$all) {
-        $params["elemstate"] = $dataIn->getElemState();
-      }
-      $stmt = $inDbConnection->prepare($request);
-      $stmt->execute($params);
-      if (self::SHOW_FIND_REQUEST) {
-        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
-      }
-      if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "FoodStorData");
-      }
-    }
-    return array($list, count($list));
-  }
-  // End of Code
-
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
@@ -338,7 +308,6 @@ class FoodStor {
       $request .= "idscorenutri= :idscorenutri,";
       $request .= "idscorenova= :idscorenova,";
       $request .= "idscoreeco= :idscoreeco,";
-      $request .= "qrcode= :qrcode,";
       $request .= "code= :code,";
       $request .= "name= :name,";
       $request .= "description= :description,";
@@ -352,7 +321,6 @@ class FoodStor {
       $params["idscorenutri"] = $data->getIdScoreNutri();
       $params["idscorenova"] = $data->getIdScoreNova();
       $params["idscoreeco"] = $data->getIdScoreEco();
-      $params["qrcode"] = $data->getQrCode();
       $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
       $params["description"] = $data->getDescription();
@@ -465,14 +433,13 @@ class FoodStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO food(";
-      $request .= "idbrand,idscorenutri,idscorenova,idscoreeco,code,qrcode,name,description,elemstate,timestamp)";
+      $request .= "idbrand,idscorenutri,idscorenova,idscoreeco,code,name,description,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":idbrand,";
       $request .= ":idscorenutri,";
       $request .= ":idscorenova,";
       $request .= ":idscoreeco,";
       $request .= ":code,";
-      $request .= ":qrcode,";
       $request .= ":name,";
       $request .= ":description,";
       $request .= ":elemstate,";
@@ -483,7 +450,6 @@ class FoodStor {
       $params["idscorenova"] = $data->getIdScoreNova();
       $params["idscoreeco"] = $data->getIdScoreEco();
       $params["code"] = $data->getCode();
-      $params["qrcode"] = $data->getQrCode();
       $params["name"] = $data->getName();
       $params["description"] = $data->getDescription();
       $params["elemstate"] = $data->getElemState();

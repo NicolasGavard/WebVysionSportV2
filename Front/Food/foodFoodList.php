@@ -54,13 +54,20 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?> <span class="infoFoodName"></span></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?> <span class="infoFoodName"></span></h4>
               <div class="row">
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-6 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_brand; ?></label>
                     <select class="custom-select2 form-control" id="listBrands" name="idBrand" style="width: 100%; height: 38px;">  
                       <option value="0"><?php echo $page_all_choice; ?></option>
                     </select>
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_brand; ?> </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_code; ?></label>
+                    <input class="form-control AddFoodFormCode" type="text" name="code" placeholder="<?php echo $page_code; ?>">
+                    <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
                   </div>
                 </div>
                 
