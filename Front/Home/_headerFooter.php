@@ -67,54 +67,54 @@
     </div>
     
     <!-- js -->
-    <script src="../../vendors/scripts/core.js"></script>
-    <script src="../../vendors/scripts/script.min.js"></script>
-    <script src="../../vendors/scripts/process.js"></script>
+    <script src="../../vendors/scripts/core.js?v=<?php echo APP_VERSION;?>"></script>
+    <script src="../../vendors/scripts/script.min.js?v=<?php echo APP_VERSION;?>"></script>
+    <script src="../../vendors/scripts/process.js?v=<?php echo APP_VERSION;?>"></script>
     <!-- <script src="../../vendors/scripts/layout-settings.js"></script> -->
     
     <!-- js -->
-    <script src="../../src/plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="../../src/plugins/apexcharts/apexcharts.min.js?v=<?php echo APP_VERSION;?>"></script>
     <!-- bootstrap-dataTables js -->
-    <script src="../../src/plugins/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="../../src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-    <script src="../../src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../src/plugins/datatables/js/jquery.dataTables.min.js?v=<?php echo APP_VERSION;?>"></script>
+    <script src="../../src/plugins/datatables/js/dataTables.bootstrap4.min.js?v=<?php echo APP_VERSION;?>"></script>
+    <script src="../../src/plugins/datatables/js/dataTables.responsive.min.js?v=<?php echo APP_VERSION;?>"></script>
+    <script src="../../src/plugins/datatables/js/responsive.bootstrap4.min.js?v=<?php echo APP_VERSION;?>"></script>
     <!-- bootstrap-cropper js -->
-    <script src="../../src/plugins/cropperjs/dist/cropper.js"></script>
+    <script src="../../src/plugins/cropperjs/dist/cropper.js?v=<?php echo APP_VERSION;?>"></script>
     <!-- bootstrap-tagsinput js -->
-	  <script src="../../src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+	  <script src="../../src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js?v=<?php echo APP_VERSION;?>"></script>
     <!-- add sweet alert js & css in footer -->
-    <script src="../../src/plugins/sweetalert2/sweetalert2.all.js"></script>
-    <script src="../../src/plugins/sweetalert2/sweet-alert.init.js"></script>
+    <script src="../../src/plugins/sweetalert2/sweetalert2.all.js?v=<?php echo APP_VERSION;?>"></script>
+    <script src="../../src/plugins/sweetalert2/sweet-alert.init.js?v=<?php echo APP_VERSION;?>"></script>
     <!-- add dropzone in footer -->
-    <script src="../../src/plugins/dropzone/src/dropzone.js"></script>
+    <script src="../../src/plugins/dropzone/src/dropzone.js?v=<?php echo APP_VERSION;?>"></script>
 
     <?php if (stripos($_SERVER['PHP_SELF'], 'main') !== false) { ?>
       <!-- dashboard -->
-      <script src="../../vendors/scripts/dashboard.js"></script>
+      <script src="../../vendors/scripts/dashboard.js?v=<?php echo APP_VERSION;?>"></script>
     <?php } else { ?>
       <!-- buttons for Export datatable -->
-      <script src="../../src/plugins/air-datepicker/dist/js/datepicker.js"></script>
-      <script src="../../src/plugins/air-datepicker/dist/js/i18n/datepicker.fr.js"></script>
+      <script src="../../src/plugins/air-datepicker/dist/js/datepicker.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../src/plugins/air-datepicker/dist/js/i18n/datepicker.fr.js?v=<?php echo APP_VERSION;?>"></script>
       <!-- buttons for Export datatable -->
-      <script src="../../src/plugins/datatables/js/dataTables.buttons.min.js"></script>
-      <script src="../../src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
-      <script src="../../src/plugins/datatables/js/buttons.print.min.js"></script>
-      <script src="../../src/plugins/datatables/js/buttons.html5.min.js"></script>
-      <script src="../../src/plugins/datatables/js/buttons.flash.min.js"></script>
-      <script src="../../src/plugins/datatables/js/pdfmake.min.js"></script>
-      <script src="../../src/plugins/datatables/js/vfs_fonts.js"></script>
+      <script src="../../src/plugins/datatables/js/dataTables.buttons.min.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../src/plugins/datatables/js/buttons.bootstrap4.min.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../src/plugins/datatables/js/buttons.print.min.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../src/plugins/datatables/js/buttons.html5.min.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../src/plugins/datatables/js/buttons.flash.min.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../src/plugins/datatables/js/pdfmake.min.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../src/plugins/datatables/js/vfs_fonts.js?v=<?php echo APP_VERSION;?>"></script>
       <!-- Datatable Setting js -->
-      <script src="../../vendors/scripts/datatable-setting.js"></script></body>
+      <script src="../../vendors/scripts/datatable-setting.js?v=<?php echo APP_VERSION;?>"></script></body>
       <!-- Datatable Colorpicker js -->
-      <script src="../../src/plugins/jquery-asColor/dist/jquery-asColor.js"></script>
-      <script src="../../src/plugins/jquery-asGradient/dist/jquery-asGradient.js"></script>
-      <script src="../../src/plugins/jquery-asColorPicker/jquery-asColorPicker.js"></script>
-      <script src="../../vendors/scripts/colorpicker.js"></script>
+      <script src="../../src/plugins/jquery-asColor/dist/jquery-asColor.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../src/plugins/jquery-asGradient/dist/jquery-asGradient.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../src/plugins/jquery-asColorPicker/jquery-asColorPicker.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../../vendors/scripts/colorpicker.js?v=<?php echo APP_VERSION;?>"></script>
     <?php } ?>
 
     <!-- js DistriX -->
-    <script src="../../jsWebVysionSport/Home/main.js"></script>
+    <script src="../../jsWebVysionSport/Home/main.js?v=<?php echo APP_VERSION;?>"></script>
 
     <script>
       window.addEventListener('DOMContentLoaded', function () {
