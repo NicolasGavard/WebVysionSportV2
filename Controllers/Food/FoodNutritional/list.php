@@ -93,6 +93,7 @@ foreach ($listFoods as $food) {
   $distriXFoodFoodData->setIdScoreNutri($food->getIdScoreNutri());
   $distriXFoodFoodData->setIdScoreNova($food->getIdScoreNova());
   $distriXFoodFoodData->setIdScoreEco($food->getIdScoreEco());
+  $distriXFoodFoodData->setQrCode($food->getQrCode());
   $distriXFoodFoodData->setCode($food->getCode());
   $distriXFoodFoodData->setName($food->getName());
   $distriXFoodFoodData->setDescription($food->getDescription());

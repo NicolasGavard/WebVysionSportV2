@@ -8,7 +8,6 @@ include(__DIR__ . "/../../Data/Food/DistriXFoodEcoScoreData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodNovaScoreData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodNutriScoreData.php");
 
-$_POST['id'] = 1;
 list($distriXFoodFoodData, $errorJson) = DistriXFoodFoodData::getJsonData($_POST);
 
 $foodCaller = new DistriXServicesCaller();

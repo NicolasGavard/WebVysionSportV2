@@ -14,7 +14,7 @@ $servicesCaller->addParameter("data", $distriXFoodFoodData);
 $servicesCaller->setServiceName("Food/Food/DistriXFoodDeleteDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-$logOk = logController("Security_Food", "DistriXBrandDeleteDataSvc", "DelFood", $output);
+$logOk = logController("Security_Food", "DistriXFoodDeleteDataSvc", "DelFood", $output);
 
 if ($outputok && !empty($output) && isset($output["ConfirmSave"])) {
   $confirmSave = $output["ConfirmSave"];
