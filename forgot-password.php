@@ -1,5 +1,10 @@
 <?php
 include(__DIR__ . "/Front/Home/_version.php");
+
+$international  = 'forgot-password';
+$i18cdlangue    = 'FR';
+// If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+include("i18/_i18.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,12 +50,12 @@ include(__DIR__ . "/Front/Home/_version.php");
 				<div class="col-md-6">
 					<div class="login-box bg-white box-shadow border-radius-10">
 						<div class="login-title">
-							<h2 class="text-center text-primary">Mot de passe oublié</h2>
+							<h2 class="text-center text-primary"><?php echo $forgotPassword;?></h2>
 						</div>
-						<h6 class="mb-20">Entrez votre adresse e-mail pour réinitialiser votre mot de passe</h6>
+						<h6 class="mb-20"><?php echo $forgotMessage;?></h6>
 						<form>
 							<div class="input-group custom">
-								<input type="text" class="form-control form-control-lg" placeholder="Email">
+								<input type="email" name="forgotEmail" class="form-control form-control-lg" placeholder="<?php echo $forgotEmail;?>">
 								<div class="input-group-append custom">
 									<span class="input-group-text"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
 								</div>
@@ -62,15 +67,15 @@ include(__DIR__ . "/Front/Home/_version.php");
 											use code for form submit
 											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">
 										-->
-										<a class="btn btn-primary btn-lg btn-block" href="index.html">Valider</a>
+										<a class="btn btn-primary btn-lg btn-block" href="index.html"><?php echo $forgotSend;?></a>
 									</div>
 								</div>
 								<div class="col-2">
-									<div class="font-16 weight-600 text-center" data-color="#707373">Ou</div>
+									<div class="font-16 weight-600 text-center" data-color="#707373"><?php echo $forgotOr;?></div>
 								</div>
 								<div class="col-5">
 									<div class="input-group mb-0">
-										<a class="btn btn-outline-primary btn-lg btn-block" href="index.html">Se connecter</a>
+										<a class="btn btn-outline-primary btn-lg btn-block" href="index.html"><?php echo $forgotConnect;?></a>
 									</div>
 								</div>
 							</div>
