@@ -37,8 +37,10 @@ if ($outputok && isset($output["ListFoodLabels"]) && is_array($output["ListFoodL
   $resp["Error"]      = $errorData;
 }
 
+$listNotApplyLabels = $listLabels;
+
 foreach ($listFoodLabels as $foodLabel) {
-  foreach ($listLabels as $label) {
+  foreach ($listLabels as $key => $label) {
     if ($label->getId() == $foodLabel->getIdLabel()){
       $distriXFoodLabelData = new DistriXFoodLabelData();
       $distriXFoodLabelData->setId($label->getId());
@@ -48,15 +50,18 @@ foreach ($listFoodLabels as $foodLabel) {
       $distriXFoodLabelData->setElemState($label->getElemState());
       $distriXFoodLabelData->setTimestamp($label->getTimestamp());
       $listFoodLabelsFromFront[] = $distriXFoodLabelData;
+      
+      unset($listNotApplyLabels[$key]);
       break;
     }
   }
 }
 
-$resp["ListFoodLabels"] = $listFoodLabelsFromFront;
-$resp["ListLabels"]     = $listLabels;
+$resp["ListNotApplyLabels"] = array_merge($listNotApplyLabels);
+$resp["ListFoodLabels"]     = $listFoodLabelsFromFront;
+$resp["ListLabels"]         = $listLabels;
 if(!empty($error)){
-  $resp["Error"]        = $error;
+  $resp["Error"]            = $error;
 }
 
 echo json_encode($resp);
