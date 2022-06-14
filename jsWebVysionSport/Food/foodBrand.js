@@ -139,7 +139,7 @@ function ListBrand(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td style="padding:1rem;"><img style="max-height:40px; max-width:40px;" src="'+val.linkToPicture+'"/></td>'+
                     ' <td>'+val.name+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+

@@ -156,7 +156,7 @@ function ListMyRecipe(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    '  <td>'+val.nameFood+'</td>'+
+                    '  <td style="padding:1rem;">'+val.nameFood+'</td>'+
                     '  <td>'+val.weight+'</td>'+
                     '  <td>'+val.nameWeightType+'</td>'+
                     '  <td>'+

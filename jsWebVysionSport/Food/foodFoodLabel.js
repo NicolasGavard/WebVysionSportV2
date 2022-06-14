@@ -14,6 +14,7 @@ $(function() {
     url : '../../Controllers/Food/FoodLabel/list.php',
     type : 'POST',
     dataType : 'JSON',
+    data: {'idFood': localStorage.getItem("idFood")},
     success : function(data) {
       foodLabelTableData = data.ListFoodLabels;
       ListFoodLabel(0);

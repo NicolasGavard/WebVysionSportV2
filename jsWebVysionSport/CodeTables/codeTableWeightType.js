@@ -148,7 +148,7 @@ function ListWeightType(elemState){
       if (val.isOther == 1)  {weightTypeType  = weightTypeType_other;}
 
       const line =  '<tr>'+
-                    ' <td>'+val.abbreviation+'</td>'+
+                    ' <td style="padding:1rem;">'+val.abbreviation+'</td>'+
                     ' <td>'+val.name+'</td>'+
                     ' <td>'+weightTypeType+'</td>'+
                     ' <td>'+

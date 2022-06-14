@@ -140,12 +140,8 @@ function ListMyTemplateDiet(elemState){
       }
 
       const line =  '<tr>'+
-                    '  <td>'+val.name+'</td>'+                  
-                    '  <td>'+
-                    // '    <button type="button" class="btn btn-outline-primary margin-5" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="popover">'+
-                    '     '+val.nbStudentAssigned+''+
-                    // '    </button>'+
-                    '  </td>'+
+                    '  <td style="padding:1rem;">'+val.name+'</td>'+
+                    '  <td>'+val.nbStudentAssigned+'</td>'+
                     '  <td>'+val.duration+' jours</td>'+
                     '  <td>'+val.tags+'</td>'+
                     '  <td>'+

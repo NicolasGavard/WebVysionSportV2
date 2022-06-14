@@ -139,7 +139,7 @@ function ListFoodCategory(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    '  <td>'+val.code+'</td>'+
+                    '  <td style="padding:1rem;">'+val.code+'</td>'+
                     '  <td>'+val.name+'</td>'+
                     '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal+'</td>'+
                     ' <td>'+

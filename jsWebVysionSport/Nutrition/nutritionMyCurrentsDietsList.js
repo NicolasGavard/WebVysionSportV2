@@ -186,7 +186,7 @@ function ListMyCurrentDiet(elemState){
       var dateFr  = day+'/'+month+'/'+year;
 
       const line =  '<tr>'+
-                    ' <td>'+val.name+'</td>'+
+                    ' <td style="padding:1rem;">'+val.name+'</td>'+
                     ' <td>'+val.firstNameUserStudent+' '+val.nameUserStudent+'</td>'+
                     ' <td>'+val.duration+' jours</td>'+
                     ' <td>'+dateFr+'</td>'+

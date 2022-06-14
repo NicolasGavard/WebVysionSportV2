@@ -145,7 +145,7 @@ function ListNutritional(elemState){
       if(val.isLipid == 1)    {nutritionalType = '<span class="micon dw dw-flame"> Lipide';}
       
       const line =  '<tr>'+
-                    ' <td>'+val.code+'</td>'+
+                    ' <td style="padding:1rem;">'+val.code+'</td>'+
                     ' <td>'+val.name+'</td>'+
                     ' <td>'+
                     '    <div class="row">'+
