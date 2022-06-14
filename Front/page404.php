@@ -12,6 +12,7 @@ $errorBack = "Page principale";
 // $errorTextLine2 = "Either check the URL";
 // $errorBack = "Back To Home";
 // }
+include(__DIR__ . "/Home/_version.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,9 +32,9 @@ $errorBack = "Page principale";
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../vendors/styles/core.css">
-	<link rel="stylesheet" type="text/css" href="../vendors/styles/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="../vendors/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="../vendors/styles/core.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="../vendors/styles/icon-font.min.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="../vendors/styles/style.css?v=<?php echo APP_VERSION;?>">
 </head>
 <body class="login-page">
 	<div class="login-header box-shadow">
@@ -60,12 +61,12 @@ $errorBack = "Page principale";
 	</div>
 
 	<!-- js -->
-	<script src="../vendors/scripts/core.js"></script>
-	<script src="../vendors/scripts/script.min.js"></script>
-	<script src="../vendors/scripts/process.js"></script>
-	<script src="../vendors/scripts/layout-settings.js"></script>
+	<script src="../vendors/scripts/core.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="../vendors/scripts/script.min.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="../vendors/scripts/process.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="../vendors/scripts/layout-settings.js?v=<?php echo APP_VERSION;?>"></script>
 	<!-- add sweet alert js & css in footer -->
-	<script src="../src/plugins/sweetalert2/sweetalert2.all.js"></script>
-	<script src="../src/plugins/sweetalert2/sweet-alert.init.js"></script>
+	<script src="../src/plugins/sweetalert2/sweetalert2.all.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="../src/plugins/sweetalert2/sweet-alert.init.js?v=<?php echo APP_VERSION;?>"></script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+<?php
+include(__DIR__ . "/Front/Home/_version.php");
+?>
 <!DOCTYPE html>
 <html>
 
@@ -17,10 +20,10 @@
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
-	<link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="src/plugins/jquery-steps/jquery.steps.css">
-	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/core.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="src/plugins/jquery-steps/jquery.steps.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css?v=<?php echo APP_VERSION;?>">
 </head>
 
 <body class="login-page">
@@ -28,14 +31,9 @@
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
 				<a href="index.html">
-					<img src="images/WebVysionSport.png" alt="" style="max-width: 110px;">
+					<img src="images/WebVysionSport.png" alt="" style="max-width: 100px;">
 					<h4 class="text-center text-primary"> WebVysionSport</h4>
 				</a>
-			</div>
-			<div class="login-menu">
-				<ul>
-					<li><a href="index.html">Se connecter</a></li>
-				</ul>
 			</div>
 		</div>
 	</div>
@@ -48,7 +46,7 @@
 				<div class="col-md-6 col-lg-5">
 					<div class="register-box bg-white box-shadow border-radius-10">
 						<div class="wizard-content">
-							<form id="registerForm" class="tab-wizard2 wizard-circle wizard">
+							<form id="registerForm" class="col-md-12 col-lg-12 tab-wizard2 wizard-circle wizard" style="padding-left: 0px;">
 								<h5>Votre compte</h5>
 								<section data-step="0">
 									<div class="form-wrap max-width-600 mx-auto">
@@ -204,14 +202,14 @@
 	</div>
 	<!-- success Popup html End -->
 	<!-- js -->
-	<script src="vendors/scripts/core.js"></script>
-	<script src="vendors/scripts/script.min.js"></script>
-	<script src="vendors/scripts/jquery.validate.min.js"></script>
-	<script src="vendors/scripts/process.js"></script>
-	<script src="vendors/scripts/layout-settings.js"></script>
-	<script src="src/plugins/jquery-steps/jquery.steps.js"></script>
-	<script src="src/plugins/bootstrap/popper.min.js"></script>
-	<script src="jsWebVysionSport/steps-setting.js"></script>
+	<script src="vendors/scripts/core.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="vendors/scripts/script.min.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="vendors/scripts/jquery.validate.min.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="vendors/scripts/process.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="vendors/scripts/layout-settings.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="src/plugins/jquery-steps/jquery.steps.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="src/plugins/bootstrap/popper.min.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="jsWebVysionSport/steps-setting.js?v=<?php echo APP_VERSION;?>"></script>
 </body>
 
 </html>

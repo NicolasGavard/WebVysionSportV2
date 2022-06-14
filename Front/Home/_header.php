@@ -1,3 +1,6 @@
+<?php
+include(__DIR__ . "/_version.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,20 +19,20 @@
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../vendors/styles/core.css">
-	<link rel="stylesheet" type="text/css" href="../../vendors/styles/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../../vendors/styles/core.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="../../vendors/styles/icon-font.min.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-dataTable css -->
-	<link rel="stylesheet" type="text/css" href="../../src/plugins/datatables/css/dataTables.bootstrap4.min.css">
-	<link rel="stylesheet" type="text/css" href="../../src/plugins/datatables/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="../../src/plugins/datatables/css/dataTables.bootstrap4.min.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="../../src/plugins/datatables/css/responsive.bootstrap4.min.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-Cropper css -->
-	<link rel="stylesheet" type="text/css" href="../../src/plugins/cropperjs/dist/cropper.css">
+	<link rel="stylesheet" type="text/css" href="../../src/plugins/cropperjs/dist/cropper.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-DropZone css -->
-	<link rel="stylesheet" type="text/css" href="../../src/plugins/dropzone/src/dropzone.css">
+	<link rel="stylesheet" type="text/css" href="../../src/plugins/dropzone/src/dropzone.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-tagsinput css -->
-	<link rel="stylesheet" type="text/css" href="../../src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
-	<link rel="stylesheet" type="text/css" href="../../vendors/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="../../src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="../../vendors/styles/style.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-colorPicker css -->
-	<link rel="stylesheet" type="text/css" href="../../src/plugins/jquery-asColorPicker/dist/css/asColorPicker.css">
+	<link rel="stylesheet" type="text/css" href="../../src/plugins/jquery-asColorPicker/dist/css/asColorPicker.css?v=<?php echo APP_VERSION;?>">
 
 </head>
 <body>
