@@ -3,19 +3,7 @@ session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodFoodData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
-
-$resp              = array();
-$error             = array();
-$output            = array();
-$outputok          = false;
+include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
 
 $food  = new DistriXFoodFoodData();
 if ($_POST['id'] > 0) {
@@ -28,10 +16,10 @@ $servicesCaller->addParameter("data", $food);
 $servicesCaller->setServiceName("Food/Food/DistriXFoodViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewFood"])) {
-    $food = $output["ViewFood"];
-  }
+$logOk = logController("Security_Food", "DistriXFoodViewDataSvc", "ViewFood", $output);
+
+if ($outputok && isset($output["ViewFood"])) {
+  list($food, $jsonError) = DistriXFoodFoodData::getJsonData($output["ViewFood"]);
 } else {
   $error = $errorData;
 }

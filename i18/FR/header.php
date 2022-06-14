@@ -34,11 +34,12 @@
   $menu_ressource_3 = "Ressources";
   $menu_ressource_4 = "Ressources";
   
-  $menu_formule   = "Formules";
-  $menu_formule_1 = "Formules";
-  $menu_formule_2 = "Formules";
-  $menu_formule_3 = "Formules";
-  $menu_formule_4 = "Formules";
+  $menu_package               = "Formules";
+  $menu_right_invoice_detail  = "Facturation";
+  $menu_package_1 = "Formules";
+  $menu_package_2 = "Formules";
+  $menu_package_3 = "Formules";
+  $menu_package_4 = "Formules";
   
   $menu_parametre   = "Paramètres";
   $menu_parametre_1 = "Paramètres";

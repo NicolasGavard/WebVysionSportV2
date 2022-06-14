@@ -205,20 +205,31 @@
         <?php } ?>
 
         <?php
-          $hasFormule = true;
+          $hasRight_PACKAGE_INVOICE = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'PACKAGE_INVOICE');
+          if ($hasRight_PACKAGE_INVOICE) {
+            $hasPackage = true;
+          }
+
+          $hasPackage               = true;
+          $hasRight_PACKAGE_INVOICE = true;
+
           $dataOption = 'off';
           $show       = '';
           $style      = 'none';
         ?>
-        <?php if ($hasFormule) { ?>
+        <?php if ($hasPackage) { ?>
           <li class="dropdown <?php echo $show; ?>">
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-money-1"></span>
-              <span class="mtext"><?php echo $menu_formule; ?></span>
+              <span class="mtext"><?php echo $menu_package; ?></span>
               &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
-              <li><a href="#">1</a></li>
+              <?php
+                $navActiveMenuPackageInvoice = "";
+                if (stripos($_SERVER['PHP_SELF'], 'packageInvoice') !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageInvoice = 'class="active"'; }
+              ?>
+              <?php if ($hasRight_PACKAGE_INVOICE) {    ?><li <?php echo $navActiveMenuPackageInvoice ?>><a class="nav-link" href="../Package/packageInvoice.php"><?php echo $menu_right_invoice_detail; ?></a></li><?php } ?>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>

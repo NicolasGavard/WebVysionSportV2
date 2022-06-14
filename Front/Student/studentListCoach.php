@@ -22,7 +22,7 @@
 									<div class="contact-dire-info text-center">
 										<div class="contact-avatar">
 											<span>
-												<img src="vendors/images/photo12.jpg" alt="">
+												<img src="../../vendors/images/photo12.jpg" alt="">
 											</span>
 										</div>
 										<div class="contact-name">
@@ -49,7 +49,7 @@
 									<div class="contact-dire-info text-center">
 										<div class="contact-avatar">
 											<span>
-												<img src="vendors/images/photo2.jpg" alt="">
+												<img src="../../vendors/images/photo2.jpg" alt="">
 											</span>
 										</div>
 										<div class="contact-name">
@@ -77,7 +77,7 @@
 									<div class="contact-dire-info text-center">
 										<div class="contact-avatar">
 											<span>
-												<img src="vendors/images/photo2.jpg" alt="">
+												<img src="../../vendors/images/photo2.jpg" alt="">
 											</span>
 										</div>
 										<div class="contact-name">
@@ -105,7 +105,7 @@
 									<div class="contact-dire-info text-center">
 										<div class="contact-avatar">
 											<span>
-												<img src="vendors/images/photo2.jpg" alt="">
+												<img src="../../vendors/images/photo2.jpg" alt="">
 											</span>
 										</div>
 										<div class="contact-name">
@@ -133,7 +133,7 @@
 									<div class="contact-dire-info text-center">
 										<div class="contact-avatar">
 											<span>
-												<img src="vendors/images/photo2.jpg" alt="">
+												<img src="../../vendors/images/photo2.jpg" alt="">
 											</span>
 										</div>
 										<div class="contact-name">
@@ -161,7 +161,7 @@
 									<div class="contact-dire-info text-center">
 										<div class="contact-avatar">
 											<span>
-												<img src="vendors/images/photo2.jpg" alt="">
+												<img src="../../vendors/images/photo2.jpg" alt="">
 											</span>
 										</div>
 										<div class="contact-name">
@@ -189,7 +189,7 @@
 									<div class="contact-dire-info text-center">
 										<div class="contact-avatar">
 											<span>
-												<img src="vendors/images/photo2.jpg" alt="">
+												<img src="../../vendors/images/photo2.jpg" alt="">
 											</span>
 										</div>
 										<div class="contact-name">
@@ -217,7 +217,7 @@
 									<div class="contact-dire-info text-center">
 										<div class="contact-avatar">
 											<span>
-												<img src="vendors/images/photo2.jpg" alt="">
+												<img src="../../vendors/images/photo2.jpg" alt="">
 											</span>
 										</div>
 										<div class="contact-name">
@@ -245,7 +245,7 @@
 									<div class="contact-dire-info text-center">
 										<div class="contact-avatar">
 											<span>
-												<img src="vendors/images/photo2.jpg" alt="">
+												<img src="../../vendors/images/photo2.jpg" alt="">
 											</span>
 										</div>
 										<div class="contact-name">

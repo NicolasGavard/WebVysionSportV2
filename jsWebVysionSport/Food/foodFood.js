@@ -197,6 +197,11 @@ function ViewFood(id, name){
       
       $(".infoFoodName").html(name);
 
+      $('#listBrands').val(data.ViewFood.idBrand);
+      $('#listEcoScores').val(data.ViewFood.idScoreEco);
+      $('#listNovaScores').val(data.ViewFood.idScoreNova);
+      $('#listNutriScores').val(data.ViewFood.idScoreNutri);
+
       $('.AddFoodFormIdFood').val(id);
       $('.AddFoodFormCode').val(data.ViewFood.code);
       $('.AddFoodFormName').val(data.ViewFood.name);

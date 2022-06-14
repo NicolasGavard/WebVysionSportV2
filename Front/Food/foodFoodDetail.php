@@ -36,16 +36,17 @@
             <h4 class="text-blue h4"><?php echo $page_title; ?></h4>
           </div>
         </div>
-
-        <div class="faq-wrap">
+  
+        <div class="faq-wrap padding-top-30">
           <div id="accordion">
             <div class="card">
               <div class="card-header">
-                <button class="btn btn-block" data-toggle="collapse" data-target="#faq1">
+                <button class="btn btn-block" data-toggle="collapse" data-target="#foodLabel">
                   <?php echo $page_group_label ?>
                 </button>
               </div>
-              <div id="faq1" class="collapse show" data-parent="#accordion">
+              <!-- <div id="foodLabel" class="collapse show" data-parent="#accordion"> -->
+              <div id="foodLabel" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <?php include('../Food/foodFoodDetailLabel.php'); ?>
                 </div>
@@ -53,11 +54,11 @@
             </div>
             <div class="card">
               <div class="card-header">
-                <button class="btn btn-block collapsed" data-toggle="collapse" data-target="#faq2">
+                <button class="btn btn-block collapsed" data-toggle="collapse" data-target="#foodWeight">
                 <?php echo $page_group_weight ?>
                 </button>
               </div>
-              <div id="faq2" class="collapse" data-parent="#accordion">
+              <div id="foodWeight" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                 <?php include('../Food/foodFoodDetailWeight.php'); ?>
                 </div>
@@ -65,11 +66,11 @@
             </div>
             <div class="card">
               <div class="card-header">
-                <button class="btn btn-block collapsed" data-toggle="collapse" data-target="#faq3">
+                <button class="btn btn-block collapsed" data-toggle="collapse" data-target="#foodNutritional">
                 <?php echo $page_group_nutritional ?>
                 </button>
               </div>
-              <div id="faq3" class="collapse" data-parent="#accordion">
+              <div id="foodNutritional" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <?php include('../Food/foodFoodDetailNutritional.php'); ?>
                 </div>
