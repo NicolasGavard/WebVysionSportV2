@@ -167,8 +167,8 @@ function ListFood(elemState){
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFood"     onclick="ViewDetailFood(\''+val.id+'\');"             href="#"><i class="dw dw-analytics-5"></i> Détail</a>'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalDetailFood"  onclick="ViewFood(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item"                                                                          onclick="ViewDetailFood(\''+val.id+'\');"             href="#"><i class="dw dw-analytics-5"></i> Détail</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFood"     onclick="ViewFood(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
                     '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelFood(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
                     '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
@@ -178,6 +178,11 @@ function ListFood(elemState){
       datatable.row.add($(line)).draw();
     }
   });
+}
+
+function ViewDetailFood(id, name){
+  localStorage.setItem("idFood", id);
+  window.location.href = 'foodFoodDetail.php';
 }
 
 function ViewFood(id){
