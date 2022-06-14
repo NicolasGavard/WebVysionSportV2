@@ -42,7 +42,7 @@
             
             <div class="card">
               <div class="card-header">
-                <button class="btn btn-block" data-toggle="collapse" data-target="#foodLabel">
+                <button class="btn btn-block collapsed" data-toggle="collapse" data-target="#foodLabel">
                   <?php echo $page_group_label ?>
                 </button>
               </div>

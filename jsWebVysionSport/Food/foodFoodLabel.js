@@ -1,24 +1,21 @@
 var foodLabelSelectedData = null;
-var foodLabelTableLanguagesData = "";
-$(function() {
-  var foodLabelTableData = "";
-  var foodLabelTable = $('#FoodLabelTable').DataTable({
-    columnDefs: [
-      { orderable: false, targets: 2 },
-      { orderable: false, targets: 3 }
-    ],
-    language: {
-      url: '../../i18/FR/DataTableFrench.json'
-    }
-  });
+var foodLabelTableData    = "";
+var foodLabelTable = $('#FoodLabelTable').DataTable({
+  columnDefs: [
+    { orderable: false, targets: 2 }
+  ],
+  language: {
+    url: '../../i18/FR/DataTableFrench.json'
+  }
+});
 
+$(function() {
   $.ajax({
     url : '../../Controllers/Food/FoodLabel/list.php',
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {
       foodLabelTableData = data.ListFoodLabels;
-      foodLabelTableLanguagesData = data.ListLanguages;
       ListFoodLabel(0);
     },
     error : function(data) {
@@ -44,7 +41,7 @@ $(function() {
     $(".btn-warning").addClass("disabled");
     $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
-    datatable.clear();
+    foodLabelTable.clear();
     ListFoodLabel(1);
   });
 
@@ -55,7 +52,7 @@ $(function() {
     $(".btn-warning").removeClass("disabled");
     $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
-    datatable.clear();
+    foodLabelTable.clear();
     ListFoodLabel(0);
   });
 
@@ -155,38 +152,29 @@ function ListFoodLabel(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
+                    ' <td style="padding:1rem;"><img style="max-height:40px; max-width:40px;" src="'+val.linkToPicture+'"/></td>'+
                     ' <td>'+val.name+'</td>'+
-                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureBrand+'"/></td>'+
-                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNutri+'"/></td>'+
-                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNova+'"/></td>'+
-                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreEco+'"/></td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                                                                          onclick="ViewDetailFood(\''+val.id+'\');"             href="#"><i class="dw dw-analytics-5"></i> Détail</a>'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFood"     onclick="ViewFood(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelFood(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"   onclick="DelFoodLabel(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"  onclick="RestFoodLabel(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
                     '</tr>';
-      datatable.row.add($(line)).draw();
+      foodLabelTable.row.add($(line)).draw();
     }
   });
 }
 
-function ViewDetailFood(id, name){
-  localStorage.setItem("idFood", id);
-  window.location.href = 'foodFoodDetail.php';
-}
 
-function ViewFood(id){
+function ViewFoodLabel(id){
   $.ajax({
-    url : '../../Controllers/Food/Food/view.php',
+    url : '../../Controllers/Food/Foodlabel/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
@@ -194,11 +182,11 @@ function ViewFood(id){
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
 
-      $('.AddFoodFormIdFood').val(id);
-      $('.AddFoodFormCode').val(data.ViewFood.code);
-      $('.AddFoodFormName').val(data.ViewFood.name);
-      $('.AddFoodFormTimestamp').val(data.ViewFood.timestamp);
-      $('.AddFoodFormStatut').val(data.ViewFood.elemState);
+      $('.AddFoodLabelFormIdFoodLabel').val(id);
+      $('.AddFoodLabelFormCode').val(data.ViewFoodLabel.code);
+      $('.AddFoodLabelFormName').val(data.ViewFoodLabel.name);
+      $('.AddFoodLabelFormTimestamp').val(data.ViewFoodLabel.timestamp);
+      $('.AddFoodLabelFormStatut').val(data.ViewFoodLabel.elemState);
     },
     error : function(data) {
       console.log(data);
@@ -206,12 +194,12 @@ function ViewFood(id){
   });
 }
 
-function DelFood(id, name){
+function DelFoodLabel(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestFood(id, name){
+function RestFoodLabel(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

@@ -20,11 +20,8 @@
       <table id="FoodLabelTable" class="display responsive nowrap" width="100%">
         <thead>
           <tr>                 
-            <th width="30%" class="table-plus"><span><?php echo $page_name; ?></span></th>
-            <th width="30%"><span><?php echo $page_brand; ?></span></th>
-            <th width="10%"><span><?php echo $page_score_nutri; ?></span></th>
-            <th width="10%"><span><?php echo $page_score_nova; ?></span></th>
-            <th width="10%"><span><?php echo $page_score_eco; ?></span></th>
+            <th width="20%" class="table-plus"><span><?php echo $page_picture; ?></span></th>
+            <th width="70%"><span><?php echo $page_name; ?></span></th>
             <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
           </tr>
         </thead>
