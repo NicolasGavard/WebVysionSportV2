@@ -1,3 +1,6 @@
+<?php
+include(__DIR__ . "/Front/Home/_version.php");
+?>
 <!DOCTYPE html>
 <html>
 
@@ -17,9 +20,9 @@
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
-	<link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/core.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css?v=<?php echo APP_VERSION;?>">
+	<link rel="stylesheet" type="text/css" href="vendors/styles/style.css?v=<?php echo APP_VERSION;?>">
 </head>
 
 <body>
@@ -27,14 +30,9 @@
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
 				<a href="index.html">
-					<img src="images/WebVysionSport.png" alt="" style="max-width: 110px;">
+					<img src="images/WebVysionSport.png" alt="" style="max-width: 100px;">
 					<h4 class="text-center text-primary"> WebVysionSport</h4>
 				</a>
-			</div>
-			<div class="login-menu">
-				<ul>
-					<li><a href="index.html">Se connecter</a></li>
-				</ul>
 			</div>
 		</div>
 	</div>
@@ -83,10 +81,10 @@
 		</div>
 	</div>
 	<!-- js -->
-	<script src="vendors/scripts/core.js"></script>
-	<script src="vendors/scripts/script.min.js"></script>
-	<script src="vendors/scripts/process.js"></script>
-	<script src="vendors/scripts/layout-settings.js"></script>
+	<script src="vendors/scripts/core.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="vendors/scripts/script.min.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="vendors/scripts/process.js?v=<?php echo APP_VERSION;?>"></script>
+	<script src="vendors/scripts/layout-settings.js?v=<?php echo APP_VERSION;?>"></script>
 </body>
 
 </html>
