@@ -15,12 +15,12 @@ list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($outp
 $logOk = logController("Security_Brand", "DistriXBrandViewDataSvc", "ViewBrand", $output);
 
 if ($outputok && isset($output["ViewBrand"])) {
-  $distriXFoodBandData = $output["ViewBrand"];
+  list($brand, $jsonError) = DistriXFoodBrandData::getJsonData($output["ViewBrand"]);
 } else {
   $error = $errorData;
 }
 
-$resp["ViewBrand"]  = $distriXFoodBandData;
+$resp["ViewBrand"]  = $brand;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }

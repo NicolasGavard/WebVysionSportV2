@@ -54,7 +54,7 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?> <span class="infoFoodName"></span></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?> <span class="infoFoodName"></span></h4>
               <div class="row">
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-12 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_brand; ?></label>
                     <select class="custom-select2 form-control" id="listBrands" name="idBrand" style="width: 100%; height: 38px;">  
@@ -64,7 +64,7 @@
                   </div>
                 </div>
                 
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-4">
                   <div class="form-group">
                     <label><?php echo $page_score_nutri; ?></label>
                     <select class="custom-select2 form-control" id="listNutriScores" name="idScoreNutri" style="width: 100%; height: 38px;">  
@@ -73,7 +73,7 @@
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_score_nutri; ?> </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-4">
                   <div class="form-group">
                     <label><?php echo $page_score_nova; ?></label>
                     <select class="custom-select2 form-control" id="listNovaScores" name="idScoreNova" style="width: 100%; height: 38px;">  
@@ -82,7 +82,7 @@
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_score_nova; ?> </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-4">
                   <div class="form-group">
                     <label><?php echo $page_score_eco; ?></label>
                     <select class="custom-select2 form-control" id="listEcoScores" name="idScoreEco" style="width: 100%; height: 38px;">  

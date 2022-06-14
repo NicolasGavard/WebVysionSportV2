@@ -65,6 +65,7 @@ $(".AddNewFood").on('click', function() {
   $(".add_title").removeClass("d-none");
   $(".update_title").addClass("d-none");
 
+  $(".infoFoodName").html('');
   $('.AddFoodFormIdFood').val(0);
   $('.AddFoodFormCode').val('');
   $('.AddFoodFormName').val('');

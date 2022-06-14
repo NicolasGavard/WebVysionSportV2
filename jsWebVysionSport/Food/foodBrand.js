@@ -175,7 +175,7 @@ function ViewBrand(id){
       $('.AddBrandFormIdBrand').val(id);
       $('.AddBrandFormCode').val(data.ViewBrand.code);
       $('.AddBrandFormName').val(data.ViewBrand.name);
-      $(".avatar-brand").attr("src", data.ViewBrand.linktopicture);
+      $(".avatar-brand").attr("src", data.ViewBrand.linkToPicture);
       $('.AddBrandFormTimestamp').val(data.ViewBrand.timestamp);
       $('.AddBrandFormStatut').val(data.ViewBrand.elemState);
     },
