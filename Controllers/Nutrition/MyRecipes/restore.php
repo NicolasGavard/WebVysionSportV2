@@ -7,14 +7,14 @@ include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.ph
 $confirmSave  = false;
 
 if (isset($_POST)) {
-  $label  = new DistriXNutritionRecipeData();
+  $recipe  = new DistriXNutritionRecipeData();
   if (isset($_POST['id']) && $_POST['id'] > 0) {
-    $label->setId($_POST['id']);
+    $recipe->setId($_POST['id']);
   }
   
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setMethodName("RestoreMyRecipe");
-  $servicesCaller->addParameter("data", $label);
+  $servicesCaller->addParameter("data", $recipe);
   $servicesCaller->setServiceName("Nutrition/MyRecipe/DistriXNutritionMyTemplatesDietsRestoreDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   

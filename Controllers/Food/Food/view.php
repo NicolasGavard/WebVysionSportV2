@@ -1,7 +1,9 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/DistriXFoodBrandData.php");
+// DATA
+include(__DIR__ . "/../../Data/DistriXFoodFoodData.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // Layer
@@ -15,35 +17,26 @@ $error             = array();
 $output            = array();
 $outputok          = false;
 
-$label  = new DistriXFoodBrandData();
+$food  = new DistriXFoodFoodData();
 if ($_POST['id'] > 0) {
-  $label->setId($_POST['id']);
+  $food->setId($_POST['id']);
 }
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewBrand");
-$servicesCaller->addParameter("data", $label);
-$servicesCaller->setServiceName("Food/Brand/DistriXBrandViewDataSvc.php");
+$servicesCaller->setMethodName("ViewFood");
+$servicesCaller->addParameter("data", $food);
+$servicesCaller->setServiceName("Food/Food/DistriXFoodViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Brand")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXBrandViewDataSvc");
-  $logInfoData->setLogFunction("ViewBrand");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
-
 if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewBrand"])) {
-    $label = $output["ViewBrand"];
+  if (isset($output["ViewFood"])) {
+    $food = $output["ViewFood"];
   }
 } else {
   $error = $errorData;
 }
 
-$resp["ViewBrand"]  = $label;
+$resp["ViewFood"]  = $food;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }

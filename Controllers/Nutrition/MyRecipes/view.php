@@ -4,14 +4,14 @@ include(__DIR__ . "/../../Init/ControllerInit.php");
 // DATA
 include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
 
-$label  = new DistriXNutritionRecipeData();
+$recipe  = new DistriXNutritionRecipeData();
 if ($_POST['id'] > 0) {
-  $label->setId($_POST['id']);
+  $recipe->setId($_POST['id']);
 }
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewMyRecipe");
-$servicesCaller->addParameter("data", $label);
+$servicesCaller->addParameter("data", $recipe);
 $servicesCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
@@ -19,13 +19,13 @@ $logOk = logController("Security_MyRecipe", "DistriXNutritionMyRecipesViewDataSv
 
 if ($outputok && !empty($output) > 0) {
   if (isset($output["ViewMyRecipe"])) {
-    $label = $output["ViewMyRecipe"];
+    $recipe = $output["ViewMyRecipe"];
   }
 } else {
   $error = $errorData;
 }
 
-$resp["ViewMyRecipe"]  = $label;
+$resp["ViewMyRecipe"]  = $recipe;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }

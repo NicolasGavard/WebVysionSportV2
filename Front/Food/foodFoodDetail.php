@@ -79,6 +79,8 @@
         </div>
       </div>
 
+      <script src="../../jsWebVysionSport/Food/foodFoodDetail.js"></script>
+
       <?php
         include('../Home/_headerFooter.php');
       ?>

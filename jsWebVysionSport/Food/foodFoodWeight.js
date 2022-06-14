@@ -1,27 +1,10 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Food/Food/list.php',
+  url : '../../Controllers/Food/Food/listWeight.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
     localStorage.setItem("dataTable", JSON.stringify(data.ListFoods));
-
-    $.map(data.ListBrands, function(val, key) {
-      $('#listBrands').append('<option value="'+val.id+'">'+val.name+'</option>');
-    });
-
-    $.map(data.ListEcoScores, function(val, key) {
-      $('#listEcoScores').append('<option value="'+val.id+'">'+val.letter+'</option>');
-    });
-
-    $.map(data.ListNovaScores, function(val, key) {
-      $('#listNovaScores').append('<option value="'+val.id+'">'+val.number+'</option>');
-    });
-
-    $.map(data.ListNutriScores, function(val, key) {
-      $('#listNutriScores').append('<option value="'+val.id+'">'+val.letter+'</option>');
-    });
-
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -168,7 +151,7 @@ function ListFood(elemState){
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
                     '       <a class="dropdown-item"                                                                          onclick="ViewDetailFood(\''+val.id+'\');"             href="#"><i class="dw dw-analytics-5"></i> Détail</a>'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFood"     onclick="ViewFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFood"     onclick="ViewFood(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
                     '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelFood(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
                     '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
@@ -185,7 +168,7 @@ function ViewDetailFood(id, name){
   window.location.href = 'foodFoodDetail.php';
 }
 
-function ViewFood(id, name){
+function ViewFood(id){
   $.ajax({
     url : '../../Controllers/Food/Food/view.php',
     type : 'POST',
@@ -194,8 +177,6 @@ function ViewFood(id, name){
     success : function(data) {
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
-      
-      $(".infoFoodName").html(name);
 
       $('.AddFoodFormIdFood').val(id);
       $('.AddFoodFormCode').val(data.ViewFood.code);
