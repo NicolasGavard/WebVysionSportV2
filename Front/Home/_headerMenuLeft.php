@@ -205,12 +205,14 @@
         <?php } ?>
 
         <?php
+          $hasRight_PACKAGE_LIST    = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'PACKAGE_LIST');
           $hasRight_PACKAGE_INVOICE = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'PACKAGE_INVOICE');
-          if ($hasRight_PACKAGE_INVOICE) {
+          if ($hasRight_PACKAGE_LIST || $hasRight_PACKAGE_INVOICE) {
             $hasPackage = true;
           }
 
           $hasPackage               = true;
+          $hasRight_PACKAGE_LIST    = true;
           $hasRight_PACKAGE_INVOICE = true;
 
           $dataOption = 'off';
@@ -226,13 +228,13 @@
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <?php
-                $navActiveMenuPackageInvoice = "";
+                $navActiveMenuPackageList = $navActiveMenuPackageInvoice = "";
                 if (stripos($_SERVER['PHP_SELF'], 'packageInvoice') !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageInvoice = 'class="active"'; }
               ?>
-              <?php if ($hasRight_PACKAGE_INVOICE) {    ?><li <?php echo $navActiveMenuPackageInvoice ?>><a class="nav-link" href="../Package/packageInvoice.php"><?php echo $menu_right_invoice_detail; ?></a></li><?php } ?>
+              <?php if ($hasRight_PACKAGE_LIST)     {?><li <?php echo $navActiveMenuPackageList ?>><a class="nav-link" href="../Package/packageList.php"><?php echo $menu_right_package_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_PACKAGE_INVOICE)  {?><li <?php echo $navActiveMenuPackageInvoice ?>><a class="nav-link" href="../Package/packageInvoice.php"><?php echo $menu_right_invoice_detail; ?></a></li><?php } ?>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
             </ul>
           </li>
         <?php } ?>

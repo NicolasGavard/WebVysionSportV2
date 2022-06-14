@@ -35,8 +35,8 @@
   $menu_ressource_4 = "Ressources";
   
   $menu_package               = "Formules";
-  $menu_right_invoice_detail  = "Facturation";
-  $menu_package_1 = "Formules";
+  $menu_right_invoice_detail  = "Facturations";
+  $menu_right_package_list    = "Les formules";
   $menu_package_2 = "Formules";
   $menu_package_3 = "Formules";
   $menu_package_4 = "Formules";
