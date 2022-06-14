@@ -157,7 +157,7 @@ function ListFood(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td>'+val.name+'</td>'+
+                    ' <td>'+val.name+'</br><div class="task-type">'+val.qrCode+'</div></td>'+
                     ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureBrand+'"/></td>'+
                     ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNutri+'"/></td>'+
                     ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNova+'"/></td>'+
@@ -199,9 +199,16 @@ function ViewFood(id, name){
       $(".infoFoodName").html(name);
 
       $('#listBrands').val(data.ViewFood.idBrand);
+      $('#select2-listBrands-container').html(data.ViewFood.nameBrand);
+      
       $('#listEcoScores').val(data.ViewFood.idScoreEco);
+      $('#select2-listEcoScores-container').html(data.ViewFood.nameScoreEco);
+      
       $('#listNovaScores').val(data.ViewFood.idScoreNova);
+      $('#select2-listNovaScores-container').html(data.ViewFood.nameScoreNova);
+      
       $('#listNutriScores').val(data.ViewFood.idScoreNutri);
+      $('#select2-listNutriScores-container').html(data.ViewFood.nameScoreNutri);
 
       $('.AddFoodFormIdFood').val(id);
       $('.AddFoodFormCode').val(data.ViewFood.code);

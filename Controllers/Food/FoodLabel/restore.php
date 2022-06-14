@@ -6,11 +6,14 @@ include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
 
 $confirmSave  = false;
 
-list($distriXFoodFoodData, $errorJson) = DistriXFoodFoodData::getJsonData($_POST);
+$food  = new DistriXFoodFoodData();
+if ($_POST['id'] > 0) {
+  $food->setId($_POST['id']);
+}
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("RestoreFood");
-$servicesCaller->addParameter("data", $distriXFoodFoodData);
+$servicesCaller->addParameter("data", $food);
 $servicesCaller->setServiceName("Food/Food/DistriXFoodRestroreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
 

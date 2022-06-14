@@ -6,14 +6,11 @@ include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
 
 $confirmSave  = false;
 
-$food  = new DistriXFoodFoodData();
-if ($_POST['id'] > 0) {
-  $food->setId($_POST['id']);
-}
+list($distriXFoodFoodData, $errorJson) = DistriXFoodFoodData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("DelFood");
-$servicesCaller->addParameter("data", $food);
+$servicesCaller->addParameter("data", $distriXFoodFoodData);
 $servicesCaller->setServiceName("Food/Food/DistriXFoodDeleteDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 

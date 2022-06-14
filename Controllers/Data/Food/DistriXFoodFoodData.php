@@ -7,11 +7,15 @@ if (!class_exists("DistriXFoodFoodData", false)) {
     protected $nameBrand;
     protected $pictureBrand;
     protected $idScoreNutri;
+    protected $nameScoreNutri;
     protected $pictureScoreNutri;
     protected $idScoreNova;
+    protected $nameScoreNova;
     protected $pictureScoreNova;
     protected $idScoreEco;
+    protected $nameScoreEco;
     protected $pictureScoreEco;
+    protected $qrCode;
     protected $code;
     protected $name;
     protected $description;
@@ -29,11 +33,15 @@ if (!class_exists("DistriXFoodFoodData", false)) {
       $this->nameBrand        = "";
       $this->pictureBrand     = "";
       $this->idScoreNutri     = 0;
+      $this->nameScoreNutri   = "";
       $this->pictureScoreNutri= "";
       $this->idScoreNova      = 0;
+      $this->nameScoreNova    = "";
       $this->pictureScoreNova = "";
       $this->idScoreEco       = 0;
+      $this->nameScoreEco     = "";
       $this->pictureScoreEco  = "";
+      $this->qrCode           = "";
       $this->code             = "";
       $this->name             = "";
       $this->description      = "";
@@ -51,11 +59,15 @@ if (!class_exists("DistriXFoodFoodData", false)) {
     public function getNameBrand() { return $this->nameBrand; }
     public function getPictureBrand() { return $this->pictureBrand; }
     public function getIdScoreNutri() { return $this->idScoreNutri; }
+    public function getNameScoreNutri() { return $this->nameScoreNutri; }
     public function getPictureScoreNutri() { return $this->pictureScoreNutri; }
     public function getIdScoreNova() { return $this->idScoreNova; }
+    public function getNameScoreNova() { return $this->nameScoreNova; }
     public function getPictureScoreNova() { return $this->pictureScoreNova; }
     public function getIdScoreEco() { return $this->idScoreEco; }
+    public function getNameScoreEco() { return $this->nameScoreEco; }
     public function getPictureScoreEco() { return $this->pictureScoreEco; }
+    public function getQrCode() { return $this->qrCode; }
     public function getCode() { return $this->code; }
     public function getName() { return $this->name; }
     public function getDescription() { return $this->description; }
@@ -72,11 +84,15 @@ if (!class_exists("DistriXFoodFoodData", false)) {
     public function setNameBrand($nameBrand) { $this->nameBrand = $nameBrand; }
     public function setPictureBrand($pictureBrand) { $this->pictureBrand = $pictureBrand; }
     public function setIdScoreNutri($idScoreNutri) { $this->idScoreNutri = $idScoreNutri; }
+    public function setNameScoreNutri($nameScoreNutri) { $this->nameScoreNutri = $nameScoreNutri; }
     public function setPictureScoreNutri($pictureScoreNutri) { $this->pictureScoreNutri = $pictureScoreNutri; }
     public function setIdScoreNova($idScoreNova) { $this->idScoreNova = $idScoreNova; }
+    public function setNameScoreNova($nameScoreNova) { $this->nameScoreNova = $nameScoreNova; }
     public function setPictureScoreNova($pictureScoreNova) { $this->pictureScoreNova = $pictureScoreNova; }
     public function setIdScoreEco($idScoreEco) { $this->idScoreEco = $idScoreEco; }
+    public function setNameScoreEco($nameScoreEco) { $this->nameScoreEco = $nameScoreEco; }
     public function setPictureScoreEco($pictureScoreEco) { $this->pictureScoreEco = $pictureScoreEco; }
+    public function setQrCode($qrCode) { $this->qrCode = $qrCode; }
     public function setCode($code) { $this->code = $code; }
     public function setName($name) { $this->name = $name; }
     public function setDescription($description) { $this->description = $description; }

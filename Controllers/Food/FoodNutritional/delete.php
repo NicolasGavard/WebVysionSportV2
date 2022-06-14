@@ -6,15 +6,18 @@ include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
 
 $confirmSave  = false;
 
-list($distriXFoodFoodData, $errorJson) = DistriXFoodFoodData::getJsonData($_POST);
+$food  = new DistriXFoodFoodData();
+if ($_POST['id'] > 0) {
+  $food->setId($_POST['id']);
+}
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("RestoreFood");
-$servicesCaller->addParameter("data", $distriXFoodFoodData);
-$servicesCaller->setServiceName("Food/Food/DistriXFoodRestroreDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
+$servicesCaller->setMethodName("DelFood");
+$servicesCaller->addParameter("data", $food);
+$servicesCaller->setServiceName("Food/Food/DistriXFoodDeleteDataSvc.php");
+list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-$logOk = logController("Security_Food", "DistriXBrandRestroreDataSvc", "RestoreFood", $output);
+$logOk = logController("Security_Food", "DistriXBrandDeleteDataSvc", "DelFood", $output);
 
 if ($outputok && !empty($output) && isset($output["ConfirmSave"])) {
   $confirmSave = $output["ConfirmSave"];
