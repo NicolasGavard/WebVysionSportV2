@@ -3,6 +3,7 @@
 include(__DIR__ . "/../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
+  // Data
   include(__DIR__ . "/Data/LanguageStorData.php");
   include(__DIR__ . "/Data/FoodStorData.php");
   include(__DIR__ . "/Data/FoodNameStorData.php");

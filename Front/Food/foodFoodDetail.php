@@ -22,7 +22,7 @@
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="../Food/foodFoodList.php"><?php echo $page_title_prev; ?></a></li>
-									<li class="breadcrumb-item active" aria-current="page"><?php echo $page_title; ?> <span class='infoRecipeName'></span></li>
+									<li class="breadcrumb-item active" aria-current="page"><?php echo $page_title; ?> <span class='infoFoodName'></span></li>
 								</ol>
 							</nav>
 						</div>
@@ -33,25 +33,26 @@
 					
         <div class="clearfix">
           <div class="pull-left">
-            <h4 class="text-blue h4"><?php echo $page_title; ?></h4>
+            <h4 class="text-blue h4"><?php echo $page_title; ?> <span class='infoFoodName'></span></h4>
           </div>
         </div>
   
         <div class="faq-wrap padding-top-30">
           <div id="accordion">
+            
             <div class="card">
               <div class="card-header">
                 <button class="btn btn-block" data-toggle="collapse" data-target="#foodLabel">
                   <?php echo $page_group_label ?>
                 </button>
               </div>
-              <!-- <div id="foodLabel" class="collapse show" data-parent="#accordion"> -->
               <div id="foodLabel" class="collapse" data-parent="#accordion">
                 <div class="card-body">
                   <?php include('../Food/foodFoodDetailLabel.php'); ?>
                 </div>
               </div>
             </div>
+            
             <div class="card">
               <div class="card-header">
                 <button class="btn btn-block collapsed" data-toggle="collapse" data-target="#foodWeight">
@@ -64,6 +65,7 @@
                 </div>
               </div>
             </div>
+            
             <div class="card">
               <div class="card-header">
                 <button class="btn btn-block collapsed" data-toggle="collapse" data-target="#foodNutritional">
@@ -80,10 +82,14 @@
         </div>
       </div>
 
-      <script src="../../jsWebVysionSport/Food/foodFoodDetail.js"></script>
-
       <?php
         include('../Home/_headerFooter.php');
       ?>
+      <script src="../../jsWebVysionSport/Food/foodFoodDetail.js"></script>
+      <script src="../../jsWebVysionSport/Food/foodFoodLabel.js"></script>
+      <!-- 
+      <script src="../../jsWebVysionSport/Food/foodFoodNutritional.js"></script>
+      <script src="../../jsWebVysionSport/Food/foodFoodWeight.js"></script>
+      -->
   </body>
 </html>

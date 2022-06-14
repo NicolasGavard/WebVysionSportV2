@@ -31,7 +31,7 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-            <table class="table stripe hover nowrap" id="datatable">
+            <table class="display responsive nowrap" width="100%" id="datatable">
 							<thead>
 								<tr>
                   <th width="15%" class="table-plus"><span><?php echo $page_name; ?></span></th>
@@ -89,7 +89,7 @@
             <div class="modal-body text-center font-18">
               <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_meal_title; ?></h4>
               <div class="row">
-                <table class="table stripe hover nowrap" id="datatable2">
+                <table class="display responsive nowrap" width="100%" id="datatable2">
                   <thead>
                     <tr>
                       <th width="15%" class="table-plus"><span><?php echo $page_days; ?></span></th>

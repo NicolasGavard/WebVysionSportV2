@@ -1,18 +1,33 @@
 <?php
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
+// STY APP
+include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
+include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+
 include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodBrandData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodEcoScoreData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodNovaScoreData.php");
 include(__DIR__ . "/../../Data/Food/DistriXFoodNutriScoreData.php");
 
+$food             = new DistriXFoodFoodData();
+$listBrands       = [];
+$listEcoScores    = [];
+$listNovaScores   = [];
+$listNutriScores  = [];
+
+$infoProfil = DistriXStyAppInterface::getUserInformation();
+$_POST['id'] = $infoProfil->getIdLanguage(); // NG 27-05-22 - until a solution is found
+list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
+
 list($distriXFoodFoodData, $errorJson) = DistriXFoodFoodData::getJsonData($_POST);
 
 $foodCaller = new DistriXServicesCaller();
 $foodCaller->setServiceName("Food/Food/DistriXFoodViewDataSvc.php");
 $foodCaller->addParameter("data", $distriXFoodFoodData);
+$foodCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 
 $brandCaller = new DistriXServicesCaller();
 $brandCaller->setServiceName("Food/Brand/DistriXFoodBrandListDataSvc.php");

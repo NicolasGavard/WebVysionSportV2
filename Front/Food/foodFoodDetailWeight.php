@@ -17,7 +17,7 @@
     </div>
     <div class="pb-20"></div>
     <div class="pb-20">
-      <table class="table stripe hover nowrap" id="datatable">
+      <table class="display responsive nowrap" width="100%" id="datatable">
         <thead>
           <tr>                 
             <th width="30%" class="table-plus"><span><?php echo $page_name; ?></span></th>
@@ -89,5 +89,3 @@
     </div>
   </div>
 </div>
-
-<script src="../../jsWebVysionSport/Food/foodFoodLabel.js"></script>

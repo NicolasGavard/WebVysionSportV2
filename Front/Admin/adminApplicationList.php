@@ -17,7 +17,7 @@
 						<h4 class="text-blue h4">Liste des applications</h4>
 					</div>
 					<div class="pb-20">
-						<table class="data-table table stripe hover nowrap">
+						<table class="data-table display responsive nowrap" width="100%">
 							<thead>
 								<tr>
 									<th class="table-plus datatable-nosort">Name</th>

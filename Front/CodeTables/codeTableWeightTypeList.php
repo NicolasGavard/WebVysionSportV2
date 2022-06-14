@@ -30,7 +30,7 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table class="table stripe hover nowrap" id="datatable">
+						<table class="display responsive nowrap" width="100%" id="datatable">
 							<thead>
                 <input class="weightTypeType_solid"   type="hidden" value="<?php echo $page_solid_title; ?>">
                 <input class="weightTypeType_liquid"  type="hidden" value="<?php echo $page_liquid_title; ?>">

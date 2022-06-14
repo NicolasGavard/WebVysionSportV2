@@ -1,6 +1,6 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Food/Food/listWeight.php',
+  url : '../../Controllers/Food/FoodWeight/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {

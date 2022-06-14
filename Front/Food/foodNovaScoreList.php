@@ -30,7 +30,7 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table class="table stripe hover nowrap" id="datatable">
+						<table class="display responsive nowrap" width="100%" id="datatable">
 							<thead>
 								<tr>                 
                   <th width="20%" class="table-plus datatable-nosort"><span><?php echo $page_picture; ?></span></th>
