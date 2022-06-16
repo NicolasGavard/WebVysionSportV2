@@ -1,5 +1,10 @@
 <?php
 include(__DIR__ . "/Front/Home/_version.php");
+
+$international  = 'register';
+$i18cdlangue    = 'FR';
+// If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+include("i18/_i18.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,29 +52,29 @@ include(__DIR__ . "/Front/Home/_version.php");
 					<div class="register-box bg-white box-shadow border-radius-10">
 						<div class="wizard-content">
 							<form id="registerForm" class="col-md-12 col-lg-12 tab-wizard2 wizard-circle wizard" style="padding-left: 0px;">
-								<h5>Votre compte</h5>
+								<h5><?php echo $registerAccount;?></h5>
 								<section data-step="0">
 									<div class="form-wrap max-width-600 mx-auto">
 										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Adresse électronique*</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerEmail;?></label>
 											<div class="col-sm-8">
 												<input type="email" id="email" name="email" class="form-control required">
 											</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Nom d'utilisateur*</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerUserCode;?></label>
 											<div class="col-sm-8">
 												<input type="text" id="username" name="username" class="form-control required">
 											</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Mot de passe*</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerPassword;?></label>
 											<div class="col-sm-8">
 												<input type="password" id="password" name="password" class="form-control required">
 											</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Confirmer le mot de passe*</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerConfirmPassword;?></label>
 											<div class="col-sm-8">
 												<input type="password" id="confirmPassword" name="confirmPassword" class="form-control required">
 											</div>
@@ -77,42 +82,42 @@ include(__DIR__ . "/Front/Home/_version.php");
 									</div>
 								</section>
 								<!-- Step 2 -->
-								<h5>Informations personnelles</h5>
+								<h5><?php echo $registerInfos;?></h5>
 								<section data-step="1">
 									<div class="form-wrap max-width-600 mx-auto">
 										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Nom*</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerName;?></label>
 											<div class="col-sm-8">
 												<input type="text" id="personname" name="personname" class="form-control required">
 											</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Prénom*</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerFirstname;?></label>
 											<div class="col-sm-8">
 												<input type="text" id="personfirstname" class="form-control required">
 											</div>
 										</div>
 										<div class="form-group row align-items-center">
-											<label class="col-sm-4 col-form-label">Sexe*</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerSex;?></label>
 											<div class="col-sm-8">
 												<div class="custom-control custom-radio custom-control-inline pb-0">
 													<input type="radio" id="male" name="gender" class="custom-control-input">
-													<label class="custom-control-label" for="male">Homme</label>
+													<label class="custom-control-label" for="male"><?php echo $registerMan;?></label>
 												</div>
 												<div class="custom-control custom-radio custom-control-inline pb-0">
 													<input type="radio" id="female" name="gender" class="custom-control-input">
-													<label class="custom-control-label" for="female">Femme</label>
+													<label class="custom-control-label" for="female"><?php echo $registerWoman;?></label>
 												</div>
 											</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Ville</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerCity;?></label>
 											<div class="col-sm-8">
 												<input type="text" id="personcity" class="form-control">
 											</div>
 										</div>
 										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Pays</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerCountry;?></label>
 											<div class="col-sm-8">
 												<input type="text" id="personcountry" class="form-control">
 											</div>
@@ -120,11 +125,11 @@ include(__DIR__ . "/Front/Home/_version.php");
 									</div>
 								</section>
 								<!-- Step 3 -->
-								<h5>Formules</h5>
+								<h5><?php echo $registerFormulas;?></h5>
 								<section data-step="2">
 									<div class="form-wrap max-width-600 mx-auto">
 										<div class="form-group row">
-											<label class="col-sm-4 col-form-label">Formule</label>
+											<label class="col-sm-4 col-form-label"><?php echo $registerFormula;?></label>
 											<div class="col-sm-8">
 												<select class="custom-select form-control required" id="formula" name="formula" title="Sélection de la Formule">
 													<option value="1">Option 1</option>
@@ -136,44 +141,44 @@ include(__DIR__ . "/Front/Home/_version.php");
 									</div>
 								</section>
 								<!-- Step 4 -->
-								<h5>Confirmation</h5>
+								<h5><?php echo $registerConfirm;?></h5>
 								<section>
 									<div class="form-wrap max-width-600 mx-auto">
 										<ul class="register-info">
 											<li>
 												<div class="row">
-													<div class="col-sm-6 weight-600">Adresse électronique</div>
+													<div class="col-sm-6 weight-600"><?php echo $registerEmail;?></div>
 													<div class="col-sm-6"><span id="confemail"></span></div>
 												</div>
 											</li>
 											<li>
 												<div class="row">
-													<div class="col-sm-6 weight-600">Nom d'utilisateur</div>
+													<div class="col-sm-6 weight-600"><?php echo $registerUserCode;?></div>
 													<div class="col-sm-6"><span id="confusername"></span></div>
 												</div>
 											</li>
 											<li>
 												<div class="row">
-													<div class="col-sm-6 weight-600">Nom</div>
+													<div class="col-sm-6 weight-600"><?php echo $registerName;?></div>
 													<div class="col-sm-6"><span id="confpersonname"></span></div>
 												</div>
 											</li>
 											<li>
 												<div class="row">
-													<div class="col-sm-6 weight-600">Prénom</div>
+													<div class="col-sm-6 weight-600"><?php echo $registerFirstname;?></div>
 													<div class="col-sm-6"><span id="confpersonfirstname"></span></div>
 												</div>
 											</li>
 											<li>
 												<div class="row">
-													<div class="col-sm-6 weight-600">Formule</div>
+													<div class="col-sm-6 weight-600"><?php echo $registerFormula;?></div>
 													<div class="col-sm-6"><span id="confformula"></span></div>
 												</div>
 											</li>
 										</ul>
 										<div class="custom-control custom-checkbox mt-4">
 											<input type="checkbox" class="custom-control-input required" name="cbusage" id="cbusage">
-											<label class="custom-control-label" for="cbusage">J'ai lu et accepté les conditions d'utilisation des services et la politique de confidentialité.</label>
+											<label class="custom-control-label" for="cbusage"><?php echo $registerConditions;?></label>
 										</div>
 									</div>
 								</section>
@@ -190,12 +195,12 @@ include(__DIR__ . "/Front/Home/_version.php");
 		<div class="modal-dialog modal-dialog-centered max-width-400" role="document">
 			<div class="modal-content">
 				<div class="modal-body text-center font-18">
-					<h3 class="mb-20">Formulaire soumis!</h3>
+					<h3 class="mb-20"><?php echo $registerSent;?></h3>
 					<div class="mb-30 text-center"><img src="vendors/images/success.png"></div>
-					Félicitations, votre compte est créé.
+					<?php echo $registerOk;?>
 				</div>
 				<div class="modal-footer justify-content-center">
-					<a href="index.html" class="btn btn-primary">Fermer</a>
+					<a href="index.html" class="btn btn-primary"><?php echo $registerClose;?></a>
 				</div>
 			</div>
 		</div>
