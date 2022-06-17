@@ -1,8 +1,13 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/Init/DistriXCurrentDietInitDataSvc.php");
+include(__DIR__ . "/../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
+  // Storage
+  include(__DIR__ . "/../Storage/DietStor.php");
+  // STOR Data
+  include(__DIR__ . "/../Data/DietStorData.php");
+  
   if (is_null($dbConnection->getError())) {
     $data = $dataSvc->getParameter("data");
     list($styApplicationStor, $styApplicationStorInd) = StyApplicationStor::findByIndCode($data, true, $dbConnection);

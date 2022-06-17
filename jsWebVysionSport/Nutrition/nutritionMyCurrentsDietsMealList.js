@@ -1,26 +1,31 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Nutrition/MyCurrentsDiets/list.php',
+  url : '../../Controllers/Nutrition/MyCurrentsDiets/view.php',
   type : 'POST',
   dataType : 'JSON',
-  data: {'idUserCoach': localStorage.getItem("idUser")},
+  data: {'id': localStorage.getItem("idDiet")},
   success : function(data) {
-    localStorage.setItem("dataTable", JSON.stringify(data.ListMyCurrentsDiets));
-
-    $.map(data.ListMyTemplatesDiets, function(val, key) {
-      $('.listMyTemplates').append('<option value="'+val.id+'">'+val.name+'</option>');
-    });
-    
-    $.map(data.ListMyStudents, function(val, key) {
-      $('.listStudents').append('<option value="'+val.id+'">'+val.firstName+' '+val.name+'</option>');
-    });
-
+    $(".infoDietName").val(data.ViewMyCurrentDiet.name);
+  },
+  error : function(data) {
+    console.log(data);
+  }
+});
+$.ajax({
+  url : '../../Controllers/Nutrition/MyCurrentsDietsMeal/list.php',
+  type : 'POST',
+  dataType : 'JSON',
+  data: {'id': localStorage.getItem("idDiet")},
+  success : function(data) {
+    localStorage.setItem("dataTable", JSON.stringify(data.ViewMyCurrentDiet));
     $('.btn-success').trigger('click');
   },
   error : function(data) {
     console.log(data);
   }
 });
+
+
 
 $(".btn-warning").on('click', function() {
   $(".btn-success").removeClass("disabled");
@@ -30,7 +35,7 @@ $(".btn-warning").on('click', function() {
   $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
   datatable.clear();
-  ListMyCurrentDiet(1);
+  ListMyCurrentDietMeal(1);
 });
 
 $(".btn-success").on('click', function() {
@@ -41,22 +46,22 @@ $(".btn-success").on('click', function() {
   $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
   datatable.clear();
-  ListMyCurrentDiet(0);
+  ListMyCurrentDietMeal(0);
 });
 
-$(".AddNewMyCurrentDiet").on('click', function() {
+$(".AddNewMyCurrentDietMeal").on('click', function() {
   $(".add_title").removeClass("d-none");
   $(".update_title").addClass("d-none");
 
-  $('.AddMyCurrentDietFormIdMyCurrentDiet').val(0);
-  $('.AddMyCurrentDietFormCode').val('');
-  $('.AddMyCurrentDietFormName').val('');
+  $('.AddMyCurrentDietMealFormIdMyCurrentDietMeal').val(0);
+  $('.AddMyCurrentDietMealFormCode').val('');
+  $('.AddMyCurrentDietMealFormName').val('');
   $(".avatar-brand").attr("src", '');
-  $('.AddMyCurrentDietFormTimestamp').val(0);
-  $('.AddMyCurrentDietFormStatut').val(0);
+  $('.AddMyCurrentDietMealFormTimestamp').val(0);
+  $('.AddMyCurrentDietMealFormStatut').val(0);
 });
 
-$(".btnAddMyCurrentDiet").on('click', function() {
+$(".btnAddMyCurrentDietMeal").on('click', function() {
   $(".page_food_brand_update_title").removeClass("d-none");
   $('.AddMyCurrentsDietsFormIdUserCoatch').val(localStorage.getItem("idUser"));
   
@@ -72,7 +77,7 @@ $(".btnAddMyCurrentDiet").on('click', function() {
       type : 'POST',
       dataType : 'JSON',
       // data: $.param(data),
-      data: $('#FormAddMyCurrentDiet').serialize(),
+      data: $('#FormAddMyCurrentDietMeal').serialize(),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
         setTimeout(function() {window.location.href = "./nutritionMyCurrentsDietsList.php";}, 800);
@@ -81,7 +86,7 @@ $(".btnAddMyCurrentDiet").on('click', function() {
         $('#sa-error-distrix').trigger('click');
       }
     });
-    $(".btnAddMyCurrentDiet").attr("data-dismiss", "modal");
+    $(".btnAddMyCurrentDietMeal").attr("data-dismiss", "modal");
   } else {
     if (template == 0){
       $('.danger-template').removeClass("d-none");
@@ -147,7 +152,7 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListMyCurrentDiet(elemState){
+function ListMyCurrentDietMeal(elemState){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
     if(val.elemState == elemState){
@@ -183,10 +188,9 @@ function ListMyCurrentDiet(elemState){
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMealCurrentDiet"  onclick="ViewmealMyCurrentDiet(\''+val.id+'\');"               href="#"><i class="dw dw-harvest"></i> Repas</a>'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyCurrentDiet"    onclick="ViewMyCurrentDiet(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                 onclick="DelMyCurrentDiet(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"                onclick="RestMyCurrentDiet(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyCurrentDietMeal"  onclick="ViewMyCurrentDietMeal(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                   onclick="DelMyCurrentDietMeal(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"                  onclick="RestMyCurrentDietMeal(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -196,22 +200,7 @@ function ListMyCurrentDiet(elemState){
   });
 }
 
-function ViewmealMyCurrentDiet(id){
-  $.ajax({
-    url : '../../Controllers/Nutrition/MyCurrentsDiets/view.php',
-    type : 'POST',
-    dataType : 'JSON',
-    data: {'id': id},
-    success : function(data) {
-      // A FINIR NG 07-06-22
-    },
-    error : function(data) {
-      console.log(data);
-    }
-  });
-}
-
-function ViewMyCurrentDiet(id){
+function ViewMyCurrentDietMeal(id){
   $.ajax({
     url : '../../Controllers/Nutrition/MyCurrentsDiets/view.php',
     type : 'POST',
@@ -221,26 +210,26 @@ function ViewMyCurrentDiet(id){
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
 
-      $('.AddMyCurrentDietFormIdMyCurrentDiet').val(id);
-      $('.AddMyCurrentsDietsFormIdUserCoatch').val(data.ViewMyCurrentDiet.idUserCoach);
+      $('.AddMyCurrentDietMealFormIdMyCurrentDietMeal').val(id);
+      $('.AddMyCurrentsDietsFormIdUserCoatch').val(data.ViewMyCurrentDietMeal.idUserCoach);
             
-      $('.listMyTemplates option[value="'+data.ViewMyCurrentDiet.idDietTemplate+'"]').prop('selected', true);
-      nameTemplate = $('.listMyTemplates option[value="'+data.ViewMyCurrentDiet.idDietTemplate+'"]').text();
+      $('.listMyTemplates option[value="'+data.ViewMyCurrentDietMeal.idDietTemplate+'"]').prop('selected', true);
+      nameTemplate = $('.listMyTemplates option[value="'+data.ViewMyCurrentDietMeal.idDietTemplate+'"]').text();
       $('#select2-listMyTemplates-container').html(nameTemplate);
       
-      $('.listStudents option[value="'+data.ViewMyCurrentDiet.idUserStudent+'"]').prop('selected', true);
-      nameStudent = $('.listStudents option[value="'+data.ViewMyCurrentDiet.idUserStudent+'"]').text();
+      $('.listStudents option[value="'+data.ViewMyCurrentDietMeal.idUserStudent+'"]').prop('selected', true);
+      nameStudent = $('.listStudents option[value="'+data.ViewMyCurrentDietMeal.idUserStudent+'"]').text();
       $('#select2-listStudents-container').html(nameStudent);
       
-      var date    = String(data.ViewMyCurrentDiet.dateStart);
+      var date    = String(data.ViewMyCurrentDietMeal.dateStart);
       var year    = date.substr(0, 4);
       var month   = date.substr(4, 2);
       var day     = date.substr(6, 2);
       var dateFr  = day+'/'+month+'/'+year;
       $('.dateStart').val(dateFr);
 
-      $('.AddMyCurrentDietFormTimestamp').val(data.ViewMyCurrentDiet.timestamp);
-      $('.AddMyCurrentDietFormStatut').val(data.ViewMyCurrentDiet.elemState);
+      $('.AddMyCurrentDietMealFormTimestamp').val(data.ViewMyCurrentDietMeal.timestamp);
+      $('.AddMyCurrentDietMealFormStatut').val(data.ViewMyCurrentDietMeal.elemState);
     },
     error : function(data) {
       console.log(data);
@@ -248,12 +237,12 @@ function ViewMyCurrentDiet(id){
   });
 }
 
-function DelMyCurrentDiet(id, name){
+function DelMyCurrentDietMeal(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestMyCurrentDiet(id, name){
+function RestMyCurrentDietMeal(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

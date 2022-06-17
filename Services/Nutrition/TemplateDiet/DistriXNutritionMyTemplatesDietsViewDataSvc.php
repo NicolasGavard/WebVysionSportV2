@@ -1,12 +1,17 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/Init/DistriXTemplateDietInitDataSvc.php");
+include(__DIR__ . "/../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
+  // Storage
+  include(__DIR__ . "/Storage/DietTemplateStor.php");
+  // STOR Data
+  include(__DIR__ . "/Data/DietTemplateStorData.php");
+  
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
-    list($dietStorData, $jsonError)   = DietStorData::getJsonData($dataSvc->getParameter("data"));
-    $dietStor                         = DietStor::read($dietStorData->getId(), $dbConnection);
+    list($dietTemplateStorData, $jsonError) = DietTemplateStorData::getJsonData($dataSvc->getParameter("data"));
+    $dietTemplateStor                       = DietTemplateStor::read($dietTemplateStorData->getId(), $dbConnection);
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }
@@ -16,7 +21,7 @@ if ($dataSvc->isAuthorized()) {
     $dataSvc->addErrorToResponse($errorData);
   }
 
-  $dataSvc->addToResponse("ViewMyTemplateDiet", $dietStor);
+  $dataSvc->addToResponse("ViewMyTemplateDiet", $dietTemplateStor);
 }
 
 // Return response
