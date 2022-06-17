@@ -59,7 +59,7 @@ class StyUserStorData extends DistriXSvcAppData {
   public function getInitPass():int {return $this->initpass;}
   public function getIdLanguage():int {return $this->idlanguage;}
   public function getIdStyEnterprise():int {return $this->idstyenterprise;}
-  public function getStatus():int {return $this->statut;}
+  public function getStatut():int {return $this->statut;}
   public function getTimestamp():int {return $this->timestamp;}
   public function isAvailable():int {return ($this->statut == self::STYUSER_STATUS_AVAILABLE);}
   public function getAvailableValue():int {return self::STYUSER_STATUS_AVAILABLE;}
@@ -81,7 +81,7 @@ class StyUserStorData extends DistriXSvcAppData {
   public function setInitPass(int $initPass) {$this->initpass = $initPass;}
   public function setIdLanguage(int $idLanguage) {$this->idlanguage = $idLanguage;}
   public function setIdStyEnterprise(int $idStyEnterprise) {$this->idstyenterprise = $idStyEnterprise;}
-  public function setStatus(int $status) {$this->statut = $status;}
+  public function setStatut(int $statut) {$this->statut = $statut;}
   public function setTimestamp(int $timestamp) {$this->timestamp = $timestamp;}
   public function setAvailable() {$this->statut = self::STYUSER_STATUS_AVAILABLE;}
   public function setUnavailable() {$this->statut = self::STYUSER_STATUS_NOT_AVAILABLE;}

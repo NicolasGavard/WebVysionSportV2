@@ -24,7 +24,7 @@ $distriXStyUserData->setMobile($_POST['mobile']);
 $distriXStyUserData->setInitPass($_POST['initPass']);
 $distriXStyUserData->setIdLanguage($_POST['idLanguage']);
 $distriXStyUserData->setIdStyEnterprise($_POST['idStyEnterprise']);
-$distriXStyUserData->setStatus($_POST['statut']);
+$distriXStyUserData->setStatut($_POST['statut']);
 list($confirmSave, $errorData) = DistriXStyAppUser::saveUser($distriXStyUserData);
 
 $resp["confirmSave"] = $confirmSave;

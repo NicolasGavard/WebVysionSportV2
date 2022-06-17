@@ -20,7 +20,7 @@ if (!class_exists("DistriXStyUserData", false)) {
     protected $idStyEnterprise;
     protected $nameEnterprise;
     protected $roles;
-    protected $status;
+    protected $statut;
 
     public function __construct()
     {
@@ -42,49 +42,49 @@ if (!class_exists("DistriXStyUserData", false)) {
       $this->idStyEnterprise= 0;
       $this->nameEnterprise = "";
       $this->roles          = [];
-      $this->status         = 0;
+      $this->statut         = 0;
     }
     // Gets
-    public function getId(){return $this->id;}
-    public function getIdStyUserType(){return $this->idStyUserType;}
-    public function getLogin(){return $this->login;}
-    public function getFirstName(){return $this->firstName;}
-    public function getName(){return $this->name;}
-    public function getLinkToPicture(){return $this->linkToPicture;}
-    public function getSize(){return $this->size;}
-    public function getType(){return $this->type;}
-    public function getPass(){return $this->pass;}
-    public function getEmail(){return $this->email;}
-    public function getEmailBackup(){return $this->emailBackup;}
-    public function getPhone(){return $this->phone;}
-    public function getMobile(){return $this->mobile;}
-    public function getInitPass(){return $this->initPass;}
-    public function getIdLanguage(){return $this->idLanguage;}
-    public function getIdStyEnterprise(){return $this->idStyEnterprise;}
-    public function getNameEnterprise(){return $this->nameEnterprise;}
-    public function getRoles(){return $this->roles;}
-    public function getStatus(){return $this->status;}
+    public function getId():int {return $this->id;}
+    public function getIdStyUserType():int {return $this->idStyUserType;}
+    public function getLogin():string {return $this->login;}
+    public function getFirstName():string {return $this->firstName;}
+    public function getName():string {return $this->name;}
+    public function getLinkToPicture():string {return $this->linkToPicture;}
+    public function getSize():int {return $this->size;}
+    public function getType():string {return $this->type;}
+    public function getPass():string {return $this->pass;}
+    public function getEmail():string {return $this->email;}
+    public function getEmailBackup():string {return $this->emailBackup;}
+    public function getPhone():string {return $this->phone;}
+    public function getMobile():string {return $this->mobile;}
+    public function getInitPass():int {return $this->initPass;}
+    public function getIdLanguage():int {return $this->idLanguage;}
+    public function getIdStyEnterprise():int {return $this->idStyEnterprise;}
+    public function getNameEnterprise():string {return $this->nameEnterprise;}
+    public function getRoles():array {return $this->roles;}
+    public function getStatut():int {return $this->statut;}
 
     // Sets
-    public function setId($id){$this->id = $id;}
-    public function setIdStyUserType($idStyUserType){$this->idStyUserType = $idStyUserType;}
-    public function setLogin($login){$this->login = $login;}
-    public function setFirstName($firstName){$this->firstName = $firstName;}
-    public function setName($name){$this->name = $name;}
-    public function setLinkToPicture($linkToPicture){$this->linkToPicture = $linkToPicture;}
-    public function setSize($size){$this->size = $size;}
-    public function setType($type){$this->type = $type;}
-    public function setPass($pass){$this->pass = $pass;}
-    public function setEmail($email){$this->email = $email;}
-    public function setEmailBackup($emailBackup){$this->emailBackup = $emailBackup;}
-    public function setPhone($phone){$this->phone = $phone;}
-    public function setMobile($mobile){$this->mobile = $mobile;}
-    public function setInitPass($initPass){$this->initPass = $initPass;}
-    public function setIdLanguage($idLanguage){$this->idLanguage = $idLanguage;}
-    public function setIdStyEnterprise($idStyEnterprise){$this->idStyEnterprise = $idStyEnterprise;}
-    public function setnameEnterprise($nameEnterprise){$this->nameEnterprise = $nameEnterprise;}
-    public function setRoles($roles){$this->roles = $roles;}
-    public function setStatus($status){$this->status = $status;}
+    public function setId(int $id){$this->id = $id;}
+    public function setIdStyUserType(int $idStyUserType){$this->idStyUserType = $idStyUserType;}
+    public function setLogin(string $login){$this->login = $login;}
+    public function setFirstName(string $firstName){$this->firstName = $firstName;}
+    public function setName(string $name){$this->name = $name;}
+    public function setLinkToPicture(string $linkToPicture){$this->linkToPicture = $linkToPicture;}
+    public function setSize(int $size){$this->size = $size;}
+    public function setType(string $type){$this->type = $type;}
+    public function setPass(string $pass){$this->pass = $pass;}
+    public function setEmail(string $email){$this->email = $email;}
+    public function setEmailBackup(string $emailBackup){$this->emailBackup = $emailBackup;}
+    public function setPhone(string $phone){$this->phone = $phone;}
+    public function setMobile(string $mobile){$this->mobile = $mobile;}
+    public function setInitPass(int $initPass){$this->initPass = $initPass;}
+    public function setIdLanguage(int $idLanguage){$this->idLanguage = $idLanguage;}
+    public function setIdStyEnterprise(int $idStyEnterprise){$this->idStyEnterprise = $idStyEnterprise;}
+    public function setnameEnterprise(string $nameEnterprise){$this->nameEnterprise = $nameEnterprise;}
+    public function setRoles(array $roles){$this->roles = $roles;}
+    public function setStatut(int $statut){$this->statut = $statut;}
   }
   // End of class
 }

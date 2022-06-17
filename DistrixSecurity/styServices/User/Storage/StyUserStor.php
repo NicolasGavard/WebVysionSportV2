@@ -138,7 +138,7 @@ class StyUserStor
       $params = [];
       $params["index0"] = $dataIn->getIdStyEnterprise();
       if (!$all) {
-        $params["statut"] = $dataIn->getStatus();
+        $params["statut"] = $dataIn->getStatut();
       }
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);
@@ -233,7 +233,7 @@ class StyUserStor
       $params["initpass"] = $data->getInitPass();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["idstyenterprise"] = $data->getIdStyEnterprise();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
@@ -378,7 +378,7 @@ class StyUserStor
       $params["initpass"] = $data->getInitPass();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["idstyenterprise"] = $data->getIdStyEnterprise();
-      $params["statut"] = $data->getStatus();
+      $params["statut"] = $data->getStatut();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute($params);

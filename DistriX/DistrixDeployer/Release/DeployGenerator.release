@@ -1,0 +1,9 @@
+ENV=DEV
+[Cards]
+APP-164
+APP-262
+CYR-59
+[PHP_D_Generator]
+PHP_D_Generator
+[EXCLUDES]
+Old Ones
