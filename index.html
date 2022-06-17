@@ -113,6 +113,17 @@
 	</div>
 
 	<!-- js -->
+	<script>
+		if ('serviceWorker' in navigator) {
+		  navigator.serviceWorker.register('/WebVysionSportV2/sw.js', { scope: '' }).then(function(reg) {
+    	// registration worked
+    	console.log('Registration succeeded. Scope is ' + reg.scope);
+  		}).catch(function(error) {
+    	// registration failed
+    		console.log('Registration failed with ' + error);
+  		});
+		}
+	</script>
 	<script src="vendors/scripts/core.js"></script>
 	<script src="vendors/scripts/script.min.js"></script>
 	<script src="vendors/scripts/process.js"></script>
