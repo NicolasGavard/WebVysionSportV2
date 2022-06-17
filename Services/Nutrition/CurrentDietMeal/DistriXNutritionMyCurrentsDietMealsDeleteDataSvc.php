@@ -4,20 +4,20 @@ include(__DIR__ . "/../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
   // Storage
-  include(__DIR__ . "/../Storage/DietStor.php");
+  include(__DIR__ . "/../Storage/DietMealStor.php");
   // STOR Data
-  include(__DIR__ . "/../Data/DietStorData.php");
-    
+  include(__DIR__ . "/../Data/DietMealStorData.php");
+   
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     if ($dbConnection->beginTransaction()) {
-      list($dietStorData, $jsonError) = DietStorData::getJsonData($dataSvc->getParameter("data"));
-      $insere = DietStor::restore($dietStorData, $dbConnection);
+      list($dietMealStorData, $jsonError) = DietMealStorData::getJsonData($dataSvc->getParameter("data"));
+      $insere = DietMealStor::remove($dietMealStorData, $dbConnection);
       if ($insere) {
         $dbConnection->commit();
       } else {
         $dbConnection->rollBack();
-        if ($dietStorData->getId() > 0) {
+        if ($dietMealStorData->getId() > 0) {
           $errorData = ApplicationErrorData::warningUpdateData(1, 1);
         } else {
           $errorData = ApplicationErrorData::warningInsertData(1, 1);
@@ -31,7 +31,7 @@ if ($dataSvc->isAuthorized()) {
   }
 
   if ($errorData != null) {
-    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "RestoreCurrentDiet", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "DelCurrentDietMeal", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 
