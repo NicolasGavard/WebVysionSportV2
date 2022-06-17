@@ -47,9 +47,9 @@
   $menu_parametre_3 = "Paramètres";
   $menu_parametre_4 = "Paramètres";
   
-  $menu_messagerie    = "Messagerie";
-  $menu_messagerie_1  = "Messagerie";
-  $menu_messagerie_2  = "Messagerie";
+  $menu_messagerie          = "Messagerie";
+  $menu_right_message_list  = "Messages";
+  $menu_right_message_chat  = "t'chat";
   $menu_messagerie_3  = "Messagerie";
   $menu_messagerie_4  = "Messagerie";
 

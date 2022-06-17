@@ -229,7 +229,8 @@
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <?php
                 $navActiveMenuPackageList = $navActiveMenuPackageInvoice = "";
-                if (stripos($_SERVER['PHP_SELF'], 'packageInvoice') !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageInvoice = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'packageList') !== false)     { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageList     = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'packageInvoice') !== false)  { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageInvoice  = 'class="active"'; }
               ?>
               <?php if ($hasRight_PACKAGE_LIST)     {?><li <?php echo $navActiveMenuPackageList ?>><a class="nav-link" href="../Package/packageList.php"><?php echo $menu_right_package_list; ?></a></li><?php } ?>
               <?php if ($hasRight_PACKAGE_INVOICE)  {?><li <?php echo $navActiveMenuPackageInvoice ?>><a class="nav-link" href="../Package/packageInvoice.php"><?php echo $menu_right_invoice_detail; ?></a></li><?php } ?>
@@ -262,7 +263,16 @@
         <?php } ?>
 
         <?php
-          $hasMessaging = true;
+          $hasRight_MESSAGE_LIST  = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'MESSAGE_LIST');
+          $hasRight_MESSAGE_CHAT  = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'MESSAGE_CHAT');
+          if ($hasRight_PACKAGE_LIST || $hasRight_PACKAGE_INVOICE) {
+            $hasMessaging = true;
+          }
+
+          $hasMessaging           = true;
+          $hasRight_MESSAGE_LIST  = true;
+          $hasRight_MESSAGE_CHAT  = true;
+          
           $dataOption   = 'off';
           $show         = '';
           $style        = 'none';
@@ -275,7 +285,13 @@
               &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
-              <li><a href="#">1</a></li>
+            <?php
+                $navActiveMenuMessageList = $navActiveMenuMessageChat = "";
+                if (stripos($_SERVER['PHP_SELF'], 'messageList') !== false)  { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuMessageList  = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'messageChat') !== false)  { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuMessageChat  = 'class="active"'; }
+              ?>
+              <?php if ($hasRight_MESSAGE_LIST) {?><li <?php echo $navActiveMenuMessageList ?>><a class="nav-link" href="../Message/messageList.php"><?php echo $menu_right_message_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_MESSAGE_CHAT) {?><li <?php echo $navActiveMenuMessageChat ?>><a class="nav-link" href="../Message/chat.php"><?php echo $menu_right_message_chat; ?></a></li><?php } ?>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
