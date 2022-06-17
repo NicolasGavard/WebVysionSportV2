@@ -31,7 +31,7 @@ if (!class_exists('DistriXDeployerSvcCaller', false)) {
 		const CLIENT_SRV_DEV_TIMEOUT              = "localhost";
 		const CLIENT_CALL_DEV_TIMEOUT             = "http";
 		const CLIENT_CALL_DEV_TIMEOUT_NB_SECONDS  = 5;
-		const CLIENT_DIR_DEV_TIMEOUT              = "DistriXWebSite";
+		const CLIENT_DIR_DEV_TIMEOUT              = "DistriXWebSite/DistriX";
 
 		const CLIENT_SRV_INT_TIMEOUT              = "";
 		const CLIENT_CALL_INT_TIMEOUT             = "https";

@@ -33,7 +33,7 @@ class DistriXStyAppUser
   }
   // End of getUserInformation
 
-  public static function getIdUser(): int
+  public static function getIdUser()
   {
     $idUser = 0;
     if (isset($_SESSION["DjangoSvcSecurity"]["StyUser"])) {
@@ -44,7 +44,7 @@ class DistriXStyAppUser
   }
   // End of getIdUser
 
-  public static function getIdLanguage(): int
+  public static function getIdLanguage()
   {
     $idLanguage = 0;
     if (isset($_SESSION["DjangoSvcSecurity"]["StyUser"])) {
@@ -55,7 +55,7 @@ class DistriXStyAppUser
   }
   // End of getIdLanguage
 
-  public static function getIdCountry(): int
+  public static function getIdCountry()
   {
     $idCountry = 0;
     if (isset($_SESSION["DjangoSvcSecurity"]["StyEnterprises"])) {
@@ -70,7 +70,7 @@ class DistriXStyAppUser
   }
   // End of getIdCountry
 
-  public static function listUsers($idStyEnterprise = ""): array
+  public static function listUsers($idStyEnterprise = "")
   {
     $data = new DistriXStyUserData();
     if ($idStyEnterprise > 0) {
@@ -80,7 +80,7 @@ class DistriXStyAppUser
   }
   // End of listUsers 
 
-  private static function listUsersEnterprise(DistriXStyUserData $data): array
+  public static function listUsersEnterprise(DistriXStyUserData $data): array
   {
     $outputok          = false;
     $output            = [];
@@ -111,7 +111,7 @@ class DistriXStyAppUser
   }
   // End of listUsersEnterprise
 
-  public static function viewUser($idUser = ""): DistriXStyUserData
+  public static function viewUser($idUser = "")
   {
     $user  = new DistriXStyUserData();
     if ($idUser > 0) {
@@ -122,7 +122,7 @@ class DistriXStyAppUser
   }
   // End of viewUser 
 
-  public static function findUserByEmail($email = ""): DistriXStyUserData
+  public static function findUserByEmail($email = "")
   {
     $user  = new DistriXStyUserData();
     if ($email != '') {
@@ -133,7 +133,7 @@ class DistriXStyAppUser
   }
   // End of findUserByEmail 
 
-  public static function findUserByEmailBackup($emailBackup = ""): DistriXStyUserData
+  public static function findUserByEmailBackup($emailBackup = "")
   {
     $user  = new DistriXStyUserData();
     if ($emailBackup != '') {
@@ -144,7 +144,7 @@ class DistriXStyAppUser
   }
   // End of findUserByEmailBackup 
 
-  private static function user(DistriXStyUserData $user): object
+  public static function user(DistriXStyUserData $user): object
   {
     $outputok          = false;
     $output            = [];
