@@ -1,32 +1,18 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// DISTRIX Init
-include("../DistriXInit/DistriXSvcDataServiceInit.php");
-// STY Const
-// STY Const
-include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STY Data
-include(__DIR__ . "/../../Data/DistriXStyApplicationData.php");
-include(__DIR__ . "/../../Data/DistriXStyUserData.php");
-// Database Data
-include(__DIR__ . "/Data/StyUserStorData.php");
-include(__DIR__ . "/Data/StyEnterpriseStorData.php");
-// Storage
-include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
-include(__DIR__ . "/Storage/StyUserStor.php");
-include(__DIR__ . "/Storage/StyEnterpriseStor.php");
-// Cdn Location
-include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
-include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
-// Database
-$databasefile = __DIR__ . "/../Db/Infodb.php";
+// Service Init
+include(__DIR__ . "/../Init/DataSvcInit.php");
+if (isset($dataSvc) && !is_null($dataSvc) && $dataSvc->isAuthorized()) {
+  // Database Data
+  include(__DIR__ . "/Data/StyUserStorData.php");
+  include(__DIR__ . "/Data/StyEnterpriseStorData.php");
+  // Storage
+  include(__DIR__ . "/Storage/StyUserStor.php");
+  include(__DIR__ . "/Storage/StyEnterpriseStor.php");
+  // Cdn Location
+  include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
+  include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
 
-// ListUsers
-if ($dataSvc->getMethodName() == "ListUsers") {
-  $dbConnection = null;
-  $errorData    = null;
-  $users        = [];
+  $styUserstor = [];
 
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
@@ -55,7 +41,7 @@ if ($dataSvc->getMethodName() == "ListUsers") {
     $dataSvc->addErrorToResponse($errorData);
   }
   $dataSvc->addToResponse("ListUsers", $styUserstor);
-}
 
-// Return response
-$dataSvc->endOfService();
+  // Return response
+  $dataSvc->endOfService();
+}

@@ -1,0 +1,8 @@
+[Cards]
+  
+[Modules]
+  [Module]
+    name=""
+     [build]
+    [ModuleName]
+      filePath ...
