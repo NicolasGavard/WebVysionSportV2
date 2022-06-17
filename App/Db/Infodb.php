@@ -7,16 +7,16 @@ switch (DISTRIX_ENV) {
     $bdd    = "KX1PpMC9ojjRo1tHRVmtCg3ZkvIFnhq/hr4hF5lCZSpnyjn82DTLZ/JsAjrZd6d8BpFkL90mirpSnp6u1Rf8Zw==";
     break;
   case DISTRIX_ENV_VER:
-    $host   = "pazzidxsty.mysql.db";
-    $user   = "pazzidxsty";
-    $passBD = "EkimPazziSty2019";
-    $bdd    = "pazzidxsty";
+    $host   = "eHnB3aAeZjCk/6M2KsPFJd9+3nEOFnUvm6nm0UoTZaSe+aB+Mu+//vbzTLHbyVuhkSmjBghibP5ouYGq73ww8dmOFzgQloEx+86hgooAuV8=";
+    $user   = "KPbjJykPUPSlYF/s4ZN67JqApnyFJYlEkiegMMoO90+ZlxspiJKkEjod1iTZAOFhNFtXR6dvtfR3nlmE5IcFBQ==";
+    $passBD = "gjcb3BcoGkUTjOMEGoV84Clt5CLFsr9UzRjJQgP7TBqLbOCpYw6qDMlRGfd3MmDI6mt+pglA97od0lW0cm4tLu4eH1OL4dP+RnKUoNLXEbg=";
+    $bdd    = "8DcVsjRml8TNZo3XCWjZ+WSGmYIrgvM01JSHcA7dQXZhnblBMS6stENKLE6KVYB261PRp6xlk9IeDXL4QHNgCfSQF8LZOFZcSlCM/fWhcig=";
     break;
   case DISTRIX_ENV_VAL:
-    $host   = "jmgxvdmsty.mysql.db";
-    $user   = "jmgxvdmsty";
-    $passBD = "EkimPazziSty2021";
-    $bdd    = "jmgxvdmsty";
+    $host   = "eHnB3aAeZjCk/6M2KsPFJd9+3nEOFnUvm6nm0UoTZaSe+aB+Mu+//vbzTLHbyVuhkSmjBghibP5ouYGq73ww8dmOFzgQloEx+86hgooAuV8=";
+    $user   = "KPbjJykPUPSlYF/s4ZN67JqApnyFJYlEkiegMMoO90+ZlxspiJKkEjod1iTZAOFhNFtXR6dvtfR3nlmE5IcFBQ==";
+    $passBD = "gjcb3BcoGkUTjOMEGoV84Clt5CLFsr9UzRjJQgP7TBqLbOCpYw6qDMlRGfd3MmDI6mt+pglA97od0lW0cm4tLu4eH1OL4dP+RnKUoNLXEbg=";
+    $bdd    = "8DcVsjRml8TNZo3XCWjZ+WSGmYIrgvM01JSHcA7dQXZhnblBMS6stENKLE6KVYB261PRp6xlk9IeDXL4QHNgCfSQF8LZOFZcSlCM/fWhcig=";
     break;
   case DISTRIX_ENV_PROD:
     $host   = "eHnB3aAeZjCk/6M2KsPFJd9+3nEOFnUvm6nm0UoTZaSe+aB+Mu+//vbzTLHbyVuhkSmjBghibP5ouYGq73ww8dmOFzgQloEx+86hgooAuV8=";
