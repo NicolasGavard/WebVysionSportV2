@@ -13,7 +13,7 @@ if ($dataSvc->isAuthorized()) {
   
   $dbConnection     = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
-    list($data, $jsonError)                 = RecipeStorData::getJsonData($dataSvc->getParameter("data"));
+    list($data, $jsonError)               = RecipeStorData::getJsonData($dataSvc->getParameter("data"));
     list($myRecipeStor, $myRecipeStorInd) = RecipeStor::findByIdUserCoach($data, true, $dbConnection);
     foreach ($myRecipeStor as $myRecipe) {
       $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_RECIPE . '/' . $myRecipe->getLinkToPicture();

@@ -33,7 +33,7 @@ class DistriXStyAppUser
   }
   // End of getUserInformation
 
-  public static function getIdUser()
+  public static function getIdUser(): int
   {
     $idUser = 0;
     if (isset($_SESSION["DjangoSvcSecurity"]["StyUser"])) {
@@ -44,7 +44,7 @@ class DistriXStyAppUser
   }
   // End of getIdUser
 
-  public static function getIdLanguage()
+  public static function getIdLanguage(): int
   {
     $idLanguage = 0;
     if (isset($_SESSION["DjangoSvcSecurity"]["StyUser"])) {
@@ -55,7 +55,7 @@ class DistriXStyAppUser
   }
   // End of getIdLanguage
 
-  public static function getIdCountry()
+  public static function getIdCountry(): int
   {
     $idCountry = 0;
     if (isset($_SESSION["DjangoSvcSecurity"]["StyEnterprises"])) {
@@ -70,7 +70,7 @@ class DistriXStyAppUser
   }
   // End of getIdCountry
 
-  public static function listUsers($idStyEnterprise = "")
+  public static function listUsers($idStyEnterprise = ""): array
   {
     $data = new DistriXStyUserData();
     if ($idStyEnterprise > 0) {
@@ -80,7 +80,7 @@ class DistriXStyAppUser
   }
   // End of listUsers 
 
-  public static function listUsersEnterprise(DistriXStyUserData $data): array
+  private static function listUsersEnterprise(DistriXStyUserData $data): array
   {
     $outputok          = false;
     $output            = [];
@@ -89,7 +89,7 @@ class DistriXStyAppUser
     $styServicesCaller->setMethodName("ListUsers");
     $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserListDataSvc.php");
     $styServicesCaller->addParameter("data", $data);
-    list($outputok, $output, $errorData) = $styServicesCaller->call(); //var_dump($output);
+    list($outputok, $output, $errorData) = $styServicesCaller->call(); var_dump($output);
 
     if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
       $logInfoData = new DistriXLoggerInfoData();
@@ -111,7 +111,7 @@ class DistriXStyAppUser
   }
   // End of listUsersEnterprise
 
-  public static function viewUser($idUser = "")
+  public static function viewUser($idUser = ""): DistriXStyUserData
   {
     $user  = new DistriXStyUserData();
     if ($idUser > 0) {
@@ -122,7 +122,7 @@ class DistriXStyAppUser
   }
   // End of viewUser 
 
-  public static function findUserByEmail($email = "")
+  public static function findUserByEmail($email = ""): DistriXStyUserData
   {
     $user  = new DistriXStyUserData();
     if ($email != '') {
@@ -133,7 +133,7 @@ class DistriXStyAppUser
   }
   // End of findUserByEmail 
 
-  public static function findUserByEmailBackup($emailBackup = "")
+  public static function findUserByEmailBackup($emailBackup = ""): DistriXStyUserData
   {
     $user  = new DistriXStyUserData();
     if ($emailBackup != '') {
@@ -144,7 +144,7 @@ class DistriXStyAppUser
   }
   // End of findUserByEmailBackup 
 
-  public static function user(DistriXStyUserData $user): object
+  private static function user(DistriXStyUserData $user): object
   {
     $outputok          = false;
     $output            = [];

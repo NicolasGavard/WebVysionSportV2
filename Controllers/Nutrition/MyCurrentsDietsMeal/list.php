@@ -23,7 +23,7 @@ $distriXNutritionCurrentDietData->setIdUserCoach($infoProfil->getId());
 $distriXNutritionRecipeData       = new DistriXNutritionRecipeData();
 $distriXNutritionRecipeData->setIdUserCoach($infoProfil->getId());
 
-// List DietMeal with idDiet
+// PREPARE CALL
 $dietMealCaller = new DistriXServicesCaller();
 $dietMealCaller->setServiceName("Nutrition/CurrentDietMeal/DistriXNutritionMyCurrentsDietMealsFindDataSvc.php");
 $dietMealCaller->addParameter("data", $distriXNutritionCurrentDietMealMealData);
@@ -33,9 +33,8 @@ $dietCurrentCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurr
 $dietCurrentCaller->addParameter("data", $distriXNutritionCurrentDietData);
 
 $recipeCaller = new DistriXServicesCaller();
-$recipeCaller->setServiceName("Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
+$recipeCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDataSvc.php");
 $recipeCaller->addParameter("data", $distriXNutritionRecipeData);
-
 
 $dietRecipeCaller = new DistriXServicesCaller();
 $dietRecipeCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
@@ -45,6 +44,7 @@ $mealTypeCaller = new DistriXServicesCaller();
 $mealTypeCaller->addParameter("dataName", $dataName);
 $mealTypeCaller->setServiceName("TablesCodes/MealType/DistriXMealTypeListDataSvc.php");
 
+// CALL
 $svc = new DistriXSvc();
 $svc->addToCall("dietMeal", $dietMealCaller);
 $svc->addToCall("dietCurrent", $dietCurrentCaller);
@@ -52,6 +52,7 @@ $svc->addToCall("recipe", $recipeCaller);
 $svc->addToCall("mealType", $mealTypeCaller);
 $callsOk = $svc->call();
 
+// RESPONSES
 list($outputok, $output, $errorData) = $svc->getResult("dietMeal"); //print_r($output);
 if ($outputok && isset($output["ListDietMeals"]) && is_array($output["ListDietMeals"])) {
   list($listMyCurrentDietMeals, $jsonError) = DistriXNutritionCurrentDietMealData::getJsonArray($output["ListDietMeals"]);
@@ -75,15 +76,13 @@ if ($outputok && isset($output["ListMyRecipes"]) && is_array($output["ListMyReci
 
 list($outputok, $output, $errorData) = $svc->getResult("mealType"); //print_r($output);
 if ($outputok && isset($output["ListMealTypes"]) && is_array($output["ListMealTypes"])) {
-  list($listMealTypes, $jsonError) = DistriXCodeTableMealTypeData::getJsonArray($output["ListMealTypes"]);
+  list($listMealTypes, $jsonError)      = DistriXCodeTableMealTypeData::getJsonArray($output["ListMealTypes"]);
+  list($listMealTypeNames, $jsonError)  = DistriXCodeTableMealTypeNameData::getJsonArray($output["ListMealTypeNames"]);
 } else {
   $error = $errorData;
 }
 
-echo '</br></br>';
-print_r($listMyCurrentDietMeals);
-echo '</br></br>';
-
+// TREATMENT
 foreach ($listMyCurrentDietMeals as $currentDietMeal) {
   $foods = [];
 
@@ -94,71 +93,21 @@ foreach ($listMyCurrentDietMeals as $currentDietMeal) {
 
   foreach ($listMyRecipe as $recipe) {
     if ($recipe->getId() == $currentDietMeal->getIdDietRecipe()){
-      $distriXNutritionCurrentDietMealData->setNameDietRecipe('');
+      $distriXNutritionCurrentDietMealData->setNameDietRecipe($recipe->getName());
+      break;
     }
   }
-
+  
   $distriXNutritionCurrentDietMealData->setDayNumber($currentDietMeal->getDayNumber());
   $distriXNutritionCurrentDietMealData->setIdMealType($currentDietMeal->getIdMealType());
-  $distriXNutritionCurrentDietMealData->setNameMealType('');
+  foreach ($listMealTypeNames as $mealTypeName) {
+    if ($mealTypeName->getIdMealType() == $currentDietMeal->getIdMealType()){
+      $distriXNutritionCurrentDietMealData->setNameMealType($mealTypeName->getName());
+    }
+  }
   $distriXNutritionCurrentDietMealData->setFoods($foods);
   $listMyCurrentDietMealsFormFront[] = $distriXNutritionCurrentDietMealData;
 }
-
-// foreach ($listMyCurrentDietMeals as $currentDiet) {
-//   $distriXNutritionCurrentDietMealData = new DistriXNutritionCurrentDietMealData();
-//   $distriXNutritionCurrentDietMealData->setId($currentDiet->getId());
-//   $distriXNutritionCurrentDietMealData->setIdUserCoach($currentDiet->getIdUserCoach());
-  
-//   foreach ($ListUsers as $user) {
-//     if ($currentDiet->getIdUserCoach() == $user->getId()){
-//       $distriXNutritionCurrentDietMealData->setNameUserCoach($user->getName());
-//       $distriXNutritionCurrentDietMealData->setFirstNameUserCoach($user->getFirstName());
-//     }
-//     if ($currentDiet->getIdUserStudent() == $user->getId()){
-//       $distriXNutritionCurrentDietMealData->setNameUserStudent($user->getName());
-//       $distriXNutritionCurrentDietMealData->setFirstNameUserStudent($user->getFirstName());
-//     }
-//   }
-
-//   $distriXNutritionCurrentDietMealData->setIdDietTemplate($currentDiet->getIdDietTemplate());
-  
-//   $duration = 0;
-//   foreach ($listMyTemplateDiets as $templateDiet) {
-//     if ($currentDiet->getIdDietTemplate() == $templateDiet->getId()) {
-//       $distriXNutritionCurrentDietMealData->setName($templateDiet->getName());
-//       $distriXNutritionCurrentDietMealData->setDuration($templateDiet->getDuration());
-//       $distriXNutritionCurrentDietMealData->setTags($templateDiet->getTags());
-//       $duration = $templateDiet->getDuration();
-//     }
-//   }
-
-//   $distriXNutritionCurrentDietMealData->setDateStart($currentDiet->getDateStart());
-  
-//   $date_start         = DistriXSvcUtil::getjmaDate($currentDiet->getDateStart());
-//   $date_start         = $date_start[0].'-'.$date_start[1].'-'.$date_start[2];
-//   $date_rest          = new DateTime('now'); 
-//   // Trouver la date de fin
-//   $date_end           =  date('Y-m-d', strtotime($date_start. ' + '.$duration.' days'));
-//   $date_fin           = new DateTime($date_end);
-//   // Nombre de jours restant
-//   $interval           = $date_rest->diff($date_fin);
-//   $nbDaysInterval     = $interval->format('%d');
-
-//   // Faire pourcentage
-//   $advancement_rest   = 100;
-//   $advancement_done   = 100;
-//   if (str_replace("-", "", $date_end) > date('Ymd')){
-//     if ($duration > 0) {
-//       $advancement_rest = round(($nbDaysInterval / $duration) * 100, 2);
-//     }
-//     $advancement_done   = 100 - round($advancement_rest,2);
-//   }
-//   $distriXNutritionCurrentDietMealData->setAdvancement($advancement_done);
-//   $distriXNutritionCurrentDietMealData->setElemState($currentDiet->getElemState());
-//   $distriXNutritionCurrentDietMealData->setTimestamp($currentDiet->getTimestamp());
-//   $listMyCurrentDietMealsFormFront[] = $distriXNutritionCurrentDietMealData;
-// }
 
 $resp["ListMyCurrentsDietMeals"]  = $listMyCurrentDietMealsFormFront;
 if(!empty($error)){
