@@ -93,6 +93,9 @@
       <!-- dashboard -->
       <script src="../../vendors/scripts/dashboard.js?v=<?php echo APP_VERSION;?>"></script>
     <?php } else { ?>
+      <!-- Wizrad -->
+      <script src="../../src/plugins/jquery-steps/jquery.steps.js"></script>
+	    <script src="../../vendors/scripts/steps-setting.js"></script>
       <!-- buttons for Export datatable -->
       <script src="../../src/plugins/air-datepicker/dist/js/datepicker.js?v=<?php echo APP_VERSION;?>"></script>
       <script src="../../src/plugins/air-datepicker/dist/js/i18n/datepicker.fr.js?v=<?php echo APP_VERSION;?>"></script>
