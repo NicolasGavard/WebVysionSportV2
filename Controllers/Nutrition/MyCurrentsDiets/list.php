@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
+include(__DIR__ . "/../../../DistriX/DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
 include(__DIR__ . "/../../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
@@ -14,6 +14,10 @@ $listMyCurrentDietsFormFront  = [];
 
 // List Users
 $ListUsers                    = DistriXStyAppUser::listUsers();
+
+
+echo count($ListUsers);
+
 
 // Current Diet
 list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
@@ -46,14 +50,16 @@ foreach ($listMyCurrentDiets as $currentDiet) {
   $distriXNutritionCurrentDietData->setId($currentDiet->getId());
   $distriXNutritionCurrentDietData->setIdUserCoach($currentDiet->getIdUserCoach());
   
-  foreach ($ListUsers as $user) {
-    if ($currentDiet->getIdUserCoach() == $user->getId()){
-      $distriXNutritionCurrentDietData->setNameUserCoach($user->getName());
-      $distriXNutritionCurrentDietData->setFirstNameUserCoach($user->getFirstName());
-    }
-    if ($currentDiet->getIdUserStudent() == $user->getId()){
-      $distriXNutritionCurrentDietData->setNameUserStudent($user->getName());
-      $distriXNutritionCurrentDietData->setFirstNameUserStudent($user->getFirstName());
+  if (count($ListUsers) > 0) {
+    foreach ($ListUsers as $user) {
+      if ($currentDiet->getIdUserCoach() == $user->getId()){
+        $distriXNutritionCurrentDietData->setNameUserCoach($user->getName());
+        $distriXNutritionCurrentDietData->setFirstNameUserCoach($user->getFirstName());
+      }
+      if ($currentDiet->getIdUserStudent() == $user->getId()){
+        $distriXNutritionCurrentDietData->setNameUserStudent($user->getName());
+        $distriXNutritionCurrentDietData->setFirstNameUserStudent($user->getFirstName());
+      }
     }
   }
 
