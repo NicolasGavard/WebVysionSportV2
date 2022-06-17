@@ -148,7 +148,7 @@ class DistriXStyAppApplication
     $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Application/DistriXStyApplicationRestoreDataSvc.php");
     list($outputok, $output, $errorData) = $styServicesCaller->call();
 
-    // Must manager $errorData. Dev2 23-Feb-22
+    // Must manager $errorData. 23-Feb-22
     $logInfoData = new DistriXLoggerInfoData();
     $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
     $logInfoData->setLogApplication("DistriXStyAppInterface");

@@ -21,5 +21,5 @@ KEY `indusertable` (`iduser`,`operationtable`,`operationdate`,`operationtime`) U
 -- VALIDATION  :
 -- VERIFICATION:
 -- INTEGRATION :
--- DEV Dev2    : DONE
+-- DEV    : DONE
 -- DEV Nico    : DONE

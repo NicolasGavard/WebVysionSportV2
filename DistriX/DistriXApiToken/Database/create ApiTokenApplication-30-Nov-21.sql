@@ -17,5 +17,5 @@ CREATE TABLE `apitokenapplication` (
 -- VALIDATION  : 
 -- VERIFICATION: 
 -- INTEGRATION : 
--- DEV Dev2    : DONE
+-- DEV    : DONE
 -- DEV Nico    : DONE

@@ -18,5 +18,5 @@ CREATE TABLE `apitokentoken` (
 -- VALIDATION  :
 -- VERIFICATION:
 -- INTEGRATION :
--- DEV Dev2    : DONE
+-- DEV    : DONE
 -- DEV Nico    : 

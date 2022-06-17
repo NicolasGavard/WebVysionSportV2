@@ -1,7 +1,7 @@
 <?php
 // Needed to encode in UTF8 ààéàé //
 ?>
-<meta content="Dev2 Excoffier" name="author" />
+<meta content="Excoffier" name="author" />
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta name="Description" content="">

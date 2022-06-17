@@ -16,5 +16,5 @@ CREATE TABLE `distrixwatcher` (
 -- VALIDATION  : 
 -- VERIFICATION: 
 -- INTEGRATION : 
--- DEV Dev2    : DONE
+-- DEV    : DONE
 -- DEV Nico    : DONE

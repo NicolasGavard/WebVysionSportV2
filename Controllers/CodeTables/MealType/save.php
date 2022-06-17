@@ -10,7 +10,7 @@ $confirmSave  = false;
 if (isset($_POST)) {
   list($mealType, $jsonError) = DistriXCodeTableMealTypeData::getJsonData($_POST);
   list($mealTypeNames, $jsonError) = DistriXCodeTableMealTypeNameData::getJsonArray($mealType->getNames());
-  $mealType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. Dev2 01 June 22
+  $mealType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. 01 June 22
 
   // print_r($mealType);
   // print_r($mealTypeNames);

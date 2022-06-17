@@ -4,10 +4,10 @@ $i18cdlangue    = 'FR';
 // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 $international  = __DIR__.'/i18/'.$i18cdlangue.'/codeTableFoodTypeList'.$i18cdlangue;
 include('../../i18/'.$i18cdlangue.'/header.php');
-include("../../i18/_i18New.php");
-include('../../Front/Home/_header.php');
-include('../../Front/Home/_headerMenuTop.php');
-include('../../Front/Home/_headerMenuLeft.php');
+include("../../i18/_i18.php");
+include('../../Home/_header.php');
+include('../../Home/_headerMenuTop.php');
+include('../../Home/_headerMenuLeft.php');
 include("../../_util.php");
 
 $toScript["langueTxt"]          = $page_language;
@@ -99,7 +99,7 @@ echo convertToScript($toScript);
       </div>
 
       <?php
-        include('../../Front/Home/_headerFooter.php');
+        include('../../Home/_headerFooter.php');
       ?>
       <script src="codeTableFoodType.js?v=<?php echo APP_VERSION;?>"></script>
   </body>

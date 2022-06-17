@@ -1,12 +1,12 @@
 <?php
 session_start();
-include(__DIR__ . "/../../../Controllers/Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
-include(__DIR__ . "/../../../Controllers/Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
-include(__DIR__ . "/../../../Controllers/Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
-include(__DIR__ . "/../../../Controllers/Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableFoodTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableFoodTypeNameData.php");
+include(__DIR__ . "/../../Language/Data/DistriXCodeTableLanguageData.php");
 
 $listFoodTypes = [];
 $listLanguages = [];
@@ -15,36 +15,30 @@ if (isset($_POST)) {
 // CALL
   $languageCaller = new DistriXServicesCaller();
   $languageCaller->setMethodName("ListLanguages");
-  $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
-
-  // $infoProfil = DistriXStyAppInterface::getUserInformation();
-  // if (empty($_POST['idLanguage'])) {
-  //   $_POST['idLanguage'] = $infoProfil->getIdLanguage();
-  // }
-  // list($dataName, $errorJson) = DistriXCodeTableFoodTypeNameData::getJsonData($_POST);
+  $languageCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageListDataSvc.php");
 
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Pas de langue pour avoir toutes les langues ! Dev2 10-June-22
+  // Pas de langue pour avoir toutes les langues ! 10-June-22
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   $dataName = new DistriXCodeTableFoodTypeNameData();
 
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("dataName", $dataName);
-  $servicesCaller->setServiceName("CodeTables/FoodType/Services/DistriXFoodTypeListDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/FoodType/Services/DistriXFoodTypeListDataSvc.php");
 
   $svc = new DistriXSvc();
-  // $svc->addToCall("Language", $languageCaller);
+  $svc->addToCall("Language", $languageCaller);
   $svc->addToCall("FoodType", $servicesCaller);
   $callsOk = $svc->call();
 
 // RESPONSES
-  // list($outputok, $output, $errorData) = $svc->getResult("Language"); //print_r($output);
-  // $logOk = logController("Security_FoodType", "DistriXFoodTypeListDataSvc", "ListFoodType-Languages", $output);
-  // if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLanguages"])) {
-  //   list($listLanguages, $jsonError) = DistriXCodeTableLanguageData::getJsonArray($output["ListLanguages"]);
-  // } else {
-  //   $error = $errorData;
-  // }
+  list($outputok, $output, $errorData) = $svc->getResult("Language"); //print_r($output);
+  $logOk = logController("Security_FoodType", "DistriXFoodTypeListDataSvc", "ListFoodType-Languages", $output);
+  if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLanguages"])) {
+    list($listLanguages, $jsonError) = DistriXCodeTableLanguageData::getJsonArray($output["ListLanguages"]);
+  } else {
+    $error = $errorData;
+  }
   list($outputok, $output, $errorData) = $svc->getResult("FoodType"); //print_r($output);
   $logOk = logController("Security_FoodType", "DistriXFoodTypeListDataSvc", "ListFoodType-FoodTypes", $output);
   if ($outputok && isset($output["ListFoodTypes"]) && is_array($output["ListFoodTypes"])) {

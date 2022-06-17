@@ -24,7 +24,7 @@ if (isset($_POST)) {
   // list($dataName, $errorJson) = DistriXCodeTableMealTypeNameData::getJsonData($_POST);
 
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Pas de langue pour avoir toutes les langues ! Dev2 10-June-22
+  // Pas de langue pour avoir toutes les langues ! 10-June-22
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   $dataName = new DistriXCodeTableMealTypeNameData();
 

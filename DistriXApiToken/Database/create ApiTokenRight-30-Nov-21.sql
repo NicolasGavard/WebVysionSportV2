@@ -34,5 +34,5 @@ INSERT INTO apitokenright(id,code,name,description,statut,timestamp) VALUES
 -- VALIDATION  :
 -- VERIFICATION:
 -- INTEGRATION :
--- DEV Dev2    : DONE
+-- DEV    : DONE
 -- DEV Nico    : DONE

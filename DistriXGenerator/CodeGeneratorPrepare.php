@@ -53,7 +53,7 @@ if (!class_exists('CodeGeneratorPrepare', false)) {
             include("TypesPos.php");
             foreach ($typesPos as $typePos) {
               $found = strpos($name, $typePos);
-              $ID_POS = 2; // 2 stands for fields starting with id which have already been processed. Dev2 11-11-20
+              $ID_POS = 2; // 2 stands for fields starting with id which have already been processed. 11-11-20
               if ($found !== FALSE && $found >= $ID_POS) $field[$fieldind]["up"][$found] = strtoupper($field[$fieldind]["up"][$found]);
             }
             $endsBy[] = "app";

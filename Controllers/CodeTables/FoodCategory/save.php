@@ -68,7 +68,7 @@ $_POST['names'] = $names;
 
 list($foodCategory, $jsonError) = DistriXCodeTableFoodCategoryData::getJsonData($_POST);
 list($foodCategoryNames, $jsonError) = DistriXCodeTableFoodCategoryNameData::getJsonArray($foodCategory->getNames());
-$foodCategory->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. Dev2 01 June 22
+$foodCategory->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. 01 June 22
 
 // print_r($foodCategory);
 // print_r($foodCategoryNames);

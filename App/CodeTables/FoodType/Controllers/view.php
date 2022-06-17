@@ -1,9 +1,9 @@
 <?php
 session_start();
-include(__DIR__ . "/../../../Controllers/Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../../Controllers/Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
-include(__DIR__ . "/../../../Controllers/Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableFoodTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableFoodTypeNameData.php");
 
 if (isset($_POST)) {
   list($foodType, $errorJson) = DistriXCodeTableFoodTypeData::getJsonData($_POST);
@@ -12,7 +12,7 @@ if (isset($_POST)) {
 // CALL
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $foodType);
-  $servicesCaller->setServiceName("TablesCodes/FoodType/DistriXFoodTypeViewDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/FoodType/Services/DistriXFoodTypeViewDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
   $logOk = logController("Security_FoodType", "DistriXFoodTypeViewDataSvc", "ViewFoodType", $output);

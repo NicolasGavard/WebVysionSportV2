@@ -360,7 +360,7 @@ if (!class_exists('CodeGeneratorDb', false)) {
         fputs($f, '      $stmt = $inDbConnection->prepare($request);' . "\r\n");
         fputs($f, '      $stmt->execute($params);' . "\r\n");
 
-        // CHANGED BECAUSE RETURN FALSE IF NO DATA MODIFIED. Dev2 4-2-21
+        // CHANGED BECAUSE RETURN FALSE IF NO DATA MODIFIED. 4-2-21
         // fputs($f,'      $insere = ($stmt->rowCount() > 0 && is_null($inDbConnection->errorInfo()[2])); // If there is no DB error'."\r\n");
         fputs($f, '      $insere = is_null($inDbConnection->errorInfo()[2]); // If there is no DB error' . "\r\n");
         fputs($f, '      if (self::SHOW_UPDATE_REQUEST) {' . "\r\n");

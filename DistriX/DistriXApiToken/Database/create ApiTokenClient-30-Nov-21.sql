@@ -22,5 +22,5 @@ CREATE TABLE `apitokenclient` (
 -- VALIDATION  :
 -- VERIFICATION:
 -- INTEGRATION :
--- DEV Dev2    : DONE
+-- DEV    : DONE
 -- DEV Nico    : DONE

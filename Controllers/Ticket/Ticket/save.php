@@ -10,7 +10,7 @@ $confirmSave  = false;
 if (isset($_POST)) {
   list($foodType, $jsonError) = DistriXTicketTicketData::getJsonData($_POST);
   list($foodTypeNames, $jsonError) = DistriXTicketTicketNameData::getJsonArray($foodType->getNames());
-  $foodType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. Dev2 01 June 22
+  $foodType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. 01 June 22
 
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->setDebugMode(DISTRIX_SVC_DATA_LAYER_IN_DEBUG_MODE);
