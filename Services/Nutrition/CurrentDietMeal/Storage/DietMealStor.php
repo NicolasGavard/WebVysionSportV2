@@ -88,7 +88,7 @@ class DietMealStor {
   }
   // End of getListFromList
 
-  public static function findByIddietIdDietRecipeDayNumberIdMealType(DietMealStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdDietIdDietRecipeDayNumberIdMealType(DietMealStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new DietMealStorData();

@@ -1,12 +1,12 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/../Init/DataSvcInit.php");
+include(__DIR__ . "/../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
   // Storage
-  include(__DIR__ . "/../Storage/DietStor.php");
+  include(__DIR__ . "/Storage/DietStor.php");
   // STOR Data
-  include(__DIR__ . "/../Data/DietStorData.php");
+  include(__DIR__ . "/Data/DietStorData.php");
   
   $myCurrentsDiets  = [];
   $dbConnection     = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);

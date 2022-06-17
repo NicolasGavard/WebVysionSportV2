@@ -42,11 +42,11 @@ if (!class_exists("DistriXNutritionCurrentDietMealData", false)) {
     public function setId(int $id) { $this->id = $id; }
     public function setIdDiet(int $idDiet) { $this->idDiet = $idDiet; }
     public function setIdDietRecipe(int $idDietRecipe) { $this->idDietRecipe = $idDietRecipe; }
-    public function setNameDietRecipe(int $nameDietRecipe) { $this->nameDietRecipe = $nameDietRecipe; }
+    public function setNameDietRecipe(string $nameDietRecipe) { $this->nameDietRecipe = $nameDietRecipe; }
     public function setDayNumber(string $dayNumber) { $this->dayNumber = $dayNumber; }
     public function setIdMealType(int $idMealType) { $this->idMealType = $idMealType; }
-    public function setNameMealType(int $nameMealType) { $this->nameMealType = $nameMealType; }
-    public function setFoods(int $foods) { $this->foods = $foods; }
+    public function setNameMealType(string $nameMealType) { $this->nameMealType = $nameMealType; }
+    public function setFoods(array $foods) { $this->foods = $foods; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }

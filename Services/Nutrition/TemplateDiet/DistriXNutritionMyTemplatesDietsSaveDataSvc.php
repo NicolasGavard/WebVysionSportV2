@@ -4,9 +4,9 @@ include(__DIR__ . "/../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
     // Storage
-    include(__DIR__ . "/../Storage/DietTemplateStor.php");
+    include(__DIR__ . "/Storage/DietTemplateStor.php");
     // STOR Data
-    include(__DIR__ . "/../Data/DietTemplateStorData.php");
+    include(__DIR__ . "/Data/DietTemplateStorData.php");
 
   $dietTemplateStorData = new DietStorData();
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
@@ -35,21 +35,21 @@ if ($dataSvc->isAuthorized()) {
         } else {
           $dbConnection->rollBack();
           if ($dietTemplateStorData->getId() > 0) {
-            $errorData = TemplateDietErrorData::warningUpdateData(1, 1);
+            $errorData = ApplicationErrorData::warningUpdateData(1, 1);
           } else {
-            $errorData = TemplateDietErrorData::warningInsertData(1, 1);
+            $errorData = ApplicationErrorData::warningInsertData(1, 1);
           }
         }
       }
     } else {
-      $errorData = TemplateDietErrorData::noBeginTransaction(1, 1);
+      $errorData = ApplicationErrorData::noBeginTransaction(1, 1);
     }
   } else {
-    $errorData = TemplateDietErrorData::noDatabaseConnection(1, 32);
+    $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }
 
   if ($errorData != null) {
-    $errorData->setTemplateDietModuleFunctionalityCodeAndFilename("DistrixSty", "Login", $dataSvc->getMethodName(), basename(__FILE__));
+    $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "Login", $dataSvc->getMethodName(), basename(__FILE__));
     $dataSvc->addErrorToResponse($errorData);
   }
 

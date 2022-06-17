@@ -33,6 +33,8 @@ include(__DIR__ . "/_version.php");
 	<link rel="stylesheet" type="text/css" href="../../vendors/styles/style.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-colorPicker css -->
 	<link rel="stylesheet" type="text/css" href="../../src/plugins/jquery-asColorPicker/dist/css/asColorPicker.css?v=<?php echo APP_VERSION;?>">
+	<!-- bootstrap-Wizard css -->
+	<link rel="stylesheet" type="text/css" href="../../src/plugins/jquery-steps/jquery.steps.css?v=<?php echo APP_VERSION;?>">
 
 </head>
 <body>
