@@ -15,7 +15,7 @@ $( "#dateStart" ).datepicker({
 
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Nutrition/MyCurrentsDiets/list.php',
+  url : 'Controllers/list.php',
   type : 'POST',
   dataType : 'JSON',
   data: {'idUserCoach': localStorage.getItem("idUser")},
@@ -83,7 +83,7 @@ $(".btnAddMyCurrentDiet").on('click', function() {
 
   if (template != 0 && student != 0 && dateStart != '' ){
     $.ajax({
-      url : '../../Controllers/Nutrition/MyCurrentsDiets/save.php',
+      url : 'Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
       // data: $.param(data),
@@ -124,7 +124,7 @@ $(".btnAddMyCurrentDiet").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Nutrition/MyCurrentsDiets/delete.php',
+    url : 'Controllers/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -144,7 +144,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Nutrition/MyCurrentsDiets/restore.php',
+    url : 'Controllers/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -218,7 +218,7 @@ function ViewMealMyCurrentDiet(id, name){
 
 function ViewMyCurrentDiet(id, name){
   $.ajax({
-    url : '../../Controllers/Nutrition/MyCurrentsDiets/view.php',
+    url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

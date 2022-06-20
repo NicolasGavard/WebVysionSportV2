@@ -1,6 +1,6 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Nutrition/MyRecipes/list.php',
+  url : 'Controllers/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
@@ -66,7 +66,7 @@ $(".btnAddMyRecipe").on('click', function() {
     data.push({name: "name", value: name});
     
     $.ajax({
-      url : '../../Controllers/Nutrition/MyRecipes/save.php',
+      url : 'Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
@@ -98,7 +98,7 @@ $(".btnAddMyRecipe").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Nutrition/MyRecipes/delete.php',
+    url : 'Controllers/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -118,7 +118,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Nutrition/MyRecipes/restore.php',
+    url : 'Controllers/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -192,7 +192,7 @@ function ViewMyRecipeFood(id, name){
 function ViewMyRecipe(id, name){
   $(".InfoSuppTitle").html(name);
   $.ajax({
-    url : '../../Controllers/Nutrition/MyRecipes/view.php',
+    url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},

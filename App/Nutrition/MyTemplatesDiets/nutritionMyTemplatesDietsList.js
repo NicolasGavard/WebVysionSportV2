@@ -1,6 +1,6 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Nutrition/MyTemplatesDiets/list.php',
+  url : 'Controllers/list.php',
   type : 'POST',
   dataType : 'JSON',
   data: {'idUserCoach': localStorage.getItem("idUser")},
@@ -56,7 +56,7 @@ $(".btnAddMyTemplateDiet").on('click', function() {
     data.push({name: "name", value: name});
     
     $.ajax({
-      url : '../../Controllers/Nutrition/MyTemplatesDiets/save.php',
+      url : 'Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
@@ -84,7 +84,7 @@ $(".btnAddMyTemplateDiet").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Nutrition/MyTemplatesDiets/delete.php',
+    url : 'Controllers/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
@@ -104,7 +104,7 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Nutrition/MyTemplatesDiets/restore.php',
+    url : 'Controllers/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
@@ -164,7 +164,7 @@ function ListMyTemplateDiet(elemState){
 
 function ViewMyTemplateDiet(id){
   $.ajax({
-    url : '../../Controllers/Nutrition/MyTemplatesDiets/view.php',
+    url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
