@@ -1,8 +1,15 @@
 <?php // Needed to encode in UTF8 ààéàé //
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
 // Service Init
-include(__DIR__ . "/../Init/DataSvcInit.php");
+include("../Init/DataSvcInit.php");
+
+echo 'Je suis la 1';
 
 if (isset($dataSvc) && !is_null($dataSvc) && $dataSvc->isAuthorized()) {
+  echo 'Je suis la 2';
   // Database Data
   include(__DIR__ . "/Data/StyUserStorData.php");
   include(__DIR__ . "/Data/StyEnterpriseStorData.php");

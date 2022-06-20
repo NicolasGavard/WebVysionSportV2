@@ -85,11 +85,12 @@ class DistriXStyAppUser
     $outputok          = false;
     $output            = [];
     $return            = [];
+    
     $styServicesCaller = new DistriXStySvcCaller();
     $styServicesCaller->setMethodName("ListUsers");
-    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserListDataSvc.php");
+    $styServicesCaller->setServiceName("DistriX/DistriXSecurity/StyServices/User/DistriXStyUserListDataSvc.php");
     $styServicesCaller->addParameter("data", $data);
-    list($outputok, $output, $errorData) = $styServicesCaller->call(); //var_dump($outputok);
+    list($outputok, $output, $errorData) = $styServicesCaller->call(); //var_dump($output);
 
     if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
       $logInfoData = new DistriXLoggerInfoData();
@@ -105,7 +106,7 @@ class DistriXStyAppUser
         list($return, $errorJson)  = DistriXStyUserData::getJsonArray($output["ListUsers"]);
       }
     } else {
-      $return = $errorData;
+      $return[] = $errorData;
     }
     return $return;
   }

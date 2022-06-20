@@ -21,9 +21,10 @@ function getLocation(): string
   }
   return $location;
 }
+
 // DISTRIX Init
-if (! file_exists(__DIR__."../../../../DistriXInit/DistriXSvcDataServiceInit.php")) {
-  include(__DIR__ . "/../../../DistrixSvc/Config/DistriXEnv.php");
+if (! file_exists(__DIR__."/../../../../DistriX/DistriXInit/DistriXSvcDataServiceInit.php")) {
+  include(__DIR__ . "/../../../../DistriX/DistrixSvc/Config/DistriXEnv.php");
   header(getLocation());
   exit(0);
 }
