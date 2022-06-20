@@ -62,85 +62,87 @@ class DistriXStyAppInterface
       $output            = array();
       $errorData         = array();
       $styServicesCaller = new DistriXStySvcCaller();
-      $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyLoginDataSvc.php");
+      $styServicesCaller->setServiceName("DistriX/DistriXSecurity/StyServices/User/DistriXStyLoginDataSvc.php");
       $styServicesCaller->setMethodName("Login");
       $styServicesCaller->addParameter("dataApp", $dataApp);                  //print_r($dataApp);
       $styServicesCaller->addParameter("dataUser", $dataUser);                //print_r($dataUser);
       list($outputok, $output, $errorData) = $styServicesCaller->call();      //print_r($output);
-      list($infoUser, $errorJson) = DistriXStyUserData::getJsonData($output["StyInfoSession"]);
-      
-      $styGlobalSession = new DistriXStyInfoSessionData();
-      $styGlobalSession->setApplication($dataApp->getCode());
-      $styGlobalSession->setConnected(false);
-
-      if ($infoUser->getId() > 0) {
-        $styGlobalSession->setIdUser($infoUser->getId());
+      if ($outputok){
+        list($infoUser, $errorJson) = DistriXStyUserData::getJsonData($output["StyInfoSession"]);
+        
+        $styGlobalSession = new DistriXStyInfoSessionData();
         $styGlobalSession->setApplication($dataApp->getCode());
-        $styGlobalSession->setConnected(true);
-        $styGlobalSession->setTimeConnected(date('His'));
-
-        $styRolesCaller = new DistriXStySvcCaller();
-        $styRolesCaller->setServiceName("DistriXSecurity/StyServices/Role/DistriXStyRoleFindByUserDataSvc.php");
-        $styRolesCaller->addParameter("data", $dataApp);
-        $styRolesCaller->addParameter("infoSession", $infoUser);
-        
-        $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Right/DistriXStyRightFindByUserDataSvc.php");
-        $styServicesCaller->addParameter("data", $dataApp);
-        $styServicesCaller->addParameter("infoSession", $infoUser);
-        
-        $styEnterprisesCaller = new DistriXStySvcCaller();
-        $styEnterprisesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseFindByUserDataSvc.php");
-        $styEnterprisesCaller->addParameter("infoSession", $infoUser);
-        
-        $svc = new DistriXSvc();
-        $svc->addToCall("Rights", $styServicesCaller);
-        $svc->addToCall("Roles", $styRolesCaller);
-        $svc->addToCall("Enterprises", $styEnterprisesCaller);
-        $callsOk = $svc->call();
-
-        list($outputok, $output, $errorData) = $svc->getResult("Roles");
-        // echo " Security Roles Svc-$outputok--------<br><br>";
-        // echo " Security Roles Svc-" . print_r($output, true) . "<br><br>";
-        // echo " Security Roles Svc Error -" . print_r($errorData, true) . "<br><br>";
-        if ($outputok && is_array($output) && isset($output["StyUserRoles"])) {
-          list($userRoles, $errorJson)  = DistriXStyUserRoleData::getJsonArray($output["StyUserRoles"]);
-          $infoUser->setRoles($userRoles);
-        }
-
-        list($outputok, $output, $errorData) = $svc->getResult("Rights");
-        // echo " Security Rights Svc-$outputok--------<br><br>";
-        // echo " Security Rights Svc-" . print_r($output, true) . "<br><br>";
-        // echo " Security Rights Svc Error -" . print_r($errorData, true) . "<br><br>";
-        if ($outputok && is_array($output) && isset($output["StyUserRights"])) {
-          list($userRights, $errorJson) = DistriXStyUserAllRightData::getJsonArray($output["StyUserRights"]);
-          // print_r($userRights);
-          // echo '</br></br>';
-          // print_r($output["StyUserRights"]);
-        }
-
-        list($outputok, $output, $errorData) = $svc->getResult("Enterprises");
-        // echo " Security Enterprises Svc-$outputok--------<br><br>";
-        // echo " Security Enterprises Svc-" . print_r($output, true) . "<br><br>";
-        // echo " Security Enterprises Svc Error -" . print_r($errorData, true) . "<br><br>";
-        if ($outputok && is_array($output)) {
-          if (isset($output["StyUserEnterprises"])) {
-            list($userEnterprises, $errorJson) = DistriXStyUserEnterpriseData::getJsonData($output["StyUserEnterprises"]);
+        $styGlobalSession->setConnected(false);
+  
+        if ($infoUser->getId() > 0) {
+          $styGlobalSession->setIdUser($infoUser->getId());
+          $styGlobalSession->setApplication($dataApp->getCode());
+          $styGlobalSession->setConnected(true);
+          $styGlobalSession->setTimeConnected(date('His'));
+  
+          $styRolesCaller = new DistriXStySvcCaller();
+          $styRolesCaller->setServiceName("DistriXSecurity/StyServices/Role/DistriXStyRoleFindByUserDataSvc.php");
+          $styRolesCaller->addParameter("data", $dataApp);
+          $styRolesCaller->addParameter("infoSession", $infoUser);
+          
+          $styServicesCaller->setServiceName("DistriXSecurity/StyServices/Right/DistriXStyRightFindByUserDataSvc.php");
+          $styServicesCaller->addParameter("data", $dataApp);
+          $styServicesCaller->addParameter("infoSession", $infoUser);
+          
+          $styEnterprisesCaller = new DistriXStySvcCaller();
+          $styEnterprisesCaller->setServiceName("DistriXSecurity/StyServices/Enterprise/DistriXStyEnterpriseFindByUserDataSvc.php");
+          $styEnterprisesCaller->addParameter("infoSession", $infoUser);
+          
+          $svc = new DistriXSvc();
+          $svc->addToCall("Rights", $styServicesCaller);
+          $svc->addToCall("Roles", $styRolesCaller);
+          $svc->addToCall("Enterprises", $styEnterprisesCaller);
+          $callsOk = $svc->call();
+  
+          list($outputok, $output, $errorData) = $svc->getResult("Roles");
+          // echo " Security Roles Svc-$outputok--------<br><br>";
+          // echo " Security Roles Svc-" . print_r($output, true) . "<br><br>";
+          // echo " Security Roles Svc Error -" . print_r($errorData, true) . "<br><br>";
+          if ($outputok && is_array($output) && isset($output["StyUserRoles"])) {
+            list($userRoles, $errorJson)  = DistriXStyUserRoleData::getJsonArray($output["StyUserRoles"]);
+            $infoUser->setRoles($userRoles);
           }
-          if (isset($output["StyEnterprises"])) {
-            list($enterprisesData, $errorJson) = DistriXStyEnterpriseData::getJsonData($output["StyEnterprises"]);
+  
+          list($outputok, $output, $errorData) = $svc->getResult("Rights");
+          // echo " Security Rights Svc-$outputok--------<br><br>";
+          // echo " Security Rights Svc-" . print_r($output, true) . "<br><br>";
+          // echo " Security Rights Svc Error -" . print_r($errorData, true) . "<br><br>";
+          if ($outputok && is_array($output) && isset($output["StyUserRights"])) {
+            list($userRights, $errorJson) = DistriXStyUserAllRightData::getJsonArray($output["StyUserRights"]);
+            // print_r($userRights);
+            // echo '</br></br>';
+            // print_r($output["StyUserRights"]);
           }
-          if (isset($output["StyEnterprisePos"])) {
-            list($enterprisesPos, $errorJson) = DistriXStyEnterprisePosData::getJsonData($output["StyEnterprisePos"]);
+  
+          list($outputok, $output, $errorData) = $svc->getResult("Enterprises");
+          // echo " Security Enterprises Svc-$outputok--------<br><br>";
+          // echo " Security Enterprises Svc-" . print_r($output, true) . "<br><br>";
+          // echo " Security Enterprises Svc Error -" . print_r($errorData, true) . "<br><br>";
+          if ($outputok && is_array($output)) {
+            if (isset($output["StyUserEnterprises"])) {
+              list($userEnterprises, $errorJson) = DistriXStyUserEnterpriseData::getJsonData($output["StyUserEnterprises"]);
+            }
+            if (isset($output["StyEnterprises"])) {
+              list($enterprisesData, $errorJson) = DistriXStyEnterpriseData::getJsonData($output["StyEnterprises"]);
+            }
+            if (isset($output["StyEnterprisePos"])) {
+              list($enterprisesPos, $errorJson) = DistriXStyEnterprisePosData::getJsonData($output["StyEnterprisePos"]);
+            }
           }
+          $_SESSION["DistriXSvcSecurity"]["StyGlobal"]          = serialize($styGlobalSession);
+          $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($infoUser);
+          $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($userRoles);
+          $_SESSION["DistriXSvcSecurity"]["StyUserRights"]      = serialize($userRights);
+          // $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($userEnterprises);
+          // $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($enterprisesData);
+          // $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($enterprisesPos);
+          $isUserConnected                                      = true;
         }
-        $_SESSION["DistriXSvcSecurity"]["StyGlobal"]          = serialize($styGlobalSession);
-        $_SESSION["DistriXSvcSecurity"]["StyUser"]            = serialize($infoUser);
-        $_SESSION["DistriXSvcSecurity"]["StyUserRoles"]       = serialize($userRoles);
-        $_SESSION["DistriXSvcSecurity"]["StyUserRights"]      = serialize($userRights);
-        // $_SESSION["DistriXSvcSecurity"]["StyUserEnterprises"] = serialize($userEnterprises);
-        // $_SESSION["DistriXSvcSecurity"]["StyEnterprises"]     = serialize($enterprisesData);
-        // $_SESSION["DistriXSvcSecurity"]["StyEnterprisePos"]   = serialize($enterprisesPos);
-        $isUserConnected                                      = true;
       }
     }
     $return[]['isUserConnected']  = self::isUserConnected();

@@ -14,6 +14,8 @@ $listMyCurrentDietsFormFront  = [];
 
 // List Users
 $ListUsers                    = DistriXStyAppUser::listUsers();
+print_r($ListUsers);
+
 $ListUsers                    = [];
 
 // Current Diet

@@ -31,27 +31,27 @@ if (!class_exists('DistriXStySvcCaller', false)) {
 		const CLIENT_SRV_DEV_TIMEOUT              = "localhost";
 		const CLIENT_CALL_DEV_TIMEOUT             = "http";
 		const CLIENT_CALL_DEV_TIMEOUT_NB_SECONDS  = 5;
-		const CLIENT_DIR_DEV_TIMEOUT              = "WebVysionSportV2/DistriX";
+		const CLIENT_DIR_DEV_TIMEOUT              = "WebVysionSportV2";
 
 		const CLIENT_SRV_INT_TIMEOUT              = "www.distrix.cloud";
 		const CLIENT_CALL_INT_TIMEOUT             = "https";
 		const CLIENT_CALL_INT_TIMEOUT_NB_SECONDS  = 5;
-		const CLIENT_DIR_INT_TIMEOUT              = "WebVysionSport/DistriX";
+		const CLIENT_DIR_INT_TIMEOUT              = "WebVysionSport";
 
 		const CLIENT_SRV_VER_TIMEOUT              = "www.distrix.cloud";
 		const CLIENT_CALL_VER_TIMEOUT             = "https";
 		const CLIENT_CALL_VER_TIMEOUT_NB_SECONDS  = 5;
-		const CLIENT_DIR_VER_TIMEOUT              = "WebVysionSport/DistriX";
+		const CLIENT_DIR_VER_TIMEOUT              = "WebVysionSport";
 
 		const CLIENT_SRV_VAL_TIMEOUT              = "www.distrix.cloud";
 		const CLIENT_CALL_VAL_TIMEOUT             = "https";
 		const CLIENT_CALL_VAL_TIMEOUT_NB_SECONDS  = 5;
-		const CLIENT_DIR_VAL_TIMEOUT              = "WebVysionSport/DistriX";
+		const CLIENT_DIR_VAL_TIMEOUT              = "WebVysionSport";
 
 		const CLIENT_SRV_PROD_TIMEOUT             = "www.distrix.cloud";
 		const CLIENT_CALL_PROD_TIMEOUT            = "https";
 		const CLIENT_CALL_PROD_TIMEOUT_NB_SECONDS = 5;
-		const CLIENT_DIR_PROD_TIMEOUT             = "WebVysionSport/DistriX";
+		const CLIENT_DIR_PROD_TIMEOUT             = "WebVysionSport";
 
 		public function __construct($svcCaller = null)
 		{

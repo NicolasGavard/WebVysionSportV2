@@ -70,7 +70,7 @@ class DistriXStyAppUser
   }
   // End of getIdCountry
 
-  public static function listUsers($idStyEnterprise = "")
+  public static function listUsers($idStyEnterprise = ""): array
   {
     $data = new DistriXStyUserData();
     if ($idStyEnterprise > 0) {
@@ -89,7 +89,7 @@ class DistriXStyAppUser
     $styServicesCaller->setMethodName("ListUsers");
     $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserListDataSvc.php");
     $styServicesCaller->addParameter("data", $data);
-    list($outputok, $output, $errorData) = $styServicesCaller->call(); //var_dump($output);
+    list($outputok, $output, $errorData) = $styServicesCaller->call(); //var_dump($outputok);
 
     if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
       $logInfoData = new DistriXLoggerInfoData();
