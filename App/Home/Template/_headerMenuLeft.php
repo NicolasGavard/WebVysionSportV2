@@ -114,12 +114,12 @@
                     <span class="mtext"><?php echo $menu_food; ?></span>
                   </a>
                   <ul class="submenu child <?php echo $show2; ?>" style='display: <?php echo $style2; ?>'>
-                    <?php if ($hasRight_FOOD_FOOD)        { ?><li <?php echo $navActiveMenuFoodFood ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/foodFoodList.php"><?php echo $menu_food_food_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_BRAND)       { ?><li <?php echo $navActiveMenuFoodBrand ?>><a class="nav-link" href="../Food/foodBrandList.php"><?php echo $menu_food_brand_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_ECO_SCORE)   { ?><li <?php echo $navActiveMenuFoodEcoScore ?>><a class="nav-link" href="../Food/foodEcoScoreList.php"><?php echo $menu_food_ecoScore_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_NOVA_SCORE)  { ?><li <?php echo $navActiveMenuFoodNovaScore ?>><a class="nav-link" href="../Food/foodNovaScoreList.php"><?php echo $menu_food_novaScore_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_NUTRI_SCORE) { ?><li <?php echo $navActiveMenuFoodNutriScore ?>><a class="nav-link" href="../Food/foodNutriScoreList.php"><?php echo $menu_food_nutriScore_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_LABEL)       { ?><li <?php echo $navActiveMenuFoodLabel ?>><a class="nav-link" href="../Food/foodLabelList.php"><?php echo $menu_food_label_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_FOOD)        { ?><li <?php echo $navActiveMenuFoodFood ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/Food/foodFoodList.php"><?php echo $menu_food_food_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_BRAND)       { ?><li <?php echo $navActiveMenuFoodBrand ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/Brand/foodBrandList.php"><?php echo $menu_food_brand_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_ECO_SCORE)   { ?><li <?php echo $navActiveMenuFoodEcoScore ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food//EcoScore/foodEcoScoreList.php"><?php echo $menu_food_ecoScore_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_NOVA_SCORE)  { ?><li <?php echo $navActiveMenuFoodNovaScore ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/NovaScore/foodNovaScoreList.php"><?php echo $menu_food_novaScore_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_NUTRI_SCORE) { ?><li <?php echo $navActiveMenuFoodNutriScore ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/NutriScore/foodNutriScoreList.php"><?php echo $menu_food_nutriScore_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_LABEL)       { ?><li <?php echo $navActiveMenuFoodLabel ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/Label/foodLabelList.php"><?php echo $menu_food_label_list; ?></a></li><?php } ?>
                   </ul>
                 </li>
               <?php } ?>
