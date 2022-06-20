@@ -14,10 +14,7 @@ $listMyCurrentDietsFormFront  = [];
 
 // List Users
 $ListUsers                    = DistriXStyAppUser::listUsers();
-
-
-echo count($ListUsers);
-
+$ListUsers                    = [];
 
 // Current Diet
 list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
@@ -50,21 +47,18 @@ foreach ($listMyCurrentDiets as $currentDiet) {
   $distriXNutritionCurrentDietData->setId($currentDiet->getId());
   $distriXNutritionCurrentDietData->setIdUserCoach($currentDiet->getIdUserCoach());
   
-  if (count($ListUsers) > 0) {
-    foreach ($ListUsers as $user) {
-      if ($currentDiet->getIdUserCoach() == $user->getId()){
-        $distriXNutritionCurrentDietData->setNameUserCoach($user->getName());
-        $distriXNutritionCurrentDietData->setFirstNameUserCoach($user->getFirstName());
-      }
-      if ($currentDiet->getIdUserStudent() == $user->getId()){
-        $distriXNutritionCurrentDietData->setNameUserStudent($user->getName());
-        $distriXNutritionCurrentDietData->setFirstNameUserStudent($user->getFirstName());
-      }
+  foreach ($ListUsers as $user) {
+    if ($currentDiet->getIdUserCoach() == $user->getId()){
+      $distriXNutritionCurrentDietData->setNameUserCoach($user->getName());
+      $distriXNutritionCurrentDietData->setFirstNameUserCoach($user->getFirstName());
+    }
+    if ($currentDiet->getIdUserStudent() == $user->getId()){
+      $distriXNutritionCurrentDietData->setNameUserStudent($user->getName());
+      $distriXNutritionCurrentDietData->setFirstNameUserStudent($user->getFirstName());
     }
   }
 
   $distriXNutritionCurrentDietData->setIdDietTemplate($currentDiet->getIdDietTemplate());
-  
   $duration = 0;
   foreach ($listMyTemplateDiets as $templateDiet) {
     if ($currentDiet->getIdDietTemplate() == $templateDiet->getId()) {
