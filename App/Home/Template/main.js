@@ -49,7 +49,7 @@ function encodeImgtoBase64(element) {
 
 function logOut(){
   $.ajax({
-    url : '../../Controllers/Login/logout.php',
+    url : '../Security/Login/Controllers/logout.php',
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {    

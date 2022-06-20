@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . "/../../DistriX/DistriXSvc/Config/DistriXEnv.php");
+include(__DIR__ . "/../../../DistriX/DistriXSvc/Config/DistriXEnv.php");
 	/* VERSION VALUE */
 $version = "1.01";
 switch (DISTRIX_ENV) {

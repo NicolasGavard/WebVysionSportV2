@@ -1,13 +1,12 @@
 <?php
 	session_start();
-  $international  = 'Nutrition/nutritionMyCurrentsDietsList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-	include('../../i18/'.$i18cdlangue.'/header.php');
-  include('../../i18/_i18.php');
-  include('../Home/_header.php');
-	include('../Home/_headerMenuTop.php');
-	include('../Home/_headerMenuLeft.php');
+	include('../../Home/i18/'.$i18cdlangue.'/header'.$i18cdlangue.'.php');
+	include('i18/'.$i18cdlangue.'/nutritionMyCurrentsDietsList'.$i18cdlangue.'.php');
+  include('../../Home/_header.php');
+	include('../../Home/_headerMenuTop.php');
+	include('../../Home/_headerMenuLeft.php');
 ?>
 	<div class="mobile-menu-overlay"></div>
 
@@ -101,7 +100,7 @@
       </div> 
 
       <?php
-        include('../Home/_headerFooter.php');
+        include('../../Home/_headerFooter.php');
       ?>
       
       <script src="../../jsWebVysionSport/Nutrition/nutritionMyCurrentsDietsList.js"></script>

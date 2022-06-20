@@ -29,7 +29,7 @@
             localStorage.setItem("emailBackup", output.infoProfil.emailBackup);
             localStorage.setItem("idLanguage", output.infoProfil.idLanguage);
 
-            window.location.replace("App/Home/main.php");
+            window.location.replace("App/Home/Template/main.php");
           } else {
             localStorage.setItem("idUser",output.infoProfil.id);
             window.location.replace("loginInitPassword.php");

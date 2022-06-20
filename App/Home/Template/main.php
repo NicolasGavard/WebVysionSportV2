@@ -1,10 +1,9 @@
 <?php
 	session_start();
-  $international  = 'nutritionMyCurrentsDietsList';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/header.php');
-	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/main.php');
+	include(__DIR__ . '/i18/'.$i18cdlangue.'/header'.$i18cdlangue.'.php');
+	include(__DIR__ . '/i18/'.$i18cdlangue.'/main'.$i18cdlangue.'.php');
 	include(__DIR__ . '/_header.php');
 	include(__DIR__ . '/_headerLoader.php');
 	include(__DIR__ . '/_headerMenuTop.php');
@@ -18,7 +17,7 @@
 			<div class="card-box pd-10 height-100-p mb-20">
 				<div class="row align-items-center">
 					<div class="col-md-4">
-						<img src="../../vendors/images/banner-img.png" alt="">
+						<img src="<?php echo FRONT_PATH;?>vendors/images/banner-img.png" alt="">
 					</div>
 					<div class="col-md-8">
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">

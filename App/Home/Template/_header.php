@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . "/../Init/frontInit.php");
+include(__DIR__ . "/../../Init/frontInit.php");
 include(__DIR__ . "/_version.php");
 ?>
 <!DOCTYPE html>
