@@ -81,9 +81,9 @@
               &nbsp;<img src="<?php echo FRONT_PATH;?>vendors/images/coming-soon.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show1; ?>" style='display: <?php echo $style1; ?>'>
-              <?php if ($hasNutrition_MyDiet)           { ?><li <?php echo $navActiveMenunutritionMyCurrentsDiets ?>><a class="nav-link" href="../Nutrition/nutritionMyCurrentsDietsList.php"><?php echo $menu_nutrition_myDiet; ?></a></li><?php } ?>
-              <?php if ($hasNutrition_MyTemplatesDiets) { ?><li <?php echo $navActiveMenuNutritionMyTemplatesDiets ?>><a class="nav-link" href="../Nutrition/nutritionMyTemplatesDietsList.php"><?php echo $menu_nutrition_myTempletDiet; ?></a></li><?php } ?>
-              <?php if ($hasNutrition_Recipe)           { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link" href="../Nutrition/nutritionMyRecipesList.php"><?php echo $menu_nutrition_myRecipe; ?></a></li><?php } ?>
+              <?php if ($hasNutrition_MyDiet)           { ?><li <?php echo $navActiveMenunutritionMyCurrentsDiets ?>><a class="nav-link" href="App/Nutrition/MyCurrentsDiets/nutritionMyCurrentsDietsList.php"><?php echo $menu_nutrition_myDiet; ?></a></li><?php } ?>
+              <?php if ($hasNutrition_MyTemplatesDiets) { ?><li <?php echo $navActiveMenuNutritionMyTemplatesDiets ?>><a class="nav-link" href="App/Nutrition/MyTemplatesDiets/nutritionMyTemplatesDietsList.php"><?php echo $menu_nutrition_myTempletDiet; ?></a></li><?php } ?>
+              <?php if ($hasNutrition_Recipe)           { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link" href="App/Nutrition/MyRecipes/nutritionMyRecipesList.php"><?php echo $menu_nutrition_myRecipe; ?></a></li><?php } ?>
               
               <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
               <!-- //                                           MENU FOOD                                             // -->

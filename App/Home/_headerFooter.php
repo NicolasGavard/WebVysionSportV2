@@ -114,7 +114,7 @@
     <?php } ?>
 
     <!-- js DistriX -->
-    <script src="../../Home/main.js?v=<?php echo APP_VERSION;?>"></script>
+    <script src="<?php echo FRONT_PATH;?>App/Home/main.js?v=<?php echo APP_VERSION;?>"></script>
 
     <script>
       window.addEventListener('DOMContentLoaded', function () {
