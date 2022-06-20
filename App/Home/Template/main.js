@@ -49,7 +49,7 @@ function encodeImgtoBase64(element) {
 
 function logOut(){
   $.ajax({
-    url : '../Security/Login/Controllers/logout.php',
+    url : '../../Security/Login/Controllers/logout.php',
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {    
@@ -65,7 +65,7 @@ function logOut(){
         
         localStorage.removeItem("dataTable");
 
-        window.location.replace("../../index.html");
+        window.location.replace("../../../index.html");
       }
     },
     error : function(data) {

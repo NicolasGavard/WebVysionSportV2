@@ -114,7 +114,7 @@
                     <span class="mtext"><?php echo $menu_food; ?></span>
                   </a>
                   <ul class="submenu child <?php echo $show2; ?>" style='display: <?php echo $style2; ?>'>
-                    <?php if ($hasRight_FOOD_FOOD)        { ?><li <?php echo $navActiveMenuFoodFood ?>><a class="nav-link" href="../Food/foodFoodList.php"><?php echo $menu_food_food_list; ?></a></li><?php } ?>
+                    <?php if ($hasRight_FOOD_FOOD)        { ?><li <?php echo $navActiveMenuFoodFood ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/foodFoodList.php"><?php echo $menu_food_food_list; ?></a></li><?php } ?>
                     <?php if ($hasRight_FOOD_BRAND)       { ?><li <?php echo $navActiveMenuFoodBrand ?>><a class="nav-link" href="../Food/foodBrandList.php"><?php echo $menu_food_brand_list; ?></a></li><?php } ?>
                     <?php if ($hasRight_FOOD_ECO_SCORE)   { ?><li <?php echo $navActiveMenuFoodEcoScore ?>><a class="nav-link" href="../Food/foodEcoScoreList.php"><?php echo $menu_food_ecoScore_list; ?></a></li><?php } ?>
                     <?php if ($hasRight_FOOD_NOVA_SCORE)  { ?><li <?php echo $navActiveMenuFoodNovaScore ?>><a class="nav-link" href="../Food/foodNovaScoreList.php"><?php echo $menu_food_novaScore_list; ?></a></li><?php } ?>
