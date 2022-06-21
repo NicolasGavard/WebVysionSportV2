@@ -6,7 +6,7 @@
 
 <div class="left-side-bar">
   <div class="brand-logo">
-    <a href="../Home/main.php">
+    <a href="<?php echo FRONT_PATH;?>App/Home/Template/main.php">
       <img src="<?php echo FRONT_PATH;?>images/WebVysionSport.png" alt="" class="light-logo" style="max-width: 75px;">
     </a>
     <div class="close-sidebar" data-toggle="left-sidebar-close">

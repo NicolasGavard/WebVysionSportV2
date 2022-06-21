@@ -84,10 +84,10 @@
           <span class="user-name InfoProfilFullName"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-          <a class="dropdown-item" href="../User/profil.php"><i class="dw dw-user1"></i> <span><?php echo $menu_profil_myProfil; ?></span></a>
-          <a class="dropdown-item" href="../Message/chat.php"><i class="dw dw-message"></i> <span><?php echo $menu_profil_messages; ?></span></a>
-          <a class="dropdown-item" href="../Ticket/activities.php"><i class="dw dw-notification"></i> <span><?php echo $menu_profil_activities; ?></span></a>
-          <a class="dropdown-item" href="../Help/faq.php"><i class="dw dw-help"></i> <span><?php echo $menu_profil_faq; ?></span></a>
+          <a class="dropdown-item" href="<?php echo FRONT_PATH;?>App/Security/Profil/profil.php"><i class="dw dw-user1"></i> <span><?php echo $menu_profil_myProfil; ?></span></a>
+          <a class="dropdown-item" href="<?php echo FRONT_PATH;?>App/Message/Chat/chat.php"><i class="dw dw-message"></i> <span><?php echo $menu_profil_messages; ?></span></a>
+          <a class="dropdown-item" href="<?php echo FRONT_PATH;?>App/Activity/Ticket/ticketList.php"><i class="dw dw-notification"></i> <span><?php echo $menu_profil_activities; ?></span></a>
+          <a class="dropdown-item" href="<?php echo FRONT_PATH;?>App/Help/FAQ/faq.php"><i class="dw dw-help"></i> <span><?php echo $menu_profil_faq; ?></span></a>
           <a class="dropdown-item btnLogout" id="btnLogout"><i class="dw dw-logout"></i> <span><?php echo $menu_profil_logout; ?></span></a>
         </div>
       </div>
