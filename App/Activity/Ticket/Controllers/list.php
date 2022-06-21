@@ -1,16 +1,16 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
-include(__DIR__ . "/../../Data/Ticket/Ticket/DistriXTicketTicketData.php");
-include(__DIR__ . "/../../Data/Ticket/TicketComment/DistriXTicketTicketCommentData.php");
-include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
-include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusNameData.php");
-include(__DIR__ . "/../../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeNameData.php");
+include(__DIR__ . "/../Data/Ticket/Ticket/DistriXTicketTicketData.php");
+include(__DIR__ . "/../Data/Ticket/TicketComment/DistriXTicketTicketCommentData.php");
+include(__DIR__ . "/../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
+include(__DIR__ . "/../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusNameData.php");
+include(__DIR__ . "/../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeData.php");
+include(__DIR__ . "/../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeNameData.php");
 
 $listTicketType         = [];
 $listTicketTypeNames    = [];
