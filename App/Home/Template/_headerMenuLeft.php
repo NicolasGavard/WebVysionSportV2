@@ -402,13 +402,13 @@
                 <span class="micon dw dw-user-13"></span>
                 <span class="mtext"><?php echo $menu_admin_users; ?></span>
               </a>
-              <ul class="submenu <?php echo $show1; ?>" style='display: <?php echo $style; ?>'>
-                <?php
-                  $navActiveMenuAdminUser = $navActiveMenuAdminEnterprise = $navActiveMenuAdminUserType = "";
-                  if (stripos($_SERVER['PHP_SELF'], 'adminUserList')        !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUser        = 'class="active"'; }
-                  if (stripos($_SERVER['PHP_SELF'], 'adminEnterpriseList')  !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminEnterprise  = 'class="active"'; }
-                  if (stripos($_SERVER['PHP_SELF'], 'adminUserTypeList')    !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUserType    = 'class="active"'; }
-                ?> 
+              <?php
+                $navActiveMenuAdminUser = $navActiveMenuAdminEnterprise = $navActiveMenuAdminUserType = "";
+                if (stripos($_SERVER['PHP_SELF'], 'adminUserList')        !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUser        = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'adminEnterpriseList')  !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminEnterprise  = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'adminUserTypeList')    !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUserType    = 'class="active"'; }
+              ?> 
+              <ul class="submenu <?php echo $show1; ?>" style='display: <?php echo $style1; ?>'>
                 <?php if ($hasRight_ADMIN_USER)       { ?><li <?php echo $navActiveMenuAdminUser ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/User/adminUserList.php"><?php echo $menu_admin_users_list; ?></a></li><?php } ?>
                 <?php if ($hasRight_ADMIN_ENTERPRISE) { ?><li <?php echo $navActiveMenuAdminEnterprise ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/Enterprise/adminEnterpriseList.php"><?php echo $menu_admin_enterprises_list; ?></a></li><?php } ?>
                 <?php if ($hasRight_ADMIN_USER_TYPE)  { ?><li <?php echo $navActiveMenuAdminUserType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/UserType/adminUserTypeList.php"><?php echo $menu_admin_usersTypes_list; ?></a></li><?php } ?>
