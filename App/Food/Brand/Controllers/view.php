@@ -1,8 +1,8 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/Food/DistriXFoodBrandData.php");
+include(__DIR__ . "/../Data/Food/DistriXFoodBrandData.php");
 
 list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
 

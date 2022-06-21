@@ -1,16 +1,16 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
 
-include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
-include(__DIR__ . "/../../Data/Food/DistriXFoodBrandData.php");
-include(__DIR__ . "/../../Data/Food/DistriXFoodEcoScoreData.php");
-include(__DIR__ . "/../../Data/Food/DistriXFoodNovaScoreData.php");
-include(__DIR__ . "/../../Data/Food/DistriXFoodNutriScoreData.php");
+include(__DIR__ . "/../Data/Food/DistriXFoodFoodData.php");
+include(__DIR__ . "/../Data/Food/DistriXFoodBrandData.php");
+include(__DIR__ . "/../Data/Food/DistriXFoodEcoScoreData.php");
+include(__DIR__ . "/../Data/Food/DistriXFoodNovaScoreData.php");
+include(__DIR__ . "/../Data/Food/DistriXFoodNutriScoreData.php");
 
 $resp               = [];
 $listFoodFormFront  = [];

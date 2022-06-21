@@ -1,8 +1,8 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/Food/DistriXFoodNovaScoreData.php");
+include(__DIR__ . "/../Data/Food/DistriXFoodNovaScoreData.php");
 
 $confirmSave  = false;
 list($distriXFoodNovaScoreData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);

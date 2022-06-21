@@ -1,16 +1,16 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
-include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
-include(__DIR__ . "/../../Data/Nutrition/MyRecipeFood/DistriXNutritionRecipeFoodData.php");
-include(__DIR__ . "/../../Data/Food/DistriXFoodFoodData.php");
-include(__DIR__ . "/../../Data/Food/DistriXFoodNutritionalData.php");
-include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
-include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
+include(__DIR__ . "/../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
+include(__DIR__ . "/../Data/Nutrition/MyRecipeFood/DistriXNutritionRecipeFoodData.php");
+include(__DIR__ . "/../Data/Food/DistriXFoodFoodData.php");
+include(__DIR__ . "/../Data/Food/DistriXFoodNutritionalData.php");
+include(__DIR__ . "/../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalData.php");
+include(__DIR__ . "/../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
 
 $listMyRecipesFormFront = [];
 $listMyRecipes          = [];

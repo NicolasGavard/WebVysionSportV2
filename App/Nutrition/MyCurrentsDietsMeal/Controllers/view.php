@@ -1,8 +1,8 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
 
 $currentDiet = new DistriXNutritionCurrentDietData();
 $currentDiet->setId($_POST['id'] ?? 0);

@@ -1,9 +1,9 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
+include(__DIR__ . "/../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeData.php");
+include(__DIR__ . "/../Data/CodeTables/FoodType/DistriXCodeTableFoodTypeNameData.php");
 
 // TESTS
 // $_POST["id"] = 1;

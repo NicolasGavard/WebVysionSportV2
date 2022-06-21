@@ -213,7 +213,7 @@ function ListMyCurrentDiet(elemState){
 
 function ViewMealMyCurrentDiet(id, name){
   localStorage.setItem("idDiet", id);
-  window.location.href = 'nutritionMyCurrentsDietsMealList.php';
+  window.location.href = '../MyCurrentsDietsMeal/nutritionMyCurrentsDietsMealList.php';
 }
 
 function ViewMyCurrentDiet(id, name){

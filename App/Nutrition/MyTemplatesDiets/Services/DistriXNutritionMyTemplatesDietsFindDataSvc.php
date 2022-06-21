@@ -3,11 +3,11 @@
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
 // STY Const
-include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/Const/DistriXStyKeys.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 // STOR DATA
-include(__DIR__ . "/../../Data/DistriXStyApplicationData.php");
+include(__DIR__ . "/../Data/DistriXStyApplicationData.php");
 // Database Data
 include(__DIR__ . "/Data/StyApplicationStorData.php");
 // Storage

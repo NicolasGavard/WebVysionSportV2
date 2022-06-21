@@ -1,15 +1,16 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
-include(__DIR__ . "/../../Data/Nutrition/MyCurrentsDietsMeal/DistriXNutritionCurrentDietMealData.php");
-include(__DIR__ . "/../../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
-include(__DIR__ . "/../../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
-include(__DIR__ . "/../../Data/Nutrition/MyTemplatesDiets/DistriXNutritionTemplateDietData.php");
-include(__DIR__ . "/../../Data/CodeTables/MealType/DistriXCodeTableMealTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/MealType/DistriXCodeTableMealTypeNameData.php");
+include(__DIR__ . "/../Data/DistriXNutritionCurrentDietMealData.php");
+
+include(__DIR__ . "/../../../Nutrition/MyCurrentsDiets/Data/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../../../Nutrition/MyRecipes/Data/DistriXNutritionRecipeData.php");
+include(__DIR__ . "/../../../Nutrition/MyTemplatesDiets/Data/DistriXNutritionTemplateDietData.php");
+include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeData.php");
+include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeNameData.php");
 
 $listMyCurrentDietMealsFormFront   = [];
 

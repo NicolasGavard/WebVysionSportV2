@@ -1,7 +1,7 @@
 <?php
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
 
 list($distriXCodeTableBandData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
 
