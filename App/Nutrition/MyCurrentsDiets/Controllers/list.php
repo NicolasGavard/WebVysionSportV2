@@ -16,8 +16,7 @@ $listMyCurrentDietsFormFront  = [];
 $_POST['idUserCoach']         = 1;
 if (!empty($_POST) && isset($_POST)) {
   // List Users
-  // $listUsers                  = DistriXStyAppUser::listUsers();
-  $listUsers                  = [];
+  $listUsers                  = DistriXStyAppUser::listUsers();
 
   // Current Diet
   list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
