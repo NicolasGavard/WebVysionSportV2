@@ -3,6 +3,7 @@ session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ . "/../Data/DistriXNutritionCurrentDietMealData.php");
 
@@ -12,9 +13,14 @@ include(__DIR__ . "/../../../Nutrition/MyTemplatesDiets/Data/DistriXNutritionTem
 include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeData.php");
 include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeNameData.php");
 
-$listMyCurrentDietMealsFormFront   = [];
+$listMyCurrentDietMealsFormFront  = [];
+$listMyCurrentDietMeals           = [];
+$listMyCurrentDiet                = [];
+$listMyRecipe                     = [];
+$listMealTypes                    = [];
+$listMealTypeNames                = [];
 
-$_POST['idDiet']          = 1;
+$_POST['idDiet'] = 1;
 list($distriXNutritionCurrentDietMealMealData, $errorJson)  = DistriXNutritionCurrentDietMealData::getJsonData($_POST);
 
 $infoProfil                       = DistriXStyAppInterface::getUserInformation();
@@ -26,24 +32,21 @@ $distriXNutritionRecipeData->setIdUserCoach($infoProfil->getId());
 
 // PREPARE CALL
 $dietMealCaller = new DistriXServicesCaller();
-$dietMealCaller->setServiceName("Nutrition/CurrentDietMeal/DistriXNutritionMyCurrentsDietMealsFindDataSvc.php");
+$dietMealCaller->setServiceName("App/Nutrition/MyCurrentsDietsMeal/Services/DistriXNutritionMyCurrentsDietMealsFindDataSvc.php");
 $dietMealCaller->addParameter("data", $distriXNutritionCurrentDietMealMealData);
 
 $dietCurrentCaller = new DistriXServicesCaller();
-$dietCurrentCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
+$dietCurrentCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsListDataSvc.php");
 $dietCurrentCaller->addParameter("data", $distriXNutritionCurrentDietData);
 
 $recipeCaller = new DistriXServicesCaller();
-$recipeCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDataSvc.php");
+$recipeCaller->setServiceName("App/Nutrition/MyRecipes/Services/DistriXNutritionMyRecipesListDataSvc.php");
 $recipeCaller->addParameter("data", $distriXNutritionRecipeData);
-
-$dietRecipeCaller = new DistriXServicesCaller();
-$dietRecipeCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
 
 $dataName       = new DistriXCodeTableMealTypeNameData();
 $mealTypeCaller = new DistriXServicesCaller();
 $mealTypeCaller->addParameter("dataName", $dataName);
-$mealTypeCaller->setServiceName("TablesCodes/MealType/DistriXMealTypeListDataSvc.php");
+$mealTypeCaller->setServiceName("App/CodeTables/MealType/Services/DistriXMealTypeListDataSvc.php");
 
 // CALL
 $svc = new DistriXSvc();

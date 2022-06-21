@@ -1,11 +1,11 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/../../Init/DataSvcInit.php");
+include(__DIR__ . "/../../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
   // Cdn Location
-  include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
-  include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
+  include(__DIR__ . "/../../../../DistriX/DistriXCdn/Const/DistriXCdnLocationConst.php");
+  include(__DIR__ . "/../../../../DistriX/DistriXCdn/Const/DistriXCdnFolderConst.php");
   // Storage
   include(__DIR__ . "/Storage/RecipeStor.php");
   // STOR Data

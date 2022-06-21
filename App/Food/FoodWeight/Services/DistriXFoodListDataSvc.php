@@ -1,6 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
-include(__DIR__ . "/../../Init/DataSvcInit.php");
+include(__DIR__ . "/../../../Init/DataSvcInit.php");
 
 
 if ($dataSvc->isAuthorized()) {
