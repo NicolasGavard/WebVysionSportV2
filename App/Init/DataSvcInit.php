@@ -26,13 +26,13 @@ function getLocation(): string
 }
 
 // DISTRIX Init
-if (! file_exists("../DistriX/DistriXInit/DistriXSvcDataServiceInit.php")) {
+if (! file_exists("../../DistriX/DistriXInit/DistriXSvcDataServiceInit.php")) {
   include(__DIR__ . "/../../DistriX/DistrixSvc/Config/DistriXEnv.php");
   header(getLocation());
   exit(0);
 }
 
-include("../DistriX/DistriXInit/DistriXSvcDataServiceInit.php");
+include("../../DistriX/DistriXInit/DistriXSvcDataServiceInit.php");
 
 if (! $dataSvc->isAuthorized()) {
   header(getLocation());

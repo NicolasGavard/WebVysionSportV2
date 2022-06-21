@@ -28,7 +28,7 @@ if (!empty($_POST) && isset($_POST)) {
   $dietCurrentCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsListDataSvc.php");
   $dietCurrentCaller->addParameter("data", $distriXNutritionCurrentDietData);
     
-  $dietTemplateCaller = new DistriXServicesCaller();  
+  $dietTemplateCaller = new DistriXServicesCaller();
   $dietTemplateCaller->setServiceName("App/Nutrition/MyTemplatesDiets/Services/DistriXNutritionMyTemplatesDietsListDataSvc.php");
   $dietTemplateCaller->addParameter("data", $distriXNutritionTemplateDietData);
    
@@ -37,7 +37,7 @@ if (!empty($_POST) && isset($_POST)) {
   $svc->addToCall("dietTemplate", $dietTemplateCaller);
   $callsOk = $svc->call();
 
-  list($outputok, $output, $errorData) = $svc->getResult("dietCurrent"); print_r($output);
+  list($outputok, $output, $errorData) = $svc->getResult("dietCurrent"); //print_r($errorData);
   if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
     list($listMyCurrentDiets, $jsonError) = DistriXNutritionCurrentDietData::getJsonArray($output["ListMyCurrentsDiets"]);
   } else {

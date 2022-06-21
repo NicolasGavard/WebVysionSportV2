@@ -4,7 +4,7 @@ if (!defined('DISTRIX_SVC_VERSION')) {
 }
 if (!defined('DISTRIX_SVC_SERVICE_LEVEL')) {
   // define("DISTRIX_SVC_SERVICE_LEVEL", "../Services/");
-  define("DISTRIX_SVC_SERVICE_LEVEL", "../");
+  define("DISTRIX_SVC_SERVICE_LEVEL", "../../");
 }
 if (!defined('DISTRIX_INTERNAL_SVC_SERVICE_LEVEL')) {
   define("DISTRIX_INTERNAL_SVC_SERVICE_LEVEL", "../");

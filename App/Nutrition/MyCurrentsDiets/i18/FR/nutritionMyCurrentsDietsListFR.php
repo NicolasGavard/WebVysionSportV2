@@ -28,4 +28,4 @@
 
   $errorData_txt_template       = "Le modèle de la template de diète est manquant !!";
   $errorData_txt_student        = "Aucun élèves assignés sur la diète !!";
-  $errorData_txt_dateBegin      = "La date de début de la diète est manquante !!";
+  $errorData_txt_dateStart      = "La date de début de la diète est manquante !!";
