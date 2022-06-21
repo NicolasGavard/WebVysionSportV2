@@ -3,7 +3,7 @@
 include("../DistriXInit/DistriXSvcDataServiceInit.php");
 // STY Const
 // STY Const
-include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Const/DistriXStyKeys.php");
 include(__DIR__ . "/../../Const/DistriXStyMailConst.php");
 // Error
 include(__DIR__ . "/../../../../GlobalData/ApplicationErrorData.php");
@@ -219,10 +219,10 @@ if ($dataSvc->getMethodName() == "SaveUser") {
           $i18cdlangue  = DISTRIX_LANG_DEFAULT;
           $filename     = "../../i18/$i18cdlangue/$international";
           $filename    .= "Txt$i18cdlangue.php";
-          include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/".$filename);
-          include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/header.php");
-          include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/mailNewUser.php");
-          include(__DIR__ . "/../../../DistriXSecurity/styServices/Mails/footer.php");
+          include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/styServices/Mails/".$filename);
+          include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/styServices/Mails/header.php");
+          include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/styServices/Mails/mailNewUser.php");
+          include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/styServices/Mails/footer.php");
           $message  = $header . $body . $footer;
 
           $eMailRecipient = $infoUser->getEmail();

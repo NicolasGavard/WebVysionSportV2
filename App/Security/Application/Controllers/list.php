@@ -1,12 +1,13 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DISTRIX Security App
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppApplication.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/StyAppInterface/DistriXStyAppApplication.php");
 // DATA
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyApplicationData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyApplicationData.php");
 // DISTRIX Security
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyRightConst.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Const/DistriXStyRightConst.php");
 // Error
 include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
 

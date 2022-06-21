@@ -96,7 +96,7 @@ $(function() {
         if(val.statut == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
 
         let line =  '<tr>'+
-                    ' <td style="padding:1rem;"><img style="max-height:100px; max-width:100px;"<img src="'+val.linkToPicture+'"/></td>'+
+                    ' <td style="padding:1rem;"><img style="max-height:60px; max-width:60px;"<img src="'+val.linkToPicture+'"/></td>'+
                     ' <td>'+
                     '   '+val.firstName+' '+val.name+''+
                     '   <br/><br/>'+
@@ -105,7 +105,7 @@ $(function() {
                     ' </td>'+
                     ' <td>'+
                     '   Mail : <a href="mailto:'+val.email+'">'+val.email+'</a>'+
-                    '   <br/><br/>'+
+                    '   <br/>'+
                     '   Phone : <a href="callto:'+val.phone+'">'+val.phone+'</a>'+
                     ' </td>'+
                     ' <td width="10%">'+

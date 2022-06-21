@@ -1,44 +1,28 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// DISTRIX Init
-include("../DistriXInit/DistriXSvcDataServiceInit.php");
-// STY Const
-// STY Const
-include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
-// Error
-include(__DIR__ . "/../../../../GlobalData/ApplicationErrorData.php");
-// STY Data
-include(__DIR__ . "/../../Data/DistriXStyEnterpriseData.php");
-// Database Data
-include(__DIR__ . "/Data/StyEnterpriseStorData.php");
-// Storage
-include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
-include(__DIR__ . "/Storage/StyEnterpriseStor.php");
-// Cdn Location
-include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
-include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
+// Service Init
+include(__DIR__.'/../Init/DataSvcInit.php');
 
-$databasefile    = __DIR__ . "/../Db/Infodb.php";
+if (isset($dataSvc) && !is_null($dataSvc) && $dataSvc->isAuthorized()) {
+  // Database Data
+  include(__DIR__ . "/Data/StyEnterpriseStorData.php");
+  // Storage
+  include(__DIR__ . "/Storage/StyEnterpriseStor.php");
+  // Cdn Location
+  include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
+  include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
 
-// ListEnterprises
-if ($dataSvc->getMethodName() == "ListEnterprises") {
-  $dbConnection    = null;
-  $errorData       = null;
   $enterprisesList = [];
   
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
-    list($enterprisesStorData, $enterprisesStorDataInd) = StyEnterpriseStor::getList(true, $dbConnection);
-    foreach ($enterprisesStorData as $enterprise) {
-      $data = DistriXSvcUtil::setData($enterprise, "DistriXStyEnterpriseData");
-      
-      $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_ENTERPRISE . '/' . trim($data->getLogoImageHtmlName());
+    list($styEnterprisesStor, $styEnterprisesStorInd) = StyEnterpriseStor::getList(true, $dbConnection);
+    foreach ($styEnterprisesStor as $enterprise) {
+      $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_ENTERPRISE . '/' . trim($enterprise->getLogoImageHtmlName());
       $pictures_headers = get_headers($urlPicture);
-      if (trim($data->getLogoImageHtmlName()) == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found') {
+      if (trim($enterprise->getLogoImageHtmlName()) == '' || !$pictures_headers || $pictures_headers[0] == 'HTTP/1.1 404 Not Found') {
         $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_ENTERPRISE . '/enterpriseDefault.png';
       }
-      $data->setLogoImageHtmlName($urlPicture);
-
-      $enterprisesList[] = $data;
+      $enterprise->setLogoImageHtmlName($urlPicture);
     }
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
@@ -49,7 +33,7 @@ if ($dataSvc->getMethodName() == "ListEnterprises") {
   }
 
 
-  $dataSvc->addToResponse("ListEnterprises", $enterprisesList);
+  $dataSvc->addToResponse("ListEnterprises", $styEnterprisesStor);
 }
 
 // Return response

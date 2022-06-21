@@ -1,9 +1,10 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUserType.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/StyAppInterface/DistriXStyAppUserType.php");
 // DATA
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserTypeData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyUserTypeData.php");
 
 include(__DIR__ . "../../../GlobalData/ApplicationErrorData.php");
 include(__DIR__ . "../../../GlobalData/ApplicationLayerData.php");

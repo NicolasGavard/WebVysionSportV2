@@ -1,15 +1,16 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUserRight.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/StyAppInterface/DistriXStyAppUserRight.php");
 // DATA
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserRightData.php");
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserRightsData.php");
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyApplicationData.php");
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyModuleData.php");
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyFunctionalityData.php");
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyRoleData.php");
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyRightData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyUserRightData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyUserRightsData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyApplicationData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyModuleData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyFunctionalityData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyRoleData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyRightData.php");
 
 $resp                     = [];
 $_POST['idStyUser']       = 1;

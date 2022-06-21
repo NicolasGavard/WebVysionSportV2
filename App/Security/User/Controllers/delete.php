@@ -2,9 +2,9 @@
 session_start();
 include(__DIR__ . "/../../../Controllers/Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyUserData.php");
 
 $resp = [];
 
