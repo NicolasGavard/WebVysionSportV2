@@ -1,7 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// DISTRIX Init
-include("../DistriXInit/DistriXSvcDataServiceInit.php");
-// STY Const
+// STY Init
+include(__DIR__.'/../Init/DataSvcInit.php');
 // STY Const
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Const/DistriXStyKeys.php");
 // Error

@@ -1,4 +1,8 @@
 <?php // Needed to encode in UTF8 ààéàé //
+if (!defined('CONTROLLER_DISTRIX_PATH')) {
+  define("CONTROLLER_DISTRIX_PATH", "../../../../DistriX/");
+}
+
 function getLocation(): string
 {
   $location = "";
@@ -22,7 +26,7 @@ function getLocation(): string
   return $location;
 }
 
-// DISTRIX Init
+// DISTRIX STY Init
 if (! file_exists(__DIR__."/../../../../DistriX/DistriXInit/DistriXSvcDataServiceInit.php")) {
   include(__DIR__ . "/../../../../DistriX/DistrixSvc/Config/DistriXEnv.php");
   header(getLocation());

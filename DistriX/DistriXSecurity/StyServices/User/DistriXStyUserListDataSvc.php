@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// Service Init
+// STY Init
 include(__DIR__.'/../Init/DataSvcInit.php');
 
 if (isset($dataSvc) && !is_null($dataSvc) && $dataSvc->isAuthorized()) {

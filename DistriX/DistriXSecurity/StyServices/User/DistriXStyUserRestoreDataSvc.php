@@ -1,6 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// Service Init
-include(__DIR__ . "/../Init/DataSvcInit.php");
+// STY Init
+include(__DIR__.'/../Init/DataSvcInit.php');
+
 if (isset($dataSvc) && !is_null($dataSvc) && $dataSvc->isAuthorized()) {
   // Database Data
   include(__DIR__ . "/Data/StyUserStorData.php");
