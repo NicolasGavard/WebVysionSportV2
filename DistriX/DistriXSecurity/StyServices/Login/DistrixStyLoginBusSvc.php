@@ -1,7 +1,7 @@
 <?php
 include("../DistriXInit/DistriXSvcBusServiceInit.php");
 // Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
+include(__DIR__ . "/../../../../GlobalData/ApplicationErrorData.php");
 // Layers
 include(__DIR__ . "/../../Layers/DistriXStySvcCaller.php");
 // Data

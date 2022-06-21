@@ -62,7 +62,7 @@ class DistriXStyAppInterface
       $output            = array();
       $errorData         = array();
       $styServicesCaller = new DistriXStySvcCaller();
-      $styServicesCaller->setServiceName("DistriX/DistriXSecurity/StyServices/User/DistriXStyLoginDataSvc.php");
+      $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyLoginDataSvc.php");
       $styServicesCaller->setMethodName("Login");
       $styServicesCaller->addParameter("dataApp", $dataApp);                  //print_r($dataApp);
       $styServicesCaller->addParameter("dataUser", $dataUser);                //print_r($dataUser);

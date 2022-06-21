@@ -39,7 +39,7 @@ if (! $dataSvc->isAuthorized()) {
 // STY Const
 include(__DIR__ . "/../../Const/DistriXStyKeys.php");
 // Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
+include(__DIR__ . "/../../../../GlobalData/ApplicationErrorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 // Trace Data

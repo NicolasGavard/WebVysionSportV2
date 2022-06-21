@@ -21,7 +21,7 @@ if (!class_exists('DistriXCdnSvcCaller', false)) {
 		const CLIENT_CALL_PROD    = "https";
 
 		/* Client Servers Directories Values */
-		const CLIENT_DIR_DEV     = "WebVysionSportV2";
+		const CLIENT_DIR_DEV     = "WebVysionSportV2/DistriX";
 		const CLIENT_DIR_INT     = "CdnServices";
 		const CLIENT_DIR_VER     = "CdnServices";
 		const CLIENT_DIR_VAL     = "CdnServices";

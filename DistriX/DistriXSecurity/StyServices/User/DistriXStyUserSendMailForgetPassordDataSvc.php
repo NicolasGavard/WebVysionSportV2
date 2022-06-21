@@ -6,7 +6,7 @@ include("../DistriXInit/DistriXSvcDataServiceInit.php");
 include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
 include(__DIR__ . "/../../Const/DistriXStyMailConst.php");
 // Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
+include(__DIR__ . "/../../../../GlobalData/ApplicationErrorData.php");
 // STY Data
 include(__DIR__ . "/../../Data/DistriXStyUserData.php");
 // Database Data

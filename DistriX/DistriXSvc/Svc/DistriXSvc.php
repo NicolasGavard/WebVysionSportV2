@@ -45,6 +45,7 @@ if (!class_exists("DistriXSvc", false)) {
               }
             }
           }
+
           $curlAddress = $wantedAddress = "";
           if ($primaryServerAvailable) {
             $curlAddress .= $caller->getServerCall() . "://";

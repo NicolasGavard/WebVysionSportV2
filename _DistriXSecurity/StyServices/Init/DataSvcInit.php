@@ -21,6 +21,7 @@ function getLocation(): string
   }
   return $location;
 }
+
 // DISTRIX Init
 if (! file_exists(__DIR__."../../../../DistriXInit/DistriXSvcDataServiceInit.php")) {
   include(__DIR__ . "/../../../DistrixSvc/Config/DistriXEnv.php");
@@ -38,7 +39,7 @@ if (! $dataSvc->isAuthorized()) {
 // STY Const
 include(__DIR__ . "/../../Const/DistriXStyKeys.php");
 // Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
+include(__DIR__ . "/../../../../GlobalData/ApplicationErrorData.php");
 // Storage
 include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 // Trace Data
