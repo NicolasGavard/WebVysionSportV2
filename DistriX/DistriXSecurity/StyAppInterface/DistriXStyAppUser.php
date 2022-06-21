@@ -88,7 +88,7 @@ class DistriXStyAppUser
     
     $styServicesCaller = new DistriXStySvcCaller();
     $styServicesCaller->setMethodName("ListUsers");
-    $styServicesCaller->setServiceName("DistriX/DistriXSecurity/StyServices/User/DistriXStyUserListDataSvc.php");
+    $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserListDataSvc.php");
     $styServicesCaller->addParameter("data", $data);
     list($outputok, $output, $errorData) = $styServicesCaller->call(); //var_dump($output);
 

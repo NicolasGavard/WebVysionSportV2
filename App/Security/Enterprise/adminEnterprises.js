@@ -1,8 +1,8 @@
-var userSelectedData = null;
-var userTableEntreprisesData=[];
+var enterpriseSelectedData = null;
+var enterpriseTableEntreprisesData=[];
 $(function() {
-  var userTableData = "";
-  var userTable = $('#UserListTable').DataTable({
+  var enterpriseTableData = "";
+  var enterpriseTable = $('#EnterpriseListTable').DataTable({
     columnDefs: [
       // { orderable: false, targets: 0 },
       { orderable: false, targets: 3 }
@@ -16,9 +16,9 @@ $(function() {
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {
-      userTableData = data.ListUsers;
-      userTableEntreprisesData = data.ListEnterprises;
-      ListUser(0);
+      enterpriseTableData = data.ListEnterprises;
+      enterpriseTableEntreprisesData = data.ListEnterprises;
+      ListEnterprise(0);
     },
     error : function(data) {
       console.log(data);
@@ -31,8 +31,8 @@ $(function() {
     
     $(".btn-warning").addClass("disabled");
     $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
-    userTable.clear().draw();
-    ListUser(1);
+    enterpriseTable.clear().draw();
+    ListEnterprise(1);
   });
 
   $(".btn-success").on('click', function() {
@@ -42,8 +42,8 @@ $(function() {
     $(".btn-warning").removeClass("disabled");
     $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
-    userTable.clear().draw();
-    ListUser(0);
+    enterpriseTable.clear().draw();
+    ListEnterprise(0);
   });
 
   $("#btnDel").on('click', function() {
@@ -55,7 +55,7 @@ $(function() {
       success : function(data) {
         if (data.confirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./adminUserList.php";}, 800);
+          setTimeout(function() {window.location.href = "./adminEnterpriseList.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
           $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.errorData.text+'</ul>');
@@ -76,7 +76,7 @@ $(function() {
       success : function(data) {
         if (data.confirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./adminUserList.php";}, 800);
+          setTimeout(function() {window.location.href = "./adminEnterpriseList.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
           $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.Error.text+'</ul>');
@@ -88,8 +88,8 @@ $(function() {
     });
   });
 
-  function ListUser(elemState){
-    const dataTableData = userTableData;
+  function ListEnterprise(elemState){
+    const dataTableData = enterpriseTableData;
     $.map(dataTableData, function(val, key) {
       if(val.statut == elemState){
         if(val.statut == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
@@ -114,25 +114,25 @@ $(function() {
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddUser"   onclick="ViewUser(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelUser(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestUser(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddEnterprise"   onclick="ViewEnterprise(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelEnterprise(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestEnterprise(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
                     '</tr>';
-        userTable.row.add($(line)).draw();
+        enterpriseTable.row.add($(line)).draw();
       }
     });
   }
 });
 
-function DelUser(id, name){
+function DelEnterprise(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestUser(id, name){
+function RestEnterprise(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

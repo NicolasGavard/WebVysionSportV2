@@ -1,12 +1,12 @@
 <?php
 session_start();
-include(__DIR__ . "/../../../Controllers/Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppEnterprise.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/StyAppInterface/DistriXStyAppEnterprise.php");
 // DATA
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyUserData.php");
-include(__DIR__ . "/../../../DistriXSecurity/Data/DistriXStyEnterpriseData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyUserData.php");
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH ."DistriXSecurity/Data/DistriXStyEnterpriseData.php");
 
 $resp            = [];
 $idStyEnterprise = 1;

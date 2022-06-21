@@ -2,12 +2,11 @@
   session_start();
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-  $international  = __DIR__.'/i18/'.$i18cdlangue.'/userList'.$i18cdlangue;
-  include('../../i18/'.$i18cdlangue.'/header.php');
-  include("../../i18/_i18New.php");
-  include('../../Front/Home/_header.php');
-  include('../../Front/Home/_headerMenuTop.php');
-  include('../../Front/Home/_headerMenuLeft.php');
+	include('../../Home/Template/i18/'.$i18cdlangue.'/header'.$i18cdlangue.'.php');
+	include('i18/'.$i18cdlangue.'/userList'.$i18cdlangue.'.php');
+  include('../../Home/Template/_header.php');
+	include('../../Home/Template/_headerMenuTop.php');
+	include('../../Home/Template/_headerMenuLeft.php');
   include("../../_util.php");
   
   $toScript["errorCodeTxt"]       = $errorData_txt_code;
@@ -28,7 +27,7 @@
             <div class="pull-right">
               <button type="button" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i>&nbsp;<?php echo $page_all_active; ?></button>
               <button type="button" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i>&nbsp;<?php echo $page_all_inactive; ?></button>
-              <button type="button" class="btn btn-primary AddNewFoodType" data-toggle="modal" data-target="#modalAddUser"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
+              <button type="button" class="btn btn-primary AddNewUser" data-toggle="modal" data-target="#modalAddUser"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
         		</div>
 					</div>
 
@@ -51,7 +50,7 @@
 			</div>
 
       <?php
-        include('../../Front/Home/_headerFooter.php');
+        include('../../Home/Template/_headerFooter.php');
       ?>
       <script src="adminUser.js?v=<?php echo APP_VERSION;?>"></script>
   </body>

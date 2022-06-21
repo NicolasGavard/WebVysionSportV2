@@ -232,8 +232,8 @@
                 if (stripos($_SERVER['PHP_SELF'], 'packageList') !== false)     { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageList     = 'class="active"'; }
                 if (stripos($_SERVER['PHP_SELF'], 'packageInvoice') !== false)  { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageInvoice  = 'class="active"'; }
               ?>
-              <?php if ($hasRight_PACKAGE_LIST)     {?><li <?php echo $navActiveMenuPackageList ?>><a class="nav-link" href="../Package/packageList.php"><?php echo $menu_right_package_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_PACKAGE_INVOICE)  {?><li <?php echo $navActiveMenuPackageInvoice ?>><a class="nav-link" href="../Package/packageInvoice.php"><?php echo $menu_right_invoice_detail; ?></a></li><?php } ?>
+              <?php if ($hasRight_PACKAGE_LIST)     {?><li <?php echo $navActiveMenuPackageList ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Package/Package/packageList.php"><?php echo $menu_right_package_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_PACKAGE_INVOICE)  {?><li <?php echo $navActiveMenuPackageInvoice ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Package/Invoice/packageInvoice.php"><?php echo $menu_right_invoice_detail; ?></a></li><?php } ?>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
             </ul>
@@ -290,8 +290,8 @@
                 if (stripos($_SERVER['PHP_SELF'], 'messageList') !== false)  { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuMessageList  = 'class="active"'; }
                 if (stripos($_SERVER['PHP_SELF'], 'messageChat') !== false)  { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuMessageChat  = 'class="active"'; }
               ?>
-              <?php if ($hasRight_MESSAGE_LIST) {?><li <?php echo $navActiveMenuMessageList ?>><a class="nav-link" href="../Message/messageList.php"><?php echo $menu_right_message_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_MESSAGE_CHAT) {?><li <?php echo $navActiveMenuMessageChat ?>><a class="nav-link" href="../Message/chat.php"><?php echo $menu_right_message_chat; ?></a></li><?php } ?>
+              <?php if ($hasRight_MESSAGE_LIST) {?><li <?php echo $navActiveMenuMessageList ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Message/Message/messageList.php"><?php echo $menu_right_message_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_MESSAGE_CHAT) {?><li <?php echo $navActiveMenuMessageChat ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Message/Chat/chat.php"><?php echo $menu_right_message_chat; ?></a></li><?php } ?>
               <li><a href="#">2</a></li>
               <li><a href="#">3</a></li>
               <li><a href="#">4</a></li>
@@ -409,9 +409,9 @@
                   if (stripos($_SERVER['PHP_SELF'], 'adminEnterpriseList')  !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminEnterprise  = 'class="active"'; }
                   if (stripos($_SERVER['PHP_SELF'], 'adminUserTypeList')    !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUserType    = 'class="active"'; }
                 ?> 
-                <?php if ($hasRight_ADMIN_USER)       { ?><li <?php echo $navActiveMenuAdminUser ?>><a class="nav-link" href="../Admin/adminUserList.php"><?php echo $menu_admin_users_list; ?></a></li><?php } ?>
-                <?php if ($hasRight_ADMIN_ENTERPRISE) { ?><li <?php echo $navActiveMenuAdminEnterprise ?>><a class="nav-link" href="../Admin/adminEnterpriseList.php"><?php echo $menu_admin_enterprises_list; ?></a></li><?php } ?>
-                <?php if ($hasRight_ADMIN_USER_TYPE)  { ?><li <?php echo $navActiveMenuAdminUserType ?>><a class="nav-link" href="../Admin/adminUserTypeList.php"><?php echo $menu_admin_usersTypes_list; ?></a></li><?php } ?>
+                <?php if ($hasRight_ADMIN_USER)       { ?><li <?php echo $navActiveMenuAdminUser ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/User/adminUserList.php"><?php echo $menu_admin_users_list; ?></a></li><?php } ?>
+                <?php if ($hasRight_ADMIN_ENTERPRISE) { ?><li <?php echo $navActiveMenuAdminEnterprise ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/Enterprise/adminEnterpriseList.php"><?php echo $menu_admin_enterprises_list; ?></a></li><?php } ?>
+                <?php if ($hasRight_ADMIN_USER_TYPE)  { ?><li <?php echo $navActiveMenuAdminUserType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/UserType/adminUserTypeList.php"><?php echo $menu_admin_usersTypes_list; ?></a></li><?php } ?>
                                 
                 <?php if ($hasSecurity) { ?>
                   <?php
@@ -428,11 +428,11 @@
                       <span class="mtext "><?php echo $menu_right; ?></span>
                     </a>
                     <ul class="submenu child <?php echo $show2; ?>" style='display: <?php echo $style2; ?>'>
-                      <?php if ($hasRight_SECURITY_APPLICATION) {    ?><li <?php echo $navActiveMenuAdminApplication ?>><a class="nav-link" href="../Admin/adminApplicationList.php"><?php echo $menu_right_applications_list; ?>/a></li><?php } ?>
-                      <?php if ($hasRight_SECURITY_MODULE) {         ?><li <?php echo $navActiveMenuAdminModule ?>><a class="nav-link" href="../Admin/adminModuleList.php"><?php echo $menu_right_modules_list; ?></a></li><?php } ?>
-                      <?php if ($hasRight_SECURITY_FUNCTIONALITY) {  ?><li <?php echo $navActiveMenuAdminFunctionality ?>><a class="nav-link" href="../Admin/adminFunctionalityList.php"><?php echo $menu_right_functionalities_list; ?></a></li><?php } ?>
-                      <?php if ($hasRight_SECURITY_ROLE) {           ?><li <?php echo $navActiveMenuAdminRole ?>><a class="nav-link" href="../Admin/adminRoleList.php"><?php echo $menu_right_roles_list; ?></a></li><?php } ?>
-                      <?php if ($hasRight_SECURITY_RIGHT) {          ?><li <?php echo $navActiveMenuAdminRight ?>><a class="nav-link" href="../Admin/adminRightList.php"><?php echo $menu_right_rights_list; ?></a></li><?php } ?>
+                      <?php if ($hasRight_SECURITY_APPLICATION) {    ?><li <?php echo $navActiveMenuAdminApplication ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/Application/adminApplicationList.php"><?php echo $menu_right_applications_list; ?></a></li><?php } ?>
+                      <?php if ($hasRight_SECURITY_MODULE) {         ?><li <?php echo $navActiveMenuAdminModule ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/Moduke/adminModuleList.php"><?php echo $menu_right_modules_list; ?></a></li><?php } ?>
+                      <?php if ($hasRight_SECURITY_FUNCTIONALITY) {  ?><li <?php echo $navActiveMenuAdminFunctionality ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/Functionality/adminFunctionalityList.php"><?php echo $menu_right_functionalities_list; ?></a></li><?php } ?>
+                      <?php if ($hasRight_SECURITY_ROLE) {           ?><li <?php echo $navActiveMenuAdminRole ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/Role/adminRoleList.php"><?php echo $menu_right_roles_list; ?></a></li><?php } ?>
+                      <?php if ($hasRight_SECURITY_RIGHT) {          ?><li <?php echo $navActiveMenuAdminRight ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Security/Right/adminRightList.php"><?php echo $menu_right_rights_list; ?></a></li><?php } ?>
                     </ul>
                   </li>
                 <?php } ?>
@@ -467,14 +467,14 @@
               <span class="mtext"><?php echo $menu_codeTables; ?></span>
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
-              <?php if ($hasRight_CODE_TABLE_WEIGHT_TYPE)       { ?><li <?php echo $navActiveMenuCodeTableWeightType ?>><a class="nav-link" href="../CodeTables/codeTableWeightTypeList.php"><?php echo $menu_codeTables_weightType_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_CATEGORY_FOOD_TYPE){ ?><li <?php echo $navActiveMenuCodeTableCategoryFoodType ?>><a class="nav-link" href="../CodeTables/codeTableCategoryFoodTypeList.php"><?php echo $menu_codeTables_food_category_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_FOOD_TYPE)         { ?><li <?php echo $navActiveMenuCodeTableFoodType ?>><a class="nav-link" href="../CodeTables/codeTableFoodTypeList.php"><?php echo $menu_codeTables_food_type_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_MEAL_TYPE)         { ?><li <?php echo $navActiveMenuCodeTableMealType ?>><a class="nav-link" href="../CodeTables/codeTableMealTypeList.php"><?php echo $menu_codeTables_meal_type_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_NUTRITIONAL)       { ?><li <?php echo $navActiveMenuCodeTableNutritionale ?>><a class="nav-link" href="../CodeTables/codeTableNutritionalList.php"><?php echo $menu_codeTables_nutritional_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_LANGUES)           { ?><li <?php echo $navActiveMenuCodeTableLanguage ?>><a class="nav-link" href="../CodeTables/codeTableLanguageList.php"><?php echo $menu_codeTables_language_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_TICKET_STATUS)     { ?><li <?php echo $navActiveMenuCodeTableTicketStatus ?>><a class="nav-link" href="../CodeTables/codeTableTicketStatusList.php"><?php echo $menu_codeTables_ticket_status_list; ?></a></li><?php } ?>
-              <?php if ($hasRight_CODE_TABLE_TICKET_TYPE)       { ?><li <?php echo $navActiveMenuCodeTableTicketType ?>><a class="nav-link" href="../CodeTables/codeTableTicketTypeList.php"><?php echo $menu_codeTables_ticket_type_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_WEIGHT_TYPE)       { ?><li <?php echo $navActiveMenuCodeTableWeightType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/WeightType/codeTableWeightTypeList.php"><?php echo $menu_codeTables_weightType_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_CATEGORY_FOOD_TYPE){ ?><li <?php echo $navActiveMenuCodeTableCategoryFoodType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/CategoryFoodType/codeTableCategoryFoodTypeList.php"><?php echo $menu_codeTables_food_category_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_FOOD_TYPE)         { ?><li <?php echo $navActiveMenuCodeTableFoodType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/FoodType/codeTableFoodTypeList.php"><?php echo $menu_codeTables_food_type_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_MEAL_TYPE)         { ?><li <?php echo $navActiveMenuCodeTableMealType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/MealType/codeTableMealTypeList.php"><?php echo $menu_codeTables_meal_type_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_NUTRITIONAL)       { ?><li <?php echo $navActiveMenuCodeTableNutritionale ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/Nutritional/codeTableNutritionalList.php"><?php echo $menu_codeTables_nutritional_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_LANGUES)           { ?><li <?php echo $navActiveMenuCodeTableLanguage ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/Language/codeTableLanguageList.php"><?php echo $menu_codeTables_language_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_TICKET_STATUS)     { ?><li <?php echo $navActiveMenuCodeTableTicketStatus ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/TicketStatus/codeTableTicketStatusList.php"><?php echo $menu_codeTables_ticket_status_list; ?></a></li><?php } ?>
+              <?php if ($hasRight_CODE_TABLE_TICKET_TYPE)       { ?><li <?php echo $navActiveMenuCodeTableTicketType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/TicketType/codeTableTicketTypeList.php"><?php echo $menu_codeTables_ticket_type_list; ?></a></li><?php } ?>
             </ul>
           </li>
         <?php } ?>
