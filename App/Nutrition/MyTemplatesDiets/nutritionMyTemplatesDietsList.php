@@ -48,38 +48,46 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_add_title; ?></h4>
-              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_update_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 add_title"><?php echo $page_add_title; ?> <span class="infoNameTemplateDiet"></span></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 update_title"><?php echo $page_update_title; ?> <span class="infoNameTemplateDiet"></span></h4>
               <form class="FormAddMyTemplateDiet" action="#" id="FormAddMyTemplateDiet">
                 <input class="form-control AddMyTemplatesDietsFormId"            type="hidden" name="id"           value="0">
                 <input class="form-control AddMyTemplatesDietsFormIdUserCoatch"  type="hidden" name="idusercoach"  value="0">
                 <input class="form-control AddMyTemplatesDietsFormTimestamp"     type="hidden" name="timestamp"    value="0">
                 <input class="form-control AddMyTemplatesDietsFormStatut"        type="hidden" name="elemState"    value="0">
+                
                 <div class="row">
-                  <div class="col-md-4 col-sm-12">
+                  <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                       <label><?php echo $page_name; ?></label>
-                      <select class="custom-select2 form-control listMyTemplates" data-style="btn-outline-danger" id="listMyTemplates" name="idDietTemplate" style="width: 100%; height: 38px;">  
-                        <option value="0"><?php echo $page_all_choice; ?></option>
-                      </select>
-                      <div class="form-control-feed back danger-template has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_template; ?> </div>
+                      <input class="form-control AddMyTemplatesDietsFormName" type="text" name="name" placeholder="<?php echo $page_name; ?>">
+                      <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-12">
+                  
+                  <div class="col-md-6 col-sm-12">
                     <div class="form-group">
-                      <label><?php echo $page_list_assigned_for_one; ?></label>
-                      <select class="custom-select2 form-control listStudents" id="listStudents" name="idUserStudent" style="width: 100%; height: 38px;">
-                        <option value="0"><?php echo $page_all_choice; ?></option>
+                      <label><?php echo $page_duration; ?></label>
+                      <select class="custom-select col-12 AddMyTemplatesDietsFormDuration" name="duration">
+                        <option selected="0">0</option>
+                        <?php
+                          $count = 0;
+                          while ($count <= 40){
+                            echo $count." ";
+                            $count = $count + 1;
+                            echo "<option value='".$count."'>".$count."</option>";
+                          }
+                        ?> 
                       </select>
-                      <div class="form-control-feed back danger-student has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_student; ?> </div>
+                      <div class="form-control-feed back danger-duration has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_duration; ?> </div>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-12">
+                  
+                  <div class="col-md-12 col-sm-12">
                     <div class="form-group">
-                      <label><?php echo $page_date_begin; ?></label>
-                      <!-- <input class="form-control date-picker dateStart" id="dateStart" placeholder="<?php //echo $page_add_date_begin; ?>" type="text" name="date_start"> -->
-                      <input class="form-control dateStart" id="dateStart" placeholder="<?php echo $page_add_date_begin; ?>" type="text" name="dateStart">
-                      <div class="form-control-feed back danger-dateStart has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_dateStart; ?> </div>
+                      <label><?php echo $page_tags; ?></label>
+                      <input type="text" class="AddMyTemplatesDietsFormTags" value="" name="tags" data-role="tagsinput">
+                      <div class="form-control-feed back danger-tags has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_tags; ?> </div>
                     </div>
                   </div>
                 </form>

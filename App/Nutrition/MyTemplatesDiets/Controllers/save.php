@@ -1,43 +1,15 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyTemplatesDiets/DistriXNutritionTemplateDietData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../Data/DistriXNutritionTemplateDietData.php");
 
-$resp         = array();
 $confirmSave  = false;
-$error        = array();
-$output       = array();
-$outputok     = false;
-
-
-$distriXNutritionTemplateDietData = new DistriXNutritionTemplateDietData();
-$distriXNutritionTemplateDietData->setId($_POST['id']);
-$distriXNutritionTemplateDietData->setIdUser($_POST['id']);
-$distriXNutritionTemplateDietData->setIdDietTemplace($_POST['id']);
-$distriXNutritionTemplateDietData->setDateStart($_POST['dateStart']);
-$distriXNutritionTemplateDietData->setStatus($_POST['statut']);
-$distriXNutritionTemplateDietData->setTimestamp($_POST['timestamp']);
-
-
-$distriXCodeTableDietData = new DistriXFoodDietData();
-$distriXCodeTableDietData->setId($_POST['id']);
-$distriXCodeTableDietData->setName($_POST['name']);
-$distriXCodeTableDietData->setLinkToPicture('');
-if($_POST['base64Img'] != '') { $distriXCodeTableDietData->setLinkToPicture($_POST['base64Img']);}
-$distriXCodeTableDietData->setTimestamp($_POST['timestamp']);
-$distriXCodeTableDietData->setStatus($_POST['statut']);
+list($distriXNutritionTemplatetDietData, $errorJson)  = DistriXNutritionTemplateDietData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("SaveDiet");
-$servicesCaller->addParameter("data", $distriXCodeTableDietData);
-$servicesCaller->setServiceName("Food/Diet/DistriXFoodDietSaveDataSvc.php");
+$servicesCaller->setServiceName("App/Nutrition/MyTemplatesDiets/Services/DistriXNutritionMyTemplatesDietsSaveDataSvc.php");
+$servicesCaller->addParameter("data", $distriXNutritionTemplatetDietData);
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Diet")) {
@@ -49,10 +21,8 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
   DistriXLogger::log($logInfoData);
 }
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
-    $confirmSave = $output["ConfirmSave"];
-  }
+if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
+  $confirmSave = $output["ConfirmSave"];
 } else {
   $error = $errorData;
 }

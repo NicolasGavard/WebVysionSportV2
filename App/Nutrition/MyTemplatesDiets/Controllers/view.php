@@ -1,29 +1,14 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyTemplatesDiets/DistriXNutritionTemplateDietData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../Data/DistriXNutritionTemplateDietData.php");
 
-$resp              = array();
-$error             = array();
-$output            = array();
-$outputok          = false;
-
-$label  = new DistriXNutritionTemplatetDietData();
-if ($_POST['id'] > 0) {
-  $label->setId($_POST['id']);
-}
+list($distriXNutritionTemplatetDietData, $errorJson)  = DistriXNutritionTemplateDietData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewMyTemplatetDiet");
-$servicesCaller->addParameter("data", $label);
-$servicesCaller->setServiceName("Food/MyTemplatetDiet/DistriXFoodMyTemplatetDietViewDataSvc.php");
+$servicesCaller->addParameter("data", $distriXNutritionTemplatetDietData);
+$servicesCaller->setServiceName("App/Nutrition/MyTemplatesDiets/Services/DistriXNutritionMyTemplatesDietsViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_MyTemplatetDiet")) {
@@ -36,14 +21,15 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 }
 
 if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewMyTemplatetDiet"])) {
-    $label = $output["ViewMyTemplatetDiet"];
+  if (isset($output["ViewMyTemplateDiet"])) {
+    // $distriXNutritionTemplatetDietData = $output["ViewMyTemplateDiet"];
+    list($distriXNutritionTemplatetDietData, $jsonError) = DistriXNutritionTemplateDietData::getJsonData($output["ViewMyTemplateDiet"]);
   }
 } else {
   $error = $errorData;
 }
 
-$resp["ViewMyTemplatetDiet"]  = $label;
+$resp["ViewMyTemplateDiet"]  = $distriXNutritionTemplatetDietData;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }

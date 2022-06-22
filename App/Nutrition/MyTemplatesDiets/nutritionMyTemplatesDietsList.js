@@ -39,30 +39,29 @@ $(".AddNewMyTemplateDiet").on('click', function() {
   $(".add_title").removeClass("d-none");
   $(".update_title").addClass("d-none");
 
-  $('.AddMyTemplateDietFormIdMyTemplateDiet').val(0);
-  $('.AddMyTemplateDietFormCode').val('');
-  $('.AddMyTemplateDietFormName').val('');
-  $(".avatar-brand").attr("src", '');
-  $('.AddMyTemplateDietFormTimestamp').val(0);
-  $('.AddMyTemplateDietFormStatut').val(0);
+  $('.AddMyTemplatesDietsFormId').val(0);
+  $('.AddMyTemplatesDietsFormName').val('');
+  $('.AddMyTemplatesDietsFormDuration').val(0);
+  $('.AddMyTemplatesDietsFormTags').val('');
+  $('.AddMyTemplatesDietsFormTimestamp').val(0);
+  $('.AddMyTemplatesDietsFormStatut').val(0);
 });
 
 $(".btnAddMyTemplateDiet").on('click', function() {
   $(".page_food_brand_update_title").removeClass("d-none");
   
-  var name = $('.AddMyTemplateDietFormName').val();
-  if (name != ""){
-    var data = $('#FormAddMyTemplateDiet').serializeArray(); // convert form to array
-    data.push({name: "name", value: name});
-    
+  var name      = $('.AddMyTemplatesDietsFormName').val();
+  var duration  = $('.AddMyTemplatesDietsFormDuration').val();
+  var tags      = $('.AddMyTemplatesDietsFormTags').val();
+  if (name != "" && duration != "" && tags != ""){   
     $.ajax({
       url : 'Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
-      data: $.param(data),
+      data: $('#FormAddMyTemplateDiet').serialize(),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./nutritionMyTemplatesDiets.php";}, 800);
+        setTimeout(function() {window.location.href = "./nutritionMyTemplatesDietsList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
@@ -71,11 +70,29 @@ $(".btnAddMyTemplateDiet").on('click', function() {
     $(".btnAddMyTemplateDiet").attr("data-dismiss", "modal");
   } else {
     if (name == ''){
-      $('.AddMyTemplateDietFormName').addClass("form-control-danger");
+      $('.AddMyTemplatesDietsFormName').addClass("form-control-danger");
       $('.danger-name').removeClass("d-none");
 
       setTimeout( () => { 
-        $(".AddMyTemplateDietFormName").removeClass("form-control-danger");
+        $(".AddMyTemplatesDietsFormName").removeClass("form-control-danger");
+        $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (duration == ''){
+      $('.AddMyTemplatesDietsFormDuration').addClass("form-control-danger");
+      $('.danger-name').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddMyTemplatesDietsFormDuration").removeClass("form-control-danger");
+        $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (name == ''){
+      $('.AddMyTemplatesDietsFormTags').addClass("form-control-danger");
+      $('.danger-name').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddMyTemplatesDietsFormTags").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
       }, 3000 );
     }
@@ -91,7 +108,7 @@ $("#btnDel").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./nutritionMyTemplatesDiets.php";}, 800);
+        setTimeout(function() {window.location.href = "./nutritionMyTemplatesDietsList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -111,7 +128,7 @@ $("#btnRest").on('click', function() {
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./nutritionMyTemplatesDiets.php";}, 800);
+        setTimeout(function() {window.location.href = "./nutritionMyTemplatesDietsList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -129,16 +146,6 @@ function ListMyTemplateDiet(elemState){
       if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
-      if (val.advancement >= 0 && val.advancement <= 25) {
-        progressColor = "danger";
-      } else if (val.advancement >= 25 && val.advancement <= 50) {
-        progressColor = "warning";
-      } else if (val.advancement >= 50 && val.advancement <= 75) {
-        progressColor = "info";
-      } else if (val.advancement >= 75 && val.advancement <= 100) {
-        progressColor = "success";
-      }
-
       const line =  '<tr>'+
                     '  <td style="padding:1rem;">'+val.name+'</td>'+
                     '  <td>'+val.nbStudentAssigned+'</td>'+
@@ -150,9 +157,9 @@ function ListMyTemplateDiet(elemState){
                     '        <i class="dw dw-more"></i>'+
                     '      </a>'+
                     '      <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyTemplateDiet"   onclick="ViewMyTemplateDiet(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '        <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelMyTemplateDiet(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '        <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestMyTemplateDiet(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyTemplateDiet"  onclick="ViewMyTemplateDiet(\''+val.id+'\', \''+val.name+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '        <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                onclick="DelMyTemplateDiet(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '        <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"               onclick="RestMyTemplateDiet(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '      </div>'+
                     '    </div>'+
                     '  </td>'+
@@ -162,24 +169,28 @@ function ListMyTemplateDiet(elemState){
   });
 }
 
-function ViewMyTemplateDiet(id){
+function ViewMyTemplateDiet(id, name){
   $.ajax({
     url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
+      $(".infoNameTemplateDiet").html(name);
+
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
     
       $(".dropzoneImage").removeClass("d-none");
       $(".dropzoneNoImage").addClass("d-none");
 
-      $('.AddMyTemplateDietFormIdMyTemplateDiet').val(id);
-      $('.AddMyTemplateDietFormCode').val(data.ViewMyTemplateDiet.code);
-      $('.AddMyTemplateDietFormName').val(data.ViewMyTemplateDiet.name);
-      $('.AddMyTemplateDietFormTimestamp').val(data.ViewMyTemplateDiet.timestamp);
-      $('.AddMyTemplateDietFormStatut').val(data.ViewMyTemplateDiet.elemState);
+      $('.AddMyTemplatesDietsFormId').val(id);
+      $('.AddMyTemplatesDietsFormIdUserCoatch').val(data.ViewMyTemplateDiet.idUserCoach);
+      $('.AddMyTemplatesDietsFormName').val(data.ViewMyTemplateDiet.name);
+      $('.AddMyTemplatesDietsFormDuration').val(data.ViewMyTemplateDiet.duration);
+      $('.AddMyTemplatesDietsFormTags').val(data.ViewMyTemplateDiet.tags);
+      $('.AddMyTemplatesDietsFormTimestamp').val(data.ViewMyTemplateDiet.timestamp);
+      $('.AddMyTemplatesDietsFormStatut').val(data.ViewMyTemplateDiet.elemState);
     },
     error : function(data) {
       console.log(data);

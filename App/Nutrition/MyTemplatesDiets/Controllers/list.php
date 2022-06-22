@@ -1,57 +1,44 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSvc/DistriXSvcUtil.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyTemplatesDiets/DistriXNutritionTemplateDietData.php");
-include(__DIR__ . "/../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
-
-$resp               = [];
-$error              = [];
-$output             = [];
-$outputok           = false;
+include(__DIR__ . "/../Data/DistriXNutritionTemplateDietData.php");
+include(__DIR__ . "/../../MyCurrentsDiets/Data/DistriXNutritionCurrentDietData.php");
 
 $listMyTemplateDietsFormFront = [];
+$listMyCurrentDiets           = [];
 $listMyTemplateDiets          = [];
-$listMyCurrentDietsFormFront  = [];
 
-list($distriXNutritionTemplateDietData, $errorJson) = DistriXNutritionTemplateDietData::getJsonData($_POST);
 list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
+list($distriXNutritionTemplateDietData, $errorJson) = DistriXNutritionTemplateDietData::getJsonData($_POST);
 
 // CALL
-$templateDietCaller = new DistriXServicesCaller();
-$templateDietCaller->setServiceName("Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsListDataSvc.php");
-$templateDietCaller->addParameter("data", $distriXNutritionTemplateDietData);
+$dietCurrentCaller = new DistriXServicesCaller();
+$dietCurrentCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsListDataSvc.php");
+$dietCurrentCaller->addParameter("data", $distriXNutritionCurrentDietData);
 
-$currentDietCaller = new DistriXServicesCaller();
-$currentDietCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsListDataSvc.php");
-$currentDietCaller->addParameter("data", $distriXNutritionCurrentDietData);
+$dietTemplateCaller = new DistriXServicesCaller();
+$dietTemplateCaller->setServiceName("App/Nutrition/MyTemplatesDiets/Services/DistriXNutritionMyTemplatesDietsListDataSvc.php");
+$dietTemplateCaller->addParameter("data", $distriXNutritionTemplateDietData);
 
 $svc = new DistriXSvc();
-$svc->addToCall("templateDiet", $templateDietCaller);
-$svc->addToCall("currentDiet", $currentDietCaller);
+$svc->addToCall("dietCurrent", $dietCurrentCaller);
+$svc->addToCall("dietTemplate", $dietTemplateCaller);
 $callsOk = $svc->call();
 
 
-list($outputok, $output, $errorData) = $svc->getResult("templateDiet"); //print_r($output);
-if ($outputok && isset($output["ListMyTemplatesDiets"]) && is_array($output["ListMyTemplatesDiets"])) {
-  list($listMyTemplateDiets, $jsonError) = DistriXNutritionTemplateDietData::getJsonArray($output["ListMyTemplatesDiets"]);
+list($outputok, $output, $errorData) = $svc->getResult("dietCurrent"); print_r($errorData);
+if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
+  list($listMyCurrentDiets, $jsonError) = DistriXNutritionCurrentDietData::getJsonArray($output["ListMyCurrentsDiets"]);
 } else {
   $error = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("currentDiet"); //print_r($output);
-if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
-  list($listMyCurrentDiets, $jsonError) = DistriXNutritionCurrentDietData::getJsonArray($output["ListMyCurrentsDiets"]);
+list($outputok, $output, $errorData) = $svc->getResult("dietTemplate"); //print_r($output);
+if ($outputok && isset($output["ListMyTemplatesDiets"]) && is_array($output["ListMyTemplatesDiets"])) {
+  list($listMyTemplateDiets, $jsonError) = DistriXNutritionTemplateDietData::getJsonArray($output["ListMyTemplatesDiets"]);
 } else {
   $error = $errorData;
 }
