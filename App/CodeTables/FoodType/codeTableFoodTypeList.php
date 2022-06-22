@@ -45,9 +45,7 @@ echo convertToScript($toScript);
                   <th><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
-							<tbody id="listFoodTypesTbody">
-							</tbody>
-						</table>
+            </table>
 					</div>
 				</div>
 			</div>

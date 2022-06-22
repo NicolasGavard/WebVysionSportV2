@@ -1,11 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// DISTRIX Init
-include("../DistriXInit/DistriXSvcDataServiceInit.php");
-// STY Const
-// STY Const
-include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/Const/DistriXStyKeys.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
+// Service Init
+include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // STOR DATA
 include(__DIR__ . "/../Data/DistriXStyLanguageData.php");
 // Database Data

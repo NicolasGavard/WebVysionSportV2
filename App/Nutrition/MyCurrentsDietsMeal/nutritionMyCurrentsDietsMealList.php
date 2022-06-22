@@ -46,15 +46,15 @@
             <table id="MyCurrentDietMealsTable" class="display responsive nowrap" width="100%">
 							<thead>
 								<tr>
-                  <th class="table-plus"><span><?php echo $page_days; ?></span></th>
+                  <th><span><?php echo $page_days; ?></span></th>
                   <th><span><?php echo $page_meal_type; ?></span></th>
                   <th><span><?php echo $page_meal_foods; ?></span></th>
                   <th><span><?php echo $page_info_nutritional; ?></span></th>
                   <th><span><?php echo $page_meal_quantity; ?></span></th>
-                  <th class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
+                  <th><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
-						</table>
+            </table>
           </div>
 				</div>
 			</div>

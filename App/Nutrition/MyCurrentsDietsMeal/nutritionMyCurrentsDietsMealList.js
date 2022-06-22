@@ -4,7 +4,7 @@ $(function() {
   var myCurrentDietMealsTableData = "";
   var myCurrentDietMealsTable = $('#MyCurrentDietMealsTable').DataTable({
     columnDefs: [
-      { orderable: false, targets: 6 }
+      { orderable: false, targets: 5 }
     ],
     language: {
       url: '../../i18/FR/DataTableFrench.json'
@@ -31,7 +31,7 @@ $(function() {
     data: {'idDiet': localStorage.getItem("idDiet")},
     success : function(data) {
       myCurrentDietMealsTableData = data.ListMyCurrentsDietMeals
-      ListMyCurrentDietMeal(0);
+      ListMyCurrentDietMeals(0);
     },
     error : function(data) {
       console.log(data);
@@ -46,7 +46,7 @@ $(function() {
     $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
     myCurrentDietMealsTable.clear();
-    ListMyCurrentDietMeal(1);
+    ListMyCurrentDietMeals(1);
   });
 
   $(".btn-success").on('click', function() {
@@ -57,7 +57,7 @@ $(function() {
     $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
     myCurrentDietMealsTable.clear();
-    ListMyCurrentDietMeal(0);
+    ListMyCurrentDietMeals(0);
   });
 
   $(".AddNewMyCurrentDietMeal").on('click', function() {
@@ -80,7 +80,6 @@ $(function() {
     var student         = $('.listStudents').val();
     var dateStart       = $('.dateStart').val();
     var dateStartSplit  = $(".dateStart").val().split("/")
-    // var dateStartDb     = dateStartSplit[2]+''+dateStartSplit[1]+''+dateStartSplit[0];
 
     if (template != 0 && student != 0 && dateStart != '' ){
       $.ajax({
@@ -163,40 +162,40 @@ $(function() {
     });
   });
 
-  function ListMyCurrentDietMeal(elemState){
+  function ListMyCurrentDietMeals(elemState){
     const dataTableData = myCurrentDietMealsTableData;
     $.map(dataTableData, function(val, key) {
       if(val.elemState == elemState){
         if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
         if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
-        const line =  '<tr>'+
-                      ' <td style="padding:1rem;">'+val.dayNumber+'</td>'+
-                      '  <td>'+val.nameMealType+'</td>'+
-                      '  <td>'+val.nameMealType+'</td>'+
-                      '  <td>'+val.nameMealType+'</td>'+
-                      '  <td>'+val.nameMealType+'</td>'+
-                      // '  <td>'+
-                      // '    <div class="row">'+
-                      // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flash"></span> '+val.calorie+'</div>'+
-                      // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-orange"></span> '+val.proetin+'</div>'+
-                      // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-chip"></span> '+val.glucide+'</div>'+
-                      // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flame"></span> '+val.lipid+'</div>'+
-                      // '    </div>'+
-                      // '  </td>'+
-                      ' <td>'+
-                      '   <div class="dropdown">'+
-                      '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
-                      '       <i class="dw dw-more"></i>'+
-                      '     </a>'+
-                      '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                      '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyCurrentDietMeal"  onclick="ViewMyCurrentDietMeal(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                      '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                   onclick="DelMyCurrentDietMeal(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                      '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"                  onclick="RestMyCurrentDietMeal(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
-                      '     </div>'+
-                      '   </div>'+
-                      ' </td>'+
-                      '</tr>';
+        let line =  '<tr>'+
+                    '  <td style="padding:1rem;">'+val.dayNumber+'</td>'+
+                    '  <td>'+val.nameMealType+'</td>'+
+                    '  <td>'+val.nameMealType+'</td>'+
+                    '  <td>'+val.nameMealType+'</td>'+
+                    '  <td>'+val.nameMealType+'</td>'+
+                    // '  <td>'+
+                    // '    <div class="row">'+
+                    // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flash"></span> '+val.calorie+'</div>'+
+                    // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-orange"></span> '+val.proetin+'</div>'+
+                    // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-chip"></span> '+val.glucide+'</div>'+
+                    // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flame"></span> '+val.lipid+'</div>'+
+                    // '    </div>'+
+                    // '  </td>'+
+                    '  <td>'+
+                    '    <div class="dropdown">'+
+                    '      <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
+                    '        <i class="dw dw-more"></i>'+
+                    '      </a>'+
+                    '      <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+                    '        <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddMyCurrentDietMeal"  onclick="ViewMyCurrentDietMeal(\''+val.id+'\');"                                                  href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '        <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                   onclick="DelMyCurrentDietMeal(\''+val.id+'\', \''+val.nameMealType+'-'+val.nameDietRecipe+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '        <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"                  onclick="RestMyCurrentDietMeal(\''+val.id+'\', \''+val.nameMealType+'-'+val.nameDietRecipe+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '      </div>'+
+                    '    </div>'+
+                    '  </td>'+
+                    '</tr>';
         myCurrentDietMealsTable.row.add($(line)).draw();
       }
     });
@@ -224,13 +223,6 @@ function ViewMyCurrentDietMeal(id){
       nameStudent = $('.listStudents option[value="'+data.ViewMyCurrentDietMeal.idUserStudent+'"]').text();
       $('#select2-listStudents-container').html(nameStudent);
       
-      var date    = String(data.ViewMyCurrentDietMeal.dateStart);
-      var year    = date.substr(0, 4);
-      var month   = date.substr(4, 2);
-      var day     = date.substr(6, 2);
-      var dateFr  = day+'/'+month+'/'+year;
-      $('.dateStart').val(dateFr);
-
       $('.AddMyCurrentDietMealFormTimestamp').val(data.ViewMyCurrentDietMeal.timestamp);
       $('.AddMyCurrentDietMealFormStatut').val(data.ViewMyCurrentDietMeal.elemState);
     },

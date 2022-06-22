@@ -4,12 +4,13 @@ include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
-include(__DIR__ . "/../Data/Nutrition/MyRecipeFood/DistriXNutritionRecipeFoodData.php");
-include(__DIR__ . "/../Data/Food/DistriXFoodFoodData.php");
-include(__DIR__ . "/../Data/Food/DistriXFoodNutritionalData.php");
-include(__DIR__ . "/../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
-include(__DIR__ . "/../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
+include(__DIR__ . "/../Data/DistriXNutritionRecipeFoodData.php");
+
+include(__DIR__ . "/../../../Nutrition/MyRecipes/Data/DistriXNutritionRecipeData.php");
+include(__DIR__ . "/../../../Food/Food/Data/DistriXFoodFoodData.php");
+include(__DIR__ . "/../../../Food/FoodNutritional/Data/DistriXFoodNutritionalData.php");
+include(__DIR__ . "/../../../CodeTables/Language/Data/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../../../CodeTables/WeightType/Data/DistriXCodeTableWeightTypeData.php");
 
 $infoMyRecipe               = new DistriXNutritionRecipeData();
 $listMyRecipesFoodFormFront = [];
@@ -17,6 +18,8 @@ $listMyRecipesFoods         = [];
 $listFoods                  = [];
 $listWeightsTypes           = [];
 $listNutritionals           = [];
+
+$_POST['idRecipe'] = 1;
 
 if (!empty($_POST) && isset($_POST)) {
   $infoProfil = DistriXStyAppInterface::getUserInformation();
@@ -30,26 +33,26 @@ if (!empty($_POST) && isset($_POST)) {
 
   // CALL
   $recipeCaller = new DistriXServicesCaller();
-  $recipeCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesViewDataSvc.php");
+  $recipeCaller->setServiceName("App/Nutrition/MyRecipes/Services/DistriXNutritionMyRecipesViewDataSvc.php");
   $recipeCaller->addParameter("data", $distriXNutritionRecipeData);
   
   $recipeFoodCaller = new DistriXServicesCaller();
-  $recipeFoodCaller->setServiceName("Nutrition/RecipeFood/DistriXNutritionMyRecipeFoodsListDataSvc.php");
+  $recipeFoodCaller->setServiceName("App/Nutrition/MyRecipeFood/Services/DistriXNutritionMyRecipeFoodsListDataSvc.php");
   $recipeFoodCaller->addParameter("data", $distriXNutritionRecipeFoodData);
   
   $foodCaller = new DistriXServicesCaller();
-  $foodCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
+  $foodCaller->setServiceName("App/Food/Food/Serices/DistriXFoodListDataSvc.php");
   $foodCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
   
   $foodNutritionalCaller = new DistriXServicesCaller();
-  $foodNutritionalCaller->setServiceName("Food/FoodNutritional/DistriXFoodNutritionalListDataSvc.php");
+  $foodNutritionalCaller->setServiceName("App/Food/FoodNutritional/Services/DistriXFoodNutritionalListDataSvc.php");
   
   $weightTypeCaller = new DistriXServicesCaller();
-  $weightTypeCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
+  $weightTypeCaller->setServiceName("App/CodeTables/WeightType/Services/DistriXWeightTypeListDataSvc.php");
   $weightTypeCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
   
   $nutritionalCaller = new DistriXServicesCaller();
-  $nutritionalCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalListDataSvc.php");
+  $nutritionalCaller->setServiceName("CodeTables/Nutritional/Services/DistriXNutritionalListDataSvc.php");
   $nutritionalCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
   
   $svc = new DistriXSvc();
@@ -75,7 +78,7 @@ if (!empty($_POST) && isset($_POST)) {
     $error = $errorData;
   }
   
-  list($outputok, $output, $errorData) = $svc->getResult("food"); //print_r($output);
+  list($outputok, $output, $errorData) = $svc->getResult("food"); print_r($output);
   if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) {
     list($listFoods, $jsonError) = DistriXFoodFoodData::getJsonArray($output["ListFoods"]);
   } else {

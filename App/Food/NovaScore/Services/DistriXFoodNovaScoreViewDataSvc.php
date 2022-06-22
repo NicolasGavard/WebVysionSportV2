@@ -1,22 +1,14 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// DISTRIX Init
-include("../DistriXInit/DistriXSvcDataServiceInit.php");
-// STY Const
-include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/Const/DistriXStyKeys.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
+// Service Init
+include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // Database Data
 include(__DIR__ . "/Data/ScoreNovaStorData.php");
 // Storage
-include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/ScoreNovaStor.php");
 // Cdn Location
-include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnLocationConst.php");
-include(__DIR__ . "/../../../DistriXCdn/Const/DistriXCdnFolderConst.php");
+include(__DIR__ . "/../../../../DistriX/DistriXCdn/Const/DistriXCdnLocationConst.php");
+include(__DIR__ . "/../../../../DistriX/DistriXCdn/Const/DistriXCdnFolderConst.php");
 
-$databasefile = __DIR__ . "/../../../Services/Db/Infodb.php";
-$dbConnection = null;
-$errorData    = null;
 $scoreNovaStor = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);

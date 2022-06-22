@@ -1,8 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// DISTRIX Init
-include("../DistriXInit/DistriXSvcBusServiceInit.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
+// Service Init
+include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // Database Data
 include(__DIR__ . "/Data/LanguageStorData.php");
 
@@ -18,8 +16,6 @@ include(__DIR__ . "/Data/ScoreEcoStorData.php");
 include(__DIR__ . "/Data/ScoreNovaStorData.php");
 include(__DIR__ . "/Data/ScoreNutriStorData.php");
 include(__DIR__ . "/Data/WeightTypeStorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
 
 list($dataLanguage, $jsonError) = LanguageStorData::getJsonData($busSvc->getParameter("dataLanguage"));
 

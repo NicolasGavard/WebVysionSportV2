@@ -9,6 +9,7 @@ include(__DIR__ . "/../Data/DistriXNutritionCurrentDietMealData.php");
 
 include(__DIR__ . "/../../../Nutrition/MyCurrentsDiets/Data/DistriXNutritionCurrentDietData.php");
 include(__DIR__ . "/../../../Nutrition/MyRecipes/Data/DistriXNutritionRecipeData.php");
+include(__DIR__ . "/../../../Nutrition/MyRecipeFood/Data/DistriXNutritionRecipeFoodData.php");
 include(__DIR__ . "/../../../Nutrition/MyTemplatesDiets/Data/DistriXNutritionTemplateDietData.php");
 include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeData.php");
 include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeNameData.php");
@@ -19,6 +20,8 @@ $listMyCurrentDiet                = [];
 $listMyRecipe                     = [];
 $listMealTypes                    = [];
 $listMealTypeNames                = [];
+
+$_POST['id'] = 1;
 
 list($distriXNutritionCurrentDietMealMealData, $errorJson)  = DistriXNutritionCurrentDietMealData::getJsonData($_POST);
 
@@ -42,6 +45,10 @@ $recipeCaller = new DistriXServicesCaller();
 $recipeCaller->setServiceName("App/Nutrition/MyRecipes/Services/DistriXNutritionMyRecipesListDataSvc.php");
 $recipeCaller->addParameter("data", $distriXNutritionRecipeData);
 
+$recipeFoodCaller = new DistriXServicesCaller();
+$recipeFoodCaller->setServiceName("App/Nutrition/MyRecipeFood/Services/DistriXNutritionMyRecipeFoodsListDataSvc.php");
+$recipeFoodCaller->addParameter("data", $distriXNutritionRecipeData);
+
 $dataName       = new DistriXCodeTableMealTypeNameData();
 $mealTypeCaller = new DistriXServicesCaller();
 $mealTypeCaller->addParameter("dataName", $dataName);
@@ -52,6 +59,7 @@ $svc = new DistriXSvc();
 $svc->addToCall("dietMeal", $dietMealCaller);
 $svc->addToCall("dietCurrent", $dietCurrentCaller);
 $svc->addToCall("recipe", $recipeCaller);
+$svc->addToCall("recipeFood", $recipeFoodCaller);
 $svc->addToCall("mealType", $mealTypeCaller);
 $callsOk = $svc->call();
 
@@ -73,6 +81,13 @@ if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["List
 list($outputok, $output, $errorData) = $svc->getResult("recipe"); //print_r($output);
 if ($outputok && isset($output["ListMyRecipes"]) && is_array($output["ListMyRecipes"])) {
   list($listMyRecipe, $jsonError) = DistriXNutritionRecipeData::getJsonArray($output["ListMyRecipes"]);
+} else {
+  $error = $errorData;
+}
+
+list($outputok, $output, $errorData) = $svc->getResult("recipeFood"); print_r($output);
+if ($outputok && isset($output["ListMyRecipeFoods"]) && is_array($output["ListMyRecipeFoods"])) {
+  list($listMyRecipe, $jsonError) = DistriXNutritionRecipeData::getJsonArray($output["ListMyRecipeFoods"]);
 } else {
   $error = $errorData;
 }
