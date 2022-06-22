@@ -4,17 +4,15 @@ include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
-include(__DIR__ . "/../Data/Nutrition/MyTemplatesDiets/DistriXNutritionTemplateDietData.php");
-
-$_POST['id'] = 1;
+include(__DIR__ . "/../Data/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../../../Nutrition/MyTemplatesDiets/Data/DistriXNutritionTemplateDietData.php");
 
 if ($_POST){
   list($distriXNutritionCurrentDietData, $errorJson) = DistriXNutritionCurrentDietData::getJsonData($_POST);
   
   // CALL
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsViewDataSvc.php");
+  $servicesCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsViewDataSvc.php");
   $servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   $logOk = logController("Security_CurrentDiet", "DistriXMyCurrentDietViewDataSvc", "ViewMyCurrentDiet", $output);
@@ -26,7 +24,7 @@ if ($_POST){
     $distriXNutritionTemplateDietData->setId($distriXNutritionCurrentDietData->getIdDietTemplate());
     
     $servicesCaller = new DistriXServicesCaller();
-    $servicesCaller->setServiceName("Nutrition/TemplateDiet/DistriXNutritionMyTemplatesDietsViewDataSvc.php");
+    $servicesCaller->setServiceName("App/Nutrition/MyTemplatesDiets/Services/DistriXNutritionMyTemplatesDietsViewDataSvc.php");
     $servicesCaller->addParameter("data", $distriXNutritionTemplateDietData);
     list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
     $logOk = logController("Security_CurrentDiet", "DistriXNutritionMyTemplatesDietsViewDataSvc", "ViewMyTemplateDiet", $output);

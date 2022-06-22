@@ -13,7 +13,6 @@ $listMyTemplateDiets          = [];
 $listUsers                    = [];
 $listMyCurrentDietsFormFront  = [];
 
-$_POST['idUserCoach']         = 1;
 if (!empty($_POST) && isset($_POST)) {
   // List Users
   $listUsers                  = DistriXStyAppUser::listUsers();
@@ -26,7 +25,7 @@ if (!empty($_POST) && isset($_POST)) {
   $dietCurrentCaller = new DistriXServicesCaller();
   $dietCurrentCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsListDataSvc.php");
   $dietCurrentCaller->addParameter("data", $distriXNutritionCurrentDietData);
-    
+  
   $dietTemplateCaller = new DistriXServicesCaller();
   $dietTemplateCaller->setServiceName("App/Nutrition/MyTemplatesDiets/Services/DistriXNutritionMyTemplatesDietsListDataSvc.php");
   $dietTemplateCaller->addParameter("data", $distriXNutritionTemplateDietData);

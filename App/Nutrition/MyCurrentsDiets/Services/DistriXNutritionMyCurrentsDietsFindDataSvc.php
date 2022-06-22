@@ -4,9 +4,9 @@ include(__DIR__ . "/../../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
   // Storage
-  include(__DIR__ . "/../Storage/DietStor.php");
+  include(__DIR__ . "/Storage/DietStor.php");
   // STOR Data
-  include(__DIR__ . "/../Data/DietStorData.php");
+  include(__DIR__ . "/Data/DietStorData.php");
   
   if (is_null($dbConnection->getError())) {
     $data = $dataSvc->getParameter("data");

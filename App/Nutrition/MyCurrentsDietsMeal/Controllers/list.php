@@ -20,7 +20,6 @@ $listMyRecipe                     = [];
 $listMealTypes                    = [];
 $listMealTypeNames                = [];
 
-$_POST['idDiet'] = 1;
 list($distriXNutritionCurrentDietMealMealData, $errorJson)  = DistriXNutritionCurrentDietMealData::getJsonData($_POST);
 
 $infoProfil                       = DistriXStyAppInterface::getUserInformation();

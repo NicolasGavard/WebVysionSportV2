@@ -4,10 +4,7 @@
   $page_days                    = "Jours";
   $page_meal_type               = "Repas";
   $page_meal_foods              = "Composition";
-  $page_meal_calorie            = "Calorie";
-  $page_meal_proetin            = "Protéine";
-  $page_meal_glucide            = "Glucide";
-  $page_meal_lipid              = "Lipide";
+  $page_info_nutritional        = "Informations nutritionnelles";
   $page_meal_quantity           = "Quantité";
   $page_action                  = "Actions";
   $page_add_title               = "Ajouter un repas";

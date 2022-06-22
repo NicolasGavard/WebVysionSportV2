@@ -10,7 +10,7 @@ $currentDiet->setId($_POST['id'] ?? 0);
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewMyCurrentDiet");
 $servicesCaller->addParameter("data", $currentDiet);
-$servicesCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsViewDataSvc.php");
+$servicesCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_CurrentDiet", "DistriXMyCurrentDietViewDataSvc", "ViewMyCurrentDiet", $output);

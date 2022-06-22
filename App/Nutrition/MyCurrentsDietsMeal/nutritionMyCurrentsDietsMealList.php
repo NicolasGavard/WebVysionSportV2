@@ -19,7 +19,7 @@
 						<div class="col-md-12 col-sm-12">
 							<nav aria-label="breadcrumb" role="navigation">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="../Nutrition/nutritionMyCurrentsDietsList.php"><?php echo $page_title_prev; ?></a></li>
+									<li class="breadcrumb-item"><a href="../MyCurrentsDiets/nutritionMyCurrentsDietsList.php"><?php echo $page_title_prev; ?></a></li>
 									<li class="breadcrumb-item active" aria-current="page"><?php echo $page_title; ?> <span class='infoDietName'></span></li>
 								</ol>
 							</nav>
@@ -43,18 +43,16 @@
           
           <div class="pb-20"></div>
           <div class="pb-20">
-            <table class="display responsive nowrap" width="100%" id="datatable">
+            <table id="FoodTypeTable" class="display responsive nowrap" width="100%">
 							<thead>
 								<tr>
-                  <th width="15%" class="table-plus"><span><?php echo $page_days; ?></span></th>
-                  <th width="15%"><span><?php echo $page_meal_type; ?></span></th>
-                  <th width="10%"><span><?php echo $page_meal_foods; ?></span></th>
-                  <th width="10%"><span><?php echo $page_meal_calorie; ?></span></th>
-                  <th width="10%"><span><?php echo $page_meal_proetin; ?></span></th>
-                  <th width="10%"><span><?php echo $page_meal_glucide; ?></span></th>
-                  <th width="10%"><span><?php echo $page_meal_lipid; ?></span></th>
-                  <th width="10%"><span><?php echo $page_meal_quantity; ?></span></th>
-                  <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
+                  <th class="table-plus"><span><?php echo $page_days; ?></span></th>
+                  <th><span><?php echo $page_meal_type; ?></span></th>
+                  <th><span><?php echo $page_meal_foods; ?></span></th>
+                  <th><span><?php echo $page_info_nutritional; ?></span></th>
+                  <th><span><?php echo $page_meal_quantity; ?></span></th>
+                  <th><span><?php echo $page_action; ?></span></th>
+                  <th class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
 						</table>

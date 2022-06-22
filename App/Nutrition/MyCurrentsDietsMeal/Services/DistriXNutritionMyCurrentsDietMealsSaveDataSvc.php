@@ -4,9 +4,9 @@ include(__DIR__ . "/../../../Init/DataSvcInit.php");
 
 if ($dataSvc->isAuthorized()) {
   // Storage
-  include(__DIR__ . "/../Storage/DietMealStor.php");
+  include(__DIR__ . "/Storage/DietMealStor.php");
   // STOR Data
-  include(__DIR__ . "/../Data/DietMealStorData.php");
+  include(__DIR__ . "/Data/DietMealStorData.php");
   
   $dietStorData = new DietStorData();
 
