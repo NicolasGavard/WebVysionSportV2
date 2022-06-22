@@ -175,6 +175,7 @@ $(function() {
                       '  <td>'+val.nameMealType+'</td>'+
                       '  <td>'+val.nameMealType+'</td>'+
                       '  <td>'+val.nameMealType+'</td>'+
+                      '  <td>'+val.nameMealType+'</td>'+
                       // '  <td>'+
                       // '    <div class="row">'+
                       // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flash"></span> '+val.calorie+'</div>'+
