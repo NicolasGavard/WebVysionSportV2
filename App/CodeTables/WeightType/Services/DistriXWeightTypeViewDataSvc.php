@@ -1,25 +1,12 @@
 <?php // Needed to encode in UTF8 ààéàé //
-// DISTRIX Init
-include("../DistriXInit/DistriXSvcDataServiceInit.php");
-// STY Const
-include(__DIR__ . "/../../../DistriXSecurity/Const/DistriXStyKeys.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// STOR DATA
-include(__DIR__ . "/../../../GlobalData/DistriXGeneralIdData.php");
-include(__DIR__ . "/Data/DistriXCodeTableWeightTypeData.php");
-include(__DIR__ . "/Data/DistriXCodeTableWeightTypeNameData.php");
+// Service Init
+include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // Database Data
 include(__DIR__ . "/Data/WeightTypeNameStorData.php");
 include(__DIR__ . "/Data/WeightTypeStorData.php");
 // Storage
-include(__DIR__ . "/../../../DistriXDbConnection/DistriXPDOConnection.php");
 include(__DIR__ . "/Storage/WeightTypeNameStor.php");
 include(__DIR__ . "/Storage/WeightTypeStor.php");
-
-$databasefile = __DIR__ . "/../../../Services/Db/Infodb.php";
-$dbConnection = null;
-$errorData    = null;
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {

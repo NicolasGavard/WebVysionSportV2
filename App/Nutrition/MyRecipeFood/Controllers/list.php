@@ -41,7 +41,7 @@ if (!empty($_POST) && isset($_POST)) {
   $recipeFoodCaller->addParameter("data", $distriXNutritionRecipeFoodData);
   
   $foodCaller = new DistriXServicesCaller();
-  $foodCaller->setServiceName("App/Food/Food/Serices/DistriXFoodListDataSvc.php");
+  $foodCaller->setServiceName("App/Food/Food/Services/DistriXFoodListDataSvc.php");
   $foodCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
   
   $foodNutritionalCaller = new DistriXServicesCaller();
@@ -52,7 +52,7 @@ if (!empty($_POST) && isset($_POST)) {
   $weightTypeCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
   
   $nutritionalCaller = new DistriXServicesCaller();
-  $nutritionalCaller->setServiceName("CodeTables/Nutritional/Services/DistriXNutritionalListDataSvc.php");
+  $nutritionalCaller->setServiceName("App/CodeTables/Nutritional/Services/DistriXNutritionalListDataSvc.php");
   $nutritionalCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
   
   $svc = new DistriXSvc();
@@ -78,7 +78,7 @@ if (!empty($_POST) && isset($_POST)) {
     $error = $errorData;
   }
   
-  list($outputok, $output, $errorData) = $svc->getResult("food"); print_r($output);
+  list($outputok, $output, $errorData) = $svc->getResult("food"); //print_r($output);
   if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) {
     list($listFoods, $jsonError) = DistriXFoodFoodData::getJsonArray($output["ListFoods"]);
   } else {
