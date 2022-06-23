@@ -1,10 +1,10 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Food/Brand/list.php',
+  url : 'Controllers/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
-    localStorage.setItem("dataTable", JSON.stringify(data.ListBrands));
+    localStorage.setItem("dataTable", JSON.stringify(data.ListNutriScores));
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -30,7 +30,7 @@ $(".btn-warning").on('click', function() {
   $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
   datatable.clear();
-  ListBrand(1);
+  ListNutriScore(1);
 });
 
 $(".btn-success").on('click', function() {
@@ -41,51 +41,61 @@ $(".btn-success").on('click', function() {
   $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
   datatable.clear();
-  ListBrand(0);
+  ListNutriScore(0);
 });
 
-$(".AddNewBrand").on('click', function() {
+$(".AddNewNutriScore").on('click', function() {
   $(".add_title").removeClass("d-none");
   $(".update_title").addClass("d-none");
 
-  $('.AddBrandFormIdBrand').val(0);
-  $('.AddBrandFormCode').val('');
-  $('.AddBrandFormName').val('');
-  $(".avatar-brand").attr("src", '');
-  $('.AddBrandFormTimestamp').val(0);
-  $('.AddBrandFormStatut').val(0);
+  $('.AddNutriScoreFormIdNutriScore').val(0);
+  $('.AddNutriScoreFormCode').val('');
+  $('.AddNutriScoreFormName').val('');
+  $('.AddNutriScoreFormColor').val('');
+  $(".avatar-NutriScore").attr("src", '');
+  $('.AddNutriScoreFormTimestamp').val(0);
+  $('.AddNutriScoreFormStatut').val(0);
 });
 
-$(".btnAddBrand").on('click', function() {
-  $(".page_food_brand_update_title").removeClass("d-none");
-  
-  var name = $('.AddBrandFormName').val();
-  if (name != ""){
-    var data = $('#FormAddBrand').serializeArray(); // convert form to array
-    data.push({name: "name", value: name});
+$(".btnAddNutriScore").on('click', function() {
+  var name  = $('.AddNutriScoreFormName').val();
+  var color = $('.AddNutriScoreFormColor').val();
+  if (name != "" || color != ""){
+    var data = $('#FormAddNutriScore').serializeArray(); // convert form to array
+    data.push({name: "letter", value: name});
+    data.push({name: "color", value: color});
     
     $.ajax({
-      url : '../../Controllers/Food/Brand/save.php',
+      url : 'Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodNutriScoreList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
       }
     });
-    $(".btnAddBrand").attr("data-dismiss", "modal");
+    $(".btnAddNutriScore").attr("data-dismiss", "modal");
   } else {
     if (name == ''){
-      $('.AddBrandFormName').addClass("form-control-danger");
+      $('.AddNutriScoreFormName').addClass("form-control-danger");
       $('.danger-name').removeClass("d-none");
 
       setTimeout( () => { 
-        $(".AddBrandFormName").removeClass("form-control-danger");
+        $(".AddNutriScoreFormName").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (color == ''){
+      $('.AddNutriScoreFormColor').addClass("form-control-danger");
+      $('.danger-color').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddNutriScoreFormColor").removeClass("form-control-danger");
+        $('.danger-color').addClass("d-none");
       }, 3000 );
     }
   } 
@@ -93,14 +103,14 @@ $(".btnAddBrand").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Food/Brand/delete.php',
+    url : 'Controllers/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodNutriScoreList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -113,14 +123,14 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Food/Brand/restore.php',
+    url : 'Controllers/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodNutriScoreList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -131,7 +141,7 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListBrand(elemState){
+function ListNutriScore(elemState){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
     if(val.elemState == elemState){
@@ -140,16 +150,17 @@ function ListBrand(elemState){
       
       const line =  '<tr>'+
                     ' <td style="padding:1rem;"><img style="max-height:40px; max-width:40px;" src="'+val.linkToPicture+'"/></td>'+
-                    ' <td>'+val.name+'</td>'+
+                    ' <td><div class="progress" style="height:40px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></td>'+ 
+                    ' <td>&nbsp;'+val.letter+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddBrand"   onclick="ViewBrand(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelBrand(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestBrand(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddNutriScore" onclick="ViewNutriScore(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelNutriScore(\''+val.id+'\', \''+val.letter+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestNutriScore(\''+val.id+'\', \''+val.letter+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -159,9 +170,9 @@ function ListBrand(elemState){
   });
 }
 
-function ViewBrand(id){
+function ViewNutriScore(id){
   $.ajax({
-    url : '../../Controllers/Food/Brand/view.php',
+    url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
@@ -172,12 +183,15 @@ function ViewBrand(id){
       $(".dropzoneImage").removeClass("d-none");
       $(".dropzoneNoImage").addClass("d-none");
 
-      $('.AddBrandFormIdBrand').val(id);
-      $('.AddBrandFormCode').val(data.ViewBrand.code);
-      $('.AddBrandFormName').val(data.ViewBrand.name);
-      $(".avatar-brand").attr("src", data.ViewBrand.linkToPicture);
-      $('.AddBrandFormTimestamp').val(data.ViewBrand.timestamp);
-      $('.AddBrandFormStatut').val(data.ViewBrand.elemState);
+      $('.AddNutriScoreFormIdNutriScore').val(id);
+      $('.AddNutriScoreFormCode').val(data.ViewNutriScore.code);
+      $('.AddNutriScoreFormName').val(data.ViewNutriScore.letter);
+      $('.AddNutriScoreFormColor').val(data.ViewNutriScore.color);
+      $('.asColorPicker-trigger span').attr('style',  'background-color:'+data.ViewNutriScore.color);
+
+      $(".avatar-NutriScore").attr("src", data.ViewNutriScore.linktopicture);
+      $('.AddNutriScoreFormTimestamp').val(data.ViewNutriScore.timestamp);
+      $('.AddNutriScoreFormStatut').val(data.ViewNutriScore.elemState);
     },
     error : function(data) {
       console.log(data);
@@ -185,12 +199,12 @@ function ViewBrand(id){
   });
 }
 
-function DelBrand(id, name){
+function DelNutriScore(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestBrand(id, name){
+function RestNutriScore(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

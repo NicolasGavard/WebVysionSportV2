@@ -2,14 +2,13 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodEcoScoreData.php");
+include(__DIR__ . "/../Data/DistriXFoodEcoScoreData.php");
 
 list($distriXFoodEcoScoreData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewEcoScore");
 $servicesCaller->addParameter("data", $distriXFoodEcoScoreData);
-$servicesCaller->setServiceName("Food/EcoScore/DistriXFoodEcoScoreViewDataSvc.php");
+$servicesCaller->setServiceName("App/Food/EcoScore/Services/DistriXFoodEcoScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_EcoScore", "DistriXEcoScoreViewDataSvc", "ViewEcoScore", $output);

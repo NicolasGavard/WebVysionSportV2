@@ -1,14 +1,12 @@
 <?php
-	session_start();
-
-  $international  = 'Food/foodFoodDetail';
+  session_start();
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-	include('../../i18/'.$i18cdlangue.'/header.php');
-  include("../../i18/_i18.php");
-  include('../Home/_header.php');
-	include('../Home/_headerMenuTop.php');
-	include('../Home/_headerMenuLeft.php')
+	include('../../Home/Template/i18/'.$i18cdlangue.'/header'.$i18cdlangue.'.php');
+	include('i18/'.$i18cdlangue.'/foodDetail'.$i18cdlangue.'.php');
+  include('../../Home/Template/_header.php');
+	include('../../Home/Template/_headerMenuTop.php');
+	include('../../Home/Template/_headerMenuLeft.php');
 ?>
 	<div class="mobile-menu-overlay"></div>
 
@@ -48,7 +46,7 @@
               </div>
               <div id="foodLabel" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  <?php include('../Food/foodFoodDetailLabel.php'); ?>
+                  <?php include('../FoodLabel/FoodLabelList.php'); ?>
                 </div>
               </div>
             </div>
@@ -61,7 +59,7 @@
               </div>
               <div id="foodWeight" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                <?php include('../Food/foodFoodDetailWeight.php'); ?>
+                <?php include('../FoodWeight/foodWeightList.php'); ?>
                 </div>
               </div>
             </div>
@@ -74,7 +72,7 @@
               </div>
               <div id="foodNutritional" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  <?php include('../Food/foodFoodDetailNutritional.php'); ?>
+                  <?php include('../FoodNutritional/foodlNutritionalList.php'); ?>
                 </div>
               </div>
             </div>
@@ -83,13 +81,12 @@
       </div>
 
       <?php
-        include('../Home/_headerFooter.php');
+        include('../../Home/Template/_headerFooter.php');
       ?>
-      <script src="../../jsWebVysionSport/Food/foodFoodDetail.js"></script>
-      <script src="../../jsWebVysionSport/Food/foodFoodLabel.js"></script>
-      <!-- 
-      <script src="../../jsWebVysionSport/Food/foodFoodNutritional.js"></script>
-      <script src="../../jsWebVysionSport/Food/foodFoodWeight.js"></script>
-      -->
+      
+      <script src="foodDetail.js"></script>
+      <script src="../FoodLabel/foodLabelList.js"></script>
+      <script src="../FoodNutritional/foodNutritionalList.js"></script>
+      <script src="../FoodWeight/foodWeightList.js"></script>
   </body>
 </html>

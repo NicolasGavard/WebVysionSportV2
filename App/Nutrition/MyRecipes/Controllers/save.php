@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
+include(__DIR__ . "/../Data/DistriXNutritionRecipeData.php");
 
 $confirmSave  = false;
 
@@ -11,7 +11,7 @@ if($_POST['base64Img'] != '') { $distriXNutritionMyRecipeData->setLinkToPicture(
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $distriXNutritionMyRecipeData);
-$servicesCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesSaveDataSvc.php");
+$servicesCaller->setServiceName("App/Nutrition/MyRecipes/Services/DistriXNutritionMyRecipesSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_MyRecipe", "DistriXNutritionMyRecipesSaveDataSvc", "SaveMyRecipe", $output);

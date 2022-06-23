@@ -1,10 +1,10 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Food/FoodWeight/list.php',
+  url : 'Controllers/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
-    localStorage.setItem("dataTable", JSON.stringify(data.ListFoods));
+    localStorage.setItem("dataTable", JSON.stringify(data.ListNovaScores));
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -30,7 +30,7 @@ $(".btn-warning").on('click', function() {
   $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
   datatable.clear();
-  ListFood(1);
+  ListNovaScore(1);
 });
 
 $(".btn-success").on('click', function() {
@@ -41,51 +41,61 @@ $(".btn-success").on('click', function() {
   $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
   datatable.clear();
-  ListFood(0);
+  ListNovaScore(0);
 });
 
-$(".AddNewFood").on('click', function() {
+$(".AddNewNovaScore").on('click', function() {
   $(".add_title").removeClass("d-none");
   $(".update_title").addClass("d-none");
 
-  $('.AddFoodFormIdFood').val(0);
-  $('.AddFoodFormCode').val('');
-  $('.AddFoodFormName').val('');
-  $(".avatar-brand").attr("src", '');
-  $('.AddFoodFormTimestamp').val(0);
-  $('.AddFoodFormStatut').val(0);
+  $('.AddNovaScoreFormIdNovaScore').val(0);
+  $('.AddNovaScoreFormCode').val('');
+  $('.AddNovaScoreFormName').val('');
+  $('.AddNovaScoreFormColor').val('');
+  $(".avatar-NovaScore").attr("src", '');
+  $('.AddNovaScoreFormTimestamp').val(0);
+  $('.AddNovaScoreFormStatut').val(0);
 });
 
-$(".btnAddFood").on('click', function() {
-  $(".page_food_brand_update_title").removeClass("d-none");
-  
-  var name = $('.AddFoodFormName').val();
-  if (name != ""){
-    var data = $('#FormAddFood').serializeArray(); // convert form to array
-    data.push({name: "name", value: name});
+$(".btnAddNovaScore").on('click', function() {
+  var name  = $('.AddNovaScoreFormName').val();
+  var color = $('.AddNovaScoreFormColor').val();
+  if (name != "" || color != ""){
+    var data = $('#FormAddNovaScore').serializeArray(); // convert form to array
+    data.push({name: "number", value: name});
+    data.push({name: "color", value: color});
     
     $.ajax({
-      url : '../../Controllers/Food/Food/save.php',
+      url : 'Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodNovaScoreList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
       }
     });
-    $(".btnAddFood").attr("data-dismiss", "modal");
+    $(".btnAddNovaScore").attr("data-dismiss", "modal");
   } else {
     if (name == ''){
-      $('.AddFoodFormName').addClass("form-control-danger");
+      $('.AddNovaScoreFormName').addClass("form-control-danger");
       $('.danger-name').removeClass("d-none");
 
       setTimeout( () => { 
-        $(".AddFoodFormName").removeClass("form-control-danger");
+        $(".AddNovaScoreFormName").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
+      }, 3000 );
+    }
+    if (color == ''){
+      $('.AddNovaScoreFormColor').addClass("form-control-danger");
+      $('.danger-color').removeClass("d-none");
+
+      setTimeout( () => { 
+        $(".AddNovaScoreFormColor").removeClass("form-control-danger");
+        $('.danger-color').addClass("d-none");
       }, 3000 );
     }
   } 
@@ -93,14 +103,14 @@ $(".btnAddFood").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Food/Food/delete.php',
+    url : 'Controllers/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodNovaScoreList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -113,14 +123,14 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Food/Food/restore.php',
+    url : 'Controllers/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodNovaScoreList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -131,7 +141,7 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListFood(elemState){
+function ListNovaScore(elemState){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
     if(val.elemState == elemState){
@@ -139,21 +149,18 @@ function ListFood(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td style="padding:1rem;">'+val.name+'</td>'+
-                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureBrand+'"/></td>'+
-                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNutri+'"/></td>'+
-                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreNova+'"/></td>'+
-                    ' <td><img style="max-height:40px; max-width:40px;" src="'+val.pictureScoreEco+'"/></td>'+
+                    ' <td style="padding:1rem;"><img style="max-height:40px; max-width:40px;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td><div class="progress" style="height:40px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></td>'+ 
+                    ' <td>&nbsp;'+val.number+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                                                                          onclick="ViewDetailFood(\''+val.id+'\');"             href="#"><i class="dw dw-analytics-5"></i> Détail</a>'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFood"     onclick="ViewFood(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelFood(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddNovaScore" onclick="ViewNovaScore(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelNovaScore(\''+val.id+'\', \''+val.number+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestNovaScore(\''+val.id+'\', \''+val.number+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -163,26 +170,28 @@ function ListFood(elemState){
   });
 }
 
-function ViewDetailFood(id, name){
-  localStorage.setItem("idFood", id);
-  window.location.href = 'foodFoodDetail.php';
-}
-
-function ViewFood(id){
+function ViewNovaScore(id){
   $.ajax({
-    url : '../../Controllers/Food/Food/view.php',
+    url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
+    
+      $(".dropzoneImage").removeClass("d-none");
+      $(".dropzoneNoImage").addClass("d-none");
 
-      $('.AddFoodFormIdFood').val(id);
-      $('.AddFoodFormCode').val(data.ViewFood.code);
-      $('.AddFoodFormName').val(data.ViewFood.name);
-      $('.AddFoodFormTimestamp').val(data.ViewFood.timestamp);
-      $('.AddFoodFormStatut').val(data.ViewFood.elemState);
+      $('.AddNovaScoreFormIdNovaScore').val(id);
+      $('.AddNovaScoreFormCode').val(data.ViewNovaScore.code);
+      $('.AddNovaScoreFormName').val(data.ViewNovaScore.number);
+      $('.AddNovaScoreFormColor').val(data.ViewNovaScore.color);
+      $('.asColorPicker-trigger span').attr('style',  'background-color:'+data.ViewNovaScore.color);
+
+      $(".avatar-NovaScore").attr("src", data.ViewNovaScore.linktopicture);
+      $('.AddNovaScoreFormTimestamp').val(data.ViewNovaScore.timestamp);
+      $('.AddNovaScoreFormStatut').val(data.ViewNovaScore.elemState);
     },
     error : function(data) {
       console.log(data);
@@ -190,12 +199,12 @@ function ViewFood(id){
   });
 }
 
-function DelFood(id, name){
+function DelNovaScore(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestFood(id, name){
+function RestNovaScore(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

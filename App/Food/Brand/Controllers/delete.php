@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodBrandData.php");
+include(__DIR__ . "/../Data/DistriXFoodBrandData.php");
 
 $confirmSave  = false;
 
@@ -10,9 +10,8 @@ if (isset($_POST)) {
   list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
   
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->setMethodName("DelBrand");
   $servicesCaller->addParameter("data", $distriXFoodBandData);
-  $servicesCaller->setServiceName("Food/Brand/DistriXFoodBrandDeleteDataSvc.php");
+  $servicesCaller->setServiceName("App/Food/Brand/Services/DistriXFoodBrandDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
   $logOk = logController("Security_Brand", "DistriXFoodBrandDeleteDataSvc", "DelBrand", $output);

@@ -2,12 +2,11 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodEcoScoreData.php");
+include(__DIR__ . "/../Data/DistriXFoodEcoScoreData.php");
 
 $listEcoScores  = [];
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ListEcoScores");
-$servicesCaller->setServiceName("Food/EcoScore/DistriXFoodEcoScoreListDataSvc.php");
+$servicesCaller->setServiceName("App/Food/EcoScore/Services/DistriXFoodEcoScoreListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 $logOk = logController("Security_EcoScore", "DistriXEcoScoreListDataSvc", "ListEcoScores", $output);

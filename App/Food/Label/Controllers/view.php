@@ -2,14 +2,13 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodLabelData.php");
+include(__DIR__ . "/../Data/DistriXFoodLabelData.php");
 
-list($distriXFoodBandData, $errorJson) = DistriXFoodLabelData::getJsonData($_POST);
+list($distriXFoodLabelData, $errorJson) = DistriXFoodLabelData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewLabel");
-$servicesCaller->addParameter("data", $distriXFoodBandData);
-$servicesCaller->setServiceName("Food/Label/DistriXFoodLabelViewDataSvc.php");
+$servicesCaller->addParameter("data", $distriXFoodLabelData);
+$servicesCaller->setServiceName("App/Food/Label/Services/DistriXFoodLabelViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Label")) {
@@ -22,12 +21,12 @@ if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php",
 }
 
 if ($outputok && isset($output["ViewLabel"])) {
-  $distriXFoodBandData = $output["ViewLabel"];
+  $distriXFoodLabelData = $output["ViewLabel"];
 } else {
   $error = $errorData;
 }
 
-$resp["ViewLabel"]  = $distriXFoodBandData;
+$resp["ViewLabel"]  = $distriXFoodLabelData;
 if(!empty($error)){
   $resp["Error"]    = $error;
 }

@@ -1,10 +1,10 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Food/Label/list.php',
+  url : 'Controllers/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
-    localStorage.setItem("dataTable", JSON.stringify(data.ListLabels));
+    localStorage.setItem("dataTable", JSON.stringify(data.ListBrands));
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -30,7 +30,7 @@ $(".btn-warning").on('click', function() {
   $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
   datatable.clear();
-  ListLabel(1);
+  ListBrand(1);
 });
 
 $(".btn-success").on('click', function() {
@@ -41,50 +41,50 @@ $(".btn-success").on('click', function() {
   $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
   datatable.clear();
-  ListLabel(0);
+  ListBrand(0);
 });
 
-$(".AddNewLabel").on('click', function() {
+$(".AddNewBrand").on('click', function() {
   $(".add_title").removeClass("d-none");
   $(".update_title").addClass("d-none");
 
-  $('.AddLabelFormIdLabel').val(0);
-  $('.AddLabelFormCode').val('');
-  $('.AddLabelFormName').val('');
+  $('.AddBrandFormIdBrand').val(0);
+  $('.AddBrandFormCode').val('');
+  $('.AddBrandFormName').val('');
   $(".avatar-brand").attr("src", '');
-  $('.AddLabelFormTimestamp').val(0);
-  $('.AddLabelFormStatut').val(0);
+  $('.AddBrandFormTimestamp').val(0);
+  $('.AddBrandFormStatut').val(0);
 });
 
-$(".btnAddLabel").on('click', function() {
+$(".btnAddBrand").on('click', function() {
   $(".page_food_brand_update_title").removeClass("d-none");
   
-  var name = $('.AddLabelFormName').val();
+  var name = $('.AddBrandFormName').val();
   if (name != ""){
-    var data = $('#FormAddLabel').serializeArray(); // convert form to array
+    var data = $('#FormAddBrand').serializeArray(); // convert form to array
     data.push({name: "name", value: name});
     
     $.ajax({
-      url : '../../Controllers/Food/Label/save.php',
+      url : 'Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodLabelList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
       }
     });
-    $(".btnAddLabel").attr("data-dismiss", "modal");
+    $(".btnAddBrand").attr("data-dismiss", "modal");
   } else {
     if (name == ''){
-      $('.AddLabelFormName').addClass("form-control-danger");
+      $('.AddBrandFormName').addClass("form-control-danger");
       $('.danger-name').removeClass("d-none");
 
       setTimeout( () => { 
-        $(".AddLabelFormName").removeClass("form-control-danger");
+        $(".AddBrandFormName").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
       }, 3000 );
     }
@@ -93,14 +93,14 @@ $(".btnAddLabel").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Food/Label/delete.php',
+    url : 'Controllers/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodLabelList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -113,14 +113,14 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Food/Label/restore.php',
+    url : 'Controllers/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodLabelList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodBrandList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -131,7 +131,7 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListLabel(elemState){
+function ListBrand(elemState){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
     if(val.elemState == elemState){
@@ -147,9 +147,9 @@ function ListLabel(elemState){
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddLabel"   onclick="ViewLabel(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelLabel(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestLabel(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddBrand"   onclick="ViewBrand(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelBrand(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestBrand(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -159,9 +159,9 @@ function ListLabel(elemState){
   });
 }
 
-function ViewLabel(id){
+function ViewBrand(id){
   $.ajax({
-    url : '../../Controllers/Food/Label/view.php',
+    url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
@@ -172,12 +172,12 @@ function ViewLabel(id){
       $(".dropzoneImage").removeClass("d-none");
       $(".dropzoneNoImage").addClass("d-none");
 
-      $('.AddLabelFormIdLabel').val(id);
-      $('.AddLabelFormCode').val(data.ViewLabel.code);
-      $('.AddLabelFormName').val(data.ViewLabel.name);
-      $(".avatar-brand").attr("src", data.ViewLabel.linktopicture);
-      $('.AddLabelFormTimestamp').val(data.ViewLabel.timestamp);
-      $('.AddLabelFormStatut').val(data.ViewLabel.elemState);
+      $('.AddBrandFormIdBrand').val(id);
+      $('.AddBrandFormCode').val(data.ViewBrand.code);
+      $('.AddBrandFormName').val(data.ViewBrand.name);
+      $(".avatar-brand").attr("src", data.ViewBrand.linkToPicture);
+      $('.AddBrandFormTimestamp').val(data.ViewBrand.timestamp);
+      $('.AddBrandFormStatut').val(data.ViewBrand.elemState);
     },
     error : function(data) {
       console.log(data);
@@ -185,12 +185,12 @@ function ViewLabel(id){
   });
 }
 
-function DelLabel(id, name){
+function DelBrand(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestLabel(id, name){
+function RestBrand(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

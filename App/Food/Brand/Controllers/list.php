@@ -2,12 +2,11 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodBrandData.php");
+include(__DIR__ . "/../Data/DistriXFoodBrandData.php");
 
 $listBrands     = [];
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ListBrands");
-$servicesCaller->setServiceName("Food/Brand/DistriXFoodBrandListDataSvc.php");
+$servicesCaller->setServiceName("App/Food/Brand/Services/DistriXFoodBrandListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 $logOk = logController("Security_Brand", "DistriXFoodBrandListDataSvc", "ListBrands", $output);

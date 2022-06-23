@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodLabelData.php");
+include(__DIR__ . "/../Data/DistriXFoodLabelData.php");
 
 $confirmSave  = false;
 
@@ -10,9 +10,8 @@ if (isset($_POST)) {
   list($distriXFoodBandData, $errorJson) = DistriXFoodLabelData::getJsonData($_POST);
   
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->setMethodName("DelLabel");
   $servicesCaller->addParameter("data", $distriXFoodBandData);
-  $servicesCaller->setServiceName("Food/Label/DistriXFoodLabelDeleteDataSvc.php");
+  $servicesCaller->setServiceName("App/Food/Label/Services/DistriXFoodLabelDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
   if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Label")) {

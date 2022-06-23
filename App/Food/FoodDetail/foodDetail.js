@@ -1,6 +1,6 @@
 $(function() {
   $.ajax({
-    url : '../../Controllers/Food/Food/view.php',
+    url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'idFood': localStorage.getItem("idFood")},

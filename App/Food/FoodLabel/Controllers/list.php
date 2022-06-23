@@ -2,20 +2,22 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodLabelData.php");
-include(__DIR__ . "/../Data/Food/DistriXFoodFoodLabelData.php");
+include(__DIR__ . "/../Data/DistriXFoodLabelData.php");
+include(__DIR__ . "/../Data/DistriXFoodFoodLabelData.php");
 
 $resp                     = [];
+$listLabels               = [];
 $listFoodLabels           = [];
+$listNotApplyLabels       = [];
 $listFoodLabelsFromFront  = [];
 list($distriXFoodFoodLabelData, $errorJson) = DistriXFoodFoodLabelData::getJsonData($_POST);
 
 // CALL
 $labelCaller = new DistriXServicesCaller();
-$labelCaller->setServiceName("Food/Label/DistriXFoodlabelListDataSvc.php");
+$labelCaller->setServiceName("App/Food/Label/Services/DistriXFoodlabelListDataSvc.php");
 
 $foodLabelCaller = new DistriXServicesCaller();
-$foodLabelCaller->setServiceName("Food/FoodLabel/DistriXFoodLabelListDataSvc.php");
+$foodLabelCaller->setServiceName("App/Food/FoodLabel/Services/DistriXFoodLabelListDataSvc.php");
 $foodLabelCaller->addParameter("data", $distriXFoodFoodLabelData);
 
 $svc = new DistriXSvc();

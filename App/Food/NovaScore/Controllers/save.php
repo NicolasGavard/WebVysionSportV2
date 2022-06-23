@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodNovaScoreData.php");
+include(__DIR__ . "/../Data/DistriXFoodNovaScoreData.php");
 
 $confirmSave  = false;
 if ($_POST["base64Img"] != '') {
@@ -11,9 +11,8 @@ if ($_POST["base64Img"] != '') {
 list($distriXFoodNovaScoreData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("SaveNovaScore");
 $servicesCaller->addParameter("data", $distriXFoodNovaScoreData);
-$servicesCaller->setServiceName("Food/NovaScore/DistriXFoodNovaScoreSaveDataSvc.php");
+$servicesCaller->setServiceName("App/Food/NovaScore/Services/DistriXFoodNovaScoreSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_NovaScore", "DistriXNovaScoreSaveDataSvc", "SaveNovaScore", $output);

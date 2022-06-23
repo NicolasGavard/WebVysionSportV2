@@ -1,10 +1,10 @@
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
-  url : '../../Controllers/Food/NutriScore/list.php',
+  url : 'Controllers/list.php',
   type : 'POST',
   dataType : 'JSON',
   success : function(data) {
-    localStorage.setItem("dataTable", JSON.stringify(data.ListNutriScores));
+    localStorage.setItem("dataTable", JSON.stringify(data.ListEcoScores));
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -30,7 +30,7 @@ $(".btn-warning").on('click', function() {
   $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
   datatable.clear();
-  ListNutriScore(1);
+  ListEcoScore(1);
 });
 
 $(".btn-success").on('click', function() {
@@ -41,60 +41,60 @@ $(".btn-success").on('click', function() {
   $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
   datatable.clear();
-  ListNutriScore(0);
+  ListEcoScore(0);
 });
 
-$(".AddNewNutriScore").on('click', function() {
+$(".AddNewEcoScore").on('click', function() {
   $(".add_title").removeClass("d-none");
   $(".update_title").addClass("d-none");
 
-  $('.AddNutriScoreFormIdNutriScore').val(0);
-  $('.AddNutriScoreFormCode').val('');
-  $('.AddNutriScoreFormName').val('');
-  $('.AddNutriScoreFormColor').val('');
-  $(".avatar-NutriScore").attr("src", '');
-  $('.AddNutriScoreFormTimestamp').val(0);
-  $('.AddNutriScoreFormStatut').val(0);
+  $('.AddEcoScoreFormIdEcoScore').val(0);
+  $('.AddEcoScoreFormCode').val('');
+  $('.AddEcoScoreFormName').val('');
+  $('.AddEcoScoreFormColor').val('');
+  $(".avatar-EcoScore").attr("src", '');
+  $('.AddEcoScoreFormTimestamp').val(0);
+  $('.AddEcoScoreFormStatut').val(0);
 });
 
-$(".btnAddNutriScore").on('click', function() {
-  var name  = $('.AddNutriScoreFormName').val();
-  var color = $('.AddNutriScoreFormColor').val();
+$(".btnAddEcoScore").on('click', function() {
+  var name  = $('.AddEcoScoreFormName').val();
+  var color = $('.AddEcoScoreFormColor').val();
   if (name != "" || color != ""){
-    var data = $('#FormAddNutriScore').serializeArray(); // convert form to array
+    var data = $('#FormAddEcoScore').serializeArray(); // convert form to array
     data.push({name: "letter", value: name});
     data.push({name: "color", value: color});
     
     $.ajax({
-      url : '../../Controllers/Food/NutriScore/save.php',
+      url : 'Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $.param(data),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodNutriScoreList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodEcoScoreList.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
       }
     });
-    $(".btnAddNutriScore").attr("data-dismiss", "modal");
+    $(".btnAddEcoScore").attr("data-dismiss", "modal");
   } else {
     if (name == ''){
-      $('.AddNutriScoreFormName').addClass("form-control-danger");
+      $('.AddEcoScoreFormName').addClass("form-control-danger");
       $('.danger-name').removeClass("d-none");
 
       setTimeout( () => { 
-        $(".AddNutriScoreFormName").removeClass("form-control-danger");
+        $(".AddEcoScoreFormName").removeClass("form-control-danger");
         $('.danger-name').addClass("d-none");
       }, 3000 );
     }
     if (color == ''){
-      $('.AddNutriScoreFormColor').addClass("form-control-danger");
+      $('.AddEcoScoreFormColor').addClass("form-control-danger");
       $('.danger-color').removeClass("d-none");
 
       setTimeout( () => { 
-        $(".AddNutriScoreFormColor").removeClass("form-control-danger");
+        $(".AddEcoScoreFormColor").removeClass("form-control-danger");
         $('.danger-color').addClass("d-none");
       }, 3000 );
     }
@@ -103,14 +103,14 @@ $(".btnAddNutriScore").on('click', function() {
 
 $("#btnDel").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Food/NutriScore/delete.php',
+    url : 'Controllers/delete.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodNutriScoreList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodEcoScoreList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -123,14 +123,14 @@ $("#btnDel").on('click', function() {
 
 $("#btnRest").on('click', function() {
   $.ajax({
-    url : '../../Controllers/Food/NutriScore/restore.php',
+    url : 'Controllers/restore.php',
     type : 'POST',
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
     success : function(data) {
       if (data.confirmSave) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodNutriScoreList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodEcoScoreList.php";}, 800);
       } else {
         $('#sa-error-distrix').trigger('click');
       }
@@ -141,7 +141,7 @@ $("#btnRest").on('click', function() {
   });
 });
 
-function ListNutriScore(elemState){
+function ListEcoScore(elemState){
   var dataTableData = JSON.parse(localStorage.getItem('dataTable'));
   $.map(dataTableData, function(val, key) {
     if(val.elemState == elemState){
@@ -149,18 +149,18 @@ function ListNutriScore(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    ' <td style="padding:1rem;"><img style="max-height:40px; max-width:40px;" src="'+val.linkToPicture+'"/></td>'+
+                    ' <td style="padding:1rem;"><img style="max-height:60px; max-width:60px;" src="'+val.linkToPicture+'"/></td>'+
                     ' <td><div class="progress" style="height:40px;"><div class="progress-bar" role="progressbar" style="width: 100%; background-color:'+val.color+';" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></td>'+ 
-                    ' <td>'+val.letter+'</td>'+
+                    ' <td>&nbsp;'+val.letter+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddNutriScore" onclick="ViewNutriScore(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelNutriScore(\''+val.id+'\', \''+val.letter+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestNutriScore(\''+val.id+'\', \''+val.letter+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddEcoScore" onclick="ViewEcoScore(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelEcoScore(\''+val.id+'\', \''+val.letter+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestEcoScore(\''+val.id+'\', \''+val.letter+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -170,9 +170,9 @@ function ListNutriScore(elemState){
   });
 }
 
-function ViewNutriScore(id){
+function ViewEcoScore(id){
   $.ajax({
-    url : '../../Controllers/Food/NutriScore/view.php',
+    url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
@@ -183,15 +183,15 @@ function ViewNutriScore(id){
       $(".dropzoneImage").removeClass("d-none");
       $(".dropzoneNoImage").addClass("d-none");
 
-      $('.AddNutriScoreFormIdNutriScore').val(id);
-      $('.AddNutriScoreFormCode').val(data.ViewNutriScore.code);
-      $('.AddNutriScoreFormName').val(data.ViewNutriScore.letter);
-      $('.AddNutriScoreFormColor').val(data.ViewNutriScore.color);
-      $('.asColorPicker-trigger span').attr('style',  'background-color:'+data.ViewNutriScore.color);
+      $('.AddEcoScoreFormIdEcoScore').val(id);
+      $('.AddEcoScoreFormCode').val(data.ViewEcoScore.code);
+      $('.AddEcoScoreFormName').val(data.ViewEcoScore.letter);
+      $('.AddEcoScoreFormColor').val(data.ViewEcoScore.color);
+      $('.asColorPicker-trigger span').attr('style',  'background-color:'+data.ViewEcoScore.color);
 
-      $(".avatar-NutriScore").attr("src", data.ViewNutriScore.linktopicture);
-      $('.AddNutriScoreFormTimestamp').val(data.ViewNutriScore.timestamp);
-      $('.AddNutriScoreFormStatut').val(data.ViewNutriScore.elemState);
+      $(".avatar-EcoScore").attr("src", data.ViewEcoScore.linktopicture);
+      $('.AddEcoScoreFormTimestamp').val(data.ViewEcoScore.timestamp);
+      $('.AddEcoScoreFormStatut').val(data.ViewEcoScore.elemState);
     },
     error : function(data) {
       console.log(data);
@@ -199,12 +199,12 @@ function ViewNutriScore(id){
   });
 }
 
-function DelNutriScore(id, name){
+function DelEcoScore(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestNutriScore(id, name){
+function RestEcoScore(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }

@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodNovaScoreData.php");
+include(__DIR__ . "/../Data/DistriXFoodNovaScoreData.php");
 
 $resp              = array();
 $error             = array();
@@ -12,9 +12,8 @@ $outputok          = false;
 list($distriXFoodNovaScoreData, $errorJson) = DistriXFoodNovaScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewNovaScore");
 $servicesCaller->addParameter("data", $distriXFoodNovaScoreData);
-$servicesCaller->setServiceName("Food/NovaScore/DistriXFoodNovaScoreViewDataSvc.php");
+$servicesCaller->setServiceName("App/Food/NovaScore/Services/DistriXFoodNovaScoreViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_NovaScore", "DistriXNovaScoreViewDataSvc", "ViewNovaScore", $output);

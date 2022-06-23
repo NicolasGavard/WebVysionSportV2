@@ -2,13 +2,13 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodFoodData.php");
+include(__DIR__ . "/../Data/DistriXFoodFoodData.php");
 
 list($distriXFoodFoodData, $errorJson) = DistriXFoodFoodData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $distriXFoodFoodData);
-$servicesCaller->setServiceName("Food/DistriXFoodSaveDataSvc.php");
+$servicesCaller->setServiceName("App/Food/Food/Services/DistriXFoodSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_Food", "DistriXBrandSaveDataSvc", "SaveFood", $output);

@@ -2,16 +2,15 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodBrandData.php");
+include(__DIR__ . "/../Data/DistriXFoodBrandData.php");
 
 $confirmSave  = false;
 
 list($distriXFoodBandData, $errorJson) = DistriXFoodBrandData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("RestoreBrand");
 $servicesCaller->addParameter("data", $distriXFoodBandData);
-$servicesCaller->setServiceName("Food/Brand/DistriXFoodBrandRestoreDataSvc.php");
+$servicesCaller->setServiceName("App/Food/Brand/Services/DistriXFoodBrandRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_Brand", "DistriXFoodBrandRestoreDataSvc", "RestoreBrand", $output);

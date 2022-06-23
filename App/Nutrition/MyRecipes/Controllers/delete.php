@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
+include(__DIR__ . "/../Data/DistriXNutritionRecipeData.php");
 
 $confirmSave  = false;
 
@@ -13,9 +13,8 @@ if (isset($_POST)) {
   }
   
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->setMethodName("DelMyRecipe");
   $servicesCaller->addParameter("data", $recipe);
-  $servicesCaller->setServiceName("Nutrition/MyRecipe/DistriXNutritionMyRecipesDeleteDataSvc.php");
+  $servicesCaller->setServiceName("App/Nutrition/MyRecipe/Services/DistriXNutritionMyRecipesDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
   $logOk = logController("Security_MyRecipe", "DistriXNutritionMyRecipesDeleteDataSvc", "DelMyRecipe", $output);

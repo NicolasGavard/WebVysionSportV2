@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodNutriScoreData.php");
+include(__DIR__ . "/../Data/DistriXFoodNutriScoreData.php");
 
 $confirmSave  = false;
 if($_POST["base64Img"] != ''){
@@ -11,9 +11,8 @@ if($_POST["base64Img"] != ''){
 list($distriXFoodNutriScoreData, $errorJson) = DistriXFoodNutriScoreData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("SaveNutriScore");
 $servicesCaller->addParameter("data", $distriXFoodNutriScoreData);
-$servicesCaller->setServiceName("Food/NutriScore/DistriXFoodNutriScoreSaveDataSvc.php");
+$servicesCaller->setServiceName("App/Food/NutriScore/Services/DistriXFoodNutriScoreSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_NutriScore", "DistriXNutriScoreSaveDataSvc", "SaveNutriScore", $output);

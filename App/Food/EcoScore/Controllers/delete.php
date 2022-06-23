@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodEcoScoreData.php");
+include(__DIR__ . "/../Data/DistriXFoodEcoScoreData.php");
 
 $confirmSave  = false;
 
@@ -10,9 +10,8 @@ if (isset($_POST)) {
   list($distriXFoodEcoScoreData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
   
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->setMethodName("DelEcoScore");
   $servicesCaller->addParameter("data", $distriXFoodEcoScoreData);
-  $servicesCaller->setServiceName("Food/EcoScore/DistriXFoodEcoScoreDeleteDataSvc.php");
+  $servicesCaller->setServiceName("App/Food/EcoScore/Services/DistriXFoodEcoScoreDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
   $logOk = logController("Security_EcoScore", "DistriXFoodEcoScoreDeleteDataSvc", "DelEcoScore", $output);

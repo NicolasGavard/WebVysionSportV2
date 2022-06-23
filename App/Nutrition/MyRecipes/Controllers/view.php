@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
+include(__DIR__ . "/../Data/DistriXNutritionRecipeData.php");
 
 $recipe  = new DistriXNutritionRecipeData();
 if ($_POST['id'] > 0) {
@@ -10,9 +10,8 @@ if ($_POST['id'] > 0) {
 }
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewMyRecipe");
 $servicesCaller->addParameter("data", $recipe);
-$servicesCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesViewDataSvc.php");
+$servicesCaller->setServiceName("App/Nutrition/MyRecipes/Services/DistriXNutritionMyRecipesViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_MyRecipe", "DistriXNutritionMyRecipesViewDataSvc", "ViewMyRecipe", $output);

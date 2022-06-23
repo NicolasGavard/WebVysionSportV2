@@ -2,12 +2,11 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodLabelData.php");
+include(__DIR__ . "/../Data/DistriXFoodLabelData.php");
 
 $listLabels     = [];
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ListLabels");
-$servicesCaller->setServiceName("Food/Label/DistriXFoodLabelListDataSvc.php");
+$servicesCaller->setServiceName("App/Food/Label/Services/DistriXFoodLabelListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_Label")) {

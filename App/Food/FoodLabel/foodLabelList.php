@@ -1,9 +1,8 @@
 <?php
-  $international  = 'Food/foodFoodLabel';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-	include('../../i18/'.$i18cdlangue.'/header.php');
-  include("../../i18/_i18.php");
+	include('../../Home/Template/i18/'.$i18cdlangue.'/header'.$i18cdlangue.'.php');
+	include('i18/'.$i18cdlangue.'/foodLabelList'.$i18cdlangue.'.php');
 ?>
 
 <div class="min-height-200px">
@@ -42,7 +41,7 @@
               <select class="custom-select2 form-control" id="listLabelsNotApply" name="idLabel" style="width: 100%; height: 38px;">  
                 <option value="0"><?php echo $page_all_choice; ?></option>
               </select>
-              <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_brand; ?> </div>
+              <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_label; ?> </div>
             </div>
           </div>
         </div>

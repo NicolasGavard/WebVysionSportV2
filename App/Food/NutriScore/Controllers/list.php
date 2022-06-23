@@ -2,13 +2,12 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodNutriScoreData.php");
+include(__DIR__ . "/../Data/DistriXFoodNutriScoreData.php");
 
 $listNutriScores = [];
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ListNutriScores");
-$servicesCaller->setServiceName("Food/NutriScore/DistriXFoodNutriScoreListDataSvc.php");
+$servicesCaller->setServiceName("App/Food/NutriScore/Services/DistriXFoodNutriScoreListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 $logOk = logController("Security_NutriScore", "DistriXNutriScoreListDataSvc", "ListNutriScores", $output);

@@ -2,12 +2,11 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodNovaScoreData.php");
+include(__DIR__ . "/../Data/DistriXFoodNovaScoreData.php");
 
 $listNovaScores = [];
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ListNovaScores");
-$servicesCaller->setServiceName("Food/NovaScore/DistriXFoodNovaScoreListDataSvc.php");
+$servicesCaller->setServiceName("App/Food/NovaScore/Services/DistriXFoodNovaScoreListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 $logOk = logController("Security_NovaScore", "DistriXNovaScoreListDataSvc", "ListNovaScores", $output);
