@@ -12,6 +12,6 @@ $distriXStyUserData = new DistriXStyUserData();
 $distriXStyUserData->setId($_POST['id']);
 list($confirmSave, $errorData) = DistriXStyAppUser::delUser($distriXStyUserData);
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);

@@ -16,6 +16,6 @@ $distriXStyRightData->setStatus($_POST['statut']);
 $distriXStyRightData->setTimestamp($_POST['timestamp']);
 list($confirmSave, $errorData) = DistriXStyAppRight::saveRight($distriXStyRightData);
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);

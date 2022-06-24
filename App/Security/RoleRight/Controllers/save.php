@@ -16,6 +16,6 @@ $distriStyRoleRightData->setIdStyFunctionality($_POST['idStyFunctionality']);
 $distriStyRoleRightData->setSumOfRights($_POST['sumOfRights']);
 list($confirmSave, $errorData) = DistriXStyAppRoleRight::saveRoleRight($distriStyRoleRightData);
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);

@@ -56,7 +56,7 @@ $(function() {
     $(".page_food_brand_update_title").removeClass("d-none");
     
     $.ajax({
-      url : '../FoodNutritional/Controllers/php',
+      url : '../FoodNutritional/Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormAddFood').serialize(),
@@ -73,12 +73,12 @@ $(function() {
 
   $("#btnDel").on('click', function() {
     $.ajax({
-      url : '../FoodNutritional/Controllers/e.php',
+      url : '../FoodNutritional/Controllers/delete.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormDel').serialize(),
       success : function(data) {
-        if (data.confirmSave) {
+        if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
           setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
         } else {
@@ -93,12 +93,12 @@ $(function() {
 
   $("#btnRest").on('click', function() {
     $.ajax({
-      url : '../FoodNutritional/Controllers/re.php',
+      url : '../FoodNutritional/Controllers/restore.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormRest').serialize(),
       success : function(data) {
-        if (data.confirmSave) {
+        if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
           setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
         } else {
@@ -121,13 +121,14 @@ function ListFoodNutritional(elemState){
       
       const line =  '<tr>'+
                     ' <td style="padding:1rem;"><img style="max-height:40px; max-width:40px;" src="'+val.linkToPicture+'"/></td>'+
-                    ' <td>'+val.weight+' '+val.nameNutritionalType+'</td>'+
+                    ' <td>'+val.name+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFood"     onclick="ViewFood(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-edit2"></i> Voir</a>'+
                     '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"   onclick="DelFoodNutritional(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
                     '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"  onclick="RestFoodNutritional(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
@@ -135,6 +136,28 @@ function ListFoodNutritional(elemState){
                     ' </td>'+
                     '</tr>';
       foodNutritionalTable.row.add($(line)).draw();
+    }
+  });
+}
+
+function ViewFood(id, name){
+  $.ajax({
+    url : '../FoodNutritional/Controllers/view.php',
+    type : 'POST',
+    dataType : 'JSON',
+    data: {'id': id},
+    success : function(data) {
+      $(".add_title").addClass("d-none");
+      $(".update_title").removeClass("d-none");
+      
+      $('.AddFoodFormIdFood').val(id);
+      $('.AddFoodFormCode').val(data.ViewFood.code);
+      $('.AddFoodFormName').val(data.ViewFood.name);
+      $('.AddFoodFormTimestamp').val(data.ViewFood.timestamp);
+      $('.AddFoodFormStatut').val(data.ViewFood.elemState);
+    },
+    error : function(data) {
+      console.log(data);
     }
   });
 }

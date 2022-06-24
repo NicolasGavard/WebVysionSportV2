@@ -16,6 +16,6 @@ $distriXStyModuleData->setStatus($_POST['status']);
 $distriXStyModuleData->setTimestamp($_POST['timestamp']);
 list($confirmSave, $errorData) = DistriXStyAppModule::saveModule($distriXStyModuleData);
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);

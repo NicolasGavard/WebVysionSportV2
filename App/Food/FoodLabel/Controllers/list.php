@@ -49,8 +49,8 @@ foreach ($listFoodLabels as $foodLabel) {
       $distriXFoodLabelData->setCode($label->getCode());
       $distriXFoodLabelData->setName($label->getName());
       $distriXFoodLabelData->setLinkToPicture($label->getLinkToPicture());
-      $distriXFoodLabelData->setElemState($label->getElemState());
-      $distriXFoodLabelData->setTimestamp($label->getTimestamp());
+      $distriXFoodLabelData->setElemState($foodLabel->getElemState());
+      $distriXFoodLabelData->setTimestamp($foodLabel->getTimestamp());
       $listFoodLabelsFromFront[] = $distriXFoodLabelData;
       
       unset($listNotApplyLabels[$key]);

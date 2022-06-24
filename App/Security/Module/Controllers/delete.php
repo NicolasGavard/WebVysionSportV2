@@ -12,6 +12,6 @@ $distriXStyModuleData = new DistriXStyModuleData();
 $distriXStyModuleData->setId($_POST['id']);
 list($confirmSave, $errorData) = DistriXStyAppModule::delModule($distriXStyModuleData);
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);

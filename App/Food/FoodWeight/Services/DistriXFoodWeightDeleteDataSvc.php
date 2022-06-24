@@ -9,15 +9,15 @@ include(__DIR__ . "/Storage/FoodWeightStor.php");
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if ($dbConnection->beginTransaction()) {
-    $infoFoodWeight = $dataSvc->getParameter("data");
-    $foodWeightStor = FoodWeightStor::read($infoFoodWeight->getId(), $dbConnection);
+    list($data, $jsonError) = FoodWeightStorData::getJsonData($dataSvc->getParameter("data"));
+    $foodWeightStor = FoodWeightStor::read($data->getId(), $dbConnection);
     $insere         = FoodWeightStor::remove($foodWeightStor, $dbConnection);
     
     if ($insere) {
       $dbConnection->commit();
     } else {
       $dbConnection->rollBack();
-      if ($infoFoodWeight->getId() > 0) {
+      if ($data->getId() > 0) {
         $errorData = ApplicationErrorData::warningUpdateData(1, 1);
       } else {
         $errorData = ApplicationErrorData::warningInsertData(1, 1);

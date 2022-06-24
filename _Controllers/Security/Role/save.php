@@ -16,6 +16,6 @@ $distriXStyRoleData->setStatus($_POST['statut']);
 $distriXStyRoleData->setTimestamp($_POST['timestamp']);
 list($confirmSave, $errorData) = DistriXStyAppRole::saveRole($distriXStyRoleData);
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);

@@ -31,7 +31,7 @@ if (isset($_POST)) {
   }
 }
 
-$resp["confirmSave"]  = $confirmSave;
+$resp["ConfirmSave"]  = $confirmSave;
 if(!empty($error)){
   $resp["Error"]        = $error;
 }

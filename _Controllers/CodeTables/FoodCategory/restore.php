@@ -45,7 +45,7 @@ if ($outputok && !empty($output) > 0) {
   $error = $errorData;
 }
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if(!empty($error)){
   $resp["Error"] = $error;
 }

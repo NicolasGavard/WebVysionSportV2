@@ -12,6 +12,6 @@ $distriXStyApplicationData = new DistriXStyApplicationData();
 $distriXStyApplicationData->setId($_POST['id']);
 list($confirmSave, $errorData) = DistriXStyAppApplication::restoreApplication($distriXStyApplicationData);
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);

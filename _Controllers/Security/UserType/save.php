@@ -18,6 +18,6 @@ $distriXStyUserTypeData->setStatus($_POST['statut']);
 $distriXStyUserTypeData->setTimestamp($_POST['timestamp']);
 list($confirmSave, $errorData) = DistriXStyAppUserType::saveUserType($distriXStyUserTypeData);
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);

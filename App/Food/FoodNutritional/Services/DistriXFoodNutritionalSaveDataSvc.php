@@ -10,46 +10,45 @@ include(__DIR__ . "/Data/FoodWeightStorData.php");
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if ($dbConnection->beginTransaction()) {
-    $infoFoodWeight     = $dataSvc->getParameter("data");
-    $foodWeightStorData = DistriXSvcUtil::setData($infoFoodWeight, "FoodWeightStorData");
+    list($data, $jsonError) = FoodWeightStorData::getJsonData($dataSvc->getParameter("data"));
     $canSaveFoodWeight  = true;
-    if ($infoFoodWeight->getId() == 0) {
+    if ($data->getId() == 0) {
       // Verify Code Exist
-      $foodWeightStorData = FoodWeightStor::findByIdFoodIdWeightTypeWeight($foodWeightStorData, $dbConnection);
-      if ($foodWeightStorData->getId() > 0) {
+      $data = FoodWeightStor::findByIdFoodIdWeightTypeWeight($data, $dbConnection);
+      if ($data->getId() > 0) {
         $canSaveFoodWeight          = false;
-        if ($foodWeightStorData->getElemState() == 0){
+        if ($data->getElemState() == 0){
           $distriXSvcErrorData = new DistriXSvcErrorData();
           $distriXSvcErrorData->setCode("400");
-          $distriXSvcErrorData->setDefaultText("The Weight " . $infoFoodWeight->getWeight() . " is already in use");
+          $distriXSvcErrorData->setDefaultText("The Weight " . $data->getWeight() . " is already in use");
           $distriXSvcErrorData->setText("CODE_ALREADY_IN_USE");
           $errorData = $distriXSvcErrorData;  
         } else {
           $canSaveFoodWeight  = true;
-          $foodWeightData     = DistriXSvcUtil::setData($foodWeightStorData, "FoodWeightStorData");
+          $foodWeightData     = DistriXSvcUtil::setData($data, "FoodWeightStorData");
           $insere             = FoodWeightStor::restore($foodWeightData, $dbConnection);
-          $infoFoodWeight->setId($foodWeightStorData->getId());
+          $data->setId($data->getId());
         }
       }
     }
 
     if ($canSaveFoodWeight) {
-      $foodWeightStorData = new FoodWeightStorData();
-      $foodWeightStorData->setId($infoFoodWeight->getId());
-      $foodWeightStorData->setIdFood($infoFoodWeight->getIdFood());
-      $foodWeightStorData->setIdWeightType($infoFoodWeight->getIdWeightType());
-      $foodWeightStorData->setWeight($infoFoodWeight->getWeight());
-      $foodWeightStorData->setElemState($infoFoodWeight->getElemState());
-      $foodWeightStorData->setTimestamp($infoFoodWeight->getTimestamp());
+      $data = new FoodWeightStorData();
+      $data->setId($data->getId());
+      $data->setIdFood($data->getIdFood());
+      $data->setIdWeightType($data->getIdWeightType());
+      $data->setWeight($data->getWeight());
+      $data->setElemState($data->getElemState());
+      $data->setTimestamp($data->getTimestamp());
       
-      if ($infoFoodWeight->getLinkToPicture() != "" && $infoFoodWeight->getLinkToPicture() != $foodWeightStorData->getLinkToPicture()) {
-        $image          = file_get_contents($infoFoodWeight->getLinkToPicture());
+      if ($data->getLinkToPicture() != "" && $data->getLinkToPicture() != $data->getLinkToPicture()) {
+        $image          = file_get_contents($data->getLinkToPicture());
         $imageInfo      = getimagesizefromstring($image);
         $imageExtension = str_replace("image/", "", $imageInfo['mime']);
 
         if ($imageExtension == "jpg" || $imageExtension == "png" || $imageExtension == "jpeg" || $imageExtension == "gif") {
           $imageName    = DistriXSvcUtil::generateRandomText(50);
-          $imageFile    = substr($infoFoodWeight->getLinkToPicture(), strpos($infoFoodWeight->getLinkToPicture(), ",") + 1);
+          $imageFile    = substr($data->getLinkToPicture(), strpos($data->getLinkToPicture(), ",") + 1);
 
           $cdn          = new DistriXCdn();
           $data         = new DistriXCdnData();
@@ -62,9 +61,9 @@ if (is_null($dbConnection->getError())) {
           $confirmSavePicture = $cdn->sendToCdn();
 
           if ($confirmSavePicture) {
-            $foodWeightStorData->setLinkToPicture($imageName);
-            $foodWeightStorData->setSize($imageInfo['bits']);
-            $foodWeightStorData->setType($imageInfo['mime']);
+            $data->setLinkToPicture($imageName);
+            $data->setSize($imageInfo['bits']);
+            $data->setType($imageInfo['mime']);
           } else {
             $distriXSvcErrorData = new DistriXSvcErrorData();
             $distriXSvcErrorData->setCode("400");
@@ -78,17 +77,17 @@ if (is_null($dbConnection->getError())) {
           $distriXSvcErrorData->setText("BAD_IMAGE_EXTENSION");
         }
       } else {
-        $foodWeightStorData->setLinkToPicture($foodWeightStorData->getLinkToPicture());
-        $foodWeightStorData->setSize($foodWeightStorData->getSize());
-        $foodWeightStorData->setType($foodWeightStorData->getType());
+        $data->setLinkToPicture($data->getLinkToPicture());
+        $data->setSize($data->getSize());
+        $data->setType($data->getType());
       }
-      list($insere, $idFoodWeight) = FoodWeightStor::save($foodWeightStorData, $dbConnection);
+      list($insere, $idFoodWeight) = FoodWeightStor::save($data, $dbConnection);
 
       if ($insere) {
         $dbConnection->commit();
       } else {
         $dbConnection->rollBack();
-        if ($infoFoodWeight->getId() > 0) {
+        if ($data->getId() > 0) {
           $errorData = ApplicationErrorData::warningUpdateData(1, 1);
         } else {
           $errorData = ApplicationErrorData::warningInsertData(1, 1);

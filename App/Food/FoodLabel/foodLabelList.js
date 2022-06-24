@@ -56,13 +56,13 @@ $(function() {
     $(".page_food_brand_update_title").removeClass("d-none");
     
     $.ajax({
-      url : '../FoodLabel/Controllers/php',
+      url : '../FoodLabel/Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormAddFood').serialize(),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
@@ -73,14 +73,14 @@ $(function() {
 
   $("#btnDel").on('click', function() {
     $.ajax({
-      url : '../FoodLabel/Controllers/e.php',
+      url : '../FoodLabel/Controllers/delete.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormDel').serialize(),
       success : function(data) {
-        if (data.confirmSave) {
+        if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+          setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
         }
@@ -93,14 +93,14 @@ $(function() {
 
   $("#btnRest").on('click', function() {
     $.ajax({
-      url : '../FoodLabel/Controllers/re.php',
+      url : '../FoodLabel/Controllers/restore.php',
       type : 'POST',
       dataType : 'JSON',
       data: $('#FormRest').serialize(),
       success : function(data) {
-        if (data.confirmSave) {
+        if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+          setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
         }

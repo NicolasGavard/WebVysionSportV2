@@ -2,24 +2,22 @@
 // Service Init
 include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // Database Data
-include(__DIR__ . "/Data/FoodWeightStorData.php");
+include(__DIR__ . "/Data/FoodLabelStorData.php");
 // Storage
-include(__DIR__ . "/Storage/FoodWeightStor.php");
-
-$infoFoodWeight = new DistriXFoodWeightData();
+include(__DIR__ . "/Storage/FoodLabelStor.php");
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if ($dbConnection->beginTransaction()) {
-    $infoFoodWeight = $dataSvc->getParameter("data");
-    $foodWeightStor = FoodWeightStor::read($infoFoodWeight->getId(), $dbConnection);
-    $insere         = FoodWeightStor::remove($foodWeightStor, $dbConnection);
+    list($data, $jsonError) = FoodLabelStorData::getJsonData($dataSvc->getParameter("data"));
+    $foodLabelStor = FoodLabelStor::read($data->getId(), $dbConnection);
+    $insere         = FoodLabelStor::remove($foodLabelStor, $dbConnection);
     
     if ($insere) {
       $dbConnection->commit();
     } else {
       $dbConnection->rollBack();
-      if ($infoFoodWeight->getId() > 0) {
+      if ($infoFoodLabel->getId() > 0) {
         $errorData = ApplicationErrorData::warningUpdateData(1, 1);
       } else {
         $errorData = ApplicationErrorData::warningInsertData(1, 1);
@@ -33,7 +31,7 @@ if (is_null($dbConnection->getError())) {
 }
 
 if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "DelFoodWeight", $dataSvc->getMethodName(), basename(__FILE__));
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "DelFoodLabel", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
 

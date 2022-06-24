@@ -24,7 +24,7 @@ if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
   $error = $errorData;
 }
 
-$resp["confirmSave"]  = $confirmSave;
+$resp["ConfirmSave"]  = $confirmSave;
 if(!empty($error)){
   $resp["Error"]        = $error;
 }

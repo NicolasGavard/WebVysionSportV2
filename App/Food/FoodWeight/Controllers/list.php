@@ -45,7 +45,8 @@ foreach ($listFoodWeights as $foodWeight) {
   foreach ($listWeights as $key => $weightType) {
     if ($weightType->getId() == $foodWeight->getIdWeightType()){
       $distriXFoodWeightData = new DistriXFoodFoodWeightData();
-      $distriXFoodWeightData->setId($weightType->getId());
+      $distriXFoodWeightData->setId($foodWeight->getId());
+      $distriXFoodWeightData->setIdFood($foodWeight->getIdFood());
       $distriXFoodWeightData->setIdWeightType($foodWeight->getIdWeightType());
       $distriXFoodWeightData->setNameWeightType($weightType->getName());
       $distriXFoodWeightData->setWeight($foodWeight->getWeight());

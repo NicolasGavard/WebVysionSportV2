@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodLabelData.php");
+include(__DIR__ . "/../Data/DistriXFoodLabelData.php");
 
 list($distriXFoodLabelData, $errorJson) = DistriXFoodLabelData::getJsonData($_POST);
 
@@ -19,7 +19,7 @@ if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
   $error = $errorData;
 }
 
-$resp["confirmSave"]  = $confirmSave;
+$resp["ConfirmSave"]  = $confirmSave;
 if(!empty($error)){
   $resp["Error"]        = $error;
 }

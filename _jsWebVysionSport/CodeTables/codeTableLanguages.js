@@ -108,7 +108,7 @@ $("#btnDel").on('click', function() {
     dataType : 'JSON',
     data: $('#FormDel').serialize(),
     success : function(data) {
-      if (data.confirmSave) {
+      if (data.ConfirmSave) {
         $('#sa-success-distrix').trigger('click');
         setTimeout(function() {window.location.href = "./codeTableLanguageList.php";}, 800);
       } else {
@@ -128,7 +128,7 @@ $("#btnRest").on('click', function() {
     dataType : 'JSON',
     data: $('#FormRest').serialize(),
     success : function(data) {
-      if (data.confirmSave) {
+      if (data.ConfirmSave) {
         $('#sa-success-distrix').trigger('click');
         setTimeout(function() {window.location.href = "./codeTableLanguageList.php";}, 800);
       } else {

@@ -21,6 +21,6 @@ foreach ($listUserByRole as $userRole) {
   list($confirmSave, $errorData) = DistriXStyAppUserRight::saveUserRight($distriStyUserRightData);
 }
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);

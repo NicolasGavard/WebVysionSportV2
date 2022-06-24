@@ -31,7 +31,7 @@ $(document).ready(function() {
             type: 'post',
             dataType: "json",
             success : function(data) {
-              if(data.confirmSave){
+              if(data.ConfirmSave){
                 $(".alert-success").show("slow").delay(1500).hide("slow");
                 setTimeout(function() {window.location.href = "./index.html";}, 2000);
               } else {

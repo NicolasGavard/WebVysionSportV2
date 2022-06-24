@@ -23,7 +23,7 @@ if (isset($_POST)) {
     $error = $errorData;
   }
 }
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!empty($error)) {
   $resp["Error"] = $error;
 }

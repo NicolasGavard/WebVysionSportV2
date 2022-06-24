@@ -19,6 +19,6 @@ if (!$confirmSaveUser) {
   $resp["errorData"] = $errorData;
 }
 
-$resp["confirmSave"] = $confirmSaveUser;
+$resp["ConfirmSave"] = $confirmSaveUser;
 
 echo json_encode($resp);

@@ -27,6 +27,6 @@ $distriXStyUserData->setIdStyEnterprise($_POST['idStyEnterprise']);
 $distriXStyUserData->setStatut($_POST['statut']);
 list($confirmSave, $errorData) = DistriXStyAppUser::saveUser($distriXStyUserData);
 
-$resp["confirmSave"] = $confirmSave;
+$resp["ConfirmSave"] = $confirmSave;
 if (!$confirmSave) {$resp["errorData"] = $errorData;}
 echo json_encode($resp);
