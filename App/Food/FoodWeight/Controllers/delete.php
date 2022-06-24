@@ -2,16 +2,15 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodWeightData.php");
+include(__DIR__ . "/../Data/DistriXFoodWeightData.php");
 
 $confirmSave  = false;
 
 list($distriXFoodWeightData, $errorJson) = DistriXFoodWeightData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("DelFoodWeight");
 $servicesCaller->addParameter("data", $distriXFoodWeightData);
-$servicesCaller->setServiceName("Food/FoodWeight/DistriXFoodWeightDeleteDataSvc.php");
+$servicesCaller->setServiceName("App/Food/FoodWeight/Services/DistriXFoodWeightDeleteDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_Food", "DistriXFoodWeightDeleteDataSvc", "DelFoodWeight", $output);

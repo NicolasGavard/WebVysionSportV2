@@ -7,10 +7,6 @@ include(__DIR__ . "/../Data/DistriXFoodFoodWeightData.php");
 
 $resp        = [];
 $listWeights = [];
-$foodWeights = [];
-
-$_POST['id']  = 12;
-
 list($distriXFoodFoodWeightData, $errorJson) = DistriXFoodFoodWeightData::getJsonData($_POST);
 
 // CALL
@@ -33,14 +29,14 @@ if ($outputok && isset($output["ListWeightTypes"]) && is_array($output["ListWeig
   $resp["Error"]      = $errorData;
 }
 
-list($outputok, $output, $errorData) = $svc->getResult("foodWeight"); print_r($output);
+list($outputok, $output, $errorData) = $svc->getResult("foodWeight"); //print_r($output);
 if ($outputok && isset($output["FoodWeights"]) && is_array($output["FoodWeights"])) {
-  list($foodWeights, $jsonError) = DistriXFoodFoodWeightData::getJsonData($output["FoodWeights"]);
+  list($distriXFoodFoodWeightData, $jsonError) = DistriXFoodFoodWeightData::getJsonData($output["FoodWeights"]);
 } else {
   $resp["Error"]      = $errorData;
 }
 
-$resp["FoodWeights"]  = $foodWeights;
+$resp["FoodWeight"]   = $distriXFoodFoodWeightData;
 $resp["ListWeights"]  = $listWeights;
 if(!empty($error)){
   $resp["Error"]      = $error;

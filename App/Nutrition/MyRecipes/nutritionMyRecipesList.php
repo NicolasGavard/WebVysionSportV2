@@ -109,8 +109,8 @@
                     </div>
                   </div>
 
-                </form>
-              </div>
+                </div>
+              </form>
               
               <div class="padding-bottom-30 row" style="margin: 0 auto;">
                 <div class="col-12">

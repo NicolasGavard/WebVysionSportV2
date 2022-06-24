@@ -29,6 +29,15 @@ $(function() {
     }
   });
 
+  $(".btnChangeImage").on('click', function() {
+    $(".dropzoneImage").addClass("d-none");
+    $(".dropzoneNoImage").removeClass("d-none");
+  });
+  
+  $(".btnChangeImageCancel").on('click', function() {
+    $(".dropzoneImage").removeClass("d-none");
+    $(".dropzoneNoImage").addClass("d-none");
+  });
 
   $(".btn-warning").on('click', function() {
     $(".btn-success").removeClass("disabled");
@@ -52,23 +61,47 @@ $(function() {
     ListFoodWeight(0);
   });
 
-  $(".btnAddFood").on('click', function() {
-    $(".page_food_brand_update_title").removeClass("d-none");
+  $(".AddNewFoodWeight").on('click', function() {
+    $(".add_title").removeClass("d-none");
+    $(".update_title").addClass("d-none");
     
+    $('.AddFoodWeightFormId').val('');
+    $('.AddFoodWeightFormIdFood').val('');
+    $('.AddFoodWeightFormWeight').val('');
+    $('.AddFoodWeightFormWeightType').val('');
+
+    $(".dropzoneImage").addClass("d-none");
+    $(".dropzoneNoImage").removeClass("d-none");
+    $(".avatar-foodWeight").attr("src", '');
+    $('.AddFoodWeightFormTimestamp').val('');
+    $('.AddFoodWeightFormStatus').val('');
+  });
+
+  function encodeImgtoBase64(element) {
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      $("#linkToPictureBase64").val(reader.result);
+      $(".avatar-foodWeight").attr("src", reader.result);
+    }
+    reader.readAsDataURL(file);
+  }
+
+  $(".btnAddFoodWeight").on('click', function() {
     $.ajax({
       url : '../FoodWeight/Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
-      data: $('#FormAddFood').serialize(),
+      data: $('#FormAddFoodWeight').serialize(),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+        setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');
       }
     });
-    $(".btnAddFood").attr("data-dismiss", "modal");
+    $(".AddNewFoodWeight").attr("data-dismiss", "modal");
   });
 
   $("#btnDel").on('click', function() {
@@ -80,7 +113,7 @@ $(function() {
       success : function(data) {
         if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+          setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
         }
@@ -100,7 +133,7 @@ $(function() {
       success : function(data) {
         if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+          setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
         }
@@ -129,9 +162,9 @@ function ListFoodWeight(elemState){
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodWeight" onclick="ViewFoodWeight(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"           onclick="DelFoodWeight(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"          onclick="RestFoodWeight(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodWeight" onclick="ViewFoodWeight(\''+val.id+'\', \''+val.name+'\');"                           href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"           onclick="DelFoodWeight(\''+val.id+'\', \''+val.weight+' '+val.nameWeightType+'\');"   href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"          onclick="RestFoodWeight(\''+val.id+'\', \''+val.weight+' '+val.nameWeightType+'\');"  href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -152,10 +185,24 @@ function ViewFoodWeight(id, name){
       $(".update_title").removeClass("d-none");
       
       $('.AddFoodWeightFormId').val(id);
-      $('.AddFoodWeightFormWeight').val(data.FoodWeights.weight);
-      $('.AddFoodWeightFormWeightType').val(data.FoodWeights.idWeightType);
-      $('.AddFoodWeightFormTimestamp').val(data.FoodWeights.timestamp);
-      $('.AddFoodWeightFormStatus').val(data.FoodWeights.elemState);
+      $('.AddFoodWeightFormIdFood').val(data.FoodWeight.idFood);
+      $('.AddFoodWeightFormWeight').val(data.FoodWeight.weight);
+      $('.AddFoodWeightFormWeightType').val(data.FoodWeight.idWeightType);
+
+      $(".dropzoneImage").removeClass("d-none");
+      $(".dropzoneNoImage").addClass("d-none");
+      $(".avatar-foodWeight").attr("src", data.FoodWeight.linkToPicture);
+
+      $('#listWeightsNotApply').empty();
+      $.map(data.ListWeights, function(val, key) {
+        $('#listWeightsNotApply').append('<option value="'+val.id+'">'+val.name+'</option>');
+        if (val.id == data.FoodWeight.idWeightType){
+          $('#select2-listWeightsNotApply-container').html(val.name);
+        }
+      });
+
+      $('.AddFoodWeightFormTimestamp').val(data.FoodWeight.timestamp);
+      $('.AddFoodWeightFormStatus').val(data.FoodWeight.elemState);
     },
     error : function(data) {
       console.log(data);

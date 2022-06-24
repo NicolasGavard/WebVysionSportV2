@@ -10,8 +10,8 @@ $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if ($dbConnection->beginTransaction()) {
     list($data, $jsonError) = FoodWeightStorData::getJsonData($dataSvc->getParameter("data"));
-    $foodWeightStor = FoodWeightStor::read($data->getId(), $dbConnection);
-    $insere         = FoodWeightStor::remove($foodWeightStor, $dbConnection);
+    $foodWeightStor         = FoodWeightStor::read($data->getId(), $dbConnection);
+    $insere                 = FoodWeightStor::restore($foodWeightStor, $dbConnection);
     
     if ($insere) {
       $dbConnection->commit();

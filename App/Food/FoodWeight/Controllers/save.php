@@ -2,16 +2,19 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodFoodData.php");
+include(__DIR__ . "/../Data/DistriXFoodFoodWeightData.php");
 
-list($distriXFoodFoodData, $errorJson) = DistriXFoodFoodData::getJsonData($_POST);
+$confirmSave = false;
+
+list($distriXFoodFoodWeightData, $errorJson) = DistriXFoodFoodWeightData::getJsonData($_POST);
+if($_POST['base64Img'] != '') { $distriXFoodFoodWeightData->setLinkToPicture($_POST['base64Img']);}
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->addParameter("data", $distriXFoodFoodData);
-$servicesCaller->setServiceName("Food/DistriXFoodSaveDataSvc.php");
+$servicesCaller->addParameter("data", $distriXFoodFoodWeightData);
+$servicesCaller->setServiceName("App/Food/FoodWeight/Services/DistriXFoodWeightSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
-$logOk = logController("Security_Food", "DistriXBrandSaveDataSvc", "SaveFood", $output);
+$logOk = logController("Security_Food", "DistriXFoodWeightSaveDataSvc", "SaveFood", $output);
 
 if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
   $confirmSave = $output["ConfirmSave"];
