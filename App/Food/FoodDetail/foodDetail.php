@@ -72,7 +72,7 @@
               </div>
               <div id="foodNutritional" class="collapse" data-parent="#accordion">
                 <div class="card-body">
-                  <?php include('../FoodNutritional/foodlNutritionalList.php'); ?>
+                  <?php include('../FoodNutritional/foodNutritionalList.php'); ?>
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@
       
       <script src="foodDetail.js"></script>
       <script src="../FoodLabel/foodLabelList.js"></script>
-      <script src="../FoodNutritional/foodNutritionalList.js"></script>
       <script src="../FoodWeight/foodWeightList.js"></script>
+      <script src="../FoodNutritional/foodNutritionalList.js"></script>
   </body>
 </html>

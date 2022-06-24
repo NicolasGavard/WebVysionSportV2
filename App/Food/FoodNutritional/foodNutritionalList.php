@@ -19,8 +19,11 @@
       <table id="FoodNutritionalTable" class="display responsive nowrap" width="100%">
         <thead>
           <tr>                 
-            <th width="20%" class="table-plus"><span><?php echo $page_picture; ?></span></th>
-            <th width="70%"><span><?php echo $page_nutritional; ?></span></th>
+            <th width="50%" class="table-plus"><span><?php echo $page_name; ?></span></th>
+            <th width="10%"><span><?php echo $page_nutritional_weight; ?></span></th>
+            <th width="10%"><span><?php echo $page_nutritional_weight_type; ?></span></th>
+            <th width="10%"><span><?php echo $page_nutritional_base_weight; ?></span></th>
+            <th width="10%"><span><?php echo $page_nutritional_base_weight_type; ?></span></th>
             <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
           </tr>
         </thead>

@@ -5,25 +5,28 @@ include(__DIR__ . "/../../../Init/ControllerInit.php");
 include(__DIR__ . "/../Data/DistriXFoodNutritionalData.php");
 include(__DIR__ . "/../Data/DistriXFoodFoodNutritionalData.php");
 
-$resp                     = [];
+$resp                           = [];
+$listNutritionals               = [];
 $listFoodNutritionals           = [];
+$listNotApplyNutritionals       = [];
 $listFoodNutritionalsFromFront  = [];
+$_POST['id']                    = 1;
 list($distriXFoodFoodNutritionalData, $errorJson) = DistriXFoodFoodNutritionalData::getJsonData($_POST);
 
 // CALL
-$labelCaller = new DistriXServicesCaller();
-$labelCaller->setServiceName("App/Food/Nutritional/Services/DistriXFoodlabelListDataSvc.php");
+$nutritionalCaller = new DistriXServicesCaller();
+$nutritionalCaller->setServiceName("App/CodeTables/Nutritional/Services/DistriXNutritionalListDataSvc.php");
 
 $foodNutritionalCaller = new DistriXServicesCaller();
 $foodNutritionalCaller->setServiceName("App/Food/FoodNutritional/Services/DistriXFoodNutritionalListDataSvc.php");
 $foodNutritionalCaller->addParameter("data", $distriXFoodFoodNutritionalData);
 
 $svc = new DistriXSvc();
-$svc->addToCall("label", $labelCaller);
+$svc->addToCall("nutritional", $nutritionalCaller);
 $svc->addToCall("foodNutritional", $foodNutritionalCaller);
 $callsOk = $svc->call();
 
-list($outputok, $output, $errorData) = $svc->getResult("label"); //print_r($output);
+list($outputok, $output, $errorData) = $svc->getResult("nutritional"); //print_r($output);
 if ($outputok && isset($output["ListNutritionals"]) && is_array($output["ListNutritionals"])) {
   list($listNutritionals, $jsonError) = DistriXFoodNutritionalData::getJsonArray($output["ListNutritionals"]);
 } else {
@@ -32,7 +35,7 @@ if ($outputok && isset($output["ListNutritionals"]) && is_array($output["ListNut
 
 list($outputok, $output, $errorData) = $svc->getResult("foodNutritional"); //print_r($output);
 if ($outputok && isset($output["ListFoodNutritionals"]) && is_array($output["ListFoodNutritionals"])) {
-  list($listFoodNutritionals, $jsonError) = DistriXFoodFoodNutritionalData::getJsonArray($output["ListFoodNutritionals"]);
+  list($listFoodNutritionals, $jsonError) = DistriXFoodNutritionalData::getJsonArray($output["ListFoodNutritionals"]);
 } else {
   $resp["Error"]      = $errorData;
 }
@@ -40,21 +43,32 @@ if ($outputok && isset($output["ListFoodNutritionals"]) && is_array($output["Lis
 $listNotApplyNutritionals = $listNutritionals;
 
 foreach ($listFoodNutritionals as $foodNutritional) {
-  foreach ($listNutritionals as $key => $label) {
-    if ($label->getId() == $foodNutritional->getIdNutritional()){
-      $distriXFoodNutritionalData = new DistriXFoodNutritionalData();
-      $distriXFoodNutritionalData->setId($label->getId());
-      $distriXFoodNutritionalData->setCode($label->getCode());
-      $distriXFoodNutritionalData->setName($label->getName());
-      $distriXFoodNutritionalData->setLinkToPicture($label->getLinkToPicture());
-      $distriXFoodNutritionalData->setElemState($label->getElemState());
-      $distriXFoodNutritionalData->setTimestamp($label->getTimestamp());
-      $listFoodNutritionalsFromFront[] = $distriXFoodNutritionalData;
+  $distriXFoodNutritionalData = new DistriXFoodNutritionalData();
+  $distriXFoodNutritionalData->setId($foodNutritional->getId());
+  $distriXFoodNutritionalData->setIdFood($foodNutritional->getIdFood());
+  $distriXFoodNutritionalData->setIdNutritional($foodNutritional->getIdNutritional());
+
+  foreach ($listNutritionals as $key => $nutritional) {
+    if ($nutritional->getId() == $foodNutritional->getIdNutritional()){
       
+      $distriXFoodNutritionalData->setNameNutritional($nutritional->getNameNutritional());
       unset($listNotApplyNutritionals[$key]);
       break;
     }
   }
+
+
+  $distriXFoodNutritionalData->setNutritional($foodNutritional->getNutritional());
+  $distriXFoodNutritionalData->setIdWeightType($foodNutritional->getIdWeightType());
+  $distriXFoodNutritionalData->setNameWeightType($foodNutritional->getNameWeightType());
+  $distriXFoodNutritionalData->setIdWeightTypeBase($foodNutritional->getIdWeightTypeBase());
+  $distriXFoodNutritionalData->setNameWeightTypeBase($foodNutritional->getNameWeightTypeBase());
+  $distriXFoodNutritionalData->setWeightTypeBase($foodNutritional->getWeightTypeBase());
+  $distriXFoodNutritionalData->setElemState($foodNutritional->getElemState());
+  $distriXFoodNutritionalData->setTimestamp($foodNutritional->getTimestamp());
+  $listFoodNutritionalsFromFront[] = $distriXFoodNutritionalData;
+  
+  
 }
 
 $resp["ListNotApplyNutritionals"] = array_merge($listNotApplyNutritionals);

@@ -13,7 +13,8 @@ $foodWeightStor  = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($foodWeightStor, $foodWeightStorInd) = FoodWeightStor::getList(true, $dbConnection);
+  list($data, $jsonError) = FoodWeightStorData::getJsonData($dataSvc->getParameter("data"));
+  list($foodWeightStor, $foodWeightStorInd) = FoodWeightStor::findByIdFood($data, true, $dbConnection);
   foreach ($foodWeightStor as $foodWeight) {
     $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_FOOD . '/' . $foodWeight->getLinkToPicture();
     $pictures_headers = get_headers($urlPicture);

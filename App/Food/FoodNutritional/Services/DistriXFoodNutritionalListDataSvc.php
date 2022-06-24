@@ -10,7 +10,8 @@ $foodNutritionalStor= [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($foodNutritionalStor, $foodNutritionalStorInd) = FoodNutritionalStor::getList(true, $dbConnection);
+  list($data, $jsonError) = FoodNutritionalStorData::getJsonData($dataSvc->getParameter("data"));
+  list($foodNutritionalStor, $foodNutritionalStorInd) = FoodNutritionalStor::findByIdFood($data, true, $dbConnection);
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
