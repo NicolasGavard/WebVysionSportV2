@@ -48,7 +48,7 @@
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
                 <label><?php echo $page_name; ?></label>
-                <select class="custom-select2 form-control AddFoodNutritionalFormNutritionalType" id="listNutritionalsNotApply" name="idNutritionalType" style="width: 100%; height: 38px;">  
+                <select class="custom-select2 form-control AddFoodNutritionalFormNutritionalType" id="listNutritionalsNotApply" name="idNutritional" style="width: 100%; height: 38px;">  
                   <option value="0"><?php echo $page_all_choice; ?></option>
                 </select>
                 <div class="form-control-feed back danger-weight has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_weight; ?> </div>
@@ -58,7 +58,7 @@
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
                 <label><?php echo $page_nutritional_weight; ?></label>
-                <input class="form-control AddFoodNutritionalFormNutritionalWeight" type="text" name="weight" placeholder="<?php echo $page_nutritional_weight; ?>">
+                <input class="form-control AddFoodNutritionalFormNutritionalWeight" type="text" name="nutritional" placeholder="<?php echo $page_nutritional_weight; ?>">
                 <div class="form-control-feed back danger-weight has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_weight; ?> </div>
               </div>
             </div>
@@ -76,7 +76,7 @@
             <div class="col-md-6 col-sm-12">
               <div class="form-group">
                 <label><?php echo $page_nutritional_base_weight; ?></label>
-                <input class="form-control AddFoodNutritionalFormNutritionalWeightBase" type="text" name="weight" placeholder="<?php echo $page_nutritional_base_weight; ?>">
+                <input class="form-control AddFoodNutritionalFormNutritionalWeightBase" type="text" name="weightTypeBase" placeholder="<?php echo $page_nutritional_base_weight; ?>">
                 <div class="form-control-feed back danger-base_weight has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_base_weight; ?> </div>
               </div>
             </div>

@@ -69,14 +69,14 @@ $(function() {
     $('.listNutritionalsWeightTypeBase').val(0);
   });
 
-  $(".btnAddFood").on('click', function() {
+  $(".btnAddFoodNutritional").on('click', function() {
     $(".page_food_brand_update_title").removeClass("d-none");
     
     $.ajax({
       url : '../FoodNutritional/Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
-      data: $('#FormAddFood').serialize(),
+      data: $('#FormAddFoodNutritional').serialize(),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
         setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
@@ -89,43 +89,49 @@ $(function() {
   });
 
   $("#btnDel").on('click', function() {
-    $.ajax({
-      url : '../FoodNutritional/Controllers/delete.php',
-      type : 'POST',
-      dataType : 'JSON',
-      data: $('#FormDel').serialize(),
-      success : function(data) {
-        if (data.ConfirmSave) {
-          $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
-        } else {
+    if ($('.DelFormType').val() == 'FoodNutritional') {
+      $.ajax({
+        url : '../FoodNutritional/Controllers/delete.php',
+        type : 'POST',
+        dataType : 'JSON',
+        data: $('#FormDel').serialize(),
+        success : function(data) {
+          if (data.ConfirmSave) {
+            $('.DelFormType').val('');
+            $('#sa-success-distrix').trigger('click');
+            setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+          } else {
+            $('#sa-error-distrix').trigger('click');
+          }
+        },
+        error : function(data) {
           $('#sa-error-distrix').trigger('click');
         }
-      },
-      error : function(data) {
-        $('#sa-error-distrix').trigger('click');
-      }
-    });
+      });
+    }
   });
 
   $("#btnRest").on('click', function() {
-    $.ajax({
-      url : '../FoodNutritional/Controllers/restore.php',
-      type : 'POST',
-      dataType : 'JSON',
-      data: $('#FormRest').serialize(),
-      success : function(data) {
-        if (data.ConfirmSave) {
-          $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
-        } else {
+    if ($('.DelFormType').val() == 'FoodNutritional') {
+      $.ajax({
+        url : '../FoodNutritional/Controllers/restore.php',
+        type : 'POST',
+        dataType : 'JSON',
+        data: $('#FormRest').serialize(),
+        success : function(data) {
+          if (data.ConfirmSave) {
+            $('.RestFormType').val('');
+            $('#sa-success-distrix').trigger('click');
+            setTimeout(function() {window.location.href = "./foodFoodList.php";}, 800);
+          } else {
+            $('#sa-error-distrix').trigger('click');
+          }
+        },
+        error : function(data) {
           $('#sa-error-distrix').trigger('click');
         }
-      },
-      error : function(data) {
-        $('#sa-error-distrix').trigger('click');
-      }
-    });
+      });
+    }
   });
 });
 
@@ -148,9 +154,9 @@ function ListFoodNutritional(elemState){
                     '       <i class="dw dw-more"></i>'+
                     '     </a>'+
                     '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodNutritional"  onclick="ViewFoodNutritional(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                 onclick="DelFoodNutritional(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"                onclick="RestFoodNutritional(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                    '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodNutritional"  onclick="ViewFoodNutritional(\''+val.id+'\', \''+val.nameNutritional+'\');" href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                    '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"                 onclick="DelFoodNutritional(\''+val.id+'\', \''+val.nameNutritional+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                    '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"                onclick="RestFoodNutritional(\''+val.id+'\', \''+val.nameNutritional+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                     '     </div>'+
                     '   </div>'+
                     ' </td>'+
@@ -172,34 +178,29 @@ function ViewFoodNutritional(id, name){
       
       $('.AddFoodNutritionalFormId').val(id);
       $('.AddFoodNutritionalFormIdFood').val(data.FoodNutritional.idFood);
-      // $('.listNutritionalsWeightType').val(data.FoodNutritional.idWeightType);
       $('.AddFoodNutritionalFormNutritionalWeightBase').val(data.FoodNutritional.weightTypeBase);
-      // $('.listNutritionalsWeightTypeBase').val(data.FoodNutritional.idWeightTypeBase);
       
-      $('.AddFoodNutritionalFormNutritionalWeight').val(data.FoodNutritional.idNutritional);
       $('#listNutritionalsNotApply').empty();
       $.map(data.ListNutritionals, function(val, key) {
         $('#listNutritionalsNotApply').append('<option value="'+val.id+'">'+val.name+'</option>');
         if (val.id == data.FoodNutritional.idNutritional){
+          $('#listNutritionalsNotApply').val(val.id);
           $('#select2-listNutritionalsNotApply-container').html(val.id+' - '+val.name);
-          alert(val.id+' - '+val.name);
         }
       });
 
-      $('.AddFoodNutritionalFormNutritionalType').val(data.FoodNutritional.idWeightType);
-      $('.AddFoodNutritionalFormNutritionalTypeBase').val(data.FoodNutritional.idWeightTypeBase);
       $('#listNutritionalsWeightType').empty();
       $('#listNutritionalsWeightTypeBase').empty();
       $.map(data.ListWeights, function(val, key) {
         $('#listNutritionalsWeightType').append('<option value="'+val.id+'">'+val.name+'</option>');
         $('#listNutritionalsWeightTypeBase').append('<option value="'+val.id+'">'+val.name+'</option>');
         if (val.id == data.FoodNutritional.idWeightType){
+          $('#listNutritionalsWeightType').val(val.id);
           $('#select2-listNutritionalsWeightType-container').html(val.id+' - '+val.name);
-          alert(val.id+' - '+val.name);
         }
         if (val.id == data.FoodNutritional.idWeightTypeBase){
+          $('#listNutritionalsWeightTypeBase').val(val.id);
           $('#select2-listNutritionalsWeightTypeBase-container').html(val.id+' - '+val.name);
-          alert(val.id+' - '+val.name);
         }
       });
 
@@ -215,9 +216,11 @@ function ViewFoodNutritional(id, name){
 function DelFoodNutritional(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
+  $('.DelFormType').val('FoodNutritional');
 }
 
 function RestFoodNutritional(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
+  $('.RestFormType').val('FoodNutritional');
 }

@@ -22,11 +22,11 @@ if (!class_exists("DistriXFoodNutritionalData", false)) {
       $this->idNutritional        = 0;
       $this->nameNutritional      = "";
       $this->nutritional          = "";
-      $this->idweighttype         = 0;
-      $this->nameweighttype       = "";
-      $this->idweighttypebase     = 0;
-      $this->nameweighttypebase   = "";
-      $this->weighttypebase       = 0;
+      $this->idWeightType         = 0;
+      $this->nameWeightType       = "";
+      $this->idWeightTypeBase     = 0;
+      $this->nameWeightTypeBase   = "";
+      $this->weightTypeBase       = 0;
       $this->elemState            = 0;
       $this->timestamp            = 0;
     }

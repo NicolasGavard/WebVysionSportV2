@@ -6,7 +6,8 @@
                 <h4 class="mb-20 weight-500 DelTxt"> </h4>
                 <div class="padding-bottom-20 row" style="max-width: 170px; margin: 0 auto;">
                   <form class="forms-sample" id="FormDel">
-                    <input type="hidden" name="id" class="DelFormId" value="0">
+                    <input type="hidden" name="id"    class="DelFormId"   value="0">
+                    <input type="hidden" name="type"  class="DelFormType" value="0">
                   </form>
                 </div>
                 <div class="padding-top-10 row" style="margin: 0 auto;">
@@ -30,7 +31,8 @@
                 <h4 class="mb-20 weight-500 RestTxt"> </h4>
                 <div class="padding-bottom-20 row" style="max-width: 170px; margin: 0 auto;">
                   <form class="forms-sample" id="FormRest">
-                    <input type="hidden" name="id" class="RestFormId" value="0">
+                    <input type="hidden" name="id"    class="RestFormId"    value="0">
+                    <input type="hidden" name="type"  class="RestFormType"  value="0">
                   </form>
                 </div>
                 <div class="padding-top-10 row" style="margin: 0 auto;">

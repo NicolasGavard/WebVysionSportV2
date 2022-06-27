@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Food/DistriXFoodNutritionalData.php");
+include(__DIR__ . "/../Data/DistriXFoodNutritionalData.php");
 
 $confirmSave  = false;
 

@@ -72,43 +72,49 @@ $(function() {
   });
 
   $("#btnDel").on('click', function() {
-    $.ajax({
-      url : '../FoodLabel/Controllers/delete.php',
-      type : 'POST',
-      dataType : 'JSON',
-      data: $('#FormDel').serialize(),
-      success : function(data) {
-        if (data.ConfirmSave) {
-          $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
-        } else {
+    if ($('.DelFormType').val() == 'FoodLabel') {
+      $.ajax({
+        url : '../FoodLabel/Controllers/delete.php',
+        type : 'POST',
+        dataType : 'JSON',
+        data: $('#FormDel').serialize(),
+        success : function(data) {
+          if (data.ConfirmSave) {
+            $('.DelFormType').val('');
+            $('#sa-success-distrix').trigger('click');
+            setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
+          } else {
+            $('#sa-error-distrix').trigger('click');
+          }
+        },
+        error : function(data) {
           $('#sa-error-distrix').trigger('click');
         }
-      },
-      error : function(data) {
-        $('#sa-error-distrix').trigger('click');
-      }
-    });
+      });
+    }
   });
 
   $("#btnRest").on('click', function() {
-    $.ajax({
-      url : '../FoodLabel/Controllers/restore.php',
-      type : 'POST',
-      dataType : 'JSON',
-      data: $('#FormRest').serialize(),
-      success : function(data) {
-        if (data.ConfirmSave) {
-          $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
-        } else {
+    if ($('.DelFormType').val() == 'FoodLabel') {
+      $.ajax({
+        url : '../FoodLabel/Controllers/restore.php',
+        type : 'POST',
+        dataType : 'JSON',
+        data: $('#FormRest').serialize(),
+        success : function(data) {
+          if (data.ConfirmSave) {
+            $('.RestFormType').val('');
+            $('#sa-success-distrix').trigger('click');
+            setTimeout(function() {window.location.href = "./foodDetail.php";}, 800);
+          } else {
+            $('#sa-error-distrix').trigger('click');
+          }
+        },
+        error : function(data) {
           $('#sa-error-distrix').trigger('click');
         }
-      },
-      error : function(data) {
-        $('#sa-error-distrix').trigger('click');
-      }
-    });
+      });
+    }
   });
 });
 
@@ -142,9 +148,11 @@ function ListFoodLabel(elemState){
 function DelFoodLabel(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
+  $('.DelFormType').val('FoodLabel');
 }
 
 function RestFoodLabel(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
+  $('.RestFormType').val('FoodLabel');
 }
