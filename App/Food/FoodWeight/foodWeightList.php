@@ -39,7 +39,7 @@
         <form class="FormAddFoodWeight" action="#" id="FormAddFoodWeight">
           <div class="row">
             <input class="form-control AddFoodWeightFormId"             type="hidden" name="id"         value="0">
-            <input class="form-control AddFoodWeightFormIdFood"         type="hidden" name="idFood"     value="0">
+            <input class="form-control AddFoodWeightFormIdFood"         type="hidden" name="idFood"         value="0">
             <input class="form-control AddFoodWeightFormTimestamp"      type="hidden" name="timestamp"  value="0">
             <input class="form-control AddFoodWeightFormStatus"         type="hidden" name="elemState"  value="0">
             <input class="form-control AddFoodWeightFormPictureBase64"  type="hidden" name="base64Img"  id="linkToPictureBase64">
