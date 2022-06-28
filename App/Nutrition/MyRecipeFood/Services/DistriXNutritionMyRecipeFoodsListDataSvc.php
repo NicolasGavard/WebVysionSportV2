@@ -11,7 +11,11 @@ if ($dataSvc->isAuthorized()) {
   $dbConnection     = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
     list($data, $jsonError)                   = RecipeFoodStorData::getJsonData($dataSvc->getParameter("data"));
-    list($recipeFoodStor, $recipeFoodStorInd) = RecipeFoodStor::findByIdRecipe($data, true, $dbConnection);
+    if($data->getIdFood() > 0){
+      list($recipeFoodStor, $recipeFoodStorInd) = RecipeFoodStor::findByIdRecipe($data, true, $dbConnection);
+    } else {
+      list($recipeFoodStor, $recipeFoodStorInd) = RecipeFoodStor::getList(false, $dbConnection);
+    }
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }

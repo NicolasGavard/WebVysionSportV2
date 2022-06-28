@@ -4,13 +4,14 @@ include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyRecipes/DistriXNutritionRecipeData.php");
-include(__DIR__ . "/../Data/Nutrition/MyRecipeFood/DistriXNutritionRecipeFoodData.php");
-include(__DIR__ . "/../Data/Food/DistriXFoodFoodData.php");
-include(__DIR__ . "/../Data/Food/DistriXFoodNutritionalData.php");
-include(__DIR__ . "/../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
-include(__DIR__ . "/../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
+include(__DIR__ . "/../Data/DistriXNutritionRecipeData.php");
+include(__DIR__ . "/../../MyRecipeFood/Data/DistriXNutritionRecipeFoodData.php");
+
+include(__DIR__ . "/../../../Food/Food/Data/DistriXFoodFoodData.php");
+include(__DIR__ . "/../../../Food/FoodNutritional/Data/DistriXFoodNutritionalData.php");
+include(__DIR__ . "/../../../CodeTables/Language/Data/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../../../CodeTables/Nutritional/Data/DistriXCodeTableNutritionalData.php");
+include(__DIR__ . "/../../../CodeTables/WeightType/Data/DistriXCodeTableWeightTypeData.php");
 
 $listMyRecipesFormFront = [];
 $listMyRecipes          = [];
@@ -29,25 +30,26 @@ $distriXCodeTableLanguageData->setId($infoProfil->getIdLanguage());
 
 // CALL
 $receipeCaller = new DistriXServicesCaller();
-$receipeCaller->setServiceName("Nutrition/Recipe/DistriXNutritionMyRecipesListDataSvc.php");
+$receipeCaller->setServiceName("App/Nutrition/MyRecipes/Services/DistriXNutritionMyRecipesListDataSvc.php");
 $receipeCaller->addParameter("data", $distriXNutritionRecipeData);
 
 $recipeFoodCaller = new DistriXServicesCaller();
-$recipeFoodCaller->setServiceName("Nutrition/RecipeFood/DistriXNutritionMyRecipeFoodsListDataSvc.php");
+$recipeFoodCaller->setServiceName("App/Nutrition/MyRecipeFood/Services/DistriXNutritionMyRecipeFoodsListDataSvc.php");
 
 $foodCaller = new DistriXServicesCaller();
-$foodCaller->setServiceName("Food/Food/DistriXFoodListDataSvc.php");
+$foodCaller->setServiceName("App/Food/Food/Services/DistriXFoodListDataSvc.php");
 $foodCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 
 $foodNutritionalCaller = new DistriXServicesCaller();
-$foodNutritionalCaller->setServiceName("Food/FoodNutritional/DistriXFoodNutritionalListDataSvc.php");
+$foodNutritionalCaller->setServiceName("App/Food/FoodNutritional/Services/DistriXFoodNutritionalListDataSvc.php");
+$foodNutritionalCaller->addParameter("dataName", $distriXCodeTableLanguageData);
 
 $weightTypeCaller = new DistriXServicesCaller();
-$weightTypeCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeListDataSvc.php");
+$weightTypeCaller->setServiceName("App/CodeTables/WeightType/Services/DistriXWeightTypeListDataSvc.php");
 $weightTypeCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 
 $nutritionalCaller = new DistriXServicesCaller();
-$nutritionalCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalListDataSvc.php");
+$nutritionalCaller->setServiceName("App/CodeTables/Nutritional/Services/DistriXNutritionalListDataSvc.php");
 $nutritionalCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 
 $svc = new DistriXSvc();
@@ -141,6 +143,7 @@ foreach ($listMyRecipes as $recipe) {
                   if ($nutritinal->getIsMineral())      { $mineral      += $foodNutritinal->getNutritional(); break;}
                 }
               }
+
 
               $distriXNutritionMyRecipeFoodData->setCalorie($calorie);
               $distriXNutritionMyRecipeFoodData->setProetin($proetin);

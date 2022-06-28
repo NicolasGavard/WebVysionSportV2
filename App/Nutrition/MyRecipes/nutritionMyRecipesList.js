@@ -3,6 +3,7 @@ $.ajax({
   url : 'Controllers/list.php',
   type : 'POST',
   dataType : 'JSON',
+  data: {'idUserCoach': localStorage.getItem("idUser")},
   success : function(data) {
     localStorage.setItem("dataTable", JSON.stringify(data.ListMyRecipes));
     $('.btn-success').trigger('click');
