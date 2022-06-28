@@ -79,18 +79,20 @@ $(".btnAddMyCurrentDiet").on('click', function() {
   var student         = $('.listStudents').val();
   var dateStart       = $('.dateStart').val();
   var dateStartSplit  = $(".dateStart").val().split("/")
-  // var dateStartDb     = dateStartSplit[2]+''+dateStartSplit[1]+''+dateStartSplit[0];
-
+  
   if (template != 0 && student != 0 && dateStart != '' ){
     $.ajax({
       url : 'Controllers/save.php',
       type : 'POST',
       dataType : 'JSON',
-      // data: $.param(data),
       data: $('#FormAddMyCurrentDiet').serialize(),
       success : function(data) {
         $('#sa-success-distrix').trigger('click');
-        setTimeout(function() {window.location.href = "./nutritionMyCurrentsDietsList.php";}, 800);
+        if ($('.AddMyCurrentsDietsFormId').val() == 0) {
+          setTimeout(function() {window.location.href = "../MyCurrentsDietsMeal/nutritionMyCurrentsDietsAdd.php?idDiet="+data.idDiet+'&idUser='+localStorage.getItem("idUser")+'&idLanguage='+localStorage.getItem("idLanguage");}, 800);
+        } else {
+          setTimeout(function() {window.location.href = "./nutritionMyCurrentsDietsList.php";}, 800);
+        }
       },
       error : function(data) {
         $('#sa-error-distrix').trigger('click');

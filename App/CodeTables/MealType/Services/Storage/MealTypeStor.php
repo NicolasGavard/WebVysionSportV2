@@ -12,7 +12,7 @@ class MealTypeStor {
     $listNames = [];
   
     if ($inDbConnection != null) {
-      $request  = "SELECT mealtype.id,mealtype.code,mealtype.name,mealtype.elemstate,mealtype.timestamp";
+      $request  = "SELECT mealtype.id,mealtype.code,mealtype.name,mealtype.displayorder,mealtype.elemstate,mealtype.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
       $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idmealtype";
@@ -22,7 +22,7 @@ class MealTypeStor {
       if (!$all) {
         $request .= " WHERE ".self::TABLE_NAME.".elemstate = :statut";
       }
-      $request .= " ORDER BY  ".self::TABLE_NAME.".code";
+      $request .= " ORDER BY  mealtype.displayorder,".self::TABLE_NAME.".code";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
@@ -56,6 +56,7 @@ class MealTypeStor {
           $data->setId($row["id"]);
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
+          $data->setDisplayOrder($row["displayorder"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
           if (! is_null($row["mealtypenameid"])) {
@@ -75,7 +76,7 @@ class MealTypeStor {
     $listNames = [];
 
     if ($inDbConnection != null) {
-      $request  = "SELECT mealtype.id,mealtype.code,mealtype.name,mealtype.elemstate,mealtype.timestamp";
+      $request  = "SELECT mealtype.id,mealtype.code,mealtype.name,mealtype.displayorder,mealtype.elemstate,mealtype.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
       $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idmealtype";
@@ -104,6 +105,7 @@ class MealTypeStor {
           $data->setId($row["id"]);
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
+          $data->setDisplayOrder($row["displayorder"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
         }
@@ -120,7 +122,7 @@ class MealTypeStor {
     $listNames = [];
 
     if ($inDbConnection != null) {
-      $request  = "SELECT mealtype.id,mealtype.code,mealtype.name,mealtype.elemstate,mealtype.timestamp";
+      $request  = "SELECT mealtype.id,mealtype.code,mealtype.name,mealtype.displayorder,mealtype.elemstate,mealtype.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
       $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idmealtype";
@@ -146,6 +148,7 @@ class MealTypeStor {
           $data->setId($row["id"]);
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
+          $data->setDisplayOrder($row["displayorder"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
         }
@@ -179,7 +182,7 @@ class MealTypeStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "mealtype";
-  const SELECT = 'SELECT id,code,name,elemstate,timestamp';
+  const SELECT = 'SELECT id,code,name,displayorder,elemstate,timestamp';
   const FROM = ' FROM mealtype';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -202,7 +205,7 @@ class MealTypeStor {
       if (!$all) {
         $request .= " WHERE elemstate = :statut";
       }
-      $request .= " ORDER BY id";
+      $request .= " ORDER BY displayorder";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
@@ -237,7 +240,7 @@ class MealTypeStor {
       if (!$all) {
         $request .= " AND elemstate = :statut";
       }
-      $request .= " ORDER BY id";
+      $request .= " ORDER BY displayorder";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
@@ -325,6 +328,7 @@ class MealTypeStor {
       $request  = "UPDATE mealtype SET ";
       $request .= "code= :code,";
       $request .= "name= :name,";
+      $request .= "displayorder= :displayorder,";
       $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
@@ -333,6 +337,7 @@ class MealTypeStor {
       $params["id"] = $data->getId();
       $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
+      $params["displayorder"] = $data->getDisplayOrder();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
@@ -446,11 +451,13 @@ class MealTypeStor {
       $request .= " VALUES(";
       $request .= ":code,";
       $request .= ":name,";
+      $request .= ":displayorder,";
       $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
+      $params["displayorder"] = $data->getDisplayOrder();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);

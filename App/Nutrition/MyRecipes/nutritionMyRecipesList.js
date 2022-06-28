@@ -187,7 +187,8 @@ function ListMyRecipe(elemState){
 
 function ViewMyRecipeFood(id, name){
   localStorage.setItem("idRecipe", id);
-  window.location.href = 'nutritionMyRecipeFoodList.php';
+  // window.location.href = 'nutritionMyRecipeFoodList.php';
+  window.location.href = '../MyRecipeFood/nutritionMyRecipeFoodList.php';
 }
 
 function ViewMyRecipe(id, name){

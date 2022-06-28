@@ -11,7 +11,7 @@ class MealTypeNameStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "mealtypename";
-  const SELECT = 'SELECT id,idmealtype,idlanguage,name,elemstate,timestamp';
+  const SELECT = 'SELECT id,idmealtype,idlanguage,name,order,elemstate,timestamp';
   const FROM = ' FROM mealtypename';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -34,7 +34,7 @@ class MealTypeNameStor {
       if (!$all) {
         $request .= " WHERE elemstate = :statut";
       }
-      $request .= " ORDER BY idmealtype";
+      $request .= " ORDER BY order";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
@@ -69,7 +69,7 @@ class MealTypeNameStor {
       if (!$all) {
         $request .= " AND elemstate = :statut";
       }
-      $request .= " ORDER BY idmealtype";
+      $request .= " ORDER BY order";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
@@ -219,6 +219,7 @@ class MealTypeNameStor {
       $request .= "idmealtype= :idmealtype,";
       $request .= "idlanguage= :idlanguage,";
       $request .= "name= :name,";
+      $request .= "order= :order,";
       $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
@@ -228,6 +229,7 @@ class MealTypeNameStor {
       $params["idmealtype"] = $data->getIdMealType();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["name"] = $data->getName();
+      $params["order"] = $data->getOrder();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
@@ -337,17 +339,19 @@ class MealTypeNameStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO mealtypename(";
-      $request .= "idmealtype,idlanguage,name,elemstate,timestamp)";
+      $request .= "idmealtype,idlanguage,name,order,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":idmealtype,";
       $request .= ":idlanguage,";
       $request .= ":name,";
+      $request .= ":order,";
       $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
       $params["idmealtype"] = $data->getIdMealType();
       $params["idlanguage"] = $data->getIdLanguage();
       $params["name"] = $data->getName();
+      $params["order"] = $data->getOrder();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);

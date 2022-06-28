@@ -113,6 +113,9 @@
       <script src="<?php echo FRONT_PATH;?>src/plugins/jquery-asGradient/dist/jquery-asGradient.js?v=<?php echo APP_VERSION;?>"></script>
       <script src="<?php echo FRONT_PATH;?>src/plugins/jquery-asColorPicker/jquery-asColorPicker.js?v=<?php echo APP_VERSION;?>"></script>
       <script src="<?php echo FRONT_PATH;?>vendors/scripts/colorpicker.js?v=<?php echo APP_VERSION;?>"></script>
+      <!-- bootstrap-wizardStep js -->
+      <script src="<?php echo FRONT_PATH;?>src/plugins/jquery-steps/jquery.steps.js?v=<?php echo APP_VERSION;?>"></script>
+	    <script src="<?php echo FRONT_PATH;?>vendors/scripts/steps-setting.js?v=<?php echo APP_VERSION;?>"></script>
     <?php } ?>
 
     <!-- js DistriX -->

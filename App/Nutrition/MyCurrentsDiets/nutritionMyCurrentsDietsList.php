@@ -54,10 +54,10 @@
               <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_update_title; ?></h4>
               <form class="FormAddMyCurrentDiet" action="#" id="FormAddMyCurrentDiet">
-                <input class="form-control AddMyCurrentsDietsFormId"            type="hidden" name="id"           value="0">
-                <input class="form-control AddMyCurrentsDietsFormIdUserCoatch"  type="hidden" name="idusercoach"  value="0">
-                <input class="form-control AddMyCurrentsDietsFormTimestamp"     type="hidden" name="timestamp"    value="0">
-                <input class="form-control AddMyCurrentsDietsFormStatut"        type="hidden" name="elemState"    value="0">
+                <input class="form-control AddMyCurrentsDietsFormId"            type="text" name="id"           value="0">
+                <input class="form-control AddMyCurrentsDietsFormIdUserCoatch"  type="text" name="idUserCoach"  value="0">
+                <input class="form-control AddMyCurrentsDietsFormTimestamp"     type="text" name="timestamp"    value="0">
+                <input class="form-control AddMyCurrentsDietsFormStatut"        type="text" name="elemState"    value="0">
                 <div class="row">
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">

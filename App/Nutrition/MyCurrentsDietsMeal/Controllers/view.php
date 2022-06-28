@@ -4,12 +4,11 @@ include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
 include(__DIR__ . "/../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
 
-$currentDiet = new DistriXNutritionCurrentDietData();
-$currentDiet->setId($_POST['id'] ?? 0);
+list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("ViewMyCurrentDiet");
-$servicesCaller->addParameter("data", $currentDiet);
+$servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
 $servicesCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsViewDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 

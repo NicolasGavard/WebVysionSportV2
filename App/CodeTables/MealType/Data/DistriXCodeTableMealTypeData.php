@@ -4,6 +4,7 @@ if (!class_exists("DistriXCodeTableMealTypeData", false)) {
     protected $id;
     protected $code;
     protected $name;
+    protected $order;
     protected $elemState;
     protected $timestamp;
     protected $nbLanguages;
@@ -14,6 +15,7 @@ if (!class_exists("DistriXCodeTableMealTypeData", false)) {
       $this->id               = 0;
       $this->code             = "";
       $this->name             = "";
+      $this->order            = 0;
       $this->elemState        = 0;
       $this->timestamp        = 0;
       $this->nbLanguages      = 0;
@@ -24,6 +26,7 @@ if (!class_exists("DistriXCodeTableMealTypeData", false)) {
     public function getId():int { return $this->id; }
     public function getCode():string { return $this->code; }
     public function getName():string { return $this->name; }
+    public function getOrder():int { return $this->order; }
     public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
     public function getNbLanguages():int { return $this->nbLanguages; }
@@ -33,6 +36,7 @@ if (!class_exists("DistriXCodeTableMealTypeData", false)) {
     public function setId(int $id) { $this->id = $id; }
     public function setCode(string $code) { $this->code = $code; }
     public function setName(string $name) { $this->name = $name; }
+    public function setOrder(int $order) { $this->order = $order; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
     public function setNbLanguages(int $nbLanguages) { $this->nbLanguages = $nbLanguages; }

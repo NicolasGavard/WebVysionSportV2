@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/Nutrition/MyCurrentsDiets/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../Data/DistriXNutritionCurrentDietData.php");
 
 $confirmSave  = false;
 
@@ -11,9 +11,8 @@ if (isset($_POST)) {
   $currentDiet->setId($_POST['id'] ?? 0);
 
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->setMethodName("DelCurrentDiet");
   $servicesCaller->addParameter("data", $currentDiet);
-  $servicesCaller->setServiceName("Nutrition/CurrentDiet/DistriXNutritionMyCurrentsDietsDeleteDataSvc.php");
+  $servicesCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
   
   $logOk = logController("Security_CurrentDiet", "DistriXCurrentDietDeleteDataSvc", "DelCurrentDiet", $output);

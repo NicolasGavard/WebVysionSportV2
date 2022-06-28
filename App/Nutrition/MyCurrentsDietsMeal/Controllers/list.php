@@ -27,8 +27,7 @@ $listFoodNutritional              = [];
 $listMealTypes                    = [];
 $listMealTypeNames                = [];
 
-$_POST['idDiet'] = 1;
-
+$_POST['idDiet']                  = 1;    
 list($distriXNutritionCurrentDietMealMealData, $errorJson)  = DistriXNutritionCurrentDietMealData::getJsonData($_POST);
 
 $infoProfil                       = DistriXStyAppInterface::getUserInformation();
@@ -132,14 +131,6 @@ if ($outputok && isset($output["ListMealTypes"]) && is_array($output["ListMealTy
   $error = $errorData;
 }
 
-print_r($listMyRecipe);
-echo '<br><br>';
-print_r($listMyRecipeFood);
-echo '<br><br>';
-print_r($listFood);
-echo '<br><br>';
-print_r($listFoodNutritional);
-
 // TREATMENT
 foreach ($listMyCurrentDietMeals as $currentDietMeal) {
   $foods = [];
@@ -152,19 +143,19 @@ foreach ($listMyCurrentDietMeals as $currentDietMeal) {
   foreach ($listMyRecipe as $recipe) {
     if ($recipe->getId() == $currentDietMeal->getIdDietRecipe()){
       $distriXNutritionCurrentDietMealData->setNameDietRecipe($recipe->getName());
-      
       foreach ($listMyRecipeFood as $recipeFood) {
         if ($recipe->getId() == $recipeFood->getIdRecipe()) {
           foreach ($listFood as $food) {
             if ($food->getId() == $recipeFood->getIdRecipe()) {
               $distriXFoodFoodData = new DistriXFoodFoodData();
-              $distriXFoodFoodData->setName($recipeFood->getName());
+              $distriXFoodFoodData->setName($food->getName());
+              $foodFoodNutritionalList = [];
               foreach ($listFoodNutritional as $foodNutritional) {
                 if ($food->getId() == $foodNutritional->getIdFood()) {
                   $distriXFoodFoodNutritionalData = new DistriXFoodFoodNutritionalData();
-                  $distriXFoodFoodNutritionalData->setId($id);
-                  $distriXFoodFoodNutritionalData->setIdFood($idFood);
-                  $distriXFoodFoodNutritionalData->setIdNutritional($idNutritional);
+                  $distriXFoodFoodNutritionalData->setId($foodNutritional->getId());
+                  $distriXFoodFoodNutritionalData->setIdFood($foodNutritional->getIdFood());
+                  $distriXFoodFoodNutritionalData->setIdNutritional($foodNutritional->getIdNutritional());
                   $foodFoodNutritionalList[] = $distriXFoodFoodNutritionalData;
                   break;
                 }
@@ -192,8 +183,7 @@ foreach ($listMyCurrentDietMeals as $currentDietMeal) {
 }
 
 $resp["ListMyCurrentsDietMeals"]  = $listMyCurrentDietMealsFormFront;
+$resp["ListMealsTypes"]           = $listMealTypeNames;
 if(!empty($error)){
   $resp["Error"]                  = $error;
 }
-
-echo json_encode($resp);

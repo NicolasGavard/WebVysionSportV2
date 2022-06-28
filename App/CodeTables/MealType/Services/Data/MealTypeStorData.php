@@ -6,6 +6,7 @@ class MealTypeStorData extends DistriXSvcAppData {
   protected $id;
   protected $code;
   protected $name;
+  protected $displayorder;
   protected $elemstate;
   protected $timestamp;
 
@@ -13,13 +14,15 @@ class MealTypeStorData extends DistriXSvcAppData {
       $this->id = 0;
       $this->code = "";
       $this->name = "";
-      $this->elemstate = 0;
-      $this->timestamp = 0;
+      $this->displayorder = 0;
+      $this->elemstate    = 0;
+      $this->timestamp    = 0;
     }
 // Gets
   public function getId():int { return $this->id; }
   public function getCode():string { return $this->code; }
   public function getName():string { return $this->name; }
+  public function getDisplayOrder():int { return $this->displayorder; }
   public function getElemState():int { return $this->elemstate; }
   public function getTimestamp():int { return $this->timestamp; }
   public function isAvailable():bool { return ($this->elemstate == self::MEALTYPE_STATUS_AVAILABLE); }
@@ -29,6 +32,7 @@ class MealTypeStorData extends DistriXSvcAppData {
   public function setId(int $id) { $this->id = $id; }
   public function setCode(string $code) { $this->code = $code; }
   public function setName(string $name) { $this->name = $name; }
+  public function setDisplayOrder(int $displayOrder) { $this->displayorder = $displayOrder; }
   public function setElemState(int $elemState) { $this->elemstate = $elemState; }
   public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->elemstate = self::MEALTYPE_STATUS_AVAILABLE; }
