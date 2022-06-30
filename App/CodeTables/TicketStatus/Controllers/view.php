@@ -1,9 +1,9 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
-include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusNameData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableTicketStatusData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableTicketStatusNameData.php");
 
 if (isset($_POST)) {
   list($ticketStatus, $errorJson) = DistriXCodeTableTicketStatusData::getJsonData($_POST);
@@ -12,7 +12,7 @@ if (isset($_POST)) {
 // CALL
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $ticketStatus);
-  $servicesCaller->setServiceName("TablesCodes/TicketStatus/DistriXTicketStatusViewDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/TicketStatus/Services/DistriXTicketStatusViewDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
   $logOk = logController("Security_TicketStatus", "DistriXTicketStatusViewDataSvc", "ViewTicketStatus", $output);

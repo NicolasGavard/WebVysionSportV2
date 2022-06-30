@@ -1,27 +1,24 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
-include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusNameData.php");
-include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableTicketStatusData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableTicketStatusNameData.php");
+include(__DIR__ . "/../../Language/Data/DistriXCodeTableLanguageData.php");
 
-$listTicketStatuss = [];
+$listTicketStatus = [];
 $listLanguages = [];
 
 if (isset($_POST)) {
 // CALL
   $languageCaller = new DistriXServicesCaller();
   $languageCaller->setMethodName("ListLanguages");
-  $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
+  $languageCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageListDataSvc.php");
 
-  $dataName = new DistriXCodeTableTicketStatusNameData();
-
+  $dataName       = new DistriXCodeTableTicketStatusNameData();
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("dataName", $dataName);
-  $servicesCaller->setServiceName("TablesCodes/TicketStatus/DistriXTicketStatusListDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/TicketStatus/Services/DistriXTicketStatusListDataSvc.php");
 
   $svc = new DistriXSvc();
   $svc->addToCall("Language", $languageCaller);
@@ -36,13 +33,15 @@ if (isset($_POST)) {
   } else {
     $error = $errorData;
   }
+
   list($outputok, $output, $errorData) = $svc->getResult("TicketStatus"); //print_r($output);
-  $logOk = logController("Security_TicketStatus", "DistriXTicketStatusListDataSvc", "ListTicketStatus-TicketStatuss", $output);
-  if ($outputok && isset($output["ListTicketStatuss"]) && is_array($output["ListTicketStatuss"])) {
-    list($listTicketStatuss, $jsonError) = DistriXCodeTableTicketStatusData::getJsonArray($output["ListTicketStatuss"]);
+  $logOk = logController("Security_TicketStatus", "DistriXTicketStatusListDataSvc", "ListTicketStatus-TicketStatus", $output);
+  if ($outputok && isset($output["ListTicketStatus"]) && is_array($output["ListTicketStatus"])) {
+    list($listTicketStatus, $jsonError) = DistriXCodeTableTicketStatusData::getJsonArray($output["ListTicketStatus"]);
   } else {
     $error = $errorData;
   }
+  
   if ($outputok && isset($output["ListTicketStatusNames"]) && is_array($output["ListTicketStatusNames"])) {
     list($listTicketStatusNames, $jsonError) = DistriXCodeTableTicketStatusNameData::getJsonArray($output["ListTicketStatusNames"]);
   } else {
@@ -51,7 +50,7 @@ if (isset($_POST)) {
 
 // TREATMENT
   $nbLanguagesTotal = count($listLanguages);
-  foreach ($listTicketStatuss as $ticketStatus) {
+  foreach ($listTicketStatus as $ticketStatus) {
     $ticketStatus->setNbLanguagesTotal($nbLanguagesTotal);
     $names = [];
     foreach ($listTicketStatusNames as $ticketStatusName) {
@@ -63,7 +62,7 @@ if (isset($_POST)) {
     $ticketStatus->setNbLanguages(count($names));
   }
 }
-$resp["ListTicketStatuss"] = $listTicketStatuss;
+$resp["ListTicketStatus"] = $listTicketStatus;
 $resp["ListLanguages"] = $listLanguages;
 if (!empty($error)) {
   $resp["Error"] = $error;

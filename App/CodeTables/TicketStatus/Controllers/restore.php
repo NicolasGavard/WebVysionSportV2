@@ -1,22 +1,24 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableTicketStatusData.php");
+
+$i18cdlangue    = 'FR';
+// If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+$international  = __DIR__.'/i18/'.$i18cdlangue.'/codeTableTicketStatusList'.$i18cdlangue;
+include(__DIR__ . "/../../../i18/_i18.php");
+$international  = $i18cdlangue.'Global/globalTranslation';
+include(__DIR__ . "/../../../i18/_i18.php");
 
 $confirmSave = false;
 
-// TESTS
-// $_POST["id"] = 1;
-// $_POST["id"] = 3;
-// $_POST["id"] = 4;
-
 if (isset($_POST)) {
-  list($ticketStatus, $errorJson) = DistriXCodeTableTicketStatusData::getJsonData($_POST);
+  list($ticketType, $errorJson) = DistriXCodeTableTicketStatusData::getJsonData($_POST);
 
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->addParameter("data", $ticketStatus);
-  $servicesCaller->setServiceName("TablesCodes/TicketStatus/DistriXTicketStatusRestoreDataSvc.php");
+  $servicesCaller->addParameter("data", $ticketType);
+  $servicesCaller->setServiceName("App/CodeTables/TicketStatus/Services/DistriXTicketStatusRestoreDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
   // print_r($output);
 
@@ -25,7 +27,11 @@ if (isset($_POST)) {
   if ($outputok && !empty($output) && isset($output["ConfirmSave"])) {
     $confirmSave = $output["ConfirmSave"];
   } else {
-    $error = $errorData;
+    list($error, $jsonError) = ApplicationErrorData::getJsonData($errorData);
+    $errorCode = "error_".$error->getCode()."_txt";
+    if (isset($$errorCode)) {
+      $error->setText(ApplicationErrorData::getErrorText($$errorCode, []));
+    }
   }
 }
 $resp["ConfirmSave"] = $confirmSave;
