@@ -1,14 +1,9 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalNameData.php");
-
-// TESTS
-// $_POST["id"] = 1;
-// $_POST["id"] = 3;
-// $_POST["id"] = 4;
+include(__DIR__ . "/../Data/DistriXCodeTableNutritionalData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableNutritionalNameData.php");
 
 if (isset($_POST)) {
   list($nutritional, $errorJson) = DistriXCodeTableNutritionalData::getJsonData($_POST);
@@ -17,7 +12,7 @@ if (isset($_POST)) {
 // CALL
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $nutritional);
-  $servicesCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalViewDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/Nutritional/Services/DistriXNutritionalViewDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
   $logOk = logController("Security_Nutritional", "DistriXNutritionalViewDataSvc", "ViewNutritional", $output);

@@ -1,12 +1,10 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalData.php");
-include(__DIR__ . "/../../Data/CodeTables/Nutritional/DistriXCodeTableNutritionalNameData.php");
-include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableNutritionalData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableNutritionalNameData.php");
+include(__DIR__ . "/../../Language/Data/DistriXCodeTableLanguageData.php");
 
 $listNutritionals = [];
 $listLanguages = [];
@@ -15,22 +13,12 @@ if (isset($_POST)) {
 // CALL
   $languageCaller = new DistriXServicesCaller();
   $languageCaller->setMethodName("ListLanguages");
-  $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
+  $languageCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageListDataSvc.php");
 
-  // $infoProfil = DistriXStyAppInterface::getUserInformation();
-  // if (empty($_POST['idLanguage'])) {
-  //   $_POST['idLanguage'] = $infoProfil->getIdLanguage();
-  // }
-  // list($dataName, $errorJson) = DistriXCodeTableNutritionalNameData::getJsonData($_POST);
-
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Pas de langue pour avoir toutes les langues ! 10-June-22
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  $dataName = new DistriXCodeTableNutritionalNameData();
-
+  $dataName       = new DistriXCodeTableNutritionalNameData();
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("dataName", $dataName);
-  $servicesCaller->setServiceName("TablesCodes/Nutritional/DistriXNutritionalListDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/Nutritional/Services/DistriXNutritionalListDataSvc.php");
 
   $svc = new DistriXSvc();
   $svc->addToCall("Language", $languageCaller);
@@ -45,6 +33,7 @@ if (isset($_POST)) {
   } else {
     $error = $errorData;
   }
+
   list($outputok, $output, $errorData) = $svc->getResult("Nutritional"); //print_r($output);
   $logOk = logController("Security_Nutritional", "DistriXNutritionalListDataSvc", "ListNutritional-Nutritionals", $output);
   if ($outputok && isset($output["ListNutritionals"]) && is_array($output["ListNutritionals"])) {
@@ -52,6 +41,7 @@ if (isset($_POST)) {
   } else {
     $error = $errorData;
   }
+  
   if ($outputok && isset($output["ListNutritionalNames"]) && is_array($output["ListNutritionalNames"])) {
     list($listNutritionalNames, $jsonError) = DistriXCodeTableNutritionalNameData::getJsonArray($output["ListNutritionalNames"]);
   } else {

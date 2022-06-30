@@ -16,7 +16,6 @@ if ($dataSvc->isAuthorized()) {
   if (is_null($dbConnection->getError())) {
     list($languageStor, $languageStorInd) = LanguageStor::getList(true, $dbConnection);
     foreach ($languageStor as $language) {
-      
       if( ini_get('allow_url_fopen') ) {
         $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_CODE_TABLES . '/' . $language->getLinkToPicture();
         $pictures_headers = get_headers($urlPicture);

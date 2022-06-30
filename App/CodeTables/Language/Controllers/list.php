@@ -1,13 +1,12 @@
 <?php
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableLanguageData.php");
 
 $listLanguages  = [];
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ListLanguages");
-$servicesCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
+$servicesCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageListDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //print_r($output);
 
 $logOk = logController("Security_Language", "DistriXLanguageDeleteDataSvc", "DelLanguage", $output);

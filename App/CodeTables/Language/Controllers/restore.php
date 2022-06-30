@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableLanguageData.php");
 
 $confirmSave  = false;
 
@@ -10,7 +10,7 @@ list($distriXCodeTableBandData, $errorJson) = DistriXCodeTableLanguageData::getJ
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("RestoreLanguage");
 $servicesCaller->addParameter("data", $distriXCodeTableBandData);
-$servicesCaller->setServiceName("TablesCodes/Language/DistriXLanguageRestoreDataSvc.php");
+$servicesCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageRestoreDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_Language", "DistriXLanguageDeleteDataSvc", "DelLanguage", $output);

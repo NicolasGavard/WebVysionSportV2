@@ -3,6 +3,10 @@
   $page_picture         = "Image";
   $page_code            = "Code";
   $page_name            = "Nom";
+  $page_translation     = "Traductions";
+  $page_languages       = "Langues";
+  $page_language        = "Langue";
+  $page_name_translated = "Nom dans la langue";
   $page_type            = "Type";
   $page_action          = "Actions";
   $page_add_title       = "Ajouter une information nutritionnelle";

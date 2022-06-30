@@ -1,7 +1,7 @@
 <?php
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableLanguageData.php");
 
 $confirmSave  = false;
 
@@ -11,7 +11,7 @@ if($_POST['base64Img'] != '') { $distriXCodeTableLanguageData->setLinkToPicture(
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveLanguage");
 $servicesCaller->addParameter("data", $distriXCodeTableLanguageData);
-$servicesCaller->setServiceName("TablesCodes/Language/DistriXLanguageSaveDataSvc.php");
+$servicesCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
 
 $logOk = logController("Security_Language", "DistriXLanguageDeleteDataSvc", "DelLanguage", $output);
