@@ -1,12 +1,10 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeNameData.php");
-include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableTicketTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableTicketTypeNameData.php");
+include(__DIR__ . "/../../Language/Data/DistriXCodeTableLanguageData.php");
 
 $listTicketTypes = [];
 $listLanguages = [];
@@ -15,13 +13,12 @@ if (isset($_POST)) {
 // CALL
   $languageCaller = new DistriXServicesCaller();
   $languageCaller->setMethodName("ListLanguages");
-  $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
+  $languageCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageListDataSvc.php");
 
-  $dataName = new DistriXCodeTableTicketTypeNameData();
-
+  $dataName       = new DistriXCodeTableTicketTypeNameData();
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("dataName", $dataName);
-  $servicesCaller->setServiceName("TablesCodes/TicketType/DistriXTicketTypeListDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/TicketType/Services/DistriXTicketTypeListDataSvc.php");
 
   $svc = new DistriXSvc();
   $svc->addToCall("Language", $languageCaller);

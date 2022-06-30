@@ -1,39 +1,39 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/Tickettype/DistriXCodeTableTickettypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/Tickettype/DistriXCodeTableTickettypeNameData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableTicketTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableTicketTypeNameData.php");
 
 if (isset($_POST)) {
-  list($tickettype, $errorJson) = DistriXCodeTableTickettypeData::getJsonData($_POST);
-  $listTickettypeNames = [];
+  list($ticketType, $errorJson) = DistriXCodeTableTicketTypeData::getJsonData($_POST);
+  $listTicketTypeNames = [];
 
 // CALL
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->addParameter("data", $tickettype);
-  $servicesCaller->setServiceName("TablesCodes/Tickettype/DistriXTickettypeViewDataSvc.php");
+  $servicesCaller->addParameter("data", $ticketType);
+  $servicesCaller->setServiceName("App/CodeTables/TicketType/Services/DistriXTicketTypeViewDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
-  $logOk = logController("Security_Tickettype", "DistriXTickettypeViewDataSvc", "ViewTickettype", $output);
+  $logOk = logController("Security_TicketType", "DistriXTicketTypeViewDataSvc", "ViewTicketType", $output);
 
 // RESPONSE
-  if ($outputok && isset($output["ViewTickettype"])) {
-    list($tickettype, $jsonError) = DistriXCodeTableTickettypeData::getJsonData($output["ViewTickettype"]);
+  if ($outputok && isset($output["ViewTicketType"])) {
+    list($ticketType, $jsonError) = DistriXCodeTableTicketTypeData::getJsonData($output["ViewTicketType"]);
   } else {
     $error = $errorData;
   }
-  if ($outputok && isset($output["ViewTickettypeNames"]) && is_array($output["ViewTickettypeNames"])) {
-    list($listTickettypeNames, $jsonError) = DistriXCodeTableTickettypeNameData::getJsonArray($output["ViewTickettypeNames"]);
+  if ($outputok && isset($output["ViewTicketTypeNames"]) && is_array($output["ViewTicketTypeNames"])) {
+    list($listTicketTypeNames, $jsonError) = DistriXCodeTableTicketTypeNameData::getJsonArray($output["ViewTicketTypeNames"]);
   } else {
     $error = $errorData;
   }
 
 // TREATMENT
-  $tickettype->setNames($listTickettypeNames);
-  $tickettype->setNbLanguages(count($listTickettypeNames));
+  $ticketType->setNames($listTicketTypeNames);
+  $ticketType->setNbLanguages(count($listTicketTypeNames));
 }
-$resp["ViewTickettype"] = $tickettype;
+$resp["ViewTicketType"] = $ticketType;
 if (!empty($error)) {
   $resp["Error"] = $error;
 }
