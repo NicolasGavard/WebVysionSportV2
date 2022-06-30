@@ -1,6 +1,186 @@
 <?php // Needed to encode in UTF8 ààéàé //
 class WeightTypeStor {
 
+  const TABLE_NAME_TABLENAME = "weighttypename";
+  const FIELDS_TABLENAME = ',weighttypename.id weighttypenameid,idweighttype weighttypenameidweighttype,idlanguage weighttypenameidlanguage,weighttypename.name weighttypename,weighttypename.elemstate weighttypenameelemstate,weighttypename.timestamp weighttypenametimestamp';
+
+  public static function getListNames(bool $all, WeightTypeNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new WeightTypeStorData();
+    $list = [];
+    $listNames = [];
+  
+    if ($inDbConnection != null) {
+      $request  = "SELECT weighttype.id,weighttype.code,weighttype.name,weighttype.abbreviation,weighttype.issolid,weighttype.isliquid,weighttype.isother,weighttype.elemstate,weighttype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idweighttype";
+      if ($dataIn->getIdLanguage() > 0) {
+        $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataIn->getIdLanguage();
+      }
+      if (!$all) {
+        $request .= " WHERE ".self::TABLE_NAME.".elemstate = :statut";
+      }
+      $request .= " ORDER BY  ".self::TABLE_NAME.".code";
+
+      $stmt = $inDbConnection->prepare($request);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $oldValue = "";
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new WeightTypeNameStorData();
+          if (! is_null($row["weighttypenameid"])) {
+            $dataName->setId($row["weighttypenameid"]);
+            $dataName->setIdWeightType($row["weighttypenameidweighttype"]);
+            $dataName->setIdLanguage($row["weighttypenameidlanguage"]);
+            $dataName->setName($row["weighttypename"]);
+            $dataName->setElemState($row["weighttypenameelemstate"]);
+            $dataName->setTimestamp($row["weighttypenametimestamp"]);
+          }
+          if ($oldValue != $row["code"]) {
+             $oldValue = $row["code"];
+             if ($data->getId() > 0) {
+               $list[] = $data;
+               $data = new WeightTypeStorData();
+             }
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setAbbreviation($row["abbreviation"]);
+          $data->setIsLiquid($row["issolid"]);
+          $data->setIsSolid($row["isliquid"]);
+          $data->setIsOther($row["isother"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+          if (! is_null($row["weighttypenameid"])) {
+            $listNames[] = $dataName;
+          }
+        }
+        $list[] = $data;
+      }
+    }
+    return array($list, $listNames);
+  }
+
+  public static function findByIndCodeNames(WeightTypeStorData $dataIn, WeightTypeNameStorData $dataNameIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new WeightTypeStorData();
+    $listNames = [];
+
+    if ($inDbConnection != null) {
+      $request  = "SELECT weighttype.id,weighttype.code,weighttype.name,weighttype.abbreviation,weighttype.issolid,weighttype.isliquid,weighttype.isother,weighttype.elemstate,weighttype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idweighttype";
+      if ($dataNameIn->getIdLanguage() > 0) {
+        $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataNameIn->getIdLanguage();
+      }
+      $request .= " WHERE weighttype.code = :index0";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['index0'=>  $dataIn->getCode()]);
+      if (self::SHOW_FIND_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new WeightTypeNameStorData();
+          if (! is_null($row["weighttypenameid"])) {
+            $dataName->setId($row["weighttypenameid"]);
+            $dataName->setIdWeightType($row["weighttypenameidweighttype"]);
+            $dataName->setIdLanguage($row["weighttypenameidlanguage"]);
+            $dataName->setName($row["weighttypename"]);
+            $dataName->setElemState($row["weighttypenameelemstate"]);
+            $dataName->setTimestamp($row["weighttypenametimestamp"]);
+            $listNames[] = $dataName;
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setAbbreviation($row["abbreviation"]);
+          $data->setIsLiquid($row["issolid"]);
+          $data->setIsSolid($row["isliquid"]);
+          $data->setIsOther($row["isother"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+        }
+      }
+    }
+    return array($data, $listNames);
+  }
+  // End of findByIndCodeNames
+
+  public static function readNames(int $id, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new WeightTypeStorData();
+    $listNames = [];
+
+    if ($inDbConnection != null) {
+      $request  = "SELECT weighttype.id,weighttype.code,weighttype.name,weighttype.abbreviation,weighttype.issolid,weighttype.isliquid,weighttype.isother,weighttype.elemstate,weighttype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idweighttype";
+      $request .= " WHERE ".self::TABLE_NAME.".id = :id";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['id'=> $id]);
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new WeightTypeNameStorData();
+          if (! is_null($row["weighttypenameid"])) {
+            $dataName->setId($row["weighttypenameid"]);
+            $dataName->setIdWeightType($row["weighttypenameidweighttype"]);
+            $dataName->setIdLanguage($row["weighttypenameidlanguage"]);
+            $dataName->setName($row["weighttypename"]);
+            $dataName->setElemState($row["weighttypenameelemstate"]);
+            $dataName->setTimestamp($row["weighttypenametimestamp"]);
+            $listNames[] = $dataName;
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setAbbreviation($row["abbreviation"]);
+          $data->setIsLiquid($row["issolid"]);
+          $data->setIsSolid($row["isliquid"]);
+          $data->setIsOther($row["isother"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+        }
+      }
+      $trace = $inDbConnection->getTrace();
+      if (!is_null($trace) && !$trace->getManualTrace()) {
+        $traceData = new DistriXTraceData();
+        $traceData->setIdUser($trace->getIdUser());
+        $traceData->setApplication($trace->getApplicationName());
+        $traceData->setSchema($trace->getDbSchemaName());
+        $traceData->setOperationCode($traceData::TRACE_READ);
+        $traceData->setOperationId($id);
+        $traceData->setOperationTable(self::TABLE_NAME);
+        $traceData->setOperationData(print_r($data, true));
+        $traceData->setOperationDate(DistriXSvcUtil::getCurrentNumDate());
+        $traceData->setOperationTime(DistriXSvcUtil::getCurrentNumTime());
+        $trace->addToTrace($traceData);
+      }
+    }
+    return array($data, $listNames);
+  }
+  // End of readNames
+
 //=============================================================================
 //== DO NOT REMOVE !
 //== CODE UNDER WILL BE AUTOMATICALLY REGENERATED !

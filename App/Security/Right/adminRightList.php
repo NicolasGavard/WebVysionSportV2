@@ -111,6 +111,6 @@
         include('../Home/_headerFooter.php');
       ?>
       
-      <script src="../../jsWebVysionSport/adminRights.js"></script>
+      <script src="../../jsWebVysionSport/adminRights.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

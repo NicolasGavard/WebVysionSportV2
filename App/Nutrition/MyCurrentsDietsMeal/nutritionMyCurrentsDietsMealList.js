@@ -174,15 +174,15 @@ $(function() {
         let listFoodsWeight       = '';
         $.map(val.foods, function(valFoods, keyFoods) {
           listFoods             += valFoods.nameFood +'<br>';
-          listFoodsNutritionals +=  '  <div class="row">'+
-                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-flash"></span> '+valFoods.calorie+'</div>'+
-                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-orange"></span> '+valFoods.proetin+'</div>'+
-                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-chip"></span> '+valFoods.glucide+'</div>'+
-                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-flame"></span> '+valFoods.lipid+'</div>'+
-                                    '  </div>';
-          listFoodsWeight       +=  '  <div class="row">'+
-                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-shopping-bag"></span> '+valFoods.weight+' '+valFoods.abbrWeightType+'</div>'+
-                                    '  </div>';
+          listFoodsNutritionals += '  <div class="row">'+
+                                   '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-flash"></span> '+valFoods.calorie+'</div>'+
+                                   '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-orange"></span> '+valFoods.proetin+'</div>'+
+                                   '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-chip"></span> '+valFoods.glucide+'</div>'+
+                                   '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-flame"></span> '+valFoods.lipid+'</div>'+
+                                   '  </div>';
+          listFoodsWeight       += '  <div class="row">'+
+                                   '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-shopping-bag"></span> '+valFoods.weight+' '+valFoods.abbrWeightType+'</div>'+
+                                   '  </div>';
         });
         
         let line =  '<tr>'+

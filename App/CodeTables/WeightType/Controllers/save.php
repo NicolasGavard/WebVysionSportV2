@@ -1,70 +1,48 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeNameData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableWeightTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableWeightTypeNameData.php");
 
-$resp         = array();
+$i18cdlangue    = 'FR';
+// If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+$international  = __DIR__.'/i18/'.$i18cdlangue.'/codeTableWeightTypeList'.$i18cdlangue;
+include(__DIR__ . "/../../../i18/_i18.php");
+
 $confirmSave  = false;
-$error        = array();
-$output       = array();
-$outputok     = false;
 
-$distriXCodeTableWeightTypeData = new DistriXCodeTableWeightTypeNameData();
-$distriXCodeTableWeightTypeData->setId($_POST['id']);
-$distriXCodeTableWeightTypeData->setIdWeightType($_POST['idWeightType']);
-$distriXCodeTableWeightTypeData->setIdLanguage($_POST['idLanguage']);
-$distriXCodeTableWeightTypeData->setCode($_POST['code']);
-$distriXCodeTableWeightTypeData->setName($_POST['name']);
-$distriXCodeTableWeightTypeData->setDescription($_POST['description']);
-$distriXCodeTableWeightTypeData->setAbbreviation($_POST['abbreviation']);
-if ($_POST['weightTypeType'] == 'isSolid') {
-  $distriXCodeTableWeightTypeData->setIsSolid(1);
-}
-if ($_POST['weightTypeType'] == 'isLiquid') {
-  $distriXCodeTableWeightTypeData->setIsLiquid(1);
-}
-if ($_POST['weightTypeType'] == 'isOther') {
-  $distriXCodeTableWeightTypeData->setIsOther(1);
-}
-$distriXCodeTableWeightTypeData->setStatus($_POST['statut']);
-$distriXCodeTableWeightTypeData->setTimestamp($_POST['timestamp']);
+if (isset($_POST)) {
+  list($weightType, $jsonError) = DistriXCodeTableWeightTypeData::getJsonData($_POST);
+  list($weightTypeNames, $jsonError) = DistriXCodeTableWeightTypeNameData::getJsonArray($weightType->getNames());
+  $weightType->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. 01 June 22
+  
+  $servicesCaller = new DistriXServicesCaller();
+  $servicesCaller->setDebugMode(DISTRIX_SVC_DATA_LAYER_IN_DEBUG_MODE);
+  // $servicesCaller->setDebugModeAllLayerOn();
+  $servicesCaller->addParameter("data", $weightType);
+  $servicesCaller->addParameter("dataNames", $weightTypeNames);
+  $servicesCaller->setServiceName("App/CodeTables/WeightType/Services/DistriXWeightTypeSaveDataSvc.php");
+  list($outputok, $output, $errorData) = $servicesCaller->call(); 
+  // echo "-*/-"; print_r($output); echo "-*/-";
 
-$servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("SaveWeightType");
-$servicesCaller->addParameter("data", $distriXCodeTableWeightTypeData);
-$servicesCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeSaveDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+  $logOk = logController("Security_WeightType", "DistriXWeightTypeSaveDataSvc", "SaveWeightType", $output);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_WeightType")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXWeightTypeSaveDataSvc");
-  $logInfoData->setLogFunction("SaveWeightType");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
-
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
+  if ($outputok && !empty($output) > 0 && isset($output["ConfirmSave"])) {
     $confirmSave = $output["ConfirmSave"];
+  } else {
+    // $error = $errorData;
+    list($error, $jsonError) = ApplicationErrorData::getJsonData($errorData);
+    $errorCode = "error_".$error->getCode()."_txt";
+    if (isset($$errorCode)) {
+      $codes[0] = $weightType->getCode();
+      $codes[1] = $weightType->getId();
+      $error->setText(ApplicationErrorData::getErrorText($$errorCode, $codes));
+    }
   }
-} else {
-  $error = $errorData;
 }
-
-$resp["ConfirmSave"]  = $confirmSave;
-if(!empty($error)){
-  $resp["Error"]        = $error;
+$resp["ConfirmSave"] = $confirmSave;
+if (!empty($error)){
+  $resp["Error"] = $error;
 }
-
 echo json_encode($resp);

@@ -182,6 +182,6 @@
         include('../Home/_headerFooter.php');
       ?>
       
-      <script src="../../jsWebVysionSport/adminRoles.js"></script>
+      <script src="../../jsWebVysionSport/adminRoles.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

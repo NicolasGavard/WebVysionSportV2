@@ -230,9 +230,9 @@ $(function() {
                 '       <i class="dw dw-more"></i>'+
                 '     </a>'+
                 '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodType"   onclick="ViewFoodType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"        onclick="DelFoodType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"       onclick="RestFoodType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodType" onclick="ViewFoodType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelFoodType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestFoodType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                 '     </div>'+
                 '   </div>'+
                 ' </td>'+
@@ -272,11 +272,12 @@ function ViewFoodType(id){
         html += '    </div>';
         html += '    <div class="col-md-8 col-sm-12">';
         html += '      <div class="form-group">';
-        var updateName = "";
+        var updateName  = "";
+        var className   = "form-control-danger";
         $.map(data.ViewFoodType.names, function(nameData, nameDataKey) {
-          if (nameData.idLanguage == language.id) { updateName=nameData.name;}
+          if (nameData.idLanguage == language.id) { updateName=nameData.name; className = "form-control-success";}
         });
-        html += '        <input class="form-control AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" value="'+updateName+'" placeholder="'+nameTranslatedTxt+'">';
+        html += '        <input class="form-control '+className+' AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" value="'+updateName+'" placeholder="'+nameTranslatedTxt+'">';
         html += '      </div>';
         html += '    </div>';
         html += '  </div>';

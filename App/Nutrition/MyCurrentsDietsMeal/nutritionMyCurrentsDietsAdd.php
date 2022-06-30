@@ -81,6 +81,6 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="nutritionMyCurrentsDietsAdd.js"></script>
+      <script src="nutritionMyCurrentsDietsAdd.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

@@ -108,6 +108,6 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="nutritionMyTemplatesDietsList.js"></script>
+      <script src="nutritionMyTemplatesDietsList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

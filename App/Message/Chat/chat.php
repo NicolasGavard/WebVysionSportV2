@@ -280,6 +280,6 @@
 		<?php
 			include('../../Home/Template/_headerFooter.php');
 		?>
-    <!-- <script src="<?php echo FRONT_PATH;?>jsWebVysionSport/Home/actititiesList.js"></script> -->
+    <!-- <script src="<?php echo FRONT_PATH;?>jsWebVysionSport/Home/actititiesList.js?v=<?php echo APP_VERSION;?>"></script> -->
   </body>
 </html>

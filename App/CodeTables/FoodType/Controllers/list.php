@@ -39,6 +39,7 @@ if (isset($_POST)) {
   } else {
     $error = $errorData;
   }
+
   list($outputok, $output, $errorData) = $svc->getResult("FoodType"); //print_r($output);
   $logOk = logController("Security_FoodType", "DistriXFoodTypeListDataSvc", "ListFoodType-FoodTypes", $output);
   if ($outputok && isset($output["ListFoodTypes"]) && is_array($output["ListFoodTypes"])) {
@@ -46,6 +47,7 @@ if (isset($_POST)) {
   } else {
     $error = $errorData;
   }
+  
   if ($outputok && isset($output["ListFoodTypeNames"]) && is_array($output["ListFoodTypeNames"])) {
     list($listFoodTypeNames, $jsonError) = DistriXCodeTableFoodTypeNameData::getJsonArray($output["ListFoodTypeNames"]);
   } else {

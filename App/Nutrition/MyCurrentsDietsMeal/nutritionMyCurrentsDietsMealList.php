@@ -115,6 +115,6 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="nutritionMyCurrentsDietsMealList.js"></script>
+      <script src="nutritionMyCurrentsDietsMealList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

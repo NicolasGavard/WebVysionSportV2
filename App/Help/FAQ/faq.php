@@ -101,6 +101,6 @@
 			include('../../Home/Template/_headerFooter.php');
 		?>
 
-    <!-- <script src="../../jsWebVysionSport/Home/actititiesList.js"></script> -->
+    <!-- <script src="../../jsWebVysionSport/Home/actititiesList.js?v=<?php echo APP_VERSION;?>"></script> -->
   </body>
 </html>

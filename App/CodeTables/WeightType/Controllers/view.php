@@ -1,59 +1,40 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeNameData.php");
-include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableWeightTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableWeightTypeNameData.php");
 
-$resp               = array();
-$error              = array();
-$output             = array();
-$outputok           = false;
+if (isset($_POST)) {
+  list($weightType, $errorJson) = DistriXCodeTableWeightTypeData::getJsonData($_POST);
+  $listWeightTypeNames = [];
 
-$listLanguages      = DistriXStyLanguage::listLanguages();
+// CALL
+  $servicesCaller = new DistriXServicesCaller();
+  $servicesCaller->addParameter("data", $weightType);
+  $servicesCaller->setServiceName("App/CodeTables/WeightType/Services/DistriXWeightTypeViewDataSvc.php");
+  list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
-$weightType         = new DistriXCodeTableWeightTypeNameData();
-if ($_POST['id'] > 0) {
-  $weightType->setId($_POST['id']);
-  $weightType->setIdWeightType($_POST['idWeightType']);
-}
+  $logOk = logController("Security_WeightType", "DistriXWeightTypeViewDataSvc", "ViewWeightType", $output);
 
-$servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("ViewScoresNutri");
-$servicesCaller->addParameter("data", $weightType);
-$servicesCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeViewDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
-
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_WeightType")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXWeightTypeViewDataSvc");
-  $logInfoData->setLogFunction("ViewScoresNutri");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
-
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ViewWeightType"])) {
-    $weightType = $output["ViewWeightType"];
+// RESPONSE
+  if ($outputok && isset($output["ViewWeightType"])) {
+    list($weightType, $jsonError) = DistriXCodeTableWeightTypeData::getJsonData($output["ViewWeightType"]);
+  } else {
+    $error = $errorData;
   }
-} else {
-  $error = $errorData;
-}
+  if ($outputok && isset($output["ViewWeightTypeNames"]) && is_array($output["ViewWeightTypeNames"])) {
+    list($listWeightTypeNames, $jsonError) = DistriXCodeTableWeightTypeNameData::getJsonArray($output["ViewWeightTypeNames"]);
+  } else {
+    $error = $errorData;
+  }
 
+// TREATMENT
+  $weightType->setNames($listWeightTypeNames);
+  $weightType->setNbLanguages(count($listWeightTypeNames));
+}
 $resp["ViewWeightType"] = $weightType;
-$resp["ListLanguages"]  = $listLanguages;
-if(!empty($error)){
-  $resp["Error"]        = $error;
+if (!empty($error)) {
+  $resp["Error"] = $error;
 }
-
 echo json_encode($resp);

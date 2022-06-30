@@ -102,6 +102,6 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="foodEcoScoreList.js"></script>
+      <script src="foodEcoScoreList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

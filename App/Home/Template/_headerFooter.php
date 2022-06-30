@@ -72,7 +72,7 @@
     <script src="<?php echo FRONT_PATH;?>vendors/scripts/core.js?v=<?php echo APP_VERSION;?>"></script>
     <script src="<?php echo FRONT_PATH;?>vendors/scripts/script.min.js?v=<?php echo APP_VERSION;?>"></script>
     <script src="<?php echo FRONT_PATH;?>vendors/scripts/process.js?v=<?php echo APP_VERSION;?>"></script>
-    <!-- <script src="../../vendors/scripts/layout-settings.js"></script> -->
+    <!-- <script src="../../vendors/scripts/layout-settings.js?v=<?php echo APP_VERSION;?>"></script> -->
     
     <!-- js -->
     <script src="<?php echo FRONT_PATH;?>src/plugins/apexcharts/apexcharts.min.js?v=<?php echo APP_VERSION;?>"></script>

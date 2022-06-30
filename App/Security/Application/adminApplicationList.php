@@ -267,6 +267,6 @@
         include('../Home/_headerFooter.php');
       ?>
       
-      <script src="../../jsWebVysionSport/adminApplications.js"></script>
+      <script src="../../jsWebVysionSport/adminApplications.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

@@ -84,9 +84,9 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="foodDetail.js"></script>
-      <script src="../FoodLabel/foodLabelList.js"></script>
-      <script src="../FoodWeight/foodWeightList.js"></script>
-      <script src="../FoodNutritional/foodNutritionalList.js"></script>
+      <script src="foodDetail.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../FoodLabel/foodLabelList.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../FoodWeight/foodWeightList.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="../FoodNutritional/foodNutritionalList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

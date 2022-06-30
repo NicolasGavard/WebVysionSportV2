@@ -94,6 +94,6 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="foodLabelList.js"></script>
+      <script src="foodLabelList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

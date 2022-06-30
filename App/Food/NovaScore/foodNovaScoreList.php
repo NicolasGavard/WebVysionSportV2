@@ -102,6 +102,6 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="foodNovaScoreList.js"></script>
+      <script src="foodNovaScoreList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

@@ -1,52 +1,41 @@
 <?php
-include(__DIR__ . "/../../../DistriXInit/DistriXSvcControllerInit.php");
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/WeightType/DistriXCodeTableWeightTypeData.php");
-// Error
-include(__DIR__ . "/../../../GlobalData/ApplicationErrorData.php");
-// Layer
-include(__DIR__ . "/../../Layers/DistriXServicesCaller.php");
-// DistriX LOGGER
-include(__DIR__ . "/../../../DistriXLogger/DistriXLogger.php");
-include(__DIR__ . "/../../../DistriXLogger/data/DistriXLoggerInfoData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableWeightTypeData.php");
 
-$resp         = array();
-$confirmSave  = false;
-$error        = array();
-$output       = array();
-$outputok     = false;
+$i18cdlangue    = 'FR';
+// If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
+$international  = __DIR__.'/i18/'.$i18cdlangue.'/codeTableWeightTypeList'.$i18cdlangue;
+include(__DIR__ . "/../../../i18/_i18.php");
+$international  = $i18cdlangue.'/Global/globalTranslation';
+include(__DIR__ . "/../../../i18/_i18.php");
 
-$scoreNutri  = new DistriXCodeTableWeightTypeData();
-if ($_POST['id'] > 0) {
-  $scoreNutri->setId($_POST['id']);
-}
+$confirmSave = false;
 
-$servicesCaller = new DistriXServicesCaller();
-$servicesCaller->setMethodName("DelWeightType");
-$servicesCaller->addParameter("data", $scoreNutri);
-$servicesCaller->setServiceName("TablesCodes/WeightType/DistriXWeightTypeDeleteDataSvc.php");
-list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+if (isset($_POST)) {
+  list($weightType, $errorJson) = DistriXCodeTableWeightTypeData::getJsonData($_POST);
 
-if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security_WeightType")) {
-  $logInfoData = new DistriXLoggerInfoData();
-  $logInfoData->setLogIpAddress($_SERVER['REMOTE_ADDR']);
-  $logInfoData->setLogApplication("DistriXWeightTypeDeleteDataSvc");
-  $logInfoData->setLogFunction("DelWeightType");
-  $logInfoData->setLogData(print_r($output, true));
-  DistriXLogger::log($logInfoData);
-}
+  $servicesCaller = new DistriXServicesCaller();
+  $servicesCaller->addParameter("data", $weightType);
+  $servicesCaller->setServiceName("App/CodeTables/WeightType/Services/DistriXWeightTypeDeleteDataSvc.php");
+  list($outputok, $output, $errorData) = $servicesCaller->call(); 
+  //print_r($output);
 
-if ($outputok && !empty($output) > 0) {
-  if (isset($output["ConfirmSave"])) {
+  $logOk = logController("Security_WeightType", "DistriXWeightTypeDeleteDataSvc", "DelWeightType", $output);
+
+  if ($outputok && !empty($output) && isset($output["ConfirmSave"])) {
     $confirmSave = $output["ConfirmSave"];
+  } else {
+    list($error, $jsonError) = ApplicationErrorData::getJsonData($errorData);
+    $errorCode = "error_".$error->getCode()."_txt";
+    if (isset($$errorCode)) {
+      $error->setText(ApplicationErrorData::getErrorText($$errorCode, []));
+    }
   }
-} else {
-  $error = $errorData;
 }
-
-$resp["ConfirmSave"]  = $confirmSave;
-if(!empty($error)){
-  $resp["Error"]        = $error;
+$resp["ConfirmSave"] = $confirmSave;
+if (!empty($error)) {
+  $resp["Error"] = $error;
 }
-
 echo json_encode($resp);

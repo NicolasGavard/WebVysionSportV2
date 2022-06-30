@@ -113,6 +113,6 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="foodFoodList.js"></script>
+      <script src="foodFoodList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

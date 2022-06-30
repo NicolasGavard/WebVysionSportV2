@@ -13,17 +13,9 @@ $weightTypeStor = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($dataLanguage, $jsonError)           = LanguageStorData::getJsonData($dataSvc->getParameter("dataLanguage"));
-  list($weightTypeStor, $weightTypeStorInd) = WeightTypeStor::getList(true, $dbConnection);
-  foreach ($weightTypeStor as $weightType) {
-    $weightTypeNameStorData = new WeightTypeNameStorData();
-    $weightTypeNameStorData->setIdWeightType($weightType->getId());
-    $weightTypeNameStorData->setIdLanguage($dataLanguage->getId());
-    $weightTypeNameStor = WeightTypeNameStor::findByIdWeightTypeIdLanguage($weightTypeNameStorData, $dbConnection);
-    if ($weightTypeNameStor->getId() > 0) {
-      $weightType->setName($weightTypeNameStor->getName());
-    }
-  }
+  list($dataName, $jsonError)           = WeightTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
+  list($weightTypes, $weightTypeNames)  = WeightTypeStor::getListNames(true, $dataName, $dbConnection);
+
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
@@ -31,7 +23,8 @@ if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "ListWeightTypes", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListWeightTypes", $weightTypeStor);
+$dataSvc->addToResponse("ListWeightTypes", $weightTypes);
+$dataSvc->addToResponse("ListWeightTypeNames", $weightTypeNames);
 
 // Return response
 $dataSvc->endOfService();

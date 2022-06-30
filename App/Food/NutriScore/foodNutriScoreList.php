@@ -102,6 +102,6 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="foodNutriScoreList.js"></script>
+      <script src="foodNutriScoreList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

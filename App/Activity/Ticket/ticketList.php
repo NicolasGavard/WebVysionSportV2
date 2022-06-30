@@ -110,6 +110,6 @@
 		<?php
 			include('../../Home/Template/_headerFooter.php');
 		?>
-    <script src="ticketList.js"></script>
+    <script src="ticketList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

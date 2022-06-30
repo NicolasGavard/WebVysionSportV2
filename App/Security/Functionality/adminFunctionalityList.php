@@ -191,6 +191,6 @@
         include('../Home/_headerFooter.php');
       ?>
       
-      <script src="../../jsWebVysionSport/adminFunctionalities.js"></script>
+      <script src="../../jsWebVysionSport/adminFunctionalities.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>
