@@ -1,44 +1,39 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/mealType/DistriXCodeTablemealTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/mealType/DistriXCodeTablemealTypeNameData.php");
-
-// TESTS
-// $_POST["id"] = 1;
-// $_POST["id"] = 3;
-// $_POST["id"] = 4;
+include(__DIR__ . "/../Data/DistriXCodeTableMealTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableMealTypeNameData.php");
 
 if (isset($_POST)) {
-  list($mealType, $errorJson) = DistriXCodeTablemealTypeData::getJsonData($_POST);
-  $listmealTypeNames = [];
+  list($mealType, $errorJson) = DistriXCodeTableMealTypeData::getJsonData($_POST);
+  $listMealTypeNames = [];
 
 // CALL
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $mealType);
-  $servicesCaller->setServiceName("TablesCodes/mealType/DistriXmealTypeViewDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/MealType/Services/DistriXMealTypeViewDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
-  $logOk = logController("Security_mealType", "DistriXmealTypeViewDataSvc", "ViewmealType", $output);
+  $logOk = logController("Security_MealType", "DistriXMealTypeViewDataSvc", "ViewMealType", $output);
 
 // RESPONSE
-  if ($outputok && isset($output["ViewmealType"])) {
-    list($mealType, $jsonError) = DistriXCodeTablemealTypeData::getJsonData($output["ViewmealType"]);
+  if ($outputok && isset($output["ViewMealType"])) {
+    list($mealType, $jsonError) = DistriXCodeTableMealTypeData::getJsonData($output["ViewMealType"]);
   } else {
     $error = $errorData;
   }
-  if ($outputok && isset($output["ViewmealTypeNames"]) && is_array($output["ViewmealTypeNames"])) {
-    list($listmealTypeNames, $jsonError) = DistriXCodeTablemealTypeNameData::getJsonArray($output["ViewmealTypeNames"]);
+  if ($outputok && isset($output["ViewMealTypeNames"]) && is_array($output["ViewMealTypeNames"])) {
+    list($listMealTypeNames, $jsonError) = DistriXCodeTableMealTypeNameData::getJsonArray($output["ViewMealTypeNames"]);
   } else {
     $error = $errorData;
   }
 
 // TREATMENT
-  $mealType->setNames($listmealTypeNames);
-  $mealType->setNbLanguages(count($listmealTypeNames));
+  $mealType->setNames($listMealTypeNames);
+  $mealType->setNbLanguages(count($listMealTypeNames));
 }
-$resp["ViewmealType"] = $mealType;
+$resp["ViewMealType"] = $mealType;
 if (!empty($error)) {
   $resp["Error"] = $error;
 }
