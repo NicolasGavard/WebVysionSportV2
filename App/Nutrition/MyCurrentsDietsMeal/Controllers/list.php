@@ -18,6 +18,7 @@ include(__DIR__ . "/../../../CodeTables/Language/Data/DistriXCodeTableLanguageDa
 include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeData.php");
 include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeNameData.php");
 include(__DIR__ . "/../../../CodeTables/Nutritional/Data/DistriXCodeTableNutritionalData.php");
+include(__DIR__ . "/../../../CodeTables/WeightType/Data/DistriXCodeTableWeightTypeData.php");
 
 $listMyCurrentDietMealsFormFront  = [];
 $listMyCurrentDietMeals           = [];
@@ -66,6 +67,10 @@ $foodCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 $foodNutritionalCaller = new DistriXServicesCaller();
 $foodNutritionalCaller->setServiceName("App/Food/FoodNutritional/Services/DistriXFoodNutritionalListDataSvc.php");
 
+$weightTypeCaller = new DistriXServicesCaller();
+$weightTypeCaller->setServiceName("App/CodeTables/WeightType/Services/DistriXWeightTypeListDataSvc.php");
+$weightTypeCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+
 $nutritionalCaller = new DistriXServicesCaller();
 $nutritionalCaller->setServiceName("App/CodeTables/Nutritional/Services/DistriXNutritionalListDataSvc.php");
 $nutritionalCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
@@ -83,6 +88,7 @@ $svc->addToCall("recipe", $recipeCaller);
 $svc->addToCall("recipeFood", $recipeFoodCaller);
 $svc->addToCall("food", $foodCaller);
 $svc->addToCall("foodNutritional", $foodNutritionalCaller);
+$svc->addToCall("weightType", $weightTypeCaller);
 $svc->addToCall("nutritional", $nutritionalCaller);
 $svc->addToCall("mealType", $mealTypeCaller);
 $callsOk = $svc->call();
@@ -137,6 +143,13 @@ if ($outputok && isset($output["ListNutritionals"]) && is_array($output["ListNut
   $error = $errorData;
 }
 
+list($outputok, $output, $errorData) = $svc->getResult("weightType"); //print_r($output);
+if ($outputok && isset($output["ListWeightTypes"]) && is_array($output["ListWeightTypes"])) {
+  list($listWeightsTypes, $jsonError) = DistriXCodeTableWeightTypeData::getJsonArray($output["ListWeightTypes"]);
+} else {
+  $error = $errorData;
+}
+
 list($outputok, $output, $errorData) = $svc->getResult("mealType"); //print_r($output);
 if ($outputok && isset($output["ListMealTypes"]) && is_array($output["ListMealTypes"])) {
   list($listMealTypes, $jsonError)      = DistriXCodeTableMealTypeData::getJsonArray($output["ListMealTypes"]);
@@ -164,6 +177,17 @@ foreach ($listMyCurrentDietMeals as $currentDietMeal) {
           $distriXNutritionMyRecipeFoodData->setId($recipeFood->getId());
           $distriXNutritionMyRecipeFoodData->setIdRecipe($recipeFood->getIdRecipe());
           $distriXNutritionMyRecipeFoodData->setNameRecipe($recipeFood->getNameRecipe());
+          $distriXNutritionMyRecipeFoodData->setWeight($recipeFood->getWeight());
+          $distriXNutritionMyRecipeFoodData->setIdWeightType($recipeFood->getIdWeightType());
+          
+          foreach ($listWeightsTypes as $weightType) {
+             if($recipeFood->getIdWeightType() == $weightType->getId()){
+              $distriXNutritionMyRecipeFoodData->setNameWeightType($weightType->getName());
+              $distriXNutritionMyRecipeFoodData->setAbbrWeightType($weightType->getAbbreviation());
+              break;
+            }
+          }
+          
           foreach ($listFoodNutritional as $foodNutritional) {
             if ($recipeFood->getIdFood() == $foodNutritional->getIdFood()) {
               foreach ($listFood as $food) {
@@ -197,9 +221,11 @@ foreach ($listMyCurrentDietMeals as $currentDietMeal) {
       break;
     }
   }
-  $distriXNutritionCurrentDietMealData->setFoods($foods);
+
   $distriXNutritionCurrentDietMealData->setDayNumber($currentDietMeal->getDayNumber());
   $distriXNutritionCurrentDietMealData->setIdMealType($currentDietMeal->getIdMealType());
+  $distriXNutritionCurrentDietMealData->setFoods($foods);
+
   foreach ($listMealTypeNames as $mealTypeName) {
     if ($mealTypeName->getIdMealType() == $currentDietMeal->getIdMealType()){
       $distriXNutritionCurrentDietMealData->setNameMealType($mealTypeName->getName());

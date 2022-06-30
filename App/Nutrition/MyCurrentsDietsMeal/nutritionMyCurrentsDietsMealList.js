@@ -171,6 +171,7 @@ $(function() {
         
         let listFoods             = '';
         let listFoodsNutritionals = '';
+        let listFoodsWeight       = '';
         $.map(val.foods, function(valFoods, keyFoods) {
           listFoods             += valFoods.nameFood +'<br>';
           listFoodsNutritionals +=  '  <div class="row">'+
@@ -179,6 +180,9 @@ $(function() {
                                     '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-chip"></span> '+valFoods.glucide+'</div>'+
                                     '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-flame"></span> '+valFoods.lipid+'</div>'+
                                     '  </div>';
+          listFoodsWeight       +=  '  <div class="row">'+
+                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-shopping-bag"></span> '+valFoods.weight+' '+valFoods.abbrWeightType+'</div>'+
+                                    '  </div>';
         });
         
         let line =  '<tr>'+
@@ -186,7 +190,7 @@ $(function() {
                     '  <td>'+val.nameMealType+'</td>'+
                     '  <td>'+listFoods+'</td>'+
                     '  <td>'+listFoodsNutritionals+'</td>'+
-                    '  <td>'+val.nameMealType+'</td>'+                   
+                    '  <td>'+listFoodsWeight+'</td>'+                   
                     '  <td>'+
                     '    <div class="dropdown">'+
                     '      <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+

@@ -98,8 +98,7 @@ if (!empty($_POST) && isset($_POST)) {
   } else {
     $error = $errorData;
   }
-  
-  
+    
   $calorieTotal     = $proetinTotal = $glucideTotal = $lipidTotal = $vitaminTotal = $traceElementTotal = $mineralTotal = 0;
   $nutritionalInfo  = [];
   foreach ($listMyRecipesFoods as $recipeFood) {
