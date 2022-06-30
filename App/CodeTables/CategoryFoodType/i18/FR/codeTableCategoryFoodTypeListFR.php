@@ -3,6 +3,7 @@
   $page_code            = "Code";
   $page_name            = "Nom";
   $page_translation     = "Traductions";
+  $page_languages       = "Langues";
   $page_language        = "Langue";
   $page_name_translated = "Nom dans la langue";
   $page_status          = "Statut";

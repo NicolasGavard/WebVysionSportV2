@@ -14,9 +14,8 @@ if ($dataSvc->isAuthorized()) {
 
   $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
   if (is_null($dbConnection->getError())) {
-    list($dataName, $jsonError) = CategoryFoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
-    list($categoryFoodTypes, $categoryFoodTypeNames) = CategoryFoodTypeStor::getListNames(true, $dataName, $dbConnection);
-    // list($categoryFoodTypes, $categoryFoodTypeNames) = CategoryFoodTypeStor::getListNames(true, CategoryFoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"))[0], $dbConnection);
+    list($dataName, $jsonError)                       = CategoryFoodTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
+    list($categoryFoodTypes, $categoryFoodTypeNames)  = CategoryFoodTypeStor::getListNames(true, $dataName, $dbConnection);
   } else {
     $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
   }

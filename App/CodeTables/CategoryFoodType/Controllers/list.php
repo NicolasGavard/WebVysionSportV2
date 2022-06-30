@@ -1,12 +1,10 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
-// STY APP
-include(__DIR__ . "/../../../DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableCategoryFoodTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableCategoryFoodTypeNameData.php");
-include(__DIR__ . "/../../Data/CodeTables/Language/DistriXCodeTableLanguageData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableCategoryFoodTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableCategoryFoodTypeNameData.php");
+include(__DIR__ . "/../../Language/Data/DistriXCodeTableLanguageData.php");
 
 $listCategoryFoodTypes = [];
 $listLanguages = [];
@@ -15,13 +13,12 @@ if (isset($_POST)) {
 // CALL
   $languageCaller = new DistriXServicesCaller();
   $languageCaller->setMethodName("ListLanguages");
-  $languageCaller->setServiceName("TablesCodes/Language/DistriXLanguageListDataSvc.php");
+  $languageCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageListDataSvc.php");
 
-  list($dataName, $errorJson) = DistriXCodeTableCategoryFoodTypeNameData::getJsonData($_POST);
-
+  $dataName       = new DistriXCodeTableCategoryFoodTypeNameData();
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("dataName", $dataName);
-  $servicesCaller->setServiceName("TablesCodes/CategoryFoodType/DistriXCategoryFoodTypeListDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/CategoryFoodType/Services/DistriXCategoryFoodTypeListDataSvc.php");
 
   $svc = new DistriXSvc();
   $svc->addToCall("Language", $languageCaller);
@@ -36,6 +33,7 @@ if (isset($_POST)) {
   } else {
     $error = $errorData;
   }
+
   list($outputok, $output, $errorData) = $svc->getResult("CategoryFoodType"); //print_r($output);
   $logOk = logController("Security_CategoryFoodType", "DistriXCategoryFoodTypeListDataSvc", "ListCategoryFoodType-CategoryFoodTypes", $output);
   if ($outputok && isset($output["ListCategoryFoodTypes"]) && is_array($output["ListCategoryFoodTypes"])) {
@@ -43,6 +41,7 @@ if (isset($_POST)) {
   } else {
     $error = $errorData;
   }
+  
   if ($outputok && isset($output["ListCategoryFoodTypeNames"]) && is_array($output["ListCategoryFoodTypeNames"])) {
     list($listCategoryFoodTypeNames, $jsonError) = DistriXCodeTableCategoryFoodTypeNameData::getJsonArray($output["ListCategoryFoodTypeNames"]);
   } else {

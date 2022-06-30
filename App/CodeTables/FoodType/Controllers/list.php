@@ -1,8 +1,6 @@
 <?php
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
-// STY APP
-include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 // DATA
 include(__DIR__ . "/../Data/DistriXCodeTableFoodTypeData.php");
 include(__DIR__ . "/../Data/DistriXCodeTableFoodTypeNameData.php");
@@ -17,11 +15,7 @@ if (isset($_POST)) {
   $languageCaller->setMethodName("ListLanguages");
   $languageCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageListDataSvc.php");
 
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Pas de langue pour avoir toutes les langues ! 10-June-22
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  $dataName = new DistriXCodeTableFoodTypeNameData();
-
+  $dataName       = new DistriXCodeTableFoodTypeNameData();
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("dataName", $dataName);
   $servicesCaller->setServiceName("App/CodeTables/FoodType/Services/DistriXFoodTypeListDataSvc.php");

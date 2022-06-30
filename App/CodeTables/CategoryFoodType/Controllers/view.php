@@ -1,25 +1,25 @@
 <?php
 session_start();
-include(__DIR__ . "/../../Init/ControllerInit.php");
+include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableCategoryFoodTypeData.php");
-include(__DIR__ . "/../../Data/CodeTables/CategoryFoodType/DistriXCodeTableCategoryFoodTypeNameData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableCategoryFoodTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableCategoryFoodTypeNameData.php");
 
 if (isset($_POST)) {
-  list($foodType, $errorJson) = DistriXCodeTableCategoryFoodTypeData::getJsonData($_POST);
+  list($categoryFoodType, $errorJson) = DistriXCodeTableCategoryFoodTypeData::getJsonData($_POST);
   $listCategoryFoodTypeNames = [];
 
 // CALL
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->addParameter("data", $foodType);
-  $servicesCaller->setServiceName("TablesCodes/CategoryFoodType/DistriXCategoryFoodTypeViewDataSvc.php");
+  $servicesCaller->addParameter("data", $categoryFoodType);
+  $servicesCaller->setServiceName("App/CodeTables/CategoryFoodType/Services/DistriXCategoryFoodTypeViewDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
   $logOk = logController("Security_CategoryFoodType", "DistriXCategoryFoodTypeViewDataSvc", "ViewCategoryFoodType", $output);
 
 // RESPONSE
   if ($outputok && isset($output["ViewCategoryFoodType"])) {
-    list($foodType, $jsonError) = DistriXCodeTableCategoryFoodTypeData::getJsonData($output["ViewCategoryFoodType"]);
+    list($categoryFoodType, $jsonError) = DistriXCodeTableCategoryFoodTypeData::getJsonData($output["ViewCategoryFoodType"]);
   } else {
     $error = $errorData;
   }
@@ -30,10 +30,10 @@ if (isset($_POST)) {
   }
 
 // TREATMENT
-  $foodType->setNames($listCategoryFoodTypeNames);
-  $foodType->setNbLanguages(count($listCategoryFoodTypeNames));
+  $categoryFoodType->setNames($listCategoryFoodTypeNames);
+  $categoryFoodType->setNbLanguages(count($listCategoryFoodTypeNames));
 }
-$resp["ViewCategoryFoodType"] = $foodType;
+$resp["ViewCategoryFoodType"] = $categoryFoodType;
 if (!empty($error)) {
   $resp["Error"] = $error;
 }
