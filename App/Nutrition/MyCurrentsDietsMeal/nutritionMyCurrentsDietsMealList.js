@@ -169,20 +169,24 @@ $(function() {
         if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
         if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
+        let listFoods             = '';
+        let listFoodsNutritionals = '';
+        $.map(val.foods, function(valFoods, keyFoods) {
+          listFoods             += valFoods.nameFood +'<br>';
+          listFoodsNutritionals +=  '  <div class="row">'+
+                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-flash"></span> '+valFoods.calorie+'</div>'+
+                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-orange"></span> '+valFoods.proetin+'</div>'+
+                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-chip"></span> '+valFoods.glucide+'</div>'+
+                                    '    <div class="col-md-3 col-sm-3"><span class="micon dw dw-flame"></span> '+valFoods.lipid+'</div>'+
+                                    '  </div>';
+        });
+        
         let line =  '<tr>'+
                     '  <td style="padding:1rem;">'+val.dayNumber+'</td>'+
                     '  <td>'+val.nameMealType+'</td>'+
-                    '  <td>'+val.nameMealType+'</td>'+
-                    '  <td>'+val.nameMealType+'</td>'+
-                    '  <td>'+val.nameMealType+'</td>'+
-                    // '  <td>'+
-                    // '    <div class="row">'+
-                    // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flash"></span> '+val.calorie+'</div>'+
-                    // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-orange"></span> '+val.proetin+'</div>'+
-                    // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-chip"></span> '+val.glucide+'</div>'+
-                    // '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flame"></span> '+val.lipid+'</div>'+
-                    // '    </div>'+
-                    // '  </td>'+
+                    '  <td>'+listFoods+'</td>'+
+                    '  <td>'+listFoodsNutritionals+'</td>'+
+                    '  <td>'+val.nameMealType+'</td>'+                   
                     '  <td>'+
                     '    <div class="dropdown">'+
                     '      <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+

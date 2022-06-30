@@ -193,7 +193,7 @@ function ListMyCurrentDiet(elemState){
                     ' <td>'+val.duration+' jours</td>'+
                     ' <td>'+dateFr+'</td>'+
                     ' <td>'+val.tags+'</td>'+
-                    ' <td><div class="progress mb-20"><div class="progress-bar progress-bar-striped bg-'+progressColor+'" role="progressbar" style="width: '+val.advancement+'%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">'+val.advancement+'%</div></div></td>'+
+                    ' <td><div class="progress mb-20" style="margin-bottom: 0px; margin-left: 10px; margin-right: 10px;"><div class="progress-bar progress-bar-striped bg-'+progressColor+'" role="progressbar" style="width: '+val.advancement+'%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">'+val.advancement+'%</div></div></td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
                     '     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+

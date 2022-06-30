@@ -130,21 +130,19 @@ foreach ($listMyRecipes as $recipe) {
       foreach ($listFoods as $food) {
         if($recipeFood->getIdFood() == $food->getId()){
           $calorie = $proetin = $glucide = $lipid = $vitamin = $traceElement = $mineral = 0;
-          foreach ($listFoodNutritionals as $foodNutritinal) {
-            if ($food->getId() == $foodNutritinal->getIdFood()){
+          foreach ($listFoodNutritionals as $foodNutritional) {
+            if ($food->getId() == $foodNutritional->getIdFood()){
               foreach ($listNutritionals as $nutritinal) {
-                if ($foodNutritinal->getIdNutritional() == $nutritinal->getId()){
-                  if ($nutritinal->getIsCalorie())      { $calorie      += $foodNutritinal->getNutritional(); break;}
-                  if ($nutritinal->getIsProetin())      { $proetin      += $foodNutritinal->getNutritional(); break;}
-                  if ($nutritinal->getIsGlucide())      { $glucide      += $foodNutritinal->getNutritional(); break;}
-                  if ($nutritinal->getIsLipid())        { $lipid        += $foodNutritinal->getNutritional(); break;}
-                  if ($nutritinal->getIsVitamin())      { $vitamin      += $foodNutritinal->getNutritional(); break;}
-                  if ($nutritinal->getIsTraceElement()) { $traceElement += $foodNutritinal->getNutritional(); break;}
-                  if ($nutritinal->getIsMineral())      { $mineral      += $foodNutritinal->getNutritional(); break;}
+                if ($foodNutritional->getIdNutritional() == $nutritinal->getId()){
+                  if ($nutritinal->getIsCalorie())      { $calorie      += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsProetin())      { $proetin      += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsGlucide())      { $glucide      += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsLipid())        { $lipid        += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsVitamin())      { $vitamin      += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsTraceElement()) { $traceElement += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsMineral())      { $mineral      += $foodNutritional->getNutritional(); break;}
                 }
               }
-
-
               $distriXNutritionMyRecipeFoodData->setCalorie($calorie);
               $distriXNutritionMyRecipeFoodData->setProetin($proetin);
               $distriXNutritionMyRecipeFoodData->setGlucide($glucide);

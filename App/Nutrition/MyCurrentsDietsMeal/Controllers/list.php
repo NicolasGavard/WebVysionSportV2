@@ -9,6 +9,7 @@ include(__DIR__ . "/../Data/DistriXNutritionCurrentDietMealData.php");
 
 include(__DIR__ . "/../../../Food/Food/Data/DistriXFoodFoodData.php");
 include(__DIR__ . "/../../../Food/FoodNutritional/Data/DistriXFoodFoodNutritionalData.php");
+include(__DIR__ . "/../../../Food/FoodNutritional/Data/DistriXFoodNutritionalData.php");
 include(__DIR__ . "/../../../Nutrition/MyCurrentsDiets/Data/DistriXNutritionCurrentDietData.php");
 include(__DIR__ . "/../../../Nutrition/MyRecipes/Data/DistriXNutritionRecipeData.php");
 include(__DIR__ . "/../../../Nutrition/MyRecipeFood/Data/DistriXNutritionRecipeFoodData.php");
@@ -16,6 +17,7 @@ include(__DIR__ . "/../../../Nutrition/MyTemplatesDiets/Data/DistriXNutritionTem
 include(__DIR__ . "/../../../CodeTables/Language/Data/DistriXCodeTableLanguageData.php");
 include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeData.php");
 include(__DIR__ . "/../../../CodeTables/MealType/Data/DistriXCodeTableMealTypeNameData.php");
+include(__DIR__ . "/../../../CodeTables/Nutritional/Data/DistriXCodeTableNutritionalData.php");
 
 $listMyCurrentDietMealsFormFront  = [];
 $listMyCurrentDietMeals           = [];
@@ -64,6 +66,10 @@ $foodCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
 $foodNutritionalCaller = new DistriXServicesCaller();
 $foodNutritionalCaller->setServiceName("App/Food/FoodNutritional/Services/DistriXFoodNutritionalListDataSvc.php");
 
+$nutritionalCaller = new DistriXServicesCaller();
+$nutritionalCaller->setServiceName("App/CodeTables/Nutritional/Services/DistriXNutritionalListDataSvc.php");
+$nutritionalCaller->addParameter("dataLanguage", $distriXCodeTableLanguageData);
+
 $dataName       = new DistriXCodeTableMealTypeNameData();
 $mealTypeCaller = new DistriXServicesCaller();
 $mealTypeCaller->addParameter("dataName", $dataName);
@@ -77,6 +83,7 @@ $svc->addToCall("recipe", $recipeCaller);
 $svc->addToCall("recipeFood", $recipeFoodCaller);
 $svc->addToCall("food", $foodCaller);
 $svc->addToCall("foodNutritional", $foodNutritionalCaller);
+$svc->addToCall("nutritional", $nutritionalCaller);
 $svc->addToCall("mealType", $mealTypeCaller);
 $callsOk = $svc->call();
 
@@ -118,7 +125,14 @@ if ($outputok && isset($output["ListFoods"]) && is_array($output["ListFoods"])) 
 
 list($outputok, $output, $errorData) = $svc->getResult("foodNutritional"); //print_r($output);
 if ($outputok && isset($output["ListFoodNutritionals"]) && is_array($output["ListFoodNutritionals"])) {
-  list($listFoodNutritional, $jsonError) = DistriXFoodFoodNutritionalData::getJsonArray($output["ListFoodNutritionals"]);
+  list($listFoodNutritional, $jsonError) = DistriXFoodNutritionalData::getJsonArray($output["ListFoodNutritionals"]);
+} else {
+  $error = $errorData;
+}
+
+list($outputok, $output, $errorData) = $svc->getResult("nutritional"); //print_r($output);
+if ($outputok && isset($output["ListNutritionals"]) && is_array($output["ListNutritionals"])) {
+  list($listNutritionals, $jsonError) = DistriXCodeTableNutritionalData::getJsonArray($output["ListNutritionals"]);
 } else {
   $error = $errorData;
 }
@@ -133,8 +147,7 @@ if ($outputok && isset($output["ListMealTypes"]) && is_array($output["ListMealTy
 
 // TREATMENT
 foreach ($listMyCurrentDietMeals as $currentDietMeal) {
-  $foods = [];
-
+  $foods    = [];
   $distriXNutritionCurrentDietMealData = new DistriXNutritionCurrentDietMealData();
   $distriXNutritionCurrentDietMealData->setId($currentDietMeal->getId());
   $distriXNutritionCurrentDietMealData->setIdDiet($currentDietMeal->getIdDiet());
@@ -142,43 +155,57 @@ foreach ($listMyCurrentDietMeals as $currentDietMeal) {
 
   foreach ($listMyRecipe as $recipe) {
     if ($recipe->getId() == $currentDietMeal->getIdDietRecipe()){
+      $calorieTotal = $proetinTotal = $glucideTotal = $lipidTotal = $vitaminTotal = $traceElementTotal = $mineralTotal = 0;
+      
       $distriXNutritionCurrentDietMealData->setNameDietRecipe($recipe->getName());
       foreach ($listMyRecipeFood as $recipeFood) {
         if ($recipe->getId() == $recipeFood->getIdRecipe()) {
-          foreach ($listFood as $food) {
-            if ($food->getId() == $recipeFood->getIdRecipe()) {
-              $distriXFoodFoodData = new DistriXFoodFoodData();
-              $distriXFoodFoodData->setName($food->getName());
-              $foodFoodNutritionalList = [];
-              foreach ($listFoodNutritional as $foodNutritional) {
-                if ($food->getId() == $foodNutritional->getIdFood()) {
-                  $distriXFoodFoodNutritionalData = new DistriXFoodFoodNutritionalData();
-                  $distriXFoodFoodNutritionalData->setId($foodNutritional->getId());
-                  $distriXFoodFoodNutritionalData->setIdFood($foodNutritional->getIdFood());
-                  $distriXFoodFoodNutritionalData->setIdNutritional($foodNutritional->getIdNutritional());
-                  $foodFoodNutritionalList[] = $distriXFoodFoodNutritionalData;
+          $distriXNutritionMyRecipeFoodData = new DistriXNutritionRecipeFoodData();
+          $distriXNutritionMyRecipeFoodData->setId($recipeFood->getId());
+          $distriXNutritionMyRecipeFoodData->setIdRecipe($recipeFood->getIdRecipe());
+          $distriXNutritionMyRecipeFoodData->setNameRecipe($recipeFood->getNameRecipe());
+          foreach ($listFoodNutritional as $foodNutritional) {
+            if ($recipeFood->getIdFood() == $foodNutritional->getIdFood()) {
+              foreach ($listFood as $food) {
+                if ($food->getId() == $recipeFood->getIdFood()) {
+                  $distriXNutritionMyRecipeFoodData->setIdFood($food->getId());
+                  $distriXNutritionMyRecipeFoodData->setNameFood($food->getName());
                   break;
                 }
               }
-              $distriXFoodFoodData->setFoodNutritionals($foodFoodNutritionalList);
-              break;
+              
+              foreach ($listNutritionals as $nutritinal) {
+                if ($foodNutritional->getIdNutritional() == $nutritinal->getId()){
+                  if ($nutritinal->getIsCalorie())      { $calorieTotal      += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsProetin())      { $proetinTotal      += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsGlucide())      { $glucideTotal      += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsLipid())        { $lipidTotal        += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsVitamin())      { $vitaminTotal      += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsTraceElement()) { $traceElementTotal += $foodNutritional->getNutritional(); break;}
+                  if ($nutritinal->getIsMineral())      { $mineralTotal      += $foodNutritional->getNutritional(); break;}
+                }
+              }
             }
           }
-          break;
+          $distriXNutritionMyRecipeFoodData->setCalorie($calorieTotal);
+          $distriXNutritionMyRecipeFoodData->setProetin($proetinTotal);
+          $distriXNutritionMyRecipeFoodData->setGlucide($glucideTotal);
+          $distriXNutritionMyRecipeFoodData->setLipid($lipidTotal);
+          $foods[] = $distriXNutritionMyRecipeFoodData;
         }
       }
       break;
     }
   }
-  
+  $distriXNutritionCurrentDietMealData->setFoods($foods);
   $distriXNutritionCurrentDietMealData->setDayNumber($currentDietMeal->getDayNumber());
   $distriXNutritionCurrentDietMealData->setIdMealType($currentDietMeal->getIdMealType());
   foreach ($listMealTypeNames as $mealTypeName) {
     if ($mealTypeName->getIdMealType() == $currentDietMeal->getIdMealType()){
       $distriXNutritionCurrentDietMealData->setNameMealType($mealTypeName->getName());
+      break;
     }
   }
-  $distriXNutritionCurrentDietMealData->setFoods($foods);
   $listMyCurrentDietMealsFormFront[] = $distriXNutritionCurrentDietMealData;
 }
 
@@ -187,3 +214,5 @@ $resp["ListMealsTypes"]           = $listMealTypeNames;
 if(!empty($error)){
   $resp["Error"]                  = $error;
 }
+
+echo json_encode($resp);

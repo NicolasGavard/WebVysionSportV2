@@ -61,9 +61,11 @@
             $style1 = 'none';
             $style2 = 'none';
             $navActiveMenunutritionMyCurrentsDiets = $navActiveMenuNutritionMyTemplatesDiets = $navActiveMenuNutritionMyRecipes = "";
-            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsList')   !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDietsList')  !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipesList')         !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsList')     !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsMealList') !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDietsList')    !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipesList')           !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyRecipeFoodList')        !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
 
             $navActiveMenuFoodFood = $navActiveMenuFoodBrand = $navActiveMenuFoodEcoScore = $navActiveMenuFoodNovaScore = $navActiveMenuFoodNutriScore = $navActiveMenuFoodLabel = '';
             if (stripos($_SERVER['PHP_SELF'], 'foodFoodList')       !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodFood       = 'class="active"'; }
