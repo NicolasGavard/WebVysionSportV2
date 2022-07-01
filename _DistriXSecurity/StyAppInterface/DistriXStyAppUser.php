@@ -111,8 +111,10 @@ class DistriXStyAppUser
   }
   // End of listUsersEnterprise
 
-  public static function viewUser($idUser = "")
+  public static function viewUser($idUser = 0): object
   {
+    echo 'idUser : '.$idUser;
+    
     $user  = new DistriXStyUserData();
     if ($idUser > 0) {
       $user->setId($idUser);
@@ -122,7 +124,7 @@ class DistriXStyAppUser
   }
   // End of viewUser 
 
-  public static function findUserByEmail($email = "")
+  public static function findUserByEmail($email = ""): object
   {
     $user  = new DistriXStyUserData();
     if ($email != '') {
@@ -133,7 +135,7 @@ class DistriXStyAppUser
   }
   // End of findUserByEmail 
 
-  public static function findUserByEmailBackup($emailBackup = "")
+  public static function findUserByEmailBackup($emailBackup = ""): object
   {
     $user  = new DistriXStyUserData();
     if ($emailBackup != '') {
@@ -153,7 +155,7 @@ class DistriXStyAppUser
     $styServicesCaller->setMethodName("ViewUser");
     $styServicesCaller->addParameter("data", $user);                    //print_r($user);
     $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserViewDataSvc.php");
-    list($outputok, $output, $errorData) = $styServicesCaller->call();  //print_r($output);
+    list($outputok, $output, $errorData) = $styServicesCaller->call();  print_r($output);
 
     if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
       $logInfoData = new DistriXLoggerInfoData();

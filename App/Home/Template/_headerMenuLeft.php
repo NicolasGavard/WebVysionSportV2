@@ -17,7 +17,7 @@
     <div class="sidebar-menu">
       <ul id="accordion-menu">
         <li>
-          <a href="../Home/main.php" class="dropdown-toggle no-arrow">
+          <a href="<?php echo FRONT_PATH;?>App/Home/Template/main.php" class="dropdown-toggle no-arrow">
             <span class="micon dw dw-house-1"></span>
             <span class="mtext"><?php echo $menu_home; ?></span>
           </a>

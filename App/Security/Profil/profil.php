@@ -1,13 +1,12 @@
 <?php
 	session_start();
-  $international  = '';
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/header.php');
-	include(__DIR__ . '/../../i18/'.$i18cdlangue.'/main.php');
-	include('../Home/_header.php');
-	include('../Home/_headerMenuTop.php');
-	include('../Home/_headerMenuLeft.php');
+	include('../../Home/Template/i18/'.$i18cdlangue.'/header'.$i18cdlangue.'.php');
+	include('i18/'.$i18cdlangue.'/profil'.$i18cdlangue.'.php');
+  include('../../Home/Template/_header.php');
+	include('../../Home/Template/_headerMenuTop.php');
+	include('../../Home/Template/_headerMenuLeft.php');
 ?>
   
   <div class="mobile-menu-overlay"></div>
@@ -530,6 +529,10 @@
 				</div>
 			</div>
 
-<?php
-	include('../Home/_headerFooter.php');
-?>
+		<?php
+			include('../../Home/Template/_headerFooter.php');
+		?>
+
+		<script src="profil.js?v=<?php echo APP_VERSION;?>"></script>
+  </body>
+</html>

@@ -28,7 +28,7 @@ class DistriXStyAppLogin
       $data->setApplication($application);
       $data->setLogin($user);
       $pwd = DistriXCrypto::encodeOneWay(trim($password));
-      $data->setPassword(trim($pwd));
+      $data->setPass(trim($pwd));
       $data->setAuthType(DISTRIX_STY_AUTH_PASSWORD);
       list($data, $errorJson) = DistriXStyLoginData::getJsonData($data);
       $logged = self::login($data);

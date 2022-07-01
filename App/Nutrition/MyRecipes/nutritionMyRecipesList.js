@@ -154,6 +154,49 @@ function ListMyRecipe(elemState){
       if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
+      rating = ''
+      if (val.rating == 1){
+        rating = '    <div class="row">'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '    </div>';
+      } else if (val.rating == 2){
+        rating = '    <div class="row">'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '    </div>';
+      } else if (val.rating == 3){
+        rating = '    <div class="row">'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '    </div>';
+      } else if (val.rating == 4){
+        rating = '    <div class="row">'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star-o" aria-hidden="true"></i></div>'+
+                 '    </div>';
+      } else if (val.rating == 5){
+        rating = '    <div class="row">'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '      <div class="col-md-2 col-sm-2"><i class="icon-copy fa fa-star" aria-hidden="true"></i></div>'+
+                 '    </div>';
+      }
+
       const line =  '<tr>'+
                     '  <td style="padding:1rem;"><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
                     '  <td>'+val.name+'</td>'+
@@ -165,7 +208,7 @@ function ListMyRecipe(elemState){
                     '      <div class="col-md-3 col-sm-3"><span class="micon dw dw-flame"></span> '+val.lipid+'</div>'+
                     '    </div>'+
                     '  </td>'+
-                    '  <td>'+val.rating+'</td>'+
+                    '  <td>'+rating+'</td>'+
                     '  <td>'+
                     '    <div class="dropdown">'+
                     '      <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">'+

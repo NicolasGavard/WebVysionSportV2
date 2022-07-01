@@ -1,13 +1,13 @@
 <?php
 include(__DIR__ . "/../../../../DistriX/DistriXSvc/Config/DistriXFolderPath.php");
-include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXInit/DistriXSvcControllerInit.php");
+include(__DIR__ . "/../../../../DistriX/DistriXInit/DistriXSvcControllerInit.php");
 // STY APP
-include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
-include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
+include(__DIR__ . "/../../../../DistriX/DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
+include(__DIR__ . "/../../../../DistriX/DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
-include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/Data/DistriXStyInfoSessionData.php");
-include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/Data/DistriXStyUserData.php");
-include(DISTRIX_FOLDER_PATH_FOR_CONTROLLER . "DistriXSecurity/Data/DistriXStyRoleData.php");
+include(__DIR__ . "/../../../../DistriX/DistriXSecurity/Data/DistriXStyInfoSessionData.php");
+include(__DIR__ . "/../../../../DistriX/DistriXSecurity/Data/DistriXStyUserData.php");
+include(__DIR__ . "/../../../../DistriX/DistriXSecurity/Data/DistriXStyRoleData.php");
 
 session_set_cookie_params([
   'SameSite' => 'None',
