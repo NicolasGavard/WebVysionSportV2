@@ -19,7 +19,7 @@
 							<div class="col-md-8 col-sm-12">
 								<h5>
                   <?php echo $page_title_opened; ?>
-                  <span class="NbTicketsOpened"> (5)</span>
+                  <span class="NbTicketsOpened"> (0)</span>
                 </h5>
 							</div>
 							<div class="col-md-4 col-sm-12 text-right">
@@ -34,7 +34,10 @@
 							
               <div class="task-title row align-items-center">
 								<div class="col-md-12 col-sm-12">
-									<h5><?php echo $page_title_closed; ?></h5>
+									<h5>
+										<?php echo $page_title_closed; ?>
+										<span class="NbTicketsClosed"> (0)</span>
+									</h5>
 								</div>
 							</div>
 

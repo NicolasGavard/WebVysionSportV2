@@ -19,6 +19,8 @@ $.ajax({
   dataType : 'JSON',
   data: {'idUser': localStorage.getItem("idUser")},
   success : function(data) {
+    var nbTicketsOpened = 0;
+    var nbTicketsClosed = 0;
     $.map(data.ListTickets, function(val, key) {
       var date    = String(val.date);
       var year    = date.substr(0, 4);
@@ -43,6 +45,7 @@ $.ajax({
       }
 
       if (val.elemState == 0) {
+        nbTicketsOpened++;
         $('#SeeActivitiesOpened').append( '<li>'+
                                           '  <div class="row">'+
                                           '    <div class="col-md-2 col-sm-2">'+
@@ -58,6 +61,7 @@ $.ajax({
                                           '  </div>'+
                                           '</li>');
       } else if (val.elemState == 1) {
+        nbTicketsClosed++;
         $('#SeeActivitiesClosed').append( '<li>'+
                                           '  <div class="row">'+
                                           '    <div class="col-md-2 col-sm-2">'+
@@ -74,6 +78,8 @@ $.ajax({
                                           '</li>');
       }
     });
+    $('.NbTicketsOpened').html('('+nbTicketsOpened+')');
+    $('.NbTicketsClosed').html('('+nbTicketsClosed+')');
   },
   error : function(data) {
     console.log(data);

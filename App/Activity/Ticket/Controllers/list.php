@@ -5,12 +5,13 @@ include(__DIR__ . "/../../../Init/ControllerInit.php");
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
-include(__DIR__ . "/../Data/Ticket/Ticket/DistriXTicketTicketData.php");
-include(__DIR__ . "/../Data/Ticket/TicketComment/DistriXTicketTicketCommentData.php");
-include(__DIR__ . "/../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusData.php");
-include(__DIR__ . "/../Data/CodeTables/TicketStatus/DistriXCodeTableTicketStatusNameData.php");
-include(__DIR__ . "/../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeData.php");
-include(__DIR__ . "/../Data/CodeTables/TicketType/DistriXCodeTableTicketTypeNameData.php");
+include(__DIR__ . "/../Data/DistriXTicketTicketData.php");
+
+include(__DIR__ . "/../../TicketComment/Data/DistriXTicketTicketCommentData.php");
+include(__DIR__ . "/../../../CodeTables/TicketStatus/Data/DistriXCodeTableTicketStatusData.php");
+include(__DIR__ . "/../../../CodeTables/TicketStatus/Data/DistriXCodeTableTicketStatusNameData.php");
+include(__DIR__ . "/../../../CodeTables/TicketType/Data/DistriXCodeTableTicketTypeData.php");
+include(__DIR__ . "/../../../CodeTables/TicketType/Data/DistriXCodeTableTicketTypeNameData.php");
 
 $listTicketType         = [];
 $listTicketTypeNames    = [];
@@ -25,18 +26,23 @@ if (isset($_POST)) {
   $infoProfil           = DistriXStyAppInterface::getUserInformation();
   $listUsers            = DistriXStyAppUser::listUsers();
 
+  $distriXTicketTicketData = new DistriXTicketTicketData();
+  $distriXTicketTicketData->setIdUserCreate($infoProfil->getId());
+  $distriXTicketTicketData->setIdUserAssign($infoProfil->getId());
+
   // CALL
   $ticketStatusCaller = new DistriXServicesCaller();
-  $ticketStatusCaller->setServiceName("TablesCodes/TicketStatus/DistriXTicketStatusListDataSvc.php");
+  $ticketStatusCaller->setServiceName("App/CodeTables/TicketStatus/Services/DistriXTicketStatusListDataSvc.php");
 
   $ticketTypeCaller = new DistriXServicesCaller();
-  $ticketTypeCaller->setServiceName("TablesCodes/TicketType/DistriXTicketTypeListDataSvc.php");
+  $ticketTypeCaller->setServiceName("App/CodeTables/TicketType/Services/DistriXTicketTypeListDataSvc.php");
 
   $ticketsCaller = new DistriXServicesCaller();
-  $ticketsCaller->setServiceName("Ticket/Ticket/DistriXTicketListDataSvc.php");
-  
+  $ticketsCaller->setServiceName("App/Activity/Ticket/Services/DistriXTicketFindDataSvc.php");
+  $ticketsCaller->addParameter("data", $distriXTicketTicketData);
+
   $ticketsCommentCaller = new DistriXServicesCaller();
-  $ticketsCommentCaller->setServiceName("Ticket/TicketComment/DistriXTicketCommentListDataSvc.php");
+  $ticketsCommentCaller->setServiceName("App/Activity/TicketComment/Services/DistriXTicketCommentListDataSvc.php");
   
   $svc = new DistriXSvc();
   $svc->addToCall("TicketStatus", $ticketStatusCaller);

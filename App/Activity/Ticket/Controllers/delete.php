@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/..Data/Ticket/Ticket/DistriXTicketTicketData.php");
+include(__DIR__ . "/..Data/DistriXTicketTicketData.php");
 
 $confirmSave = false;
 
@@ -11,7 +11,7 @@ if (isset($_POST)) {
 
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $ticket);
-  $servicesCaller->setServiceName("Ticket/Ticket/DistriXTicketDeleteDataSvc.php");
+  $servicesCaller->setServiceName("App/Ticket/Ticket/Services/DistriXTicketDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
   //print_r($output);
 
