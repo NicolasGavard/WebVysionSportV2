@@ -64,40 +64,17 @@
               <?php if ($hasSportExercise)        { ?><li <?php echo $navActiveMenuNutritionMyRecipes ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Nutrition/MyRecipes/nutritionMyRecipesList.php"><?php echo $menu_nutrition_myRecipe; ?></a></li><?php } ?>
             
               <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
-              <!-- //                                           MENU FOOD                                             // -->
-              <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
-              <?php
-                $hasRight_FOOD_FOOD         = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_FOOD');
-                $hasRight_FOOD_BRAND        = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_BRAND');
-                $hasRight_FOOD_ECO_SCORE    = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_ECO_SCORE');
-                $hasRight_FOOD_NOVA_SCORE   = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_NOVA_SCORE');
-                $hasRight_FOOD_NUTRI_SCORE  = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_NUTRI_SCORE');
-                $hasRight_FOOD_LABEL        = DistriXStyAppInterface::hasAnyRight('WEBVYSION_SPORT', 'SECURITY', 'FOOD_LABEL');
-                $hasFood                    = false;
-                if(
-                  $hasRight_FOOD_FOOD         || 
-                  $hasRight_FOOD_BRAND        || 
-                  $hasRight_FOOD_ECO_SCORE    || 
-                  $hasRight_FOOD_NOVA_SCORE   || 
-                  $hasRight_FOOD_NUTRI_SCORE  || 
-                  $hasRight_FOOD_LABEL) {
-                    $hasFood                = true;
-                }
-              ?>
-              
-              <?php if ($hasFood) { ?>
+              <!-- //                                        MENU SPORT ADMIN                                         // -->
+              <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->            
+              <?php if ($hasSportAdmin) { ?>
                 <li class="dropdown <?php echo $show2; ?>">
                   <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
                     <span class="micon dw dw-harvest"></span>
                     <span class="mtext"><?php echo $menu_food; ?></span>
                   </a>
                   <ul class="submenu child <?php echo $show2; ?>" style='display: <?php echo $style2; ?>'>
-                    <?php if ($hasRight_FOOD_FOOD)        { ?><li <?php echo $navActiveMenuFoodFood ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/Food/foodFoodList.php"><?php echo $menu_food_food_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_BRAND)       { ?><li <?php echo $navActiveMenuFoodBrand ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/Brand/foodBrandList.php"><?php echo $menu_food_brand_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_ECO_SCORE)   { ?><li <?php echo $navActiveMenuFoodEcoScore ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/EcoScore/foodEcoScoreList.php"><?php echo $menu_food_ecoScore_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_NOVA_SCORE)  { ?><li <?php echo $navActiveMenuFoodNovaScore ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/NovaScore/foodNovaScoreList.php"><?php echo $menu_food_novaScore_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_NUTRI_SCORE) { ?><li <?php echo $navActiveMenuFoodNutriScore ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/NutriScore/foodNutriScoreList.php"><?php echo $menu_food_nutriScore_list; ?></a></li><?php } ?>
-                    <?php if ($hasRight_FOOD_LABEL)       { ?><li <?php echo $navActiveMenuFoodLabel ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/Label/foodLabelList.php"><?php echo $menu_food_label_list; ?></a></li><?php } ?>
+                    <?php if ($hasSportMuscle)        { ?><li <?php echo $navActiveMenuSportMuscle ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/Food/foodFoodList.php"><?php echo $menu_food_food_list; ?></a></li><?php } ?>
+                    <?php if ($hasSportExerciseType)  { ?><li <?php echo $navActiveMenuSportExerciseType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Food/Brand/foodBrandList.php"><?php echo $menu_food_brand_list; ?></a></li><?php } ?>
                   </ul>
                 </li>
               <?php } ?>
@@ -106,25 +83,7 @@
         <?php } ?>
 
 
-          <li class="dropdown">
-            <a href="javascript:;" class="dropdown-toggle">
-              <span class="micon dw dw-dumbbell"></span>
-              <span class="mtext"><?php echo $menu_sport; ?></span>
-              &nbsp;<img src="<?php echo FRONT_PATH;?>vendors/images/coming-soon.png" alt="" width="25">
-            </a>
-            <?php
-              $dataOption = 'off';
-              $show       = '';
-              $style      = 'none';
-            ?>
-            <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-            </ul>
-          </li>
-        <?php } ?>
+
 
         <?php
           $hasNutrition                   = true;

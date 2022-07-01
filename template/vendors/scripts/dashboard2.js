@@ -61,7 +61,7 @@ Highcharts.chart('chart', {
 		categories: ['jan 01', 'jan 05', 'jan 10', 'jan 15', 'jan 20', 'jan 25', 'jan 30'],
 		labels: {
 			style: {
-				color: '#6d051c',
+				color: '#a70000',
 				fontSize: '12px',
 			}
 		}
@@ -72,7 +72,7 @@ Highcharts.chart('chart', {
 				return this.value;
 			},
 			style: {
-				color: '#6d051c',
+				color: '#a70000',
 				fontSize: '14px'
 			}
 		},
@@ -91,7 +91,7 @@ Highcharts.chart('chart', {
 		spline: {
 			marker: {
 				radius: 10,
-				lineColor: '#6d051c',
+				lineColor: '#a70000',
 				lineWidth: 2
 			}
 		}
