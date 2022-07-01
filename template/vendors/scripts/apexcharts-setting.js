@@ -37,7 +37,7 @@ var options = {
 		type: 'gradient',
 		gradient: {
 			shade: 'dark',
-			gradientToColors: [ '#1b00ff'],
+			gradientToColors: [ '#6d051c'],
 			shadeIntensity: 1,
 			type: 'horizontal',
 			opacityFrom: 1,

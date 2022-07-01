@@ -95,7 +95,7 @@ $(function() {
   });
 
   $("#btnRest").on('click', function() {
-    if ($('.DelFormType').val() == 'FoodLabel') {
+    if ($('.RestFormType').val() == 'FoodLabel') {
       $.ajax({
         url : '../FoodLabel/Controllers/restore.php',
         type : 'POST',

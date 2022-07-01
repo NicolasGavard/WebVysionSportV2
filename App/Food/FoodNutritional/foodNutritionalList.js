@@ -112,7 +112,7 @@ $(function() {
   });
 
   $("#btnRest").on('click', function() {
-    if ($('.DelFormType').val() == 'FoodNutritional') {
+    if ($('.RestFormType').val() == 'FoodNutritional') {
       $.ajax({
         url : '../FoodNutritional/Controllers/restore.php',
         type : 'POST',

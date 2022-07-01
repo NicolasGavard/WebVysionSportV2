@@ -128,7 +128,7 @@ $(function() {
   });
 
   $("#btnRest").on('click', function() {
-    if ($('.DelFormType').val() == 'FoodWeight') {
+    if ($('.RestFormType').val() == 'FoodWeight') {
       $.ajax({
         url : '../FoodWeight/Controllers/restore.php',
         type : 'POST',

@@ -7,7 +7,7 @@
 <div class="left-side-bar">
   <div class="brand-logo">
     <a href="../Home/main.php">
-      <img src="../../images/WebVysionSport.png" alt="" class="light-logo" style="max-width: 75px;">
+      <img src="../../images/VysionCoaching.png" alt="" class="light-logo" style="max-width: 75px;">
     </a>
     <div class="close-sidebar" data-toggle="left-sidebar-close">
       <i class="ion-close-round"></i>
