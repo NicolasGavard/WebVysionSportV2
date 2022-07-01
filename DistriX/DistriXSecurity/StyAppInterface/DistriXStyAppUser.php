@@ -154,7 +154,7 @@ class DistriXStyAppUser
     $styServicesCaller->setMethodName("ViewUser");
     $styServicesCaller->addParameter("data", $user);                    //print_r($user);
     $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserViewDataSvc.php");
-    list($outputok, $output, $errorData) = $styServicesCaller->call();  print_r($output);
+    list($outputok, $output, $errorData) = $styServicesCaller->call();  //print_r($output);
 
     if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
       $logInfoData = new DistriXLoggerInfoData();

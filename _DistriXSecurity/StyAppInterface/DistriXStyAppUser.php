@@ -113,8 +113,6 @@ class DistriXStyAppUser
 
   public static function viewUser($idUser = 0): object
   {
-    echo 'idUser : '.$idUser;
-    
     $user  = new DistriXStyUserData();
     if ($idUser > 0) {
       $user->setId($idUser);
@@ -155,7 +153,7 @@ class DistriXStyAppUser
     $styServicesCaller->setMethodName("ViewUser");
     $styServicesCaller->addParameter("data", $user);                    //print_r($user);
     $styServicesCaller->setServiceName("DistriXSecurity/StyServices/User/DistriXStyUserViewDataSvc.php");
-    list($outputok, $output, $errorData) = $styServicesCaller->call();  print_r($output);
+    list($outputok, $output, $errorData) = $styServicesCaller->call();  //print_r($output);
 
     if (DistriXLogger::isLoggerRunning(__DIR__ . "/../../DistriXLoggerSettings.php", "Security")) {
       $logInfoData = new DistriXLoggerInfoData();

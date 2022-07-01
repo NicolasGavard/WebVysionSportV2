@@ -1,5 +1,5 @@
 <?php
-include("../DistriXInit/DistriXSvcBusServiceInit.php");
+include(__DIR__.'/../Init/DataSvcInit.php');
 // Error
 include(__DIR__ . "/../../../../GlobalData/ApplicationErrorData.php");
 // Layers
