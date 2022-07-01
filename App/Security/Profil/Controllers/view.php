@@ -17,6 +17,6 @@ if (isset($_POST['id']) && $_POST['id'] > 0) {
   }
 }
 
-$resp["Users"]  = $distriXStyUserData;
+$resp["ViewUser"]  = $distriXStyUserData;
 
 echo json_encode($resp);

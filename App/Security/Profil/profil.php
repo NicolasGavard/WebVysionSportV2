@@ -25,27 +25,27 @@
 							<div class="profile-info">
 								<h5 class="mb-20 h5 text-blue" style="font-size: 1.2rem;">
 									<span class="micon dw dw-user1"></span>&nbsp;
-									<span class="page_profil_title_presentation"></span>&nbsp;
+									<span><?php echo $page_title_presentation; ?></span>&nbsp;
 								</h5>
 								<ul>
 									<li>
-										<span class="page_profil_full_name"></span>
+										<span><?php echo $page_full_name; ?></span>
 										<span class="InfoProfilFullName" style="color: #202342"></span>
 									</li>
 									<li>
-										<span class="page_profil_email"></span>
+										<span><?php echo $page_email; ?></span>
 										<span class="InfoProfilFormEmail" style="color: #202342"></span>
 									</li>
 									<li>
-										<span class="page_profil_phone"></span>
+										<span><?php echo $page_phone; ?></span>
 										<span class="InfoProfilFormPhone" style="color: #202342"></span>
 									</li>
 									<li>
-										<span class="page_profil_mobile"></span>
+										<span><?php echo $page_mobile; ?></span>
 										<span class="InfoProfilFormMobile" style="color: #202342"></span>
 									</li>
 									<li>
-										<span class="page_profil_address1"></span>
+										<span><?php echo $page_address1; ?></span>
 										<span class="InfoProfilFullAdresse" style="color: #202342"></span>1807 Holden Street
 										<br>
 										<span class="InfoProfilFullZipCity" style="color: #202342"></span>San Diego, CA 92115
@@ -55,7 +55,7 @@
 							<div class="profile-social">
 								<h5 class="mb-20 h5 text-blue" style="font-size: 1.1rem;">
 									<span class="micon dw dw-link2"></span>&nbsp;
-									<span class="page_profil_social_links"></span> 
+									<span><?php echo $page_social_links; ?></span> 
 								</h5>
 								<ul class="clearfix">
 									<li><a href="#" class="btn" data-bgcolor="#3b5998" data-color="#ffffff"><i class="fa fa-facebook"></i></a></li>
@@ -97,13 +97,13 @@
 								<div class="tab height-100-p">
 									<ul class="nav nav-tabs customtab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active page_profil_title_settings" data-toggle="tab" href="#setting" role="tab" style="padding:10px 15px;"></a>
+                      <a class="nav-link active page_title_settings" data-toggle="tab" href="#setting" role="tab" style="padding:10px 15px;"><?php echo $page_title_settings; ?></a>
                     </li>
 										<li class="nav-item">
-											<a class="nav-link page_profil_title_tasks" data-toggle="tab" href="#tasks" role="tab" style="padding:10px 15px;"></a>
+											<a class="nav-link page_title_tasks" data-toggle="tab" href="#tasks" role="tab" style="padding:10px 15px;"><?php echo $page_title_tasks; ?></a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link page_profil_title_change_pass" data-toggle="tab" href="#security" role="tab" style="padding:10px 15px;"></a>
+											<a class="nav-link page_title_change_pass" data-toggle="tab" href="#security" role="tab" style="padding:10px 15px;"><?php echo $page_title_change_pass; ?></a>
 										</li>
 									</ul>
 									<div class="tab-content">
@@ -114,18 +114,18 @@
 													<input class="form-control InfoProfilFormIdUser form-control-lg" type="hidden">
 													<ul class="profile-edit-list row">
 														<li class="weight-500 col-md-6">
-															<h4 class="text-blue h5 mb-20 page_profil_edit_settings"></h4>
+															<h4 class="text-blue h5 mb-20"><?php echo $page_edit_settings; ?></h4>
 															
 															<div class="form-group">
-																<label class="page_profil_gender"></label>
+																<label><?php echo $page_gender; ?></label>
 																<div class="d-flex">
 																	<div class="custom-control custom-radio mb-5 mr-20">
 																		<input type="radio" id="genreMal" name="customRadio" class="custom-control-input">
-																		<label class="custom-control-label weight-400 page_profil_male" for="genreMal">Homme</label>
+																		<label class="custom-control-label weight-400 page_male" for="genreMal"><?php echo $page_male; ?></label>
 																	</div>
 																	<div class="custom-control custom-radio mb-5">
 																		<input type="radio" id="genreFemale" name="customRadio" class="custom-control-input">
-																		<label class="custom-control-label weight-400 page_profil_female" for="genreFemale">Femme</label>
+																		<label class="custom-control-label weight-400 page_female" for="genreFemale"><?php echo $page_female; ?></label>
 																	</div>
 																</div>
 															</div>
@@ -133,65 +133,65 @@
 															<div class="row">
 																<div class="col-md-6 col-sm-12">
 																	<div class="form-group">
-																		<label class="page_profil_name"></label>
+																		<label><?php echo $page_name; ?></label>
 																		<input class="form-control InfoProfilFormName form-control-lg" type="text">
 																	</div>
 																</div>
 																<div class="col-md-6 col-sm-12">
 																	<div class="form-group">
-																		<label class="page_profil_firstname"></label>
+																		<label><?php echo $page_firstname; ?></label>
 																		<input class="form-control InfoProfilFormFirstName form-control-lg" type="text">
 																	</div>
 																</div>
 															</div>
 
 															<div class="form-group">
-																<label class="page_profil_email"></label>
+																<label><?php echo $page_email; ?></label>
 																<input class="form-control InfoProfilFormEmail form-control-lg" type="email">
 															</div>
 
 															<div class="form-group">
-																<label class="page_profil_emailBackup"></label>
+																<label><?php echo $page_emailBackup; ?></label>
 																<input class="form-control InfoProfilFormEmailBackup form-control-lg" type="email">
 															</div>
 
 															<div class="form-group">
-																<label class="page_profil_date_of_birth"></label>
+																<label><?php echo $page_date_of_birth; ?></label>
 																<input class="form-control InfoProfilFormDateOfBirth form-control-lg date-picker" type="text">
 															</div>
 															
 															<div class="form-group">
-																<label class="page_profil_phone"></label>
+																<label><?php echo $page_phone; ?></label>
 																<input class="form-control InfoProfilFormPhone form-control-lg" type="text">
 															</div>
 															
 															<div class="form-group">
-																<label class="page_profil_mobile"></label>
+																<label><?php echo $page_mobile; ?></label>
 																<input class="form-control InfoProfilFormMobile form-control-lg" type="text">
 															</div>
 															
 															<div class="form-group">
-																<label class="page_profil_address1"></label>
+																<label><?php echo $page_address1; ?></label>
 																<input class="form-control InfoProfilFormAdresse form-control-lg" type="text">
 															</div>
 
 															<div class="row">
 																<div class="col-md-4 col-sm-12">
 																	<div class="form-group">
-																		<label class="page_profil_zip_code"></label>
+																		<label><?php echo $page_zip_code; ?></label>
 																		<input class="form-control InfoProfilFormZip form-control-lg" type="text">
 																	</div>
 																</div>
 																<div class="col-md-8 col-sm-12">
 																	<div class="form-group">
-																		<label class="page_profil_city"></label>
+																		<label><?php echo $page_city; ?></label>
 																		<input class="form-control InfoProfilFormCity form-control-lg" type="text">
 																	</div>
 																</div>
 															</div>
 
 															<div class="form-group">
-																<label class="page_profil_country"></label>
+																<label><?php echo $page_country; ?></label>
 																<select class="selectpicker form-control form-control-lg" data-style="btn-outline-secondary btn-lg" title="Pays">
 																	<option>France</option>
 																</select>
@@ -200,7 +200,7 @@
 															<div class="form-group">
 																<div class="custom-control custom-checkbox mb-5">
 																	<input type="checkbox" class="custom-control-input" id="customCheck1-1">
-																	<label class="custom-control-label weight-400 page_profil_notifier" for="customCheck1-1"></label>
+																	<label class="custom-control-label weight-400" for="customCheck1-1"><?php echo $page_notifier; ?></label>
 																</div>
 															</div>
 															<div class="form-group mb-0">
@@ -209,7 +209,7 @@
 														</li>
 
 														<li class="weight-500 col-md-6">
-															<h4 class="text-blue h5 mb-20 page_profil_photo_profil"></h4>
+															<h4 class="text-blue h5 mb-20 page_photo_profil"></h4>
 															<div class="pd-20 card-box mb-30">
 																<form class="dropzone" action="#" id="my-awesome-dropzone">
 																	<input class="form-control AddBrandFormId"       	type="hidden" name="id"         value="0">
@@ -221,7 +221,7 @@
 																</form>
 															</div>
 															
-															<h4 class="text-blue h5 mb-20 page_profil_social_links"></h4>
+															<h4 class="text-blue h5 mb-20 page_social_links"></h4>
 															<div class="form-group">
 																<table class="table">
 																	<tbody>
@@ -499,17 +499,17 @@
 													<!-- Open Task start -->
 													<div class="task-title row align-items-center">
 														<div class="col-md-12 col-sm-12">
-															<h4 class="text-blue h5 mb-20 page_profil_edit_settings"></h4>
+															<h4 class="text-blue h5 mb-20 page_edit_settings"></h4>
 															<div class="form-group">
-																<label class="page_profil_old_pass">Old pass</label>
+																<label><?php echo $page_old_pass; ?>Old pass</label>
 																<input class="form-control form-control-lg" type="text">
 															</div>
 															<div class="form-group">
-																<label class="page_profil_new_pass">New pass</label>
+																<label><?php echo $page_new_pass; ?>New pass</label>
 																<input class="form-control form-control-lg" type="text">
 															</div>
 															<div class="form-group">
-																<label class="page_profil_confirm_pass">Confirm pass</label>
+																<label><?php echo $page_confirm_pass; ?>Confirm pass</label>
 																<input class="form-control form-control-lg" type="email">
 															</div>
 															<div class="form-group mb-0">

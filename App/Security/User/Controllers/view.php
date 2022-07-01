@@ -14,10 +14,10 @@ if (isset($_POST['id']) && $_POST['id'] > 0) {
   $id           = $_POST['id'];
   $infoProfil   = DistriXStyAppInterface::getUserInformation();
   if ($infoProfil->getId() == $id) {
-    $listUsers  = DistriXStyAppUser::user($id);
+    $infoUsers  = DistriXStyAppUser::user($id);
   }
 }
 
-$resp["Users"]  = $listUsers;
+$resp["ViewUser"]  = $infoUsers;
 
 echo json_encode($resp);
