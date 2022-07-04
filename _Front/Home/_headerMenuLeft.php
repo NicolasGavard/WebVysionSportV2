@@ -31,7 +31,7 @@
             <a href="javascript:;" class="dropdown-toggle">
               <span class="micon dw dw-dumbbell"></span>
               <span class="mtext"><?php echo $menu_sport; ?></span>
-              &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
+              &nbsp;<img src="../../vendors/images/coming-soon2.png" alt="" width="25">
             </a>
             <?php
               $dataOption = 'off';
@@ -78,7 +78,7 @@
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-food-cart"></span>
               <span class="mtext"><?php echo $menu_nutrition; ?></span>
-              &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
+              &nbsp;<img src="../../vendors/images/coming-soon2.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show1; ?>" style='display: <?php echo $style1; ?>'>
               <?php if ($hasNutrition_MyDiet)           { ?><li <?php echo $navActiveMenunutritionMyCurrentsDiets ?>><a class="nav-link" href="../Nutrition/nutritionMyCurrentsDietsList.php"><?php echo $menu_nutrition_myDiet; ?></a></li><?php } ?>
@@ -138,7 +138,7 @@
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-board"></span>
               <span class="mtext"><?php echo $menu_bilan; ?></span>
-              &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
+              &nbsp;<img src="../../vendors/images/coming-soon2.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <li><a href="#">1</a></li>
@@ -160,7 +160,7 @@
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-user-2"></span>
               <span class="mtext"><?php echo $menu_student; ?></span>
-              &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
+              &nbsp;<img src="../../vendors/images/coming-soon2.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <?php
@@ -193,7 +193,7 @@
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-human-resources"></span>
               <span class="mtext"><?php echo $menu_ressource; ?></span>
-              &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
+              &nbsp;<img src="../../vendors/images/coming-soon2.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <li><a href="#">1</a></li>
@@ -224,7 +224,7 @@
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-money-1"></span>
               <span class="mtext"><?php echo $menu_package; ?></span>
-              &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
+              &nbsp;<img src="../../vendors/images/coming-soon2.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <?php
@@ -251,7 +251,7 @@
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-settings"></span>
               <span class="mtext"><?php echo $menu_parametre; ?></span>
-              &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
+              &nbsp;<img src="../../vendors/images/coming-soon2.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <li><a href="#">1</a></li>
@@ -282,7 +282,7 @@
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
               <span class="micon dw dw-message"></span>
               <span class="mtext"><?php echo $menu_messagerie; ?></span>
-              &nbsp;<img src="../../vendors/images/coming-soon.png" alt="" width="25">
+              &nbsp;<img src="../../vendors/images/coming-soon2.png" alt="" width="25">
             </a>
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
             <?php

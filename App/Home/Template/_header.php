@@ -10,9 +10,9 @@ include(__DIR__ . "/_version.php");
 	<title>WebVysionSport</title>
 
 	<!-- Site favicon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo FRONT_PATH;?>vendors/images/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo FRONT_PATH;?>vendors/images/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo FRONT_PATH;?>vendors/images/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo FRONT_PATH;?>images/VysionCoaching180x180.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo FRONT_PATH;?>images/VysionCoaching32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo FRONT_PATH;?>images/VysionCoaching16x16.png">
 
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

@@ -1,6 +1,6 @@
 <div class="pre-loader">
 	<div class="pre-loader-box">
-		<div class="loader-logo"><img src="<?php echo FRONT_PATH;?>images/WebVysionSport.png" style="max-width: 100px;" alt=""></div>
+		<div class="loader-logo"><img src="<?php echo FRONT_PATH;?>images/VysionCoaching.png" style="max-width: 100px;" alt=""></div>
 		<div class='loader-progress' id="progress_div">
 			<div class='bar' id='bar1'></div>
 		</div>

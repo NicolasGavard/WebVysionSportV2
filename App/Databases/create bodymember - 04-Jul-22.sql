@@ -10,7 +10,7 @@ CREATE TABLE `bodymember` (
 ) ENGINE=InnoDB COMMENT='Food Types' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
 INSERT INTO bodymember(id,code,name,elemstate,timestamp) VALUES 
-(1,'ARM','Head',0,0),
+(1,'HEAD','Head',0,0),
 (2,'NECK','Neck',0,0),
 (3,'BACK','Back',0,0),
 (4,'TRUNK','Trunk',0,0),
