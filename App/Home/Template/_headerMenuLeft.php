@@ -29,7 +29,7 @@
           $hasSportProgramTemplate  = true;
           $hasSportCircuit          = true;
           $hasSportExercise         = true;
-          $hasSportMuscle           = true;
+          $hasSportBodyMuscle           = true;
         ?>
 
         <?php
@@ -40,8 +40,8 @@
           $hasSportExercise         = true;
 
           $hasSportAdmin            = true;
-          $hasSportMemberBody       = true;
-          $hasSportMuscle           = true;
+          $hasSportBodyMember       = true;
+          $hasSportBodyMuscle           = true;
           $hasSportExerciseType     = true;
         ?>
         <?php if ($hasSport) { ?>
@@ -57,10 +57,10 @@
             if (stripos($_SERVER['PHP_SELF'], 'sportCircuit')             !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportCircuit         = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'sportExercise')            !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportExercise        = 'class="active"'; }
 
-            $navActiveMenuSportMemberBody = $navActiveMenuSportMuscle = $navActiveMenuSportExerciseType = '';
-            if (stripos($_SERVER['PHP_SELF'], 'sportMenber')       !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportMemberBody   = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'sportMuscle')       !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportMuscle       = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'sportExerciseType') !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportExerciseType = 'class="active"'; }
+            $navActiveMenuSportBodyMember = $navActiveMenuSportBodyMuscle = $navActiveMenuSportExerciseType = '';
+            if (stripos($_SERVER['PHP_SELF'], 'sportBodyMemberList')    !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportBodyMember    = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'sportBodyMuscleList')    !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportBodyMuscle    = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'sportExerciseTypeList')  !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportExerciseType  = 'class="active"'; }
           ?>
           <li class="dropdown <?php echo $show1; ?>">
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
@@ -83,9 +83,9 @@
                     <span class="mtext"><?php echo $menu_administration; ?></span>
                   </a>
                   <ul class="submenu child <?php echo $show2; ?>" style='display: <?php echo $style2; ?>'>
-                    <?php if ($hasSportMemberBody)    { ?><li <?php echo $navActiveMenuSportMemberBody ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Sport/MemberBody/sportMemberBodyList.php"><?php echo $menu_muscle_member_body_list; ?></a></li><?php } ?>
-                    <?php if ($hasSportMuscle)        { ?><li <?php echo $navActiveMenuSportMuscle ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Sport/Muscle/sportBrandList.php"><?php echo $menu_muscle_muscle_list; ?></a></li><?php } ?>
-                    <?php if ($hasSportExerciseType)  { ?><li <?php echo $navActiveMenuSportExerciseType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/Sport/ExerciseType/sportBrandList.php"><?php echo $menu_muscle_exercice_Type_list; ?></a></li><?php } ?>
+                    <?php if ($hasSportBodyMember)    { ?><li <?php echo $navActiveMenuSportBodyMember ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/SportBodyMember/sportBodyMemberList.php"><?php echo $menu_Bodymuscle_body_member_list; ?></a></li><?php } ?>
+                    <?php if ($hasSportBodyMuscle)    { ?><li <?php echo $navActiveMenuSportBodyMuscle ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/SportBodyMuscle/sportBodyMuscleList.php"><?php echo $menu_Bodymuscle_body_muscle_list; ?></a></li><?php } ?>
+                    <?php if ($hasSportExerciseType)  { ?><li <?php echo $navActiveMenuSportExerciseType ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/SportExerciseType/sportExerciseTypeList.php"><?php echo $menu_Bodymuscle_exercice_Type_list; ?></a></li><?php } ?>
                   </ul>
                 </li>
               <?php } ?>

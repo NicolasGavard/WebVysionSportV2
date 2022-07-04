@@ -8,16 +8,16 @@
   //                                                     SPORT                                                        //
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  $menu_sport                     = "Sport";
-  $menu_sport_myProgram           = "Mes programmes Sportif";
-  $menu_sport_myTemplateProgram   = "Mes templates de programmes Sportif";
-  $menu_sport_myCircuit           = "Mes circuits";
-  $menu_sport_myExercise          = "mes exercices";
+  $menu_sport                       = "Sport";
+  $menu_sport_myProgram             = "Mes programmes Sportif";
+  $menu_sport_myTemplateProgram     = "Mes templates de programmes Sportif";
+  $menu_sport_myCircuit             = "Mes circuits";
+  $menu_sport_myExercise            = "mes exercices";
 
-  $menu_administration            = "Administrations";
-  $menu_muscle_member_body_list   = "Liste des membres du coprs";
-  $menu_muscle_muscle_list        = "Liste des muscles";
-  $menu_muscle_exercice_Type_list = "Liste des exercices types";
+  $menu_administration              = "Administrations";
+  $menu_muscle_body_member_list     = "Liste des membres du corps";
+  $menu_Bodymuscle_body_muscle_list = "Liste des muscles du corps";
+  $menu_muscle_exercice_Type_list   = "Liste des exercices types";
   
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                   NUTRITION                                                      //
