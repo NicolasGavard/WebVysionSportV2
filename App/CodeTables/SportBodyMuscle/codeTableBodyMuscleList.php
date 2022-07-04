@@ -3,7 +3,7 @@
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('../../Home/Template/i18/'.$i18cdlangue.'/header'.$i18cdlangue.'.php');
-	include('i18/'.$i18cdlangue.'/codeTableFoodTypeList'.$i18cdlangue.'.php');
+	include('i18/'.$i18cdlangue.'/codeTableBodyMuscleList'.$i18cdlangue.'.php');
   include('../../Home/Template/_header.php');
 	include('../../Home/Template/_headerMenuTop.php');
 	include('../../Home/Template/_headerMenuLeft.php');
@@ -29,13 +29,13 @@
             <div class="pull-right">
               <button type="button" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i>&nbsp;<?php echo $page_all_active; ?></button>
               <button type="button" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i>&nbsp;<?php echo $page_all_inactive; ?></button>
-              <button type="button" class="btn btn-primary AddNewFoodType" data-toggle="modal" data-target="#modalAddFoodType"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
+              <button type="button" class="btn btn-primary AddNewBodyMuscle" data-toggle="modal" data-target="#modalAddBodyMuscle"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
         		</div>
 					</div>
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table id="FoodTypeTable" class="display responsive nowrap" width="100%">
+						<table id="BodyMuscleTable" class="display responsive nowrap" width="100%">
 							<thead>
 								<tr>                 
                   <th><span><?php echo $page_code; ?></span></th>
@@ -49,29 +49,29 @@
 				</div>
 			</div>
       
-      <div class="modal fade" id="modalAddFoodType" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade" id="modalAddBodyMuscle" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
               <h4 class="padding-top-20 mb-20 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-20 mb-20 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               
-              <input class="form-control AddFoodTypeFormIdFoodType" type="hidden" name="id"         value="0">
-              <input class="form-control AddFoodTypeFormTimestamp"  type="hidden" name="timestamp"  value="0">
-              <input class="form-control AddFoodTypeFormStatut"     type="hidden" name="elemState"  value="0">
+              <input class="form-control AddBodyMuscleFormIdBodyMuscle" type="hidden" name="id"         value="0">
+              <input class="form-control AddBodyMuscleFormTimestamp"  type="hidden" name="timestamp"  value="0">
+              <input class="form-control AddBodyMuscleFormStatut"     type="hidden" name="elemState"  value="0">
               
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_code; ?></label>
-                    <input class="form-control AddFoodTypeFormCode" id="AddFoodTypeFormCode" type="text" code="codeShort" placeholder="<?php echo $page_code; ?>">
+                    <input class="form-control AddBodyMuscleFormCode" id="AddBodyMuscleFormCode" type="text" code="codeShort" placeholder="<?php echo $page_code; ?>">
                     <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
                   </div>
                 </div>
                 <div class="col-md-8 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
-                    <input class="form-control AddFoodTypeFormName" id="AddFoodTypeFormName" type="text" code="foodTypeName" placeholder="<?php echo $page_name; ?>">
+                    <input class="form-control AddBodyMuscleFormName" id="AddBodyMuscleFormName" type="text" code="bodyMuscleName" placeholder="<?php echo $page_name; ?>">
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
                   </div>
                 </div>
@@ -81,13 +81,13 @@
                 <label class="col-sm-12 col-md-12"><?php echo $page_languages; ?></label>
               </div>
               
-              <div id="foodTypeLanguages"></div>
+              <div id="bodyMuscleLanguages"></div>
               
               <div class="padding-bottom-20 row" style="margin: 0 auto;">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
-                  <button type="button" class="btn btn-primary btnAddFoodType" id="btnAddFoodType"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_add; ?></button>
-                  <button type="button" class="btn btn-primary btnUpdateFoodType" id="btnUpdateFoodType"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_update; ?></button>
+                  <button type="button" class="btn btn-primary btnAddBodyMuscle" id="btnAddBodyMuscle"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_add; ?></button>
+                  <button type="button" class="btn btn-primary btnUpdateBodyMuscle" id="btnUpdateBodyMuscle"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_update; ?></button>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@
       <?php
         include('../../Home/Template/_headerFooter.php');
       ?>
-      <script src="codeTableFoodTypeList.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="codeTableBodyMuscleList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>
 

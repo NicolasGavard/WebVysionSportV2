@@ -1,8 +1,8 @@
-var foodTypeSelectedData = null;
-var foodTypeTableLanguagesData = "";
+var bodyMuscleSelectedData = null;
+var bodyMuscleTableLanguagesData = "";
 $(function() {
-  var foodTypeTableData = "";
-  var foodTypeTable = $('#FoodTypeTable').DataTable({
+  var bodyMuscleTableData = "";
+  var bodyMuscleTable = $('#BodyMuscleTable').DataTable({
     columnDefs: [
       { orderable: false, targets: 2 },
       { orderable: false, targets: 3 }
@@ -17,9 +17,9 @@ $(function() {
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {
-      foodTypeTableData = data.ListFoodTypes;
-      foodTypeTableLanguagesData = data.ListLanguages;
-      ListFoodType(0);
+      bodyMuscleTableData = data.ListBodyMuscles;
+      bodyMuscleTableLanguagesData = data.ListLanguages;
+      ListBodyMuscle(0);
     },
     error : function(data) {
       console.log(data);
@@ -33,8 +33,8 @@ $(function() {
     $(".btn-warning").addClass("disabled");
     $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
-    foodTypeTable.clear();
-    ListFoodType(1);
+    bodyMuscleTable.clear();
+    ListBodyMuscle(1);
   });
 
   $(".btn-success").on('click', function() {
@@ -44,22 +44,22 @@ $(function() {
     $(".btn-warning").removeClass("disabled");
     $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
-    foodTypeTable.clear();
-    ListFoodType(0);
+    bodyMuscleTable.clear();
+    ListBodyMuscle(0);
   });
 
-  $(".AddNewFoodType").on('click', function() {
+  $(".AddNewBodyMuscle").on('click', function() {
     $(".add_title").removeClass("d-none");
-    $("#btnAddFoodType").removeClass("d-none");
+    $("#btnAddBodyMuscle").removeClass("d-none");
     $(".update_title").addClass("d-none");
-    $("#btnUpdateFoodType").addClass("d-none");
+    $("#btnUpdateBodyMuscle").addClass("d-none");
     
-    foodTypeSelectedData = null;
-    $('.AddFoodTypeFormCode').val('');
-    $('.AddFoodTypeFormName').val('');
-    $('#foodTypeLanguages').html("");
+    bodyMuscleSelectedData = null;
+    $('.AddBodyMuscleFormCode').val('');
+    $('.AddBodyMuscleFormName').val('');
+    $('#bodyMuscleLanguages').html("");
 
-    const languages = foodTypeTableLanguagesData;
+    const languages = bodyMuscleTableLanguagesData;
     $.map(languages, function(language, languageKey) {
       var html = "";
       html += '  <div class="row">';
@@ -70,77 +70,77 @@ $(function() {
       html += '    </div>';
       html += '    <div class="col-md-8 col-sm-12">';
       html += '      <div class="form-group">';
-      html += '        <input class="form-control AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" placeholder="'+nameTranslatedTxt+'">';
+      html += '        <input class="form-control AddBodyMuscleFormLanguageName" type="text" name="bodyMuscleLanguageName'+language.id+'" placeholder="'+nameTranslatedTxt+'">';
       html += '      </div>';
       html += '    </div>';
       html += '  </div>';
       
-      $('#foodTypeLanguages').append(html);
+      $('#bodyMuscleLanguages').append(html);
     });
   });
 
-  $("#btnAddFoodType, #btnUpdateFoodType").on('click', function() {
-    var code = $('#AddFoodTypeFormCode').val();
-    var name = $('#AddFoodTypeFormName').val();
+  $("#btnAddBodyMuscle, #btnUpdateBodyMuscle").on('click', function() {
+    var code = $('#AddBodyMuscleFormCode').val();
+    var name = $('#AddBodyMuscleFormName').val();
     if (code == "" || name == '') {
       if (code == '') {
-        $('.AddFoodTypeFormCode').addClass("form-control-danger");
+        $('.AddBodyMuscleFormCode').addClass("form-control-danger");
         $('.danger-code').removeClass("d-none");
 
         setTimeout( () => { 
-          $(".AddFoodTypeFormCode").removeClass("form-control-danger");
+          $(".AddBodyMuscleFormCode").removeClass("form-control-danger");
           $('.danger-code').addClass("d-none");
         }, 3000 );
       }
       if (name == '') {
-        $('.AddFoodTypeFormName').addClass("form-control-danger");
+        $('.AddBodyMuscleFormName').addClass("form-control-danger");
         $('.danger-name').removeClass("d-none");
 
         setTimeout( () => { 
-          $(".AddFoodTypeFormName").removeClass("form-control-danger");
+          $(".AddBodyMuscleFormName").removeClass("form-control-danger");
           $('.danger-name').addClass("d-none");
         }, 3000 );
       }
     } else {
-      var foodTypeNames = [];
-      $('input[name^="foodTypeLanguageName"]').each(function() {
-        var idNameLanguage = this.name.substr("foodTypeLanguageName".length);
-        var idName=0; var idFoodType=0; var timestampName=0; var elemStateName=0;
-        if (foodTypeSelectedData != null) {
-          $.map(foodTypeSelectedData.names, function(nameData, nameDataKey) {
+      var bodyMuscleNames = [];
+      $('input[name^="bodyMuscleLanguageName"]').each(function() {
+        var idNameLanguage = this.name.substr("bodyMuscleLanguageName".length);
+        var idName=0; var idBodyMuscle=0; var timestampName=0; var elemStateName=0;
+        if (bodyMuscleSelectedData != null) {
+          $.map(bodyMuscleSelectedData.names, function(nameData, nameDataKey) {
             if (nameData.idLanguage == idNameLanguage) { 
               idName=nameData.id;
-              idFoodType=nameData.idFoodType;
+              idBodyMuscle=nameData.idBodyMuscle;
               timestampName=nameData.timestamp;
               elemStateName=nameData.elemState;
             }
           });
         }  
-        let foodTypeName = {
+        let bodyMuscleName = {
           "id": idName,
-          "idFoodType": idFoodType,
+          "idBodyMuscle": idBodyMuscle,
           "idLanguage": idNameLanguage,
           "elemState": elemStateName,
           "timestamp": timestampName,
           "name": this.value
         }
-        foodTypeNames.push(foodTypeName);
+        bodyMuscleNames.push(bodyMuscleName);
       });
       var id=0; var timestamp=0; var elemState=0;
-      if (foodTypeSelectedData != null) {
-        id=foodTypeSelectedData.id;
-        timestamp=foodTypeSelectedData.timestamp;
-        elemState=foodTypeSelectedData.elemState;
+      if (bodyMuscleSelectedData != null) {
+        id=bodyMuscleSelectedData.id;
+        timestamp=bodyMuscleSelectedData.timestamp;
+        elemState=bodyMuscleSelectedData.elemState;
       }
       $.ajax({
         url : 'Controllers/save.php',
         type : 'POST',
         dataType : 'JSON',
-        data: {id,code,name,elemState,timestamp, "names":foodTypeNames},
+        data: {id,code,name,elemState,timestamp, "names":bodyMuscleNames},
         success : function(data) {
           if (data.ConfirmSave) {
             $('#sa-success-distrix').trigger('click');
-            setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);        
+            setTimeout(function() {window.location.href = "./codeTableBodyMuscleList.php";}, 800);        
           } else {
             $('#sa-error-distrix').trigger('click');
             $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.Error.text+'</ul>');
@@ -150,7 +150,7 @@ $(function() {
           $('#sa-error-distrix').trigger('click');
         }
       });
-      $(".btnAddFoodType").attr("data-dismiss", "modal");
+      $(".btnAddBodyMuscle").attr("data-dismiss", "modal");
     } 
   });
 
@@ -163,7 +163,7 @@ $(function() {
       success : function(data) {
         if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);
+          setTimeout(function() {window.location.href = "./codeTableBodyMuscleList.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
           $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.Error.text+'</ul>');
@@ -184,7 +184,7 @@ $(function() {
       success : function(data) {
         if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./codeTableFoodTypeList.php";}, 800);
+          setTimeout(function() {window.location.href = "./codeTableBodyMuscleList.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
           $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.Error.text+'</ul>');
@@ -196,8 +196,8 @@ $(function() {
     });
   });
 
-  function ListFoodType(elemState){
-    const dataTableData = foodTypeTableData;
+  function ListBodyMuscle(elemState){
+    const dataTableData = bodyMuscleTableData;
     $.map(dataTableData, function(val, key) {
       if(val.elemState == elemState){
         if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
@@ -208,7 +208,7 @@ $(function() {
                       '  <td>'+val.name+'</td>'+
                       '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {
-          const languages = foodTypeTableLanguagesData;
+          const languages = bodyMuscleTableLanguagesData;
           $.map(languages, function(language, languageKey) {
             var notFound = true;
             if (val.names.length > 0) {
@@ -230,38 +230,38 @@ $(function() {
                 '       <i class="dw dw-more"></i>'+
                 '     </a>'+
                 '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddFoodType" onclick="ViewFoodType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelFoodType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestFoodType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddBodyMuscle" onclick="ViewBodyMuscle(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelBodyMuscle(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestBodyMuscle(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                 '     </div>'+
                 '   </div>'+
                 ' </td>'+
                 '</tr>';
-        foodTypeTable.row.add($(line)).draw();
+        bodyMuscleTable.row.add($(line)).draw();
       }
     });
   }
 });
 
-function ViewFoodType(id){
+function ViewBodyMuscle(id){
   $.ajax({
     url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      foodTypeSelectedData = data.ViewFoodType;
+      bodyMuscleSelectedData = data.ViewBodyMuscle;
 
       $(".add_title").addClass("d-none");
-      $("#btnAddFoodType").addClass("d-none");
+      $("#btnAddBodyMuscle").addClass("d-none");
       $(".update_title").removeClass("d-none");
-      $("#btnUpdateFoodType").removeClass("d-none");
+      $("#btnUpdateBodyMuscle").removeClass("d-none");
   
-      $('.AddFoodTypeFormCode').val(data.ViewFoodType.code);
-      $('.AddFoodTypeFormName').val(data.ViewFoodType.name);
-      $('#foodTypeLanguages').html("");
+      $('.AddBodyMuscleFormCode').val(data.ViewBodyMuscle.code);
+      $('.AddBodyMuscleFormName').val(data.ViewBodyMuscle.name);
+      $('#bodyMuscleLanguages').html("");
 
-      const languages = foodTypeTableLanguagesData;
+      const languages = bodyMuscleTableLanguagesData;
       $.map(languages, function(language, languageKey) {
         var html = "";
         html += '  <div class="row">';
@@ -274,15 +274,15 @@ function ViewFoodType(id){
         html += '      <div class="form-group">';
         var updateName  = "";
         var className   = "form-control-danger";
-        $.map(data.ViewFoodType.names, function(nameData, nameDataKey) {
+        $.map(data.ViewBodyMuscle.names, function(nameData, nameDataKey) {
           if (nameData.idLanguage == language.id) { updateName=nameData.name; className = "form-control-success";}
         });
-        html += '        <input class="form-control '+className+' AddFoodTypeFormLanguageName" type="text" name="foodTypeLanguageName'+language.id+'" value="'+updateName+'" placeholder="'+nameTranslatedTxt+'">';
+        html += '        <input class="form-control '+className+' AddBodyMuscleFormLanguageName" type="text" name="bodyMuscleLanguageName'+language.id+'" value="'+updateName+'" placeholder="'+nameTranslatedTxt+'">';
         html += '      </div>';
         html += '    </div>';
         html += '  </div>';
         
-        $('#foodTypeLanguages').append(html);
+        $('#bodyMuscleLanguages').append(html);
       });
     },
     error : function(data) {
@@ -291,12 +291,12 @@ function ViewFoodType(id){
   });
 }
 
-function DelFoodType(id, name){
+function DelBodyMuscle(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestFoodType(id, name){
+function RestBodyMuscle(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }
