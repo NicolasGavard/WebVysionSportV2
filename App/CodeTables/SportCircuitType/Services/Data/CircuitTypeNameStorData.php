@@ -4,7 +4,7 @@ class CircuitTypeNameStorData extends DistriXSvcAppData {
   const CIRCUITTYPENAME_STATUS_NOT_AVAILABLE = 1;
 
   protected $id;
-  protected $idbodymember;
+  protected $idcircuittype;
   protected $idlanguage;
   protected $name;
   protected $elemstate;
@@ -12,7 +12,7 @@ class CircuitTypeNameStorData extends DistriXSvcAppData {
 
   public function __construct() {
       $this->id = 0;
-      $this->idbodymember = 0;
+      $this->idcircuittype = 0;
       $this->idlanguage = 0;
       $this->name = "";
       $this->elemstate = 0;
@@ -20,7 +20,7 @@ class CircuitTypeNameStorData extends DistriXSvcAppData {
     }
 // Gets
   public function getId():int { return $this->id; }
-  public function getIdCircuitType():int { return $this->idbodymember; }
+  public function getIdCircuitType():int { return $this->idcircuittype; }
   public function getIdLanguage():int { return $this->idlanguage; }
   public function getName():string { return $this->name; }
   public function getElemState():int { return $this->elemstate; }
@@ -30,7 +30,7 @@ class CircuitTypeNameStorData extends DistriXSvcAppData {
   public function getUnavailableValue():int { return self::CIRCUITTYPENAME_STATUS_NOT_AVAILABLE; }
 // Sets
   public function setId(int $id) { $this->id = $id; }
-  public function setIdCircuitType(int $idCircuitType) { $this->idbodymember = $idCircuitType; }
+  public function setIdCircuitType(int $idCircuitType) { $this->idcircuittype = $idCircuitType; }
   public function setIdLanguage(int $idLanguage) { $this->idlanguage = $idLanguage; }
   public function setName(string $name) { $this->name = $name; }
   public function setElemState(int $elemState) { $this->elemstate = $elemState; }

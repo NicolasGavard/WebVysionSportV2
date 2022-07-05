@@ -4,7 +4,7 @@ class ExerciseTypeNameStorData extends DistriXSvcAppData {
   const EXERCISETYPENAME_STATUS_NOT_AVAILABLE = 1;
 
   protected $id;
-  protected $idbodymember;
+  protected $idexercisetype;
   protected $idlanguage;
   protected $name;
   protected $elemstate;
@@ -12,7 +12,7 @@ class ExerciseTypeNameStorData extends DistriXSvcAppData {
 
   public function __construct() {
       $this->id = 0;
-      $this->idbodymember = 0;
+      $this->idexercisetype = 0;
       $this->idlanguage = 0;
       $this->name = "";
       $this->elemstate = 0;
@@ -20,7 +20,7 @@ class ExerciseTypeNameStorData extends DistriXSvcAppData {
     }
 // Gets
   public function getId():int { return $this->id; }
-  public function getIdExerciseType():int { return $this->idbodymember; }
+  public function getIdExerciseType():int { return $this->idexercisetype; }
   public function getIdLanguage():int { return $this->idlanguage; }
   public function getName():string { return $this->name; }
   public function getElemState():int { return $this->elemstate; }
@@ -30,7 +30,7 @@ class ExerciseTypeNameStorData extends DistriXSvcAppData {
   public function getUnavailableValue():int { return self::EXERCISETYPENAME_STATUS_NOT_AVAILABLE; }
 // Sets
   public function setId(int $id) { $this->id = $id; }
-  public function setIdExerciseType(int $idExerciseType) { $this->idbodymember = $idExerciseType; }
+  public function setIdExerciseType(int $idExerciseType) { $this->idexercisetype = $idExerciseType; }
   public function setIdLanguage(int $idLanguage) { $this->idlanguage = $idLanguage; }
   public function setName(string $name) { $this->name = $name; }
   public function setElemState(int $elemState) { $this->elemstate = $elemState; }

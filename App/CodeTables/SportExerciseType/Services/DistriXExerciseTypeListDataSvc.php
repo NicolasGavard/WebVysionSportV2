@@ -13,9 +13,8 @@ $ExerciseTypeNames = [];
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($dataName, $jsonError) = ExerciseTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
-  list($ExerciseTypes, $ExerciseTypeNames) = ExerciseTypeStor::getListNames(true, $dataName, $dbConnection);
-  // list($ExerciseTypes, $ExerciseTypeNames) = ExerciseTypeStor::getListNames(true, ExerciseTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"))[0], $dbConnection);
+  list($dataName, $jsonError)               = ExerciseTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
+  list($ExerciseTypes, $ExerciseTypeNames)  = ExerciseTypeStor::getListNames(true, $dataName, $dbConnection);
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
