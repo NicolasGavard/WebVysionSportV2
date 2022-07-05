@@ -22,7 +22,7 @@ if (isset($_POST)) {
   // $servicesCaller->setDebugModeAllLayerOn();
   $servicesCaller->addParameter("data", $bodymuscle);
   $servicesCaller->addParameter("dataNames", $bodymuscleNames);
-  $servicesCaller->setServiceName("App/CodeTables/BodyMuscle/Services/DistriXBodyMuscleSaveDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/SportBodyMuscle/Services/DistriXBodyMuscleSaveDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
   // echo "-*/-"; print_r($output); echo "-*/-";
 

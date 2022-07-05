@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `bodymembername`;
-CREATE TABLE `bodymembername` (
+DROP TABLE IF EXISTS `circuittypename`;
+CREATE TABLE `circuittypename` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `idbodymember` int unsigned NOT NULL,
   `idlanguage` int unsigned NOT NULL,
@@ -9,9 +9,9 @@ CREATE TABLE `bodymembername` (
   PRIMARY KEY (`id`),
   KEY `indlanguage` (`idlanguage`),
   UNIQUE KEY `indbodymemberunique` (`idbodymember`,`idlanguage`) USING BTREE
-) ENGINE=InnoDB COMMENT='Body Members Names' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
+) ENGINE=InnoDB COMMENT='Circuit Type Names' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO bodymembername(id,idbodymember,idlanguage,name,elemstate,timestamp) VALUES 
+INSERT INTO circuittypename(id,idbodymember,idlanguage,name,elemstate,timestamp) VALUES 
 (1,1,2,'Head',0,0),
 (2,2,2,'Neck',0,0),
 (3,3,2,'Back',0,0),

@@ -18,7 +18,7 @@ if (isset($_POST)) {
   $dataName       = new DistriXCodeTableBodyMuscleNameData();
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("dataName", $dataName);
-  $servicesCaller->setServiceName("App/CodeTables/BodyMuscle/Services/DistriXBodyMuscleListDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/SportBodyMuscle/Services/DistriXBodyMuscleListDataSvc.php");
 
   $svc = new DistriXSvc();
   $svc->addToCall("Language", $languageCaller);
@@ -62,9 +62,9 @@ if (isset($_POST)) {
     $bodyMuscle->setNbLanguages(count($names));
   }
 }
-$resp["ListBodyMuscles"] = $listBodyMuscles;
-$resp["ListLanguages"] = $listLanguages;
+$resp["ListBodyMuscles"]  = $listBodyMuscles;
+$resp["ListLanguages"]    = $listLanguages;
 if (!empty($error)) {
-  $resp["Error"] = $error;
+  $resp["Error"]          = $error;
 }
 echo json_encode($resp);

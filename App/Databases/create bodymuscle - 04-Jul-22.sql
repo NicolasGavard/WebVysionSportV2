@@ -8,7 +8,7 @@ CREATE TABLE `bodymuscle` (
   `timestamp` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `indcodeunique` (`code`) USING BTREE
-) ENGINE=InnoDB COMMENT='Food Types' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
+) ENGINE=InnoDB COMMENT='Body Muscles' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
 INSERT INTO bodymuscle(id,idbodymember,code,name,elemstate,timestamp) VALUES 
 (1,1,'MESSETER','Masséter',0,0),

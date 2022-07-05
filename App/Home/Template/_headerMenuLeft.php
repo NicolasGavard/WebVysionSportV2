@@ -41,8 +41,9 @@
 
           $hasSportAdmin            = true;
           $hasSportBodyMember       = true;
-          $hasSportBodyMuscle           = true;
+          $hasSportBodyMuscle       = true;
           $hasSportExerciseType     = true;
+          $hasSportCircuitType      = true;
         ?>
         <?php if ($hasSport) { ?>
           <?php
@@ -57,10 +58,11 @@
             if (stripos($_SERVER['PHP_SELF'], 'sportCircuit')             !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportCircuit         = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'sportExercise')            !== false) { $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportExercise        = 'class="active"'; }
 
-            $navActiveMenuSportBodyMember = $navActiveMenuSportBodyMuscle = $navActiveMenuSportExerciseType = '';
+            $navActiveMenuSportBodyMember = $navActiveMenuSportBodyMuscle = $navActiveMenuSportExerciseType = $navActiveMenuSportCircuitType = '';
             if (stripos($_SERVER['PHP_SELF'], 'codeTableBodyMemberList')    !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportBodyMember    = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'codeTableBodyMuscleList')    !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportBodyMuscle    = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'codeTableExerciseTypeList')  !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportExerciseType  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableCircuitTypeList')   !== false) { $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportCircuitType  = 'class="active"'; }
           ?>
           <li class="dropdown <?php echo $show1; ?>">
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
@@ -86,6 +88,7 @@
                     <?php if ($hasSportBodyMember)    { ?><li <?php echo $navActiveMenuSportBodyMember; ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/SportBodyMember/codeTableBodyMemberList.php"><?php echo $menu_sport_admin_body_member_list; ?></a></li><?php } ?>
                     <?php if ($hasSportBodyMuscle)    { ?><li <?php echo $navActiveMenuSportBodyMuscle; ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/SportBodyMuscle/codeTableBodyMuscleList.php"><?php echo $menu_sport_admin_body_muscle_list; ?></a></li><?php } ?>
                     <?php if ($hasSportExerciseType)  { ?><li <?php echo $navActiveMenuSportExerciseType; ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/SportExerciseType/codeTableExerciseTypeList.php"><?php echo $menu_sport_admin_exercice_Type_list; ?></a></li><?php } ?>
+                    <?php if ($hasSportCircuitType)   { ?><li <?php echo $navActiveMenuSportCircuitType; ?>><a class="nav-link" href="<?php echo FRONT_PATH;?>App/CodeTables/SportCircuitType/codeTableCircuitTypeList.php"><?php echo $menu_sport_admin_circuit_Type_list; ?></a></li><?php } ?>
                   </ul>
                 </li>
               <?php } ?>

@@ -12,7 +12,7 @@ if (isset($_POST)) {
 // CALL
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $bodyMuscle);
-  $servicesCaller->setServiceName("App/CodeTables/BodyMuscle/Services/DistriXBodyMuscleViewDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/SportBodyMuscle/Services/DistriXBodyMuscleViewDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); //echo "--";print_r($output);
 
   $logOk = logController("Security_BodyMuscle", "DistriXBodyMuscleViewDataSvc", "ViewBodyMuscle", $output);

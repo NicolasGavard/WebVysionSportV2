@@ -18,7 +18,7 @@ if (isset($_POST)) {
 
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("data", $bodyMuscle);
-  $servicesCaller->setServiceName("App/CodeTables/BodyMuscle/Services/DistriXBodyMuscleRestoreDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/SportBodyMuscle/Services/DistriXBodyMuscleRestoreDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
   // print_r($output);
 
