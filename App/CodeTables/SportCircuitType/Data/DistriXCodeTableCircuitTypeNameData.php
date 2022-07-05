@@ -1,8 +1,8 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXCodeTableBodyMemberNameData", false)) {
-  class DistriXCodeTableBodyMemberNameData extends DistriXSvcAppData {
+if (!class_exists("DistriXCodeTableCircuitTypeNameData", false)) {
+  class DistriXCodeTableCircuitTypeNameData extends DistriXSvcAppData {
     protected $id;
-    protected $idBodyMember;
+    protected $idCircuitType;
     protected $idLanguage;
     protected $name;
     protected $elemState;
@@ -10,7 +10,7 @@ if (!class_exists("DistriXCodeTableBodyMemberNameData", false)) {
   
     public function __construct() {
       $this->id           = 0;
-      $this->idBodyMember = 0;
+      $this->idCircuitType = 0;
       $this->idLanguage   = 0;
       $this->name         = "";
       $this->elemState    = 0;
@@ -18,14 +18,14 @@ if (!class_exists("DistriXCodeTableBodyMemberNameData", false)) {
       }
   // Gets
     public function getId():int { return $this->id; }
-    public function getIdBodyMember():int { return $this->idBodyMember; }
+    public function getIdCircuitType():int { return $this->idCircuitType; }
     public function getIdLanguage():int { return $this->idLanguage; }
     public function getName():string { return $this->name; }
     public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
   // Sets
     public function setId(int $id) { $this->id = $id; }
-    public function setIdBodyMember(int $idBodyMember) { $this->idBodyMember = $idBodyMember; }
+    public function setIdCircuitType(int $idCircuitType) { $this->idCircuitType = $idCircuitType; }
     public function setIdLanguage(int $idLanguage) { $this->idLanguage = $idLanguage; }
     public function setName(string $name) { $this->name = $name; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }

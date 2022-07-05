@@ -1,6 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("DistriXCodeTableBodyMemberData", false)) {
-  class DistriXCodeTableBodyMemberData extends DistriXSvcAppData {
+if (!class_exists("DistriXCodeTableCircuitTypeData", false)) {
+  class DistriXCodeTableCircuitTypeData extends DistriXSvcAppData {
     protected $id;
     protected $code;
     protected $name;

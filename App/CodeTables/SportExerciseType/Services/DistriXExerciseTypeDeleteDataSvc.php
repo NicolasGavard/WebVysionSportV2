@@ -2,15 +2,15 @@
 // Service Init
 include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // Database StorData
-include(__DIR__ . "/Data/BodyMemberStorData.php");
+include(__DIR__ . "/Data/ExerciseTypeStorData.php");
 // Storage
-include(__DIR__ . "/Storage/BodyMemberStor.php");
+include(__DIR__ . "/Storage/ExerciseTypeStor.php");
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if ($dbConnection->beginTransaction()) {
-    list($bodyMemberStor, $jsonError) = BodyMemberStorData::getJsonData($dataSvc->getParameter("data"));
-    $insere = BodyMemberStor::remove($bodyMemberStor, $dbConnection);
+    list($exerciseTypeStor, $jsonError) = ExerciseTypeStorData::getJsonData($dataSvc->getParameter("data"));
+    $insere = ExerciseTypeStor::remove($exerciseTypeStor, $dbConnection);
     if ($insere) {
       $dbConnection->commit();
     } else {
@@ -24,7 +24,7 @@ if (is_null($dbConnection->getError())) {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
 if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "DelBodyMember", $dataSvc->getMethodName(), basename(__FILE__));
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "DelExerciseType", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
 $dataSvc->addToResponse("ConfirmSave", $insere);

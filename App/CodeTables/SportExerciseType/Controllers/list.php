@@ -2,11 +2,11 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/DistriXCodeTableBodyMemberData.php");
-include(__DIR__ . "/../Data/DistriXCodeTableBodyMemberNameData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableExerciseTypeData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableExerciseTypeNameData.php");
 include(__DIR__ . "/../../Language/Data/DistriXCodeTableLanguageData.php");
 
-$listBodyMembers = [];
+$listExerciseTypes = [];
 $listLanguages = [];
 
 if (isset($_POST)) {
@@ -15,54 +15,54 @@ if (isset($_POST)) {
   $languageCaller->setMethodName("ListLanguages");
   $languageCaller->setServiceName("App/CodeTables/Language/Services/DistriXLanguageListDataSvc.php");
 
-  $dataName       = new DistriXCodeTableBodyMemberNameData();
+  $dataName       = new DistriXCodeTableExerciseTypeNameData();
   $servicesCaller = new DistriXServicesCaller();
   $servicesCaller->addParameter("dataName", $dataName);
-  $servicesCaller->setServiceName("App/CodeTables/SportBodyMember/Services/DistriXBodyMemberListDataSvc.php");
+  $servicesCaller->setServiceName("App/CodeTables/SportExerciseType/Services/DistriXExerciseTypeListDataSvc.php");
 
   $svc = new DistriXSvc();
   $svc->addToCall("Language", $languageCaller);
-  $svc->addToCall("BodyMember", $servicesCaller);
+  $svc->addToCall("ExerciseType", $servicesCaller);
   $callsOk = $svc->call();
 
 // RESPONSES
   list($outputok, $output, $errorData) = $svc->getResult("Language"); //print_r($output);
-  $logOk = logController("Security_BodyMember", "DistriXBodyMemberListDataSvc", "ListBodyMember-Languages", $output);
+  $logOk = logController("Security_ExerciseType", "DistriXExerciseTypeListDataSvc", "ListExerciseType-Languages", $output);
   if ($outputok && isset($output["ListLanguages"]) && is_array($output["ListLanguages"])) {
     list($listLanguages, $jsonError) = DistriXCodeTableLanguageData::getJsonArray($output["ListLanguages"]);
   } else {
     $error = $errorData;
   }
 
-  list($outputok, $output, $errorData) = $svc->getResult("BodyMember"); //print_r($output);
-  $logOk = logController("Security_BodyMember", "DistriXBodyMemberListDataSvc", "ListBodyMember-BodyMembers", $output);
-  if ($outputok && isset($output["ListBodyMembers"]) && is_array($output["ListBodyMembers"])) {
-    list($listBodyMembers, $jsonError) = DistriXCodeTableBodyMemberData::getJsonArray($output["ListBodyMembers"]);
+  list($outputok, $output, $errorData) = $svc->getResult("ExerciseType"); //print_r($output);
+  $logOk = logController("Security_ExerciseType", "DistriXExerciseTypeListDataSvc", "ListExerciseType-ExerciseTypes", $output);
+  if ($outputok && isset($output["ListExerciseTypes"]) && is_array($output["ListExerciseTypes"])) {
+    list($listExerciseTypes, $jsonError) = DistriXCodeTableExerciseTypeData::getJsonArray($output["ListExerciseTypes"]);
   } else {
     $error = $errorData;
   }
   
-  if ($outputok && isset($output["ListBodyMemberNames"]) && is_array($output["ListBodyMemberNames"])) {
-    list($listBodyMemberNames, $jsonError) = DistriXCodeTableBodyMemberNameData::getJsonArray($output["ListBodyMemberNames"]);
+  if ($outputok && isset($output["ListExerciseTypeNames"]) && is_array($output["ListExerciseTypeNames"])) {
+    list($listExerciseTypeNames, $jsonError) = DistriXCodeTableExerciseTypeNameData::getJsonArray($output["ListExerciseTypeNames"]);
   } else {
     $error = $errorData;
   }
 
 // TREATMENT
   $nbLanguagesTotal = count($listLanguages);
-  foreach ($listBodyMembers as $bodyMember) {
-    $bodyMember->setNbLanguagesTotal($nbLanguagesTotal);
+  foreach ($listExerciseTypes as $exerciseType) {
+    $exerciseType->setNbLanguagesTotal($nbLanguagesTotal);
     $names = [];
-    foreach ($listBodyMemberNames as $bodyMemberName) {
-      if ($bodyMemberName->getIdBodyMember() == $bodyMember->getId()) {
-        $names[] = $bodyMemberName;
+    foreach ($listExerciseTypeNames as $exerciseTypeName) {
+      if ($exerciseTypeName->getIdExerciseType() == $exerciseType->getId()) {
+        $names[] = $exerciseTypeName;
       }
     }
-    $bodyMember->setNames($names);
-    $bodyMember->setNbLanguages(count($names));
+    $exerciseType->setNames($names);
+    $exerciseType->setNbLanguages(count($names));
   }
 }
-$resp["ListBodyMembers"] = $listBodyMembers;
+$resp["ListExerciseTypes"] = $listExerciseTypes;
 $resp["ListLanguages"] = $listLanguages;
 if (!empty($error)) {
   $resp["Error"] = $error;

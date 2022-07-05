@@ -1,5 +1,173 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class BodyMemberNameStor {
+class ExerciseTypeStor {
+
+  const TABLE_NAME_TABLENAME = "exercisetypename";
+  const FIELDS_TABLENAME = ',exercisetypename.id exercisetypenameid,idexercisetype exercisetypenameidexercisetype,idlanguage exercisetypenameidlanguage,exercisetypename.name exercisetypename,exercisetypename.elemstate exercisetypenameelemstate,exercisetypename.timestamp exercisetypenametimestamp';
+
+  public static function getListNames(bool $all, ExerciseTypeNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new ExerciseTypeStorData();
+    $list = [];
+    $listNames = [];
+  
+    if ($inDbConnection != null) {
+      $request  = "SELECT exercisetype.id,exercisetype.code,exercisetype.name,exercisetype.elemstate,exercisetype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idexercisetype";
+      if ($dataIn->getIdLanguage() > 0) {
+        $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataIn->getIdLanguage();
+      }
+      if (!$all) {
+        $request .= " WHERE ".self::TABLE_NAME.".elemstate = :statut";
+      }
+      $request .= " ORDER BY  ".self::TABLE_NAME.".code";
+
+      $stmt = $inDbConnection->prepare($request);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $oldValue = "";
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new ExerciseTypeNameStorData();
+          if (! is_null($row["exercisetypenameid"])) {
+            $dataName->setId($row["exercisetypenameid"]);
+            $dataName->setIdExerciseType($row["exercisetypenameidexercisetype"]);
+            $dataName->setIdLanguage($row["exercisetypenameidlanguage"]);
+            $dataName->setName($row["exercisetypename"]);
+            $dataName->setElemState($row["exercisetypenameelemstate"]);
+            $dataName->setTimestamp($row["exercisetypenametimestamp"]);
+          }
+          if ($oldValue != $row["code"]) {
+             $oldValue = $row["code"];
+             if ($data->getId() > 0) {
+               $list[] = $data;
+               $data = new ExerciseTypeStorData();
+             }
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+          if (! is_null($row["exercisetypenameid"])) {
+            $listNames[] = $dataName;
+          }
+        }
+        $list[] = $data;
+      }
+    }
+    return array($list, $listNames);
+  }
+
+  public static function findByIndCodeNames(ExerciseTypeStorData $dataIn, ExerciseTypeNameStorData $dataNameIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new ExerciseTypeStorData();
+    $listNames = [];
+
+    if ($inDbConnection != null) {
+      $request  = "SELECT exercisetype.id,exercisetype.code,exercisetype.name,exercisetype.elemstate,exercisetype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idexercisetype";
+      if ($dataNameIn->getIdLanguage() > 0) {
+        $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataNameIn->getIdLanguage();
+      }
+      $request .= " WHERE exercisetype.code = :index0";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['index0'=>  $dataIn->getCode()]);
+      if (self::SHOW_FIND_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new ExerciseTypeNameStorData();
+          if (! is_null($row["exercisetypenameid"])) {
+            $dataName->setId($row["exercisetypenameid"]);
+            $dataName->setIdExerciseType($row["exercisetypenameidexercisetype"]);
+            $dataName->setIdLanguage($row["exercisetypenameidlanguage"]);
+            $dataName->setName($row["exercisetypename"]);
+            $dataName->setElemState($row["exercisetypenameelemstate"]);
+            $dataName->setTimestamp($row["exercisetypenametimestamp"]);
+            $listNames[] = $dataName;
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+        }
+      }
+    }
+    return array($data, $listNames);
+  }
+  // End of findByIndCodeNames
+
+  public static function readNames(int $id, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new ExerciseTypeStorData();
+    $listNames = [];
+
+    if ($inDbConnection != null) {
+      $request  = "SELECT exercisetype.id,exercisetype.code,exercisetype.name,exercisetype.elemstate,exercisetype.timestamp";
+      $request .= self::FIELDS_TABLENAME;
+      $request .= self::FROM;
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idexercisetype";
+      $request .= " WHERE ".self::TABLE_NAME.".id = :id";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['id'=> $id]);
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+          // print_r($row);
+          $dataName = new ExerciseTypeNameStorData();
+          if (! is_null($row["exercisetypenameid"])) {
+            $dataName->setId($row["exercisetypenameid"]);
+            $dataName->setIdExerciseType($row["exercisetypenameidexercisetype"]);
+            $dataName->setIdLanguage($row["exercisetypenameidlanguage"]);
+            $dataName->setName($row["exercisetypename"]);
+            $dataName->setElemState($row["exercisetypenameelemstate"]);
+            $dataName->setTimestamp($row["exercisetypenametimestamp"]);
+            $listNames[] = $dataName;
+          }
+          $data->setId($row["id"]);
+          $data->setCode($row["code"]);
+          $data->setName($row["name"]);
+          $data->setElemState($row["elemstate"]);
+          $data->setTimestamp($row["timestamp"]);
+        }
+      }
+      $trace = $inDbConnection->getTrace();
+      if (!is_null($trace) && !$trace->getManualTrace()) {
+        $traceData = new DistriXTraceData();
+        $traceData->setIdUser($trace->getIdUser());
+        $traceData->setApplication($trace->getApplicationName());
+        $traceData->setSchema($trace->getDbSchemaName());
+        $traceData->setOperationCode($traceData::TRACE_READ);
+        $traceData->setOperationId($id);
+        $traceData->setOperationTable(self::TABLE_NAME);
+        $traceData->setOperationData(print_r($data, true));
+        $traceData->setOperationDate(DistriXSvcUtil::getCurrentNumDate());
+        $traceData->setOperationTime(DistriXSvcUtil::getCurrentNumTime());
+        $trace->addToTrace($traceData);
+      }
+    }
+    return array($data, $listNames);
+  }
+  // End of readNames
 
 //=============================================================================
 //== DO NOT REMOVE !
@@ -10,9 +178,9 @@ class BodyMemberNameStor {
 //==
 //=============================================================================
 //=============================================================================
-  const TABLE_NAME = "bodymembername";
-  const SELECT = 'SELECT id,idbodymember,idlanguage,name,elemstate,timestamp';
-  const FROM = ' FROM bodymembername';
+  const TABLE_NAME = "exercisetype";
+  const SELECT = 'SELECT id,code,name,elemstate,timestamp';
+  const FROM = ' FROM exercisetype';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
   const SHOW_CREATE_REQUEST = FALSE;
@@ -25,7 +193,7 @@ class BodyMemberNameStor {
   public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberNameStorData();
+    $data = new ExerciseTypeStorData();
     $list = [];
 
     if ($inDbConnection != null) {
@@ -34,7 +202,7 @@ class BodyMemberNameStor {
       if (!$all) {
         $request .= " WHERE elemstate = :statut";
       }
-      $request .= " ORDER BY name";
+      $request .= " ORDER BY code";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
@@ -46,7 +214,7 @@ class BodyMemberNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "BodyMemberNameStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ExerciseTypeStorData");
       }
     }
     return array($list, count($list));
@@ -56,12 +224,12 @@ class BodyMemberNameStor {
   public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberNameStorData();
+    $data = new ExerciseTypeStorData();
     $list = [];
 
     if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
       if ($className == "" || is_null($className)) {
-        $className = "BodyMemberNameStorData";
+        $className = "ExerciseTypeStorData";
       }
       $request  = self::SELECT;
       $request .= self::FROM;
@@ -69,7 +237,7 @@ class BodyMemberNameStor {
       if (!$all) {
         $request .= " AND elemstate = :statut";
       }
-      $request .= " ORDER BY name";
+      $request .= " ORDER BY code";
 
       $stmt = $inDbConnection->prepare($request);
       if (!$all) {
@@ -88,64 +256,33 @@ class BodyMemberNameStor {
   }
   // End of getListFromList
 
-  public static function findByindbodyMemberunique(BodyMemberNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIndCode(ExerciseTypeStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberNameStorData();
+    $data = new ExerciseTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE idbodymember = :index0";
-      $request .= " AND idlanguage = :index1";
+      $request .= " WHERE code = :index0";
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['index0'=>  $dataIn->getIdBodyMember(), 'index1'=>  $dataIn->getIdLanguage()]);
+      $stmt->execute(['index0'=>  $dataIn->getCode()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "BodyMemberNameStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ExerciseTypeStorData");
         $data = $stmt->fetch();
       }
     }
     return $data;
   }
-  // End of indbodyMemberunique
-
-  public static function findByindlanguage(BodyMemberNameStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
-  {
-    $request = "";
-    $list = [];
-
-    if ($inDbConnection != null) {
-      $request  = self::SELECT;
-      $request .= self::FROM;
-      $request .= " WHERE idlanguage = :index0";
-      if (!$all) {
-        $request .= " AND elemstate = :statut";
-      }
-      $params = [];
-      $params["index0"] = $dataIn->getIdLanguage();
-      if (!$all) {
-        $params["statut"] = $dataIn->getAvailableValue();
-      }
-      $stmt = $inDbConnection->prepare($request);
-      $stmt->execute($params);
-      if (self::SHOW_FIND_REQUEST) {
-        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
-      }
-      if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "BodyMemberNameStorData");
-      }
-    }
-    return array($list, count($list));
-  }
-  // End of indlanguage
+  // End of IndCode
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberNameStorData();
+    $data = new ExerciseTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -157,7 +294,7 @@ class BodyMemberNameStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "BodyMemberNameStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ExerciseTypeStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -179,15 +316,14 @@ class BodyMemberNameStor {
   }
   // End of read
 
-  public static function update(BodyMemberNameStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(ExerciseTypeStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "UPDATE bodymembername SET ";
-      $request .= "idbodymember= :idbodymember,";
-      $request .= "idlanguage= :idlanguage,";
+      $request  = "UPDATE exercisetype SET ";
+      $request .= "code= :code,";
       $request .= "name= :name,";
       $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
@@ -195,8 +331,7 @@ class BodyMemberNameStor {
       $request .= " AND timestamp = :oldtimestamp";
       $params = [];
       $params["id"] = $data->getId();
-      $params["idbodymember"] = $data->getIdBodyMember();
-      $params["idlanguage"] = $data->getIdLanguage();
+      $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
@@ -234,7 +369,7 @@ class BodyMemberNameStor {
   }
   // End of update
 
-  public static function save(BodyMemberNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(ExerciseTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -247,7 +382,7 @@ class BodyMemberNameStor {
   }
   // End of save
 
-  public static function remove(BodyMemberNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(ExerciseTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -259,13 +394,13 @@ class BodyMemberNameStor {
   }
   // End of remove
 
-  public static function restore(BodyMemberNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(ExerciseTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
       $data = self::read($data->getId(), $inDbConnection);
       $data->setAvailable();
-      $insere = self::update($data, "TRACE_RESTORE", $inDbConnection);
+      $insere = self::update($data, "Restore", $inDbConnection);
     }
     return $insere;
   }
@@ -277,7 +412,7 @@ class BodyMemberNameStor {
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "DELETE FROM bodymembername";
+      $request  = "DELETE FROM exercisetype";
       $request .= " WHERE id = :id";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['id'=> $id]);
@@ -306,23 +441,21 @@ class BodyMemberNameStor {
   }
   // End of delete
 
-  public static function create(BodyMemberNameStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(ExerciseTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "INSERT INTO bodymembername(";
-      $request .= "idbodymember,idlanguage,name,elemstate,timestamp)";
+      $request  = "INSERT INTO exercisetype(";
+      $request .= "code,name,elemstate,timestamp)";
       $request .= " VALUES(";
-      $request .= ":idbodymember,";
-      $request .= ":idlanguage,";
+      $request .= ":code,";
       $request .= ":name,";
       $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
-      $params["idbodymember"] = $data->getIdBodyMember();
-      $params["idlanguage"] = $data->getIdLanguage();
+      $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();

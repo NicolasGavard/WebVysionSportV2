@@ -1,7 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class BodyMemberNameStorData extends DistriXSvcAppData {
-  const BODYMEMBERNAME_STATUS_AVAILABLE     = 0;
-  const BODYMEMBERNAME_STATUS_NOT_AVAILABLE = 1;
+class CircuitTypeNameStorData extends DistriXSvcAppData {
+  const CIRCUITTYPENAME_STATUS_AVAILABLE     = 0;
+  const CIRCUITTYPENAME_STATUS_NOT_AVAILABLE = 1;
 
   protected $id;
   protected $idbodymember;
@@ -20,21 +20,21 @@ class BodyMemberNameStorData extends DistriXSvcAppData {
     }
 // Gets
   public function getId():int { return $this->id; }
-  public function getIdBodyMember():int { return $this->idbodymember; }
+  public function getIdCircuitType():int { return $this->idbodymember; }
   public function getIdLanguage():int { return $this->idlanguage; }
   public function getName():string { return $this->name; }
   public function getElemState():int { return $this->elemstate; }
   public function getTimestamp():int { return $this->timestamp; }
-  public function isAvailable():bool { return ($this->elemstate == self::BODYMEMBERNAME_STATUS_AVAILABLE); }
-  public function getAvailableValue():int { return self::BODYMEMBERNAME_STATUS_AVAILABLE; }
-  public function getUnavailableValue():int { return self::BODYMEMBERNAME_STATUS_NOT_AVAILABLE; }
+  public function isAvailable():bool { return ($this->elemstate == self::CIRCUITTYPENAME_STATUS_AVAILABLE); }
+  public function getAvailableValue():int { return self::CIRCUITTYPENAME_STATUS_AVAILABLE; }
+  public function getUnavailableValue():int { return self::CIRCUITTYPENAME_STATUS_NOT_AVAILABLE; }
 // Sets
   public function setId(int $id) { $this->id = $id; }
-  public function setIdBodyMember(int $idBodyMember) { $this->idbodymember = $idBodyMember; }
+  public function setIdCircuitType(int $idCircuitType) { $this->idbodymember = $idCircuitType; }
   public function setIdLanguage(int $idLanguage) { $this->idlanguage = $idLanguage; }
   public function setName(string $name) { $this->name = $name; }
   public function setElemState(int $elemState) { $this->elemstate = $elemState; }
   public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->elemstate = self::BODYMEMBERNAME_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->elemstate = self::BODYMEMBERNAME_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::CIRCUITTYPENAME_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::CIRCUITTYPENAME_STATUS_NOT_AVAILABLE; }
 }

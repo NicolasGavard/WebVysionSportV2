@@ -3,7 +3,7 @@
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('../../Home/Template/i18/'.$i18cdlangue.'/header'.$i18cdlangue.'.php');
-	include('i18/'.$i18cdlangue.'/codeTableBodyMemberList'.$i18cdlangue.'.php');
+	include('i18/'.$i18cdlangue.'/codeTableCircuitTypeList'.$i18cdlangue.'.php');
   include('../../Home/Template/_header.php');
 	include('../../Home/Template/_headerMenuTop.php');
 	include('../../Home/Template/_headerMenuLeft.php');
@@ -29,13 +29,13 @@
             <div class="pull-right">
               <button type="button" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i>&nbsp;<?php echo $page_all_active; ?></button>
               <button type="button" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i>&nbsp;<?php echo $page_all_inactive; ?></button>
-              <button type="button" class="btn btn-primary AddNewBodyMember" data-toggle="modal" data-target="#modalAddBodyMember"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
+              <button type="button" class="btn btn-primary AddNewCircuitType" data-toggle="modal" data-target="#modalAddCircuitType"><i class="fa fa-plus"></i>&nbsp;<?php echo $page_all_add; ?></button>
         		</div>
 					</div>
           
           <div class="pb-20"></div>
           <div class="pb-20">
-						<table id="BodyMemberTable" class="display responsive nowrap" width="100%">
+						<table id="CircuitTypeTable" class="display responsive nowrap" width="100%">
 							<thead>
 								<tr>                 
                   <th><span><?php echo $page_code; ?></span></th>
@@ -49,29 +49,29 @@
 				</div>
 			</div>
       
-      <div class="modal fade" id="modalAddBodyMember" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade" id="modalAddCircuitType" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
               <h4 class="padding-top-20 mb-20 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-20 mb-20 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               
-              <input class="form-control AddBodyMemberFormIdBodyMember" type="hidden" name="id"         value="0">
-              <input class="form-control AddBodyMemberFormTimestamp"  type="hidden" name="timestamp"  value="0">
-              <input class="form-control AddBodyMemberFormStatut"     type="hidden" name="elemState"  value="0">
+              <input class="form-control AddCircuitTypeFormIdCircuitType" type="hidden" name="id"         value="0">
+              <input class="form-control AddCircuitTypeFormTimestamp"  type="hidden" name="timestamp"  value="0">
+              <input class="form-control AddCircuitTypeFormStatut"     type="hidden" name="elemState"  value="0">
               
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_code; ?></label>
-                    <input class="form-control AddBodyMemberFormCode" id="AddBodyMemberFormCode" type="text" code="codeShort" placeholder="<?php echo $page_code; ?>">
+                    <input class="form-control AddCircuitTypeFormCode" id="AddCircuitTypeFormCode" type="text" code="codeShort" placeholder="<?php echo $page_code; ?>">
                     <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
                   </div>
                 </div>
                 <div class="col-md-8 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
-                    <input class="form-control AddBodyMemberFormName" id="AddBodyMemberFormName" type="text" code="bodyMemberName" placeholder="<?php echo $page_name; ?>">
+                    <input class="form-control AddCircuitTypeFormName" id="AddCircuitTypeFormName" type="text" code="circuitTypeName" placeholder="<?php echo $page_name; ?>">
                     <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
                   </div>
                 </div>
@@ -81,13 +81,13 @@
                 <label class="col-sm-12 col-md-12"><?php echo $page_languages; ?></label>
               </div>
               
-              <div id="bodyMemberLanguages"></div>
+              <div id="circuitTypeLanguages"></div>
               
               <div class="padding-bottom-20 row" style="margin: 0 auto;">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
-                  <button type="button" class="btn btn-primary btnAddBodyMember" id="btnAddBodyMember"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_add; ?></button>
-                  <button type="button" class="btn btn-primary btnUpdateBodyMember" id="btnUpdateBodyMember"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_update; ?></button>
+                  <button type="button" class="btn btn-primary btnAddCircuitType" id="btnAddCircuitType"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_add; ?></button>
+                  <button type="button" class="btn btn-primary btnUpdateCircuitType" id="btnUpdateCircuitType"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_update; ?></button>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@
       <?php
         include('../../Home/Template/_headerFooter.php');
       ?>
-      <script src="codeTableBodyMemberList.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="codeTableCircuitTypeList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>
 

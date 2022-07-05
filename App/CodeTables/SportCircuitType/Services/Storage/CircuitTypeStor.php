@@ -1,21 +1,21 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class BodyMemberStor {
+class CircuitTypeStor {
 
-  const TABLE_NAME_TABLENAME = "bodymembername";
-  const FIELDS_TABLENAME = ',bodymembername.id bodymembernameid,idbodymember bodymembernameidbodymember,idlanguage bodymembernameidlanguage,bodymembername.name bodymembername,bodymembername.elemstate bodymembernameelemstate,bodymembername.timestamp bodymembernametimestamp';
+  const TABLE_NAME_TABLENAME = "circuittypename";
+  const FIELDS_TABLENAME = ',circuittypename.id circuittypenameid,idcircuittype circuittypenameidcircuittype,idlanguage circuittypenameidlanguage,circuittypename.name circuittypename,circuittypename.elemstate circuittypenameelemstate,circuittypename.timestamp circuittypenametimestamp';
 
-  public static function getListNames(bool $all, BodyMemberNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function getListNames(bool $all, CircuitTypeNameStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberStorData();
+    $data = new CircuitTypeStorData();
     $list = [];
     $listNames = [];
   
     if ($inDbConnection != null) {
-      $request  = "SELECT bodymember.id,bodymember.code,bodymember.name,bodymember.elemstate,bodymember.timestamp";
+      $request  = "SELECT circuittype.id,circuittype.code,circuittype.name,circuittype.elemstate,circuittype.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
-      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idbodymember";
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idcircuittype";
       if ($dataIn->getIdLanguage() > 0) {
         $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataIn->getIdLanguage();
       }
@@ -37,20 +37,20 @@ class BodyMemberStor {
         $oldValue = "";
         while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
           // print_r($row);
-          $dataName = new BodyMemberNameStorData();
-          if (! is_null($row["bodymembernameid"])) {
-            $dataName->setId($row["bodymembernameid"]);
-            $dataName->setIdBodyMember($row["bodymembernameidbodymember"]);
-            $dataName->setIdLanguage($row["bodymembernameidlanguage"]);
-            $dataName->setName($row["bodymembername"]);
-            $dataName->setElemState($row["bodymembernameelemstate"]);
-            $dataName->setTimestamp($row["bodymembernametimestamp"]);
+          $dataName = new CircuitTypeNameStorData();
+          if (! is_null($row["circuittypenameid"])) {
+            $dataName->setId($row["circuittypenameid"]);
+            $dataName->setIdCircuitType($row["circuittypenameidcircuittype"]);
+            $dataName->setIdLanguage($row["circuittypenameidlanguage"]);
+            $dataName->setName($row["circuittypename"]);
+            $dataName->setElemState($row["circuittypenameelemstate"]);
+            $dataName->setTimestamp($row["circuittypenametimestamp"]);
           }
           if ($oldValue != $row["code"]) {
              $oldValue = $row["code"];
              if ($data->getId() > 0) {
                $list[] = $data;
-               $data = new BodyMemberStorData();
+               $data = new CircuitTypeStorData();
              }
           }
           $data->setId($row["id"]);
@@ -58,7 +58,7 @@ class BodyMemberStor {
           $data->setName($row["name"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
-          if (! is_null($row["bodymembernameid"])) {
+          if (! is_null($row["circuittypenameid"])) {
             $listNames[] = $dataName;
           }
         }
@@ -68,21 +68,21 @@ class BodyMemberStor {
     return array($list, $listNames);
   }
 
-  public static function findByIndCodeNames(BodyMemberStorData $dataIn, BodyMemberNameStorData $dataNameIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIndCodeNames(CircuitTypeStorData $dataIn, CircuitTypeNameStorData $dataNameIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberStorData();
+    $data = new CircuitTypeStorData();
     $listNames = [];
 
     if ($inDbConnection != null) {
-      $request  = "SELECT bodymember.id,bodymember.code,bodymember.name,bodymember.elemstate,bodymember.timestamp";
+      $request  = "SELECT circuittype.id,circuittype.code,circuittype.name,circuittype.elemstate,circuittype.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
-      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idbodymember";
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idcircuittype";
       if ($dataNameIn->getIdLanguage() > 0) {
         $request .= " AND ".self::TABLE_NAME_TABLENAME.".idlanguage = ".$dataNameIn->getIdLanguage();
       }
-      $request .= " WHERE bodymember.code = :index0";
+      $request .= " WHERE circuittype.code = :index0";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['index0'=>  $dataIn->getCode()]);
       if (self::SHOW_FIND_REQUEST) {
@@ -91,14 +91,14 @@ class BodyMemberStor {
       if ($stmt->rowCount() > 0) {
         while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
           // print_r($row);
-          $dataName = new BodyMemberNameStorData();
-          if (! is_null($row["bodymembernameid"])) {
-            $dataName->setId($row["bodymembernameid"]);
-            $dataName->setIdBodyMember($row["bodymembernameidbodymember"]);
-            $dataName->setIdLanguage($row["bodymembernameidlanguage"]);
-            $dataName->setName($row["bodymembername"]);
-            $dataName->setElemState($row["bodymembernameelemstate"]);
-            $dataName->setTimestamp($row["bodymembernametimestamp"]);
+          $dataName = new CircuitTypeNameStorData();
+          if (! is_null($row["circuittypenameid"])) {
+            $dataName->setId($row["circuittypenameid"]);
+            $dataName->setIdCircuitType($row["circuittypenameidcircuittype"]);
+            $dataName->setIdLanguage($row["circuittypenameidlanguage"]);
+            $dataName->setName($row["circuittypename"]);
+            $dataName->setElemState($row["circuittypenameelemstate"]);
+            $dataName->setTimestamp($row["circuittypenametimestamp"]);
             $listNames[] = $dataName;
           }
           $data->setId($row["id"]);
@@ -116,14 +116,14 @@ class BodyMemberStor {
   public static function readNames(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberStorData();
+    $data = new CircuitTypeStorData();
     $listNames = [];
 
     if ($inDbConnection != null) {
-      $request  = "SELECT bodymember.id,bodymember.code,bodymember.name,bodymember.elemstate,bodymember.timestamp";
+      $request  = "SELECT circuittype.id,circuittype.code,circuittype.name,circuittype.elemstate,circuittype.timestamp";
       $request .= self::FIELDS_TABLENAME;
       $request .= self::FROM;
-      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idbodymember";
+      $request .= " LEFT JOIN ".self::TABLE_NAME_TABLENAME." ON ".self::TABLE_NAME.".id = ".self::TABLE_NAME_TABLENAME.".idcircuittype";
       $request .= " WHERE ".self::TABLE_NAME.".id = :id";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['id'=> $id]);
@@ -133,14 +133,14 @@ class BodyMemberStor {
       if ($stmt->rowCount() > 0) {
         while (($row = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
           // print_r($row);
-          $dataName = new BodyMemberNameStorData();
-          if (! is_null($row["bodymembernameid"])) {
-            $dataName->setId($row["bodymembernameid"]);
-            $dataName->setIdBodyMember($row["bodymembernameidbodymember"]);
-            $dataName->setIdLanguage($row["bodymembernameidlanguage"]);
-            $dataName->setName($row["bodymembername"]);
-            $dataName->setElemState($row["bodymembernameelemstate"]);
-            $dataName->setTimestamp($row["bodymembernametimestamp"]);
+          $dataName = new CircuitTypeNameStorData();
+          if (! is_null($row["circuittypenameid"])) {
+            $dataName->setId($row["circuittypenameid"]);
+            $dataName->setIdCircuitType($row["circuittypenameidcircuittype"]);
+            $dataName->setIdLanguage($row["circuittypenameidlanguage"]);
+            $dataName->setName($row["circuittypename"]);
+            $dataName->setElemState($row["circuittypenameelemstate"]);
+            $dataName->setTimestamp($row["circuittypenametimestamp"]);
             $listNames[] = $dataName;
           }
           $data->setId($row["id"]);
@@ -178,9 +178,9 @@ class BodyMemberStor {
 //==
 //=============================================================================
 //=============================================================================
-  const TABLE_NAME = "bodymember";
+  const TABLE_NAME = "circuittype";
   const SELECT = 'SELECT id,code,name,elemstate,timestamp';
-  const FROM = ' FROM bodymember';
+  const FROM = ' FROM circuittype';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
   const SHOW_CREATE_REQUEST = FALSE;
@@ -193,7 +193,7 @@ class BodyMemberStor {
   public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberStorData();
+    $data = new CircuitTypeStorData();
     $list = [];
 
     if ($inDbConnection != null) {
@@ -214,7 +214,7 @@ class BodyMemberStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "BodyMemberStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitTypeStorData");
       }
     }
     return array($list, count($list));
@@ -224,12 +224,12 @@ class BodyMemberStor {
   public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberStorData();
+    $data = new CircuitTypeStorData();
     $list = [];
 
     if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
       if ($className == "" || is_null($className)) {
-        $className = "BodyMemberStorData";
+        $className = "CircuitTypeStorData";
       }
       $request  = self::SELECT;
       $request .= self::FROM;
@@ -256,10 +256,10 @@ class BodyMemberStor {
   }
   // End of getListFromList
 
-  public static function findByIndCode(BodyMemberStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIndCode(CircuitTypeStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberStorData();
+    $data = new CircuitTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -271,7 +271,7 @@ class BodyMemberStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "BodyMemberStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitTypeStorData");
         $data = $stmt->fetch();
       }
     }
@@ -282,7 +282,7 @@ class BodyMemberStor {
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new BodyMemberStorData();
+    $data = new CircuitTypeStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -294,7 +294,7 @@ class BodyMemberStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "BodyMemberStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitTypeStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -316,13 +316,13 @@ class BodyMemberStor {
   }
   // End of read
 
-  public static function update(BodyMemberStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(CircuitTypeStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "UPDATE bodymember SET ";
+      $request  = "UPDATE circuittype SET ";
       $request .= "code= :code,";
       $request .= "name= :name,";
       $request .= "elemstate= :elemstate,";
@@ -369,7 +369,7 @@ class BodyMemberStor {
   }
   // End of update
 
-  public static function save(BodyMemberStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(CircuitTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -382,7 +382,7 @@ class BodyMemberStor {
   }
   // End of save
 
-  public static function remove(BodyMemberStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(CircuitTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -394,7 +394,7 @@ class BodyMemberStor {
   }
   // End of remove
 
-  public static function restore(BodyMemberStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(CircuitTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -412,7 +412,7 @@ class BodyMemberStor {
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "DELETE FROM bodymember";
+      $request  = "DELETE FROM circuittype";
       $request .= " WHERE id = :id";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['id'=> $id]);
@@ -441,13 +441,13 @@ class BodyMemberStor {
   }
   // End of delete
 
-  public static function create(BodyMemberStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(CircuitTypeStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "INSERT INTO bodymember(";
+      $request  = "INSERT INTO circuittype(";
       $request .= "code,name,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";

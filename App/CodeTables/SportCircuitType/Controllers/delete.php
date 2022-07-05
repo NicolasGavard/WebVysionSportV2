@@ -2,11 +2,11 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/DistriXCodeTableBodyMemberData.php");
+include(__DIR__ . "/../Data/DistriXCodeTableCircuitTypeData.php");
 
 $i18cdlangue    = 'FR';
 // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-$international  = __DIR__.'/i18/'.$i18cdlangue.'/codeTableBodyMemberList'.$i18cdlangue;
+$international  = __DIR__.'/i18/'.$i18cdlangue.'/codeTableCircuitTypeList'.$i18cdlangue;
 include(__DIR__ . "/../../../i18/_i18.php");
 $international  = $i18cdlangue.'/Global/globalTranslation';
 include(__DIR__ . "/../../../i18/_i18.php");
@@ -14,15 +14,15 @@ include(__DIR__ . "/../../../i18/_i18.php");
 $confirmSave = false;
 
 if (isset($_POST)) {
-  list($bodyMember, $errorJson) = DistriXCodeTableBodyMemberData::getJsonData($_POST);
+  list($circuitType, $errorJson) = DistriXCodeTableCircuitTypeData::getJsonData($_POST);
 
   $servicesCaller = new DistriXServicesCaller();
-  $servicesCaller->addParameter("data", $bodyMember);
-  $servicesCaller->setServiceName("App/CodeTables/SportBodyMember/Services/DistriXBodyMemberDeleteDataSvc.php");
+  $servicesCaller->addParameter("data", $circuitType);
+  $servicesCaller->setServiceName("App/CodeTables/SportCircuitType/Services/DistriXCircuitTypeDeleteDataSvc.php");
   list($outputok, $output, $errorData) = $servicesCaller->call(); 
   //print_r($output);
 
-  $logOk = logController("Security_BodyMember", "DistriXBodyMemberDeleteDataSvc", "DelBodyMember", $output);
+  $logOk = logController("Security_CircuitType", "DistriXCircuitTypeDeleteDataSvc", "DelCircuitType", $output);
 
   if ($outputok && !empty($output) && isset($output["ConfirmSave"])) {
     $confirmSave = $output["ConfirmSave"];

@@ -1,8 +1,8 @@
-var bodyMemberSelectedData = null;
-var bodyMemberTableLanguagesData = "";
+var exerciseTypeSelectedData = null;
+var exerciseTypeTableLanguagesData = "";
 $(function() {
-  var bodyMemberTableData = "";
-  var bodyMemberTable = $('#BodyMemberTable').DataTable({
+  var exerciseTypeTableData = "";
+  var exerciseTypeTable = $('#ExerciseTypeTable').DataTable({
     columnDefs: [
       { orderable: false, targets: 2 },
       { orderable: false, targets: 3 }
@@ -17,9 +17,9 @@ $(function() {
     type : 'POST',
     dataType : 'JSON',
     success : function(data) {
-      bodyMemberTableData = data.ListBodyMembers;
-      bodyMemberTableLanguagesData = data.ListLanguages;
-      ListBodyMember(0);
+      exerciseTypeTableData = data.ListExerciseTypes;
+      exerciseTypeTableLanguagesData = data.ListLanguages;
+      ListExerciseType(0);
     },
     error : function(data) {
       console.log(data);
@@ -33,8 +33,8 @@ $(function() {
     $(".btn-warning").addClass("disabled");
     $(".dw-warning").addClass("dw-checked").removeClass("dw-ban");
 
-    bodyMemberTable.clear();
-    ListBodyMember(1);
+    exerciseTypeTable.clear();
+    ListExerciseType(1);
   });
 
   $(".btn-success").on('click', function() {
@@ -44,22 +44,22 @@ $(function() {
     $(".btn-warning").removeClass("disabled");
     $(".dw-warning").addClass("dw-ban").removeClass("dw-checked");
 
-    bodyMemberTable.clear();
-    ListBodyMember(0);
+    exerciseTypeTable.clear();
+    ListExerciseType(0);
   });
 
-  $(".AddNewBodyMember").on('click', function() {
+  $(".AddNewExerciseType").on('click', function() {
     $(".add_title").removeClass("d-none");
-    $("#btnAddBodyMember").removeClass("d-none");
+    $("#btnAddExerciseType").removeClass("d-none");
     $(".update_title").addClass("d-none");
-    $("#btnUpdateBodyMember").addClass("d-none");
+    $("#btnUpdateExerciseType").addClass("d-none");
     
-    bodyMemberSelectedData = null;
-    $('.AddBodyMemberFormCode').val('');
-    $('.AddBodyMemberFormName').val('');
-    $('#bodyMemberLanguages').html("");
+    exerciseTypeSelectedData = null;
+    $('.AddExerciseTypeFormCode').val('');
+    $('.AddExerciseTypeFormName').val('');
+    $('#exerciseTypeLanguages').html("");
 
-    const languages = bodyMemberTableLanguagesData;
+    const languages = exerciseTypeTableLanguagesData;
     $.map(languages, function(language, languageKey) {
       var html = "";
       html += '  <div class="row">';
@@ -70,77 +70,77 @@ $(function() {
       html += '    </div>';
       html += '    <div class="col-md-8 col-sm-12">';
       html += '      <div class="form-group">';
-      html += '        <input class="form-control AddBodyMemberFormLanguageName" type="text" name="bodyMemberLanguageName'+language.id+'" placeholder="'+nameTranslatedTxt+'">';
+      html += '        <input class="form-control AddExerciseTypeFormLanguageName" type="text" name="exerciseTypeLanguageName'+language.id+'" placeholder="'+nameTranslatedTxt+'">';
       html += '      </div>';
       html += '    </div>';
       html += '  </div>';
       
-      $('#bodyMemberLanguages').append(html);
+      $('#exerciseTypeLanguages').append(html);
     });
   });
 
-  $("#btnAddBodyMember, #btnUpdateBodyMember").on('click', function() {
-    var code = $('#AddBodyMemberFormCode').val();
-    var name = $('#AddBodyMemberFormName').val();
+  $("#btnAddExerciseType, #btnUpdateExerciseType").on('click', function() {
+    var code = $('#AddExerciseTypeFormCode').val();
+    var name = $('#AddExerciseTypeFormName').val();
     if (code == "" || name == '') {
       if (code == '') {
-        $('.AddBodyMemberFormCode').addClass("form-control-danger");
+        $('.AddExerciseTypeFormCode').addClass("form-control-danger");
         $('.danger-code').removeClass("d-none");
 
         setTimeout( () => { 
-          $(".AddBodyMemberFormCode").removeClass("form-control-danger");
+          $(".AddExerciseTypeFormCode").removeClass("form-control-danger");
           $('.danger-code').addClass("d-none");
         }, 3000 );
       }
       if (name == '') {
-        $('.AddBodyMemberFormName').addClass("form-control-danger");
+        $('.AddExerciseTypeFormName').addClass("form-control-danger");
         $('.danger-name').removeClass("d-none");
 
         setTimeout( () => { 
-          $(".AddBodyMemberFormName").removeClass("form-control-danger");
+          $(".AddExerciseTypeFormName").removeClass("form-control-danger");
           $('.danger-name').addClass("d-none");
         }, 3000 );
       }
     } else {
-      var bodyMemberNames = [];
-      $('input[name^="bodyMemberLanguageName"]').each(function() {
-        var idNameLanguage = this.name.substr("bodyMemberLanguageName".length);
-        var idName=0; var idBodyMember=0; var timestampName=0; var elemStateName=0;
-        if (bodyMemberSelectedData != null) {
-          $.map(bodyMemberSelectedData.names, function(nameData, nameDataKey) {
+      var exerciseTypeNames = [];
+      $('input[name^="exerciseTypeLanguageName"]').each(function() {
+        var idNameLanguage = this.name.substr("exerciseTypeLanguageName".length);
+        var idName=0; var idExerciseType=0; var timestampName=0; var elemStateName=0;
+        if (exerciseTypeSelectedData != null) {
+          $.map(exerciseTypeSelectedData.names, function(nameData, nameDataKey) {
             if (nameData.idLanguage == idNameLanguage) { 
               idName=nameData.id;
-              idBodyMember=nameData.idBodyMember;
+              idExerciseType=nameData.idExerciseType;
               timestampName=nameData.timestamp;
               elemStateName=nameData.elemState;
             }
           });
         }  
-        let bodyMemberName = {
+        let exerciseTypeName = {
           "id": idName,
-          "idBodyMember": idBodyMember,
+          "idExerciseType": idExerciseType,
           "idLanguage": idNameLanguage,
           "elemState": elemStateName,
           "timestamp": timestampName,
           "name": this.value
         }
-        bodyMemberNames.push(bodyMemberName);
+        exerciseTypeNames.push(exerciseTypeName);
       });
       var id=0; var timestamp=0; var elemState=0;
-      if (bodyMemberSelectedData != null) {
-        id=bodyMemberSelectedData.id;
-        timestamp=bodyMemberSelectedData.timestamp;
-        elemState=bodyMemberSelectedData.elemState;
+      if (exerciseTypeSelectedData != null) {
+        id=exerciseTypeSelectedData.id;
+        timestamp=exerciseTypeSelectedData.timestamp;
+        elemState=exerciseTypeSelectedData.elemState;
       }
       $.ajax({
         url : 'Controllers/save.php',
         type : 'POST',
         dataType : 'JSON',
-        data: {id,code,name,elemState,timestamp, "names":bodyMemberNames},
+        data: {id,code,name,elemState,timestamp, "names":exerciseTypeNames},
         success : function(data) {
           if (data.ConfirmSave) {
             $('#sa-success-distrix').trigger('click');
-            setTimeout(function() {window.location.href = "./codeTableBodyMemberList.php";}, 800);        
+            setTimeout(function() {window.location.href = "./codeTableExerciseTypeList.php";}, 800);        
           } else {
             $('#sa-error-distrix').trigger('click');
             $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.Error.text+'</ul>');
@@ -150,7 +150,7 @@ $(function() {
           $('#sa-error-distrix').trigger('click');
         }
       });
-      $(".btnAddBodyMember").attr("data-dismiss", "modal");
+      $(".btnAddExerciseType").attr("data-dismiss", "modal");
     } 
   });
 
@@ -163,7 +163,7 @@ $(function() {
       success : function(data) {
         if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./codeTableBodyMemberList.php";}, 800);
+          setTimeout(function() {window.location.href = "./codeTableExerciseTypeList.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
           $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.Error.text+'</ul>');
@@ -184,7 +184,7 @@ $(function() {
       success : function(data) {
         if (data.ConfirmSave) {
           $('#sa-success-distrix').trigger('click');
-          setTimeout(function() {window.location.href = "./codeTableBodyMemberList.php";}, 800);
+          setTimeout(function() {window.location.href = "./codeTableExerciseTypeList.php";}, 800);
         } else {
           $('#sa-error-distrix').trigger('click');
           $('#swal2-content').html('<ul class="list-group list-group-flush">'+data.Error.text+'</ul>');
@@ -196,8 +196,8 @@ $(function() {
     });
   });
 
-  function ListBodyMember(elemState){
-    const dataTableData = bodyMemberTableData;
+  function ListExerciseType(elemState){
+    const dataTableData = exerciseTypeTableData;
     $.map(dataTableData, function(val, key) {
       if(val.elemState == elemState){
         if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
@@ -208,7 +208,7 @@ $(function() {
                       '  <td>'+val.name+'</td>'+
                       '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {
-          const languages = bodyMemberTableLanguagesData;
+          const languages = exerciseTypeTableLanguagesData;
           $.map(languages, function(language, languageKey) {
             var notFound = true;
             if (val.names.length > 0) {
@@ -230,38 +230,38 @@ $(function() {
                 '       <i class="dw dw-more"></i>'+
                 '     </a>'+
                 '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">'+
-                '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddBodyMember" onclick="ViewBodyMember(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
-                '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelBodyMember(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
-                '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestBodyMember(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
+                '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddExerciseType" onclick="ViewExerciseType(\''+val.id+'\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>'+
+                '       <a class="dropdown-item '+actionBtnDelete+'"  data-toggle="modal" data-target="#modalDel"         onclick="DelExerciseType(\''+val.id+'\', \''+val.name+'\');"  href="#"><i class="dw dw-delete-3"></i> Supprimer</a>'+
+                '       <a class="dropdown-item '+actionBtnRestore+'" data-toggle="modal" data-target="#modalRest"        onclick="RestExerciseType(\''+val.id+'\', \''+val.name+'\');" href="#"><i class="dw dw-share-2"></i> Restaurer</a>'+
                 '     </div>'+
                 '   </div>'+
                 ' </td>'+
                 '</tr>';
-        bodyMemberTable.row.add($(line)).draw();
+        exerciseTypeTable.row.add($(line)).draw();
       }
     });
   }
 });
 
-function ViewBodyMember(id){
+function ViewExerciseType(id){
   $.ajax({
     url : 'Controllers/view.php',
     type : 'POST',
     dataType : 'JSON',
     data: {'id': id},
     success : function(data) {
-      bodyMemberSelectedData = data.ViewBodyMember;
+      exerciseTypeSelectedData = data.ViewExerciseType;
 
       $(".add_title").addClass("d-none");
-      $("#btnAddBodyMember").addClass("d-none");
+      $("#btnAddExerciseType").addClass("d-none");
       $(".update_title").removeClass("d-none");
-      $("#btnUpdateBodyMember").removeClass("d-none");
+      $("#btnUpdateExerciseType").removeClass("d-none");
   
-      $('.AddBodyMemberFormCode').val(data.ViewBodyMember.code);
-      $('.AddBodyMemberFormName').val(data.ViewBodyMember.name);
-      $('#bodyMemberLanguages').html("");
+      $('.AddExerciseTypeFormCode').val(data.ViewExerciseType.code);
+      $('.AddExerciseTypeFormName').val(data.ViewExerciseType.name);
+      $('#exerciseTypeLanguages').html("");
 
-      const languages = bodyMemberTableLanguagesData;
+      const languages = exerciseTypeTableLanguagesData;
       $.map(languages, function(language, languageKey) {
         var html = "";
         html += '  <div class="row">';
@@ -274,15 +274,15 @@ function ViewBodyMember(id){
         html += '      <div class="form-group">';
         var updateName  = "";
         var className   = "form-control-danger";
-        $.map(data.ViewBodyMember.names, function(nameData, nameDataKey) {
+        $.map(data.ViewExerciseType.names, function(nameData, nameDataKey) {
           if (nameData.idLanguage == language.id) { updateName=nameData.name; className = "form-control-success";}
         });
-        html += '        <input class="form-control '+className+' AddBodyMemberFormLanguageName" type="text" name="bodyMemberLanguageName'+language.id+'" value="'+updateName+'" placeholder="'+nameTranslatedTxt+'">';
+        html += '        <input class="form-control '+className+' AddExerciseTypeFormLanguageName" type="text" name="exerciseTypeLanguageName'+language.id+'" value="'+updateName+'" placeholder="'+nameTranslatedTxt+'">';
         html += '      </div>';
         html += '    </div>';
         html += '  </div>';
         
-        $('#bodyMemberLanguages').append(html);
+        $('#exerciseTypeLanguages').append(html);
       });
     },
     error : function(data) {
@@ -291,12 +291,12 @@ function ViewBodyMember(id){
   });
 }
 
-function DelBodyMember(id, name){
+function DelExerciseType(id, name){
   $('.DelFormId').val(id);
   $('.DelTxt').html(' <b>'+name+'</b> ?');
 }
 
-function RestBodyMember(id, name){
+function RestExerciseType(id, name){
   $('.RestFormId').val(id);
   $('.RestTxt').html(' <b>'+name+'</b> ?');
 }
