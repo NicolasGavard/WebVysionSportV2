@@ -10,18 +10,12 @@ CREATE TABLE `exercisetype` (
 ) ENGINE=InnoDB COMMENT='Exercise Types' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
 INSERT INTO exercisetype(id,code,name,elemstate,timestamp) VALUES 
-(1,'HEAD','Head',0,0),
-(2,'NECK','Neck',0,0),
-(3,'BACK','Back',0,0),
-(4,'TRUNK','Trunk',0,0),
-(5,'SHOULDER','Shoulder',0,0),
-(6,'ARM','Arm',0,0),
-(7,'FOREARM','Forearm',0,0),
-(8,'HAND','Hand',0,0),
-(9,'HIP','Hip',0,0),
-(10,'THIGH','Thigh',0,0),
-(11,'CALF','Calf',0,0),
-(12,'FOOT','Foot',0,0);
+(1,'CARDIO','Cardiovascular exercise',0,0),
+(2,'STRENGTH','Strength Training Exercise',0,0),
+(3,'ENDURANCE','Endurance exercise',0,0),
+(4,'BALANCE','Balance exercise',0,0),
+(5,'STRETCHING','Stretching exercise',0,0),
+(6,'MENTAL','Mental exercise',0,0);
 
 -- PRODUCTION   : 
 -- VALIDATION   : 

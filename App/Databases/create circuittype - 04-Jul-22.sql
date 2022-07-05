@@ -10,18 +10,9 @@ CREATE TABLE `circuittype` (
 ) ENGINE=InnoDB COMMENT='Circuit Types' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
 INSERT INTO circuittype(id,code,name,elemstate,timestamp) VALUES 
-(1,'HEAD','Head',0,0),
-(2,'NECK','Neck',0,0),
-(3,'BACK','Back',0,0),
-(4,'TRUNK','Trunk',0,0),
-(5,'SHOULDER','Shoulder',0,0),
-(6,'ARM','Arm',0,0),
-(7,'FOREARM','Forearm',0,0),
-(8,'HAND','Hand',0,0),
-(9,'HIP','Hip',0,0),
-(10,'THIGH','Thigh',0,0),
-(11,'CALF','Calf',0,0),
-(12,'FOOT','Foot',0,0);
+(1,'BISET','Biset',0,0),
+(2,'TRISET','Triset',0,0),
+(3,'TABATA','Tabata',0,0);
 
 -- PRODUCTION   : 
 -- VALIDATION   : 
