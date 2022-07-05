@@ -47,23 +47,23 @@
         ?>
         <?php if ($hasSport) { ?>
           <?php
-            $dataOption = 'off';
-            $classActiv1 = $classActiv2 = $classActiv3 = $classActiv4 = $classActiv5 = $classActiv6 = $classActiv7 = $classActiv8 = "";
-            $show1  = $show2  = '';
-            $style1     = 'none';
-            $style2     = 'none';
+            $dataOption   = 'off';
+            $classActiv1  = $classActiv2 = $classActiv3 = $classActiv4 = $classActiv5 = $classActiv6 = $classActiv7 = $classActiv8 = "";
+            $show1        = $show2  = '';
+            $style1       = 'none';
+            $style2       = 'none';
             
             $navActiveMenuSportProgram = $navActiveMenuSportProgramTemplate = $navActiveMenuSportCircuit = $navActiveMenuSportExercise ="";
-            if (stripos($_SERVER['PHP_SELF'], 'sportProgramList')         !== false) { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportProgram         = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'sportProgramTemplateList') !== false) { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportProgramTemplate = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'sportCircuit')             !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportCircuit         = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'sportExercise')            !== false) { $classActiv4="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportExercise        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'sportProgramList.php')         !== false) { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportProgram         = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'sportProgramTemplateList.php') !== false) { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportProgramTemplate = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'sportCircuit.php')             !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportCircuit         = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'sportExercise.php')            !== false) { $classActiv4="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportExercise        = 'class="active"'; }
 
             $navActiveMenuSportBodyMember = $navActiveMenuSportBodyMuscle = $navActiveMenuSportExerciseType = $navActiveMenuSportCircuitType = '';
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableBodyMemberList')    !== false) { $classActiv5="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportBodyMember    = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableBodyMuscleList')    !== false) { $classActiv6="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportBodyMuscle    = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableExerciseTypeList')  !== false) { $classActiv7="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportExerciseType  = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableCircuitTypeList')   !== false) { $classActiv8="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportCircuitType  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableBodyMemberList.php')    !== false) { $classActiv5="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportBodyMember    = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableBodyMuscleList.php')    !== false) { $classActiv6="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportBodyMuscle    = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableExerciseTypeList.php')  !== false) { $classActiv7="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportExerciseType  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableCircuitTypeList.php')   !== false) { $classActiv8="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportCircuitType  = 'class="active"'; }
           ?>
           <li class="dropdown <?php echo $show1; ?>">
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
@@ -113,19 +113,19 @@
             $style1 = 'none';
             $style2 = 'none';
             $navActiveMenunutritionMyCurrentsDiets = $navActiveMenuNutritionMyTemplatesDiets = $navActiveMenuNutritionMyRecipes = "";
-            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsList')     !== false) { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsMealList') !== false) { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDietsList')    !== false) { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipesList')           !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyRecipeFoodList')        !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsList.php')     !== false) { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyCurrentsDietsMealList.php') !== false) { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenunutritionMyCurrentsDiets = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyTemplatesDietsList.php')    !== false) { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyTemplatesDiet = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'NutritionMyRecipesList.php')           !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'nutritionMyRecipeFoodList.php')        !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuNutritionMyRecipes        = 'class="active"'; }
 
             $navActiveMenuFoodFood = $navActiveMenuFoodBrand = $navActiveMenuFoodEcoScore = $navActiveMenuFoodNovaScore = $navActiveMenuFoodNutriScore = $navActiveMenuFoodLabel = '';
-            if (stripos($_SERVER['PHP_SELF'], 'foodFoodList')       !== false) { $classActiv4="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodFood       = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodBrandList')      !== false) { $classActiv5="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodBrand      = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodEcoScoreList')   !== false) { $classActiv6="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodEcoScore   = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodNovaScoreList')  !== false) { $classActiv7="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodNovaScore  = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodNutriScoreList') !== false) { $classActiv8="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodNutriScore = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'foodLabelList')      !== false) { $classActiv9="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodLabel      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodFoodList.php')       !== false) { $classActiv4="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodFood       = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodBrandList.php')      !== false) { $classActiv5="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodBrand      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodEcoScoreList.php')   !== false) { $classActiv6="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodEcoScore   = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodNovaScoreList.php')  !== false) { $classActiv7="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodNovaScore  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodNutriScoreList.php') !== false) { $classActiv8="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodNutriScore = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'foodLabelList.php')      !== false) { $classActiv9="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuFoodLabel      = 'class="active"'; }
           ?>
           
           <li class="dropdown <?php echo $show1; ?>">
@@ -226,7 +226,7 @@
                 $show       =  '';
                 $style      = 'none';
                 $navActiveMenuStudentListCoach = "";
-                if (stripos($_SERVER['PHP_SELF'], 'studentListCoach')        !== false) { $classActiv="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuStudentListCoach = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'studentListCoach.php')        !== false) { $classActiv="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuStudentListCoach = 'class="active"'; }
               ?> 
               <?php if ($hasSTUDENT_LIST_COATCH) { ?><li <?php echo $navActiveMenuStudentListCoach; ?>><a class="<?php echo $classActiv; ?>" href="../Student/studentListCoach.php"><?php echo $menu_student_list_coach; ?></a></li><?php } ?>
             
@@ -286,8 +286,8 @@
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
               <?php
                 $navActiveMenuPackageList = $navActiveMenuPackageInvoice = "";
-                if (stripos($_SERVER['PHP_SELF'], 'packageList') !== false)     { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageList     = 'class="active"'; }
-                if (stripos($_SERVER['PHP_SELF'], 'packageInvoice') !== false)  { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageInvoice  = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'packageList.php') !== false)     { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageList     = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'packageInvoice.php') !== false)  { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuPackageInvoice  = 'class="active"'; }
               ?>
               <?php if ($hasRight_PACKAGE_LIST)     {?><li <?php echo $navActiveMenuPackageList; ?>><a class="<?php echo $classActiv1; ?>" href="<?php echo FRONT_PATH;?>App/Package/Package/packageList.php"><?php echo $menu_right_package_list; ?></a></li><?php } ?>
               <?php if ($hasRight_PACKAGE_INVOICE)  {?><li <?php echo $navActiveMenuPackageInvoice; ?>><a class="<?php echo $classActiv2; ?>" href="<?php echo FRONT_PATH;?>App/Package/Invoice/packageInvoice.php"><?php echo $menu_right_invoice_detail; ?></a></li><?php } ?>
@@ -346,8 +346,8 @@
             <ul class="submenu <?php echo $show; ?>" style='display: <?php echo $style; ?>'>
             <?php
                 $navActiveMenuMessageList = $navActiveMenuMessageChat = "";
-                if (stripos($_SERVER['PHP_SELF'], 'messageList') !== false)  { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuMessageList  = 'class="active"'; }
-                if (stripos($_SERVER['PHP_SELF'], 'messageChat') !== false)  { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuMessageChat  = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'messageList.php') !== false)  { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuMessageList  = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'messageChat.php') !== false)  { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuMessageChat  = 'class="active"'; }
               ?>
               <?php if ($hasRight_MESSAGE_LIST) {?><li <?php echo $navActiveMenuMessageList; ?>><a class="<?php echo $classActiv1; ?>" href="<?php echo FRONT_PATH;?>App/Message/Message/messageList.php"><?php echo $menu_right_message_list; ?></a></li><?php } ?>
               <?php if ($hasRight_MESSAGE_CHAT) {?><li <?php echo $navActiveMenuMessageChat; ?>><a class="<?php echo $classActiv2; ?>" href="<?php echo FRONT_PATH;?>App/Message/Chat/chat.php"><?php echo $menu_right_message_chat; ?></a></li><?php } ?>
@@ -464,9 +464,9 @@
               </a>
               <?php
                 $navActiveMenuAdminUser = $navActiveMenuAdminEnterprise = $navActiveMenuAdminUserType = "";
-                if (stripos($_SERVER['PHP_SELF'], 'adminUserList')        !== false) { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUser        = 'class="active"'; }
-                if (stripos($_SERVER['PHP_SELF'], 'adminEnterpriseList')  !== false) { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminEnterprise  = 'class="active"'; }
-                if (stripos($_SERVER['PHP_SELF'], 'adminUserTypeList')    !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUserType    = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'adminUserList.php')        !== false) { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUser        = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'adminEnterpriseList.php')  !== false) { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminEnterprise  = 'class="active"'; }
+                if (stripos($_SERVER['PHP_SELF'], 'adminUserTypeList.php')    !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuAdminUserType    = 'class="active"'; }
               ?> 
               <ul class="submenu <?php echo $show1; ?>" style='display: <?php echo $style1; ?>'>
                 <?php if ($hasRight_ADMIN_USER)       { ?><li <?php echo $navActiveMenuAdminUser; ?>><a class="<?php echo $classActiv1; ?>" href="<?php echo FRONT_PATH;?>App/Security/User/adminUserList.php"><?php echo $menu_admin_users_list; ?></a></li><?php } ?>
@@ -476,11 +476,11 @@
                 <?php if ($hasSecurity) { ?>
                   <?php
                     $navActiveMenuAdminApplication = $navActiveMenuAdminModule = $navActiveMenuAdminFunctionality = $navActiveMenuAdminRole = $navActiveMenuAdminRight = "";
-                    if (stripos($_SERVER['PHP_SELF'], 'adminApplication')     !== false) { $classActiv4="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminApplication    = 'class="active"'; }
-                    if (stripos($_SERVER['PHP_SELF'], 'adminModule')          !== false) { $classActiv5="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminModule         = 'class="active"'; }
-                    if (stripos($_SERVER['PHP_SELF'], 'adminFunctionality')   !== false) { $classActiv6="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminFunctionality  = 'class="active"'; }
-                    if (stripos($_SERVER['PHP_SELF'], 'adminRoleList')        !== false) { $classActiv7="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminRole           = 'class="active"'; }
-                    if (stripos($_SERVER['PHP_SELF'], 'adminRightList')       !== false) { $classActiv8="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminRight          = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminApplication.php')     !== false) { $classActiv4="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminApplication    = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminModule.php')          !== false) { $classActiv5="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminModule         = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminFunctionality.php')   !== false) { $classActiv6="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminFunctionality  = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminRoleList.php')        !== false) { $classActiv7="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminRole           = 'class="active"'; }
+                    if (stripos($_SERVER['PHP_SELF'], 'adminRightList.php')       !== false) { $classActiv8="active"; $dataOption="on"; $show2="show"; $style2='block'; $navActiveMenuAdminRight          = 'class="active"'; }
                   ?>
                   <li class="dropdown <?php echo $show2; ?>">
                     <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
@@ -513,14 +513,14 @@
             $navActiveMenuCodeTableWeightType   = $navActiveMenuCodeTableCategoryFoodType = $navActiveMenuCodeTableFoodType = $navActiveMenuCodeTableMealType = "";
             $navActiveMenuCodeTableNutritionale = $navActiveMenuCodeTableLanguage         = $navActiveMenuCodeTableTicketStatus = $navActiveMenuCodeTableTicketType ="";
             $navActiveMenuCodeTableFoodType     = "";
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableWeightTypeList')        !== false) { $classActiv1="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableWeightType        = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableCategoryFoodTypeList')  !== false) { $classActiv2="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableCategoryFoodType  = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableFoodTypeList')          !== false) { $classActiv3="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableFoodType          = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableMealTypeList')          !== false) { $classActiv4="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableMealType          = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableNutritionalList')       !== false) { $classActiv5="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableNutritionale      = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableLanguageList')          !== false) { $classActiv6="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableLanguage          = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableTicketStatusList')      !== false) { $classActiv7="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableTicketStatus      = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'codeTableTicketTypeList')        !== false) { $classActiv8="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableTicketType      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableWeightTypeList.php')        !== false) { $classActiv1="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableWeightType        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableCategoryFoodTypeList.php')  !== false) { $classActiv2="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableCategoryFoodType  = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableFoodTypeList.php')          !== false) { $classActiv3="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableFoodType          = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableMealTypeList.php')          !== false) { $classActiv4="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableMealType          = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableNutritionalList.php')       !== false) { $classActiv5="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableNutritionale      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableLanguageList.php')          !== false) { $classActiv6="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableLanguage          = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableTicketStatusList.php')      !== false) { $classActiv7="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableTicketStatus      = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'codeTableTicketTypeList.php')        !== false) { $classActiv8="active"; $dataOption="on"; $show="show"; $style='block'; $navActiveMenuCodeTableTicketType      = 'class="active"'; }
           ?>
           <li>
             <a href="javascript:;" class="dropdown-toggle" data-option="<?php echo $dataOption; ?>">
