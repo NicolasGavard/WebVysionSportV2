@@ -88,7 +88,30 @@ class ExerciseStor {
   }
   // End of getListFromList
 
-  public static function findByidUserCoachCode(ExerciseStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoach(ExerciseStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new ExerciseStorData();
+
+    if ($inDbConnection != null) {
+      $request  = self::SELECT;
+      $request .= self::FROM;
+      $request .= " WHERE idusercoach = :index0";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['index0'=>  $dataIn->getIdUserCoach()]);
+      if (self::SHOW_FIND_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ExerciseStorData");
+        $data = $stmt->fetch();
+      }
+    }
+    return $data;
+  }
+  // End of idUserCoach
+
+  public static function findByIdUserCoachCode(ExerciseStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new ExerciseStorData();

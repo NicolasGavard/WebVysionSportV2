@@ -88,7 +88,30 @@ class ExerciseMuscleStor {
   }
   // End of getListFromList
 
-  public static function findByidExerciseidBodyMuscle(ExerciseMuscleStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdExercise(ExerciseMuscleStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new ExerciseMuscleStorData();
+    $list = [];
+
+    if ($inDbConnection != null) {
+      $request  = self::SELECT;
+      $request .= self::FROM;
+      $request .= " WHERE idexercise = :index0";
+      $stmt = $inDbConnection->prepare($request);
+      $stmt->execute(['index0'=>  $dataIn->getIdExercise()]);
+      if (self::SHOW_FIND_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ExerciseMuscleStorData");
+      }
+    }
+    return array($list, count($list));
+  }
+  // End of findByIdExercise
+
+  public static function findByIdExerciseIdBodyMuscle(ExerciseMuscleStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
     $data = new ExerciseMuscleStorData();
@@ -110,7 +133,7 @@ class ExerciseMuscleStor {
     }
     return $data;
   }
-  // End of idExerciseidBodyMuscle
+  // End of findByIdExerciseIdBodyMuscle
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {

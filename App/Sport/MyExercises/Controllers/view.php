@@ -4,11 +4,11 @@ include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
-include(__DIR__ . "/../Data/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../Data/DistriXSportMyExercisesData.php");
 include(__DIR__ . "/../../../Nutrition/MyTemplatesDiets/Data/DistriXNutritionTemplateDietData.php");
 
 if ($_POST){
-  list($distriXNutritionCurrentDietData, $errorJson) = DistriXNutritionCurrentDietData::getJsonData($_POST);
+  list($distriXNutritionCurrentDietData, $errorJson) = DistriXSportMyExercisesData::getJsonData($_POST);
   
   // CALL
   $servicesCaller = new DistriXServicesCaller();
@@ -18,7 +18,7 @@ if ($_POST){
   $logOk = logController("Security_CurrentDiet", "DistriXMyCurrentDietViewDataSvc", "ViewMyCurrentDiet", $output);
   
   if ($outputok && isset($output["ViewMyCurrentDiet"])) {
-    list($distriXNutritionCurrentDietData, $jsonError) = DistriXNutritionCurrentDietData::getJsonData($output["ViewMyCurrentDiet"]);
+    list($distriXNutritionCurrentDietData, $jsonError) = DistriXSportMyExercisesData::getJsonData($output["ViewMyCurrentDiet"]);
     
     $distriXNutritionTemplateDietData = new DistriXNutritionTemplateDietData();
     $distriXNutritionTemplateDietData->setId($distriXNutritionCurrentDietData->getIdDietTemplate());

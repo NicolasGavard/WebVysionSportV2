@@ -2,12 +2,12 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../Data/DistriXSportMyExercisesData.php");
 
 $confirmSave  = false;
 
 if (isset($_POST)) {
-  $currentDiet = new DistriXNutritionCurrentDietData();
+  $currentDiet = new DistriXSportMyExercisesData();
   $currentDiet->setId($_POST['id'] ?? 0);
   
   $servicesCaller = new DistriXServicesCaller();

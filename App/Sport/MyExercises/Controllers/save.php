@@ -2,7 +2,7 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/DistriXNutritionCurrentDietData.php");
+include(__DIR__ . "/../Data/DistriXSportMyExercisesData.php");
 
 $confirmSave  = false;
 
@@ -10,7 +10,7 @@ $idDiet             = 0;
 $date               = $_POST['dateStart'];
 $newDate            = date("Ymd", strtotime($date));
 $_POST['dateStart'] = $newDate;
-list($distriXNutritionCurrentDietData, $errorJson) = DistriXNutritionCurrentDietData::getJsonData($_POST);
+list($distriXNutritionCurrentDietData, $errorJson) = DistriXSportMyExercisesData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);

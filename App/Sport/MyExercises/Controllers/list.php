@@ -5,78 +5,78 @@ include(__DIR__ . "/../../../Init/ControllerInit.php");
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity//Data/DistriXStyUserData.php");
-include(__DIR__ . "/../Data/DistriXNutritionCurrentDietData.php");
-include(__DIR__ . "/../../MyTemplatesDiets/Data/DistriXNutritionTemplateDietData.php");
+include(__DIR__ . "/../Data/DistriXSportMyExercisesData.php");
+include(__DIR__ . "/../../MyExercisesMuscles/Data/DistriXSportMyExercisesMusclesData.php");
 
-$listMyCurrentDiets           = [];
-$listMyTemplateDiets          = [];
-$listUsers                    = [];
-$listMyCurrentDietsFormFront  = [];
-
+$listMyExercises          = [];
+$listMyExerciseMuscles    = [];
+$listUsers                = [];
+$listMyExercisesFormFront = [];
+$_POST['idUserCoach']     = 1;
 if (!empty($_POST) && isset($_POST)) {
   // List Users
-  $listUsers                  = DistriXStyAppUser::listUsers();
+  $listUsers              = DistriXStyAppUser::listUsers();
 
-  // Current Diet
-  list($distriXNutritionCurrentDietData, $errorJson)  = DistriXNutritionCurrentDietData::getJsonData($_POST);
-  list($distriXNutritionTemplateDietData, $errorJson) = DistriXNutritionTemplateDietData::getJsonData($_POST);
+  // Exercise
+  list($distriXSportCurrentDietData, $errorJson)    = DistriXSportMyExercisesData::getJsonData($_POST);
+  list($distriXSportExerciseMuscleData, $errorJson) = DistriXSportMyExercisesMusclesData::getJsonData($_POST);
 
   // CALL
-  $dietCurrentCaller = new DistriXServicesCaller();
-  $dietCurrentCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsListDataSvc.php");
-  $dietCurrentCaller->addParameter("data", $distriXNutritionCurrentDietData);
+  $exerciseCaller = new DistriXServicesCaller();
+  $exerciseCaller->setServiceName("App/Sport/MyExercises/Services/DistriXSportMyExercisesListDataSvc.php");
+  $exerciseCaller->addParameter("data", $distriXSportCurrentDietData);
   
-  $dietTemplateCaller = new DistriXServicesCaller();
-  $dietTemplateCaller->setServiceName("App/Nutrition/MyTemplatesDiets/Services/DistriXNutritionMyTemplatesDietsListDataSvc.php");
-  $dietTemplateCaller->addParameter("data", $distriXNutritionTemplateDietData);
+  $exerciseMuscleCaller = new DistriXServicesCaller();
+  $exerciseMuscleCaller->setServiceName("App/Sport/MyExercisesMuscles/Services/DistriXSportMyExercisesMusclesListDataSvc.php");
+  $exerciseMuscleCaller->addParameter("data", $distriXSportExerciseMuscleData);
    
   $svc = new DistriXSvc();
-  $svc->addToCall("dietCurrent", $dietCurrentCaller);
-  $svc->addToCall("dietTemplate", $dietTemplateCaller);
+  $svc->addToCall("exercise", $exerciseCaller);
+  $svc->addToCall("exerciseMuscle", $exerciseMuscleCaller);
   $callsOk = $svc->call();
 
-  list($outputok, $output, $errorData) = $svc->getResult("dietCurrent"); //print_r($errorData);
-  if ($outputok && isset($output["ListMyCurrentsDiets"]) && is_array($output["ListMyCurrentsDiets"])) {
-    list($listMyCurrentDiets, $jsonError) = DistriXNutritionCurrentDietData::getJsonArray($output["ListMyCurrentsDiets"]);
+  list($outputok, $output, $errorData) = $svc->getResult("exercise"); print_r($errorData);
+  if ($outputok && isset($output["ListMyExercises"]) && is_array($output["ListMyExercises"])) {
+    list($listMyExercises, $jsonError) = DistriXSportMyExercisesData::getJsonArray($output["ListMyExercises"]);
   } else {
     $error = $errorData;
   }
   
-  list($outputok, $output, $errorData) = $svc->getResult("dietTemplate"); //print_r($output);
-  if ($outputok && isset($output["ListMyTemplatesDiets"]) && is_array($output["ListMyTemplatesDiets"])) {
-    list($listMyTemplateDiets, $jsonError) = DistriXNutritionTemplateDietData::getJsonArray($output["ListMyTemplatesDiets"]);
+  list($outputok, $output, $errorData) = $svc->getResult("exerciseMuscle"); print_r($output);
+  if ($outputok && isset($output["ListMyExerciseMuscles"]) && is_array($output["ListMyExerciseMuscles"])) {
+    list($listMyExerciseMuscles, $jsonError) = DistriXSportMyExercisesMusclesData::getJsonArray($output["ListMyExerciseMuscles"]);
   } else {
     $error = $errorData;
   }
 
-  foreach ($listMyCurrentDiets as $currentDiet) {
-    $distriXNutritionCurrentDietData = new DistriXNutritionCurrentDietData();
-    $distriXNutritionCurrentDietData->setId($currentDiet->getId());
-    $distriXNutritionCurrentDietData->setIdUserCoach($currentDiet->getIdUserCoach());
+  foreach ($listMyExercises as $currentDiet) {
+    $distriXSportCurrentDietData = new DistriXSportMyExercisesData();
+    $distriXSportCurrentDietData->setId($currentDiet->getId());
+    $distriXSportCurrentDietData->setIdUserCoach($currentDiet->getIdUserCoach());
     
     foreach ($listUsers as $user) {
       if ($currentDiet->getIdUserCoach() == $user->getId()){
-        $distriXNutritionCurrentDietData->setNameUserCoach($user->getName());
-        $distriXNutritionCurrentDietData->setFirstNameUserCoach($user->getFirstName());
+        $distriXSportCurrentDietData->setNameUserCoach($user->getName());
+        $distriXSportCurrentDietData->setFirstNameUserCoach($user->getFirstName());
       }
       if ($currentDiet->getIdUserStudent() == $user->getId()){
-        $distriXNutritionCurrentDietData->setNameUserStudent($user->getName());
-        $distriXNutritionCurrentDietData->setFirstNameUserStudent($user->getFirstName());
+        $distriXSportCurrentDietData->setNameUserStudent($user->getName());
+        $distriXSportCurrentDietData->setFirstNameUserStudent($user->getFirstName());
       }
     }
 
-    $distriXNutritionCurrentDietData->setIdDietTemplate($currentDiet->getIdDietTemplate());
+    $distriXSportCurrentDietData->setIdDietTemplate($currentDiet->getIdDietTemplate());
     $duration = 0;
-    foreach ($listMyTemplateDiets as $templateDiet) {
+    foreach ($listMyExerciseMuscles as $templateDiet) {
       if ($currentDiet->getIdDietTemplate() == $templateDiet->getId()) {
-        $distriXNutritionCurrentDietData->setName($templateDiet->getName());
-        $distriXNutritionCurrentDietData->setDuration($templateDiet->getDuration());
-        $distriXNutritionCurrentDietData->setTags($templateDiet->getTags());
+        $distriXSportCurrentDietData->setName($templateDiet->getName());
+        $distriXSportCurrentDietData->setDuration($templateDiet->getDuration());
+        $distriXSportCurrentDietData->setTags($templateDiet->getTags());
         $duration = $templateDiet->getDuration();
       }
     }
 
-    $distriXNutritionCurrentDietData->setDateStart($currentDiet->getDateStart());
+    $distriXSportCurrentDietData->setDateStart($currentDiet->getDateStart());
     
     $date_start         = DistriXSvcUtil::getjmaDate($currentDiet->getDateStart());
     $date_start         = $date_start[0].'-'.$date_start[1].'-'.$date_start[2];
@@ -97,15 +97,15 @@ if (!empty($_POST) && isset($_POST)) {
       }
       $advancement_done   = 100 - round($advancement_rest,2);
     }
-    $distriXNutritionCurrentDietData->setAdvancement($advancement_done);
-    $distriXNutritionCurrentDietData->setElemState($currentDiet->getElemState());
-    $distriXNutritionCurrentDietData->setTimestamp($currentDiet->getTimestamp());
-    $listMyCurrentDietsFormFront[] = $distriXNutritionCurrentDietData;
+    $distriXSportCurrentDietData->setAdvancement($advancement_done);
+    $distriXSportCurrentDietData->setElemState($currentDiet->getElemState());
+    $distriXSportCurrentDietData->setTimestamp($currentDiet->getTimestamp());
+    $listMyExercisesFormFront[] = $distriXSportCurrentDietData;
   }
 }
 
-$resp["ListMyCurrentsDiets"]  = $listMyCurrentDietsFormFront;
-$resp["ListMyTemplatesDiets"] = $listMyTemplateDiets;
+$resp["ListMyExercises"]  = $listMyExercisesFormFront;
+$resp["ListMyExercisesMuscles"] = $listMyExerciseMuscles;
 $resp["ListMyStudents"]       = $listUsers;
 if(!empty($error)){
   $resp["Error"]              = $error;

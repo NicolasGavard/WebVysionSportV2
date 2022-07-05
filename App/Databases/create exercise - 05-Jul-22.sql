@@ -15,6 +15,10 @@ CREATE TABLE `exercise` (
   UNIQUE KEY `indcodeunique` (`idusercoach`,`code`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Exercise' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
+INSERT INTO exercise(id,idusercoach,code,name,idexercisetype,linktopicture,size,type,description,elemstate,timestamp) VALUES 
+(1,1,'EXO1','Exercise 1',1,'',0,'','',0,0),
+(2,1,'EXO2','Exercise 2',2,'',0,'','',0,0);
+
 -- PRODUCTION   : 
 -- VALIDATION   : 
 -- VERIFICATION : 
