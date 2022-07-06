@@ -150,15 +150,30 @@ if (!empty($_POST) && isset($_POST)) {
         break;
       }
     }
-
+    
     $distriXSportMyExercisesData->setCode($exercise->getCode());
     $distriXSportMyExercisesData->setName($exercise->getName());
     $distriXSportMyExercisesData->setLinkToPictureInternal($exercise->getLinkToPictureInternal());
     $distriXSportMyExercisesData->setLinkToPictureExternal($exercise->getLinkToPictureExternal());
     $distriXSportMyExercisesData->setSize($exercise->getSize());
     $distriXSportMyExercisesData->setType($exercise->getType());
+    $distriXSportMyExercisesData->setDescription($exercise->getDescription());
     
     $exerciseMuscles = [];
+    foreach ($listMyExerciseMuscles as $listExerciseMuscles) {
+      if ($listExerciseMuscles->getIdExercise() == $exercise->getId()) {
+        $distriXCodeTableBodyMuscleNameData = new DistriXCodeTableBodyMuscleNameData();
+        $distriXCodeTableBodyMuscleNameData->setId($listExerciseMuscles->getIdBodyMuscle());
+        
+        foreach ($listBodyMusclesName as $bodyMusclesName) {
+          if ($bodyMusclesName->getIdBodyMuscle() == $listExerciseMuscles->getIdBodyMuscle()){
+            $distriXCodeTableBodyMuscleNameData->setName($bodyMusclesName->getName());
+            break;
+          }
+        }
+        $exerciseMuscles[] = $distriXCodeTableBodyMuscleNameData;
+      }
+    }
     $distriXSportMyExercisesData->setExerciseMuscles($exerciseMuscles);
 
     $distriXSportMyExercisesData->setElemState($exercise->getElemState());

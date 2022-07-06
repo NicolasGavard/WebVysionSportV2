@@ -24,7 +24,7 @@
               <!-- <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-info AddSearchMyExercises" data-toggle="modal" data-target="#modalSearchMyExercises"><i class="icon-copy dw-info dw dw-search"></i> <?php echo $page_all_filter; ?></buttons> -->
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> <?php echo $page_all_active; ?></buttons>
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> <?php echo $page_all_inactive; ?></button>
-              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyExercises" data-toggle="modal" data-target="#modalAddMyCurrentDiet"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
+              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyExercises" data-toggle="modal" data-target="#modalAddMyExercise"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
             </div>
           </div>
           
@@ -36,6 +36,7 @@
                   <th width="15%" class="table-plus"><span><?php echo $page_name; ?></span></th>
                   <th width="20%"><span><?php echo $page_muscles; ?></span></th>
                   <th width="10%"><span><?php echo $page_exercise_type; ?></span></th>
+                  <th width="45%"><span><?php echo $page_description; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
@@ -44,13 +45,13 @@
 				</div>
 			</div>
       
-      <div class="modal fade bs-example-modal-lg" id="modalAddMyCurrentDiet" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal fade bs-example-modal-lg" id="modalAddMyExercise" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
               <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_update_title; ?></h4>
-              <form class="FormAddMyCurrentDiet" action="#" id="FormAddMyCurrentDiet">
+              <form class="FormAddMyExercise" action="#" id="FormAddMyExercise">
                 <input class="form-control AddMyExercisesFormId"            type="text" name="id"           value="0">
                 <input class="form-control AddMyExercisesFormIdUserCoatch"  type="text" name="idUserCoach"  value="0">
                 <input class="form-control AddMyExercisesFormTimestamp"     type="text" name="timestamp"    value="0">
@@ -88,7 +89,7 @@
               <div class="padding-bottom-30 row" style="margin: 0 auto;">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;<?php echo $page_all_close; ?></button>
-                  <button type="button" class="btn btn-primary btnAddMyCurrentDiet" id="btnAddMyCurrentDiet"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
+                  <button type="button" class="btn btn-primary btnAddMyExercise" id="btnAddMyExercise"><i class="fa fa-check"></i>&nbsp;<?php echo $page_all_confirm; ?></button>
                 </div>
               </div>
             </div>

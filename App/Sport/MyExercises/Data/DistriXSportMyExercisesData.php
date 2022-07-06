@@ -14,6 +14,7 @@ if (!class_exists("DistriXSportMyExercisesData", false)) {
     protected $linkToPictureExternal;
     protected $size;
     protected $type;
+    protected $description;
     protected $exerciseMuscles;
     protected $elemState;
     protected $timestamp;
@@ -32,6 +33,7 @@ if (!class_exists("DistriXSportMyExercisesData", false)) {
       $this->linkToPictureExternal  = "";
       $this->size                   = 0;
       $this->type                   = "";
+      $this->description            = "";
       $this->exerciseMuscles        = [];
       $this->elemState              = 0;
       $this->timestamp              = 0;
@@ -49,6 +51,7 @@ if (!class_exists("DistriXSportMyExercisesData", false)) {
     public function getLinkToPictureExternal():string { return $this->linkToPictureExternal; }
     public function getSize():int { return $this->size; }
     public function getType():string { return $this->type; }
+    public function getDescription():string { return $this->description; }
     public function getExerciseMuscles():array { return $this->exerciseMuscles; }
     public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
@@ -66,6 +69,7 @@ if (!class_exists("DistriXSportMyExercisesData", false)) {
     public function setLinkToPictureExternal(string $linkToPictureExternal) { $this->linkToPictureExternal = $linkToPictureExternal; }
     public function setSize(int $size) { $this->size = $size; }
     public function setType(string $type) { $this->type = $type; }
+    public function setDescription(string $description) { $this->description = $description; }
     public function setExerciseMuscles(array $exerciseMuscles) { $this->exerciseMuscles = $exerciseMuscles; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
