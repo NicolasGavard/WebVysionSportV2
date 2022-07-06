@@ -35,7 +35,7 @@ if (!empty($_POST) && isset($_POST)) {
   $svc->addToCall("exerciseMuscle", $exerciseMuscleCaller);
   $callsOk = $svc->call();
 
-  list($outputok, $output, $errorData) = $svc->getResult("exercise"); print_r($errorData);
+  list($outputok, $output, $errorData) = $svc->getResult("exercise"); //print_r($output);
   if ($outputok && isset($output["ListMyExercises"]) && is_array($output["ListMyExercises"])) {
     list($listMyExercises, $jsonError) = DistriXSportMyExercisesData::getJsonArray($output["ListMyExercises"]);
   } else {
@@ -51,6 +51,23 @@ if (!empty($_POST) && isset($_POST)) {
 
   foreach ($listMyExercises as $currentDiet) {
     $distriXSportCurrentDietData = new DistriXSportMyExercisesData();
+
+    public function setId(int $id) { $this->id = $id; }
+    public function setIdUserCoach(int $idUserCoach) { $this->idUserCoach = $idUserCoach; }
+    public function setNameUserCoach(string $nameUserCoach) { $this->nameUserCoach = $nameUserCoach; }
+    public function setFirstNameUserCoach(string $firstNameUserCoach) { $this->firstNameUserCoach = $firstNameUserCoach; }
+    public function setIdExerciseType(int $idExerciseType) { $this->idExerciseType = $idExerciseType; }
+    public function setNameExerciseType(int $nameExerciseType) { $this->nameExerciseType = $nameExerciseType; }
+    public function setCode(string $code) { $this->code = $code; }
+    public function setName(string $name) { $this->name = $name; }
+    public function setLinkToPicture(string $linkToPicture) { $this->linkToPicture = $linkToPicture; }
+    public function setSize(int $size) { $this->size = $size; }
+    public function setType(string $type) { $this->type = $type; }
+    public function setExerciseMuscles(array $exerciseMuscles) { $this->exerciseMuscles = $exerciseMuscles; }
+    public function setElemState(int $elemState) { $this->elemState = $elemState; }
+    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
+
+
     $distriXSportCurrentDietData->setId($currentDiet->getId());
     $distriXSportCurrentDietData->setIdUserCoach($currentDiet->getIdUserCoach());
     

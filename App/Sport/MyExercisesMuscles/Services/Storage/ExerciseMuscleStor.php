@@ -88,6 +88,41 @@ class ExerciseMuscleStor {
   }
   // End of getListFromList
 
+  public static function getListFromExercisesList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
+  {
+    $request = "";
+    $data = new ExerciseMuscleStorData();
+    $list = [];
+
+    if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
+      if ($className == "" || is_null($className)) {
+        $className = "ExerciseMuscleStorData";
+      }
+      $request  = self::SELECT;
+      $request .= self::FROM;
+      $request .= " WHERE idexercise IN('" . implode("','", array_map(function($data) { return $data->getId(); }, $inList))."')";
+      if (!$all) {
+        $request .= " AND elemstate = :statut";
+      }
+      $request .= " ORDER BY id";
+
+      $stmt = $inDbConnection->prepare($request);
+      if (!$all) {
+        $stmt->execute(['statut'=> $data->getAvailableValue()]);
+      } else {
+        $stmt->execute();
+      }
+      if (self::SHOW_READ_REQUEST) {
+        echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
+      }
+      if ($stmt->rowCount() > 0) {
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $className);
+      }
+    }
+    return array($list, count($list));
+  }
+  // End of getListFromExercisesList
+
   public static function findByIdExercise(ExerciseMuscleStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";

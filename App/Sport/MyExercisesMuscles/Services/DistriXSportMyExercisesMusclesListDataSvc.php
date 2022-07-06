@@ -9,8 +9,9 @@ include(__DIR__ . "/Data/ExerciseMuscleStorData.php");
 $myExerciseMuscles  = [];
 $dbConnection     = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  list($data, $jsonError)       = ExerciseMuscleStorData::getJsonData($dataSvc->getParameter("data"));
-  list($exerciseMuscleStor, $exerciseMuscleStorInd) = ExerciseMuscleStor::findByIdExercise($data, $dbConnection);
+  list($data, $jsonError)                           = ExerciseMuscleStorData::getJsonData($dataSvc->getParameter("data"));
+  // list($exerciseMuscleStor, $exerciseMuscleStorInd) = ExerciseMuscleStor::getListFromExercisesList($data, $dbConnection);
+  list($exerciseMuscleStor, $exerciseMuscleStorInd) = ExerciseMuscleStor::getList(true, $dbConnection);
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }

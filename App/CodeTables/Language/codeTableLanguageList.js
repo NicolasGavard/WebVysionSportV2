@@ -59,6 +59,7 @@ $(".AddNewLanguage").on('click', function() {
   $(".update_title").addClass("d-none");
 
   $('.AddLanguageFormIdLanguage').val(0);
+  $('.AddLanguageFormCodeShort').val('');
   $('.AddLanguageFormCode').val('');
   $('.AddLanguageFormName').val('');
   $(".AddLanguagePicture").attr("src", '');
@@ -69,10 +70,11 @@ $(".AddNewLanguage").on('click', function() {
 $(".btnAddLanguage").on('click', function() {
   $(".page_food_brand_update_title").removeClass("d-none");
   
-  var name = $('.AddLanguageFormName').val();
-  if (name != ""){
+  var name      = $('.AddLanguageFormName').val();
+  var codeShort = $('.AddLanguageFormCodeShort').val();
+  if (name != '' && codeShort != ''){
     var data = $('#FormAddLanguage').serializeArray(); // convert form to array
-    data.push({name: "name", value: name});
+    data.push({name: "name", value: name, name: "codeShort", value: codeShort});
     
     $.ajax({
       url : 'Controllers/save.php',

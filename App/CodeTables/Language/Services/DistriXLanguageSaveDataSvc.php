@@ -32,6 +32,7 @@ if (is_null($dbConnection->getError())) {
     if ($canSaveLanguage) {
       $languageStorData = LanguageStor::read($data->getId(), $dbConnection);
       $languageStorData->setId($data->getId());
+      $languageStorData->setCodeShort($data->getCodeShort());
       $languageStorData->setCode(strtoupper(trim(DistriXSvcUtil::remove_accents($data->getName()))));
       $languageStorData->setName($data->getName());
       $languageStorData->setElemState($data->getElemState());

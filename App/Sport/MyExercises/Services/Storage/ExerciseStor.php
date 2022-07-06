@@ -92,6 +92,7 @@ class ExerciseStor {
   {
     $request = "";
     $data = new ExerciseStorData();
+    $list = [];
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -103,11 +104,10 @@ class ExerciseStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ExerciseStorData");
-        $data = $stmt->fetch();
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ExerciseStorData");
       }
     }
-    return $data;
+    return array($list, count($list));
   }
   // End of idUserCoach
 
