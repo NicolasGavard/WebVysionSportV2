@@ -203,10 +203,15 @@ $(function() {
         if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
         if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
         
+        var infoLanguage = '<i class="icon-copy dw dw-checked mr-2" data-color="#FF9900" style="color: rgb(255,153,0);"></i>';
+        if (val.nbLanguages == val.nbLanguagesTotal) {
+          var infoLanguage = '<i class="icon-copy dw dw-checked mr-2" data-color="#006600" style="color: rgb(0,102,0);"></i>';
+        }
+
         let line =  '<tr>'+
                       '  <td style="padding:1rem;">'+val.code+'</td>'+
                       '  <td>'+val.name+'</td>'+
-                      '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal;
+                      '  <td>'+infoLanguage+' '+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {
           const languages = circuitTypeTableLanguagesData;
           $.map(languages, function(language, languageKey) {

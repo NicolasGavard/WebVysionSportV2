@@ -1,18 +1,3 @@
-$( "#dateStart" ).datepicker({
-  altField: "#dateStart",
-  closeText: 'Fermer',
-  prevText: 'Précédent',
-  nextText: 'Suivant',
-  currentText: 'Aujourd\'hui',
-  monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-  monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-  dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-  dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-  dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-  weekHeader: 'Sem.',
-  dateFormat: 'dd/mm/yyyy'
-});
-
 datatable = $('#datatable').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"}});
 $.ajax({
   url : 'Controllers/list.php',
@@ -21,15 +6,6 @@ $.ajax({
   data: {'idUserCoach': localStorage.getItem("idUser")},
   success : function(data) {
     localStorage.setItem("dataTable", JSON.stringify(data.ListMyCurrentsDiets));
-
-    $.map(data.ListMyTemplatesDiets, function(val, key) {
-      $('.listMyTemplates').append('<option value="'+val.id+'">'+val.name+'</option>');
-    });
-    
-    $.map(data.ListMyStudents, function(val, key) {
-      $('.listStudents').append('<option value="'+val.id+'">'+val.firstName+' '+val.name+'</option>');
-    });
-
     $('.btn-success').trigger('click');
   },
   error : function(data) {

@@ -8,7 +8,8 @@ class ExerciseStorData extends DistriXSvcAppData {
   protected $code;
   protected $name;
   protected $idexercisetype;
-  protected $linktopicture;
+  protected $linktopictureinternal;
+  protected $linktopictureexternal;
   protected $size;
   protected $type;
   protected $description;
@@ -21,7 +22,8 @@ class ExerciseStorData extends DistriXSvcAppData {
       $this->code = "";
       $this->name = "";
       $this->idexercisetype = 0;
-      $this->linktopicture = "";
+      $this->linktopictureinternal = "";
+      $this->linktopictureexternal = "";
       $this->size = 0;
       $this->type = "";
       $this->description = "";
@@ -34,7 +36,8 @@ class ExerciseStorData extends DistriXSvcAppData {
   public function getCode():string { return $this->code; }
   public function getName():string { return $this->name; }
   public function getIdExerciseType():int { return $this->idexercisetype; }
-  public function getLinkToPicture():string { return $this->linktopicture; }
+  public function getLinkToPictureInternal():string { return $this->linktopictureinternal; }
+  public function getLinkToPictureExternal():string { return $this->linktopictureexternal; }
   public function getSize():int { return $this->size; }
   public function getType():string { return $this->type; }
   public function getDescription():string { return $this->description; }
@@ -49,7 +52,8 @@ class ExerciseStorData extends DistriXSvcAppData {
   public function setCode(string $code) { $this->code = $code; }
   public function setName(string $name) { $this->name = $name; }
   public function setIdExerciseType(int $idExerciseType) { $this->idexercisetype = $idExerciseType; }
-  public function setLinkToPicture(string $linkToPicture) { $this->linktopicture = $linkToPicture; }
+  public function setLinkToPictureInternal(string $linkToPictureInternal) { $this->linktopictureinternal = $linkToPictureInternal; }
+  public function setLinkToPictureExternal(string $linkToPictureExternal) { $this->linktopictureexternal = $linkToPictureExternal; }
   public function setSize(int $size) { $this->size = $size; }
   public function setType(string $type) { $this->type = $type; }
   public function setDescription(string $description) { $this->description = $description; }

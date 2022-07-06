@@ -2,25 +2,46 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // STY APP
+include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity/StyAppInterface/DistriXStyAppUser.php");
 // DATA
 include(__DIR__ ."/". CONTROLLER_DISTRIX_PATH."DistriXSecurity//Data/DistriXStyUserData.php");
 include(__DIR__ . "/../Data/DistriXSportMyExercisesData.php");
 include(__DIR__ . "/../../MyExercisesMuscles/Data/DistriXSportMyExercisesMusclesData.php");
 
-$listMyExercises          = [];
-$listMyExerciseMuscles    = [];
+include(__DIR__ . "/../../../CodeTables/SportBodyMember/Data/DistriXCodeTableBodyMemberData.php");
+include(__DIR__ . "/../../../CodeTables/SportBodyMember/Data/DistriXCodeTableBodyMemberNameData.php");
+include(__DIR__ . "/../../../CodeTables/SportBodyMuscle/Data/DistriXCodeTableBodyMuscleData.php");
+include(__DIR__ . "/../../../CodeTables/SportBodyMuscle/Data/DistriXCodeTableBodyMuscleNameData.php");
+include(__DIR__ . "/../../../CodeTables/SportBodyMember/Data/DistriXCodeTableBodyMembersMusclesData.php");
+include(__DIR__ . "/../../../CodeTables/SportExerciseType/Data/DistriXCodeTableExerciseTypeNameData.php");
+
 $listUsers                = [];
+$listMyExercises          = [];
+$listExercisesTypes       = [];
+$listExercisesTypes       = [];
+$listBodyMembersName          = [];
+$listBodyMuscles          = [];
 $listMyExercisesFormFront = [];
 $_POST['idUserCoach']     = 1;
+
 if (!empty($_POST) && isset($_POST)) {
+  // Info profil
+  $infoProfil                           = DistriXStyAppInterface::getUserInformation();
+  $distriXCodeTableBodyMemberNameData   = new DistriXCodeTableBodyMemberNameData();
+  $distriXCodeTableBodyMemberNameData->setIdLanguage($infoProfil->getIdLanguage());
+  $distriXCodeTableBodyMuscleNameData   = new DistriXCodeTableBodyMuscleNameData();
+  $distriXCodeTableBodyMuscleNameData->setIdLanguage($infoProfil->getIdLanguage());
+  $distriXCodeTableExerciseTypeNameData = new DistriXCodeTableExerciseTypeNameData();
+  $distriXCodeTableExerciseTypeNameData->setIdLanguage($infoProfil->getIdLanguage());
+  
   // List Users
-  $listUsers              = DistriXStyAppUser::listUsers();
+  $listUsers                            = DistriXStyAppUser::listUsers();
 
   // Exercise
   list($distriXSportCurrentDietData, $errorJson)    = DistriXSportMyExercisesData::getJsonData($_POST);
   list($distriXSportExerciseMuscleData, $errorJson) = DistriXSportMyExercisesMusclesData::getJsonData($_POST);
-
+  
   // CALL
   $exerciseCaller = new DistriXServicesCaller();
   $exerciseCaller->setServiceName("App/Sport/MyExercises/Services/DistriXSportMyExercisesListDataSvc.php");
@@ -29,10 +50,25 @@ if (!empty($_POST) && isset($_POST)) {
   $exerciseMuscleCaller = new DistriXServicesCaller();
   $exerciseMuscleCaller->setServiceName("App/Sport/MyExercisesMuscles/Services/DistriXSportMyExercisesMusclesListDataSvc.php");
   $exerciseMuscleCaller->addParameter("data", $distriXSportExerciseMuscleData);
+
+  $exerciseTypeCaller = new DistriXServicesCaller();
+  $exerciseTypeCaller->setServiceName("App/CodeTables/SportExerciseType/Services/DistriXExerciseTypeListDataSvc.php");
+  $exerciseTypeCaller->addParameter("dataName", $distriXCodeTableExerciseTypeNameData);
+
+  $bodyMemberCaller = new DistriXServicesCaller();
+  $bodyMemberCaller->setServiceName("App/CodeTables/SportBodyMember/Services/DistriXBodyMemberListDataSvc.php");
+  $bodyMemberCaller->addParameter("dataName", $distriXCodeTableBodyMemberNameData);
+  
+  $bodyMuscleCaller = new DistriXServicesCaller();
+  $bodyMuscleCaller->setServiceName("App/CodeTables/SportBodyMuscle/Services/DistriXBodyMuscleListDataSvc.php");
+  $bodyMuscleCaller->addParameter("dataName", $distriXCodeTableBodyMuscleNameData);
    
   $svc = new DistriXSvc();
   $svc->addToCall("exercise", $exerciseCaller);
   $svc->addToCall("exerciseMuscle", $exerciseMuscleCaller);
+  $svc->addToCall("exerciseType", $exerciseTypeCaller);
+  $svc->addToCall("bodyMember", $bodyMemberCaller);
+  $svc->addToCall("bodyMuscle", $bodyMuscleCaller);
   $callsOk = $svc->call();
 
   list($outputok, $output, $errorData) = $svc->getResult("exercise"); //print_r($output);
@@ -42,90 +78,99 @@ if (!empty($_POST) && isset($_POST)) {
     $error = $errorData;
   }
   
-  list($outputok, $output, $errorData) = $svc->getResult("exerciseMuscle"); print_r($output);
+  list($outputok, $output, $errorData) = $svc->getResult("exerciseMuscle"); //print_r($output);
   if ($outputok && isset($output["ListMyExerciseMuscles"]) && is_array($output["ListMyExerciseMuscles"])) {
     list($listMyExerciseMuscles, $jsonError) = DistriXSportMyExercisesMusclesData::getJsonArray($output["ListMyExerciseMuscles"]);
   } else {
     $error = $errorData;
   }
+  
+  list($outputok, $output, $errorData) = $svc->getResult("exerciseType"); //print_r($output);
+  if ($outputok && isset($output["ListExerciseTypeNames"]) && is_array($output["ListExerciseTypeNames"])) {
+    list($listExercisesTypes, $jsonError) = DistriXCodeTableExerciseTypeNameData::getJsonArray($output["ListExerciseTypeNames"]);
+  } else {
+    $error = $errorData;
+  }
 
-  foreach ($listMyExercises as $currentDiet) {
-    $distriXSportCurrentDietData = new DistriXSportMyExercisesData();
+  list($outputok, $output, $errorData) = $svc->getResult("bodyMember"); //print_r($output);
+  if ($outputok && isset($output["ListBodyMemberNames"]) && is_array($output["ListBodyMemberNames"])) {
+    list($listBodyMembersName, $jsonError)  = DistriXCodeTableBodyMemberNameData::getJsonArray($output["ListBodyMemberNames"]);
+  } else {
+    $error = $errorData;
+  }
+  
+  list($outputok, $output, $errorData) = $svc->getResult("bodyMuscle"); //print_r($output);
+  if ($outputok && isset($output["ListBodyMuscleNames"]) && is_array($output["ListBodyMuscleNames"])) {
+    list($listBodyMuscles, $jsonError)      = DistriXCodeTableBodyMuscleData::getJsonArray($output["ListBodyMuscles"]);
+    list($listBodyMusclesName, $jsonError)  = DistriXCodeTableBodyMuscleNameData::getJsonArray($output["ListBodyMuscleNames"]);
+  } else {
+    $error = $errorData;
+  }
 
-    public function setId(int $id) { $this->id = $id; }
-    public function setIdUserCoach(int $idUserCoach) { $this->idUserCoach = $idUserCoach; }
-    public function setNameUserCoach(string $nameUserCoach) { $this->nameUserCoach = $nameUserCoach; }
-    public function setFirstNameUserCoach(string $firstNameUserCoach) { $this->firstNameUserCoach = $firstNameUserCoach; }
-    public function setIdExerciseType(int $idExerciseType) { $this->idExerciseType = $idExerciseType; }
-    public function setNameExerciseType(int $nameExerciseType) { $this->nameExerciseType = $nameExerciseType; }
-    public function setCode(string $code) { $this->code = $code; }
-    public function setName(string $name) { $this->name = $name; }
-    public function setLinkToPicture(string $linkToPicture) { $this->linkToPicture = $linkToPicture; }
-    public function setSize(int $size) { $this->size = $size; }
-    public function setType(string $type) { $this->type = $type; }
-    public function setExerciseMuscles(array $exerciseMuscles) { $this->exerciseMuscles = $exerciseMuscles; }
-    public function setElemState(int $elemState) { $this->elemState = $elemState; }
-    public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
-
-
-    $distriXSportCurrentDietData->setId($currentDiet->getId());
-    $distriXSportCurrentDietData->setIdUserCoach($currentDiet->getIdUserCoach());
+  foreach ($listBodyMembersName as $bodyMembers) {
+    $distriXCodeTableBodyMembersMusclesData = new DistriXCodeTableBodyMembersMusclesData();
+    $distriXCodeTableBodyMembersMusclesData->setId($bodyMembers->getId());
+    $distriXCodeTableBodyMembersMusclesData->setName($bodyMembers->getName());
+    $distriXCodeTableBodyMembersMusclesData->setElemState($bodyMembers->getElemState());
+    $distriXCodeTableBodyMembersMusclesData->setTimestamp($bodyMembers->getTimestamp());
     
+    $muscles = [];
+    foreach ($listBodyMuscles as $bodyMuscles) {
+      if ($bodyMuscles->getIdBodyMember() == $bodyMembers->getIdBodyMember()){
+        foreach ($listBodyMusclesName as $bodyMusclesName) {
+          if ($bodyMusclesName->getIdBodyMuscle() == $bodyMuscles->getId()){
+            $distriXCodeTableBodyMuscleNameData = new DistriXCodeTableBodyMuscleNameData();
+            $distriXCodeTableBodyMuscleNameData->setId($bodyMusclesName->getIdBodyMuscle());
+            $distriXCodeTableBodyMuscleNameData->setName($bodyMusclesName->getName());
+            $muscles[] = $distriXCodeTableBodyMuscleNameData;
+          }
+        }
+      }
+    }
+    $distriXCodeTableBodyMembersMusclesData->setMuscles($muscles);
+    $listMyExerciseMusclesFormFront[] = $distriXCodeTableBodyMembersMusclesData;
+  }
+
+  foreach ($listMyExercises as $exercise) {
+    $distriXSportMyExercisesData = new DistriXSportMyExercisesData();
+
+    $distriXSportMyExercisesData->setId($exercise->getId());
+    $distriXSportMyExercisesData->setIdUserCoach($exercise->getIdUserCoach());
     foreach ($listUsers as $user) {
-      if ($currentDiet->getIdUserCoach() == $user->getId()){
-        $distriXSportCurrentDietData->setNameUserCoach($user->getName());
-        $distriXSportCurrentDietData->setFirstNameUserCoach($user->getFirstName());
-      }
-      if ($currentDiet->getIdUserStudent() == $user->getId()){
-        $distriXSportCurrentDietData->setNameUserStudent($user->getName());
-        $distriXSportCurrentDietData->setFirstNameUserStudent($user->getFirstName());
+      if ($exercise->getIdUserCoach() == $user->getId()){
+        $distriXSportMyExercisesData->setNameUserCoach($user->getName());
+        $distriXSportMyExercisesData->setFirstNameUserCoach($user->getFirstName());
+        break;
       }
     }
 
-    $distriXSportCurrentDietData->setIdDietTemplate($currentDiet->getIdDietTemplate());
-    $duration = 0;
-    foreach ($listMyExerciseMuscles as $templateDiet) {
-      if ($currentDiet->getIdDietTemplate() == $templateDiet->getId()) {
-        $distriXSportCurrentDietData->setName($templateDiet->getName());
-        $distriXSportCurrentDietData->setDuration($templateDiet->getDuration());
-        $distriXSportCurrentDietData->setTags($templateDiet->getTags());
-        $duration = $templateDiet->getDuration();
+    foreach ($listExercisesTypes as $exerciseType) {
+      if ($exerciseType->getIdExerciseType() == $exercise->getIdExerciseType()){
+        $distriXSportMyExercisesData->setNameExerciseType($exerciseType->getName());
+        break;
       }
     }
 
-    $distriXSportCurrentDietData->setDateStart($currentDiet->getDateStart());
+    $distriXSportMyExercisesData->setCode($exercise->getCode());
+    $distriXSportMyExercisesData->setName($exercise->getName());
+    $distriXSportMyExercisesData->setLinkToPictureInternal($exercise->getLinkToPictureInternal());
+    $distriXSportMyExercisesData->setLinkToPictureExternal($exercise->getLinkToPictureExternal());
+    $distriXSportMyExercisesData->setSize($exercise->getSize());
+    $distriXSportMyExercisesData->setType($exercise->getType());
     
-    $date_start         = DistriXSvcUtil::getjmaDate($currentDiet->getDateStart());
-    $date_start         = $date_start[0].'-'.$date_start[1].'-'.$date_start[2];
-    $date_rest          = new DateTime('now'); 
-    // Trouver la date de fin
-    $date_end           =  date('Y-m-d', strtotime($date_start. ' + '.$duration.' days'));
-    $date_fin           = new DateTime($date_end);
-    // Nombre de jours restant
-    $interval           = $date_rest->diff($date_fin);
-    $nbDaysInterval     = $interval->format('%d');
+    $exerciseMuscles = [];
+    $distriXSportMyExercisesData->setExerciseMuscles($exerciseMuscles);
 
-    // Faire pourcentage
-    $advancement_rest   = 100;
-    $advancement_done   = 100;
-    if (str_replace("-", "", $date_end) > date('Ymd')){
-      if ($duration > 0) {
-        $advancement_rest = round(($nbDaysInterval / $duration) * 100, 2);
-      }
-      $advancement_done   = 100 - round($advancement_rest,2);
-    }
-    $distriXSportCurrentDietData->setAdvancement($advancement_done);
-    $distriXSportCurrentDietData->setElemState($currentDiet->getElemState());
-    $distriXSportCurrentDietData->setTimestamp($currentDiet->getTimestamp());
-    $listMyExercisesFormFront[] = $distriXSportCurrentDietData;
+    $distriXSportMyExercisesData->setElemState($exercise->getElemState());
+    $distriXSportMyExercisesData->setTimestamp($exercise->getTimestamp());
+    $listMyExercisesFormFront[] = $distriXSportMyExercisesData;
   }
 }
 
-$resp["ListMyExercises"]  = $listMyExercisesFormFront;
-$resp["ListMyExercisesMuscles"] = $listMyExerciseMuscles;
-$resp["ListMyStudents"]       = $listUsers;
+$resp["ListMyExercisesMuscles"] = $listMyExerciseMusclesFormFront;
+$resp["ListMyExercises"]        = $listMyExercisesFormFront;
 if(!empty($error)){
-  $resp["Error"]              = $error;
+  $resp["Error"]                = $error;
 }
 
 echo json_encode($resp);

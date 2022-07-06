@@ -3,7 +3,7 @@
   $i18cdlangue    = 'FR';
   // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
 	include('../../Home/Template/i18/'.$i18cdlangue.'/header'.$i18cdlangue.'.php');
-	include('i18/'.$i18cdlangue.'/nutritionMyCurrentsDietsList'.$i18cdlangue.'.php');
+	include('i18/'.$i18cdlangue.'/sportMyExercisesList'.$i18cdlangue.'.php');
   include('../../Home/Template/_header.php');
 	include('../../Home/Template/_headerMenuTop.php');
 	include('../../Home/Template/_headerMenuLeft.php');
@@ -21,10 +21,10 @@
             </div>
               
             <div class="pull-right">
-              <!-- <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-info AddSearchMyCurrentsDiets" data-toggle="modal" data-target="#modalSearchMyCurrentsDiets"><i class="icon-copy dw-info dw dw-search"></i> <?php echo $page_all_filter; ?></buttons> -->
+              <!-- <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-info AddSearchMyExercises" data-toggle="modal" data-target="#modalSearchMyExercises"><i class="icon-copy dw-info dw dw-search"></i> <?php echo $page_all_filter; ?></buttons> -->
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> <?php echo $page_all_active; ?></buttons>
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> <?php echo $page_all_inactive; ?></button>
-              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyCurrentsDiets" data-toggle="modal" data-target="#modalAddMyCurrentDiet"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
+              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyExercises" data-toggle="modal" data-target="#modalAddMyCurrentDiet"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
             </div>
           </div>
           
@@ -34,11 +34,8 @@
 							<thead>
 								<tr>
                   <th width="15%" class="table-plus"><span><?php echo $page_name; ?></span></th>
-                  <th width="20%"><span><?php echo $page_assigned_for; ?></span></th>
-                  <th width="10%"><span><?php echo $page_date_duration; ?></span></th>
-                  <th width="10%"><span><?php echo $page_date_begin; ?></span></th>
-                  <th width="20%"><span><?php echo $page_date_tags; ?></span></th>
-                  <th width="25%"><span><?php echo $page_advancement; ?></span></th>
+                  <th width="20%"><span><?php echo $page_muscles; ?></span></th>
+                  <th width="10%"><span><?php echo $page_exercise_type; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
@@ -54,10 +51,10 @@
               <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_update_title; ?></h4>
               <form class="FormAddMyCurrentDiet" action="#" id="FormAddMyCurrentDiet">
-                <input class="form-control AddMyCurrentsDietsFormId"            type="text" name="id"           value="0">
-                <input class="form-control AddMyCurrentsDietsFormIdUserCoatch"  type="text" name="idUserCoach"  value="0">
-                <input class="form-control AddMyCurrentsDietsFormTimestamp"     type="text" name="timestamp"    value="0">
-                <input class="form-control AddMyCurrentsDietsFormStatut"        type="text" name="elemState"    value="0">
+                <input class="form-control AddMyExercisesFormId"            type="text" name="id"           value="0">
+                <input class="form-control AddMyExercisesFormIdUserCoatch"  type="text" name="idUserCoach"  value="0">
+                <input class="form-control AddMyExercisesFormTimestamp"     type="text" name="timestamp"    value="0">
+                <input class="form-control AddMyExercisesFormStatut"        type="text" name="elemState"    value="0">
                 <div class="row">
                   <div class="col-md-4 col-sm-12">
                     <div class="form-group">
@@ -103,6 +100,6 @@
         include('../../Home/Template/_headerFooter.php');
       ?>
       
-      <script src="nutritionMyCurrentsDietsList.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="sportMyExercisesList.js?v=<?php echo APP_VERSION;?>"></script>
   </body>
 </html>

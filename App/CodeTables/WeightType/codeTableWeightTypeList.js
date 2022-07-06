@@ -208,12 +208,17 @@ $(function() {
         if (val.isLiquid == 1) {weightTypeType  = '<div class="row"><div class="col-md-12 col-sm-12"><span class="micon dw dw-drop"></span> '+weightTypeType_liquid+'</div>';}
         if (val.isOther == 1)  {weightTypeType  = '<div class="row"><div class="col-md-12 col-sm-12"><span class="micon dw dw-question"></span> '+weightTypeType_other+'</div>';}
 
+        var infoLanguage = '<i class="icon-copy dw dw-checked mr-2" data-color="#FF9900" style="color: rgb(255,153,0);"></i>';
+        if (val.nbLanguages == val.nbLanguagesTotal) {
+          var infoLanguage = '<i class="icon-copy dw dw-checked mr-2" data-color="#006600" style="color: rgb(0,102,0);"></i>';
+        }
+        
         let line =  '<tr>'+
-                      '  <td style="padding:1rem;">&nbsp;&nbsp;'+val.code+'</td>'+
-                      '  <td>'+val.name+'</td>'+
-                      '  <td>'+val.abbreviation+'</td>'+
-                      ' <td>'+weightTypeType+'</td>'+
-                      '  <td>'+val.nbLanguages+'/'+val.nbLanguagesTotal;
+                    '  <td style="padding:1rem;">&nbsp;&nbsp;'+val.code+'</td>'+
+                    '  <td>'+val.name+'</td>'+
+                    '  <td>'+val.abbreviation+'</td>'+
+                    '  <td>'+weightTypeType+'</td>'+
+                    '  <td>'+infoLanguage+' '+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {
           const languages = weightTypeTableLanguagesData;
           $.map(languages, function(language, languageKey) {

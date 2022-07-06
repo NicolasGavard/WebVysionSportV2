@@ -56,8 +56,8 @@
             $navActiveMenuSportProgram = $navActiveMenuSportProgramTemplate = $navActiveMenuSportCircuit = $navActiveMenuSportExercise ="";
             if (stripos($_SERVER['PHP_SELF'], 'sportProgramList.php')         !== false) { $classActiv1="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportProgram         = 'class="active"'; }
             if (stripos($_SERVER['PHP_SELF'], 'sportProgramTemplateList.php') !== false) { $classActiv2="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportProgramTemplate = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'sportCircuit.php')             !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportCircuit         = 'class="active"'; }
-            if (stripos($_SERVER['PHP_SELF'], 'sportExercise.php')            !== false) { $classActiv4="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportExercise        = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'sportMyCircuitsList.php')      !== false) { $classActiv3="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportCircuit         = 'class="active"'; }
+            if (stripos($_SERVER['PHP_SELF'], 'sportMyExercisesList.php')     !== false) { $classActiv4="active"; $dataOption="on"; $show1="show"; $style1='block'; $navActiveMenuSportExercise        = 'class="active"'; }
 
             $navActiveMenuSportBodyMember = $navActiveMenuSportBodyMuscle = $navActiveMenuSportExerciseType = $navActiveMenuSportCircuitType = '';
             if (stripos($_SERVER['PHP_SELF'], 'codeTableBodyMemberList.php')    !== false) { $classActiv5="active"; $dataOption="on"; $show1="show"; $show2="show"; $style1='block'; $style2='block'; $navActiveMenuSportBodyMember    = 'class="active"'; }

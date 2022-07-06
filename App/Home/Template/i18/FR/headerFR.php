@@ -12,7 +12,7 @@
   $menu_sport_myProgram                 = "Mes programmes Sportif";
   $menu_sport_myTemplateProgram         = "Mes templates de programmes Sportif";
   $menu_sport_myCircuit                 = "Mes circuits";
-  $menu_sport_myExercise                = "mes exercices";
+  $menu_sport_myExercise                = "Mes exercices";
 
   $menu_administration                  = "Administrations";
   $menu_sport_admin_body_member_list    = "Liste des membres du corps";

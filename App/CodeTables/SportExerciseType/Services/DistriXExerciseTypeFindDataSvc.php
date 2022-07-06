@@ -18,7 +18,7 @@ if (is_null($dbConnection->getError())) {
   }
   $dataName = new ExerciseTypeNameStorData();
   if (!is_null($dataSvc->getParameter("dataName"))) {
-    list($dataName, $jsonError) = ExerciseTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
+    list($dataName, $jsonError)           = ExerciseTypeNameStorData::getJsonData($dataSvc->getParameter("dataName"));
   }
   list($ExerciseType, $ExerciseTypeNames) = ExerciseTypeStor::findByIndCodeNames($ExerciseType, $dataName, $dbConnection);
   // print_r($ExerciseTypeNamesStor);
