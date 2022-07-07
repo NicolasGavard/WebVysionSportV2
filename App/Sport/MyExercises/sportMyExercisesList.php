@@ -106,7 +106,9 @@
                       <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.mp4" type="video/mp4">
                       <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.webm" type="video/webm">
                     </video>
-                    
+                  </div>
+                  
+                  <div class="col-md-12 col-sm-12 embed-responsive embed-responsive-16by9 update_title">
                     <div data-type="youtube" data-video-id="bTqVqk7FSmY">Essai YouTube</div>
                   </div>
 

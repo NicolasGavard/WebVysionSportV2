@@ -157,6 +157,7 @@ if (!empty($_POST) && isset($_POST)) {
     
     $distriXSportMyExerciseData->setCode($exercise->getCode());
     $distriXSportMyExerciseData->setName($exercise->getName());
+    $distriXSportMyExerciseData->setLinkToPictureInternalPoster($exercise->getLinkToPictureInternalPoster());
     $distriXSportMyExerciseData->setLinkToPictureInternal($exercise->getLinkToPictureInternal());
     $distriXSportMyExerciseData->setLinkToPictureExternal($exercise->getLinkToPictureExternal());
     $distriXSportMyExerciseData->setSize($exercise->getSize());

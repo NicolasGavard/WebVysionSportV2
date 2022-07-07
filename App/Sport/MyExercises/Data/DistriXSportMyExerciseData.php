@@ -10,6 +10,7 @@ if (!class_exists("DistriXSportMyExerciseData", false)) {
     protected $name;
     protected $idExerciseType;
     protected $nameExerciseType;
+    protected $linkToPictureInternalPoster;
     protected $linkToPictureInternal;
     protected $linkToPictureExternal;
     protected $size;
@@ -21,22 +22,23 @@ if (!class_exists("DistriXSportMyExerciseData", false)) {
 
     public function __construct()
     {
-      $this->id                     = 0;
-      $this->idUserCoach            = 0;
-      $this->nameUserCoach          = "";
-      $this->firstNameUserCoach     = "";
-      $this->code                   = "";
-      $this->name                   = "";
-      $this->idExerciseType         = 0;
-      $this->nameExerciseType       = "";
-      $this->linkToPictureInternal  = "";
-      $this->linkToPictureExternal  = "";
-      $this->size                   = 0;
-      $this->type                   = "";
-      $this->description            = "";
-      $this->exerciseMuscles        = [];
-      $this->elemState              = 0;
-      $this->timestamp              = 0;
+      $this->id                           = 0;
+      $this->idUserCoach                  = 0;
+      $this->nameUserCoach                = "";
+      $this->firstNameUserCoach           = "";
+      $this->code                         = "";
+      $this->name                         = "";
+      $this->idExerciseType               = 0;
+      $this->nameExerciseType             = "";
+      $this->linkToPictureInternalPoster  = "";
+      $this->linkToPictureInternal        = "";
+      $this->linkToPictureExternal        = "";
+      $this->size                         = 0;
+      $this->type                         = "";
+      $this->description                  = "";
+      $this->exerciseMuscles              = [];
+      $this->elemState                    = 0;
+      $this->timestamp                    = 0;
     }
     // Gets
     public function getId():int { return $this->id; }
@@ -47,6 +49,7 @@ if (!class_exists("DistriXSportMyExerciseData", false)) {
     public function getName():string { return $this->name; }
     public function getIdExerciseType():int { return $this->idExerciseType; }
     public function getNameExerciseType():string { return $this->nameExerciseType; }
+    public function getLinkToPictureInternalPoster():string { return $this->linkToPictureInternalPoster; }
     public function getLinkToPictureInternal():string { return $this->linkToPictureInternal; }
     public function getLinkToPictureExternal():string { return $this->linkToPictureExternal; }
     public function getSize():int { return $this->size; }
@@ -65,6 +68,7 @@ if (!class_exists("DistriXSportMyExerciseData", false)) {
     public function setNameExerciseType(string $nameExerciseType) { $this->nameExerciseType = $nameExerciseType; }
     public function setCode(string $code) { $this->code = $code; }
     public function setName(string $name) { $this->name = $name; }
+    public function setLinkToPictureInternalPoster(string $linkToPictureInternalPoster) { $this->linkToPictureInternalPoster = $linkToPictureInternalPoster; }
     public function setLinkToPictureInternal(string $linkToPictureInternal) { $this->linkToPictureInternal = $linkToPictureInternal; }
     public function setLinkToPictureExternal(string $linkToPictureExternal) { $this->linkToPictureExternal = $linkToPictureExternal; }
     public function setSize(int $size) { $this->size = $size; }
