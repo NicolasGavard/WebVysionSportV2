@@ -10,6 +10,8 @@ class ExerciseStorData extends DistriXSvcAppData {
   protected $idexercisetype;
   protected $linktopictureinternalposter;
   protected $linktopictureinternal;
+  protected $linktopictureexternaltype;
+  protected $linktopictureexternalid;
   protected $linktopictureexternal;
   protected $size;
   protected $type;
@@ -25,6 +27,8 @@ class ExerciseStorData extends DistriXSvcAppData {
       $this->idexercisetype = 0;
       $this->linktopictureinternalposter = "";
       $this->linktopictureinternal = "";
+      $this->linktopictureexternaltype = "";
+      $this->linktopictureexternalid = "";
       $this->linktopictureexternal = "";
       $this->size = 0;
       $this->type = "";
@@ -40,6 +44,8 @@ class ExerciseStorData extends DistriXSvcAppData {
   public function getIdExerciseType():int { return $this->idexercisetype; }
   public function getLinkToPictureInternalPoster():string { return $this->linktopictureinternalposter; }
   public function getLinkToPictureInternal():string { return $this->linktopictureinternal; }
+  public function getLinkToPictureExternalType():string { return $this->linktopictureexternaltype; }
+  public function getLinkToPictureExternalId():string { return $this->linktopictureexternalid; }
   public function getLinkToPictureExternal():string { return $this->linktopictureexternal; }
   public function getSize():int { return $this->size; }
   public function getType():string { return $this->type; }
@@ -57,6 +63,8 @@ class ExerciseStorData extends DistriXSvcAppData {
   public function setIdExerciseType(int $idExerciseType) { $this->idexercisetype = $idExerciseType; }
   public function setLinkToPictureInternalPoster(string $linkToPictureInternalPoster) { $this->linktopictureinternalposter = $linkToPictureInternalPoster; }
   public function setLinkToPictureInternal(string $linkToPictureInternal) { $this->linktopictureinternal = $linkToPictureInternal; }
+  public function setLinkToPictureExternalType(string $linkToPictureExternalType) { $this->linktopictureexternaltype = $linkToPictureExternalType; }
+  public function setLinkToPictureExternalId(string $linkToPictureExternalId) { $this->linktopictureexternalid = $linkToPictureExternalId; }
   public function setLinkToPictureExternal(string $linkToPictureExternal) { $this->linktopictureexternal = $linkToPictureExternal; }
   public function setSize(int $size) { $this->size = $size; }
   public function setType(string $type) { $this->type = $type; }

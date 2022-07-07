@@ -8,15 +8,15 @@ $.ajax({
     localStorage.setItem("dataTable", JSON.stringify(data.ListMyExercises));
 
     $.map(data.ListMyExercisesTypes, function(val, key) {
-      $('.listExercisesTypes').append('<option value="'+val .id+'">'+val.name+'</option>');
+      $('.AddMyExerciseFormNameExercicesTypes').append('<option value="'+val .id+'">'+val.name+'</option>');
     });
 
     $.map(data.ListMyExercisesMuscles, function(val, key) {
-      $('.listMuscles').append('<optgroup label="'+val.name+'">');
+      $('.AddMyExerciseFormMuscles').append('<optgroup label="'+val.name+'">');
       $.map(val.muscles, function(valMuscles, key) {
-        $('.listMuscles').append('<option value="'+valMuscles.id+'">'+valMuscles.name+'</option>');
+        $('.AddMyExerciseFormMuscles').append('<option value="'+valMuscles.id+'">'+valMuscles.name+'</option>');
       });
-      $('.listMuscles').append('</optgroup>');
+      $('.AddMyExerciseFormMuscles').append('</optgroup>');
     });
 
     $('.btn-success').trigger('click');
@@ -52,10 +52,10 @@ $(".AddNewMyExercise").on('click', function() {
   $(".add_title").removeClass("d-none");
   $(".update_title").addClass("d-none");
 
-  $('.AddMyExerciseFormIdMyExercise').val(0);
-  $('.AddMyExerciseFormCode').val('');
+  $('.AddMyExerciseFormId').val(0);
+  $('.AddMyExerciseFormIdUserCoatch').val(localStorage.getItem("idUser"));
   $('.AddMyExerciseFormName').val('');
-  $(".avatar-brand").attr("src", '');
+  $('.AddMyExerciseFormDecription').val('');
   $('.AddMyExerciseFormTimestamp').val(0);
   $('.AddMyExerciseFormStatut').val(0);
 });
@@ -200,26 +200,26 @@ function ViewMyExercise(id, name){
       $(".add_title").addClass("d-none");
       $(".update_title").removeClass("d-none");
 
-      $('.AddMyExerciseFormIdMyExercise').val(id);
-      $('.AddMyExercisesFormIdUserCoatch').val(data.ViewMyExercise.idUserCoach);
-            
-      $('.listMyTemplates option[value="'+data.ViewMyExercise.idDietTemplate+'"]').prop('selected', true);
-      nameTemplate = $('.listMyTemplates option[value="'+data.ViewMyExercise.idDietTemplate+'"]').text();
-      $('#select2-listMyTemplates-container').html(nameTemplate);
-      
-      $('.listStudents option[value="'+data.ViewMyExercise.idUserStudent+'"]').prop('selected', true);
-      nameStudent = $('.listStudents option[value="'+data.ViewMyExercise.idUserStudent+'"]').text();
-      $('#select2-listStudents-container').html(nameStudent);
-      
-      var date    = String(data.ViewMyExercise.dateStart);
-      var year    = date.substr(0, 4);
-      var month   = date.substr(4, 2);
-      var day     = date.substr(6, 2);
-      var dateFr  = day+'/'+month+'/'+year;
-      $('.dateStart').val(dateFr);
-
+      $('.AddMyExerciseFormId').val(data.ViewMyExercise.id);
+      $('.AddMyExerciseFormIdUserCoatch').val(data.ViewMyExercise.idUserCoach);
+      $('.AddMyExerciseFormName').val(data.ViewMyExercise.name);
+      $('.AddMyExerciseFormDecription').val(data.ViewMyExercise.description);
       $('.AddMyExerciseFormTimestamp').val(data.ViewMyExercise.timestamp);
       $('.AddMyExerciseFormStatut').val(data.ViewMyExercise.elemState);
+
+      $.map(data.ViewMyExercise.exerciseMuscles, function(val, key) {
+        $('.AddMyExerciseFormMuscles option[value="'+val.idBodyMuscle+'"]').prop('selected', true);
+        nameBodyMuscle = $('.AddMyExerciseFormMuscles option[value="'+val.nameBodyMuscle+'"]').text();
+        $('#select2-listMuscles-container').html(nameBodyMuscle);
+      });
+
+      $.map(data.ListMyExercisesTypes, function(val, key) {
+        if (val.id == data.ViewMyExercise.idExerciseType) {
+          $('.AddMyExerciseFormNameExercicesTypes option[value="'+data.ViewMyExercise.idExerciseType+'"]').prop('selected', true);
+          nameExerciseType = $('.AddMyExerciseFormNameExercicesTypes option[value="'+data.ViewMyExercise.idExerciseType+'"]').text();
+          $('#select2-listExercisesTypes-container').html(nameExerciseType);
+        }
+      });
     },
     error : function(data) {
       console.log(data);

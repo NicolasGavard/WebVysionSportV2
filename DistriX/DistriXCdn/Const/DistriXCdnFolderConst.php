@@ -40,6 +40,6 @@ if (!defined('DISTRIX_CDN_FOLDER_RECIPES')) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                VIDEOS                                                       //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if (!defined('DISTRIX_CDN_FOLDER_EXERCICES')) {
-  define("DISTRIX_CDN_FOLDER_EXERCICES", "exercices");
+if (!defined('DISTRIX_CDN_FOLDER_EXERCISES')) {
+  define("DISTRIX_CDN_FOLDER_EXERCISES", "exercises");
 }

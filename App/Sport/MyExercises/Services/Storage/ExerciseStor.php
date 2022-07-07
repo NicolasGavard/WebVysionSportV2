@@ -11,7 +11,7 @@ class ExerciseStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "exercise";
-  const SELECT = 'SELECT id,idusercoach,code,name,idexercisetype,linktopictureinternalposter,linktopictureinternal,linktopictureexternal,size,type,description,elemstate,timestamp';
+  const SELECT = 'SELECT id,idusercoach,code,name,idexercisetype,linktopictureinternalposter,linktopictureinternal,linktopictureexternaltype,linktopictureexternalid,linktopictureexternal,size,type,description,elemstate,timestamp';
   const FROM = ' FROM exercise';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -184,8 +184,10 @@ class ExerciseStor {
       $request .= "name= :name,";
       $request .= "idexercisetype= :idexercisetype,";
       $request .= "linktopictureinternalposter= :linktopictureinternalposter,";
-      $request .= "linktopictureinternal= :linktopictureinternal,";
       $request .= "linktopictureexternal= :linktopictureexternal,";
+      $request .= "linktopictureinternaltype= :linktopictureinternaltype,";
+      $request .= "linktopictureinternalid= :linktopictureinternalid,";
+      $request .= "linktopictureinternal= :linktopictureinternal,";
       $request .= "size= :size,";
       $request .= "type= :type,";
       $request .= "description= :description,";
@@ -201,6 +203,8 @@ class ExerciseStor {
       $params["idexercisetype"] = $data->getIdExerciseType();
       $params["linktopictureinternalposter"] = $data->getLinkToPictureInternalPoster();
       $params["linktopictureinternal"] = $data->getLinkToPictureInternal();
+      $params["linktopictureexternaltype"] = $data->getLinkToPictureExternalType();
+      $params["linktopictureexternalid"] = $data->getLinkToPictureExternalId();
       $params["linktopictureexternal"] = $data->getLinkToPictureExternal();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
@@ -320,7 +324,7 @@ class ExerciseStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO exercise(";
-      $request .= "idusercoach,code,name,idexercisetype,linktopictureinternalposter,linktopictureinternal,linktopictureexternal,size,type,description,elemstate,timestamp)";
+      $request .= "idusercoach,code,name,idexercisetype,linktopictureinternalposter,linktopictureinternal,linktopictureexternaltype,linktopictureexternalid,linktopictureexternal,size,type,description,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":idusercoach,";
       $request .= ":code,";
@@ -341,6 +345,8 @@ class ExerciseStor {
       $params["idexercisetype"] = $data->getIdExerciseType();
       $params["linktopictureinternalposter"] = $data->getLinkToPictureInternalPoster();
       $params["linktopictureinternal"] = $data->getLinkToPictureInternal();
+      $params["linktopictureexternaltype"] = $data->getLinkToPictureExternalType();
+      $params["linktopictureexternalid"] = $data->getLinkToPictureExternalId();
       $params["linktopictureexternal"] = $data->getLinkToPictureExternal();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();

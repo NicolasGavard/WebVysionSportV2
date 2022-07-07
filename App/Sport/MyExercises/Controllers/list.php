@@ -19,7 +19,6 @@ include(__DIR__ . "/../../../CodeTables/SportExerciseType/Data/DistriXCodeTableE
 $listUsers                = [];
 $listMyExercises          = [];
 $listExercisesTypes       = [];
-$listExercisesTypes       = [];
 $listBodyMembersName      = [];
 $listBodyMuscles          = [];
 $listMyExercisesFormFront = [];
@@ -154,6 +153,8 @@ if (!empty($_POST) && isset($_POST)) {
     $distriXSportMyExerciseData->setName($exercise->getName());
     $distriXSportMyExerciseData->setLinkToPictureInternalPoster($exercise->getLinkToPictureInternalPoster());
     $distriXSportMyExerciseData->setLinkToPictureInternal($exercise->getLinkToPictureInternal());
+    $distriXSportMyExerciseData->setLinkToPictureExternalType($exercise->getLinkToPictureExternalType());
+    $distriXSportMyExerciseData->setLinkToPictureExternalId($exercise->getLinkToPictureExternalId());
     $distriXSportMyExerciseData->setLinkToPictureExternal($exercise->getLinkToPictureExternal());
     $distriXSportMyExerciseData->setSize($exercise->getSize());
     $distriXSportMyExerciseData->setType($exercise->getType());

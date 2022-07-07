@@ -12,6 +12,8 @@ if (!class_exists("DistriXSportMyExerciseData", false)) {
     protected $nameExerciseType;
     protected $linkToPictureInternalPoster;
     protected $linkToPictureInternal;
+    protected $linkToPictureExternalType;
+    protected $linkToPictureExternalId;
     protected $linkToPictureExternal;
     protected $size;
     protected $type;
@@ -32,6 +34,8 @@ if (!class_exists("DistriXSportMyExerciseData", false)) {
       $this->nameExerciseType             = "";
       $this->linkToPictureInternalPoster  = "";
       $this->linkToPictureInternal        = "";
+      $this->linkToPictureExternalType    = "";
+      $this->linkToPictureExternalId      = "";
       $this->linkToPictureExternal        = "";
       $this->size                         = 0;
       $this->type                         = "";
@@ -51,6 +55,8 @@ if (!class_exists("DistriXSportMyExerciseData", false)) {
     public function getNameExerciseType():string { return $this->nameExerciseType; }
     public function getLinkToPictureInternalPoster():string { return $this->linkToPictureInternalPoster; }
     public function getLinkToPictureInternal():string { return $this->linkToPictureInternal; }
+    public function getLinkToPictureExternalType():string { return $this->linkToPictureExternalType; }
+    public function getLinkToPictureExternalId():string { return $this->linkToPictureExternalId; }
     public function getLinkToPictureExternal():string { return $this->linkToPictureExternal; }
     public function getSize():int { return $this->size; }
     public function getType():string { return $this->type; }
@@ -70,6 +76,8 @@ if (!class_exists("DistriXSportMyExerciseData", false)) {
     public function setName(string $name) { $this->name = $name; }
     public function setLinkToPictureInternalPoster(string $linkToPictureInternalPoster) { $this->linkToPictureInternalPoster = $linkToPictureInternalPoster; }
     public function setLinkToPictureInternal(string $linkToPictureInternal) { $this->linkToPictureInternal = $linkToPictureInternal; }
+    public function setLinkToPictureExternalType(string $linkToPictureExternalType) { $this->linkToPictureExternalType = $linkToPictureExternalType; }
+    public function setLinkToPictureExternalId(string $linkToPictureExternalId) { $this->linkToPictureExternalId = $linkToPictureExternalId; }
     public function setLinkToPictureExternal(string $linkToPictureExternal) { $this->linkToPictureExternal = $linkToPictureExternal; }
     public function setSize(int $size) { $this->size = $size; }
     public function setType(string $type) { $this->type = $type; }

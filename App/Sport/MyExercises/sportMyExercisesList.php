@@ -52,15 +52,15 @@
               <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <form class="FormAddMyExercise" action="#" id="FormAddMyExercise">
-                <input class="form-control AddMyExercisesFormId"            type="text" name="id"           value="0">
-                <input class="form-control AddMyExercisesFormIdUserCoatch"  type="text" name="idUserCoach"  value="0">
-                <input class="form-control AddMyExercisesFormTimestamp"     type="text" name="timestamp"    value="0">
-                <input class="form-control AddMyExercisesFormStatut"        type="text" name="elemState"    value="0">
+                <input class="form-control AddMyExerciseFormId"            type="hidden" name="id"           value="0">
+                <input class="form-control AddMyExerciseFormIdUserCoatch"  type="hidden" name="idUserCoach"  value="0">
+                <input class="form-control AddMyExerciseFormTimestamp"     type="hidden" name="timestamp"    value="0">
+                <input class="form-control AddMyExerciseFormStatut"        type="hidden" name="elemState"    value="0">
                 <div class="row">
                   <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                       <label><?php echo $page_name; ?></label>
-                      <input class="form-control name" id="name" placeholder="<?php echo $page_name; ?>" type="text" name="name">
+                      <input class="form-control AddMyExerciseFormName" id="name" placeholder="<?php echo $page_name; ?>" type="text" name="name">
                       <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
                     </div>
                   </div>
@@ -68,7 +68,7 @@
                   <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                       <label><?php echo $page_muscles; ?></label>
-                      <select class="custom-select2 form-control listMuscles" multiple="multiple" data-style="btn-outline-danger" id="listMuscles" name="idMuscle" style="width: 100%; height: 38px;">  
+                      <select class="custom-select2 form-control AddMyExerciseFormMuscles" multiple="multiple" data-style="btn-outline-danger" id="listMuscles" name="idMuscle" style="width: 100%; height: 30px;">  
                       </select>
                       <div class="form-control-feed back danger-template has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_muscles; ?> </div>
                     </div>
@@ -77,7 +77,7 @@
                   <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                       <label><?php echo $page_exercise_type; ?></label>
-                      <select class="custom-select2 form-control listExercisesTypes" id="listExercisesTypes" name="idExerciseType" style="width: 100%; height: 38px;">
+                      <select class="custom-select2 form-control AddMyExerciseFormNameExercicesTypes" id="listExercisesTypes" name="idExerciseType" style="width: 100%; height: 38px;">
                         <option value="0"><?php echo $page_all_choice; ?></option>
                       </select>
                       <div class="form-control-feed back danger-student has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_exercise_type; ?> </div>
@@ -87,7 +87,7 @@
                   <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                       <label><?php echo $page_description; ?></label>
-                      <textarea class="form-control" id="description" placeholder="<?php echo $page_description; ?>" name="description"></textarea>
+                      <textarea class="form-control AddMyExerciseFormDecription" id="description" placeholder="<?php echo $page_description; ?>" name="description"></textarea>
                     </div>
                   </div>
                   
@@ -101,18 +101,17 @@
                     </div>
                   </div>
                 
-                  <div class="col-md-12 col-sm-12 embed-responsive embed-responsive-16by9 update_title">
-                    <video poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg?v1" controls crossorigin>
-                      <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.mp4" type="video/mp4">
-                      <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.webm" type="video/webm">
-                    </video>
-                  </div>
-                  
-                  <div class="col-md-12 col-sm-12 embed-responsive embed-responsive-16by9 update_title">
-                    <div data-type="youtube" data-video-id="bTqVqk7FSmY">Essai YouTube</div>
-                  </div>
+                  <div class="update_title">
+                    <div class="container padding-bottom-30 internalVideo">
+                      <video poster="http://localhost/WebVysionSportV2/Distrix/DistriXCdn/Sent/Images/exercises/videoExercice.png?v1" controls crossorigin>
+                        <source src="http://localhost/WebVysionSportV2/Distrix/DistriXCdn/Sent/Movies/exercises/videoExercice.mp4" type="video/mp4">
+                      </video>
+                    </div>
 
-
+                    <div class="col-md-12 col-sm-12 padding-bottom-30 externalVideo">
+                      <div data-type="youtube" data-video-id="bTqVqk7FSmY"></div>
+                    </div>
+                  </div>
                 </form>
               </div>
               

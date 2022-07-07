@@ -116,12 +116,21 @@
       <!-- bootstrap-wizardStep js -->
       <script src="<?php echo FRONT_PATH;?>src/plugins/jquery-steps/jquery.steps.js?v=<?php echo APP_VERSION;?>"></script>
 	    <script src="<?php echo FRONT_PATH;?>vendors/scripts/steps-setting.js?v=<?php echo APP_VERSION;?>"></script>
+      <!-- bootstrap-Video js -->
+      <script src="<?php echo FRONT_PATH;?>src/plugins/plyr/dist/plyr.js"></script>
+	    <script src="https://cdn.shr.one/1.0.1/shr.js"></script>
     <?php } ?>
 
     <!-- js DistriX -->
     <script src="<?php echo FRONT_PATH;?>App/Home/Template/main.js?v=<?php echo APP_VERSION;?>"></script>
 
     <script>
+      plyr.setup({
+        tooltips: {
+          controls: !0
+        },
+      });
+      
       window.addEventListener('DOMContentLoaded', function () {
         var image = document.getElementById('image');
         var cropBoxData;
