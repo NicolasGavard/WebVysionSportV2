@@ -147,7 +147,7 @@ function ListMyTemplateDiet(elemState){
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
       const line =  '<tr>'+
-                    '  <td style="padding:1rem;">'+val.name+'</td>'+
+                    '  <td style="padding:1rem;">&nbsp;&nbsp;'+val.name+'</td>'+
                     '  <td>'+val.nbStudentAssigned+'</td>'+
                     '  <td>'+val.duration+' jours</td>'+
                     '  <td>'+val.tags+'</td>'+

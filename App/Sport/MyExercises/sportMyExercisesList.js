@@ -6,6 +6,19 @@ $.ajax({
   data: {'idUserCoach': localStorage.getItem("idUser")},
   success : function(data) {
     localStorage.setItem("dataTable", JSON.stringify(data.ListMyExercises));
+
+    $.map(data.ListMyExercisesTypes, function(val, key) {
+      $('.listExercisesTypes').append('<option value="'+val .id+'">'+val.name+'</option>');
+    });
+
+    $.map(data.ListMyExercisesMuscles, function(val, key) {
+      $('.listMuscles').append('<optgroup label="'+val.name+'">');
+      $.map(val.muscles, function(valMuscles, key) {
+        $('.listMuscles').append('<option value="'+valMuscles.id+'">'+valMuscles.name+'</option>');
+      });
+      $('.listMuscles').append('</optgroup>');
+    });
+
     $('.btn-success').trigger('click');
   },
   error : function(data) {
@@ -143,9 +156,19 @@ function ListMyExercise(elemState){
       if(val.elemState == 1) {actionBtnDelete = 'd-none'; actionBtnRestore = '';}
       if(val.elemState == 0) {actionBtnDelete = '';       actionBtnRestore = 'd-none';}
       
+      var listMuscles = '';
+      $.map(val.exerciseMuscles, function(valExerciseMuscles, key) {
+        listMuscles = listMuscles +''+ valExerciseMuscles.nameBodyMuscle +', <br>';
+      });
+      listMuscles = listMuscles.substring(0, listMuscles.length - 6); // To delete the last 6 characters NG 06-07-22
+      
+      if (listMuscles == ''){
+        listMuscles = '-';
+      }
+
       const line =  '<tr>'+
                     ' <td style="padding:1rem;">&nbsp;&nbsp;'+val.name+'</td>'+
-                    ' <td>'+val.name+'</td>'+
+                    ' <td>'+listMuscles+'</td>'+
                     // ' <td>'+val.firstNameUserStudent+' '+val.nameUserStudent+'</td>'+
                     ' <td>'+val.nameExerciseType+'</td>'+
                     ' <td>'+val.description+'</td>'+

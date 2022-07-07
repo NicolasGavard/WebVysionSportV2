@@ -34,7 +34,7 @@ if (!class_exists("DistriXSportMyExercisesMusclesData", false)) {
     public function setIdExercise(int $idExercise) { $this->idExercise = $idExercise; }
     public function setNameExercise(string $nameExercise) { $this->nameExercise = $nameExercise; }
     public function setIdBodyMuscle(int $idBodyMuscle) { $this->idBodyMuscle = $idBodyMuscle; }
-    public function setNameBodyMuscle(int $nameBodyMuscle) { $this->nameBodyMuscle = $nameBodyMuscle; }
+    public function setNameBodyMuscle(string $nameBodyMuscle) { $this->nameBodyMuscle = $nameBodyMuscle; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   }

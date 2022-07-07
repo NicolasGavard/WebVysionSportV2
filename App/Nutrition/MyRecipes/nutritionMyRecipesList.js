@@ -198,7 +198,7 @@ function ListMyRecipe(elemState){
       }
 
       const line =  '<tr>'+
-                    '  <td style="padding:1rem;"><img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
+                    '  <td style="padding:1rem;">&nbsp;&nbsp;<img style="max-height:100px; max-width:100px;" src="'+val.linkToPicture+'"/></td>'+
                     '  <td>'+val.name+'</td>'+
                     '  <td>'+
                     '    <div class="row">'+

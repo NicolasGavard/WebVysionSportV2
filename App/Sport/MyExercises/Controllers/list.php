@@ -20,12 +20,14 @@ $listUsers                = [];
 $listMyExercises          = [];
 $listExercisesTypes       = [];
 $listExercisesTypes       = [];
-$listBodyMembersName          = [];
+$listBodyMembersName      = [];
 $listBodyMuscles          = [];
 $listMyExercisesFormFront = [];
-$_POST['idUserCoach']     = 1;
 
 if (!empty($_POST) && isset($_POST)) {
+    // List Users
+    $listUsers                            = DistriXStyAppUser::listUsers();
+  
   // Info profil
   $infoProfil                           = DistriXStyAppInterface::getUserInformation();
   $distriXCodeTableBodyMemberNameData   = new DistriXCodeTableBodyMemberNameData();
@@ -35,9 +37,6 @@ if (!empty($_POST) && isset($_POST)) {
   $distriXCodeTableExerciseTypeNameData = new DistriXCodeTableExerciseTypeNameData();
   $distriXCodeTableExerciseTypeNameData->setIdLanguage($infoProfil->getIdLanguage());
   
-  // List Users
-  $listUsers                            = DistriXStyAppUser::listUsers();
-
   // Exercise
   list($distriXSportCurrentDietData, $errorJson)    = DistriXSportMyExercisesData::getJsonData($_POST);
   list($distriXSportExerciseMuscleData, $errorJson) = DistriXSportMyExercisesMusclesData::getJsonData($_POST);
@@ -162,16 +161,19 @@ if (!empty($_POST) && isset($_POST)) {
     $exerciseMuscles = [];
     foreach ($listMyExerciseMuscles as $listExerciseMuscles) {
       if ($listExerciseMuscles->getIdExercise() == $exercise->getId()) {
-        $distriXCodeTableBodyMuscleNameData = new DistriXCodeTableBodyMuscleNameData();
-        $distriXCodeTableBodyMuscleNameData->setId($listExerciseMuscles->getIdBodyMuscle());
-        
+        $distriXSportMyExercisesMusclesData = new DistriXSportMyExercisesMusclesData();
+        $distriXSportMyExercisesMusclesData->setId($listExerciseMuscles->getId());
+        $distriXSportMyExercisesMusclesData->setIdExercise($listExerciseMuscles->getIdExercise());
+        $distriXSportMyExercisesMusclesData->setIdBodyMuscle($listExerciseMuscles->getIdBodyMuscle());
         foreach ($listBodyMusclesName as $bodyMusclesName) {
           if ($bodyMusclesName->getIdBodyMuscle() == $listExerciseMuscles->getIdBodyMuscle()){
-            $distriXCodeTableBodyMuscleNameData->setName($bodyMusclesName->getName());
+            $distriXSportMyExercisesMusclesData->setNameBodyMuscle($bodyMusclesName->getName());
             break;
           }
         }
-        $exerciseMuscles[] = $distriXCodeTableBodyMuscleNameData;
+        $distriXSportMyExercisesMusclesData->setElemState($listExerciseMuscles->getElemState());
+        $distriXSportMyExercisesMusclesData->setTimestamp($listExerciseMuscles->getTimestamp());
+        $exerciseMuscles[] = $distriXSportMyExercisesMusclesData;
       }
     }
     $distriXSportMyExercisesData->setExerciseMuscles($exerciseMuscles);
@@ -182,6 +184,7 @@ if (!empty($_POST) && isset($_POST)) {
   }
 }
 
+$resp["ListMyExercisesTypes"]   = $listExercisesTypes;
 $resp["ListMyExercisesMuscles"] = $listMyExerciseMusclesFormFront;
 $resp["ListMyExercises"]        = $listMyExercisesFormFront;
 if(!empty($error)){

@@ -186,7 +186,7 @@ $(function() {
         });
         
         let line =  '<tr>'+
-                    '  <td style="padding:1rem;">'+val.dayNumber+'</td>'+
+                    '  <td style="padding:1rem;">&nbsp;&nbsp;'+val.dayNumber+'</td>'+
                     '  <td>'+val.nameMealType+'</td>'+
                     '  <td>'+listFoods+'</td>'+
                     '  <td>'+listFoodsNutritionals+'</td>'+

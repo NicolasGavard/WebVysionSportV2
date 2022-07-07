@@ -63,8 +63,8 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_add_title; ?></h4>
-              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_update_title; ?></h4>
+            <h4 class="padding-top-30 mb-30 weight-500 add_title"><?php echo $page_add_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 update_title"><?php echo $page_update_title; ?></h4>
               <form class="FormAddMyCurrentDietMeal" action="#" id="FormAddMyCurrentDietMeal">
                 <input class="form-control AddMyCurrentsDietsMealFormId"            type="hidden" name="id"           value="0">
                 <input class="form-control AddMyCurrentsDietsMealFormIdUserCoatch"  type="hidden" name="idDiet"       value="0">

@@ -209,7 +209,7 @@ $(function() {
         }
 
         let line =  '<tr>'+
-                      '  <td style="padding:1rem;">'+val.code+'</td>'+
+                      '  <td style="padding:1rem;">&nbsp;&nbsp;'+val.code+'</td>'+
                       '  <td>'+val.name+'</td>'+
                       '  <td>'+infoLanguage+' '+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {

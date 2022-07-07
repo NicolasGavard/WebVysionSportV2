@@ -24,7 +24,7 @@
               <!-- <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-info AddSearchMyExercises" data-toggle="modal" data-target="#modalSearchMyExercises"><i class="icon-copy dw-info dw dw-search"></i> <?php echo $page_all_filter; ?></buttons> -->
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-success disabled"><i class="icon-copy dw-success dw dw-checked"></i> <?php echo $page_all_active; ?></buttons>
               <button type="button" style="margin-top: 5px; margin-right: 5px;" class="btn btn-warning"><i class="icon-copy dw-warning dw dw-ban"></i> <?php echo $page_all_inactive; ?></button>
-              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyExercises" data-toggle="modal" data-target="#modalAddMyExercise"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
+              <button type="button" style="margin-top: 5px; margin-right: 0px;" class="btn btn-primary AddNewMyExercise" data-toggle="modal" data-target="#modalAddMyExercise"><i class="fa fa-plus"></i> <?php echo $page_all_add; ?></button>
             </div>
           </div>
           
@@ -35,8 +35,8 @@
 								<tr>
                   <th width="15%" class="table-plus"><span><?php echo $page_name; ?></span></th>
                   <th width="20%"><span><?php echo $page_muscles; ?></span></th>
-                  <th width="10%"><span><?php echo $page_exercise_type; ?></span></th>
-                  <th width="45%"><span><?php echo $page_description; ?></span></th>
+                  <th width="25%"><span><?php echo $page_exercise_type; ?></span></th>
+                  <th width="30%"><span><?php echo $page_description; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
 							</thead>
@@ -49,40 +49,72 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-body text-center font-18">
-              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_add_title; ?></h4>
-              <h4 class="padding-top-30 mb-30 weight-500"><?php echo $page_update_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
+              <h4 class="padding-top-30 mb-30 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
               <form class="FormAddMyExercise" action="#" id="FormAddMyExercise">
                 <input class="form-control AddMyExercisesFormId"            type="text" name="id"           value="0">
                 <input class="form-control AddMyExercisesFormIdUserCoatch"  type="text" name="idUserCoach"  value="0">
                 <input class="form-control AddMyExercisesFormTimestamp"     type="text" name="timestamp"    value="0">
                 <input class="form-control AddMyExercisesFormStatut"        type="text" name="elemState"    value="0">
                 <div class="row">
-                  <div class="col-md-4 col-sm-12">
+                  <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                       <label><?php echo $page_name; ?></label>
-                      <select class="custom-select2 form-control listMyTemplates" data-style="btn-outline-danger" id="listMyTemplates" name="idDietTemplate" style="width: 100%; height: 38px;">  
+                      <input class="form-control name" id="name" placeholder="<?php echo $page_name; ?>" type="text" name="name">
+                      <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                    </div>
+                  </div>
+                
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label><?php echo $page_muscles; ?></label>
+                      <select class="custom-select2 form-control listMuscles" multiple="multiple" data-style="btn-outline-danger" id="listMuscles" name="idMuscle" style="width: 100%; height: 38px;">  
+                      </select>
+                      <div class="form-control-feed back danger-template has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_muscles; ?> </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label><?php echo $page_exercise_type; ?></label>
+                      <select class="custom-select2 form-control listExercisesTypes" id="listExercisesTypes" name="idExerciseType" style="width: 100%; height: 38px;">
                         <option value="0"><?php echo $page_all_choice; ?></option>
                       </select>
-                      <div class="form-control-feed back danger-template has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_template; ?> </div>
+                      <div class="form-control-feed back danger-student has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_exercise_type; ?> </div>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-12">
+
+                  <div class="col-md-12 col-sm-12">
                     <div class="form-group">
-                      <label><?php echo $page_list_assigned_for_one; ?></label>
-                      <select class="custom-select2 form-control listStudents" id="listStudents" name="idUserStudent" style="width: 100%; height: 38px;">
-                        <option value="0"><?php echo $page_all_choice; ?></option>
-                      </select>
-                      <div class="form-control-feed back danger-student has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_student; ?> </div>
+                      <label><?php echo $page_description; ?></label>
+                      <textarea class="form-control" id="description" placeholder="<?php echo $page_description; ?>" name="description"></textarea>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-12">
-                    <div class="form-group">
-                      <label><?php echo $page_date_begin; ?></label>
-                      <!-- <input class="form-control date-picker dateStart" id="dateStart" placeholder="<?php //echo $page_add_date_begin; ?>" type="text" name="date_start"> -->
-                      <input class="form-control dateStart" id="dateStart" placeholder="<?php echo $page_add_date_begin; ?>" type="text" name="dateStart">
-                      <div class="form-control-feed back danger-dateStart has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_dateStart; ?> </div>
+                  
+                  <div class="add_title">
+                    <div class="col-md-12 col-sm-12">
+                      <div class="form-group">
+                        <label><?php echo $page_name; ?></label>
+                        <input class="form-control name" id="name" placeholder="<?php echo $page_name; ?>" type="text" name="name">
+                        <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                      </div>
                     </div>
                   </div>
+                
+                  <div class="update_title">
+                    <div class="container">
+                      <video poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg?v1" controls crossorigin>
+                        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.mp4" type="video/mp4">
+                        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.webm" type="video/webm">
+                      </video>
+                    </div>
+
+                    <div class="container">
+                      <div data-type="youtube" data-video-id="bTqVqk7FSmY"></div>
+                    </div>
+                  </div>
+
+
                 </form>
               </div>
               
