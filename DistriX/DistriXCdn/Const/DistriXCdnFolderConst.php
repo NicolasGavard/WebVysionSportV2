@@ -5,14 +5,18 @@ if (!defined('DISTRIX_CDN_GROUP_IMAGES')) {
 if (!defined('DISTRIX_CDN_GROUP_MOVIES')) {
   define("DISTRIX_CDN_GROUP_MOVIES", "DISTRIX_CDN_GROUP_MOVIES");
 }
-if (!defined('DISTRIX_CDN_FOLDER_ENTERPRISE')) {
-  define("DISTRIX_CDN_FOLDER_ENTERPRISE", "enterprises");
-}
 if (!defined('DISTRIX_CDN_FOLDER_SEND_TO')) {
   define("DISTRIX_CDN_FOLDER_SEND_TO", "Send To Service");
 }
 if (!defined('DISTRIX_CDN_FOLDER_GET_FROM')) {
   define("DISTRIX_CDN_FOLDER_GET_FROM", "Get From Service");
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                IMAGES                                                       //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if (!defined('DISTRIX_CDN_FOLDER_ENTERPRISE')) {
+  define("DISTRIX_CDN_FOLDER_ENTERPRISE", "enterprises");
 }
 if (!defined('DISTRIX_CDN_FOLDER_USERS')) {
   define("DISTRIX_CDN_FOLDER_USERS", "users");
@@ -31,4 +35,11 @@ if (!defined('DISTRIX_CDN_FOLDER_CODE_TABLES')) {
 }
 if (!defined('DISTRIX_CDN_FOLDER_RECIPES')) {
   define("DISTRIX_CDN_FOLDER_RECIPES", "recipes");
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                VIDEOS                                                       //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if (!defined('DISTRIX_CDN_FOLDER_EXERCICES')) {
+  define("DISTRIX_CDN_FOLDER_EXERCICES", "exercices");
 }

@@ -101,17 +101,13 @@
                     </div>
                   </div>
                 
-                  <div class="update_title">
-                    <div class="container">
-                      <video poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg?v1" controls crossorigin>
-                        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.mp4" type="video/mp4">
-                        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.webm" type="video/webm">
-                      </video>
-                    </div>
-
-                    <div class="container">
-                      <div data-type="youtube" data-video-id="bTqVqk7FSmY"></div>
-                    </div>
+                  <div class="col-md-12 col-sm-12 embed-responsive embed-responsive-16by9 update_title">
+                    <video poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg?v1" controls crossorigin>
+                      <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.mp4" type="video/mp4">
+                      <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.webm" type="video/webm">
+                    </video>
+                    
+                    <div data-type="youtube" data-video-id="bTqVqk7FSmY">Essai YouTube</div>
                   </div>
 
 
