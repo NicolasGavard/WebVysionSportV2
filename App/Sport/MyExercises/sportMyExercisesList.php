@@ -101,16 +101,8 @@
                     </div>
                   </div>
                 
-                  <div class="update_title">
-                    <div class="container padding-bottom-30 internalVideo">
-                      <video poster="http://localhost/WebVysionSportV2/Distrix/DistriXCdn/Sent/Images/exercises/videoExercice.png?v1" controls crossorigin>
-                        <source src="http://localhost/WebVysionSportV2/Distrix/DistriXCdn/Sent/Movies/exercises/videoExercice.mp4" type="video/mp4">
-                      </video>
-                    </div>
-
-                    <div class="col-md-12 col-sm-12 padding-bottom-30 externalVideo">
-                      <div data-type="youtube" data-video-id="bTqVqk7FSmY"></div>
-                    </div>
+                  <div class="col-md-12 col-sm-12 padding-bottom-30 update_title">
+                    <div class="col-md-12 col-sm-12 video"></div>
                   </div>
                 </form>
               </div>

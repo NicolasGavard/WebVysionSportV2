@@ -21,7 +21,8 @@ CREATE TABLE `exercise` (
 
 INSERT INTO exercise(id,idusercoach,code,name,idexercisetype,linktopictureinternalposter,linktopictureinternal,linktopictureexternaltype,linktopictureexternalid,linktopictureexternal,size,type,description,elemstate,timestamp) VALUES 
 (1,1,'EXO1','Exercise 1',1,'videoExercice.png','videoExercice.mp4','','','',0,'','Desc Exo. 1',0,0),
-(2,1,'EXO2','Exercise 2',2,'','','youtube','bTqVqk7FSmY','',0,'','Desc Exo. 2',0,0);
+(2,1,'EXO2','Exercise 2',2,'','','youtube','bTqVqk7FSmY','',0,'','Desc Exo. 2',0,0),
+(3,1,'EXO3','Exercise 3',2,'','','','','videoExercice.mp4',0,'','Desc Exo. 3',0,0);
 
 -- PRODUCTION   : 
 -- VALIDATION   : 

@@ -16,10 +16,11 @@ include(__DIR__ . "/../../../CodeTables/SportBodyMuscle/Data/DistriXCodeTableBod
 include(__DIR__ . "/../../../CodeTables/SportBodyMember/Data/DistriXCodeTableBodyMembersMusclesData.php");
 include(__DIR__ . "/../../../CodeTables/SportExerciseType/Data/DistriXCodeTableExerciseTypeNameData.php");
 
-$listUsers                = [];
-$listExercisesTypes       = [];
-$listBodyMembersName      = [];
-$listBodyMuscles          = [];
+$listUsers                  = [];
+$distriXSportMyExerciseData = new DistriXSportMyExerciseData();
+$listExercisesTypes         = [];
+$listBodyMembersName        = [];
+$listBodyMuscles            = [];
 
 if (!empty($_POST) && isset($_POST)) {
   // List Users

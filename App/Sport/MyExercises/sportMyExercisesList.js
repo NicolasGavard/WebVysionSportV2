@@ -83,7 +83,7 @@ $(".btnAddMyExercise").on('click', function() {
         $('#sa-error-distrix').trigger('click');
       }
     });
-    $(".btnAddMyExercise").attr("data-dismiss", "modal");
+    
   } else {
     if (template == 0){
       $('.danger-template').removeClass("d-none");
@@ -207,11 +207,13 @@ function ViewMyExercise(id, name){
       $('.AddMyExerciseFormTimestamp').val(data.ViewMyExercise.timestamp);
       $('.AddMyExerciseFormStatut').val(data.ViewMyExercise.elemState);
 
+      var nameBodyMuscle = '<ul class="select2-selection__rendered">';
       $.map(data.ViewMyExercise.exerciseMuscles, function(val, key) {
         $('.AddMyExerciseFormMuscles option[value="'+val.idBodyMuscle+'"]').prop('selected', true);
-        nameBodyMuscle = $('.AddMyExerciseFormMuscles option[value="'+val.nameBodyMuscle+'"]').text();
-        $('#select2-listMuscles-container').html(nameBodyMuscle);
+        nameBodyMuscle += '<li class="select2-selection__choice" title="'+val.nameBodyMuscle+'" data-select2-id="'+val.idBodyMuscle+'"><span class="select2-selection__choice__remove" role="presentation">×</span>'+val.nameBodyMuscle+'</li>';
       });
+      nameBodyMuscle += '</ul">';
+      $('.select2-selection__rendered').html(nameBodyMuscle);
 
       $.map(data.ListMyExercisesTypes, function(val, key) {
         if (val.id == data.ViewMyExercise.idExerciseType) {
@@ -220,6 +222,19 @@ function ViewMyExercise(id, name){
           $('#select2-listExercisesTypes-container').html(nameExerciseType);
         }
       });
+
+      $(".video").empty();
+      if (data.ViewMyExercise.linkToPictureInternalPoster != '') {
+        $(".video").html('<video style="max-width:700px" poster="'+data.ViewMyExercise.linkToPictureInternalPoster+'" controls crossorigin><source src="'+data.ViewMyExercise.linkToPictureInternal+'" type="video/mp4"></source>');
+      } else {
+        if (data.ViewMyExercise.linkToPictureExternalId == '') {
+          $(".video").html('<video style="max-width:700px" poster="'+data.ViewMyExercise.linkToPictureInternalPoster+'" controls crossorigin><source src="'+data.ViewMyExercise.linkToPictureExternal+'" type="video/mp4"></source>');
+        } else {
+          $(".video").html('<div class="AddMyExerciseFormExternalVideo" data-type="'+data.ViewMyExercise.linkToPictureExternalType+'" data-video-id="'+data.ViewMyExercise.linkToPictureExternalId+'"></div>');
+        }
+      }
+      // alert($(".internalVideo").html());
+      // alert($(".externalVideo").html());
     },
     error : function(data) {
       console.log(data);

@@ -36,6 +36,9 @@ if (!defined('DISTRIX_CDN_FOLDER_CODE_TABLES')) {
 if (!defined('DISTRIX_CDN_FOLDER_RECIPES')) {
   define("DISTRIX_CDN_FOLDER_RECIPES", "recipes");
 }
+if (!defined('DISTRIX_CDN_FOLDER_EXERCISES')) {
+  define("DISTRIX_CDN_FOLDER_EXERCISES", "exercises");
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                VIDEOS                                                       //
