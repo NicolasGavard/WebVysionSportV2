@@ -29,14 +29,19 @@ include(__DIR__ . "/_version.php");
 	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>src/plugins/cropperjs/dist/cropper.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-DropZone css -->
 	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>src/plugins/dropzone/src/dropzone.css?v=<?php echo APP_VERSION;?>">
-	<!-- bootstrap-tagsinput css -->
-	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css?v=<?php echo APP_VERSION;?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>vendors/styles/style.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-colorPicker css -->
 	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>src/plugins/jquery-asColorPicker/dist/css/asColorPicker.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-wizardStep css -->
 	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>src/plugins/jquery-steps/jquery.steps.css?v=<?php echo APP_VERSION;?>">
 	<!-- bootstrap-video css -->
 	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>src/plugins/plyr/dist/plyr.css?v=<?php echo APP_VERSION;?>">
+	<!-- switchery css -->
+	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>src/plugins/switchery/switchery.min.css?v=<?php echo APP_VERSION;?>">
+	<!-- bootstrap-tagsinput css -->
+	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css?v=<?php echo APP_VERSION;?>">
+	<!-- bootstrap-touchspin css -->
+	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.css?v=<?php echo APP_VERSION;?>">
+	<!-- style css -->
+	<link rel="stylesheet" type="text/css" href="<?php echo FRONT_PATH;?>vendors/styles/style.css?v=<?php echo APP_VERSION;?>">
 </head>
 <body>

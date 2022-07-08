@@ -91,12 +91,50 @@
                     </div>
                   </div>
                   
-                  <div class="add_title">
-                    <div class="col-md-12 col-sm-12">
-                      <div class="form-group">
-                        <label><?php echo $page_name; ?></label>
-                        <input class="form-control name" id="name" placeholder="<?php echo $page_name; ?>" type="text" name="name">
-                        <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                  <div class="add_title col-md-12 col-sm-12">
+                    <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <input type="checkbox" checked class="switch-btn internalVideo" data-size="small" data-color="#a70000">
+                          <label><?php echo $page_internal_video_title; ?></label>
+                          
+                          <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Text</label>
+                            <div class="col-sm-12 col-md-10">
+                              <input class="form-control name" id="name" type="file" name="name">
+                              <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                            </div>
+                          </div>
+                          
+                          
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <input type="checkbox" class="switch-btn internalAudio" data-size="small" data-color="#a70000">
+                          <label><?php echo $page_internal_audio_title; ?></label>
+                          <input class="form-control name" id="name" type="file" name="name">
+                          <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <input type="checkbox" class="switch-btn externalVideo" data-size="small" data-color="#a70000">
+                          <label><?php echo $page_external_video_title; ?></label>
+                          <input class="form-control name" id="name" placeholder="<?php echo $page_name; ?>" type="text" name="name">
+                          <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                          <input type="checkbox" class="switch-btn externalAudio" data-size="small" data-color="#a70000">
+                          <label><?php echo $page_external_audio_title; ?></label>
+                          <input class="form-control name" id="name" placeholder="<?php echo $page_name; ?>" type="text" name="name">
+                          <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                        </div>
                       </div>
                     </div>
                   </div>

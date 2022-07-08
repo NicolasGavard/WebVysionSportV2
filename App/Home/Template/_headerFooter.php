@@ -72,7 +72,7 @@
     <script src="<?php echo FRONT_PATH;?>vendors/scripts/core.js?v=<?php echo APP_VERSION;?>"></script>
     <script src="<?php echo FRONT_PATH;?>vendors/scripts/script.min.js?v=<?php echo APP_VERSION;?>"></script>
     <script src="<?php echo FRONT_PATH;?>vendors/scripts/process.js?v=<?php echo APP_VERSION;?>"></script>
-    <!-- <script src="../../vendors/scripts/layout-settings.js?v=<?php echo APP_VERSION;?>"></script> -->
+    <!-- <script src="../../vendors/scripts/layout-settings.js?v=<?php //echo APP_VERSION;?>"></script> -->
     
     <!-- js -->
     <script src="<?php echo FRONT_PATH;?>src/plugins/apexcharts/apexcharts.min.js?v=<?php echo APP_VERSION;?>"></script>
@@ -83,8 +83,6 @@
     <script src="<?php echo FRONT_PATH;?>src/plugins/datatables/js/responsive.bootstrap4.min.js?v=<?php echo APP_VERSION;?>"></script>
     <!-- bootstrap-cropper js -->
     <script src="<?php echo FRONT_PATH;?>src/plugins/cropperjs/dist/cropper.js?v=<?php echo APP_VERSION;?>"></script>
-    <!-- bootstrap-tagsinput js -->
-	  <script src="<?php echo FRONT_PATH;?>src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js?v=<?php echo APP_VERSION;?>"></script>
     <!-- add sweet alert js & css in footer -->
     <script src="<?php echo FRONT_PATH;?>src/plugins/sweetalert2/sweetalert2.all.js?v=<?php echo APP_VERSION;?>"></script>
     <script src="<?php echo FRONT_PATH;?>src/plugins/sweetalert2/sweet-alert.init.js?v=<?php echo APP_VERSION;?>"></script>
@@ -119,6 +117,13 @@
       <!-- bootstrap-Video js -->
       <script src="<?php echo FRONT_PATH;?>src/plugins/plyr/dist/plyr.js"></script>
 	    <script src="https://cdn.shr.one/1.0.1/shr.js"></script>
+      <!-- switchery js -->
+      <script src="<?php echo FRONT_PATH;?>src/plugins/switchery/switchery.min.js?v=<?php echo APP_VERSION;?>"></script>
+      <!-- bootstrap-tagsinput js -->
+      <script src="<?php echo FRONT_PATH;?>src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js?v=<?php echo APP_VERSION;?>"></script>
+      <!-- bootstrap-touchspin js -->
+	    <script src="<?php echo FRONT_PATH;?>src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js?v=<?php echo APP_VERSION;?>"></script>
+      <script src="<?php echo FRONT_PATH;?>vendors/scripts/advanced-components.js?v=<?php echo APP_VERSION;?>"></script>
     <?php } ?>
 
     <!-- js DistriX -->

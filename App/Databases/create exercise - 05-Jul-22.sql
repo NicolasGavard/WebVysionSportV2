@@ -5,11 +5,12 @@ CREATE TABLE `exercise` (
   `code` varchar(80) NOT NULL,
   `name` varchar(200) NOT NULL,
   `idexercisetype` int unsigned NOT NULL,
-  `linktopictureinternalposter` varchar(50) NOT NULL,
-  `linktopictureinternal` varchar(150) NOT NULL,
-  `linktopictureexternaltype` varchar(20) NOT NULL,
-  `linktopictureexternalid` varchar(20) NOT NULL,
-  `linktopictureexternal` varchar(150) NOT NULL,
+  `isaudio` int unsigned NOT NULL,
+  `isvideo` int unsigned NOT NULL,
+  `playertype` varchar(20),
+  `playerid` varchar(20),
+  `linktopictureposter` varchar(150),
+  `linktopicture` varchar(150),
   `size` int unsigned NOT NULL,
   `type` varchar(150) NOT NULL,
   `description` varchar(150) NOT NULL,
@@ -19,10 +20,11 @@ CREATE TABLE `exercise` (
   UNIQUE KEY `indcodeunique` (`idusercoach`,`code`) USING BTREE
 ) ENGINE=InnoDB COMMENT='Exercise' DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
 
-INSERT INTO exercise(id,idusercoach,code,name,idexercisetype,linktopictureinternalposter,linktopictureinternal,linktopictureexternaltype,linktopictureexternalid,linktopictureexternal,size,type,description,elemstate,timestamp) VALUES 
-(1,1,'EXO1','Exercise 1',1,'videoExercice.png','videoExercice.mp4','','','',0,'','Desc Exo. 1',0,0),
-(2,1,'EXO2','Exercise 2',2,'','','youtube','bTqVqk7FSmY','',0,'','Desc Exo. 2',0,0),
-(3,1,'EXO3','Exercise 3',2,'','','','','videoExercice.mp4',0,'','Desc Exo. 3',0,0);
+INSERT INTO exercise(id,idusercoach,code,name,idexercisetype,isaudio,isvideo,playertype,playerid,linktopictureposter,linktopicture,size,type,description,elemstate,timestamp) VALUES 
+(1,1,'EXO1','Exercise 1',1,0,1,'','','videoExercice.png','videoExercice.mp4',13,'video/mp4','Desc Exo. 1',0,0),
+(2,1,'EXO2','Exercise 2',2,0,1,'youtube','bTqVqk7FSmY','','',0,'','Desc Exo. 2',0,0),
+(3,1,'EXO3','Exercise 3',3,0,1,'vimeo','143418951','','',0,'','Desc Exo. 3',0,0),
+(4,1,'EXO4','Exercise 4',3,1,0,'','','','videoExercice.mp3',14,'audio/mp3','Desc Exo. 4',0,0);
 
 -- PRODUCTION   : 
 -- VALIDATION   : 
