@@ -11,7 +11,7 @@ class ExerciseStor {
 //=============================================================================
 //=============================================================================
   const TABLE_NAME = "exercise";
-  const SELECT = 'SELECT id,idusercoach,code,name,idexercisetype,linktopictureinternalposter,linktopictureinternal,linktopictureexternaltype,linktopictureexternalid,linktopictureexternal,size,type,description,elemstate,timestamp';
+  const SELECT = 'SELECT id,idusercoach,code,name,idexercisetype,isaudio,isvideo,playertype,playerid,linktopicture,linktomedia,size,type,description,elemstate,timestamp';
   const FROM = ' FROM exercise';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
@@ -100,7 +100,7 @@ class ExerciseStor {
       $request .= " WHERE idusercoach = :index0";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['index0'=>  $dataIn->getIdUserCoach()]);
-      if (self::SHOW_FIND_REQUEST) {
+      if (self::SHOW_READ_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
@@ -109,7 +109,7 @@ class ExerciseStor {
     }
     return array($list, count($list));
   }
-  // End of idUserCoach
+  // End of IdUserCoach
 
   public static function findByIdUserCoachCode(ExerciseStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
@@ -133,7 +133,7 @@ class ExerciseStor {
     }
     return $data;
   }
-  // End of idUserCoachCode
+  // End of IdUserCoachCode
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
@@ -183,11 +183,12 @@ class ExerciseStor {
       $request .= "code= :code,";
       $request .= "name= :name,";
       $request .= "idexercisetype= :idexercisetype,";
-      $request .= "linktopictureinternalposter= :linktopictureinternalposter,";
-      $request .= "linktopictureexternal= :linktopictureexternal,";
-      $request .= "linktopictureinternaltype= :linktopictureinternaltype,";
-      $request .= "linktopictureinternalid= :linktopictureinternalid,";
-      $request .= "linktopictureinternal= :linktopictureinternal,";
+      $request .= "isaudio= :isaudio,";
+      $request .= "isvideo= :isvideo,";
+      $request .= "playertype= :playertype,";
+      $request .= "playerid= :playerid,";
+      $request .= "linktopicture= :linktopicture,";
+      $request .= "linktoMedia= :linktoMedia,";
       $request .= "size= :size,";
       $request .= "type= :type,";
       $request .= "description= :description,";
@@ -201,11 +202,12 @@ class ExerciseStor {
       $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
       $params["idexercisetype"] = $data->getIdExerciseType();
-      $params["linktopictureinternalposter"] = $data->getLinkToPictureInternalPoster();
-      $params["linktopictureinternal"] = $data->getLinkToPictureInternal();
-      $params["linktopictureexternaltype"] = $data->getLinkToPictureExternalType();
-      $params["linktopictureexternalid"] = $data->getLinkToPictureExternalId();
-      $params["linktopictureexternal"] = $data->getLinkToPictureExternal();
+      $params["isaudio"] = $data->getIsAudio();
+      $params["isvideo"] = $data->getIsVideo();
+      $params["playertype"] = $data->getPlayerType();
+      $params["playerid"] = $data->getPlayerId();
+      $params["linktopicture"] = $data->getLinkToPicture();
+      $params["linktomedia"] = $data->getLinkToMedia();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
       $params["description"] = $data->getDescription();
@@ -324,15 +326,18 @@ class ExerciseStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO exercise(";
-      $request .= "idusercoach,code,name,idexercisetype,linktopictureinternalposter,linktopictureinternal,linktopictureexternaltype,linktopictureexternalid,linktopictureexternal,size,type,description,elemstate,timestamp)";
+      $request .= "idusercoach,code,name,idexercisetype,isaudio,isvideo,playertype,playerid,linktopicture,linktomedia,size,type,description,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":idusercoach,";
       $request .= ":code,";
       $request .= ":name,";
       $request .= ":idexercisetype,";
-      $request .= ":linktopictureinternalposter";
-      $request .= ":linktopictureinternal";
-      $request .= ":linktopictureexternal,";
+      $request .= ":isaudio,";
+      $request .= ":isvideo,";
+      $request .= ":playertype,";
+      $request .= ":playerid,";
+      $request .= ":linktopicture,";
+      $request .= ":linktopicture,";
       $request .= ":size,";
       $request .= ":type,";
       $request .= ":description,";
@@ -343,11 +348,12 @@ class ExerciseStor {
       $params["code"] = $data->getCode();
       $params["name"] = $data->getName();
       $params["idexercisetype"] = $data->getIdExerciseType();
-      $params["linktopictureinternalposter"] = $data->getLinkToPictureInternalPoster();
-      $params["linktopictureinternal"] = $data->getLinkToPictureInternal();
-      $params["linktopictureexternaltype"] = $data->getLinkToPictureExternalType();
-      $params["linktopictureexternalid"] = $data->getLinkToPictureExternalId();
-      $params["linktopictureexternal"] = $data->getLinkToPictureExternal();
+      $params["isaudio"] = $data->getIsAudio();
+      $params["isvideo"] = $data->getIsVideo();
+      $params["playertype"] = $data->getPlayerType();
+      $params["playerid"] = $data->getPlayerId();
+      $params["linktopicture"] = $data->getLinkToPicture();
+      $params["linktomedia"] = $data->getLinkToMedia();
       $params["size"] = $data->getSize();
       $params["type"] = $data->getType();
       $params["description"] = $data->getDescription();

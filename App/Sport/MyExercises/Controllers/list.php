@@ -16,12 +16,13 @@ include(__DIR__ . "/../../../CodeTables/SportBodyMuscle/Data/DistriXCodeTableBod
 include(__DIR__ . "/../../../CodeTables/SportBodyMember/Data/DistriXCodeTableBodyMembersMusclesData.php");
 include(__DIR__ . "/../../../CodeTables/SportExerciseType/Data/DistriXCodeTableExerciseTypeNameData.php");
 
-$listUsers                = [];
-$listMyExercises          = [];
-$listExercisesTypes       = [];
-$listBodyMembersName      = [];
-$listBodyMuscles          = [];
-$listMyExercisesFormFront = [];
+$listUsers                      = [];
+$listMyExercises                = [];
+$listExercisesTypes             = [];
+$listBodyMembersName            = [];
+$listBodyMuscles                = [];
+$listMyExerciseMusclesFormFront = [];
+$listMyExercisesFormFront       = [];
 
 if (!empty($_POST) && isset($_POST)) {
     // List Users
@@ -130,35 +131,20 @@ if (!empty($_POST) && isset($_POST)) {
   }
 
   foreach ($listMyExercises as $exercise) {
-    $distriXSportMyExerciseData = new DistriXSportMyExerciseData();
-
-    $distriXSportMyExerciseData->setId($exercise->getId());
-    $distriXSportMyExerciseData->setIdUserCoach($exercise->getIdUserCoach());
     foreach ($listUsers as $user) {
       if ($exercise->getIdUserCoach() == $user->getId()){
-        $distriXSportMyExerciseData->setNameUserCoach($user->getName());
-        $distriXSportMyExerciseData->setFirstNameUserCoach($user->getFirstName());
+        $exercise->setNameUserCoach($user->getName());
+        $exercise->setFirstNameUserCoach($user->getFirstName());
         break;
       }
     }
 
     foreach ($listExercisesTypes as $exerciseType) {
       if ($exerciseType->getIdExerciseType() == $exercise->getIdExerciseType()){
-        $distriXSportMyExerciseData->setNameExerciseType($exerciseType->getName());
+        $exercise->setNameExerciseType($exerciseType->getName());
         break;
       }
     }
-    
-    $distriXSportMyExerciseData->setCode($exercise->getCode());
-    $distriXSportMyExerciseData->setName($exercise->getName());
-    $distriXSportMyExerciseData->setLinkToPictureInternalPoster($exercise->getLinkToPictureInternalPoster());
-    $distriXSportMyExerciseData->setLinkToPictureInternal($exercise->getLinkToPictureInternal());
-    $distriXSportMyExerciseData->setLinkToPictureExternalType($exercise->getLinkToPictureExternalType());
-    $distriXSportMyExerciseData->setLinkToPictureExternalId($exercise->getLinkToPictureExternalId());
-    $distriXSportMyExerciseData->setLinkToPictureExternal($exercise->getLinkToPictureExternal());
-    $distriXSportMyExerciseData->setSize($exercise->getSize());
-    $distriXSportMyExerciseData->setType($exercise->getType());
-    $distriXSportMyExerciseData->setDescription($exercise->getDescription());
     
     $exerciseMuscles = [];
     foreach ($listMyExerciseMuscles as $listExerciseMuscles) {
@@ -178,11 +164,8 @@ if (!empty($_POST) && isset($_POST)) {
         $exerciseMuscles[] = $distriXSportMyExercisesMusclesData;
       }
     }
-    $distriXSportMyExerciseData->setExerciseMuscles($exerciseMuscles);
-
-    $distriXSportMyExerciseData->setElemState($exercise->getElemState());
-    $distriXSportMyExerciseData->setTimestamp($exercise->getTimestamp());
-    $listMyExercisesFormFront[] = $distriXSportMyExerciseData;
+    $exercise->setExerciseMuscles($exerciseMuscles);
+    $listMyExercisesFormFront[] = $exercise;
   }
 }
 

@@ -5,6 +5,9 @@ if (!defined('DISTRIX_CDN_GROUP_IMAGES')) {
 if (!defined('DISTRIX_CDN_GROUP_MOVIES')) {
   define("DISTRIX_CDN_GROUP_MOVIES", "DISTRIX_CDN_GROUP_MOVIES");
 }
+if (!defined('DISTRIX_CDN_GROUP_AUDIOS')) {
+  define("DISTRIX_CDN_GROUP_AUDIOS", "DISTRIX_CDN_GROUP_AUDIOS");
+}
 if (!defined('DISTRIX_CDN_FOLDER_SEND_TO')) {
   define("DISTRIX_CDN_FOLDER_SEND_TO", "Send To Service");
 }

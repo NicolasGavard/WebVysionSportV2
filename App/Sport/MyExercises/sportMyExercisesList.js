@@ -55,6 +55,13 @@ $(".AddNewMyExercise").on('click', function() {
   $('.AddMyExerciseFormId').val(0);
   $('.AddMyExerciseFormIdUserCoatch').val(localStorage.getItem("idUser"));
   $('.AddMyExerciseFormName').val('');
+  
+  $('.AddMyExerciseFormMuscles').prop('selected', false);
+  $('.select2-selection__rendered').html('');
+
+  $('.AddMyExerciseFormNameExercicesTypes option[value="0"]').prop('selected', true);
+  $('#select2-listExercisesTypes-container').html('Choix');
+  
   $('.AddMyExerciseFormDecription').val('');
   $('.AddMyExerciseFormTimestamp').val(0);
   $('.AddMyExerciseFormStatut').val(0);
@@ -63,12 +70,7 @@ $(".AddNewMyExercise").on('click', function() {
 $(".btnAddMyExercise").on('click', function() {
   $(".page_food_brand_update_title").removeClass("d-none");
   $('.AddMyExercisesFormIdUserCoatch').val(localStorage.getItem("idUser"));
-  
-  var template        = $('.listMyTemplates').val();
-  var student         = $('.listStudents').val();
-  var dateStart       = $('.dateStart').val();
-  var dateStartSplit  = $(".dateStart").val().split("/")
-  
+   
   if (template != 0 && student != 0 && dateStart != '' ){
     $.ajax({
       url : 'Controllers/save.php',
@@ -166,11 +168,19 @@ function ListMyExercise(elemState){
         listMuscles = '-';
       }
 
+      var infoMedia = ' - ';
+      if (val.isAudio) {
+        infoMedia = '<div class="row"><div class="col-md-12 col-sm-12"><i class="dw dw-music" aria-hidden="true"></i></div></div>';
+      } else if (val.isVideo) {
+        infoMedia = '<div class="row"><div class="col-md-12 col-sm-12"><i class="dw dw-video-player" aria-hidden="true"></i></div></div>';
+      }
+
       const line =  '<tr>'+
                     ' <td style="padding:1rem;">&nbsp;&nbsp;'+val.name+'</td>'+
                     ' <td>'+listMuscles+'</td>'+
                     // ' <td>'+val.firstNameUserStudent+' '+val.nameUserStudent+'</td>'+
                     ' <td>'+val.nameExerciseType+'</td>'+
+                    ' <td>'+infoMedia+'</td>'+
                     ' <td>'+val.description+'</td>'+
                     ' <td>'+
                     '   <div class="dropdown">'+
@@ -224,17 +234,21 @@ function ViewMyExercise(id, name){
       });
 
       $(".video").empty();
-      if (data.ViewMyExercise.linkToPictureInternalPoster != '') {
-        $(".video").html('<video style="max-width:700px" poster="'+data.ViewMyExercise.linkToPictureInternalPoster+'" controls crossorigin><source src="'+data.ViewMyExercise.linkToPictureInternal+'" type="video/mp4"></source>');
-      } else {
-        if (data.ViewMyExercise.linkToPictureExternalId == '') {
-          $(".video").html('<video style="max-width:700px" poster="'+data.ViewMyExercise.linkToPictureInternalPoster+'" controls crossorigin><source src="'+data.ViewMyExercise.linkToPictureExternal+'" type="video/mp4"></source>');
+      if (data.ViewMyExercise.isAudio) {
+        $(".video").html('<audio controls><source src="'+data.ViewMyExercise.linkToMedia+'" type="'+data.ViewMyExercise.type+'">Your browser does not support the audio element.</audio>');
+      } else if (data.ViewMyExercise.isVideo) {
+        if (data.ViewMyExercise.linkToMedia != '') {
+          $(".video").html('<video poster="'+data.ViewMyExercise.linkToPicture+'" controls crossorigin><source src="'+data.ViewMyExercise.linkToMedia+'" type="'+data.ViewMyExercise.type+'"></video>');
         } else {
-          $(".video").html('<div class="AddMyExerciseFormExternalVideo" data-type="'+data.ViewMyExercise.linkToPictureExternalType+'" data-video-id="'+data.ViewMyExercise.linkToPictureExternalId+'"></div>');
+          $(".video").html('<div class="container"><div data-type="'+data.ViewMyExercise.playerType+'" data-video-id="'+data.ViewMyExercise.playerId+'"></div></div>');
         }
       }
-      // alert($(".internalVideo").html());
-      // alert($(".externalVideo").html());
+
+      plyr.setup({
+        tooltips: {
+          controls: !0
+        },
+      });
     },
     error : function(data) {
       console.log(data);

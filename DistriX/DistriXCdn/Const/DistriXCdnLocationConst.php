@@ -7,6 +7,9 @@ switch (DISTRIX_ENV) {
     if (!defined('DISTRIX_CDN_URL_MOVIES')) {
       define("DISTRIX_CDN_URL_MOVIES", "http://localhost/WebVysionSportV2/DistriX/DistriXCdn/Sent/Movies/");
     }
+    if (!defined('DISTRIX_CDN_URL_AUDIOS')) {
+      define("DISTRIX_CDN_URL_AUDIOS", "http://localhost/WebVysionSportV2/DistriX/DistriXCdn/Sent/Audios/");
+    }
     if (!defined('DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES')) {
       define("DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES", "../Sent/Images/");
     }
@@ -20,6 +23,9 @@ switch (DISTRIX_ENV) {
     }
     if (!defined('DISTRIX_CDN_URL_MOVIES')) {
       define("DISTRIX_CDN_URL_MOVIES", "https://www.pazzidjango.com/WebVysionSportV2/DistriX/DistriXCdn/Sent/Movies/");
+    }
+    if (!defined('DISTRIX_CDN_URL_AUDIOS')) {
+      define("DISTRIX_CDN_URL_AUDIOS", "https://www.pazzidjango.com/WebVysionSportV2/DistriX/DistriXCdn/Sent/Audios/");
     }
     if (!defined('DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES')) {
       define("DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES", "../../Images/");
@@ -35,6 +41,9 @@ switch (DISTRIX_ENV) {
     if (!defined('DISTRIX_CDN_URL_MOVIES')) {
       define("DISTRIX_CDN_URL_MOVIES", "https://www.pazzidjango.com/WebVysionSportV2/DistriX/DistriXCdn/Sent/Movies/");
     }
+    if (!defined('DISTRIX_CDN_URL_AUDIOS')) {
+      define("DISTRIX_CDN_URL_AUDIOS", "https://www.pazzidjango.com/WebVysionSportV2/DistriX/DistriXCdn/Sent/Audios/");
+    }
     if (!defined('DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES')) {
       define("DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES", "../../Images/");
     }
@@ -48,6 +57,9 @@ switch (DISTRIX_ENV) {
     }
     if (!defined('DISTRIX_CDN_URL_MOVIES')) {
       define("DISTRIX_CDN_URL_MOVIES", "https://www.pazziman.com/WebVysionSportV2/DistriX/DistriXCdn/Sent/Movies/");
+    }
+    if (!defined('DISTRIX_CDN_URL_AUDIOS')) {
+      define("DISTRIX_CDN_URL_AUDIOS", "https://www.pazziman.com/WebVysionSportV2/DistriX/DistriXCdn/Sent/Audios/");
     }
     if (!defined('DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES')) {
       define("DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES", "../../Images/");
@@ -63,11 +75,17 @@ switch (DISTRIX_ENV) {
     if (!defined('DISTRIX_CDN_URL_MOVIES')) {
       define("DISTRIX_CDN_URL_MOVIES", "https://www.distrix.cloud/WebVysionSport/DistriX/DistriXCdn/Sent/Movies/");
     }
+    if (!defined('DISTRIX_CDN_URL_AUDIOS')) {
+      define("DISTRIX_CDN_URL_AUDIOS", "https://www.distrix.cloud/WebVysionSport/DistriX/DistriXCdn/Sent/Audios/");
+    }
     if (!defined('DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES')) {
       define("DISTRIX_CDN_URL_UP_TO_FOLDER_IMAGES", "../../../Images/");
     }
     if (!defined('DISTRIX_CDN_URL_UP_TO_FOLDER_MOVIES')) {
       define("DISTRIX_CDN_URL_UP_TO_FOLDER_MOVIES", "../../../Movies/");
+    }
+    if (!defined('DISTRIX_CDN_URL_UP_TO_FOLDER_AUDIOS')) {
+      define("DISTRIX_CDN_URL_UP_TO_FOLDER_AUDIOS", "../../../Audios/");
     }
     break;
   default:

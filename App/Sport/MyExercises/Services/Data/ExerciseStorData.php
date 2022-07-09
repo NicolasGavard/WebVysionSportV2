@@ -8,11 +8,12 @@ class ExerciseStorData extends DistriXSvcAppData {
   protected $code;
   protected $name;
   protected $idexercisetype;
-  protected $linktopictureinternalposter;
-  protected $linktopictureinternal;
-  protected $linktopictureexternaltype;
-  protected $linktopictureexternalid;
-  protected $linktopictureexternal;
+  protected $isaudio;
+  protected $isvideo;
+  protected $playertype;
+  protected $playerid;
+  protected $linktopicture;
+  protected $linktomedia;
   protected $size;
   protected $type;
   protected $description;
@@ -25,11 +26,12 @@ class ExerciseStorData extends DistriXSvcAppData {
       $this->code = "";
       $this->name = "";
       $this->idexercisetype = 0;
-      $this->linktopictureinternalposter = "";
-      $this->linktopictureinternal = "";
-      $this->linktopictureexternaltype = "";
-      $this->linktopictureexternalid = "";
-      $this->linktopictureexternal = "";
+      $this->isaudio = 0;
+      $this->isvideo = 0;
+      $this->playertype = "";
+      $this->playerid = "";
+      $this->linktopicture = "";
+      $this->linktomedia = "";
       $this->size = 0;
       $this->type = "";
       $this->description = "";
@@ -42,11 +44,12 @@ class ExerciseStorData extends DistriXSvcAppData {
   public function getCode():string { return $this->code; }
   public function getName():string { return $this->name; }
   public function getIdExerciseType():int { return $this->idexercisetype; }
-  public function getLinkToPictureInternalPoster():string { return $this->linktopictureinternalposter; }
-  public function getLinkToPictureInternal():string { return $this->linktopictureinternal; }
-  public function getLinkToPictureExternalType():string { return $this->linktopictureexternaltype; }
-  public function getLinkToPictureExternalId():string { return $this->linktopictureexternalid; }
-  public function getLinkToPictureExternal():string { return $this->linktopictureexternal; }
+  public function getIsAudio():int { return $this->isaudio; }
+  public function getIsVideo():int { return $this->isvideo; }
+  public function getPlayerType():string { return $this->playertype; }
+  public function getPlayerId():string { return $this->playerid; }
+  public function getLinkToPicture():string { return $this->linktopicture; }
+  public function getLinkToMedia():string { return $this->linktomedia; }
   public function getSize():int { return $this->size; }
   public function getType():string { return $this->type; }
   public function getDescription():string { return $this->description; }
@@ -61,11 +64,12 @@ class ExerciseStorData extends DistriXSvcAppData {
   public function setCode(string $code) { $this->code = $code; }
   public function setName(string $name) { $this->name = $name; }
   public function setIdExerciseType(int $idExerciseType) { $this->idexercisetype = $idExerciseType; }
-  public function setLinkToPictureInternalPoster(string $linkToPictureInternalPoster) { $this->linktopictureinternalposter = $linkToPictureInternalPoster; }
-  public function setLinkToPictureInternal(string $linkToPictureInternal) { $this->linktopictureinternal = $linkToPictureInternal; }
-  public function setLinkToPictureExternalType(string $linkToPictureExternalType) { $this->linktopictureexternaltype = $linkToPictureExternalType; }
-  public function setLinkToPictureExternalId(string $linkToPictureExternalId) { $this->linktopictureexternalid = $linkToPictureExternalId; }
-  public function setLinkToPictureExternal(string $linkToPictureExternal) { $this->linktopictureexternal = $linkToPictureExternal; }
+  public function setIsAudio(int $isAudio) { $this->isaudio = $isAudio; }
+  public function setIsVideo(int $isVideo) { $this->isvideo = $isVideo; }
+  public function setPlayerType(string $playerType) { $this->playertype = $playerType; }
+  public function setPlayerId(string $playerId) { $this->playerid = $playerId; }
+  public function setLinkToPicture(string $linkToPicture) { $this->linktopicture = $linkToPicture; }
+  public function setLinkToMedia(string $linkToMedia) { $this->linktomedia = $linkToMedia; }
   public function setSize(int $size) { $this->size = $size; }
   public function setType(string $type) { $this->type = $type; }
   public function setDescription(string $description) { $this->description = $description; }

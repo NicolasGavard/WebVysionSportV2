@@ -36,6 +36,7 @@
                   <th width="15%" class="table-plus"><span><?php echo $page_name; ?></span></th>
                   <th width="20%"><span><?php echo $page_muscles; ?></span></th>
                   <th width="25%"><span><?php echo $page_exercise_type; ?></span></th>
+                  <th width="10%"><span><?php echo $page_media_type; ?></span></th>
                   <th width="30%"><span><?php echo $page_description; ?></span></th>
                   <th width="10%" class="datatable-nosort"><span><?php echo $page_action; ?></span></th>
 								</tr>
@@ -91,54 +92,108 @@
                     </div>
                   </div>
                   
-                  <div class="add_title col-md-12 col-sm-12">
-                    <div class="row">
-                      <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                          <input type="checkbox" checked class="switch-btn internalVideo" data-size="small" data-color="#a70000">
-                          <label><?php echo $page_internal_video_title; ?></label>
-                          
-                          <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Text</label>
-                            <div class="col-sm-12 col-md-10">
-                              <input class="form-control name" id="name" type="file" name="name">
-                              <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                  <div class="col-md-12 col-sm-12 padding-bottom-30 add_title">
+                    
+                    <div id="accordion">
+                      <div class="card">
+                        <div class="card-header">
+                          <button class="btn btn-block" data-toggle="collapse" data-target="#<?php echo $page_video_title; ?>">
+                          <i class="dw dw-video-player" aria-hidden="true"></i>
+                            <?php echo $page_video_title; ?>
+                          </button>
+                        </div>
+                        <div id="<?php echo $page_video_title; ?>" class="collapse show" data-parent="#accordion">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                  <label><?php echo $page_player_type; ?></label>
+                                  <select class="custom-select2 form-control AddMyExerciseFormPlayerType" id="playerType" name="playerType" style="width: 100%; height: 38px;">
+                                    <option value="<?php echo strtolower($page_player_type_youtube); ?>"><?php echo $page_player_type_youtube; ?></option>
+                                    <option value="<?php echo strtolower($page_player_type_vimeo); ?>"><?php echo $page_player_type_vimeo; ?></option>
+                                    <option value=""><?php echo $page_player_type_other; ?></option>
+                                  </select>
+                                  <div class="form-control-feed back danger-player_type  has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_player_type; ?> </div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                  <label><?php echo $page_player_id; ?></label>
+                                  <input class="form-control AddMyExerciseFormPlayerId" id="playerId" placeholder="<?php echo $page_player_id; ?>" type="text" name="playerId">
+                                  <div class="form-control-feed back danger-player_id has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_player_id; ?> </div>
+                                </div>
+                              </div>
+                              
+                              <hr width=45%>&nbsp;&nbsp;<?php echo $page_choice_or; ?>&nbsp;&nbsp;<hr width=45%>
+
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                  <label><?php echo $page_linkToPicture; ?></label>
+                                  <input class="form-control AddMyExerciseFormLinkToPicture" id="linkToPicture" placeholder="<?php echo $page_linkToPicture; ?>" type="file" name="linkToPicture">
+                                  <div class="form-control-feed back danger-link_to_picture has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_link_to_picture; ?> </div>
+                                </div>
+                              </div>
+
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                  <label><?php echo $page_linkToMedia; ?></label>
+                                  <input class="form-control AddMyExerciseFormLinkToMedia" id="linkToMedia" placeholder="<?php echo $page_linkToMedia; ?>" type="file" name="linkToMedia">
+                                  <div class="form-control-feed back danger-link_to_media has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_link_to_media; ?> </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                          
-                          
                         </div>
                       </div>
-
-                      <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                          <input type="checkbox" class="switch-btn internalAudio" data-size="small" data-color="#a70000">
-                          <label><?php echo $page_internal_audio_title; ?></label>
-                          <input class="form-control name" id="name" type="file" name="name">
-                          <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                      <div class="card">
+                        <div class="card-header">
+                          <button class="btn btn-block collapsed" data-toggle="collapse" data-target="#<?php echo $page_audio_title; ?>">
+                            <i class="dw dw-music" aria-hidden="true"></i>
+                            <?php echo $page_audio_title; ?>
+                          </button>
                         </div>
-                      </div>
+                        <div id="<?php echo $page_audio_title; ?>" class="collapse" data-parent="#accordion">
+                          <div class="card-body">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                  <label><?php echo $page_player_type; ?></label>
+                                  <select class="custom-select2 form-control AddMyExerciseFormPlayerType" id="playerType" name="playerType" style="width: 100%; height: 38px;">
+                                    <option value="<?php echo strtolower($page_player_type_youtube); ?>"><?php echo $page_player_type_youtube; ?></option>
+                                    <option value="<?php echo strtolower($page_player_type_vimeo); ?>"><?php echo $page_player_type_vimeo; ?></option>
+                                    <option value=""><?php echo $page_player_type_other; ?></option>
+                                  </select>
+                                  <div class="form-control-feed back danger-player_type  has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_player_type; ?> </div>
+                                </div>
+                              </div>
 
-                      <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                          <input type="checkbox" class="switch-btn externalVideo" data-size="small" data-color="#a70000">
-                          <label><?php echo $page_external_video_title; ?></label>
-                          <input class="form-control name" id="name" placeholder="<?php echo $page_name; ?>" type="text" name="name">
-                          <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
-                        </div>
-                      </div>
+                              <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                  <label><?php echo $page_player_id; ?></label>
+                                  <input class="form-control AddMyExerciseFormPlayerId" id="playerId" placeholder="<?php echo $page_player_id; ?>" type="text" name="playerId">
+                                  <div class="form-control-feed back danger-player_id has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_player_id; ?> </div>
+                                </div>
+                              </div>
 
-                      <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                          <input type="checkbox" class="switch-btn externalAudio" data-size="small" data-color="#a70000">
-                          <label><?php echo $page_external_audio_title; ?></label>
-                          <input class="form-control name" id="name" placeholder="<?php echo $page_name; ?>" type="text" name="name">
-                          <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                              <hr width=45%>&nbsp;&nbsp;<?php echo $page_choice_or; ?>&nbsp;&nbsp;<hr width=45%>
+
+                              <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                  <label><?php echo $page_linkToMedia; ?></label>
+                                  <input class="form-control AddMyExerciseFormLinkToMedia" id="linkToMedia" placeholder="<?php echo $page_linkToMedia; ?>" type="file" name="linkToMedia">
+                                  <div class="form-control-feed back danger-link_to_media has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_link_to_media; ?> </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                
+                  
                   <div class="col-md-12 col-sm-12 padding-bottom-30 update_title">
                     <div class="col-md-12 col-sm-12 video"></div>
                   </div>

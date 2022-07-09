@@ -14,30 +14,37 @@ if (is_null($dbConnection->getError())) {
   list($exerciseStorData, $jsonError)   = ExerciseStorData::getJsonData($dataSvc->getParameter("data"));
   $exerciseStor                         = ExerciseStor::read($exerciseStorData->getId(), $dbConnection);
 
-  if ($exerciseStor->getLinkToPictureInternalPoster() != '') {
-    $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_EXERCISES . '/' . $exerciseStor->getLinkToPictureInternalPoster();
-    if ($exerciseStor->getLinkToPictureInternalPoster() == '') {
-      $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_EXERCISES . '/default.png';
-    }
-    $exerciseStor->setLinkToPictureInternalPoster($urlPicture);
-
-    $urlPicture   = DISTRIX_CDN_URL_MOVIES . DISTRIX_CDN_FOLDER_EXERCISES . '/' . $exerciseStor->getLinkToPictureInternal();
-    $exerciseStor->setLinkToPictureInternal($urlPicture);
-  } else {
-    if ($exerciseStor->getLinkToPictureExternalId() == '') {
-      $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_EXERCISES . '/' . $exerciseStor->getLinkToPictureInternalPoster();
-      if ($exerciseStor->getLinkToPictureInternalPoster() == '') {
-        $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_EXERCISES . '/default.png';
+  if ($exerciseStor->getIsAudio()) {
+    if ($exerciseStor->getPlayerType() == '' && $exerciseStor->getPlayerId() == '') {
+      $urlMedia       = DISTRIX_CDN_URL_AUDIOS . DISTRIX_CDN_FOLDER_EXERCISES . '/' . $exerciseStor->getLinkToMedia();
+      $medias_headers = get_headers($urlMedia);
+      if ($exerciseStor->getLinkToMedia() == '' || !$medias_headers || $medias_headers[0] == 'HTTP/1.1 404 Not Found') {
+        $exerciseStor->setLinkToMedia('');
+      } else {
+        $exerciseStor->setLinkToMedia($urlMedia);
       }
-      $exerciseStor->setLinkToPictureInternalPoster($urlPicture);
-
-      $urlPicture   = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_EXERCISES . '/' . $exerciseStor->getLinkToPictureExternal();
-      if ($exerciseStor->getLinkToPictureExternal() == '') {
-        $urlPicture = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_EXERCISES . '/default.png';
-      }
-      $exerciseStor->setLinkToPictureExternal($urlPicture);
     }
-  }
+  } else if ($exerciseStor->getIsVideo()) {
+    if ($exerciseStor->getPlayerType() == '' && $exerciseStor->getPlayerId() == '') {
+      // Picture
+      $urlPicture       = DISTRIX_CDN_URL_IMAGES . DISTRIX_CDN_FOLDER_EXERCISES . '/' . $exerciseStor->getLinkToPicture();
+      $medias_headers = get_headers($urlPicture);
+      if ($exerciseStor->getLinkToPicture() == '' || !$medias_headers || $medias_headers[0] == 'HTTP/1.1 404 Not Found') {
+        $exerciseStor->setLinkToPicture('');
+      } else {
+        $exerciseStor->setLinkToPicture($urlPicture);
+      }
+      
+      // Media
+      $urlMedia       = DISTRIX_CDN_URL_MOVIES . DISTRIX_CDN_FOLDER_EXERCISES . '/' . $exerciseStor->getLinkToMedia();
+      $medias_headers = get_headers($urlMedia);
+      if ($exerciseStor->getLinkToMedia() == '' || !$medias_headers || $medias_headers[0] == 'HTTP/1.1 404 Not Found') {
+        $exerciseStor->setLinkToMedia('');
+      } else {
+        $exerciseStor->setLinkToMedia($urlMedia);
+      }
+    }
+  } 
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
