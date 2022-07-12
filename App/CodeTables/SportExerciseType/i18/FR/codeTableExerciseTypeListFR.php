@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des types d'exercise";
+  $page_title           = "Types d'exercise";
   $page_code            = "Code";
   $page_name            = "Nom";
   $page_translation     = "Traductions";
