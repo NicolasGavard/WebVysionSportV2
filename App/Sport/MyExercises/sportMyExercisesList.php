@@ -108,10 +108,10 @@
                               <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                   <label><?php echo $page_player_type; ?></label>
-                                  <select class="custom-select2 form-control AddMyExerciseFormPlayerType" id="playerType" name="playerType" style="width: 100%; height: 38px;">
+                                  <select class="custom-select2 form-control AddMyExerciseFormVideoPlayerType" id="playerType" name="playerType" style="width: 100%; height: 38px;">
                                     <option value="<?php echo strtolower($page_player_type_youtube); ?>"><?php echo $page_player_type_youtube; ?></option>
                                     <option value="<?php echo strtolower($page_player_type_vimeo); ?>"><?php echo $page_player_type_vimeo; ?></option>
-                                    <option value=""><?php echo $page_player_type_other; ?></option>
+                                    <option value="" selected><?php echo $page_player_type_other; ?></option>
                                   </select>
                                   <div class="form-control-feed back danger-player_type  has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_player_type; ?> </div>
                                 </div>
@@ -120,7 +120,7 @@
                               <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                   <label><?php echo $page_player_id; ?></label>
-                                  <input class="form-control AddMyExerciseFormPlayerId" id="playerId" placeholder="<?php echo $page_player_id; ?>" type="text" name="playerId">
+                                  <input class="form-control AddMyExerciseFormVideoPlayerId" id="playerId" placeholder="<?php echo $page_player_id; ?>" type="text" name="playerId">
                                   <div class="form-control-feed back danger-player_id has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_player_id; ?> </div>
                                 </div>
                               </div>
@@ -130,7 +130,7 @@
                               <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                   <label><?php echo $page_linkToPicture; ?></label>
-                                  <input class="form-control AddMyExerciseFormLinkToPicture" id="linkToPicture" placeholder="<?php echo $page_linkToPicture; ?>" type="file" name="linkToPicture">
+                                  <input class="form-control AddMyExerciseFormVideoLinkToPicture" id="linkToPicture" placeholder="<?php echo $page_linkToPicture; ?>" type="file" name="linkToPicture">
                                   <div class="form-control-feed back danger-link_to_picture has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_link_to_picture; ?> </div>
                                 </div>
                               </div>
@@ -138,7 +138,7 @@
                               <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                   <label><?php echo $page_linkToMedia; ?></label>
-                                  <input class="form-control AddMyExerciseFormLinkToMedia" id="linkToMedia" placeholder="<?php echo $page_linkToMedia; ?>" type="file" name="linkToMedia">
+                                  <input class="form-control AddMyExerciseFormVideoLinkToMedia" id="linkToMedia" placeholder="<?php echo $page_linkToMedia; ?>" type="file" name="linkToMedia">
                                   <div class="form-control-feed back danger-link_to_media has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_link_to_media; ?> </div>
                                 </div>
                               </div>
@@ -160,7 +160,7 @@
                               <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                   <label><?php echo $page_player_type; ?></label>
-                                  <select class="custom-select2 form-control AddMyExerciseFormPlayerType" id="playerType" name="playerType" style="width: 100%; height: 38px;">
+                                  <select class="custom-select2 form-control AddMyExerciseFormAudioPlayerType" id="playerType" name="playerType" style="width: 100%; height: 38px;">
                                     <option value="<?php echo strtolower($page_player_type_youtube); ?>"><?php echo $page_player_type_youtube; ?></option>
                                     <option value="<?php echo strtolower($page_player_type_vimeo); ?>"><?php echo $page_player_type_vimeo; ?></option>
                                     <option value=""><?php echo $page_player_type_other; ?></option>
@@ -172,7 +172,7 @@
                               <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                   <label><?php echo $page_player_id; ?></label>
-                                  <input class="form-control AddMyExerciseFormPlayerId" id="playerId" placeholder="<?php echo $page_player_id; ?>" type="text" name="playerId">
+                                  <input class="form-control AddMyExerciseFormAudioPlayerId" id="playerId" placeholder="<?php echo $page_player_id; ?>" type="text" name="playerId">
                                   <div class="form-control-feed back danger-player_id has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_player_id; ?> </div>
                                 </div>
                               </div>
@@ -182,7 +182,7 @@
                               <div class="col-md-12 col-sm-12">
                                 <div class="form-group">
                                   <label><?php echo $page_linkToMedia; ?></label>
-                                  <input class="form-control AddMyExerciseFormLinkToMedia" id="linkToMedia" placeholder="<?php echo $page_linkToMedia; ?>" type="file" name="linkToMedia">
+                                  <input class="form-control AddMyExerciseFormAudioLinkToMedia" id="linkToMedia" placeholder="<?php echo $page_linkToMedia; ?>" type="file" name="linkToMedia">
                                   <div class="form-control-feed back danger-link_to_media has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_link_to_media; ?> </div>
                                 </div>
                               </div>
