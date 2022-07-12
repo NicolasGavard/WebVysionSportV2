@@ -18,6 +18,7 @@
 				<div class="row align-items-center">
 					<div class="col-md-4">
 						<img src="<?php echo FRONT_PATH;?>vendors/images/banner-img.png" alt="">
+						<!-- <img src="<?php //echo FRONT_PATH;?>images/VysionCoaching.png" alt=""> -->
 					</div>
 					<div class="col-md-8">
 						<h4 class="font-20 weight-500 mb-10 text-capitalize">
