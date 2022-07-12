@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des catégories d'aliments";
+  $page_title           = "Catégories d'aliments";
   $page_code            = "Code";
   $page_name            = "Nom";
   $page_translation     = "Traductions";

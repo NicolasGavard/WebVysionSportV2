@@ -1,5 +1,5 @@
 <?php
-  $page_title          = "Liste des langues";
+  $page_title          = "Langues";
   $page_picture        = "Image";
   $page_code           = "Code";
   $page_name           = "Langue";

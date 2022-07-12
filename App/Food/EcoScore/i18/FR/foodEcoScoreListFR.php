@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des éco scores";
+  $page_title           = "Eco scores";
   $page_picture         = "Image";
   $page_name            = "Score";
   $page_color           = "Couleur";

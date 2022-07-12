@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des informations nutritionnelles";
+  $page_title           = "Informations nutritionnelles";
   $page_picture         = "Image";
   $page_code            = "Code";
   $page_name            = "Nom";

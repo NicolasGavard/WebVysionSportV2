@@ -1,5 +1,5 @@
 <?php
-  $page_title          = "Liste des labels";
+  $page_title          = "Labels";
   $page_picture        = "Image";
   $page_name           = "Label";
   $page_action         = "Actions";

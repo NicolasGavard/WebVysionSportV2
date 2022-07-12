@@ -1,5 +1,5 @@
 <?php
-  $page_title          = "Liste des marques";
+  $page_title          = "Marques";
   $page_picture        = "Image";
   $page_name           = "Marque";
   $page_action         = "Actions";

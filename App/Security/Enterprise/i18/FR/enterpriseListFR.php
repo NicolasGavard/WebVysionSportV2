@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des entreprises";
+  $page_title           = "Entreprises";
   $page_picture         = "Logo";
   $page_name            = "Nom";
   $page_email_phone     = "Email/Téléphone";

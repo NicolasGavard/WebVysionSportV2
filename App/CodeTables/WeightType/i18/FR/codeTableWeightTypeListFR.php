@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des unités de mesures";
+  $page_title           = "Unités de mesures";
   $page_code            = "Code";
   $page_name            = "Nom";
   $page_abbreviation    = "Abbréviation";

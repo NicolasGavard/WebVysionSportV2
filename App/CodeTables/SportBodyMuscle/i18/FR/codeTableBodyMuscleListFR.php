@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des muscles du corps";
+  $page_title           = "Muscles du corps";
   $page_code            = "Code";
   $page_name            = "Nom";
   $page_translation     = "Traductions";

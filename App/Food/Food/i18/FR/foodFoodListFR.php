@@ -1,5 +1,5 @@
 <?php
-  $page_title         = "Liste des aliments";
+  $page_title         = "Aliments";
   $page_name          = "Nom";
   $page_code          = "Code-barres";
   $page_brand         = "Marque";

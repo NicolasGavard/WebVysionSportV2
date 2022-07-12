@@ -1,6 +1,6 @@
 <?php
-  $page_title_prev        = "Liste de mes recettes";
-  $page_title             = "Liste des aliments de la recette";
+  $page_title_prev        = "Mes recettes";
+  $page_title             = "Aliments de la recette";
   $page_name              = "Aliment";
   $page_weight            = "Quantité";
   $page_weightType        = "Unité de mesure";

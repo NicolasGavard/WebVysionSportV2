@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des types de repas";
+  $page_title           = "Types de repas";
   $page_code            = "Code";
   $page_name            = "Nom";
   $page_translation     = "Traductions";

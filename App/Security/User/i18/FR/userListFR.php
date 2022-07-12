@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des utilisateurs";
+  $page_title           = "Utilisateurs";
   $page_picture         = "Avatar";
   $page_name            = "Nom";
   $page_email_phone     = "Email/Téléphone";

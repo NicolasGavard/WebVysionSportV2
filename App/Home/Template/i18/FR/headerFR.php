@@ -15,10 +15,10 @@
   $menu_sport_myExercise                = "Mes exercices";
 
   $menu_administration                  = "Administrations";
-  $menu_sport_admin_body_member_list    = "Liste des membres du corps";
-  $menu_sport_admin_body_muscle_list    = "Liste des muscles du corps";
-  $menu_sport_admin_exercice_Type_list  = "Liste des exercices types";
-  $menu_sport_admin_circuit_Type_list   = "Liste des types de circuits";
+  $menu_sport_admin_body_member_list    = "Membres du corps";
+  $menu_sport_admin_body_muscle_list    = "Muscles du corps";
+  $menu_sport_admin_exercice_Type_list  = "Exercices types";
+  $menu_sport_admin_circuit_Type_list   = "Types de circuits";
   
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                   NUTRITION                                                      //
@@ -30,12 +30,12 @@
   $menu_nutrition_myIngredient  = "Aliments";
   
   $menu_administration          = "Administrations";
-  $menu_food_food_list          = "Liste des aliments";
-  $menu_food_brand_list         = "Liste des marques";
-  $menu_food_ecoScore_list      = "Liste des eco-Score";
-  $menu_food_novaScore_list     = "Liste des nova-Score";
-  $menu_food_nutriScore_list    = "Liste des nutri-Score";
-  $menu_food_label_list         = "Liste des labels";
+  $menu_food_food_list          = "Aliments";
+  $menu_food_brand_list         = "Marques";
+  $menu_food_ecoScore_list      = "Eco-Score";
+  $menu_food_novaScore_list     = "Nova-Score";
+  $menu_food_nutriScore_list    = "Nutri-Score";
+  $menu_food_label_list         = "Labels";
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                     BILAN                                                        //
@@ -52,7 +52,7 @@
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   $menu_student             = "Elèves";
-  $menu_student_list_coach = "Liste des coachs";
+  $menu_student_list_coach = "Coachs";
   $menu_student_2 = "Elèves";
   $menu_student_3 = "Elèves";
   $menu_student_4 = "Elèves";
@@ -104,31 +104,32 @@
 
   $menu_admin                   = "Administration";
   $menu_admin_users             = "Utilisateurs";
-  $menu_admin_users_list        = "Liste des utilisateurs";
-  $menu_admin_enterprises_list  = "Liste des entreprises";
-  $menu_admin_usersTypes_list   = "Liste des types d'utilisateurs";
+  $menu_admin_users_list        = "Utilisateurs";
+  $menu_admin_enterprises_list  = "Entreprises";
+  $menu_admin_usersTypes_list   = "Types d'utilisateurs";
   
   $menu_right                       = "Droits";
-  $menu_right_applications_list     = "Liste des applications";
-  $menu_right_modules_list          = "Liste des modules";
-  $menu_right_functionalities_list  = "Liste des fonctionnalités";
-  $menu_right_roles_list            = "Liste des rôles";
-  $menu_right_rights_list           = "Liste des droits";
+  $menu_right_applications_list     = "Applications";
+  $menu_right_modules_list          = "Modules";
+  $menu_right_functionalities_list  = "Fonctionnalités";
+  $menu_right_roles_list            = "Rôles";
+  $menu_right_rights_list           = "Droits";
   
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                 TABLES DE CODE                                                   //
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   $menu_codeTables                    = "Tables de code";
-  $menu_codeTables_weightType_list    = "Liste des contenances";
-  $menu_codeTables_food_category_list = "Liste des catégories d'aliments";
-  $menu_codeTables_food_type_list     = "Liste des types d'aliments";
-  $menu_codeTables_meal_type_list     = "Liste des types de repas";
-  $menu_codeTables_nutritional_list   = "Liste des info. nutritionnelles";
-  $menu_codeTables_food_type_list     = "Liste des types d'aliments";
-  $menu_codeTables_language_list      = "Liste des langues";
-  $menu_codeTables_ticket_status_list = "Liste des statuts d'incidents";
-  $menu_codeTables_ticket_type_list   = "Liste des types d'incidents";
+  $menu_codeTables_weightType_list    = "Contenances";
+  $menu_codeTables_food_category_list = "Catégories d'aliments";
+  $menu_codeTables_food_type_list     = "Types d'aliments";
+  $menu_codeTables_meal_type_list     = "Types de repas";
+  $menu_codeTables_nutritional_list   = "Infos nutritionnelles";
+  $menu_codeTables_food_type_list     = "Types d'aliments";
+  $menu_codeTables_language_list      = "Langues";
+  $menu_codeTables_ticket_status_list = "Statuts d'incidents";
+  $menu_codeTables_ticket_type_list   = "Types d'incidents";
+  $menu_codeTables_circuit_type_list   = "Types de circuits";
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                    HEADER                                                        //

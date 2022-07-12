@@ -1,5 +1,5 @@
 <?php
-  $page_title             = "Liste de mes recettes";
+  $page_title             = "Mes recettes";
   $page_code              = "Code";
   $page_name              = "Nom";
   $page_picture           = "Image";

@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des nutri scores";
+  $page_title           = "Nutri scores";
   $page_picture         = "Image";
   $page_name            = "Nom";
   $page_color           = "Couleur";

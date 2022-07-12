@@ -1,5 +1,5 @@
 <?php
-  $page_title_prev    = "Liste des aliments";
+  $page_title_prev    = "Aliments";
   $page_title         = "Détail de l'aliment";
   
   $page_group_label       = "Les labels de l'aliment";

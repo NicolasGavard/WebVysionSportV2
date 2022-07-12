@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des types d'utilisateurs";
+  $page_title           = "Types d'utilisateurs";
   $page_code            = "Code";
   $page_name            = "Nom";
   $page_action          = "Actions";

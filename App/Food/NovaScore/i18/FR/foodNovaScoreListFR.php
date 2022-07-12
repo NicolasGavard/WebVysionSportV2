@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des nova scores";
+  $page_title           = "Nova scores";
   $page_picture         = "Image";
   $page_name            = "Nom";
   $page_color           = "Couleur";

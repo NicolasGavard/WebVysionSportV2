@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Liste des membres du corps";
+  $page_title           = "Membres du corps";
   $page_code            = "Code";
   $page_name            = "Nom";
   $page_translation     = "Traductions";
