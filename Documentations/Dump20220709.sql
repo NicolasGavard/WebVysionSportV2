@@ -1215,7 +1215,7 @@ CREATE TABLE `sociallink` (
   `id` int(10) UNSIGNED NOT NULL,
   `color` varchar(255) NOT NULL,
   `colorbg` varchar(255) NOT NULL,
-  `iconfa` varchar(255) NOT NULL,
+  `iconfa` varchar(160) NOT NULL,
   `linksocial` varchar(255) NOT NULL,
   `linktopicture` varchar(255) NOT NULL,
   `size` int(10) UNSIGNED NOT NULL,
