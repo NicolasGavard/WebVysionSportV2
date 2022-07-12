@@ -1,6 +1,6 @@
 <?php
   $hello    =  "Bonjour ";
-  $welcome  =  "Bienvenue à nouveau sur WebVysion Sport";
+  $welcome  =  "Bienvenue à nouveau sur VysionCoaching";
   
   $menu_home    = "Accueil";
   

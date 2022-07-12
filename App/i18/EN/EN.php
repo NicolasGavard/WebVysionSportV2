@@ -1,6 +1,6 @@
 { 
   "hello":    "Hello", 
-  "welcome":  "Welcome to WebVysion Sport", 
+  "welcome":  "Welcome to VysionCoaching", 
   
   "menu_home":        "Home", 
   

@@ -213,7 +213,7 @@ $(function() {
                       '  <td>'+val.name+'</td>'+
                       '  <td>'+infoLanguage+' '+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {
-          const lpàp0/ = categoryFoodTypeTableLanguagesData;
+          const languages = categoryFoodTypeTableLanguagesData;
           $.map(languages, function(language, languageKey) {
             var notFound = true;
             if (val.names.length > 0) {
