@@ -16,6 +16,7 @@
 
   $errorData_txt_code   = "Le code du muscle du corps est manquant";
   $errorData_txt_name   = "Le nom du muscle du corps est manquant";
+  $errorData_txt_member = "Le membre du muscle du corps est manquant";
   $errorData_txt_langue = "La langue du muscle du corps est manquante";
 
   $error_400_txt        = "Le Code {0} est déjà utilisé";

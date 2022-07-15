@@ -72,6 +72,7 @@ if (isset($_POST)) {
   if ($outputok && isset($output["ListBodyMemberNames"]) && is_array($output["ListBodyMemberNames"])) {
     list($listBodyMemberNames, $jsonError) = DistriXCodeTableBodyMemberNameData::getJsonArray($output["ListBodyMemberNames"]);
     foreach ($listBodyMembers as $key => $bodyMember) {
+      $names = [];
       $names[] = $listBodyMemberNames[$key];
       $bodyMember->setNames($names);
     }
@@ -92,6 +93,8 @@ if (isset($_POST)) {
     }
     $bodyMuscle->setNames($names);
     $bodyMuscle->setNbLanguages(count($names));
+
+    // print_r($listBodyMemberNames);
   
     foreach ($listBodyMemberNames as $bodyMemberName) {
       if ($bodyMuscle->getIdBodyMember() == $bodyMemberName->getIdBodyMember()) {

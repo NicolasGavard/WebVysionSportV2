@@ -19,6 +19,11 @@ $(function() {
     success : function(data) {
       bodyMuscleTableData = data.ListBodyMuscles;
       bodyMuscleTableLanguagesData = data.ListLanguages;
+
+      $.map(data.ListBodyMembers, function(val, key) {
+        $("#listBodyMuscleMembers").append('<option value="'+val.id+'">'+val.names[0].name+'</option>');
+      });
+
       ListBodyMuscle(0);
     },
     error : function(data) {
@@ -58,7 +63,8 @@ $(function() {
     $('.AddBodyMuscleFormCode').val('');
     $('.AddBodyMuscleFormName').val('');
     $('#bodyMuscleLanguages').html("");
-
+    $('#listBodyMuscleMembers').val(0).change();
+        
     const languages = bodyMuscleTableLanguagesData;
     $.map(languages, function(language, languageKey) {
       var html = "";
@@ -80,9 +86,12 @@ $(function() {
   });
 
   $("#btnAddBodyMuscle, #btnUpdateBodyMuscle").on('click', function() {
+    let noError = true;
     var code = $('#AddBodyMuscleFormCode').val();
     var name = $('#AddBodyMuscleFormName').val();
-    if (code == "" || name == '') {
+    const idBodyMember = $('#listBodyMuscleMembers option:selected').val();
+    if (code == "" || name == '' || idBodyMember == 0) {
+      noError = false;
       if (code == '') {
         $('.AddBodyMuscleFormCode').addClass("form-control-danger");
         $('.danger-code').removeClass("d-none");
@@ -101,7 +110,17 @@ $(function() {
           $('.danger-name').addClass("d-none");
         }, 3000 );
       }
-    } else {
+      if (idBodyMember == 0) {
+        $('.AddBodyMuscleMember').addClass("form-control-danger");
+        $('.danger-member').removeClass("d-none");
+
+        setTimeout( () => { 
+          $(".AddBodyMuscleMember").removeClass("form-control-danger");
+          $('.danger-member').addClass("d-none");
+        }, 3000 );
+      }
+    }
+    if (noError) {
       var bodyMuscleNames = [];
       $('input[name^="bodyMuscleLanguageName"]').each(function() {
         var idNameLanguage = this.name.substr("bodyMuscleLanguageName".length);
@@ -136,7 +155,7 @@ $(function() {
         url : 'Controllers/save.php',
         type : 'POST',
         dataType : 'JSON',
-        data: {id,code,name,elemState,timestamp, "names":bodyMuscleNames},
+        data: {id,code,name,idBodyMember,elemState,timestamp, "names":bodyMuscleNames},
         success : function(data) {
           if (data.ConfirmSave) {
             $('#sa-success-distrix').trigger('click');
@@ -265,6 +284,7 @@ function ViewBodyMuscle(id){
   
       $('.AddBodyMuscleFormCode').val(data.ViewBodyMuscle.code);
       $('.AddBodyMuscleFormName').val(data.ViewBodyMuscle.name);
+      $('#listBodyMuscleMembers').val(data.ViewBodyMuscle.idBodyMember).change();
       $('#bodyMuscleLanguages').html("");
 
       const languages = bodyMuscleTableLanguagesData;

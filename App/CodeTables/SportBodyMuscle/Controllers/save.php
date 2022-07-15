@@ -7,14 +7,14 @@ include(__DIR__ . "/../Data/DistriXCodeTableBodyMuscleNameData.php");
 
 $i18cdlangue    = 'FR';
 // If ($user->->getIdLanguage() == 2) $i18cdlangue = 'EN';
-$international  = __DIR__.'/i18/'.$i18cdlangue.'/codeTableBodyMuscleList'.$i18cdlangue;
+$international  = __DIR__."/i18/".$i18cdlangue.'/codeTableBodyMuscleList'.$i18cdlangue;
 include(__DIR__ . "/../../../i18/_i18.php");
 
 $confirmSave  = false;
 
 if (isset($_POST)) {
-  list($bodymuscle, $jsonError)       = DistriXCodeTableBodyMuscleData::getJsonData($_POST);
-  list($bodymuscleNames, $jsonError)  = DistriXCodeTableBodyMuscleNameData::getJsonArray($bodymuscle->getNames());
+  list($bodymuscle, $jsonError)      = DistriXCodeTableBodyMuscleData::getJsonData($_POST);
+  list($bodymuscleNames, $jsonError) = DistriXCodeTableBodyMuscleNameData::getJsonArray($bodymuscle->getNames());
   $bodymuscle->setNames([]); // Needed to be sent without an array fulfilled with elements that are not data objects. 01 June 22
   
   $servicesCaller = new DistriXServicesCaller();
