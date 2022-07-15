@@ -4,8 +4,8 @@ $(function() {
   var bodyMuscleTableData = "";
   var bodyMuscleTable = $('#BodyMuscleTable').DataTable({
     columnDefs: [
-      { orderable: false, targets: 2 },
-      { orderable: false, targets: 3 }
+      { orderable: false, targets: 3 },
+      { orderable: false, targets: 4 }
     ],
     language: {
       url: '../../i18/FR/DataTableFrench.json'
@@ -211,6 +211,7 @@ $(function() {
         let line =  '<tr>'+
                       '  <td style="padding:1rem;">&nbsp;&nbsp;'+val.code+'</td>'+
                       '  <td>'+val.name+'</td>'+
+                      '  <td>'+val.bodyMemberName+'</td>'+
                       '  <td>'+infoLanguage+' '+val.nbLanguages+'/'+val.nbLanguagesTotal;
         if (val.nbLanguages < val.nbLanguagesTotal) {
           const languages = bodyMuscleTableLanguagesData;

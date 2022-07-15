@@ -2,6 +2,7 @@
   $page_title           = "Muscles du corps";
   $page_code            = "Code";
   $page_name            = "Nom";
+  $page_member          = "Membre";
   $page_translation     = "Traductions";
   $page_languages       = "Langues";
   $page_language        = "Langue";

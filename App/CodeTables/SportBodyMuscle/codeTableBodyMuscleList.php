@@ -40,6 +40,7 @@
 								<tr>                 
                   <th><span><?php echo $page_code; ?></span></th>
                   <th><span><?php echo $page_name; ?></span></th>
+                  <th><span><?php echo $page_member; ?></span></th>
                   <th><span><?php echo $page_translation; ?></span></th>
                   <th><span><?php echo $page_action; ?></span></th>
 								</tr>

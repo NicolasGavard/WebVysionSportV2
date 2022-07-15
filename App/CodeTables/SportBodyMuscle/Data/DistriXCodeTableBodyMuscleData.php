@@ -5,6 +5,7 @@ if (!class_exists("DistriXCodeTableBodyMuscleData", false)) {
     protected $idBodyMember;
     protected $code;
     protected $name;
+    protected $bodyMemberName;
     protected $elemState;
     protected $timestamp;
     protected $nbLanguages;
@@ -16,6 +17,7 @@ if (!class_exists("DistriXCodeTableBodyMuscleData", false)) {
       $this->idBodyMember     = 0;
       $this->code             = "";
       $this->name             = "";
+      $this->bodyMemberName   = "";
       $this->elemState        = 0;
       $this->timestamp        = 0;
       $this->nbLanguages      = 0;
@@ -27,6 +29,7 @@ if (!class_exists("DistriXCodeTableBodyMuscleData", false)) {
     public function getIdBodyMember():int { return $this->idBodyMember; }
     public function getCode():string { return $this->code; }
     public function getName():string { return $this->name; }
+    public function getBodyMemberName():string { return $this->bodyMemberName; }
     public function getElemState():int { return $this->elemState; }
     public function getTimestamp():int { return $this->timestamp; }
     public function getNbLanguages():int { return $this->nbLanguages; }
@@ -37,6 +40,7 @@ if (!class_exists("DistriXCodeTableBodyMuscleData", false)) {
     public function setIdBodyMember(int $idBodyMember) { $this->idBodyMember = $idBodyMember; }
     public function setCode(string $code) { $this->code = $code; }
     public function setName(string $name) { $this->name = $name; }
+    public function setBodyMemberName(string $bodyMemberName) { $this->bodyMemberName = $bodyMemberName; }
     public function setElemState(int $elemState) { $this->elemState = $elemState; }
     public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
     public function setNbLanguages(int $nbLanguages) { $this->nbLanguages = $nbLanguages; }
