@@ -79,15 +79,19 @@
               </div>
               
               <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <label><?php echo $page_member; ?></label>
-                      <select class="custom-select2 form-control AddBodyMuscleMember" id="listBodyMuscleMembers" name="idBodyMuscleMember" style="width: 100%; height: 38px;">
-                        <option value="0"><?php echo $page_all_choice; ?></option>
-                      </select>
-                      <div class="form-control-feed back danger-member has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_member; ?> </div>
-                    </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group">
+                    <label><?php echo $page_member; ?></label>
                   </div>
+                </div>
+                <div class="col-md-9 col-sm-12">
+                  <div class="form-group">
+                    <select class="custom-select2 form-control AddBodyMuscleMember" id="listBodyMuscleMembers" name="idBodyMuscleMember" style="width:100%;font-size:14px;height:20px !important;">
+                      <option value="0"><?php echo $page_all_choice; ?></option>
+                    </select>
+                    <div class="form-control-feed back danger-member has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_member; ?> </div>
+                  </div>
+                </div>
               </div>
               <div class="row">
                 <label class="col-sm-12 col-md-12"><?php echo $page_languages; ?></label>
