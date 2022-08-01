@@ -1,0 +1,11 @@
+[Cards]
+  
+[Modules]
+  [Module]
+    name=DistriX
+    [build]
+      folderFrom=
+      folderTo=
+      version=
+    [DistriXWebSite]
+      DistriXCrypto/DistriXCrypto.php

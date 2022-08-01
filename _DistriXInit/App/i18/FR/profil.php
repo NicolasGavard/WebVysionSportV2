@@ -1,0 +1,36 @@
+<?php  
+  $page_title               = "Mon profil";
+  $page_title_settings      = "Paramètres";
+  $page_title_tasks         = "Mes tâches";
+  $page_title_change_pass   = "Sécurité";
+  $page_title_presentation  = "Informations";
+  $page_full_name           = "Nom complet";
+  $page_login               = "Identifiant";
+  $page_role                = "Rôle";
+  $page_name                = "Nom";
+  $page_firstname           = "Prénom";
+  $page_gender              = "Genre";
+  $page_female              = "Femme";
+  $page_male                = "Homme";
+  $page_email               = "Email";
+  $page_address1            = "Adresse";
+  $page_address2            = "Complément";
+  $page_country             = "Pays";
+  $page_zip_code            = "Code postal";
+  $page_city                = "Ville";
+  $page_emailBackup         = "Email de secours";
+  $page_date_of_birth       = "Date d'anniversaire";
+  $page_phone               = "Téléphone";
+  $page_mobile              = "Portable";
+  $page_langue              = "Langue";
+  $page_photo_profil        = "Changer ma photo de profil";
+  $page_notifier            = "J'accepte de recevoir des courriels de notifications";
+  $page_social_links        = "Mes réseaux sociaux";
+  $page_edit_settings       = "Modifier vos paramètres personnels";
+  $page_update_title        = "Modifier mon profil";
+  
+  $page_title_2             = "Changer mon mot de passe";
+  $page_old_pass            = "Ancien mot de passe";
+  $page_new_pass            = "Nouveau mot de passe";
+  $page_confirm_pass        = "Confirmer le mot de passe";
+  $page_change_pass_title   = "Changer mon mot de passe";

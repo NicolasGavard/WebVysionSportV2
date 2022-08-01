@@ -1,0 +1,18 @@
+[Cards]
+  
+[Modules]
+  [Module]
+    name=AppPazziria
+    [build]
+      folderFrom=AppPazziria
+      folderTo=./
+      version=1.64
+    [CrossEntServices]
+      Purchase/Drink/svc/data/AppOrderDrinkData.php
+      Purchase/Drink/svc/storage/DrinkFamilyStaticStor.php
+      Purchase/Drink/svc/DrinkDataSvc.php
+    [CrossPosCloudServices]
+      PazziriaOrder/ValidationOrder/svc/include/orderDrinksData.php
+    [PazziOrder]
+      PazziOrderServices/svc/Drink/data/AppOrderDrinkData.php
+      PazziOrderServices/svc/Drink/PazziOrderDrinkListDrinksDataSvc.php

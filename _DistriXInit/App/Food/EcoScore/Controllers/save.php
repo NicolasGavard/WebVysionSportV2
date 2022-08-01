@@ -1,0 +1,32 @@
+<?php
+session_start();
+include(__DIR__ . "/../../../Init/ControllerInit.php");
+// DATA
+include(__DIR__ . "/../Data/DistriXFoodEcoScoreData.php");
+
+$confirmSave  = false;
+
+if ($_POST["base64Img"] != '') {
+  $_POST["linkToPicture"] = $_POST["base64Img"];
+}
+list($distriXFoodEcoScoreData, $errorJson) = DistriXFoodEcoScoreData::getJsonData($_POST);
+
+$servicesCaller = new DistriXServicesCaller();
+$servicesCaller->addParameter("data", $distriXFoodEcoScoreData);
+$servicesCaller->setServiceName("App/Food/EcoScore/Services/DistriXFoodEcoScoreSaveDataSvc.php");
+list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($output);
+
+$logOk = logController("Security_EcoScore", "DistriXEcoScoreSaveDataSvc", "SaveEcoScore", $output);
+
+if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
+  $confirmSave = $output["ConfirmSave"];
+} else {
+  $error = $errorData;
+}
+
+$resp["ConfirmSave"]  = $confirmSave;
+if(!empty($error)){
+  $resp["Error"]        = $error;
+}
+
+echo json_encode($resp);

@@ -1,0 +1,22 @@
+[Cards]
+  
+[Modules]
+  [Module]
+    name=AppPazziria
+    [build]
+      folderFrom=AppPazziria
+      folderTo=./
+      version=1.64
+    [PazziOrderServices]
+      layer/CrossMarketingSvcCallerClient.php
+      svc/Pazziria/data/AppPazziriaMovie.php
+      svc/Pazziria/data/CrossMarketingMovieData.php
+      svc/Pazziria/PazziOrderHomePazziriaMovieBusSvc.php
+      svc/Pazziria/PazziOrderHomePazziriaMovieDataSvc.php
+    [CrossPosCloudServices]
+      PazziriaMovie
+    [CrossMarketingServices]
+      Movie
+    [Db]
+      Marketing/create movie 2-2-22.sql
+      PosCloud/create posmovie 2-2-22.sql
