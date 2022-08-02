@@ -21,9 +21,9 @@ if (!class_exists("DistriXNutritionCurrentDietData", false)) {
     public function __construct()
     {
       $this->id                   = 0;
-      $this->idUserCoach         = 0;
-      $this->nameUserCoach       = "";
-      $this->firstNameUserCoach  = "";
+      $this->idUserCoach          = 0;
+      $this->nameUserCoach        = "";
+      $this->firstNameUserCoach   = "";
       $this->idUserStudent        = 0;
       $this->nameUserStudent      = "";
       $this->firstNameUserStudent = "";

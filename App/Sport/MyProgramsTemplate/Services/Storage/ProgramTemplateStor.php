@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class CircuitExerciseStor {
+class ProgramTemplateStor {
 
 //=============================================================================
 //== DO NOT REMOVE !
@@ -10,9 +10,9 @@ class CircuitExerciseStor {
 //==
 //=============================================================================
 //=============================================================================
-  const TABLE_NAME = "circuitexercise";
-  const SELECT = 'SELECT id,idcircuittemplate,idexercise,elemstate,timestamp';
-  const FROM = ' FROM circuitexercise';
+  const TABLE_NAME = "programtemplate";
+  const SELECT = 'SELECT id,idusercoach,name,description,duration,tags,elemstate,timestamp';
+  const FROM = ' FROM programtemplate';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
   const SHOW_CREATE_REQUEST = FALSE;
@@ -25,7 +25,7 @@ class CircuitExerciseStor {
   public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CircuitExerciseStorData();
+    $data = new ProgramTemplateStorData();
     $list = [];
 
     if ($inDbConnection != null) {
@@ -46,7 +46,7 @@ class CircuitExerciseStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitExerciseStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProgramTemplateStorData");
       }
     }
     return array($list, count($list));
@@ -56,12 +56,12 @@ class CircuitExerciseStor {
   public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CircuitExerciseStorData();
+    $data = new ProgramTemplateStorData();
     $list = [];
 
     if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
       if ($className == "" || is_null($className)) {
-        $className = "CircuitExerciseStorData";
+        $className = "ProgramTemplateStorData";
       }
       $request  = self::SELECT;
       $request .= self::FROM;
@@ -88,57 +88,65 @@ class CircuitExerciseStor {
   }
   // End of getListFromList
 
-  public static function findByIdCircuitTemplateIdExercise(CircuitExerciseStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoachNameDuration(ProgramTemplateStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CircuitExerciseStorData();
+    $data = new ProgramTemplateStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE idcircuittemplate = :index0";
-      $request .= " AND idexercise = :index1";
+      $request .= " WHERE idusercoach = :index0";
+      $request .= " AND name = :index1";
+      $request .= " AND duration = :index2";
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['index0'=>  $dataIn->getIdCircuitTemplate(), 'index1'=>  $dataIn->getIdExercise()]);
+      $stmt->execute(['index0'=>  $dataIn->getIdUserCoach(), 'index1'=>  $dataIn->getName(), 'index2'=>  $dataIn->getDuration()]);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitExerciseStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProgramTemplateStorData");
         $data = $stmt->fetch();
       }
     }
     return $data;
   }
-  // End of IdCircuitTemplateIdExercise
+  // End of IdUserCoachNameDuration
 
-  public static function findByIdCircuitTemplate(CircuitExerciseStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserCoach(ProgramTemplateStorData $dataIn, bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CircuitExerciseStorData();
+    $list = [];
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
       $request .= self::FROM;
-      $request .= " WHERE idcircuittemplate = :index0";
+      $request .= " WHERE idusercoach = :index0";
+      if (!$all) {
+        $request .= " AND elemstate = :statut";
+      }
+      $params = [];
+      $params["index0"] = $dataIn->getIdUserCoach();
+      if (!$all) {
+        $params["statut"] = $dataIn->getAvailableValue();
+      }
       $stmt = $inDbConnection->prepare($request);
-      $stmt->execute(['index0'=>  $dataIn->getIdCircuitTemplate()]);
+      $stmt->execute($params);
       if (self::SHOW_FIND_REQUEST) {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitExerciseStorData");
-        $data = $stmt->fetch();
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProgramTemplateStorData");
       }
     }
-    return $data;
+    return array($list, count($list));
   }
-  // End of findByIdCircuitTemplate
+  // End of IdUserCoach
 
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CircuitExerciseStorData();
+    $data = new ProgramTemplateStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -150,7 +158,7 @@ class CircuitExerciseStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitExerciseStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProgramTemplateStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -172,23 +180,29 @@ class CircuitExerciseStor {
   }
   // End of read
 
-  public static function update(CircuitExerciseStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(ProgramTemplateStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "UPDATE circuitexercise SET ";
-      $request .= "idcircuittemplate= :idcircuittemplate,";
-      $request .= "idexercise= :idexercise,";
+      $request  = "UPDATE programtemplate SET ";
+      $request .= "idusercoach= :idusercoach,";
+      $request .= "name= :name,";
+      $request .= "description= :description,";
+      $request .= "duration= :duration,";
+      $request .= "tags= :tags,";
       $request .= "elemstate= :elemstate,";
       $request .= "timestamp= :timestamp";
       $request .= " WHERE id = :id";
       $request .= " AND timestamp = :oldtimestamp";
       $params = [];
       $params["id"] = $data->getId();
-      $params["idcircuittemplate"] = $data->getIdCircuitTemplate();
-      $params["idexercise"] = $data->getIdExercise();
+      $params["idusercoach"] = $data->getIdUserCoach();
+      $params["name"] = $data->getName();
+      $params["description"] = $data->getDescription();
+      $params["duration"] = $data->getDuration();
+      $params["tags"] = $data->getTags();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp() + 1;
       $params["oldtimestamp"] = $data->getTimestamp();
@@ -225,7 +239,7 @@ class CircuitExerciseStor {
   }
   // End of update
 
-  public static function save(CircuitExerciseStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(ProgramTemplateStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -238,7 +252,7 @@ class CircuitExerciseStor {
   }
   // End of save
 
-  public static function remove(CircuitExerciseStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(ProgramTemplateStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -250,7 +264,7 @@ class CircuitExerciseStor {
   }
   // End of remove
 
-  public static function restore(CircuitExerciseStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(ProgramTemplateStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -268,7 +282,7 @@ class CircuitExerciseStor {
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "DELETE FROM circuitexercise";
+      $request  = "DELETE FROM programtemplate";
       $request .= " WHERE id = :id";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['id'=> $id]);
@@ -297,22 +311,28 @@ class CircuitExerciseStor {
   }
   // End of delete
 
-  public static function create(CircuitExerciseStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(ProgramTemplateStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "INSERT INTO circuitexercise(";
-      $request .= "idcircuittemplate,idexercise,elemstate,timestamp)";
+      $request  = "INSERT INTO programtemplate(";
+      $request .= "idusercoach,name,description,duration,tags,elemstate,timestamp)";
       $request .= " VALUES(";
-      $request .= ":idcircuittemplate,";
-      $request .= ":idexercise,";
+      $request .= ":idusercoach,";
+      $request .= ":name,";
+      $request .= ":description,";
+      $request .= ":duration,";
+      $request .= ":tags,";
       $request .= ":elemstate,";
       $request .= ":timestamp)";
       $params = [];
-      $params["idcircuittemplate"] = $data->getIdCircuitTemplate();
-      $params["idexercise"] = $data->getIdExercise();
+      $params["idusercoach"] = $data->getIdUserCoach();
+      $params["name"] = $data->getName();
+      $params["description"] = $data->getDescription();
+      $params["duration"] = $data->getDuration();
+      $params["tags"] = $data->getTags();
       $params["elemstate"] = $data->getElemState();
       $params["timestamp"] = $data->getTimestamp();
       $stmt = $inDbConnection->prepare($request);

@@ -1,7 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class CircuitStudentStorData extends DistriXSvcAppData {
-  const CIRCUITSTUDENT_STATUS_AVAILABLE     = 0;
-  const CIRCUITSTUDENT_STATUS_NOT_AVAILABLE = 1;
+class ProgramStudentStorData extends DistriXSvcAppData {
+  const PROGRAMSTUDENT_STATUS_AVAILABLE     = 0;
+  const PROGRAMSTUDENT_STATUS_NOT_AVAILABLE = 1;
 
   protected $id;
   protected $iduserstudent;
@@ -22,15 +22,15 @@ class CircuitStudentStorData extends DistriXSvcAppData {
   public function getDateStart():int { return $this->datestart; }
   public function getElemState():int { return $this->elemstate; }
   public function getTimestamp():int { return $this->timestamp; }
-  public function isAvailable():bool { return ($this->elemstate == self::CIRCUITSTUDENT_STATUS_AVAILABLE); }
-  public function getAvailableValue():int { return self::CIRCUITSTUDENT_STATUS_AVAILABLE; }
-  public function getUnavailableValue():int { return self::CIRCUITSTUDENT_STATUS_NOT_AVAILABLE; }
+  public function isAvailable():bool { return ($this->elemstate == self::PROGRAMSTUDENT_STATUS_AVAILABLE); }
+  public function getAvailableValue():int { return self::PROGRAMSTUDENT_STATUS_AVAILABLE; }
+  public function getUnavailableValue():int { return self::PROGRAMSTUDENT_STATUS_NOT_AVAILABLE; }
 // Sets
   public function setId(int $id) { $this->id = $id; }
   public function setIdUserStudent(int $idUserStudent) { $this->iduserstudent = $idUserStudent; }
   public function setDateStart(int $dateStart) { $this->datestart = $dateStart; }
   public function setElemState(int $elemState) { $this->elemstate = $elemState; }
   public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
-  public function setAvailable() { $this->elemstate = self::CIRCUITSTUDENT_STATUS_AVAILABLE; }
-  public function setUnavailable() { $this->elemstate = self::CIRCUITSTUDENT_STATUS_NOT_AVAILABLE; }
+  public function setAvailable() { $this->elemstate = self::PROGRAMSTUDENT_STATUS_AVAILABLE; }
+  public function setUnavailable() { $this->elemstate = self::PROGRAMSTUDENT_STATUS_NOT_AVAILABLE; }
 }

@@ -5,18 +5,21 @@ class CircuitExerciseStorData extends DistriXSvcAppData {
 
   protected $id;
   protected $idcircuittemplate;
+  protected $idexercise;
   protected $elemstate;
   protected $timestamp;
 
   public function __construct() {
       $this->id = 0;
       $this->idcircuittemplate = 0;
+      $this->idexercise = 0;
       $this->elemstate = 0;
       $this->timestamp = 0;
     }
 // Gets
   public function getId():int { return $this->id; }
   public function getIdCircuitTemplate():int { return $this->idcircuittemplate; }
+  public function getIdExercise():int { return $this->idexercise; }
   public function getElemState():int { return $this->elemstate; }
   public function getTimestamp():int { return $this->timestamp; }
   public function isAvailable():bool { return ($this->elemstate == self::CIRCUITEXERCISE_STATUS_AVAILABLE); }
@@ -25,6 +28,7 @@ class CircuitExerciseStorData extends DistriXSvcAppData {
 // Sets
   public function setId(int $id) { $this->id = $id; }
   public function setIdCircuitTemplate(int $idCircuitTemplate) { $this->idcircuittemplate = $idCircuitTemplate; }
+  public function setIdExercise(int $idExercise) { $this->idexercise = $idExercise; }
   public function setElemState(int $elemState) { $this->elemstate = $elemState; }
   public function setTimestamp(int $timestamp) { $this->timestamp = $timestamp; }
   public function setAvailable() { $this->elemstate = self::CIRCUITEXERCISE_STATUS_AVAILABLE; }
