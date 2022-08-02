@@ -1,5 +1,5 @@
 <?php // Needed to encode in UTF8 ààéàé //
-class CircuitStudentStor {
+class ProgramStudentStor {
 
 //=============================================================================
 //== DO NOT REMOVE !
@@ -10,9 +10,9 @@ class CircuitStudentStor {
 //==
 //=============================================================================
 //=============================================================================
-  const TABLE_NAME = "circuitstudent";
+  const TABLE_NAME = "programstudent";
   const SELECT = 'SELECT id,iduserstudent,datestart,elemstate,timestamp';
-  const FROM = ' FROM circuitstudent';
+  const FROM = ' FROM programstudent';
   const SHOW_READ_REQUEST = FALSE;
   const SHOW_FIND_REQUEST = FALSE;
   const SHOW_CREATE_REQUEST = FALSE;
@@ -25,7 +25,7 @@ class CircuitStudentStor {
   public static function getList(bool $all, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CircuitStudentStorData();
+    $data = new ProgramStudentStorData();
     $list = [];
 
     if ($inDbConnection != null) {
@@ -46,7 +46,7 @@ class CircuitStudentStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitStudentStorData");
+        $list = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProgramStudentStorData");
       }
     }
     return array($list, count($list));
@@ -56,12 +56,12 @@ class CircuitStudentStor {
   public static function getListFromList(array $inList, bool $all, string $className, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CircuitStudentStorData();
+    $data = new ProgramStudentStorData();
     $list = [];
 
     if ($inDbConnection != null && (!is_null($inList)) && (!empty($inList))) {
       if ($className == "" || is_null($className)) {
-        $className = "CircuitStudentStorData";
+        $className = "ProgramStudentStorData";
       }
       $request  = self::SELECT;
       $request .= self::FROM;
@@ -88,10 +88,10 @@ class CircuitStudentStor {
   }
   // End of getListFromList
 
-  public static function findByIdUserStudentDateStart(CircuitStudentStorData $dataIn, DistriXPDOConnection $inDbConnection)
+  public static function findByIdUserStudentDateStart(ProgramStudentStorData $dataIn, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CircuitStudentStorData();
+    $data = new ProgramStudentStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -104,7 +104,7 @@ class CircuitStudentStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitStudentStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProgramStudentStorData");
         $data = $stmt->fetch();
       }
     }
@@ -115,7 +115,7 @@ class CircuitStudentStor {
   public static function read(int $id, DistriXPDOConnection $inDbConnection)
   {
     $request = "";
-    $data = new CircuitStudentStorData();
+    $data = new ProgramStudentStorData();
 
     if ($inDbConnection != null) {
       $request  = self::SELECT;
@@ -127,7 +127,7 @@ class CircuitStudentStor {
         echo self::DEBUG_ERROR . $inDbConnection->errorInfo()[2] . self::BREAK . $stmt->debugDumpParams() . self::DOUBLE_BREAK;
       }
       if ($stmt->rowCount() > 0) {
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CircuitStudentStorData");
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProgramStudentStorData");
         $data = $stmt->fetch();
       }
       $trace = $inDbConnection->getTrace();
@@ -149,13 +149,13 @@ class CircuitStudentStor {
   }
   // End of read
 
-  public static function update(CircuitStudentStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
+  public static function update(ProgramStudentStorData $data, $traceType, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "UPDATE circuitstudent SET ";
+      $request  = "UPDATE programstudent SET ";
       $request .= "iduserstudent= :iduserstudent,";
       $request .= "datestart= :datestart,";
       $request .= "elemstate= :elemstate,";
@@ -202,7 +202,7 @@ class CircuitStudentStor {
   }
   // End of update
 
-  public static function save(CircuitStudentStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function save(ProgramStudentStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false; $id = 0;
     if ($data->getId() > 0) {
@@ -215,7 +215,7 @@ class CircuitStudentStor {
   }
   // End of save
 
-  public static function remove(CircuitStudentStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function remove(ProgramStudentStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -227,7 +227,7 @@ class CircuitStudentStor {
   }
   // End of remove
 
-  public static function restore(CircuitStudentStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function restore(ProgramStudentStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     if ($data->getId() > 0) {
@@ -245,7 +245,7 @@ class CircuitStudentStor {
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "DELETE FROM circuitstudent";
+      $request  = "DELETE FROM programstudent";
       $request .= " WHERE id = :id";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['id'=> $id]);
@@ -274,13 +274,13 @@ class CircuitStudentStor {
   }
   // End of delete
 
-  public static function create(CircuitStudentStorData $data, DistriXPDOConnection $inDbConnection)
+  public static function create(ProgramStudentStorData $data, DistriXPDOConnection $inDbConnection)
   {
     $insere = false;
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "INSERT INTO circuitstudent(";
+      $request  = "INSERT INTO programstudent(";
       $request .= "iduserstudent,datestart,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":iduserstudent,";
