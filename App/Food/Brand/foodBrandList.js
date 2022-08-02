@@ -17,24 +17,7 @@ $.ajax({
 });
 
 $("#datatable tbody").on("click", "td", function () {
-  const col = datatable.cell(this).data();
-  if (col.includes('id="ViewBrand')) return;
-
-  const dataRow = datatable.row(this).data();
-  const searchText = 'id="ViewBrand';
-  const closingText = '"';
-  let id = 0;
-  for (const [, value] of Object.entries(dataRow)) {
-    const pos = value.indexOf(searchText);
-    if (pos != -1) {
-      const startPlace = pos + searchText.length;
-      const pos2 = value.indexOf(closingText, startPlace);
-      if (pos2 != -1) {
-        id = value.substr(startPlace, pos2 - startPlace);
-      }
-    }
-  }
-  $("#ViewBrand" + id).click();
+  viewDetail(this, datatable, "ViewBrand");
 });
 
 $(".btnChangeImage").on("click", function () {
