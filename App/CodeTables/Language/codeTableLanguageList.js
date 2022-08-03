@@ -125,7 +125,7 @@ $(function () {
           if (data.ConfirmSave) {
             $("#sa-success-distrix").trigger("click");
             setTimeout(function () {
-              // window.location.href = "./codeTableLanguageList.php";
+              window.location.href = "./codeTableLanguageList.php";
             }, 800);
           } else {
             $("#sa-error-distrix").trigger("click");
@@ -263,11 +263,11 @@ function ViewLanguage(id) {
       $(".dropzoneImage").removeClass("d-none");
       $(".dropzoneNoImage").addClass("d-none");
 
-      $(".AddLanguageFormCodeShort").val(data.ViewLanguage.codeshort);
+      $(".AddLanguageFormCodeShort").val(data.ViewLanguage.codeShort);
       $(".AddLanguageFormCode").val(data.ViewLanguage.code);
       $(".AddLanguageFormName").val(data.ViewLanguage.name);
-      $(".AddLanguagePicture").attr("src", data.ViewLanguage.linktopicture);
-      $("#linkToPictureBase64").val(data.ViewLanguage.linktopicture);
+      $(".AddLanguagePicture").attr("src", data.ViewLanguage.linkToPicture);
+      $("#linkToPictureBase64").val(data.ViewLanguage.linkToPicture);
     },
     error: function (data) {
       console.log(data);

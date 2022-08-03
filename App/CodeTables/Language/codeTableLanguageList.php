@@ -76,7 +76,7 @@
                   <div class="padding-top-20 padding-bottom-20 col-md-12 col-sm-12">
                     <div class="form-group">
                       <img src="" alt="" style="margin-top:20px; margin-bottom:20px; max-width:120px; max-height:150px; border-radius: 10px;" class="avatar-photo AddLanguagePicture">
-                      <div class="dropzoneNoImage d-none">
+                      <div class="dropzoneNoImage">
                         <input type="file" name="file" class="AddLanguageFormPicture" onchange="encodeImgtoBase64(this);" />
                         </br>
                         <button type="button" class="btn btn-info btnChangeImageCancel"><i class="icon-copy dw dw-image1"></i>&nbsp;<?php echo $page_all_cancel; ?></button>
