@@ -143,9 +143,9 @@ $(function () {
           ticketTypeNames.push(ticketTypeName);
         }
       });
-      var id = 0;
-      var timestamp = 0;
-      var elemState = 0;
+      let id = 0;
+      let timestamp = 0;
+      let elemState = 0;
       if (ticketTypeSelectedData != null) {
         id = ticketTypeSelectedData.id;
         timestamp = ticketTypeSelectedData.timestamp;

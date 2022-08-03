@@ -47,28 +47,36 @@ if (is_null($dbConnection->getError())) {
         if (($ticketTypeStorData->getId() == $currentTicketTypeStorData->getId() && $ticketTypeStorData->getTimestamp() == $currentTicketTypeStorData->getTimestamp())
         || ($ticketTypeStorData->getId() != $currentTicketTypeStorData->getId())) {
           list($insere, $idTicketTypeStorData) = TicketTypeStor::save($ticketTypeStorData, $dbConnection);
-          foreach ($listNames as $nameStorData) {
-            $notFound = true;
+          if (!empty($listNames)) {
+            foreach ($listNames as $nameStorData) {
+              $notFound = true;
+              foreach ($ticketTypeNamesStorData as $ticketTypeNameStorData) {
+                $ticketTypeNameStorData->setIdTicketType($idTicketTypeStorData);
+                if ($ticketTypeNameStorData->getId() > 0 && $ticketTypeNameStorData->getId() == $nameStorData->getId()) {
+                  $notFound = false;
+                  if ($ticketTypeNameStorData->getTimestamp() != $nameStorData->getTimestamp()) {
+                    $canSave = false;
+                    $distriXSvcErrorData = new DistriXSvcErrorData();
+                    $distriXSvcErrorData->setCode("402");
+                    $distriXSvcErrorData->setDefaultText("The language data of " . $ticketTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
+                    $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
+                    $errorData = $distriXSvcErrorData;
+                    break;
+                  }
+                }
+                list($insere, $idTicketTypeNameStorData) = TicketTypeNameStor::save($ticketTypeNameStorData, $dbConnection);
+                if (!$insere) { break; }
+              }
+              if ($notFound) { // This language has been removed !
+                  $insere = TicketTypeNameStor::delete($nameStorData->getId(), $dbConnection);
+                  if (!$insere) { break; }
+              }
+            }
+          } else { // Currently no languages
             foreach ($ticketTypeNamesStorData as $ticketTypeNameStorData) {
               $ticketTypeNameStorData->setIdTicketType($idTicketTypeStorData);
-              if ($ticketTypeNameStorData->getId() > 0 && $ticketTypeNameStorData->getId() == $nameStorData->getId()) {
-                $notFound = false;
-                if ($ticketTypeNameStorData->getTimestamp() != $nameStorData->getTimestamp()) {
-                  $canSave = false;
-                  $distriXSvcErrorData = new DistriXSvcErrorData();
-                  $distriXSvcErrorData->setCode("402");
-                  $distriXSvcErrorData->setDefaultText("The language data of " . $ticketTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
-                  $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
-                  $errorData = $distriXSvcErrorData;
-                  break;
-                }
-              }
               list($insere, $idTicketTypeNameStorData) = TicketTypeNameStor::save($ticketTypeNameStorData, $dbConnection);
               if (!$insere) { break; }
-            }
-            if ($notFound) { // This language has been removed !
-                $insere = TicketTypeNameStor::delete($nameStorData->getId(), $dbConnection);
-                if (!$insere) { break; }
             }
           }
         }

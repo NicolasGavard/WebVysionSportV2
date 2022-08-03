@@ -14,6 +14,8 @@
   $page_delete_title    = "Supprimer l'information nutritionnelle";
   $page_restore_title   = "Restaurer l'information nutritionnelle";
   
+  $errorData_txt_code   = "Le code de l'information nutritionnelle est déjà utilisé !!";
+  $errorData_txt_code_empty = "Le code de l'information nutritionnelle est manquant !!";
   $errorData_txt_name   = "Le nom de l'information nutritionnelle est manquant !!";
   
   $page_isCalorie       = "Calorie";
