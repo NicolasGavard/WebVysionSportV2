@@ -2,6 +2,8 @@
   include(__DIR__ . "/../" . FRONT_DISTRIX_PATH . "DistriXInit/DistriXSvcControllerInit.php");
   include(__DIR__ . "/../" . FRONT_DISTRIX_PATH . "DistriXSecurity/StyAppInterface/DistriXStyAppInterface.php");
   include(__DIR__ . "/../" . FRONT_DISTRIX_PATH . "DistriXSecurity/Const/DistriXStyRightConst.php");
+
+  $userId = DistriXStyAppInterface::getUserInformation()->getId();
 ?>
 
 <div class="left-side-bar">
@@ -24,15 +26,8 @@
         </li>
         
         <?php
-          $hasSport                 = true;
-          $hasSportProgram          = true;
-          $hasSportProgramTemplate  = true;
-          $hasSportCircuit          = true;
-          $hasSportExercise         = true;
-          $hasSportBodyMuscle           = true;
-        ?>
-
-        <?php
+        $hasSport = false;
+        if ($userId == 1 || $userId == 2) {
           $hasSport                 = true;
           $hasSportProgram          = true;
           $hasSportProgramTemplate  = true;
@@ -44,6 +39,7 @@
           $hasSportBodyMuscle       = true;
           $hasSportExerciseType     = true;
           $hasSportCircuitType      = true;
+        }
         ?>
         <?php if ($hasSport) { ?>
           <?php
@@ -98,11 +94,14 @@
         <?php } ?>
 
         <?php
-          $hasNutrition                   = true;
-          $hasNutrition_MyDiet            = true;
-          $hasNutrition_MyTemplatesDiets  = true;
-          $hasNutrition_Recipe            = true;
-          $hasNutrition_Recipe            = true;
+          $hasNutrition = false;
+          if ($userId == 1 || $userId == 2) {
+            $hasNutrition                   = true;
+            $hasNutrition_MyDiet            = true;
+            $hasNutrition_MyTemplatesDiets  = true;
+            $hasNutrition_Recipe            = true;
+            $hasNutrition_Recipe            = true;
+          }
         ?>
         
         <?php if ($hasNutrition) { ?>
@@ -181,7 +180,10 @@
         <?php } ?>
         
         <?php
-          $hasBilan   = true;
+          $hasBilan = false;
+          if ($userId == 1 || $userId == 2) {
+            $hasBilan = true;
+          }
           $dataOption = 'off';
           $classActiv = "";
           $show       = '';
@@ -204,7 +206,10 @@
         <?php } ?>
 
         <?php
-          $hasStudent = true;
+          $hasStudent = false;
+          if ($userId == 1 || $userId == 2) {
+            $hasStudent = true;
+          }
           $dataOption = 'off';
           $classActiv = "";
           $show       = '';
@@ -238,7 +243,10 @@
         <?php } ?>
 
         <?php
-          $hasResource  = true;
+          $hasResource = false;
+          if ($userId == 1 || $userId == 2 || $userId == 3) {
+            $hasResource  = true;
+          }
           $dataOption   = 'off';
           $classActiv   = "";
           $show         = '';
@@ -266,8 +274,10 @@
           if ($hasRight_PACKAGE_LIST || $hasRight_PACKAGE_INVOICE) {
             $hasPackage = true;
           }
-
-          $hasPackage               = true;
+          $hasPackage = false;
+          if ($userId == 1 || $userId == 2) {
+            $hasPackage = true;
+          }
           $hasRight_PACKAGE_LIST    = true;
           $hasRight_PACKAGE_INVOICE = true;
 
@@ -351,9 +361,6 @@
               ?>
               <?php if ($hasRight_MESSAGE_LIST) {?><li <?php echo $navActiveMenuMessageList; ?>><a class="<?php echo $classActiv1; ?>" href="<?php echo FRONT_PATH;?>App/Message/Message/messageList.php"><?php echo $menu_right_message_list; ?></a></li><?php } ?>
               <?php if ($hasRight_MESSAGE_CHAT) {?><li <?php echo $navActiveMenuMessageChat; ?>><a class="<?php echo $classActiv2; ?>" href="<?php echo FRONT_PATH;?>App/Message/Chat/chat.php"><?php echo $menu_right_message_chat; ?></a></li><?php } ?>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
             </ul>
           </li>
         <?php } ?>
@@ -436,7 +443,18 @@
           $hasSecurity                        = true;
           $hasFood                            = true;
           $hasCodeTable                       = true;
-        ?>
+          
+          $hasAdministration = false;
+          $hasSecurity       = false;
+          $hasAdminUser      = false;
+          $hasCodeTable      = false;
+          if ($userId == 1) {
+            $hasAdministration = true;
+            $hasSecurity       = true;
+            $hasAdminUser      = true;
+            $hasCodeTable      = true;
+          }
+?>
         
         <?php if ($hasAdministration) { ?>
           <li>
