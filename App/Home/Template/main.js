@@ -105,7 +105,7 @@ function viewDetail(element, dataTableName, elementName) {
   if (col.includes(searchText)) return;
 
   const closingText = '"';
-  const dataRow = datatable.row(element).data();
+  const dataRow = dataTableName.row(element).data();
   let id = 0;
   for (const [, value] of Object.entries(dataRow)) {
     const pos = value.indexOf(searchText);

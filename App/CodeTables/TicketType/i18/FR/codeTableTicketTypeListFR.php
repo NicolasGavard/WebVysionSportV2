@@ -1,5 +1,5 @@
 <?php
-  $page_title           = "Statuts d'incidents";
+  $page_title           = "Types d'incident";
   $page_code            = "Code";
   $page_name            = "Nom";
   $page_translation     = "Traductions";
