@@ -81,7 +81,8 @@ if (is_null($dbConnection->getError())) {
       list($insere, $idLanguage) = LanguageStor::save($languageStorData, $dbConnection);
 
       if ($insere) {
-        $dbConnection->commit();
+        // $dbConnection->commit();
+        $dbConnection->rollBack();
       } else {
         $dbConnection->rollBack();
         if ($data->getId() > 0) {

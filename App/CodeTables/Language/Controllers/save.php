@@ -6,7 +6,7 @@ include(__DIR__ . "/../Data/DistriXCodeTableLanguageData.php");
 $confirmSave  = false;
 
 list($distriXCodeTableLanguageData, $errorJson) = DistriXCodeTableLanguageData::getJsonData($_POST);
-if($_POST['base64Img'] != '') { $distriXCodeTableLanguageData->setLinkToPicture($_POST['base64Img']);}
+if(isset($_POST['base64Img']) && $_POST['base64Img'] != '') { $distriXCodeTableLanguageData->setLinkToPicture($_POST['base64Img']);}
 
 $servicesCaller = new DistriXServicesCaller();
 $servicesCaller->setMethodName("SaveLanguage");
@@ -22,9 +22,9 @@ if ($outputok && isset($output["ConfirmSave"])) {
   $error = $errorData;
 }
 
-$resp["ConfirmSave"]  = $confirmSave;
-if(!empty($error)){
-  $resp["Error"]        = $error;
+$resp["ConfirmSave"] = $confirmSave;
+if (!empty($error)) {
+  $resp["Error"] = $error;
 }
 
 echo json_encode($resp);

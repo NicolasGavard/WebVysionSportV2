@@ -97,11 +97,11 @@ $(function () {
     if (code == "" || name == "") {
       if (code == "") {
         $(".AddTicketStatusFormCode").addClass("form-control-danger");
-        $(".danger-code").removeClass("d-none");
+        $(".danger-code-empty").removeClass("d-none");
 
         setTimeout(() => {
           $(".AddTicketStatusFormCode").removeClass("form-control-danger");
-          $(".danger-code").addClass("d-none");
+          $(".danger-code-empty").addClass("d-none");
         }, 3000);
       }
       if (name == "") {

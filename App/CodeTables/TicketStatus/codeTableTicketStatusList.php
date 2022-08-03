@@ -9,10 +9,11 @@
 	include('../../Home/Template/_headerMenuLeft.php');
   include("../../_util.php");
   
-  $toScript["langueTxt"]          = $page_language;
-  $toScript["nameTranslatedTxt"]  = $page_name_translated;
-  $toScript["errorCodeTxt"]       = $errorData_txt_code;
-  $toScript["errorNameTxt"]       = $errorData_txt_name;
+  $toScript["langueTxt"]         = $page_language;
+  $toScript["nameTranslatedTxt"] = $page_name_translated;
+  $toScript["errorCodeTxt"]      = $errorData_txt_code;
+  $toScript["errorCodeEmptyTxt"] = $errorData_txt_code_empty;
+  $toScript["errorNameTxt"]      = $errorData_txt_name;
   echo convertToScript($toScript);
 ?>
 	<div class="mobile-menu-overlay"></div>
@@ -55,24 +56,20 @@
             <div class="modal-body text-center font-18">
               <h4 class="padding-top-20 mb-20 weight-500 add_title d-none"><?php echo $page_add_title; ?></h4>
               <h4 class="padding-top-20 mb-20 weight-500 update_title d-none"><?php echo $page_update_title; ?></h4>
-              
-              <input class="form-control AddTicketStatusFormIdTicketStatus" type="hidden" name="id"         value="0">
-              <input class="form-control AddTicketStatusFormTimestamp"  type="hidden" name="timestamp"  value="0">
-              <input class="form-control AddTicketStatusFormStatut"     type="hidden" name="elemState"  value="0">
-              
               <div class="row">
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_code; ?></label>
                     <input class="form-control AddTicketStatusFormCode" id="AddTicketStatusFormCode" type="text" code="codeShort" placeholder="<?php echo $page_code; ?>">
-                    <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?> </div>
+                    <div class="form-control-feed back danger-code has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code; ?></div>
+                    <div class="form-control-feed back danger-code-empty has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_code_empty; ?></div>
                   </div>
                 </div>
                 <div class="col-md-8 col-sm-12">
                   <div class="form-group">
                     <label><?php echo $page_name; ?></label>
                     <input class="form-control AddTicketStatusFormName" id="AddTicketStatusFormName" type="text" code="ticketStatusName" placeholder="<?php echo $page_name; ?>">
-                    <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?> </div>
+                    <div class="form-control-feed back danger-name has-danger d-none" style='font-size: 14px;'><?php echo $errorData_txt_name; ?></div>
                   </div>
                 </div>
               </div>
