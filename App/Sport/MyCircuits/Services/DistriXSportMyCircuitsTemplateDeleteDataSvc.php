@@ -2,15 +2,15 @@
 // Service Init
 include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // Storage
-include(__DIR__ . "/Storage/ExerciseMuscleStor.php");
+include(__DIR__ . "/Storage/CircuitTemplateStor.php");
 // STOR Data
-include(__DIR__ . "/Data/ExerciseMuscleStorData.php");
+include(__DIR__ . "/Data/CircuitTemplateStorData.php");
   
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if ($dbConnection->beginTransaction()) {
-    list($exerciseMuscleStorData, $jsonError) = ExerciseMuscleStorData::getJsonData($dataSvc->getParameter("data"));
-    $insere = ExerciseMuscleStor::remove($exerciseMuscleStorData, $dbConnection);
+    list($exerciseMuscleStorData, $jsonError) = CircuitTemplateStorData::getJsonData($dataSvc->getParameter("data"));
+    $insere = CircuitTemplateStor::remove($exerciseMuscleStorData, $dbConnection);
     if ($insere) {
       $dbConnection->commit();
     } else {
@@ -29,7 +29,7 @@ if (is_null($dbConnection->getError())) {
 }
 
 if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "DelCurrentExerciseMuscle", $dataSvc->getMethodName(), basename(__FILE__));
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "DelCurrentCircuitTemplate", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
 

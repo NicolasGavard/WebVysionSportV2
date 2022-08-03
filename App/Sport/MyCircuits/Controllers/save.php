@@ -2,36 +2,31 @@
 session_start();
 include(__DIR__ . "/../../../Init/ControllerInit.php");
 // DATA
-include(__DIR__ . "/../Data/DistriXSportMyExercisesData.php");
+include(__DIR__ . "/../Data/DistriXCircuitTemplateData.php");
 
 $confirmSave  = false;
-
-$idDiet             = 0;
-$date               = $_POST['dateStart'];
-$newDate            = date("Ymd", strtotime($date));
-$_POST['dateStart'] = $newDate;
-list($distriXNutritionCurrentDietData, $errorJson) = DistriXSportMyExercisesData::getJsonData($_POST);
+list($distriXCircuitTemplateData, $errorJson) = DistriXCircuitTemplateData::getJsonData($_POST);
 
 $servicesCaller = new DistriXServicesCaller();
-$servicesCaller->addParameter("data", $distriXNutritionCurrentDietData);
-$servicesCaller->setServiceName("App/Nutrition/MyCurrentsDiets/Services/DistriXNutritionMyCurrentsDietsSaveDataSvc.php");
+$servicesCaller->addParameter("data", $distriXCircuitTemplateData);
+$servicesCaller->setServiceName("App/Sport/MyCircuits/Services/DistriXSportMyCircuitsTemplateSaveDataSvc.php");
 list($outputok, $output, $errorData) = $servicesCaller->call(); var_dump($output);
 
-$logOk = logController("Security_CurrentDiet", "DistriXDietSaveDataSvc", "SaveCurrentDiet", $output);
+$logOk = logController("Security_CircuitTemplate", "DistriXSportMyCircuitsTemplateSaveDataSvc", "SaveCircuitTemplate", $output);
 
 if ($outputok && isset($output["ConfirmSave"]) && $output["ConfirmSave"]) {
-  $confirmSave  = $output["ConfirmSave"];
-  $idDiet       = $output["idDiet"];
+  $confirmSave        = $output["ConfirmSave"];
+  $idCircuitTemplate  = $output["idCircuitTemplate"];
 } else {
   $error = $errorData;
 }
 
-$resp["ConfirmSave"]  = $confirmSave;
+$resp["ConfirmSave"]          = $confirmSave;
 if ($_POST['id'] > 0)  {
-  $resp["idDiet"]     = $idDiet;
+  $resp["idCircuitTemplate"]  = $idCircuitTemplate;
 }
 if (!empty($error)) {
-  $resp["Error"]      = $error;
+  $resp["Error"]              = $error;
 }
 
 echo json_encode($resp);
