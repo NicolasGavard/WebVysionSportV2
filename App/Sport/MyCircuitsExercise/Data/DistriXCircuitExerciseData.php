@@ -1,6 +1,6 @@
 <?php // Needed to encode in UTF8 ààéàé //
-if (!class_exists("CircuitExerciseData", false)) {
-  class CircuitExerciseData extends DistriXSvcAppData
+if (!class_exists("DistriXCircuitExerciseData", false)) {
+  class DistriXCircuitExerciseData extends DistriXSvcAppData
   {
     protected $id;
     protected $idCircuitTemplate;

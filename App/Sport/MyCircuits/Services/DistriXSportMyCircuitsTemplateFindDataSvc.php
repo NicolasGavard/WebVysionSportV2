@@ -2,25 +2,29 @@
 // Service Init
 include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // Storage
-include(__DIR__ . "/Storage/ExerciseStor.php");
+include(__DIR__ . "/Storage/CircuitTemplateStor.php");
 // STOR Data
-include(__DIR__ . "/Data/ExerciseStorData.php");
+include(__DIR__ . "/Data/CircuitTemplateStorData.php");
 
+$exerciseStor   = [];
+$dbConnection   = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
-  $data = $dataSvc->getParameter("data");
-  list($styApplicationStor, $styApplicationStorInd) = StyApplicationStor::findByIndCode($data, true, $dbConnection);
-  foreach ($styApplicationStor as $application) {
-    $infoApplication = DistriXSvcUtil::setData($application, "DistriXStyApplicationData");
-    $applications[]  = $infoApplication;
+  list($data, $jsonError)               = CircuitTemplateStorData::getJsonData($dataSvc->getParameter("data"));
+  
+  if ($data->getIdUserCoach() > 0) {
+    list($exerciseStor, $exerciseStorInd) = CircuitTemplateStor::findByIdUserCoach($data, true, $dbConnection);
+  } else if ($data->getId() > 0) {
+    $exerciseStor[] = CircuitTemplateStor::read($data->getId(), $dbConnection);
   }
 } else {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
 if ($errorData != null) {
-  $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ListApplications", $dataSvc->getMethodName(), basename(__FILE__));
+  $errorData->setApplicationModuleFunctionalityCodeAndFilename("DistrixSty", "ListMyCircuitTemplates", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
-$dataSvc->addToResponse("ListApplications", $applications);
+
+$dataSvc->addToResponse("ListMyCircuitTemplates", $exerciseStor);
 
 // Return response
 $dataSvc->endOfService();

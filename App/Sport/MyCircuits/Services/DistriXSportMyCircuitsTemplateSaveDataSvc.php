@@ -2,23 +2,23 @@
 // Service Init
 include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // Storage
-include(__DIR__ . "/Storage/ExerciseStor.php");
+include(__DIR__ . "/Storage/CircuitTemplateStor.php");
 // STOR Data
-include(__DIR__ . "/Data/ExerciseStorData.php");
+include(__DIR__ . "/Data/CircuitTemplateStorData.php");
 
 $insere       = false;
-$exerciseStorData = new ExerciseStorData();
+$exerciseStorData = new CircuitTemplateStorData();
 
 $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if ($dbConnection->beginTransaction()) {
-    list($exerciseStorData, $jsonError) = ExerciseStorData::getJsonData($dataSvc->getParameter("data"));
-    $canSaveCurrentExercise  = true;
+    list($exerciseStorData, $jsonError) = CircuitTemplateStorData::getJsonData($dataSvc->getParameter("data"));
+    $canSaveCurrentCircuitTemplate  = true;
     if ($exerciseStorData->getId() == 0) {
       // Possibility to save datas
-      $styCurrentExerciseStor = ExerciseStor::findByIdUserCoachIdUserStudentIdExerciseTemplateDateStart($exerciseStorData, $dbConnection);
-      if ($styCurrentExerciseStor->getId() > 0) {
-        $canSaveCurrentExercise  = false;
+      $styCurrentCircuitTemplateStor = CircuitTemplateStor::findByIdUserCoachNameDuration($exerciseStorData, $dbConnection);
+      if ($styCurrentCircuitTemplateStor->getId() > 0) {
+        $canSaveCurrentCircuitTemplate  = false;
         $distriXSvcErrorData = new DistriXSvcErrorData();
         $distriXSvcErrorData->setCode("400");
         $distriXSvcErrorData->setDefaultText("This exercise is already in use");
@@ -27,8 +27,8 @@ if (is_null($dbConnection->getError())) {
       }
     }
 
-    if ($canSaveCurrentExercise) {
-      list($insere, $idCurrentExercise) = ExerciseStor::save($exerciseStorData, $dbConnection);
+    if ($canSaveCurrentCircuitTemplate) {
+      list($insere, $idCurrentCircuitTemplate) = CircuitTemplateStor::save($exerciseStorData, $dbConnection);
 
       if ($insere) {
         $dbConnection->commit();
@@ -53,8 +53,8 @@ if ($errorData != null) {
   $dataSvc->addErrorToResponse($errorData);
 }
 
-$dataSvc->addToResponse("ConfirmSaveCurrentExercise", $insere);
-$dataSvc->addToResponse("idExercise", $idCurrentExercise);
+$dataSvc->addToResponse("ConfirmSaveCurrentCircuitTemplate", $insere);
+$dataSvc->addToResponse("idCircuitTemplate", $idCurrentCircuitTemplate);
 
 // Return response
 $dataSvc->endOfService();
