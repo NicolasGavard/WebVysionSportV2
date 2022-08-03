@@ -1,6 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
 include(__DIR__ . "/../../../Init/DataSvcInit.php");
+if ($dataSvc->isAuthorized()) {
 // Database Data
 include(__DIR__ . "/Data/CircuitTypeStorData.php");
 include(__DIR__ . "/Data/CircuitTypeNameStorData.php");
@@ -41,26 +42,40 @@ if (is_null($dbConnection->getError())) {
           }
       }
       if ($canSave) {
-        $currentCircuitTypeStorData = CircuitTypeStor::read($circuitTypeStorData->getId(), $dbConnection);
+        list($currentCircuitTypeStorData, $listNames) = CircuitTypeStor::readNames($circuitTypeStorData->getId(), $dbConnection);
         if (($circuitTypeStorData->getId() == $currentCircuitTypeStorData->getId() && $circuitTypeStorData->getTimestamp() == $currentCircuitTypeStorData->getTimestamp())
         || ($circuitTypeStorData->getId() != $currentCircuitTypeStorData->getId())) {
           list($insere, $idCircuitTypeStorData) = CircuitTypeStor::save($circuitTypeStorData, $dbConnection);
-          foreach ($circuitTypeNamesStorData as $circuitTypeNameStorData) {
-            $circuitTypeNameStorData->setIdCircuitType($idCircuitTypeStorData);
-            if ($circuitTypeNameStorData->getId() > 0) {
-              $currentCircuitTypeNameStorData = CircuitTypeNameStor::read($circuitTypeNameStorData->getId(), $dbConnection);
-              if ($circuitTypeNameStorData->getId() == $currentCircuitTypeNameStorData->getId() 
-              && $circuitTypeNameStorData->getTimestamp() != $currentCircuitTypeNameStorData->getTimestamp()) {
-                $canSave = false;
-                $distriXSvcErrorData = new ApplicationErrorData("402", 1, 1);
-                $distriXSvcErrorData->setDefaultText("The language data of " . $circuitTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
-                $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
-                $errorData = $distriXSvcErrorData;
-                break;
+          if (!empty($listNames)) {
+            foreach ($listNames as $nameStorData) {
+              $notFound = true;
+              foreach ($circuitTypeNamesStorData as $circuitTypeNameStorData) {
+                $circuitTypeNameStorData->setIdCircuitType($idCircuitTypeStorData);
+                if ($circuitTypeNameStorData->getId() > 0 && $circuitTypeNameStorData->getId() == $nameStorData->getId()) {
+                  $notFound = false;
+                  if ($circuitTypeNameStorData->getTimestamp() != $nameStorData->getTimestamp()) {
+                    $canSave = false;
+                    $distriXSvcErrorData = new ApplicationErrorData("402", 1, 1);
+                    $distriXSvcErrorData->setDefaultText("The language data of " . $circuitTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
+                    $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
+                    $errorData = $distriXSvcErrorData;
+                    break;
+                  }
+                }
+                list($insere, $idCircuitTypeNameStorData) = CircuitTypeNameStor::save($circuitTypeNameStorData, $dbConnection);
+                if (!$insere) { break; }
+              }
+              if ($notFound) { // This language has been removed !
+                  $insere = CircuitTypeNameStor::delete($nameStorData->getId(), $dbConnection);
+                  if (!$insere) { break; }
               }
             }
-            list($insere, $idCircuitTypeNameStorData) = CircuitTypeNameStor::save($circuitTypeNameStorData, $dbConnection);
-            if (!$insere) { break; }
+          } else { // Currently no languages
+            foreach ($circuitTypeNamesStorData as $circuitTypeNameStorData) {
+              $circuitTypeNameStorData->setIdCircuitType($idCircuitTypeStorData);
+              list($insere, $idCircuitTypeNameStorData) = CircuitTypeNameStor::save($circuitTypeNameStorData, $dbConnection);
+              if (!$insere) { break; }
+            }
           }
         }
       }
@@ -93,3 +108,4 @@ $dataSvc->addToResponse("ConfirmSave", $insere && $canSave);
 
 // Return response
 $dataSvc->endOfService();
+}
