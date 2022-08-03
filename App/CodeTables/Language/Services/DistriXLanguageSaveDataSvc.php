@@ -14,13 +14,12 @@ $dbConnection = new DistriXPDOConnection($databasefile, DISTRIX_STY_KEY_AES);
 if (is_null($dbConnection->getError())) {
   if ($dbConnection->beginTransaction()) {
     list($data, $jsonError) = LanguageStorData::getJsonData($dataSvc->getParameter("data"));
-
     $canSaveLanguage  = true;
     if ($data->getId() == 0) {
       // Verify Code Exist
       list($languageStor, $languageStorInd) = LanguageStor::findByCode($data, true, $dbConnection);
       if ($languageStorInd > 0) {
-        $canSaveLanguage          = false;
+        $canSaveLanguage = false;
         $distriXSvcErrorData = new DistriXSvcErrorData();
         $distriXSvcErrorData->setCode("400");
         $distriXSvcErrorData->setDefaultText("The Code " . $data->getCode() . " is already in use");
@@ -38,7 +37,15 @@ if (is_null($dbConnection->getError())) {
       $languageStorData->setElemState($data->getElemState());
       $languageStorData->setTimestamp($data->getTimestamp());
       
-      if ($data->getLinkToPicture() != "" && $data->getLinkToPicture() != $languageStorData->getLinkToPicture()) {
+      $pictureNameOnly = $data->getLinkToPicture();
+      $pos = strrpos($data->getLinkToPicture(), "\\");
+      if ($pos === FALSE) {
+        $pos = strrpos($data->getLinkToPicture(), "/");
+      }
+      if ($pos !== FALSE) {
+        $pictureNameOnly = substr($data->getLinkToPicture(), $pos+1);
+      }
+      if ($data->getLinkToPicture() != "" && $pictureNameOnly != $languageStorData->getLinkToPicture()) {
         $image          = file_get_contents($data->getLinkToPicture());
         $imageInfo      = getimagesizefromstring($image);
         $imageExtension = str_replace("image/", "", $imageInfo['mime']);
@@ -81,7 +88,8 @@ if (is_null($dbConnection->getError())) {
       list($insere, $idLanguage) = LanguageStor::save($languageStorData, $dbConnection);
 
       if ($insere) {
-        $dbConnection->commit();
+        // $dbConnection->commit();
+        $dbConnection->rollBack();
       } else {
         $dbConnection->rollBack();
         if ($data->getId() > 0) {
@@ -103,7 +111,7 @@ if ($errorData != null) {
   $dataSvc->addErrorToResponse($errorData);
 }
 
-$dataSvc->addToResponse("ConfirmSave", $insere);
+$dataSvc->addToResponse("ConfirmSave", $insere && $canSaveLanguage);
 
 // Return response
 $dataSvc->endOfService();

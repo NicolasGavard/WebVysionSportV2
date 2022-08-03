@@ -322,7 +322,7 @@ class CategoryFoodTypeStor {
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "UPDATE categorycategoryfoodtype SET ";
+      $request  = "UPDATE categoryfoodtype SET ";
       $request .= "code= :code,";
       $request .= "name= :name,";
       $request .= "elemstate= :elemstate,";
@@ -412,7 +412,7 @@ class CategoryFoodTypeStor {
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "DELETE FROM categorycategoryfoodtype";
+      $request  = "DELETE FROM categoryfoodtype";
       $request .= " WHERE id = :id";
       $stmt = $inDbConnection->prepare($request);
       $stmt->execute(['id'=> $id]);
@@ -447,7 +447,7 @@ class CategoryFoodTypeStor {
     $request = "";
 
     if ($inDbConnection != null) {
-      $request  = "INSERT INTO categorycategoryfoodtype(";
+      $request  = "INSERT INTO categoryfoodtype(";
       $request .= "code,name,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";

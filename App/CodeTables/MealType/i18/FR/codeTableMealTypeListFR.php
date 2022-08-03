@@ -13,6 +13,7 @@
   $page_delete_title    = "Supprimer le type de repas";
   $page_restore_title   = "Restaurer le type de repas";
 
-  $errorData_txt_code   = "Le code du type de repas est déjà utilisé !!";
-  $errorData_txt_name   = "Le nom du type de repas est manquant !!";
-  $errorData_txt_langue = "La langue du type de repas est manquante !!";
+  $errorData_txt_code       = "Le code du type de repas est déjà utilisé !!";
+  $errorData_txt_code_empty = "Le code du type de repas est manquant !!";
+  $errorData_txt_name       = "Le nom du type de repas est manquant !!";
+  $errorData_txt_langue     = "La langue du type de repas est manquante !!";

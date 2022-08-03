@@ -447,7 +447,7 @@ class MealTypeStor {
 
     if ($inDbConnection != null) {
       $request  = "INSERT INTO mealtype(";
-      $request .= "code,name,elemstate,timestamp)";
+      $request .= "code,name,displayorder,elemstate,timestamp)";
       $request .= " VALUES(";
       $request .= ":code,";
       $request .= ":name,";

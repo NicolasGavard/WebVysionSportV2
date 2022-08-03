@@ -43,25 +43,39 @@ if (is_null($dbConnection->getError())) {
           }
       }
       if ($canSave) {
-        $currentTicketStatusStorData = TicketStatusStor::read($ticketStatusStorData->getId(), $dbConnection);
+        list($currentTicketStatusStorData, $listNames) = TicketStatusStor::readNames($ticketStatusStorData->getId(), $dbConnection);
         if (($ticketStatusStorData->getId() == $currentTicketStatusStorData->getId() && $ticketStatusStorData->getTimestamp() == $currentTicketStatusStorData->getTimestamp())
         || ($ticketStatusStorData->getId() != $currentTicketStatusStorData->getId())) {
           list($insere, $idTicketStatusStorData) = TicketStatusStor::save($ticketStatusStorData, $dbConnection);
-          foreach ($ticketStatusNamesStorData as $ticketStatusNameStorData) {
-            $ticketStatusNameStorData->setIdTicketStatus($idTicketStatusStorData);
-            if ($ticketStatusNameStorData->getId() > 0) {
-              $currentTicketStatusNameStorData = TicketStatusNameStor::read($ticketStatusNameStorData->getId(), $dbConnection);
-              if ($ticketStatusNameStorData->getId() == $currentTicketStatusNameStorData->getId() 
-              && $ticketStatusNameStorData->getTimestamp() != $currentTicketStatusNameStorData->getTimestamp()) {
-                $canSave = false;
-                $distriXSvcErrorData = new DistriXSvcErrorData();
-                $distriXSvcErrorData->setCode("402");
-                $distriXSvcErrorData->setDefaultText("The language data of " . $ticketStatusStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
-                $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
-                $errorData = $distriXSvcErrorData;
-                break;
+          if (!empty($listNames)) {
+            foreach ($listNames as $nameStorData) {
+              $notFound = true;
+              foreach ($ticketStatusNamesStorData as $ticketStatusNameStorData) {
+                $ticketStatusNameStorData->setIdTicketStatus($idTicketStatusStorData);
+                if ($ticketStatusNameStorData->getId() && $ticketStatusNameStorData->getId() == $nameStorData->getId()) {
+                  $notFound = false;
+                  if ($ticketStatusNameStorData->getTimestamp() != $nameStorData->getTimestamp()) {
+                    $canSave = false;
+                    $distriXSvcErrorData = new DistriXSvcErrorData();
+                    $distriXSvcErrorData->setCode("402");
+                    $distriXSvcErrorData->setDefaultText("The language data of " . $ticketStatusStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
+                    $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
+                    $errorData = $distriXSvcErrorData;
+                    break;
+                  }
+                }
+                list($insere, $idTicketStatusNameStorData) = TicketStatusNameStor::save($ticketStatusNameStorData, $dbConnection);
+                if (!$insere) { break; }
+              }
+              if ($notFound) { // This language has been removed !
+                  $insere = TicketStatusNameStor::delete($nameStorData->getId(), $dbConnection);
+                  if (!$insere) { break; }
               }
             }
+          }
+        } else { // Currently no languages
+          foreach ($ticketStatusNamesStorData as $ticketStatusNameStorData) {
+            $ticketStatusNameStorData->setIdTicketStatus($idTicketStatusStorData);
             list($insere, $idTicketStatusNameStorData) = TicketStatusNameStor::save($ticketStatusNameStorData, $dbConnection);
             if (!$insere) { break; }
           }

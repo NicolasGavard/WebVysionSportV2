@@ -121,15 +121,15 @@
 
   $menu_codeTables                    = "Tables de code";
   $menu_codeTables_weightType_list    = "Contenances";
-  $menu_codeTables_food_category_list = "Catégories d'aliments";
-  $menu_codeTables_food_type_list     = "Types d'aliments";
+  $menu_codeTables_food_category_list = "Catégories d'aliment";
+  $menu_codeTables_food_type_list     = "Types d'aliment";
   $menu_codeTables_meal_type_list     = "Types de repas";
   $menu_codeTables_nutritional_list   = "Infos nutritionnelles";
-  $menu_codeTables_food_type_list     = "Types d'aliments";
+  $menu_codeTables_food_type_list     = "Types d'aliment";
   $menu_codeTables_language_list      = "Langues";
-  $menu_codeTables_ticket_status_list = "Statuts d'incidents";
-  $menu_codeTables_ticket_type_list   = "Types d'incidents";
-  $menu_codeTables_circuit_type_list   = "Types de circuits";
+  $menu_codeTables_ticket_status_list = "Statuts d'incident";
+  $menu_codeTables_ticket_type_list   = "Types d'incident";
+  $menu_codeTables_circuit_type_list   = "Types de circuit";
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                    HEADER                                                        //

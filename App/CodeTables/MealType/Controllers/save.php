@@ -42,7 +42,7 @@ if (isset($_POST)) {
   }
 }
 $resp["ConfirmSave"] = $confirmSave;
-if (!empty($error)){
+if (!empty($error)) {
   $resp["Error"] = $error;
 }
 echo json_encode($resp);

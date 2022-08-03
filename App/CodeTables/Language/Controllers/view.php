@@ -13,14 +13,13 @@ list($outputok, $output, $errorData) = $servicesCaller->call(); //var_dump($outp
 $logOk = logController("Security_Language", "DistriXLanguageDeleteDataSvc", "DelLanguage", $output);
 
 if ($outputok && isset($output["ViewLanguage"])) {
-  $distriXCodeTableBandData = $output["ViewLanguage"];
+  list($distriXCodeTableBandData, $jsonError) = DistriXCodeTableLanguageData::getJsonData($output["ViewLanguage"]);
 } else {
   $error = $errorData;
 }
 
-$resp["ViewLanguage"]  = $distriXCodeTableBandData;
-if(!empty($error)){
-  $resp["Error"]    = $error;
+$resp["ViewLanguage"] = $distriXCodeTableBandData;
+if (!empty($error)) {
+  $resp["Error"] = $error;
 }
-
 echo json_encode($resp);

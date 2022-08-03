@@ -26,6 +26,10 @@ $(function () {
     },
   });
 
+  $("#TicketTypeTable tbody").on("click", "td", function () {
+    viewDetail(this, ticketTypeTable, "ViewTicketType");
+  });
+
   $(".btn-warning").on("click", function () {
     $(".btn-success").removeClass("disabled");
     $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
@@ -93,11 +97,11 @@ $(function () {
     if (code == "" || name == "") {
       if (code == "") {
         $(".AddTicketTypeFormCode").addClass("form-control-danger");
-        $(".danger-code").removeClass("d-none");
+        $(".danger-code-empty").removeClass("d-none");
 
         setTimeout(() => {
           $(".AddTicketTypeFormCode").removeClass("form-control-danger");
-          $(".danger-code").addClass("d-none");
+          $(".danger-code-empty").addClass("d-none");
         }, 3000);
       }
       if (name == "") {
@@ -127,19 +131,21 @@ $(function () {
             }
           });
         }
-        let ticketTypeName = {
-          id: idName,
-          idTicketType: idTicketType,
-          idLanguage: idNameLanguage,
-          elemState: elemStateName,
-          timestamp: timestampName,
-          name: this.value,
-        };
-        ticketTypeNames.push(ticketTypeName);
+        if (this.value.length > 0) {
+          let ticketTypeName = {
+            id: idName,
+            idTicketType: idTicketType,
+            idLanguage: idNameLanguage,
+            elemState: elemStateName,
+            timestamp: timestampName,
+            name: this.value,
+          };
+          ticketTypeNames.push(ticketTypeName);
+        }
       });
-      var id = 0;
-      var timestamp = 0;
-      var elemState = 0;
+      let id = 0;
+      let timestamp = 0;
+      let elemState = 0;
       if (ticketTypeSelectedData != null) {
         id = ticketTypeSelectedData.id;
         timestamp = ticketTypeSelectedData.timestamp;
@@ -288,9 +294,11 @@ $(function () {
           '       <i class="dw dw-more"></i>' +
           "     </a>" +
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' +
-          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddTicketType" onclick="ViewTicketType(\'' +
+          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddTicketType" id="ViewTicketType' +
           val.id +
-          '\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>' +
+          '" onclick="ViewTicketType(' +
+          val.id +
+          ');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>' +
           '       <a class="dropdown-item ' +
           actionBtnDelete +
           '"  data-toggle="modal" data-target="#modalDel"         onclick="DelTicketType(\'' +

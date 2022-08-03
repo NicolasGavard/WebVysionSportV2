@@ -26,6 +26,10 @@ $(function () {
     },
   });
 
+  $("#NutritionalTable tbody").on("click", "td", function () {
+    viewDetail(this, nutritionalTable, "ViewNutritional");
+  });
+
   $(".btn-warning").on("click", function () {
     $(".btn-success").removeClass("disabled");
     $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
@@ -93,11 +97,11 @@ $(function () {
     if (code == "" || name == "") {
       if (code == "") {
         $(".AddNutritionalFormCode").addClass("form-control-danger");
-        $(".danger-code").removeClass("d-none");
+        $(".danger-code-empty").removeClass("d-none");
 
         setTimeout(() => {
           $(".AddNutritionalFormCode").removeClass("form-control-danger");
-          $(".danger-code").addClass("d-none");
+          $(".danger-code-empty").addClass("d-none");
         }, 3000);
       }
       if (name == "") {
@@ -130,19 +134,21 @@ $(function () {
             }
           );
         }
-        let nutritionalName = {
-          id: idName,
-          idNutritional: idNutritional,
-          idLanguage: idNameLanguage,
-          elemState: elemStateName,
-          timestamp: timestampName,
-          name: this.value,
-        };
-        nutritionalNames.push(nutritionalName);
+        if (this.value.length > 0) {
+          let nutritionalName = {
+            id: idName,
+            idNutritional: idNutritional,
+            idLanguage: idNameLanguage,
+            elemState: elemStateName,
+            timestamp: timestampName,
+            name: this.value,
+          };
+          nutritionalNames.push(nutritionalName);
+        }
       });
-      var id = 0;
-      var timestamp = 0;
-      var elemState = 0;
+      let id = 0;
+      let timestamp = 0;
+      let elemState = 0;
       if (nutritionalSelectedData != null) {
         id = nutritionalSelectedData.id;
         timestamp = nutritionalSelectedData.timestamp;
@@ -291,9 +297,11 @@ $(function () {
           '       <i class="dw dw-more"></i>' +
           "     </a>" +
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' +
-          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddNutritional" onclick="ViewNutritional(\'' +
+          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddNutritional" id="ViewNutritional' +
           val.id +
-          '\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>' +
+          '" onclick="ViewNutritional(' +
+          val.id +
+          ');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>' +
           '       <a class="dropdown-item ' +
           actionBtnDelete +
           '"  data-toggle="modal" data-target="#modalDel"         onclick="DelNutritional(\'' +

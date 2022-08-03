@@ -13,6 +13,7 @@
   $page_delete_title    = "Supprimer le statut d'incident";
   $page_restore_title   = "Restaurer le statut d'incident";
 
-  $errorData_txt_code   = "Le code du statut d'incident est déjà utilisé !!";
-  $errorData_txt_name   = "Le nom du statut d'incident est manquant !!";
-  $errorData_txt_langue = "La langue du statut d'incident est manquante !!";
+  $errorData_txt_code       = "Le code du statut d'incident est déjà utilisé !!";
+  $errorData_txt_code_empty = "Le code du statut d'incident est manquant !!";
+  $errorData_txt_name       = "Le nom du statut d'incident est manquant !!";
+  $errorData_txt_langue     = "La langue du statut d'incident est manquante !!";
