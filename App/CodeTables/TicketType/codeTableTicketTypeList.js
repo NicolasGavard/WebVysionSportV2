@@ -294,7 +294,7 @@ $(function () {
           '       <i class="dw dw-more"></i>' +
           "     </a>" +
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' +
-          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddTicketType"  id="ViewTicketType' +
+          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddTicketType" id="ViewTicketType' +
           val.id +
           '" onclick="ViewTicketType(' +
           val.id +

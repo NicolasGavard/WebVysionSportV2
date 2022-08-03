@@ -26,6 +26,10 @@ $(function () {
     },
   });
 
+  $("#TicketStatusTable tbody").on("click", "td", function () {
+    viewDetail(this, ticketStatusTable, "ViewTicketStatus");
+  });
+
   $(".btn-warning").on("click", function () {
     $(".btn-success").removeClass("disabled");
     $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
@@ -132,15 +136,17 @@ $(function () {
             }
           );
         }
-        let ticketStatusName = {
-          id: idName,
-          idTicketStatus: idTicketStatus,
-          idLanguage: idNameLanguage,
-          elemState: elemStateName,
-          timestamp: timestampName,
-          name: this.value,
-        };
-        ticketStatusNames.push(ticketStatusName);
+        if (this.value.length > 0) {
+          let ticketStatusName = {
+            id: idName,
+            idTicketStatus: idTicketStatus,
+            idLanguage: idNameLanguage,
+            elemState: elemStateName,
+            timestamp: timestampName,
+            name: this.value,
+          };
+          ticketStatusNames.push(ticketStatusName);
+        }
       });
       var id = 0;
       var timestamp = 0;
@@ -300,7 +306,9 @@ $(function () {
           '       <i class="dw dw-more"></i>' +
           "     </a>" +
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' +
-          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddTicketStatus" onclick="ViewTicketStatus(\'' +
+          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddTicketStatus" id="ViewTicketStatus' +
+          val.id +
+          '" onclick="ViewTicketStatus(\'' +
           val.id +
           '\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>' +
           '       <a class="dropdown-item ' +
