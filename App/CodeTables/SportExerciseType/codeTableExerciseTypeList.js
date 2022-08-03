@@ -26,6 +26,10 @@ $(function () {
     },
   });
 
+  $("#ExerciseTypeTable tbody").on("click", "td", function () {
+    viewDetail(this, exerciseTypeTable, "ViewExerciseType");
+  });
+
   $(".btn-warning").on("click", function () {
     $(".btn-success").removeClass("disabled");
     $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
@@ -93,11 +97,11 @@ $(function () {
     if (code == "" || name == "") {
       if (code == "") {
         $(".AddExerciseTypeFormCode").addClass("form-control-danger");
-        $(".danger-code").removeClass("d-none");
+        $(".danger-code-empty").removeClass("d-none");
 
         setTimeout(() => {
           $(".AddExerciseTypeFormCode").removeClass("form-control-danger");
-          $(".danger-code").addClass("d-none");
+          $(".danger-code-empty").addClass("d-none");
         }, 3000);
       }
       if (name == "") {
@@ -132,15 +136,17 @@ $(function () {
             }
           );
         }
-        let exerciseTypeName = {
-          id: idName,
-          idExerciseType: idExerciseType,
-          idLanguage: idNameLanguage,
-          elemState: elemStateName,
-          timestamp: timestampName,
-          name: this.value,
-        };
-        exerciseTypeNames.push(exerciseTypeName);
+        if (this.value.length > 0) {
+          let exerciseTypeName = {
+            id: idName,
+            idExerciseType: idExerciseType,
+            idLanguage: idNameLanguage,
+            elemState: elemStateName,
+            timestamp: timestampName,
+            name: this.value,
+          };
+          exerciseTypeNames.push(exerciseTypeName);
+        }
       });
       var id = 0;
       var timestamp = 0;
@@ -300,9 +306,11 @@ $(function () {
           '       <i class="dw dw-more"></i>' +
           "     </a>" +
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' +
-          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddExerciseType" onclick="ViewExerciseType(\'' +
+          '       <a class="dropdown-item" data-toggle="modal" data-target="#modalAddExerciseType" id="ViewExerciseType' +
           val.id +
-          '\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>' +
+          '" onclick="ViewExerciseType(' +
+          val.id +
+          ');" href="#"><i class="dw dw-edit2"></i> Voir</a>' +
           '       <a class="dropdown-item ' +
           actionBtnDelete +
           '"  data-toggle="modal" data-target="#modalDel"         onclick="DelExerciseType(\'' +

@@ -26,6 +26,10 @@ $(function () {
     },
   });
 
+  $("#BodyMemberTable tbody").on("click", "td", function () {
+    viewDetail(this, bodyMemberTable, "ViewBodyMember");
+  });
+
   $(".btn-warning").on("click", function () {
     $(".btn-success").removeClass("disabled");
     $(".dw-success").removeClass("dw-checked").addClass("dw-ban");
@@ -93,11 +97,11 @@ $(function () {
     if (code == "" || name == "") {
       if (code == "") {
         $(".AddBodyMemberFormCode").addClass("form-control-danger");
-        $(".danger-code").removeClass("d-none");
+        $(".danger-code-empty").removeClass("d-none");
 
         setTimeout(() => {
           $(".AddBodyMemberFormCode").removeClass("form-control-danger");
-          $(".danger-code").addClass("d-none");
+          $(".danger-code-empty").addClass("d-none");
         }, 3000);
       }
       if (name == "") {
@@ -127,15 +131,17 @@ $(function () {
             }
           });
         }
-        let bodyMemberName = {
-          id: idName,
-          idBodyMember: idBodyMember,
-          idLanguage: idNameLanguage,
-          elemState: elemStateName,
-          timestamp: timestampName,
-          name: this.value,
-        };
-        bodyMemberNames.push(bodyMemberName);
+        if (this.value.length > 0) {
+          let bodyMemberName = {
+            id: idName,
+            idBodyMember: idBodyMember,
+            idLanguage: idNameLanguage,
+            elemState: elemStateName,
+            timestamp: timestampName,
+            name: this.value,
+          };
+          bodyMemberNames.push(bodyMemberName);
+        }
       });
       var id = 0;
       var timestamp = 0;
@@ -288,9 +294,11 @@ $(function () {
           '       <i class="dw dw-more"></i>' +
           "     </a>" +
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' +
-          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddBodyMember" onclick="ViewBodyMember(\'' +
+          '       <a class="dropdown-item" data-toggle="modal" data-target="#modalAddBodyMember" id="ViewBodyMember' +
           val.id +
-          '\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>' +
+          '" onclick="ViewBodyMember(' +
+          val.id +
+          ');" href="#"><i class="dw dw-edit2"></i> Voir</a>' +
           '       <a class="dropdown-item ' +
           actionBtnDelete +
           '"  data-toggle="modal" data-target="#modalDel"         onclick="DelBodyMember(\'' +

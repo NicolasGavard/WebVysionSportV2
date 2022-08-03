@@ -1,6 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
 include(__DIR__ . "/../../../Init/DataSvcInit.php");
+if ($dataSvc->isAuthorized()) {
 // Database Data
 include(__DIR__ . "/Data/BodyMemberStorData.php");
 include(__DIR__ . "/Data/BodyMemberNameStorData.php");
@@ -41,26 +42,40 @@ if (is_null($dbConnection->getError())) {
           }
       }
       if ($canSave) {
-        $currentBodyMemberStorData = BodyMemberStor::read($bodyMemberStorData->getId(), $dbConnection);
+        list($currentBodyMemberStorData, $listNames) = BodyMemberStor::readNames($bodyMemberStorData->getId(), $dbConnection);
         if (($bodyMemberStorData->getId() == $currentBodyMemberStorData->getId() && $bodyMemberStorData->getTimestamp() == $currentBodyMemberStorData->getTimestamp())
         || ($bodyMemberStorData->getId() != $currentBodyMemberStorData->getId())) {
           list($insere, $idBodyMemberStorData) = BodyMemberStor::save($bodyMemberStorData, $dbConnection);
-          foreach ($bodyMemberNamesStorData as $bodyMemberNameStorData) {
-            $bodyMemberNameStorData->setIdBodyMember($idBodyMemberStorData);
-            if ($bodyMemberNameStorData->getId() > 0) {
-              $currentBodyMemberNameStorData = BodyMemberNameStor::read($bodyMemberNameStorData->getId(), $dbConnection);
-              if ($bodyMemberNameStorData->getId() == $currentBodyMemberNameStorData->getId() 
-              && $bodyMemberNameStorData->getTimestamp() != $currentBodyMemberNameStorData->getTimestamp()) {
-                $canSave = false;
-                $distriXSvcErrorData = new ApplicationErrorData("402", 1, 1);
-                $distriXSvcErrorData->setDefaultText("The language data of " . $bodyMemberStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
-                $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
-                $errorData = $distriXSvcErrorData;
-                break;
+          if (!empty($listNames)) {
+            foreach ($listNames as $nameStorData) {
+              $notFound = true;
+              foreach ($bodyMemberNamesStorData as $bodyMemberNameStorData) {
+                $bodyMemberNameStorData->setIdBodyMember($idBodyMemberStorData);
+                if ($bodyMemberNameStorData->getId() > 0 && $bodyMemberNameStorData->getId() == $nameStorData->getId()) {
+                  $notFound = false;
+                  if ($bodyMemberNameStorData->getTimestamp() != $nameStorData->getTimestamp()) {
+                    $canSave = false;
+                    $distriXSvcErrorData = new ApplicationErrorData("402", 1, 1);
+                    $distriXSvcErrorData->setDefaultText("The language data of " . $bodyMemberStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
+                    $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
+                    $errorData = $distriXSvcErrorData;
+                    break;
+                  }
+                }
+                list($insere, $idBodyMemberNameStorData) = BodyMemberNameStor::save($bodyMemberNameStorData, $dbConnection);
+                if (!$insere) { break; }
+              }
+              if ($notFound) { // This language has been removed !
+                  $insere = BodyMemberNameStor::delete($nameStorData->getId(), $dbConnection);
+                  if (!$insere) { break; }
               }
             }
-            list($insere, $idBodyMemberNameStorData) = BodyMemberNameStor::save($bodyMemberNameStorData, $dbConnection);
-            if (!$insere) { break; }
+          } else { // Currently no languages
+            foreach ($bodyMemberNamesStorData as $bodyMemberNameStorData) {
+              $bodyMemberNameStorData->setIdBodyMember($idBodyMemberStorData);
+              list($insere, $idBodyMemberNameStorData) = BodyMemberNameStor::save($bodyMemberNameStorData, $dbConnection);
+              if (!$insere) { break; }
+            }
           }
         }
       }
@@ -93,3 +108,4 @@ $dataSvc->addToResponse("ConfirmSave", $insere && $canSave);
 
 // Return response
 $dataSvc->endOfService();
+}

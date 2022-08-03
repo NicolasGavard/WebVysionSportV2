@@ -1,6 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
 include(__DIR__ . "/../../../Init/DataSvcInit.php");
+if ($dataSvc->isAuthorized()) {
 // Database Data
 include(__DIR__ . "/Data/ExerciseTypeStorData.php");
 include(__DIR__ . "/Data/ExerciseTypeNameStorData.php");
@@ -41,26 +42,40 @@ if (is_null($dbConnection->getError())) {
           }
       }
       if ($canSave) {
-        $currentExerciseTypeStorData = ExerciseTypeStor::read($exerciseTypeStorData->getId(), $dbConnection);
+        list($currentExerciseTypeStorData, $listNames) = ExerciseTypeStor::readNames($exerciseTypeStorData->getId(), $dbConnection);
         if (($exerciseTypeStorData->getId() == $currentExerciseTypeStorData->getId() && $exerciseTypeStorData->getTimestamp() == $currentExerciseTypeStorData->getTimestamp())
         || ($exerciseTypeStorData->getId() != $currentExerciseTypeStorData->getId())) {
           list($insere, $idExerciseTypeStorData) = ExerciseTypeStor::save($exerciseTypeStorData, $dbConnection);
-          foreach ($exerciseTypeNamesStorData as $exerciseTypeNameStorData) {
-            $exerciseTypeNameStorData->setIdExerciseType($idExerciseTypeStorData);
-            if ($exerciseTypeNameStorData->getId() > 0) {
-              $currentExerciseTypeNameStorData = ExerciseTypeNameStor::read($exerciseTypeNameStorData->getId(), $dbConnection);
-              if ($exerciseTypeNameStorData->getId() == $currentExerciseTypeNameStorData->getId() 
-              && $exerciseTypeNameStorData->getTimestamp() != $currentExerciseTypeNameStorData->getTimestamp()) {
-                $canSave = false;
-                $distriXSvcErrorData = new ApplicationErrorData("402", 1, 1);
-                $distriXSvcErrorData->setDefaultText("The language data of " . $exerciseTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
-                $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
-                $errorData = $distriXSvcErrorData;
-                break;
+          if (!empty($listNames)) {
+            foreach ($listNames as $nameStorData) {
+              $notFound = true;
+              foreach ($exerciseTypeNamesStorData as $exerciseTypeNameStorData) {
+                $exerciseTypeNameStorData->setIdExerciseType($idExerciseTypeStorData);
+                if ($exerciseTypeNameStorData->getId() > 0 && $exerciseTypeNameStorData->getId() == $nameStorData->getId()) {
+                  $notFound = false;
+                  if ($exerciseTypeNameStorData->getTimestamp() != $nameStorData->getTimestamp()) {
+                    $canSave = false;
+                    $distriXSvcErrorData = new ApplicationErrorData("402", 1, 1);
+                    $distriXSvcErrorData->setDefaultText("The language data of " . $exerciseTypeStorData->getCode() . " has been modified by another user. Please reload the data to see the modifications.");
+                    $distriXSvcErrorData->setText("DATA_ALREADY_MODIFIED");
+                    $errorData = $distriXSvcErrorData;
+                    break;
+                  }
+                }
+                list($insere, $idExerciseTypeNameStorData) = ExerciseTypeNameStor::save($exerciseTypeNameStorData, $dbConnection);
+                if (!$insere) { break; }
+              }
+              if ($notFound) { // This language has been removed !
+                  $insere = ExerciseTypeNameStor::delete($nameStorData->getId(), $dbConnection);
+                  if (!$insere) { break; }
               }
             }
-            list($insere, $idExerciseTypeNameStorData) = ExerciseTypeNameStor::save($exerciseTypeNameStorData, $dbConnection);
-            if (!$insere) { break; }
+          } else { // Currently no languages
+            foreach ($exerciseTypeNamesStorData as $exerciseTypeNameStorData) {
+              $exerciseTypeNameStorData->setIdExerciseType($idExerciseTypeStorData);
+              list($insere, $idExerciseTypeNameStorData) = ExerciseTypeNameStor::save($exerciseTypeNameStorData, $dbConnection);
+              if (!$insere) { break; }
+            }
           }
         }
       }
@@ -93,3 +108,4 @@ $dataSvc->addToResponse("ConfirmSave", $insere && $canSave);
 
 // Return response
 $dataSvc->endOfService();
+}

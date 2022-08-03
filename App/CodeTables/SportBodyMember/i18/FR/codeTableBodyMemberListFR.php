@@ -13,9 +13,10 @@
   $page_delete_title    = "Supprimer le membre du corps";
   $page_restore_title   = "Restaurer le membre du corps";
 
-  $errorData_txt_code   = "Le code du membre du corps est manquant";
-  $errorData_txt_name   = "Le nom du membre du corps est manquant";
-  $errorData_txt_langue = "La langue du membre du corps est manquante";
+  $errorData_txt_code       = "Le code du membre du corps est déjà utilisé !!";
+  $errorData_txt_code_empty = "Le code du membre du corps est manquant";
+  $errorData_txt_name       = "Le nom du membre du corps est manquant";
+  $errorData_txt_langue     = "La langue du membre du corps est manquante";
 
   $error_400_txt        = "Le Code {0} est déjà utilisé";
   $error_401_txt        = "Les informations de {0} ont été modifiées par un autre utilisateur. Merci d'afficher à nouveau la page pour voir les modifications.";
