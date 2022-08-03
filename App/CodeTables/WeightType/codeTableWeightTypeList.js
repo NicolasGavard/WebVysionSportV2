@@ -4,8 +4,8 @@ $(function () {
   var weightTypeTableData = "";
   var weightTypeTable = $("#WeightTypeTable").DataTable({
     columnDefs: [
-      { orderable: false, targets: 2 },
-      { orderable: false, targets: 3 },
+      { orderable: false, targets: 4 },
+      { orderable: false, targets: 5 },
     ],
     language: {
       url: "../../i18/FR/DataTableFrench.json",
@@ -24,6 +24,10 @@ $(function () {
     error: function (data) {
       console.log(data);
     },
+  });
+
+  $("#WeightTypeTable tbody").on("click", "td", function () {
+    viewDetail(this, weightTypeTable, "ViewWeightType");
   });
 
   $(".btn-warning").on("click", function () {
@@ -57,6 +61,7 @@ $(function () {
     weightTypeSelectedData = null;
     $(".AddWeightTypeFormCode").val("");
     $(".AddWeightTypeFormName").val("");
+    $(".AddWeightTypeFormAbb").val("");
     $("#weightTypeLanguages").html("");
 
     const languages = weightTypeTableLanguagesData;
@@ -90,14 +95,15 @@ $(function () {
   $("#btnAddWeightType, #btnUpdateWeightType").on("click", function () {
     var code = $("#AddWeightTypeFormCode").val();
     var name = $("#AddWeightTypeFormName").val();
-    if (code == "" || name == "") {
+    var abb = $("#AddWeightTypeFormAbb").val();
+    if (code == "" || name == "" || abb == "") {
       if (code == "") {
         $(".AddWeightTypeFormCode").addClass("form-control-danger");
-        $(".danger-code").removeClass("d-none");
+        $(".danger-code-empty").removeClass("d-none");
 
         setTimeout(() => {
           $(".AddWeightTypeFormCode").removeClass("form-control-danger");
-          $(".danger-code").addClass("d-none");
+          $(".danger-code-empty").addClass("d-none");
         }, 3000);
       }
       if (name == "") {
@@ -107,6 +113,15 @@ $(function () {
         setTimeout(() => {
           $(".AddWeightTypeFormName").removeClass("form-control-danger");
           $(".danger-name").addClass("d-none");
+        }, 3000);
+      }
+      if (abb == "") {
+        $(".AddWeightTypeFormAbb").addClass("form-control-danger");
+        $(".danger-abb").removeClass("d-none");
+
+        setTimeout(() => {
+          $(".AddWeightTypeFormAbb").removeClass("form-control-danger");
+          $(".danger-abb").addClass("d-none");
         }, 3000);
       }
     } else {
@@ -127,15 +142,17 @@ $(function () {
             }
           });
         }
-        let weightTypeName = {
-          id: idName,
-          idWeightType: idWeightType,
-          idLanguage: idNameLanguage,
-          elemState: elemStateName,
-          timestamp: timestampName,
-          name: this.value,
-        };
-        weightTypeNames.push(weightTypeName);
+        if (this.value.length > 0) {
+          let weightTypeName = {
+            id: idName,
+            idWeightType: idWeightType,
+            idLanguage: idNameLanguage,
+            elemState: elemStateName,
+            timestamp: timestampName,
+            name: this.value,
+          };
+          weightTypeNames.push(weightTypeName);
+        }
       });
       var id = 0;
       var timestamp = 0;
@@ -149,7 +166,15 @@ $(function () {
         url: "Controllers/save.php",
         type: "POST",
         dataType: "JSON",
-        data: { id, code, name, elemState, timestamp, names: weightTypeNames },
+        data: {
+          id,
+          code,
+          name,
+          abbreviation: abb,
+          elemState,
+          timestamp,
+          names: weightTypeNames,
+        },
         success: function (data) {
           if (data.ConfirmSave) {
             $("#sa-success-distrix").trigger("click");
@@ -314,9 +339,11 @@ $(function () {
           '       <i class="dw dw-more"></i>' +
           "     </a>" +
           '     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">' +
-          '       <a class="dropdown-item"                      data-toggle="modal" data-target="#modalAddWeightType" onclick="ViewWeightType(\'' +
+          '       <a class="dropdown-item" data-toggle="modal" data-target="#modalAddWeightType" id="ViewWeightType' +
           val.id +
-          '\');"                   href="#"><i class="dw dw-edit2"></i> Voir</a>' +
+          '" onclick="ViewWeightType(' +
+          val.id +
+          ');" href="#"><i class="dw dw-edit2"></i> Voir</a>' +
           '       <a class="dropdown-item ' +
           actionBtnDelete +
           '"  data-toggle="modal" data-target="#modalDel"           onclick="DelWeightType(\'' +
@@ -357,6 +384,7 @@ function ViewWeightType(id) {
 
       $(".AddWeightTypeFormCode").val(data.ViewWeightType.code);
       $(".AddWeightTypeFormName").val(data.ViewWeightType.name);
+      $(".AddWeightTypeFormAbb").val(data.ViewWeightType.abbreviation);
       $("#weightTypeLanguages").html("");
 
       const languages = weightTypeTableLanguagesData;

@@ -21,5 +21,7 @@
   $page_liquid_title    = "Liquide";
   $page_other_title     = "Autre";
 
-  $errorData_txt_name   = "Le nom de l'unité de mesures est manquant !!";
-  $errorData_txt_abb    = "L'abbréviation de l'unité de mesures est manquante !!";
+  $errorData_txt_code       = "Le code de l'unité de mesures est déjà utilisé !!";
+  $errorData_txt_code_empty = "Le code de l'unité de mesures est manquant !!";
+  $errorData_txt_name       = "Le nom de l'unité de mesures est manquant !!";
+  $errorData_txt_abb        = "L'abbréviation de l'unité de mesures est manquante !!";
