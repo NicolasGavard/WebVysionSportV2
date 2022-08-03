@@ -102,14 +102,12 @@ if (is_null($dbConnection->getError())) {
   $errorData = ApplicationErrorData::noDatabaseConnection(1, 32);
 }
 
-
-
 if ($errorData != null) {
   $errorData->setApplicationModuleFunctionalityCodeAndFilename("Distrix", "SaveNutritional", $dataSvc->getMethodName(), basename(__FILE__));
   $dataSvc->addErrorToResponse($errorData);
 }
 
-$dataSvc->addToResponse("ConfirmSave", $insere);
+$dataSvc->addToResponse("ConfirmSave", $insere && $canSave);
 
 // Return response
 $dataSvc->endOfService();

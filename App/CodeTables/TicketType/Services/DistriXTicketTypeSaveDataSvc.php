@@ -1,6 +1,7 @@
 <?php // Needed to encode in UTF8 ààéàé //
 // Service Init
 include(__DIR__ . "/../../../Init/DataSvcInit.php");
+if ($dataSvc->isAuthorized()) {
 // Database Data
 include(__DIR__ . "/Data/TicketTypeStorData.php");
 include(__DIR__ . "/Data/TicketTypeNameStorData.php");
@@ -111,3 +112,4 @@ $dataSvc->addToResponse("ConfirmSave", $insere && $canSave);
 
 // Return response
 $dataSvc->endOfService();
+}

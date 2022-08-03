@@ -103,7 +103,7 @@ if ($errorData != null) {
   $dataSvc->addErrorToResponse($errorData);
 }
 
-$dataSvc->addToResponse("ConfirmSave", $insere);
+$dataSvc->addToResponse("ConfirmSave", $insere && $canSaveLanguage);
 
 // Return response
 $dataSvc->endOfService();
