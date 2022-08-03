@@ -63,8 +63,8 @@ if (isset($_POST)) {
   }
 }
 
-$resp["ListWeightTypes"]  = $listWeightTypes;
-$resp["ListLanguages"]    = $listLanguages;
+$resp["ListWeightTypes"] = $listWeightTypes;
+$resp["ListLanguages"]   = $listLanguages;
 if (!empty($error)) {
   $resp["Error"] = $error;
 }

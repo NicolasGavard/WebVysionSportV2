@@ -83,7 +83,7 @@ echo convertToScript($toScript);
               
               <div class="row">
                 <div class="col-md-4 col-sm-12">
-                  <div class="form-group">
+                  <div class="form-group" style="text-align:left;">
                     <label><?php echo $page_abbreviation; ?></label>
                   </div>
                 </div>
@@ -94,7 +94,24 @@ echo convertToScript($toScript);
                   </div>
                 </div>
               </div>
-              
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group" style="text-align:left;">
+                    <label><?php echo $page_abbreviation; ?></label>
+                  </div>
+                </div>
+                <div class="col-md-8 col-sm-12">
+                  <div class="form-group" style="text-align:left;">
+                    <input type="radio" checked id="StateSolid" name="weightTypeState" class="radio-inline">
+                    <label for="StateSolid"><?php echo $page_solid_title;?></label>
+                    <input type="radio" id="StateLiquid" name="weightTypeState" class="radio-inline">
+                    <label for="StateLiquid"><?php echo $page_liquid_title;?></label>
+                    <input type="radio" id="StateOther" name="weightTypeState" class="radio-inline">
+                    <label for="StateOther"><?php echo $page_other_title;?></label>
+                  </div>
+                </div>
+              </div>
+
               <div class="row">
                 <label class="col-sm-12 col-md-12"><?php echo $page_languages; ?></label>
               </div>

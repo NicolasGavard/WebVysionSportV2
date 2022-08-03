@@ -57,8 +57,8 @@ class WeightTypeStor {
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
           $data->setAbbreviation($row["abbreviation"]);
-          $data->setIsLiquid($row["issolid"]);
-          $data->setIsSolid($row["isliquid"]);
+          $data->setIsSolid($row["issolid"]);
+          $data->setIsLiquid($row["isliquid"]);
           $data->setIsOther($row["isother"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
@@ -109,8 +109,8 @@ class WeightTypeStor {
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
           $data->setAbbreviation($row["abbreviation"]);
-          $data->setIsLiquid($row["issolid"]);
-          $data->setIsSolid($row["isliquid"]);
+          $data->setIsSolid($row["issolid"]);
+          $data->setIsLiquid($row["isliquid"]);
           $data->setIsOther($row["isother"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);
@@ -155,8 +155,8 @@ class WeightTypeStor {
           $data->setCode($row["code"]);
           $data->setName($row["name"]);
           $data->setAbbreviation($row["abbreviation"]);
-          $data->setIsLiquid($row["issolid"]);
-          $data->setIsSolid($row["isliquid"]);
+          $data->setIsSolid($row["issolid"]);
+          $data->setIsLiquid($row["isliquid"]);
           $data->setIsOther($row["isother"]);
           $data->setElemState($row["elemstate"]);
           $data->setTimestamp($row["timestamp"]);

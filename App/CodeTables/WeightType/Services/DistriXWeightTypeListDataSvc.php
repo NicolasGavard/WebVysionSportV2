@@ -4,7 +4,6 @@ include(__DIR__ . "/../../../Init/DataSvcInit.php");
 // Database Data
 include(__DIR__ . "/Data/WeightTypeNameStorData.php");
 include(__DIR__ . "/Data/WeightTypeStorData.php");
-include(__DIR__ . "/Data/LanguageStorData.php");
 // Storage
 include(__DIR__ . "/Storage/WeightTypeNameStor.php");
 include(__DIR__ . "/Storage/WeightTypeStor.php");

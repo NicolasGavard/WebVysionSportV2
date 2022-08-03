@@ -125,6 +125,10 @@ $(function () {
         }, 3000);
       }
     } else {
+      const isSolid = +$("#StateSolid").prop("checked");
+      const isLiquid = +$("#StateLiquid").prop("checked");
+      const isOther = +$("#StateOther").prop("checked");
+
       var weightTypeNames = [];
       $('input[name^="weightTypeLanguageName"]').each(function () {
         var idNameLanguage = this.name.substr("weightTypeLanguageName".length);
@@ -171,6 +175,9 @@ $(function () {
           code,
           name,
           abbreviation: abb,
+          isSolid,
+          isLiquid,
+          isOther,
           elemState,
           timestamp,
           names: weightTypeNames,
@@ -385,6 +392,14 @@ function ViewWeightType(id) {
       $(".AddWeightTypeFormCode").val(data.ViewWeightType.code);
       $(".AddWeightTypeFormName").val(data.ViewWeightType.name);
       $(".AddWeightTypeFormAbb").val(data.ViewWeightType.abbreviation);
+      if (data.ViewWeightType.isLiquid) {
+        $("#StateSolid").prop("checked", false);
+        $("#StateLiquid").prop("checked", true);
+      }
+      if (data.ViewWeightType.isOther) {
+        $("#StateSolid").prop("checked", false);
+        $("#StateOther").prop("checked", true);
+      }
       $("#weightTypeLanguages").html("");
 
       const languages = weightTypeTableLanguagesData;
